@@ -73,17 +73,74 @@ TYPE_ID :	BASE_TYPE
 	;
 
 BASE_TYPE
-	:		
+	:	'int'
+	|	'fixedpt'
+	;
+
+VAR_DECLARATION 
+	:	'var' ID_LIST ':' TYPE_ID OPTIONAL_INIT ';'
+	;
+
+ID_LIST :	ID
+	|	ID ', ' ID_LIST
+	;
+
+OPTIONAL_INIT 
+	:	  
+	| 	':=' CONST
+	;
+
+STAT_SEQ 
+	:	STAT
+	|	STAT STAT_SEQ
+	;
+
+STAT 
+	: VALUE ':=' EXPR ';'
+	| 'if' EXPR 'then' STAT_SEQ 'endif;'
+	| 'if' EXPR 'then' STAT_SEQ 'else' STAT_SEQ 'endif;'
+	| 'while' EXPR 'do' STAT_SEQ 'enddo;'
+	| 'for' ID ':=' INDEX_EXPR 'to' INDEX_EXPR 'do' STAT_SEQ 'enddo;'
+	| OPT_PREFIX ID '('EXPR_LIST');'
+	| 'break;'
+	| 'return' EXPR ';'
+	| BLOCK_LIST ';'
+	;
+	
+EXPR 	:	CONST
+	|	VALUE
+	|	EXPR BINARY_OPERATOR EXPR
+	|	'(' EXPR ')'
+	;
+	
+CONST 	:	INTLIT
+	|	FIXEDPTLIT
+	;
+	
 ID  :	('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*
     ;
 
-INT :	'0'..'9'+;
+INTLIT :	'0'..'9'+;
 
-FLOAT
+FIXEDPTLIT
     :   ('0'..'9')+ '.' ('0'..'9')* 
     |   '.' ('0'..'9')+
     |   ('0'..'9')+
     ;
+
+BINARY_OPERATOR 
+	:	(PLUS|MINUS|MULT|DIV|EQ|NEQ|LESSER|GREATER|LESSEREQ|GREATEREQ|AND|OR)
+	;
+
+EXPR_LIST 
+	:	
+	|	EXPR EXPR_LIST_TAIL
+	;
+
+EXPR_LIST_TAIL
+	:	',' EXPR EXPR_LIST_TAIL
+	|	
+	;
 
 COMMENT
     :	   '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}
