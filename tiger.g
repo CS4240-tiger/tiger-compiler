@@ -1,5 +1,16 @@
-grammar tiger;
+lexer grammar tiger;
 
+TIGER_PROGRAM
+	:	TYPE_DECLARATION_LIST FUNCT_DECLARATION_LIST MAIN_FUNCTION
+	;
+	
+FUNCT_DECLARATION_LIST
+	:	
+	|	FUNCT_DECLARATION FUNCT_DECLARATION_LIST
+	;
+
+FUNCT_DECLARATION
+	:	RET_TYPE 'function ' ID '('PARAM_LIST')'
 ID  :	('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*
     ;
 
