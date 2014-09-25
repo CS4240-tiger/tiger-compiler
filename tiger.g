@@ -106,7 +106,12 @@ STAT
 	| 'return' EXPR ';'
 	| BLOCK_LIST ';'
 	;
-	
+
+OPT_PREFIX 
+	:	VALUE ':='
+	|	
+	;
+		
 EXPR 	:	CONST
 	|	VALUE
 	|	EXPR BINARY_OPERATOR EXPR
@@ -142,6 +147,22 @@ EXPR_LIST_TAIL
 	|	
 	;
 
+VALUE 	:	ID VALUE_TAIL;
+VALUE_TAIL 
+	:	'[' INDEX_EXPR ']'
+	|	'[' INDEX_EXPR '][' INDEX_EXPR ']'
+	|
+	;
+
+INDEX_EXPR 
+	:	INTLIT
+	|	ID
+	|	INDEX_EXPR INDEX_OPER INDEX_EXPR
+	;
+
+INDEX_OPER 
+	:	(PLUS|MINUS|MULT)
+	;
 COMMENT
     :	   '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}
     ;
