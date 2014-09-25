@@ -67,25 +67,27 @@ TYPE	:	BASE_TYPE
 	|	'array[' INTLIT '] of' BASE_TYPE
 	|	'array[' INTLIT '][' INTLIT '] of' BASE_TYPE
 	;
-	
+
+TYPE_ID :	BASE_TYPE
+	|	ID
+	;
+
+BASE_TYPE
+	:		
 ID  :	('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*
     ;
 
 INT :	'0'..'9'+;
 
 FLOAT
-    :   ('0'..'9')+ '.' ('0'..'9')* EXPONENT?
-    |   '.' ('0'..'9')+ EXPONENT?
-    |   ('0'..'9')+ EXPONENT
+    :   ('0'..'9')+ '.' ('0'..'9')* 
+    |   '.' ('0'..'9')+
+    |   ('0'..'9')+
     ;
 
 COMMENT
-    :   '//' ~('\n'|'\r')* '\r'? '\n' {$channel=HIDDEN;}
-    |   '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}
+    :	   '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}
     ;
-
-fragment
-EXPONENT : ('e'|'E') ('+'|'-')? ('0'..'9')+ ;
 
 // Punctuaion symbols/binary operators
 COMMA 	:	',';
