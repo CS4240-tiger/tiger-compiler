@@ -96,6 +96,7 @@ STAT_SEQ
 
 STAT 
 	: OPT_PREFIX EXPR ';'
+	| 'if' EXPR 'then' STAT_SEQ ('endif;'|'else' STAT_SEQ 'endif;')
 	| 'while' EXPR 'do' STAT_SEQ 'enddo;'
 	| 'for' ID ':=' INDEX_EXPR 'to' INDEX_EXPR 'do' STAT_SEQ 'enddo;'
 	| OPT_PREFIX ID '('EXPR_LIST');'
@@ -143,9 +144,8 @@ EXPR_LIST_TAIL
 
 VALUE 	:	ID VALUE_TAIL;
 VALUE_TAIL 
-	:	'[' INDEX_EXPR ']'
-	|	'[' INDEX_EXPR '][' INDEX_EXPR ']'
-	|
+	:	'[' INDEX_EXPR ']'('[' INDEX_EXPR ']')?
+	|	 
 	;
 
 INDEX_EXPR 
