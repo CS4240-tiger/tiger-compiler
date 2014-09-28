@@ -91,14 +91,11 @@ OPTIONAL_INIT
 	;
 
 STAT_SEQ 
-	:	STAT
-	|	STAT STAT_SEQ
+	:	STAT STAT_SEQ*
 	;
 
 STAT 
-	: VALUE ':=' EXPR ';'
-	| 'if' EXPR 'then' STAT_SEQ 'endif;'
-	| 'if' EXPR 'then' STAT_SEQ 'else' STAT_SEQ 'endif;'
+	: OPT_PREFIX EXPR ';'
 	| 'while' EXPR 'do' STAT_SEQ 'enddo;'
 	| 'for' ID ':=' INDEX_EXPR 'to' INDEX_EXPR 'do' STAT_SEQ 'enddo;'
 	| OPT_PREFIX ID '('EXPR_LIST');'
