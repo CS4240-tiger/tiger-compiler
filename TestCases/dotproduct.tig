@@ -9,4 +9,4 @@ begin
 		enddo
 	printi(sum); /* library call to printi to print the dot product */
 	end;
-end; 
+end;
