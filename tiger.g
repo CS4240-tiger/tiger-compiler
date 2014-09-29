@@ -10,15 +10,15 @@ FUNCT_DECLARATION_LIST
 	;
 
 FUNCT_DECLARATION
-	:	RET_TYPE 'function' ID '('PARAM_LIST')' 'begin' BLOCK_LIST 'end;'
+	:	RET_TYPE FUNCTION_KEY ID LPAREN PARAM_LIST RPAREN BEGIN_KEY BLOCK_LIST END_KEY SEMI
 	;
 
 MAIN_FUNCTION 
-	:	'void main() begin' BLOCK_LIST 'end;'
+	:	VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY BLOCK_LIST END_KEY SEMI
 	;
 
 RET_TYPE 
-	:	'void'
+	:	VOID_KEY
 	|	TYPE_ID
 	;
 
@@ -29,21 +29,16 @@ PARAM_LIST
 
 PARAM_LIST_TAIL 
 	:	
-	|	',' PARAM PARAM_LIST_TAIL
+	|	COMMA PARAM PARAM_LIST_TAIL
 	;
 
-PARAM 	:	ID ':' TYPE_ID;
+PARAM 	:	ID COLON TYPE_ID;
 
 BLOCK_LIST 
-	:	BLOCK BLOCK_TAIL
+	:	BLOCK BLOCK*
 	;
-
-BLOCK_TAIL 
-	:	BLOCK BLOCK_TAIL
-	|	
-	;
-
-BLOCK 	:	'begin' DECLARATION_SEGMENT STAT_SEQ 'end;';
+	
+BLOCK 	:	BEGIN_KEY DECLARATION_SEGMENT STAT_SEQ END_KEY SEMI;
 
 DECLARATION_SEGMENT 
 	:	TYPE_DECLARATION_LIST VAR_DECLARATION_LIST
@@ -60,12 +55,12 @@ VAR_DECLARATION_LIST
 	;
 
 TYPE_DECLARATION 
-	:	'type' ID '=' TYPE ';'
+	:	TYPE_KEY ID EQ TYPE SEMI
 	;
 	
 TYPE	:	BASE_TYPE
-	|	'array[' INTLIT '] of' BASE_TYPE
-	|	'array[' INTLIT '][' INTLIT '] of' BASE_TYPE
+	|	ARRAY_KEY LBRACK INTLIT RBRACK OF_KEY BASE_TYPE
+	|	ARRAY_KEY LBRACK INTLIT RBRACK LBRACK INTLIT RBRACK OF_KEY BASE_TYPE
 	;
 
 TYPE_ID :	BASE_TYPE
@@ -73,51 +68,51 @@ TYPE_ID :	BASE_TYPE
 	;
 
 BASE_TYPE
-	:	'int'
-	|	'fixedpt'
+	:	INT_KEY
+	|	FIXEDPT_KEY
 	;
 
 VAR_DECLARATION 
-	:	'var' ID_LIST ':' TYPE_ID OPTIONAL_INIT ';'
+	:	VAR_KEY ID_LIST COLON TYPE_ID OPTIONAL_INIT SEMI
 	;
 
-ID_LIST :	ID
-	|	ID ', ' ID_LIST
+ID_LIST :	ID (COMMA ID)*
 	;
 
 OPTIONAL_INIT 
 	:	  
-	| 	':=' CONST
+	| 	ASSIGN CONST
 	;
 
 STAT_SEQ 
-	:	STAT STAT_SEQ*
+	:	STAT STAT*
 	;
 
 STAT 
-	: 'if' EXPR 'then' STAT_SEQ ('endif;'|'else' STAT_SEQ 'endif;')
-	| 'while' EXPR 'do' STAT_SEQ 'enddo;'
-	| 'for' ID ':=' INDEX_EXPR 'to' INDEX_EXPR 'do' STAT_SEQ 'enddo;'
-	| OPT_PREFIX ID '('EXPR_LIST');'
-	| 'break;'
-	| 'return' EXPR ';'
-	| BLOCK_LIST ';'
+	: IF_KEY EXPR THEN_KEY STAT_SEQ (ENDIF_KEY SEMI|ELSE_KEY STAT_SEQ ENDIF_KEY SEMI)
+	| WHILE_KEY EXPR DO_KEY STAT_SEQ ENDDO_KEY SEMI
+	| FOR_KEY ID ASSIGN INDEX_EXPR TO_KEY INDEX_EXPR DO_KEY STAT_SEQ ENDDO_KEY SEMI
+	| OPT_PREFIX LPAREN EXPR_LIST RPAREN SEMI
+	| BREAK_KEY SEMI
+	| RETURN_KEY EXPR SEMI
+	| BLOCK_LIST SEMI
 	;
 
 OPT_PREFIX 
-	:	VALUE ':='
+	:	VALUE ASSIGN
 	|	
 	;
 		
-EXPR 	:	(CONST | VALUE | '(' EXPR ')') (BINARY_OPERATOR EXPR)*
+EXPR 	:	((CONST | VALUE | FACT_EXPR) BINARY_OPERATOR?)* // Token alt 25
+	;
+	
+FACT_EXPR
+	:	LPAREN (CONST | VALUE) (BINARY_OPERATOR (CONST | VALUE))* RPAREN
 	;
 	
 CONST 	:	INTLIT
 	|	FIXEDPTLIT
 	;
-	
-ID  :	('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*
-    ;
 
 INTLIT :	'0'..'9'+;
 
@@ -130,24 +125,23 @@ BINARY_OPERATOR
 	:	(PLUS|MINUS|MULT|DIV|EQ|NEQ|LESSER|GREATER|LESSEREQ|GREATEREQ|AND|OR)
 	;
 
-EXPR_LIST 
+EXPR_LIST // Token alt 31
 	:	
-	|	EXPR EXPR_LIST_TAIL
-	;
-
-EXPR_LIST_TAIL
-	:	',' EXPR EXPR_LIST_TAIL
-	|	
+	|	(EXPR COMMA?)*
 	;
 
 VALUE 	:	ID VALUE_TAIL;
 VALUE_TAIL 
-	:	'[' INDEX_EXPR ']'('[' INDEX_EXPR ']')?
+	:	LBRACK INDEX_EXPR RBRACK (LBRACK INDEX_EXPR RBRACK)?
 	|	 
 	;
 
 INDEX_EXPR 
-	:	(INTLIT | ID) (INDEX_OPER INDEX_EXPR)*
+	:	(INTLIT | ID) INDEX_EXPR_TAIL
+	;
+	
+INDEX_EXPR_TAIL
+	:	(INDEX_OPER (INTLIT | ID))*
 	;
 
 INDEX_OPER 
@@ -157,6 +151,126 @@ COMMENT
     :	   '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}
     ;
 
+// Keywords
+KEYWORDS
+	: FUNCTION_KEY
+	| BEGIN_KEY
+	| END_KEY
+	| VOID_KEY
+	| MAIN_KEY
+	| TYPE_KEY
+	| ARRAY_KEY
+	| OF_KEY
+	| INT_KEY
+	| FIXEDPT_KEY
+	| VAR_KEY
+	| IF_KEY
+	| THEN_KEY
+	| ENDIF_KEY
+	| ELSE_KEY
+	| WHILE_KEY
+	| DO_KEY
+	| ENDDO_KEY
+	| FOR_KEY
+	| ID_KEY
+	| TO_KEY
+	| DO_KEY
+	| BREAK_KEY
+	| RETURN_KEY
+	;
+
+FUNCTION_KEY
+	: 'function'
+	;
+
+BEGIN_KEY
+	: 'begin'
+	;
+
+END_KEY
+	: 'end'
+	;
+	
+VOID_KEY
+	: 'void'
+	;
+	
+MAIN_KEY
+	: 'main'
+	;
+	
+TYPE_KEY
+	: 'type'
+	;
+	
+ARRAY_KEY
+	: 'array'
+	;
+	
+OF_KEY
+	: 'of'
+	;
+	
+INT_KEY
+	: 'int'
+	;
+	
+FIXEDPT_KEY
+	: 'fixedpt'
+	;
+	
+VAR_KEY
+	: 'var'
+	;
+	
+IF_KEY
+	: 'if'
+	;
+	
+THEN_KEY
+	: 'then'
+	;
+	
+ENDIF_KEY
+	: 'endif'
+	;
+	
+ELSE_KEY
+	: 'else'
+	;
+	
+WHILE_KEY
+	: 'while'
+	;
+	
+ENDDO_KEY
+	: 'enddo'
+	;
+	
+FOR_KEY
+	: 'for'
+	;
+	
+ID_KEY
+	: 'id'
+	;
+	
+TO_KEY
+	: 'to'
+	;
+	
+DO_KEY
+	: 'do'
+	;
+	
+BREAK_KEY
+	: 'break'
+	;
+	
+RETURN_KEY
+	: 'return'
+	;
+	
 // Punctuaion symbols/binary operators
 COMMA 	:	',';
 COLON 	:	':';
@@ -179,3 +293,6 @@ GREATEREQ
 AND	:	'&';
 OR	:	'|';
 ASSIGN	:	':=';
+
+ID  :	('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*
+    ;
