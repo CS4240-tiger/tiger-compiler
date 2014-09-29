@@ -109,7 +109,7 @@ OPT_PREFIX
 	|	
 	;
 		
-EXPR 	:	(CONST | VALUE | '(' EXPR ')') (BINARY_OPERATOR EXPR)*
+EXPR 	:	(CONST | VALUE | '(' EXPR ')') (BINARY_OPERATOR EXPR)* // Token alt 25
 	;
 	
 CONST 	:	INTLIT
@@ -130,7 +130,7 @@ BINARY_OPERATOR
 	:	(PLUS|MINUS|MULT|DIV|EQ|NEQ|LESSER|GREATER|LESSEREQ|GREATEREQ|AND|OR)
 	;
 
-EXPR_LIST 
+EXPR_LIST // Token alt 31
 	:	
 	|	EXPR EXPR_LIST_TAIL
 	;
@@ -157,6 +157,130 @@ COMMENT
     :	   '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}
     ;
 
+// Keywords
+KEYWORDS
+	: FUNCTION_KEY
+	| BEGIN_KEY
+	| END_KEY
+	| VOID_KEY
+	| MAIN_KEY
+	| TYPE_KEY
+	| ARRAY_KEY
+	| OF_KEY
+	| INT_KEY
+	| FIXEDPT_KEY
+	| VAR_KEY
+	| IF_KEY
+	| THEN_KEY
+	| ENDIF_KEY
+	| ELSE_KEY
+	| WHILE_KEY
+	| DO_KEY
+	| ENDDO_KEY
+	| FOR_KEY
+	| ID_KEY
+	| TO_KEY
+	| DO_KEY
+	| BREAK_KEY
+	| RETURN_KEY
+	;
+
+fragment FUNCTION_KEY
+	: 'function'
+	;
+
+fragment BEGIN_KEY
+	: 'begin'
+	;
+
+fragment END_KEY
+	: 'end'
+	;
+	
+fragment VOID_KEY
+	: 'void'
+	;
+	
+fragment MAIN_KEY
+	: 'main'
+	;
+	
+fragment TYPE_KEY
+	: 'type'
+	;
+	
+fragment ARRAY_KEY
+	: 'array'
+	;
+	
+fragment OF_KEY
+	: 'of'
+	;
+	
+fragment INT_KEY
+	: 'int'
+	;
+	
+fragment FIXEDPT_KEY
+	: 'fixedpt'
+	;
+	
+fragment VAR_KEY
+	: 'var'
+	;
+	
+fragment IF_KEY
+	: 'if'
+	;
+	
+fragment THEN_KEY
+	: 'then'
+	;
+	
+fragment ENDIF_KEY
+	: 'endif'
+	;
+	
+fragment ELSE_KEY
+	: 'else'
+	;
+	
+fragment WHILE_KEY
+	: 'while'
+	;
+	
+fragment DO_KEY
+	: 'do'
+	;
+	
+fragment ENDDO_KEY
+	: 'enddo'
+	;
+	
+fragment FOR_KEY
+	: 'for'
+	;
+	
+fragment ID_KEY
+	: 'id'
+	;
+	
+fragment TO_KEY
+	: 'to'
+	;
+	
+fragment DO_KEY
+	: 'do'
+	;
+	
+fragment BREAK_KEY
+	: 'break'
+	;
+	
+fragment RETURN_KEY
+	: 'return'
+	;
+	
 // Punctuaion symbols/binary operators
 COMMA 	:	',';
 COLON 	:	':';
