@@ -246,10 +246,6 @@ WHILE_KEY
 	: 'while'
 	;
 	
-DO_KEY
-	: 'do'
-	;
-	
 ENDDO_KEY
 	: 'enddo'
 	;
