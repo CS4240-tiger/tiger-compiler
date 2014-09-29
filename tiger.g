@@ -85,7 +85,7 @@ OPTIONAL_INIT
 	;
 
 STAT_SEQ 
-	:	STAT*
+	:	STAT STAT*
 	;
 
 STAT 
