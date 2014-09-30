@@ -34,6 +34,7 @@ param_list_tail
 
 param 	:	ID COLON type_id;
 
+<<<<<<< HEAD
 block_list 
 	:	block block_tail
 	;
@@ -44,6 +45,13 @@ block_tail
 	;
 
 block 	:	BEGIN_KEY declaration_statement stat_seq END_KEY SEMI;
+=======
+BLOCK_LIST // rule 9
+	:	BLOCK BLOCK*
+	;
+	
+BLOCK 	:	BEGIN_KEY DECLARATION_SEGMENT (STAT STAT*) END_KEY SEMI;
+>>>>>>> phase1-recurs-fix
 
 declaration_statement 
 	:	type_declaration_list var_declaration_list
@@ -81,8 +89,12 @@ var_declaration
 	:	VAR_KEY id_list COLON type_id optional_init SEMI
 	;
 
+<<<<<<< HEAD
 id_list :	ID
 	|	ID COMMA id_list
+=======
+ID_LIST :	ID (COMMA ID)*
+>>>>>>> phase1-recurs-fix
 	;
 
 optional_init 
@@ -90,6 +102,7 @@ optional_init
 	| 	ASSIGN const
 	;
 
+<<<<<<< HEAD
 stat_seq 
 	:	stat*
 	;
@@ -99,17 +112,52 @@ stat
 	| WHILE_KEY expr DO_KEY stat_seq ENDDO_KEY SEMI
 	| FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI
 	| opt_prefix ID LPAREN expr_list RPAREN SEMI
+=======
+STAT 
+	: COND_STAT
+	| WHILE_STAT
+	| FOR_STAT
+	| OPT_PREFIX LPAREN EXPR_LIST RPAREN SEMI
+>>>>>>> phase1-recurs-fix
 	| BREAK_KEY SEMI
 	| RETURN_KEY expr SEMI
 	| block_list SEMI
 	;
 
+<<<<<<< HEAD
 opt_prefix 
 	:	value ASSIGN
 	|	
 	;
 		
 expr 	:	(const | value | LPAREN expr RPAREN) (binary_operator expr)? // Token alt 25
+=======
+COND_STAT
+	: IF_KEY EXPR THEN_KEY STAT* (ELSE_KEY STAT*)? ENDIF_KEY SEMI
+	;
+
+WHILE_STAT
+	: WHILE_KEY EXPR DO_KEY STAT* ENDDO_KEY SEMI
+	;
+	
+FOR_STAT: FOR_KEY ID ASSIGN INDEX_EXPR TO_KEY INDEX_EXPR DO_KEY STAT* ENDDO_KEY SEMI
+	;
+	
+OPT_PREFIX 
+	:	VALUE ASSIGN
+	|	
+	;
+		
+EXPR 	:	(CONST | VALUE | FACT_EXPR) EXPR_TAIL
+	;
+
+EXPR_TAIL
+	:	(BINARY_OPERATOR (CONST | VALUE | FACT_EXPR))*
+	;
+	
+FACT_EXPR
+	:	LPAREN (CONST | VALUE) (BINARY_OPERATOR (CONST | VALUE))* RPAREN
+>>>>>>> phase1-recurs-fix
 	;
 	
 const 	:	INTLIT
@@ -127,6 +175,7 @@ binary_operator
 	:	(PLUS|MINUS|MULT|DIV|EQ|NEQ|LESSER|GREATER|LESSEREQ|GREATEREQ|AND|OR)
 	;
 
+<<<<<<< HEAD
 expr_list // Token alt 31
 	:	
 	|	expr expr_list_tail
@@ -135,6 +184,11 @@ expr_list // Token alt 31
 expr_list_tail
 	:	COMMA expr expr_list_tail
 	|	
+=======
+EXPR_LIST
+	:	
+	|	(EXPR COMMA?)*
+>>>>>>> phase1-recurs-fix
 	;
 
 value 	:	ID value_tail;
@@ -143,8 +197,17 @@ value_tail
 	|	 
 	;
 
+<<<<<<< HEAD
 index_expr 
 	:	(INTLIT | ID) (index_oper index_expr)?
+=======
+INDEX_EXPR 
+	:	(INTLIT | ID) INDEX_EXPR_TAIL
+	;
+	
+INDEX_EXPR_TAIL
+	:	(INDEX_OPER (INTLIT | ID))*
+>>>>>>> phase1-recurs-fix
 	;
 
 index_oper
