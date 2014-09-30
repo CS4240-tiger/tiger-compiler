@@ -1,74 +1,74 @@
 grammar tiger;
 
 tiger_program
-	:	TYPE_DECLARATION_LIST FUNCT_DECLARATION_LIST MAIN_FUNCTION
+	:	type_declaration_list funct_declaration_list main_function
 	;
 	
 funct_declaration_list
 	:	
-	|	FUNCT_DECLARATION FUNCT_DECLARATION_LIST
+	|	funct_declaration funct_declaration_list
 	;
 
 funct_declaration
-	:	RET_TYPE FUNCTION_KEY ID LPAREN PARAM_LIST RPAREN BEGIN_KEY BLOCK_LIST END_KEY SEMI
+	:	ret_type FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
 	;
 
 main_function 
-	:	VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY BLOCK_LIST END_KEY SEMI
+	:	VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY block_list END_KEY SEMI
 	;
 
 ret_type 
 	:	VOID_KEY
-	|	TYPE_ID
+	|	type_id
 	;
 
 param_list 
 	:	
-	|	PARAM PARAM_LIST_TAIL
+	|	param param_list_tail
 	;
 
 param_list_tail 
 	:	
-	|	COMMA PARAM PARAM_LIST_TAIL
+	|	COMMA param param_list_tail
 	;
 
-param 	:	ID COLON TYPE_ID;
+param 	:	ID COLON type_id;
 
 block_list 
-	:	BLOCK BLOCK_TAIL
+	:	block block_tail
 	;
 
 block_tail 
-	:	BLOCK BLOCK_TAIL
+	:	block block_tail
 	|	
 	;
 
-block 	:	BEGIN_KEY DECLARATION_SEGMENT STAT_SEQ END_KEY SEMI;
+block 	:	BEGIN_KEY declaration_segment stat_seq END_KEY SEMI;
 
 declaration_statement 
-	:	TYPE_DECLARATION_LIST VAR_DECLARATION_LIST
+	:	type_declaration_list var_declaration_list
 	;
 	
 type_declaration_list 
 	:	
-	|	TYPE_DECLARATION TYPE_DECLARATION_LIST
+	|	type_declaration type_declaration_list
 	;
 	
 var_declaration_list 
 	:	
-	|	VAR_DECLARATION VAR_DECLARATION_LIST
+	|	var_declaration var_declaration_list
 	;
 
 type_declaration 
-	:	TYPE_KEY ID EQ TYPE SEMI
+	:	TYPE_KEY ID EQ type SEMI
 	;
 	
-type	:	BASE_TYPE
-	|	ARRAY_KEY LBRACK INTLIT RBRACK OF_KEY BASE_TYPE
-	|	ARRAY_KEY LBRACK INTLIT RBRACK LBRACK INTLIT RBRACK OF_KEY BASE_TYPE
+type	:	base_type
+	|	ARRAY_KEY LBRACK INTLIT RBRACK OF_KEY base_type
+	|	ARRAY_KEY LBRACK INTLIT RBRACK LBRACK INTLIT RBRACK OF_KEY base_type
 	;
 
-type_id :	BASE_TYPE
+type_id :	base_type
 	|	ID
 	;
 
@@ -78,38 +78,38 @@ base_type
 	;
 
 var_declaration 
-	:	VAR_KEY ID_LIST COLON TYPE_ID OPTIONAL_INIT SEMI
+	:	VAR_KEY id_list COLON type_id optional_init SEMI
 	;
 
 id_list :	ID
-	|	ID COMMA ID_LIST
+	|	ID COMMA id_list
 	;
 
 optional_init 
 	:	  
-	| 	ASSIGN CONST
+	| 	ASSIGN const
 	;
 
 stat_seq 
-	:	STAT STAT_SEQ*
+	:	stat stat_seq*
 	;
 
 stat 
-	: IF_KEY EXPR THEN_KEY STAT_SEQ (ENDIF_KEY SEMI|ELSE_KEY STAT_SEQ ENDIF_KEY SEMI)
-	| WHILE_KEY EXPR DO_KEY STAT_SEQ ENDDO_KEY SEMI
-	| FOR_KEY ID ASSIGN INDEX_EXPR TO_KEY INDEX_EXPR DO_KEY STAT_SEQ ENDDO_KEY SEMI
-	| OPT_PREFIX ID LPAREN EXPR_LIST RPAREN SEMI
+	: IF_KEY expr THEN_KEY stat_seq (ENDIF_KEY SEMI|ELSE_KEY stat_seq ENDIF_KEY SEMI)
+	| WHILE_KEY expr DO_KEY stat_seq ENDDO_KEY SEMI
+	| FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI
+	| opt_prefix ID LPAREN expr_list RPAREN SEMI
 	| BREAK_KEY SEMI
-	| RETURN_KEY EXPR SEMI
-	| BLOCK_LIST SEMI
+	| RETURN_KEY expr SEMI
+	| block_list SEMI
 	;
 
 opt_prefix 
-	:	VALUE ASSIGN
+	:	value ASSIGN
 	|	
 	;
 		
-expr 	:	(CONST | VALUE | LPAREN EXPR RPAREN) (BINARY_OPERATOR EXPR)* // Token alt 25
+expr 	:	(const | value | LPAREN expr RPAREN) (BINARY_OPERATOR expr)* // Token alt 25
 	;
 	
 const 	:	INTLIT
@@ -123,23 +123,23 @@ FIXEDPTLIT
     |   '.' ('0'..'9')+
     ;
 
-binary_operator 
+BINARY_OPERATOR
 	:	(PLUS|MINUS|MULT|DIV|EQ|NEQ|LESSER|GREATER|LESSEREQ|GREATEREQ|AND|OR)
 	;
 
 expr_list // Token alt 31
 	:	
-	|	EXPR EXPR_LIST_TAIL
+	|	expr expr_list_tail
 	;
 
 expr_list_tail
-	:	COMMA EXPR EXPR_LIST_TAIL
+	:	COMMA expr expr_list_tail
 	|	
 	;
 
-value 	:	ID VALUE_TAIL;
+value 	:	ID value_tail;
 value_tail 
-	:	LBRACK INDEX_EXPR RBRACK (LBRACK INDEX_EXPR RBRACK)?
+	:	LBRACK index_expr RBRACK (LBRACK index_expr RBRACK)?
 	|	 
 	;
 
@@ -147,7 +147,7 @@ index_expr
 	:	(INTLIT | ID) (INDEX_OPER INDEX_EXPR)*
 	;
 
-index_oper 
+INDEX_OPER
 	:	(PLUS|MINUS|MULT)
 	;
 COMMENT
