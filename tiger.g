@@ -109,7 +109,7 @@ opt_prefix
 	|	
 	;
 		
-expr 	:	(const | value | LPAREN expr RPAREN) (binary_operator expr)* // Token alt 25
+expr 	:	(const | value | LPAREN expr RPAREN) (binary_operator expr)? // Token alt 25
 	;
 	
 const 	:	INTLIT
@@ -144,7 +144,7 @@ value_tail
 	;
 
 index_expr 
-	:	(INTLIT | ID) (index_oper index_expr)*
+	:	(INTLIT | ID) (index_oper index_expr)?
 	;
 
 index_oper
