@@ -91,7 +91,7 @@ optional_init
 	;
 
 stat_seq 
-	:	stat stat_seq*
+	:	stat*
 	;
 
 stat 
@@ -109,7 +109,7 @@ opt_prefix
 	|	
 	;
 		
-expr 	:	(const | value | LPAREN expr RPAREN) (BINARY_OPERATOR expr)* // Token alt 25
+expr 	:	(const | value | LPAREN expr RPAREN) (binary_operator expr)* // Token alt 25
 	;
 	
 const 	:	INTLIT
@@ -123,7 +123,7 @@ FIXEDPTLIT
     |   '.' ('0'..'9')+
     ;
 
-BINARY_OPERATOR
+binary_operator
 	:	(PLUS|MINUS|MULT|DIV|EQ|NEQ|LESSER|GREATER|LESSEREQ|GREATEREQ|AND|OR)
 	;
 
@@ -144,10 +144,10 @@ value_tail
 	;
 
 index_expr 
-	:	(INTLIT | ID) (INDEX_OPER index_expr)*
+	:	(INTLIT | ID) (index_oper index_expr)*
 	;
 
-INDEX_OPER
+index_oper
 	:	(PLUS|MINUS|MULT)
 	;
 COMMENT
@@ -272,7 +272,7 @@ BREAK_KEY
 RETURN_KEY
 	: 'return'
 	;
-	
+
 // Punctuaion symbols/binary operators
 COMMA 	:	',';
 COLON 	:	':';
