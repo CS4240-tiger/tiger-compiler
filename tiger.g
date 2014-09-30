@@ -43,7 +43,7 @@ block_tail
 	|	
 	;
 
-block 	:	BEGIN_KEY declaration_segment stat_seq END_KEY SEMI;
+block 	:	BEGIN_KEY declaration_statement stat_seq END_KEY SEMI;
 
 declaration_statement 
 	:	type_declaration_list var_declaration_list
