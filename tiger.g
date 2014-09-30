@@ -144,7 +144,7 @@ value_tail
 	;
 
 index_expr 
-	:	(INTLIT | ID) (INDEX_OPER INDEX_EXPR)*
+	:	(INTLIT | ID) (INDEX_OPER index_expr)*
 	;
 
 INDEX_OPER
@@ -177,7 +177,6 @@ keywords
 	| FOR_KEY
 	| ID_KEY
 	| TO_KEY
-	| DO_KEY
 	| BREAK_KEY
 	| RETURN_KEY
 	;
