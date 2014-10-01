@@ -1,4 +1,4 @@
-// $ANTLR 3.5 /media/sf_College/CS 4240/tiger-compiler/tiger.g 2014-09-30 18:12:20
+// $ANTLR 3.5 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g 2014-10-01 11:54:56
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -82,16 +82,16 @@ public class tigerParser extends Parser {
 	}
 
 	@Override public String[] getTokenNames() { return tigerParser.tokenNames; }
-	@Override public String getGrammarFileName() { return "/media/sf_College/CS 4240/tiger-compiler/tiger.g"; }
+	@Override public String getGrammarFileName() { return "C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g"; }
 
 
 
 	// $ANTLR start "tiger_program"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:3:1: tiger_program : type_declaration_list funct_declaration_list main_function ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:3:1: tiger_program : type_declaration_list funct_declaration_list main_function ;
 	public final void tiger_program() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:4:2: ( type_declaration_list funct_declaration_list main_function )
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:4:4: type_declaration_list funct_declaration_list main_function
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:4:2: ( type_declaration_list funct_declaration_list main_function )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:4:4: type_declaration_list funct_declaration_list main_function
 			{
 			pushFollow(FOLLOW_type_declaration_list_in_tiger_program11);
 			type_declaration_list();
@@ -121,10 +121,10 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "funct_declaration_list"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:7:1: funct_declaration_list : (| funct_declaration funct_declaration_list );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:7:1: funct_declaration_list : (| funct_declaration funct_declaration_list );
 	public final void funct_declaration_list() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:8:2: (| funct_declaration funct_declaration_list )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:8:2: (| funct_declaration funct_declaration_list )
 			int alt1=2;
 			int LA1_0 = input.LA(1);
 			if ( (LA1_0==VOID_KEY) ) {
@@ -161,12 +161,12 @@ public class tigerParser extends Parser {
 
 			switch (alt1) {
 				case 1 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:9:2: 
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:9:2: 
 					{
 					}
 					break;
 				case 2 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:9:4: funct_declaration funct_declaration_list
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:9:4: funct_declaration funct_declaration_list
 					{
 					pushFollow(FOLLOW_funct_declaration_in_funct_declaration_list31);
 					funct_declaration();
@@ -194,11 +194,11 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "funct_declaration"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:12:1: funct_declaration : ret_type FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:12:1: funct_declaration : ret_type FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI ;
 	public final void funct_declaration() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:13:2: ( ret_type FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI )
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:13:4: ret_type FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:13:2: ( ret_type FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:13:4: ret_type FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
 			{
 			pushFollow(FOLLOW_ret_type_in_funct_declaration44);
 			ret_type();
@@ -235,11 +235,11 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "main_function"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:16:1: main_function : VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY block_list END_KEY SEMI ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:16:1: main_function : VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY block_list END_KEY SEMI ;
 	public final void main_function() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:17:2: ( VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY block_list END_KEY SEMI )
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:17:4: VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY block_list END_KEY SEMI
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:17:2: ( VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY block_list END_KEY SEMI )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:17:4: VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY block_list END_KEY SEMI
 			{
 			match(input,VOID_KEY,FOLLOW_VOID_KEY_in_main_function74); 
 			match(input,MAIN_KEY,FOLLOW_MAIN_KEY_in_main_function76); 
@@ -268,10 +268,10 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "ret_type"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:20:1: ret_type : ( VOID_KEY | type_id );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:20:1: ret_type : ( VOID_KEY | type_id );
 	public final void ret_type() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:21:2: ( VOID_KEY | type_id )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:21:2: ( VOID_KEY | type_id )
 			int alt2=2;
 			int LA2_0 = input.LA(1);
 			if ( (LA2_0==VOID_KEY) ) {
@@ -289,13 +289,13 @@ public class tigerParser extends Parser {
 
 			switch (alt2) {
 				case 1 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:21:4: VOID_KEY
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:21:4: VOID_KEY
 					{
 					match(input,VOID_KEY,FOLLOW_VOID_KEY_in_ret_type100); 
 					}
 					break;
 				case 2 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:22:4: type_id
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:22:4: type_id
 					{
 					pushFollow(FOLLOW_type_id_in_ret_type105);
 					type_id();
@@ -319,10 +319,10 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "param_list"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:25:1: param_list : (| param param_list_tail );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:25:1: param_list : (| param param_list_tail );
 	public final void param_list() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:26:2: (| param param_list_tail )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:26:2: (| param param_list_tail )
 			int alt3=2;
 			int LA3_0 = input.LA(1);
 			if ( (LA3_0==RPAREN) ) {
@@ -340,12 +340,12 @@ public class tigerParser extends Parser {
 
 			switch (alt3) {
 				case 1 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:27:2: 
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:27:2: 
 					{
 					}
 					break;
 				case 2 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:27:4: param param_list_tail
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:27:4: param param_list_tail
 					{
 					pushFollow(FOLLOW_param_in_param_list121);
 					param();
@@ -373,10 +373,10 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "param_list_tail"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:30:1: param_list_tail : (| COMMA param param_list_tail );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:30:1: param_list_tail : (| COMMA param param_list_tail );
 	public final void param_list_tail() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:31:2: (| COMMA param param_list_tail )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:31:2: (| COMMA param param_list_tail )
 			int alt4=2;
 			int LA4_0 = input.LA(1);
 			if ( (LA4_0==RPAREN) ) {
@@ -394,12 +394,12 @@ public class tigerParser extends Parser {
 
 			switch (alt4) {
 				case 1 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:32:2: 
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:32:2: 
 					{
 					}
 					break;
 				case 2 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:32:4: COMMA param param_list_tail
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:32:4: COMMA param param_list_tail
 					{
 					match(input,COMMA,FOLLOW_COMMA_in_param_list_tail139); 
 					pushFollow(FOLLOW_param_in_param_list_tail141);
@@ -428,11 +428,11 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "param"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:35:1: param : ID COLON type_id ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:35:1: param : ID COLON type_id ;
 	public final void param() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:35:8: ( ID COLON type_id )
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:35:10: ID COLON type_id
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:35:8: ( ID COLON type_id )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:35:10: ID COLON type_id
 			{
 			match(input,ID,FOLLOW_ID_in_param154); 
 			match(input,COLON,FOLLOW_COLON_in_param156); 
@@ -456,11 +456,11 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "block_list"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:37:1: block_list : block block_tail ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:37:1: block_list : block block_tail ;
 	public final void block_list() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:38:2: ( block block_tail )
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:38:4: block block_tail
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:38:2: ( block block_tail )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:38:4: block block_tail
 			{
 			pushFollow(FOLLOW_block_in_block_list168);
 			block();
@@ -486,10 +486,10 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "block_tail"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:41:1: block_tail : ( block block_tail |);
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:41:1: block_tail : ( block block_tail |);
 	public final void block_tail() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:42:2: ( block block_tail |)
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:42:2: ( block block_tail |)
 			int alt5=2;
 			int LA5_0 = input.LA(1);
 			if ( (LA5_0==BEGIN_KEY) ) {
@@ -507,7 +507,7 @@ public class tigerParser extends Parser {
 
 			switch (alt5) {
 				case 1 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:42:4: block block_tail
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:42:4: block block_tail
 					{
 					pushFollow(FOLLOW_block_in_block_tail182);
 					block();
@@ -520,7 +520,7 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 2 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:44:2: 
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:44:2: 
 					{
 					}
 					break;
@@ -540,11 +540,11 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "block"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:46:1: block : BEGIN_KEY declaration_statement stat_seq END_KEY SEMI ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:46:1: block : BEGIN_KEY declaration_statement stat_seq END_KEY SEMI ;
 	public final void block() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:46:8: ( BEGIN_KEY declaration_statement stat_seq END_KEY SEMI )
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:46:10: BEGIN_KEY declaration_statement stat_seq END_KEY SEMI
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:46:8: ( BEGIN_KEY declaration_statement stat_seq END_KEY SEMI )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:46:10: BEGIN_KEY declaration_statement stat_seq END_KEY SEMI
 			{
 			match(input,BEGIN_KEY,FOLLOW_BEGIN_KEY_in_block199); 
 			pushFollow(FOLLOW_declaration_statement_in_block201);
@@ -573,11 +573,11 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "declaration_statement"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:48:1: declaration_statement : type_declaration_list var_declaration_list ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:48:1: declaration_statement : type_declaration_list var_declaration_list ;
 	public final void declaration_statement() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:49:2: ( type_declaration_list var_declaration_list )
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:49:4: type_declaration_list var_declaration_list
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:49:2: ( type_declaration_list var_declaration_list )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:49:4: type_declaration_list var_declaration_list
 			{
 			pushFollow(FOLLOW_type_declaration_list_in_declaration_statement217);
 			type_declaration_list();
@@ -603,10 +603,10 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "type_declaration_list"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:52:1: type_declaration_list : (| type_declaration type_declaration_list );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:52:1: type_declaration_list : (| type_declaration type_declaration_list );
 	public final void type_declaration_list() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:53:2: (| type_declaration type_declaration_list )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:53:2: (| type_declaration type_declaration_list )
 			int alt6=2;
 			int LA6_0 = input.LA(1);
 			if ( ((LA6_0 >= BEGIN_KEY && LA6_0 <= BREAK_KEY)||(LA6_0 >= ELSE_KEY && LA6_0 <= END_KEY)||(LA6_0 >= FIXEDPT_KEY && LA6_0 <= FOR_KEY)||LA6_0==ID||LA6_0==IF_KEY||LA6_0==INT_KEY||LA6_0==RETURN_KEY||(LA6_0 >= VAR_KEY && LA6_0 <= WHILE_KEY)) ) {
@@ -624,12 +624,12 @@ public class tigerParser extends Parser {
 
 			switch (alt6) {
 				case 1 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:54:2: 
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:54:2: 
 					{
 					}
 					break;
 				case 2 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:54:4: type_declaration type_declaration_list
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:54:4: type_declaration type_declaration_list
 					{
 					pushFollow(FOLLOW_type_declaration_in_type_declaration_list236);
 					type_declaration();
@@ -657,10 +657,10 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "var_declaration_list"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:57:1: var_declaration_list : (| var_declaration var_declaration_list );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:57:1: var_declaration_list : (| var_declaration var_declaration_list );
 	public final void var_declaration_list() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:58:2: (| var_declaration var_declaration_list )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:58:2: (| var_declaration var_declaration_list )
 			int alt7=2;
 			int LA7_0 = input.LA(1);
 			if ( ((LA7_0 >= BEGIN_KEY && LA7_0 <= BREAK_KEY)||(LA7_0 >= ELSE_KEY && LA7_0 <= END_KEY)||LA7_0==FOR_KEY||LA7_0==ID||LA7_0==IF_KEY||LA7_0==RETURN_KEY||LA7_0==WHILE_KEY) ) {
@@ -678,12 +678,12 @@ public class tigerParser extends Parser {
 
 			switch (alt7) {
 				case 1 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:59:2: 
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:59:2: 
 					{
 					}
 					break;
 				case 2 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:59:4: var_declaration var_declaration_list
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:59:4: var_declaration var_declaration_list
 					{
 					pushFollow(FOLLOW_var_declaration_in_var_declaration_list255);
 					var_declaration();
@@ -711,11 +711,11 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "type_declaration"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:62:1: type_declaration : TYPE_KEY ID EQ type SEMI ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:62:1: type_declaration : TYPE_KEY ID EQ type SEMI ;
 	public final void type_declaration() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:63:2: ( TYPE_KEY ID EQ type SEMI )
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:63:4: TYPE_KEY ID EQ type SEMI
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:63:2: ( TYPE_KEY ID EQ type SEMI )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:63:4: TYPE_KEY ID EQ type SEMI
 			{
 			match(input,TYPE_KEY,FOLLOW_TYPE_KEY_in_type_declaration269); 
 			match(input,ID,FOLLOW_ID_in_type_declaration271); 
@@ -741,10 +741,10 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "type"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:66:1: type : ( base_type | ARRAY_KEY LBRACK INTLIT RBRACK OF_KEY base_type | ARRAY_KEY LBRACK INTLIT RBRACK LBRACK INTLIT RBRACK OF_KEY base_type );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:66:1: type : ( base_type | ARRAY_KEY LBRACK INTLIT RBRACK OF_KEY base_type | ARRAY_KEY LBRACK INTLIT RBRACK LBRACK INTLIT RBRACK OF_KEY base_type );
 	public final void type() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:66:6: ( base_type | ARRAY_KEY LBRACK INTLIT RBRACK OF_KEY base_type | ARRAY_KEY LBRACK INTLIT RBRACK LBRACK INTLIT RBRACK OF_KEY base_type )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:66:6: ( base_type | ARRAY_KEY LBRACK INTLIT RBRACK OF_KEY base_type | ARRAY_KEY LBRACK INTLIT RBRACK LBRACK INTLIT RBRACK OF_KEY base_type )
 			int alt8=3;
 			int LA8_0 = input.LA(1);
 			if ( (LA8_0==FIXEDPT_KEY||LA8_0==INT_KEY) ) {
@@ -835,7 +835,7 @@ public class tigerParser extends Parser {
 
 			switch (alt8) {
 				case 1 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:66:8: base_type
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:66:8: base_type
 					{
 					pushFollow(FOLLOW_base_type_in_type288);
 					base_type();
@@ -844,7 +844,7 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 2 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:67:4: ARRAY_KEY LBRACK INTLIT RBRACK OF_KEY base_type
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:67:4: ARRAY_KEY LBRACK INTLIT RBRACK OF_KEY base_type
 					{
 					match(input,ARRAY_KEY,FOLLOW_ARRAY_KEY_in_type293); 
 					match(input,LBRACK,FOLLOW_LBRACK_in_type295); 
@@ -858,7 +858,7 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 3 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:68:4: ARRAY_KEY LBRACK INTLIT RBRACK LBRACK INTLIT RBRACK OF_KEY base_type
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:68:4: ARRAY_KEY LBRACK INTLIT RBRACK LBRACK INTLIT RBRACK OF_KEY base_type
 					{
 					match(input,ARRAY_KEY,FOLLOW_ARRAY_KEY_in_type308); 
 					match(input,LBRACK,FOLLOW_LBRACK_in_type310); 
@@ -890,10 +890,10 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "type_id"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:71:1: type_id : ( base_type | ID );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:71:1: type_id : ( base_type | ID );
 	public final void type_id() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:71:9: ( base_type | ID )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:71:9: ( base_type | ID )
 			int alt9=2;
 			int LA9_0 = input.LA(1);
 			if ( (LA9_0==FIXEDPT_KEY||LA9_0==INT_KEY) ) {
@@ -911,7 +911,7 @@ public class tigerParser extends Parser {
 
 			switch (alt9) {
 				case 1 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:71:11: base_type
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:71:11: base_type
 					{
 					pushFollow(FOLLOW_base_type_in_type_id334);
 					base_type();
@@ -920,7 +920,7 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 2 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:72:4: ID
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:72:4: ID
 					{
 					match(input,ID,FOLLOW_ID_in_type_id339); 
 					}
@@ -941,11 +941,11 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "base_type"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:75:1: base_type : ( INT_KEY | FIXEDPT_KEY );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:75:1: base_type : ( INT_KEY | FIXEDPT_KEY );
 	public final void base_type() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:76:2: ( INT_KEY | FIXEDPT_KEY )
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:76:2: ( INT_KEY | FIXEDPT_KEY )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:
 			{
 			if ( input.LA(1)==FIXEDPT_KEY||input.LA(1)==INT_KEY ) {
 				input.consume();
@@ -971,11 +971,11 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "var_declaration"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:80:1: var_declaration : VAR_KEY id_list COLON type_id optional_init SEMI ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:80:1: var_declaration : VAR_KEY id_list COLON type_id optional_init SEMI ;
 	public final void var_declaration() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:81:2: ( VAR_KEY id_list COLON type_id optional_init SEMI )
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:81:4: VAR_KEY id_list COLON type_id optional_init SEMI
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:81:2: ( VAR_KEY id_list COLON type_id optional_init SEMI )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:81:4: VAR_KEY id_list COLON type_id optional_init SEMI
 			{
 			match(input,VAR_KEY,FOLLOW_VAR_KEY_in_var_declaration367); 
 			pushFollow(FOLLOW_id_list_in_var_declaration369);
@@ -1008,10 +1008,10 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "id_list"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:84:1: id_list : ( ID | ID COMMA id_list );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:84:1: id_list : ( ID | ID COMMA id_list );
 	public final void id_list() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:84:9: ( ID | ID COMMA id_list )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:84:9: ( ID | ID COMMA id_list )
 			int alt10=2;
 			int LA10_0 = input.LA(1);
 			if ( (LA10_0==ID) ) {
@@ -1045,13 +1045,13 @@ public class tigerParser extends Parser {
 
 			switch (alt10) {
 				case 1 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:84:11: ID
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:84:11: ID
 					{
 					match(input,ID,FOLLOW_ID_in_id_list387); 
 					}
 					break;
 				case 2 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:85:4: ID COMMA id_list
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:85:4: ID COMMA id_list
 					{
 					match(input,ID,FOLLOW_ID_in_id_list392); 
 					match(input,COMMA,FOLLOW_COMMA_in_id_list394); 
@@ -1077,10 +1077,10 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "optional_init"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:88:1: optional_init : (| ASSIGN const );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:88:1: optional_init : (| ASSIGN const );
 	public final void optional_init() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:89:2: (| ASSIGN const )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:89:2: (| ASSIGN const )
 			int alt11=2;
 			int LA11_0 = input.LA(1);
 			if ( (LA11_0==SEMI) ) {
@@ -1098,12 +1098,12 @@ public class tigerParser extends Parser {
 
 			switch (alt11) {
 				case 1 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:90:2: 
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:90:2: 
 					{
 					}
 					break;
 				case 2 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:90:5: ASSIGN const
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:90:5: ASSIGN const
 					{
 					match(input,ASSIGN,FOLLOW_ASSIGN_in_optional_init415); 
 					pushFollow(FOLLOW_const_in_optional_init417);
@@ -1128,13 +1128,13 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "stat_seq"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:93:1: stat_seq : ( stat )* ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:93:1: stat_seq : ( stat )* ;
 	public final void stat_seq() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:94:2: ( ( stat )* )
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:94:4: ( stat )*
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:94:2: ( ( stat )* )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:94:4: ( stat )*
 			{
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:94:4: ( stat )*
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:94:4: ( stat )*
 			loop12:
 			while (true) {
 				int alt12=2;
@@ -1145,7 +1145,7 @@ public class tigerParser extends Parser {
 
 				switch (alt12) {
 				case 1 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:94:4: stat
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:94:4: stat
 					{
 					pushFollow(FOLLOW_stat_in_stat_seq429);
 					stat();
@@ -1175,10 +1175,10 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "stat"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:97:1: stat : ( IF_KEY expr THEN_KEY stat_seq ( ENDIF_KEY SEMI | ELSE_KEY stat_seq ENDIF_KEY SEMI ) | WHILE_KEY expr DO_KEY stat_seq ENDDO_KEY SEMI | FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI | opt_prefix ID LPAREN expr_list RPAREN SEMI | BREAK_KEY SEMI | RETURN_KEY expr SEMI | block_list SEMI );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:97:1: stat : ( IF_KEY expr THEN_KEY stat_seq ( ENDIF_KEY SEMI | ELSE_KEY stat_seq ENDIF_KEY SEMI ) | WHILE_KEY expr DO_KEY stat_seq ENDDO_KEY SEMI | FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI | opt_prefix ID LPAREN expr_list RPAREN SEMI | BREAK_KEY SEMI | RETURN_KEY expr SEMI | block_list SEMI );
 	public final void stat() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:98:2: ( IF_KEY expr THEN_KEY stat_seq ( ENDIF_KEY SEMI | ELSE_KEY stat_seq ENDIF_KEY SEMI ) | WHILE_KEY expr DO_KEY stat_seq ENDDO_KEY SEMI | FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI | opt_prefix ID LPAREN expr_list RPAREN SEMI | BREAK_KEY SEMI | RETURN_KEY expr SEMI | block_list SEMI )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:98:2: ( IF_KEY expr THEN_KEY stat_seq ( ENDIF_KEY SEMI | ELSE_KEY stat_seq ENDIF_KEY SEMI ) | WHILE_KEY expr DO_KEY stat_seq ENDDO_KEY SEMI | FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI | opt_prefix ID LPAREN expr_list RPAREN SEMI | BREAK_KEY SEMI | RETURN_KEY expr SEMI | block_list SEMI )
 			int alt14=7;
 			switch ( input.LA(1) ) {
 			case IF_KEY:
@@ -1223,7 +1223,7 @@ public class tigerParser extends Parser {
 			}
 			switch (alt14) {
 				case 1 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:98:4: IF_KEY expr THEN_KEY stat_seq ( ENDIF_KEY SEMI | ELSE_KEY stat_seq ENDIF_KEY SEMI )
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:98:4: IF_KEY expr THEN_KEY stat_seq ( ENDIF_KEY SEMI | ELSE_KEY stat_seq ENDIF_KEY SEMI )
 					{
 					match(input,IF_KEY,FOLLOW_IF_KEY_in_stat442); 
 					pushFollow(FOLLOW_expr_in_stat444);
@@ -1235,7 +1235,7 @@ public class tigerParser extends Parser {
 					stat_seq();
 					state._fsp--;
 
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:98:34: ( ENDIF_KEY SEMI | ELSE_KEY stat_seq ENDIF_KEY SEMI )
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:98:34: ( ENDIF_KEY SEMI | ELSE_KEY stat_seq ENDIF_KEY SEMI )
 					int alt13=2;
 					int LA13_0 = input.LA(1);
 					if ( (LA13_0==ENDIF_KEY) ) {
@@ -1253,14 +1253,14 @@ public class tigerParser extends Parser {
 
 					switch (alt13) {
 						case 1 :
-							// /media/sf_College/CS 4240/tiger-compiler/tiger.g:98:35: ENDIF_KEY SEMI
+							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:98:35: ENDIF_KEY SEMI
 							{
 							match(input,ENDIF_KEY,FOLLOW_ENDIF_KEY_in_stat451); 
 							match(input,SEMI,FOLLOW_SEMI_in_stat453); 
 							}
 							break;
 						case 2 :
-							// /media/sf_College/CS 4240/tiger-compiler/tiger.g:98:50: ELSE_KEY stat_seq ENDIF_KEY SEMI
+							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:98:50: ELSE_KEY stat_seq ENDIF_KEY SEMI
 							{
 							match(input,ELSE_KEY,FOLLOW_ELSE_KEY_in_stat455); 
 							pushFollow(FOLLOW_stat_seq_in_stat457);
@@ -1277,7 +1277,7 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 2 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:99:4: WHILE_KEY expr DO_KEY stat_seq ENDDO_KEY SEMI
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:99:4: WHILE_KEY expr DO_KEY stat_seq ENDDO_KEY SEMI
 					{
 					match(input,WHILE_KEY,FOLLOW_WHILE_KEY_in_stat467); 
 					pushFollow(FOLLOW_expr_in_stat469);
@@ -1294,7 +1294,7 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 3 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:100:4: FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:100:4: FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI
 					{
 					match(input,FOR_KEY,FOLLOW_FOR_KEY_in_stat482); 
 					match(input,ID,FOLLOW_ID_in_stat484); 
@@ -1318,7 +1318,7 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 4 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:101:4: opt_prefix ID LPAREN expr_list RPAREN SEMI
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:101:4: opt_prefix ID LPAREN expr_list RPAREN SEMI
 					{
 					pushFollow(FOLLOW_opt_prefix_in_stat505);
 					opt_prefix();
@@ -1335,14 +1335,14 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 5 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:102:4: BREAK_KEY SEMI
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:102:4: BREAK_KEY SEMI
 					{
 					match(input,BREAK_KEY,FOLLOW_BREAK_KEY_in_stat520); 
 					match(input,SEMI,FOLLOW_SEMI_in_stat522); 
 					}
 					break;
 				case 6 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:103:4: RETURN_KEY expr SEMI
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:103:4: RETURN_KEY expr SEMI
 					{
 					match(input,RETURN_KEY,FOLLOW_RETURN_KEY_in_stat527); 
 					pushFollow(FOLLOW_expr_in_stat529);
@@ -1353,7 +1353,7 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 7 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:104:4: block_list SEMI
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:104:4: block_list SEMI
 					{
 					pushFollow(FOLLOW_block_list_in_stat536);
 					block_list();
@@ -1378,10 +1378,10 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "opt_prefix"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:107:1: opt_prefix : ( value ASSIGN |);
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:107:1: opt_prefix : ( value ASSIGN |);
 	public final void opt_prefix() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:108:2: ( value ASSIGN |)
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:108:2: ( value ASSIGN |)
 			int alt15=2;
 			int LA15_0 = input.LA(1);
 			if ( (LA15_0==ID) ) {
@@ -1415,7 +1415,7 @@ public class tigerParser extends Parser {
 
 			switch (alt15) {
 				case 1 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:108:4: value ASSIGN
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:108:4: value ASSIGN
 					{
 					pushFollow(FOLLOW_value_in_opt_prefix550);
 					value();
@@ -1425,7 +1425,7 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 2 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:110:2: 
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:110:2: 
 					{
 					}
 					break;
@@ -1445,13 +1445,13 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "expr"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:112:1: expr : ( const | value | LPAREN expr RPAREN ) ( binary_operator expr )? ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:112:1: expr : ( const | value | LPAREN expr RPAREN ) ( binary_operator expr )? ;
 	public final void expr() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:112:7: ( ( const | value | LPAREN expr RPAREN ) ( binary_operator expr )? )
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:112:9: ( const | value | LPAREN expr RPAREN ) ( binary_operator expr )?
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:112:7: ( ( const | value | LPAREN expr RPAREN ) ( binary_operator expr )? )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:112:9: ( const | value | LPAREN expr RPAREN ) ( binary_operator expr )?
 			{
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:112:9: ( const | value | LPAREN expr RPAREN )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:112:9: ( const | value | LPAREN expr RPAREN )
 			int alt16=3;
 			switch ( input.LA(1) ) {
 			case FIXEDPTLIT:
@@ -1477,7 +1477,7 @@ public class tigerParser extends Parser {
 			}
 			switch (alt16) {
 				case 1 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:112:10: const
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:112:10: const
 					{
 					pushFollow(FOLLOW_const_in_expr570);
 					const();
@@ -1486,7 +1486,7 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 2 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:112:18: value
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:112:18: value
 					{
 					pushFollow(FOLLOW_value_in_expr574);
 					value();
@@ -1495,7 +1495,7 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 3 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:112:26: LPAREN expr RPAREN
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:112:26: LPAREN expr RPAREN
 					{
 					match(input,LPAREN,FOLLOW_LPAREN_in_expr578); 
 					pushFollow(FOLLOW_expr_in_expr580);
@@ -1508,7 +1508,7 @@ public class tigerParser extends Parser {
 
 			}
 
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:112:46: ( binary_operator expr )?
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:112:46: ( binary_operator expr )?
 			int alt17=2;
 			int LA17_0 = input.LA(1);
 			if ( (LA17_0==AND||LA17_0==DIV||LA17_0==EQ||(LA17_0 >= GREATER && LA17_0 <= GREATEREQ)||(LA17_0 >= LESSER && LA17_0 <= LESSEREQ)||(LA17_0 >= MINUS && LA17_0 <= NEQ)||(LA17_0 >= OR && LA17_0 <= PLUS)) ) {
@@ -1516,7 +1516,7 @@ public class tigerParser extends Parser {
 			}
 			switch (alt17) {
 				case 1 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:112:47: binary_operator expr
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:112:47: binary_operator expr
 					{
 					pushFollow(FOLLOW_binary_operator_in_expr586);
 					binary_operator();
@@ -1547,11 +1547,11 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "const"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:115:1: const : ( INTLIT | FIXEDPTLIT );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:115:1: const : ( INTLIT | FIXEDPTLIT );
 	public final void const() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:115:8: ( INTLIT | FIXEDPTLIT )
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:115:8: ( INTLIT | FIXEDPTLIT )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:
 			{
 			if ( input.LA(1)==FIXEDPTLIT||input.LA(1)==INTLIT ) {
 				input.consume();
@@ -1577,11 +1577,11 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "binary_operator"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:126:1: binary_operator : ( PLUS | MINUS | MULT | DIV | EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | AND | OR ) ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:126:1: binary_operator : ( PLUS | MINUS | MULT | DIV | EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | AND | OR ) ;
 	public final void binary_operator() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:127:2: ( ( PLUS | MINUS | MULT | DIV | EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | AND | OR ) )
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:127:2: ( ( PLUS | MINUS | MULT | DIV | EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | AND | OR ) )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:
 			{
 			if ( input.LA(1)==AND||input.LA(1)==DIV||input.LA(1)==EQ||(input.LA(1) >= GREATER && input.LA(1) <= GREATEREQ)||(input.LA(1) >= LESSER && input.LA(1) <= LESSEREQ)||(input.LA(1) >= MINUS && input.LA(1) <= NEQ)||(input.LA(1) >= OR && input.LA(1) <= PLUS) ) {
 				input.consume();
@@ -1607,10 +1607,10 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "expr_list"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:130:1: expr_list : (| expr expr_list_tail );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:130:1: expr_list : (| expr expr_list_tail );
 	public final void expr_list() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:131:2: (| expr expr_list_tail )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:131:2: (| expr expr_list_tail )
 			int alt18=2;
 			int LA18_0 = input.LA(1);
 			if ( (LA18_0==RPAREN) ) {
@@ -1628,12 +1628,12 @@ public class tigerParser extends Parser {
 
 			switch (alt18) {
 				case 1 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:132:2: 
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:132:2: 
 					{
 					}
 					break;
 				case 2 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:132:4: expr expr_list_tail
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:132:4: expr expr_list_tail
 					{
 					pushFollow(FOLLOW_expr_in_expr_list716);
 					expr();
@@ -1661,10 +1661,10 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "expr_list_tail"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:135:1: expr_list_tail : ( COMMA expr expr_list_tail |);
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:135:1: expr_list_tail : ( COMMA expr expr_list_tail |);
 	public final void expr_list_tail() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:136:2: ( COMMA expr expr_list_tail |)
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:136:2: ( COMMA expr expr_list_tail |)
 			int alt19=2;
 			int LA19_0 = input.LA(1);
 			if ( (LA19_0==COMMA) ) {
@@ -1682,7 +1682,7 @@ public class tigerParser extends Parser {
 
 			switch (alt19) {
 				case 1 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:136:4: COMMA expr expr_list_tail
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:136:4: COMMA expr expr_list_tail
 					{
 					match(input,COMMA,FOLLOW_COMMA_in_expr_list_tail729); 
 					pushFollow(FOLLOW_expr_in_expr_list_tail731);
@@ -1696,7 +1696,7 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 2 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:138:2: 
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:138:2: 
 					{
 					}
 					break;
@@ -1716,11 +1716,11 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "value"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:140:1: value : ID value_tail ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:140:1: value : ID value_tail ;
 	public final void value() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:140:8: ( ID value_tail )
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:140:10: ID value_tail
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:140:8: ( ID value_tail )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:140:10: ID value_tail
 			{
 			match(input,ID,FOLLOW_ID_in_value748); 
 			pushFollow(FOLLOW_value_tail_in_value750);
@@ -1743,10 +1743,10 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "value_tail"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:141:1: value_tail : ( LBRACK index_expr RBRACK ( LBRACK index_expr RBRACK )? |);
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:141:1: value_tail : ( LBRACK index_expr RBRACK ( LBRACK index_expr RBRACK )? |);
 	public final void value_tail() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:142:2: ( LBRACK index_expr RBRACK ( LBRACK index_expr RBRACK )? |)
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:142:2: ( LBRACK index_expr RBRACK ( LBRACK index_expr RBRACK )? |)
 			int alt21=2;
 			int LA21_0 = input.LA(1);
 			if ( (LA21_0==LBRACK) ) {
@@ -1764,7 +1764,7 @@ public class tigerParser extends Parser {
 
 			switch (alt21) {
 				case 1 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:142:4: LBRACK index_expr RBRACK ( LBRACK index_expr RBRACK )?
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:142:4: LBRACK index_expr RBRACK ( LBRACK index_expr RBRACK )?
 					{
 					match(input,LBRACK,FOLLOW_LBRACK_in_value_tail759); 
 					pushFollow(FOLLOW_index_expr_in_value_tail761);
@@ -1772,7 +1772,7 @@ public class tigerParser extends Parser {
 					state._fsp--;
 
 					match(input,RBRACK,FOLLOW_RBRACK_in_value_tail763); 
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:142:29: ( LBRACK index_expr RBRACK )?
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:142:29: ( LBRACK index_expr RBRACK )?
 					int alt20=2;
 					int LA20_0 = input.LA(1);
 					if ( (LA20_0==LBRACK) ) {
@@ -1780,7 +1780,7 @@ public class tigerParser extends Parser {
 					}
 					switch (alt20) {
 						case 1 :
-							// /media/sf_College/CS 4240/tiger-compiler/tiger.g:142:30: LBRACK index_expr RBRACK
+							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:142:30: LBRACK index_expr RBRACK
 							{
 							match(input,LBRACK,FOLLOW_LBRACK_in_value_tail766); 
 							pushFollow(FOLLOW_index_expr_in_value_tail768);
@@ -1796,7 +1796,7 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 2 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:144:2: 
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:144:2: 
 					{
 					}
 					break;
@@ -1816,11 +1816,11 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "index_expr"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:146:1: index_expr : ( INTLIT | ID ) ( index_oper index_expr )? ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:146:1: index_expr : ( INTLIT | ID ) ( index_oper index_expr )? ;
 	public final void index_expr() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:147:2: ( ( INTLIT | ID ) ( index_oper index_expr )? )
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:147:4: ( INTLIT | ID ) ( index_oper index_expr )?
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:147:2: ( ( INTLIT | ID ) ( index_oper index_expr )? )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:147:4: ( INTLIT | ID ) ( index_oper index_expr )?
 			{
 			if ( input.LA(1)==ID||input.LA(1)==INTLIT ) {
 				input.consume();
@@ -1830,7 +1830,7 @@ public class tigerParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:147:18: ( index_oper index_expr )?
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:147:18: ( index_oper index_expr )?
 			int alt22=2;
 			int LA22_0 = input.LA(1);
 			if ( ((LA22_0 >= MINUS && LA22_0 <= MULT)||LA22_0==PLUS) ) {
@@ -1838,7 +1838,7 @@ public class tigerParser extends Parser {
 			}
 			switch (alt22) {
 				case 1 :
-					// /media/sf_College/CS 4240/tiger-compiler/tiger.g:147:19: index_oper index_expr
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:147:19: index_oper index_expr
 					{
 					pushFollow(FOLLOW_index_oper_in_index_expr798);
 					index_oper();
@@ -1869,11 +1869,11 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "index_oper"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:150:1: index_oper : ( PLUS | MINUS | MULT ) ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:150:1: index_oper : ( PLUS | MINUS | MULT ) ;
 	public final void index_oper() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:151:2: ( ( PLUS | MINUS | MULT ) )
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:151:2: ( ( PLUS | MINUS | MULT ) )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:
 			{
 			if ( (input.LA(1) >= MINUS && input.LA(1) <= MULT)||input.LA(1)==PLUS ) {
 				input.consume();
@@ -1899,11 +1899,11 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "keywords"
-	// /media/sf_College/CS 4240/tiger-compiler/tiger.g:158:1: keywords : ( FUNCTION_KEY | BEGIN_KEY | END_KEY | VOID_KEY | MAIN_KEY | TYPE_KEY | ARRAY_KEY | OF_KEY | INT_KEY | FIXEDPT_KEY | VAR_KEY | IF_KEY | THEN_KEY | ENDIF_KEY | ELSE_KEY | WHILE_KEY | DO_KEY | ENDDO_KEY | FOR_KEY | ID_KEY | TO_KEY | BREAK_KEY | RETURN_KEY );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:158:1: keywords : ( FUNCTION_KEY | BEGIN_KEY | END_KEY | VOID_KEY | MAIN_KEY | TYPE_KEY | ARRAY_KEY | OF_KEY | INT_KEY | FIXEDPT_KEY | VAR_KEY | IF_KEY | THEN_KEY | ENDIF_KEY | ELSE_KEY | WHILE_KEY | DO_KEY | ENDDO_KEY | FOR_KEY | ID_KEY | TO_KEY | BREAK_KEY | RETURN_KEY );
 	public final void keywords() throws  {
 		try {
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:159:2: ( FUNCTION_KEY | BEGIN_KEY | END_KEY | VOID_KEY | MAIN_KEY | TYPE_KEY | ARRAY_KEY | OF_KEY | INT_KEY | FIXEDPT_KEY | VAR_KEY | IF_KEY | THEN_KEY | ENDIF_KEY | ELSE_KEY | WHILE_KEY | DO_KEY | ENDDO_KEY | FOR_KEY | ID_KEY | TO_KEY | BREAK_KEY | RETURN_KEY )
-			// /media/sf_College/CS 4240/tiger-compiler/tiger.g:
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:159:2: ( FUNCTION_KEY | BEGIN_KEY | END_KEY | VOID_KEY | MAIN_KEY | TYPE_KEY | ARRAY_KEY | OF_KEY | INT_KEY | FIXEDPT_KEY | VAR_KEY | IF_KEY | THEN_KEY | ENDIF_KEY | ELSE_KEY | WHILE_KEY | DO_KEY | ENDDO_KEY | FOR_KEY | ID_KEY | TO_KEY | BREAK_KEY | RETURN_KEY )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:
 			{
 			if ( input.LA(1)==ARRAY_KEY||(input.LA(1) >= BEGIN_KEY && input.LA(1) <= BREAK_KEY)||(input.LA(1) >= DO_KEY && input.LA(1) <= END_KEY)||(input.LA(1) >= FIXEDPT_KEY && input.LA(1) <= FUNCTION_KEY)||(input.LA(1) >= ID_KEY && input.LA(1) <= IF_KEY)||input.LA(1)==INT_KEY||input.LA(1)==MAIN_KEY||input.LA(1)==OF_KEY||input.LA(1)==RETURN_KEY||(input.LA(1) >= THEN_KEY && input.LA(1) <= WHILE_KEY) ) {
 				input.consume();
