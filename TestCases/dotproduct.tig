@@ -1,4 +1,4 @@
-main()
+void main()
 begin
 	begin
 		type ArrayInt = array [100] of int; /*Declare ArrayInt as a new type */

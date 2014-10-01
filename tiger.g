@@ -50,7 +50,7 @@ declaration_statement
 	;
 	
 type_declaration_list 
-	:	
+	:	 
 	|	type_declaration type_declaration_list
 	;
 	
