@@ -101,7 +101,7 @@ stat
 	| opt_prefix ID LPAREN expr_list RPAREN SEMI
 	| BREAK_KEY SEMI
 	| RETURN_KEY expr SEMI
-	| block_list SEMI
+	| block
 	;
 
 opt_prefix 
