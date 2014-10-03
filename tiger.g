@@ -86,7 +86,7 @@ id_list :	ID ((COMMA | COMMA_SPACE) id_list)?
 
 optional_init 
 	:	  
-	| 	ASSIGN const
+	| 	ASSIGN constval
 	;
 
 stat_seq 
@@ -108,10 +108,10 @@ opt_prefix
 	|	
 	;
 		
-expr 	:	(const | value | LPAREN expr RPAREN | func_call) (binary_operator expr)? // Token alt 25
+expr 	:	(constval | value | LPAREN expr RPAREN | func_call) (binary_operator expr)? // Token alt 25
 	;
 	
-const 	:	INTLIT
+constval 	:	INTLIT
 	|	FIXEDPTLIT
 	;
 
