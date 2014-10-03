@@ -81,7 +81,7 @@ var_declaration
 	:	VAR_KEY id_list COLON type_id optional_init SEMI
 	;
 
-id_list :	ID (COMMA id_list)
+id_list :	ID ((COMMA | COMMA_SPACE) id_list)?
 	;
 
 optional_init 
@@ -100,6 +100,7 @@ stat
 	| opt_prefix (LPAREN expr_list RPAREN | expr_list) SEMI
 	| BREAK_KEY SEMI
 	| RETURN_KEY expr SEMI
+	| func_call SEMI
 	| block
 	;
 
@@ -160,7 +161,7 @@ func_call
   ;
   
 func_param_list
-  : value (', ' value)*
+  : value (COMMA_SPACE value)*
   | 
   ;
 
@@ -285,6 +286,8 @@ RETURN_KEY
 
 // Punctuaion symbols/binary operators
 COMMA 	:	',';
+COMMA_SPACE
+  : ', ';
 COLON 	:	':';
 SEMI	:	';';
 LPAREN	:	'(';
