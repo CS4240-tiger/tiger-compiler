@@ -81,8 +81,7 @@ var_declaration
 	:	VAR_KEY id_list COLON type_id optional_init SEMI
 	;
 
-id_list :	ID
-	|	ID COMMA id_list
+id_list :	ID (COMMA id_list)
 	;
 
 optional_init 
@@ -98,7 +97,7 @@ stat
 	: IF_KEY expr THEN_KEY stat_seq (ENDIF_KEY SEMI|ELSE_KEY stat_seq ENDIF_KEY SEMI)
 	| WHILE_KEY expr DO_KEY stat_seq ENDDO_KEY SEMI
 	| FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI
-	| opt_prefix ID LPAREN expr_list RPAREN SEMI
+	| opt_prefix (LPAREN expr_list RPAREN | expr_list) SEMI
 	| BREAK_KEY SEMI
 	| RETURN_KEY expr SEMI
 	| block
@@ -110,6 +109,7 @@ opt_prefix
 	;
 		
 expr 	:	(const | value | LPAREN expr RPAREN) (binary_operator expr)? // Token alt 25
+  | func_call SEMI
 	;
 	
 const 	:	INTLIT
@@ -128,8 +128,8 @@ binary_operator
 	;
 
 expr_list // Token alt 31
-	:	
-	|	expr expr_list_tail
+	:	expr expr_list_tail
+	|
 	;
 
 expr_list_tail
@@ -150,9 +150,19 @@ index_expr
 index_oper
 	:	(PLUS|MINUS|MULT)
 	;
+	
 COMMENT
     :	   '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}
     ;
+
+func_call
+  : ID LPAREN func_param_list RPAREN
+  ;
+  
+func_param_list
+  : value (', ' value)*
+  | 
+  ;
 
 // Keywords
 keywords
