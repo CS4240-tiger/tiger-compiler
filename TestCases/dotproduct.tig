@@ -6,7 +6,7 @@ begin
 		var i, sum : int := 0;
 		begin
 			for i := 1 to 100 do
-				sum := sum + X[i] * Y[i]
+				sum := sum + X[i] * Y[i];
 			enddo;
 			printi(sum);
 		end;

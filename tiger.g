@@ -100,7 +100,6 @@ stat
 	| opt_prefix (LPAREN expr_list RPAREN | expr_list) SEMI
 	| BREAK_KEY SEMI
 	| RETURN_KEY expr SEMI
-	| func_call SEMI
 	| block
 	;
 
@@ -109,8 +108,7 @@ opt_prefix
 	|	
 	;
 		
-expr 	:	(const | value | LPAREN expr RPAREN) (binary_operator expr)? // Token alt 25
-  | func_call SEMI
+expr 	:	(const | value | LPAREN expr RPAREN | func_call) (binary_operator expr)? // Token alt 25
 	;
 	
 const 	:	INTLIT
@@ -129,13 +127,7 @@ binary_operator
 	;
 
 expr_list // Token alt 31
-	:	expr expr_list_tail
-	|
-	;
-
-expr_list_tail
-	:	COMMA expr expr_list_tail
-	|	
+	:	expr (COMMA expr)*
 	;
 
 value 	:	ID value_tail;
