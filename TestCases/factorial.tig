@@ -1,13 +1,3 @@
-/* Variable declaration and subroutine call */
-void main()
-begin
-	var factParam : int;
-	begin
-		factParam := 5;
-		return fact(factParam);
-	end;
-end;
-
 /* Computes the factorial of a given input >= 0 */
 int function fact(input : int)
 begin
@@ -16,4 +6,14 @@ begin
 	else
 		return input + fact(input - 1);
 	endif;
+end;
+
+/* Variable declaration and subroutine call */
+void main()
+begin
+	var factParam : int;
+	begin
+		factParam := 5;
+		return fact(factParam);
+	end;
 end;
