@@ -85,8 +85,6 @@ public class tigerParser extends Parser {
 	@Override public String[] getTokenNames() { return tigerParser.tokenNames; }
 	@Override public String getGrammarFileName() { return "C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g"; }
 
-
-
 	// $ANTLR start "tiger_program"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:3:1: tiger_program : type_declaration_list funct_declaration_list main_function ;
 	public final void tiger_program() throws TigerParseException {

@@ -50,13 +50,11 @@ declaration_statement
 	;
 	
 type_declaration_list 
-	:	 
-	|	type_declaration type_declaration_list
+	:	 (type_declaration)*
 	;
 	
 var_declaration_list 
-	:	
-	|	var_declaration var_declaration_list
+	:	(var_declaration)*
 	;
 
 type_declaration 
