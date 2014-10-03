@@ -23,13 +23,7 @@ ret_type
 	;
 
 param_list 
-	:	
-	|	param param_list_tail
-	;
-
-param_list_tail 
-	:	
-	|	COMMA param param_list_tail
+	:	(param (COMMA param)*)?
 	;
 
 param 	:	ID COLON type_id;
