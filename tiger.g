@@ -97,12 +97,8 @@ stat
 	| RETURN_KEY expr SEMI
 	| block
 	;
-
-opt_prefix 
-  |
-	;
 		
-expr 	:	(constval | value | LPAREN expr RPAREN | func_call_tail) (binary_operator expr)? // Token alt 25
+expr 	:	(constval | ID (value_tail|func_call_tail) | LPAREN expr RPAREN) (binary_operator expr)? // Token alt 25
 	;
 	
 constval:	INTLIT
