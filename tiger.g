@@ -143,7 +143,7 @@ func_call_tail
   ;
   
 func_param_list
-  : value (COMMA_SPACE value)*
+  : expr (COMMA_SPACE expr)*
   | 
   ;
 
