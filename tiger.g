@@ -92,17 +92,17 @@ stat
 	: IF_KEY expr THEN_KEY stat_seq (ENDIF_KEY SEMI|ELSE_KEY stat_seq ENDIF_KEY SEMI)
 	| WHILE_KEY expr DO_KEY stat_seq ENDDO_KEY SEMI
 	| FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI
-	| opt_prefix expr_list SEMI
+  | ID ((value_tail ASSIGN expr_list)|(func_call_tail)) SEMI;
 	| BREAK_KEY SEMI
 	| RETURN_KEY expr SEMI
 	| block
 	;
 
 opt_prefix 
-	:	value (ASSIGN | func_call_tail)
+  |
 	;
 		
-expr 	:	(constval | value | LPAREN expr RPAREN) (binary_operator expr)? // Token alt 25
+expr 	:	(constval | value | LPAREN expr RPAREN | func_call) (binary_operator expr)? // Token alt 25
 	;
 	
 constval:	INTLIT
