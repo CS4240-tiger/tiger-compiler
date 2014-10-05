@@ -1,12 +1,16 @@
 grammar tiger;
 
+options {
+    k = 1;
+    backtrack = no;
+  }
+  
 tiger_program
 	:	type_declaration_list funct_declaration_list main_function
 	;
 	
 funct_declaration_list
-	:	
-	|	funct_declaration funct_declaration_list
+	:	(funct_declaration funct_declaration_list)?
 	;
 
 funct_declaration
@@ -56,8 +60,7 @@ type_declaration
 	;
 	
 type	:	base_type
-	|	ARRAY_KEY LBRACK INTLIT RBRACK OF_KEY base_type
-	|	ARRAY_KEY LBRACK INTLIT RBRACK LBRACK INTLIT RBRACK OF_KEY base_type
+	|	ARRAY_KEY LBRACK INTLIT RBRACK (LBRACK INTLIT RBRACK)? OF_KEY base_type
 	;
 
 type_id :	base_type
@@ -92,15 +95,14 @@ stat
 	| opt_prefix expr_list SEMI
 	| BREAK_KEY SEMI
 	| RETURN_KEY expr SEMI
-	| func_call SEMI
 	| block
 	;
 
 opt_prefix 
-	:	value ASSIGN
+	:	value (ASSIGN | func_call_tail)
 	;
 		
-expr 	:	(constval | value | LPAREN expr RPAREN | func_call) (binary_operator expr)? // Token alt 25
+expr 	:	(constval | value | LPAREN expr RPAREN) (binary_operator expr)? // Token alt 25
 	;
 	
 constval:	INTLIT
@@ -140,8 +142,8 @@ COMMENT
     :	   '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}
     ;
 
-func_call
-  : ID LPAREN func_param_list RPAREN
+func_call_tail
+  : LPAREN func_param_list RPAREN
   ;
   
 func_param_list
