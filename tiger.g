@@ -18,7 +18,7 @@ funct_declaration
 	;
 
 main_function 
-	:	VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY block_list END_KEY SEMI
+	:	MAIN_FUNCTION_KEY BEGIN_KEY block_list END_KEY SEMI
 	;
 
 ret_type 
@@ -48,11 +48,11 @@ declaration_statement
 	;
 	
 type_declaration_list 
-	:	 (type_declaration)*
+	:	 type_declaration*
 	;
 	
 var_declaration_list 
-	:	(var_declaration)*
+	:	var_declaration*
 	;
 
 type_declaration 
@@ -176,6 +176,10 @@ keywords
 	| TO_KEY
 	| BREAK_KEY
 	| RETURN_KEY
+	;
+
+MAIN_FUNCTION_KEY
+	: 'void main()'
 	;
 
 FUNCTION_KEY
