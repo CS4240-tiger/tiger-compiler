@@ -31,7 +31,7 @@ ret_type
 	;
 
 param_list 
-	:	(param (COMMA_SPACE param)*)?
+	:	(param (COMMA param)*)?
 	;
 
 param 	:	ID COLON type_id;
@@ -80,7 +80,7 @@ var_declaration
 	:	VAR_KEY id_list COLON type_id optional_init SEMI
 	;
 
-id_list :	ID ((COMMA | COMMA_SPACE) id_list)?
+id_list :	ID (COMMA id_list)?
 	;
 
 optional_init 
@@ -141,13 +141,25 @@ index_oper
 COMMENT
     :	   '/*' ( options {greedy=false;} : . )* '*/' {$channel=HIDDEN;}
     ;
+    
+TAB	:	'\t' {$channel=HIDDEN;};
+NEWLINE
+	:	'\n' {$channel=HIDDEN;}
+	;
+CARRAGE_RET
+	:	'\r' {$channel=HIDDEN;}
+	;
+
+WHITESPACE
+	:	' ' {$channel=HIDDEN;}
+	;
 
 func_call_tail
   : LPAREN func_param_list RPAREN
   ;
   
 func_param_list
-  : expr (COMMA_SPACE expr)*
+  : expr (COMMA expr)*
   | 
   ;
 
@@ -272,8 +284,6 @@ RETURN_KEY
 
 // Punctuaion symbols/binary operators
 COMMA 	:	',';
-COMMA_SPACE
-  : ', ';
 COLON 	:	':';
 SEMI	:	';';
 LPAREN	:	'(';
