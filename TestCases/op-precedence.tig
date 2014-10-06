@@ -1,0 +1,9 @@
+void main()
+begin
+	begin
+		/* Correct grouping: ((1 + 2) * (3 / 4)) OK! */
+		var x : int := ((1 + 2) * (3 / 4));
+		/* Correct grouping: (1 + (2 * (3 / 4))) OK! */
+		var y : int := (1 + 2 * 3 / 4);
+	end;
+end;

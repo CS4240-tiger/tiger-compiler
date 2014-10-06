@@ -102,8 +102,13 @@ stat
 	| block
 	;
 		
-expr 	:	(constval | ID (value_tail|func_call_tail) | LPAREN expr RPAREN) (binary_operator expr)? // Token alt 25
+expr 	:	(constval | ID (value_tail | func_call_tail) | LPAREN expr RPAREN) (binop_p0 expr)? // Token alt 25
 	;
+	
+binop_p0:	(AND | OR | binop_p1);
+binop_p1:	(EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | binop_p2);     
+binop_p2:	(MINUS | PLUS | binop_p3);
+binop_p3:	(MULT | DIV);
 	
 constval:	INTLIT
 	|	FIXEDPTLIT
