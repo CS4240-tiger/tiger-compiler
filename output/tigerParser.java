@@ -1,4 +1,4 @@
-// $ANTLR 3.5 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g 2014-10-05 20:02:54
+// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g 2014-10-05 20:33:26
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -89,7 +89,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "tiger_program"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:8:1: tiger_program : type_declaration_list funct_declaration_list ;
-	public final void tiger_program() throws  {
+	public final void tiger_program() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:9:2: ( type_declaration_list funct_declaration_list )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:9:4: type_declaration_list funct_declaration_list
@@ -119,7 +119,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "funct_declaration_list"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:12:1: funct_declaration_list : ( funct_declaration funct_declaration_list )? ;
-	public final void funct_declaration_list() throws  {
+	public final void funct_declaration_list() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:13:2: ( ( funct_declaration funct_declaration_list )? )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:13:4: ( funct_declaration funct_declaration_list )?
@@ -164,7 +164,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "funct_declaration"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:16:1: funct_declaration : ( ( type_id funct_declaration_tail ) | ( VOID_KEY ( funct_declaration_tail | main_function_tail ) ) ) BEGIN_KEY block_list END_KEY SEMI ;
-	public final void funct_declaration() throws  {
+	public final void funct_declaration() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:17:2: ( ( ( type_id funct_declaration_tail ) | ( VOID_KEY ( funct_declaration_tail | main_function_tail ) ) ) BEGIN_KEY block_list END_KEY SEMI )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:17:4: ( ( type_id funct_declaration_tail ) | ( VOID_KEY ( funct_declaration_tail | main_function_tail ) ) ) BEGIN_KEY block_list END_KEY SEMI
@@ -280,7 +280,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "funct_declaration_tail"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:20:1: funct_declaration_tail : FUNCTION_KEY ID LPAREN param_list RPAREN ;
-	public final void funct_declaration_tail() throws  {
+	public final void funct_declaration_tail() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:21:3: ( FUNCTION_KEY ID LPAREN param_list RPAREN )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:21:5: FUNCTION_KEY ID LPAREN param_list RPAREN
@@ -310,7 +310,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "main_function_tail"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:24:1: main_function_tail : MAIN_KEY LPAREN RPAREN ;
-	public final void main_function_tail() throws  {
+	public final void main_function_tail() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:25:2: ( MAIN_KEY LPAREN RPAREN )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:25:4: MAIN_KEY LPAREN RPAREN
@@ -335,7 +335,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "ret_type"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:28:1: ret_type : ( VOID_KEY | type_id );
-	public final void ret_type() throws  {
+	public final void ret_type() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:29:2: ( VOID_KEY | type_id )
 			int alt4=2;
@@ -386,7 +386,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "param_list"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:33:1: param_list : ( param ( COMMA param )* )? ;
-	public final void param_list() throws  {
+	public final void param_list() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:34:2: ( ( param ( COMMA param )* )? )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:34:4: ( param ( COMMA param )* )?
@@ -453,7 +453,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "param"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:37:1: param : ID COLON type_id ;
-	public final void param() throws  {
+	public final void param() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:37:8: ( ID COLON type_id )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:37:10: ID COLON type_id
@@ -481,7 +481,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "block_list"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:39:1: block_list : block block_tail ;
-	public final void block_list() throws  {
+	public final void block_list() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:40:2: ( block block_tail )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:40:4: block block_tail
@@ -511,7 +511,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "block_tail"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:43:1: block_tail : ( block block_tail |);
-	public final void block_tail() throws  {
+	public final void block_tail() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:44:2: ( block block_tail |)
 			int alt7=2;
@@ -565,7 +565,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "block"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:48:1: block : BEGIN_KEY declaration_statement stat_seq END_KEY SEMI ;
-	public final void block() throws  {
+	public final void block() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:48:8: ( BEGIN_KEY declaration_statement stat_seq END_KEY SEMI )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:48:10: BEGIN_KEY declaration_statement stat_seq END_KEY SEMI
@@ -598,7 +598,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "declaration_statement"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:50:1: declaration_statement : type_declaration_list var_declaration_list ;
-	public final void declaration_statement() throws  {
+	public final void declaration_statement() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:51:2: ( type_declaration_list var_declaration_list )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:51:4: type_declaration_list var_declaration_list
@@ -628,7 +628,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "type_declaration_list"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:54:1: type_declaration_list : ( type_declaration )* ;
-	public final void type_declaration_list() throws  {
+	public final void type_declaration_list() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:55:2: ( ( type_declaration )* )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:55:5: ( type_declaration )*
@@ -675,7 +675,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "var_declaration_list"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:58:1: var_declaration_list : ( var_declaration )* ;
-	public final void var_declaration_list() throws  {
+	public final void var_declaration_list() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:59:2: ( ( var_declaration )* )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:59:4: ( var_declaration )*
@@ -722,7 +722,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "type_declaration"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:62:1: type_declaration : TYPE_KEY ID EQ type SEMI ;
-	public final void type_declaration() throws  {
+	public final void type_declaration() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:63:2: ( TYPE_KEY ID EQ type SEMI )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:63:4: TYPE_KEY ID EQ type SEMI
@@ -752,7 +752,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "type"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:66:1: type : ( base_type | ARRAY_KEY LBRACK INTLIT RBRACK ( LBRACK INTLIT RBRACK )? OF_KEY base_type );
-	public final void type() throws  {
+	public final void type() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:66:6: ( base_type | ARRAY_KEY LBRACK INTLIT RBRACK ( LBRACK INTLIT RBRACK )? OF_KEY base_type )
 			int alt11=2;
@@ -829,7 +829,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "type_id"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:70:1: type_id : ( base_type | ID );
-	public final void type_id() throws  {
+	public final void type_id() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:70:9: ( base_type | ID )
 			int alt12=2;
@@ -880,7 +880,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "base_type"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:74:1: base_type : ( INT_KEY | FIXEDPT_KEY );
-	public final void base_type() throws  {
+	public final void base_type() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:75:2: ( INT_KEY | FIXEDPT_KEY )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:
@@ -910,7 +910,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "var_declaration"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:79:1: var_declaration : VAR_KEY id_list COLON type_id optional_init SEMI ;
-	public final void var_declaration() throws  {
+	public final void var_declaration() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:80:2: ( VAR_KEY id_list COLON type_id optional_init SEMI )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:80:4: VAR_KEY id_list COLON type_id optional_init SEMI
@@ -947,7 +947,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "id_list"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:83:1: id_list : ID ( ( COMMA | COMMA_SPACE ) id_list )? ;
-	public final void id_list() throws  {
+	public final void id_list() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:83:9: ( ID ( ( COMMA | COMMA_SPACE ) id_list )? )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:83:11: ID ( ( COMMA | COMMA_SPACE ) id_list )?
@@ -997,7 +997,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "optional_init"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:86:1: optional_init : (| ASSIGN constval );
-	public final void optional_init() throws  {
+	public final void optional_init() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:87:2: (| ASSIGN constval )
 			int alt14=2;
@@ -1048,7 +1048,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "stat_seq"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:91:1: stat_seq : ( stat )* ;
-	public final void stat_seq() throws  {
+	public final void stat_seq() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:92:2: ( ( stat )* )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:92:4: ( stat )*
@@ -1095,7 +1095,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "stat"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:95:1: stat : ( IF_KEY expr THEN_KEY stat_seq ( ENDIF_KEY SEMI | ELSE_KEY stat_seq ENDIF_KEY SEMI ) | WHILE_KEY expr DO_KEY stat_seq ENDDO_KEY SEMI | FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI | ID ( ( value_tail ASSIGN expr_list ) | ( func_call_tail ) ) SEMI | BREAK_KEY SEMI | RETURN_KEY expr SEMI | block );
-	public final void stat() throws  {
+	public final void stat() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:96:2: ( IF_KEY expr THEN_KEY stat_seq ( ENDIF_KEY SEMI | ELSE_KEY stat_seq ENDIF_KEY SEMI ) | WHILE_KEY expr DO_KEY stat_seq ENDDO_KEY SEMI | FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI | ID ( ( value_tail ASSIGN expr_list ) | ( func_call_tail ) ) SEMI | BREAK_KEY SEMI | RETURN_KEY expr SEMI | block )
 			int alt18=7;
@@ -1340,7 +1340,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "expr"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:105:1: expr : ( constval | ID ( value_tail | func_call_tail ) | LPAREN expr RPAREN ) ( binary_operator expr )? ;
-	public final void expr() throws  {
+	public final void expr() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:105:7: ( ( constval | ID ( value_tail | func_call_tail ) | LPAREN expr RPAREN ) ( binary_operator expr )? )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:105:9: ( constval | ID ( value_tail | func_call_tail ) | LPAREN expr RPAREN ) ( binary_operator expr )?
@@ -1477,7 +1477,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "constval"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:108:1: constval : ( INTLIT | FIXEDPTLIT );
-	public final void constval() throws  {
+	public final void constval() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:108:9: ( INTLIT | FIXEDPTLIT )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:
@@ -1507,7 +1507,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "binary_operator"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:119:1: binary_operator : ( PLUS | MINUS | MULT | DIV | EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | AND | OR ) ;
-	public final void binary_operator() throws  {
+	public final void binary_operator() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:120:2: ( ( PLUS | MINUS | MULT | DIV | EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | AND | OR ) )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:
@@ -1537,7 +1537,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "expr_list"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:123:1: expr_list : expr ( COMMA expr )* ;
-	public final void expr_list() throws  {
+	public final void expr_list() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:124:2: ( expr ( COMMA expr )* )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:124:4: expr ( COMMA expr )*
@@ -1589,7 +1589,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "value"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:127:1: value : ID value_tail ;
-	public final void value() throws  {
+	public final void value() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:127:8: ( ID value_tail )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:127:10: ID value_tail
@@ -1616,7 +1616,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "value_tail"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:128:1: value_tail : ( LBRACK index_expr RBRACK ( LBRACK index_expr RBRACK )? |);
-	public final void value_tail() throws  {
+	public final void value_tail() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:129:2: ( LBRACK index_expr RBRACK ( LBRACK index_expr RBRACK )? |)
 			int alt24=2;
@@ -1689,7 +1689,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "index_expr"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:133:1: index_expr : ( INTLIT | ID ) ( index_oper index_expr )? ;
-	public final void index_expr() throws  {
+	public final void index_expr() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:134:2: ( ( INTLIT | ID ) ( index_oper index_expr )? )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:134:4: ( INTLIT | ID ) ( index_oper index_expr )?
@@ -1742,7 +1742,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "index_oper"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:137:1: index_oper : ( PLUS | MINUS | MULT ) ;
-	public final void index_oper() throws  {
+	public final void index_oper() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:138:2: ( ( PLUS | MINUS | MULT ) )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:
@@ -1772,7 +1772,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "func_call_tail"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:145:1: func_call_tail : LPAREN func_param_list RPAREN ;
-	public final void func_call_tail() throws  {
+	public final void func_call_tail() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:146:3: ( LPAREN func_param_list RPAREN )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:146:5: LPAREN func_param_list RPAREN
@@ -1800,7 +1800,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "func_param_list"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:149:1: func_param_list : ( expr ( COMMA_SPACE expr )* |);
-	public final void func_param_list() throws  {
+	public final void func_param_list() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:150:3: ( expr ( COMMA_SPACE expr )* |)
 			int alt27=2;
@@ -1876,7 +1876,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "keywords"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:155:1: keywords : ( FUNCTION_KEY | BEGIN_KEY | END_KEY | VOID_KEY | MAIN_KEY | TYPE_KEY | ARRAY_KEY | OF_KEY | INT_KEY | FIXEDPT_KEY | VAR_KEY | IF_KEY | THEN_KEY | ENDIF_KEY | ELSE_KEY | WHILE_KEY | DO_KEY | ENDDO_KEY | FOR_KEY | ID_KEY | TO_KEY | BREAK_KEY | RETURN_KEY );
-	public final void keywords() throws  {
+	public final void keywords() throws RecognitionException {
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:156:2: ( FUNCTION_KEY | BEGIN_KEY | END_KEY | VOID_KEY | MAIN_KEY | TYPE_KEY | ARRAY_KEY | OF_KEY | INT_KEY | FIXEDPT_KEY | VAR_KEY | IF_KEY | THEN_KEY | ENDIF_KEY | ELSE_KEY | WHILE_KEY | DO_KEY | ENDDO_KEY | FOR_KEY | ID_KEY | TO_KEY | BREAK_KEY | RETURN_KEY )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:
