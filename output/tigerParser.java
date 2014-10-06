@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g 2014-10-05 23:20:21
+// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g 2014-10-05 23:23:58
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -1239,10 +1239,10 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 4 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:99:5: ID ( ( value_tail ASSIGN expr_list ) | ( func_call_tail ) ) SEMI
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:99:6: ID ( ( value_tail ASSIGN expr_list ) | ( func_call_tail ) ) SEMI
 					{
-					match(input,ID,FOLLOW_ID_in_stat517); 
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:99:8: ( ( value_tail ASSIGN expr_list ) | ( func_call_tail ) )
+					match(input,ID,FOLLOW_ID_in_stat518); 
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:99:9: ( ( value_tail ASSIGN expr_list ) | ( func_call_tail ) )
 					int alt17=2;
 					int LA17_0 = input.LA(1);
 					if ( (LA17_0==EOF||LA17_0==AND||LA17_0==ASSIGN||(LA17_0 >= COMMA && LA17_0 <= COMMA_SPACE)||(LA17_0 >= DIV && LA17_0 <= DO_KEY)||LA17_0==EQ||(LA17_0 >= GREATER && LA17_0 <= GREATEREQ)||(LA17_0 >= LBRACK && LA17_0 <= LESSEREQ)||(LA17_0 >= MINUS && LA17_0 <= NEQ)||(LA17_0 >= OR && LA17_0 <= PLUS)||(LA17_0 >= RPAREN && LA17_0 <= THEN_KEY)) ) {
@@ -1260,17 +1260,17 @@ public class tigerParser extends Parser {
 
 					switch (alt17) {
 						case 1 :
-							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:99:9: ( value_tail ASSIGN expr_list )
+							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:99:10: ( value_tail ASSIGN expr_list )
 							{
-							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:99:9: ( value_tail ASSIGN expr_list )
-							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:99:10: value_tail ASSIGN expr_list
+							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:99:10: ( value_tail ASSIGN expr_list )
+							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:99:11: value_tail ASSIGN expr_list
 							{
-							pushFollow(FOLLOW_value_tail_in_stat521);
+							pushFollow(FOLLOW_value_tail_in_stat522);
 							value_tail();
 							state._fsp--;
 
-							match(input,ASSIGN,FOLLOW_ASSIGN_in_stat523); 
-							pushFollow(FOLLOW_expr_list_in_stat525);
+							match(input,ASSIGN,FOLLOW_ASSIGN_in_stat524); 
+							pushFollow(FOLLOW_expr_list_in_stat526);
 							expr_list();
 							state._fsp--;
 
@@ -1279,12 +1279,12 @@ public class tigerParser extends Parser {
 							}
 							break;
 						case 2 :
-							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:99:41: ( func_call_tail )
+							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:99:42: ( func_call_tail )
 							{
-							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:99:41: ( func_call_tail )
-							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:99:42: func_call_tail
+							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:99:42: ( func_call_tail )
+							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:99:43: func_call_tail
 							{
-							pushFollow(FOLLOW_func_call_tail_in_stat531);
+							pushFollow(FOLLOW_func_call_tail_in_stat532);
 							func_call_tail();
 							state._fsp--;
 
@@ -1295,31 +1295,31 @@ public class tigerParser extends Parser {
 
 					}
 
-					match(input,SEMI,FOLLOW_SEMI_in_stat535); 
+					match(input,SEMI,FOLLOW_SEMI_in_stat536); 
 					}
 					break;
 				case 5 :
 					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:100:4: BREAK_KEY SEMI
 					{
-					match(input,BREAK_KEY,FOLLOW_BREAK_KEY_in_stat540); 
-					match(input,SEMI,FOLLOW_SEMI_in_stat542); 
+					match(input,BREAK_KEY,FOLLOW_BREAK_KEY_in_stat541); 
+					match(input,SEMI,FOLLOW_SEMI_in_stat543); 
 					}
 					break;
 				case 6 :
 					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:101:4: RETURN_KEY expr SEMI
 					{
-					match(input,RETURN_KEY,FOLLOW_RETURN_KEY_in_stat547); 
-					pushFollow(FOLLOW_expr_in_stat549);
+					match(input,RETURN_KEY,FOLLOW_RETURN_KEY_in_stat548); 
+					pushFollow(FOLLOW_expr_in_stat550);
 					expr();
 					state._fsp--;
 
-					match(input,SEMI,FOLLOW_SEMI_in_stat551); 
+					match(input,SEMI,FOLLOW_SEMI_in_stat552); 
 					}
 					break;
 				case 7 :
 					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:102:4: block
 					{
-					pushFollow(FOLLOW_block_in_stat556);
+					pushFollow(FOLLOW_block_in_stat557);
 					block();
 					state._fsp--;
 
@@ -1375,7 +1375,7 @@ public class tigerParser extends Parser {
 				case 1 :
 					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:105:10: constval
 					{
-					pushFollow(FOLLOW_constval_in_expr570);
+					pushFollow(FOLLOW_constval_in_expr571);
 					constval();
 					state._fsp--;
 
@@ -1384,7 +1384,7 @@ public class tigerParser extends Parser {
 				case 2 :
 					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:105:21: ID ( value_tail | func_call_tail )
 					{
-					match(input,ID,FOLLOW_ID_in_expr574); 
+					match(input,ID,FOLLOW_ID_in_expr575); 
 					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:105:24: ( value_tail | func_call_tail )
 					int alt19=2;
 					int LA19_0 = input.LA(1);
@@ -1405,7 +1405,7 @@ public class tigerParser extends Parser {
 						case 1 :
 							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:105:25: value_tail
 							{
-							pushFollow(FOLLOW_value_tail_in_expr577);
+							pushFollow(FOLLOW_value_tail_in_expr578);
 							value_tail();
 							state._fsp--;
 
@@ -1414,7 +1414,7 @@ public class tigerParser extends Parser {
 						case 2 :
 							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:105:36: func_call_tail
 							{
-							pushFollow(FOLLOW_func_call_tail_in_expr579);
+							pushFollow(FOLLOW_func_call_tail_in_expr580);
 							func_call_tail();
 							state._fsp--;
 
@@ -1428,12 +1428,12 @@ public class tigerParser extends Parser {
 				case 3 :
 					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:105:54: LPAREN expr RPAREN
 					{
-					match(input,LPAREN,FOLLOW_LPAREN_in_expr584); 
-					pushFollow(FOLLOW_expr_in_expr586);
+					match(input,LPAREN,FOLLOW_LPAREN_in_expr585); 
+					pushFollow(FOLLOW_expr_in_expr587);
 					expr();
 					state._fsp--;
 
-					match(input,RPAREN,FOLLOW_RPAREN_in_expr588); 
+					match(input,RPAREN,FOLLOW_RPAREN_in_expr589); 
 					}
 					break;
 
@@ -1449,11 +1449,11 @@ public class tigerParser extends Parser {
 				case 1 :
 					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:105:75: binary_operator expr
 					{
-					pushFollow(FOLLOW_binary_operator_in_expr592);
+					pushFollow(FOLLOW_binary_operator_in_expr593);
 					binary_operator();
 					state._fsp--;
 
-					pushFollow(FOLLOW_expr_in_expr594);
+					pushFollow(FOLLOW_expr_in_expr595);
 					expr();
 					state._fsp--;
 
@@ -1544,7 +1544,7 @@ public class tigerParser extends Parser {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:124:2: ( expr ( COMMA expr )* )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:124:4: expr ( COMMA expr )*
 			{
-			pushFollow(FOLLOW_expr_in_expr_list719);
+			pushFollow(FOLLOW_expr_in_expr_list720);
 			expr();
 			state._fsp--;
 
@@ -1561,8 +1561,8 @@ public class tigerParser extends Parser {
 				case 1 :
 					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:124:10: COMMA expr
 					{
-					match(input,COMMA,FOLLOW_COMMA_in_expr_list722); 
-					pushFollow(FOLLOW_expr_in_expr_list724);
+					match(input,COMMA,FOLLOW_COMMA_in_expr_list723); 
+					pushFollow(FOLLOW_expr_in_expr_list725);
 					expr();
 					state._fsp--;
 
@@ -1596,8 +1596,8 @@ public class tigerParser extends Parser {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:127:8: ( ID value_tail )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:127:10: ID value_tail
 			{
-			match(input,ID,FOLLOW_ID_in_value737); 
-			pushFollow(FOLLOW_value_tail_in_value739);
+			match(input,ID,FOLLOW_ID_in_value738); 
+			pushFollow(FOLLOW_value_tail_in_value740);
 			value_tail();
 			state._fsp--;
 
@@ -1640,12 +1640,12 @@ public class tigerParser extends Parser {
 				case 1 :
 					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:129:4: LBRACK index_expr RBRACK ( LBRACK index_expr RBRACK )?
 					{
-					match(input,LBRACK,FOLLOW_LBRACK_in_value_tail748); 
-					pushFollow(FOLLOW_index_expr_in_value_tail750);
+					match(input,LBRACK,FOLLOW_LBRACK_in_value_tail749); 
+					pushFollow(FOLLOW_index_expr_in_value_tail751);
 					index_expr();
 					state._fsp--;
 
-					match(input,RBRACK,FOLLOW_RBRACK_in_value_tail752); 
+					match(input,RBRACK,FOLLOW_RBRACK_in_value_tail753); 
 					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:129:29: ( LBRACK index_expr RBRACK )?
 					int alt23=2;
 					int LA23_0 = input.LA(1);
@@ -1656,12 +1656,12 @@ public class tigerParser extends Parser {
 						case 1 :
 							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:129:30: LBRACK index_expr RBRACK
 							{
-							match(input,LBRACK,FOLLOW_LBRACK_in_value_tail755); 
-							pushFollow(FOLLOW_index_expr_in_value_tail757);
+							match(input,LBRACK,FOLLOW_LBRACK_in_value_tail756); 
+							pushFollow(FOLLOW_index_expr_in_value_tail758);
 							index_expr();
 							state._fsp--;
 
-							match(input,RBRACK,FOLLOW_RBRACK_in_value_tail759); 
+							match(input,RBRACK,FOLLOW_RBRACK_in_value_tail760); 
 							}
 							break;
 
@@ -1714,11 +1714,11 @@ public class tigerParser extends Parser {
 				case 1 :
 					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:134:19: index_oper index_expr
 					{
-					pushFollow(FOLLOW_index_oper_in_index_expr787);
+					pushFollow(FOLLOW_index_oper_in_index_expr788);
 					index_oper();
 					state._fsp--;
 
-					pushFollow(FOLLOW_index_expr_in_index_expr789);
+					pushFollow(FOLLOW_index_expr_in_index_expr790);
 					index_expr();
 					state._fsp--;
 
@@ -1779,12 +1779,12 @@ public class tigerParser extends Parser {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:146:3: ( LPAREN func_param_list RPAREN )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:146:5: LPAREN func_param_list RPAREN
 			{
-			match(input,LPAREN,FOLLOW_LPAREN_in_func_call_tail861); 
-			pushFollow(FOLLOW_func_param_list_in_func_call_tail863);
+			match(input,LPAREN,FOLLOW_LPAREN_in_func_call_tail862); 
+			pushFollow(FOLLOW_func_param_list_in_func_call_tail864);
 			func_param_list();
 			state._fsp--;
 
-			match(input,RPAREN,FOLLOW_RPAREN_in_func_call_tail865); 
+			match(input,RPAREN,FOLLOW_RPAREN_in_func_call_tail866); 
 			}
 
 		}
@@ -1824,7 +1824,7 @@ public class tigerParser extends Parser {
 				case 1 :
 					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:150:5: expr ( COMMA_SPACE expr )*
 					{
-					pushFollow(FOLLOW_expr_in_func_param_list880);
+					pushFollow(FOLLOW_expr_in_func_param_list881);
 					expr();
 					state._fsp--;
 
@@ -1841,8 +1841,8 @@ public class tigerParser extends Parser {
 						case 1 :
 							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:150:11: COMMA_SPACE expr
 							{
-							match(input,COMMA_SPACE,FOLLOW_COMMA_SPACE_in_func_param_list883); 
-							pushFollow(FOLLOW_expr_in_func_param_list885);
+							match(input,COMMA_SPACE,FOLLOW_COMMA_SPACE_in_func_param_list884); 
+							pushFollow(FOLLOW_expr_in_func_param_list886);
 							expr();
 							state._fsp--;
 
@@ -2004,45 +2004,45 @@ public class tigerParser extends Parser {
 	public static final BitSet FOLLOW_stat_seq_in_stat507 = new BitSet(new long[]{0x0000000000010000L});
 	public static final BitSet FOLLOW_ENDDO_KEY_in_stat509 = new BitSet(new long[]{0x0000200000000000L});
 	public static final BitSet FOLLOW_SEMI_in_stat511 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_stat517 = new BitSet(new long[]{0x0000000480000040L});
-	public static final BitSet FOLLOW_value_tail_in_stat521 = new BitSet(new long[]{0x0000000000000040L});
-	public static final BitSet FOLLOW_ASSIGN_in_stat523 = new BitSet(new long[]{0x0000000424100000L});
-	public static final BitSet FOLLOW_expr_list_in_stat525 = new BitSet(new long[]{0x0000200000000000L});
-	public static final BitSet FOLLOW_func_call_tail_in_stat531 = new BitSet(new long[]{0x0000200000000000L});
-	public static final BitSet FOLLOW_SEMI_in_stat535 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_BREAK_KEY_in_stat540 = new BitSet(new long[]{0x0000200000000000L});
-	public static final BitSet FOLLOW_SEMI_in_stat542 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_RETURN_KEY_in_stat547 = new BitSet(new long[]{0x0000000424100000L});
-	public static final BitSet FOLLOW_expr_in_stat549 = new BitSet(new long[]{0x0000200000000000L});
-	public static final BitSet FOLLOW_SEMI_in_stat551 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_block_in_stat556 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_constval_in_expr570 = new BitSet(new long[]{0x0000037303082012L});
-	public static final BitSet FOLLOW_ID_in_expr574 = new BitSet(new long[]{0x0000037783082010L});
-	public static final BitSet FOLLOW_value_tail_in_expr577 = new BitSet(new long[]{0x0000037303082012L});
-	public static final BitSet FOLLOW_func_call_tail_in_expr579 = new BitSet(new long[]{0x0000037303082012L});
-	public static final BitSet FOLLOW_LPAREN_in_expr584 = new BitSet(new long[]{0x0000000424100000L});
-	public static final BitSet FOLLOW_expr_in_expr586 = new BitSet(new long[]{0x0000100000000000L});
-	public static final BitSet FOLLOW_RPAREN_in_expr588 = new BitSet(new long[]{0x0000037303082012L});
-	public static final BitSet FOLLOW_binary_operator_in_expr592 = new BitSet(new long[]{0x0000000424100000L});
-	public static final BitSet FOLLOW_expr_in_expr594 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_expr_in_expr_list719 = new BitSet(new long[]{0x0000000000000402L});
-	public static final BitSet FOLLOW_COMMA_in_expr_list722 = new BitSet(new long[]{0x0000000424100000L});
-	public static final BitSet FOLLOW_expr_in_expr_list724 = new BitSet(new long[]{0x0000000000000402L});
-	public static final BitSet FOLLOW_ID_in_value737 = new BitSet(new long[]{0x0000000080000000L});
-	public static final BitSet FOLLOW_value_tail_in_value739 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LBRACK_in_value_tail748 = new BitSet(new long[]{0x0000000024000000L});
-	public static final BitSet FOLLOW_index_expr_in_value_tail750 = new BitSet(new long[]{0x0000040000000000L});
-	public static final BitSet FOLLOW_RBRACK_in_value_tail752 = new BitSet(new long[]{0x0000000080000002L});
-	public static final BitSet FOLLOW_LBRACK_in_value_tail755 = new BitSet(new long[]{0x0000000024000000L});
-	public static final BitSet FOLLOW_index_expr_in_value_tail757 = new BitSet(new long[]{0x0000040000000000L});
-	public static final BitSet FOLLOW_RBRACK_in_value_tail759 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_set_in_index_expr778 = new BitSet(new long[]{0x0000023000000002L});
-	public static final BitSet FOLLOW_index_oper_in_index_expr787 = new BitSet(new long[]{0x0000000024000000L});
-	public static final BitSet FOLLOW_index_expr_in_index_expr789 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LPAREN_in_func_call_tail861 = new BitSet(new long[]{0x0000100424100000L});
-	public static final BitSet FOLLOW_func_param_list_in_func_call_tail863 = new BitSet(new long[]{0x0000100000000000L});
-	public static final BitSet FOLLOW_RPAREN_in_func_call_tail865 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_expr_in_func_param_list880 = new BitSet(new long[]{0x0000000000000802L});
-	public static final BitSet FOLLOW_COMMA_SPACE_in_func_param_list883 = new BitSet(new long[]{0x0000000424100000L});
-	public static final BitSet FOLLOW_expr_in_func_param_list885 = new BitSet(new long[]{0x0000000000000802L});
+	public static final BitSet FOLLOW_ID_in_stat518 = new BitSet(new long[]{0x0000000480000040L});
+	public static final BitSet FOLLOW_value_tail_in_stat522 = new BitSet(new long[]{0x0000000000000040L});
+	public static final BitSet FOLLOW_ASSIGN_in_stat524 = new BitSet(new long[]{0x0000000424100000L});
+	public static final BitSet FOLLOW_expr_list_in_stat526 = new BitSet(new long[]{0x0000200000000000L});
+	public static final BitSet FOLLOW_func_call_tail_in_stat532 = new BitSet(new long[]{0x0000200000000000L});
+	public static final BitSet FOLLOW_SEMI_in_stat536 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_BREAK_KEY_in_stat541 = new BitSet(new long[]{0x0000200000000000L});
+	public static final BitSet FOLLOW_SEMI_in_stat543 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_RETURN_KEY_in_stat548 = new BitSet(new long[]{0x0000000424100000L});
+	public static final BitSet FOLLOW_expr_in_stat550 = new BitSet(new long[]{0x0000200000000000L});
+	public static final BitSet FOLLOW_SEMI_in_stat552 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_block_in_stat557 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_constval_in_expr571 = new BitSet(new long[]{0x0000037303082012L});
+	public static final BitSet FOLLOW_ID_in_expr575 = new BitSet(new long[]{0x0000037783082010L});
+	public static final BitSet FOLLOW_value_tail_in_expr578 = new BitSet(new long[]{0x0000037303082012L});
+	public static final BitSet FOLLOW_func_call_tail_in_expr580 = new BitSet(new long[]{0x0000037303082012L});
+	public static final BitSet FOLLOW_LPAREN_in_expr585 = new BitSet(new long[]{0x0000000424100000L});
+	public static final BitSet FOLLOW_expr_in_expr587 = new BitSet(new long[]{0x0000100000000000L});
+	public static final BitSet FOLLOW_RPAREN_in_expr589 = new BitSet(new long[]{0x0000037303082012L});
+	public static final BitSet FOLLOW_binary_operator_in_expr593 = new BitSet(new long[]{0x0000000424100000L});
+	public static final BitSet FOLLOW_expr_in_expr595 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_expr_in_expr_list720 = new BitSet(new long[]{0x0000000000000402L});
+	public static final BitSet FOLLOW_COMMA_in_expr_list723 = new BitSet(new long[]{0x0000000424100000L});
+	public static final BitSet FOLLOW_expr_in_expr_list725 = new BitSet(new long[]{0x0000000000000402L});
+	public static final BitSet FOLLOW_ID_in_value738 = new BitSet(new long[]{0x0000000080000000L});
+	public static final BitSet FOLLOW_value_tail_in_value740 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LBRACK_in_value_tail749 = new BitSet(new long[]{0x0000000024000000L});
+	public static final BitSet FOLLOW_index_expr_in_value_tail751 = new BitSet(new long[]{0x0000040000000000L});
+	public static final BitSet FOLLOW_RBRACK_in_value_tail753 = new BitSet(new long[]{0x0000000080000002L});
+	public static final BitSet FOLLOW_LBRACK_in_value_tail756 = new BitSet(new long[]{0x0000000024000000L});
+	public static final BitSet FOLLOW_index_expr_in_value_tail758 = new BitSet(new long[]{0x0000040000000000L});
+	public static final BitSet FOLLOW_RBRACK_in_value_tail760 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_set_in_index_expr779 = new BitSet(new long[]{0x0000023000000002L});
+	public static final BitSet FOLLOW_index_oper_in_index_expr788 = new BitSet(new long[]{0x0000000024000000L});
+	public static final BitSet FOLLOW_index_expr_in_index_expr790 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LPAREN_in_func_call_tail862 = new BitSet(new long[]{0x0000100424100000L});
+	public static final BitSet FOLLOW_func_param_list_in_func_call_tail864 = new BitSet(new long[]{0x0000100000000000L});
+	public static final BitSet FOLLOW_RPAREN_in_func_call_tail866 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_expr_in_func_param_list881 = new BitSet(new long[]{0x0000000000000802L});
+	public static final BitSet FOLLOW_COMMA_SPACE_in_func_param_list884 = new BitSet(new long[]{0x0000000424100000L});
+	public static final BitSet FOLLOW_expr_in_func_param_list886 = new BitSet(new long[]{0x0000000000000802L});
 }
