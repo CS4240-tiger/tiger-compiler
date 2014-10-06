@@ -1,4 +1,4 @@
-void dotproduct()
+void function dotproduct()
 begin
 	begin
 		type ArrayInt = array [100] of int;
