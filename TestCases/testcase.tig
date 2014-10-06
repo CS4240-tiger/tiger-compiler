@@ -1,0 +1,36 @@
+void dotproduct()
+begin
+	begin
+		type ArrayInt = array [100] of int;
+		var X, Y : ArrayInt := 10;
+		var i, sum : int := 0;
+		begin
+			for i := 1 to 100 do
+				sum := sum + X[i] * Y[i];
+			enddo;
+			printi(sum);
+		end;
+	end;
+end;
+
+/* Computes the factorial of a given input >= 0 */
+int function fact(input : int)
+begin
+	begin
+		if (input = 0 | input = 1) then
+			return 1;
+		else
+			return input + fact(input - 1);
+		endif;
+	end;
+end;
+
+/* Variable declaration and subroutine call */
+void main()
+begin
+	begin
+		var factParam : int;
+		factParam := 5;
+		return fact(factParam);
+	end;
+end;

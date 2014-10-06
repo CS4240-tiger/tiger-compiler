@@ -6,7 +6,7 @@ options {
   }
   
 tiger_program
-	:	type_declaration_list funct_declaration_list main_function
+	:	type_declaration_list funct_declaration_list
 	;
 	
 funct_declaration_list
@@ -14,11 +14,15 @@ funct_declaration_list
 	;
 
 funct_declaration
-	:	ret_type FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
+	:	((type_id funct_declaration_tail) | (VOID_KEY (funct_declaration_tail | main_function_tail))) BEGIN_KEY block_list END_KEY SEMI
 	;
 
-main_function 
-	:	MAIN_FUNCTION_KEY BEGIN_KEY block_list END_KEY SEMI
+funct_declaration_tail
+  : FUNCTION_KEY ID LPAREN param_list RPAREN
+  ;
+
+main_function_tail
+	:	MAIN_KEY LPAREN RPAREN
 	;
 
 ret_type 
@@ -174,10 +178,6 @@ keywords
 	| RETURN_KEY
 	;
 
-MAIN_FUNCTION_KEY
-	: 'void main()'
-	;
-
 FUNCTION_KEY
 	: 'function'
 	;
@@ -295,5 +295,5 @@ AND	:	'&';
 OR	:	'|';
 ASSIGN	:	':=';
 
-ID  :	('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*
+ID  :	('a'..'z'|'A'..'Z'|'_')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*
     ;
