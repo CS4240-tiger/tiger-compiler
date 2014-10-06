@@ -14,12 +14,20 @@ funct_declaration_list
 	;
 
 funct_declaration
-	:	((type_id funct_declaration_tail) | (VOID_KEY (funct_declaration_tail | main_function_tail))) BEGIN_KEY block_list END_KEY SEMI
+	:	((type_id funct_declaration_tail nonvoid_tail) | (VOID_KEY (funct_declaration_tail | main_function_tail)) void_tail)
 	;
 
 funct_declaration_tail
-  : FUNCTION_KEY ID LPAREN param_list RPAREN
-  ;
+  	: 	FUNCTION_KEY ID LPAREN param_list RPAREN
+  	;
+  
+nonvoid_tail
+	:	 BEGIN_KEY block_list_return block_list END_KEY SEMI
+	;	
+	
+void_tail
+	:	BEGIN_KEY block_list END_KEY SEMI
+	;
 
 main_function_tail
 	:	MAIN_KEY LPAREN RPAREN
@@ -37,13 +45,11 @@ param_list
 param 	:	ID COLON type_id;
 
 block_list 
-	:	block block_tail
+	:	block*
 	;
 
-block_tail 
-	:	block block_tail
-	|	
-	;
+block_list_return
+	:	BEGIN_KEY declaration_statement stat_seq return_stat stat_seq END_KEY SEMI;
 
 block 	:	BEGIN_KEY declaration_statement stat_seq END_KEY SEMI;
 
@@ -93,14 +99,16 @@ stat_seq
 	;
 
 stat 
-	: IF_KEY expr THEN_KEY stat_seq (ENDIF_KEY SEMI|ELSE_KEY stat_seq ENDIF_KEY SEMI)
-	| WHILE_KEY expr DO_KEY stat_seq ENDDO_KEY SEMI
-	| FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI
-  	| ID ((value_tail ASSIGN expr_list) | (func_call_tail)) SEMI
-	| BREAK_KEY SEMI
-	| RETURN_KEY expr SEMI
-	| block
+	: 	IF_KEY expr THEN_KEY stat_seq (ENDIF_KEY SEMI|ELSE_KEY stat_seq ENDIF_KEY SEMI)
+	| 	WHILE_KEY expr DO_KEY stat_seq ENDDO_KEY SEMI
+	| 	FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI
+  	| 	ID ((value_tail ASSIGN expr_list) | (func_call_tail)) SEMI
+	| 	BREAK_KEY SEMI
+	| 	block
 	;
+
+return_stat
+	:	RETURN_KEY expr SEMI;
 		
 expr 	:	(constval | ID (value_tail|func_call_tail) | LPAREN expr RPAREN) (binary_operator expr)? // Token alt 25
 	;
