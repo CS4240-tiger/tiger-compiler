@@ -31,7 +31,7 @@ ret_type
 	;
 
 param_list 
-	:	(param (COMMA param)*)?
+	:	(param (COMMA_SPACE param)*)?
 	;
 
 param 	:	ID COLON type_id;
@@ -85,7 +85,7 @@ id_list :	ID ((COMMA | COMMA_SPACE) id_list)?
 
 optional_init 
 	:	  
-	| 	ASSIGN constval
+	| 	ASSIGN expr
 	;
 
 stat_seq 
@@ -96,7 +96,7 @@ stat
 	: IF_KEY expr THEN_KEY stat_seq (ENDIF_KEY SEMI|ELSE_KEY stat_seq ENDIF_KEY SEMI)
 	| WHILE_KEY expr DO_KEY stat_seq ENDDO_KEY SEMI
 	| FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI
-  	| ID ((value_tail ASSIGN expr_list) | (func_call_tail)) SEMI
+  | ID ((value_tail ASSIGN expr_list) | (func_call_tail)) SEMI
 	| BREAK_KEY SEMI
 	| RETURN_KEY expr SEMI
 	| block
@@ -109,7 +109,7 @@ constval:	INTLIT
 	|	FIXEDPTLIT
 	;
 
-INTLIT :	'0'..'9'+;
+INTLIT :	'-'? '0'..'9'+;
 
 FIXEDPTLIT
     :   INTLIT '.' ('0'..'9')* 

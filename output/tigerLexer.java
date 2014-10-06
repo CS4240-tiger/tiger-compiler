@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g 2014-10-05 20:42:58
+// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g 2014-10-05 23:20:23
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -77,20 +77,36 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = INTLIT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:112:8: ( ( '0' .. '9' )+ )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:112:10: ( '0' .. '9' )+
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:112:8: ( ( '-' )? ( '0' .. '9' )+ )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:112:10: ( '-' )? ( '0' .. '9' )+
 			{
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:112:10: ( '0' .. '9' )+
-			int cnt1=0;
-			loop1:
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:112:10: ( '-' )?
+			int alt1=2;
+			int LA1_0 = input.LA(1);
+			if ( (LA1_0=='-') ) {
+				alt1=1;
+			}
+			switch (alt1) {
+				case 1 :
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:112:10: '-'
+					{
+					match('-'); 
+					}
+					break;
+
+			}
+
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:112:15: ( '0' .. '9' )+
+			int cnt2=0;
+			loop2:
 			while (true) {
-				int alt1=2;
-				int LA1_0 = input.LA(1);
-				if ( ((LA1_0 >= '0' && LA1_0 <= '9')) ) {
-					alt1=1;
+				int alt2=2;
+				int LA2_0 = input.LA(1);
+				if ( ((LA2_0 >= '0' && LA2_0 <= '9')) ) {
+					alt2=1;
 				}
 
-				switch (alt1) {
+				switch (alt2) {
 				case 1 :
 					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:
 					{
@@ -106,11 +122,11 @@ public class tigerLexer extends Lexer {
 					break;
 
 				default :
-					if ( cnt1 >= 1 ) break loop1;
-					EarlyExitException eee = new EarlyExitException(1, input);
+					if ( cnt2 >= 1 ) break loop2;
+					EarlyExitException eee = new EarlyExitException(2, input);
 					throw eee;
 				}
-				cnt1++;
+				cnt2++;
 			}
 
 			}
@@ -130,22 +146,22 @@ public class tigerLexer extends Lexer {
 			int _type = FIXEDPTLIT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:115:5: ( INTLIT '.' ( '0' .. '9' )* | '.' ( '0' .. '9' )+ )
-			int alt4=2;
-			int LA4_0 = input.LA(1);
-			if ( ((LA4_0 >= '0' && LA4_0 <= '9')) ) {
-				alt4=1;
+			int alt5=2;
+			int LA5_0 = input.LA(1);
+			if ( (LA5_0=='-'||(LA5_0 >= '0' && LA5_0 <= '9')) ) {
+				alt5=1;
 			}
-			else if ( (LA4_0=='.') ) {
-				alt4=2;
+			else if ( (LA5_0=='.') ) {
+				alt5=2;
 			}
 
 			else {
 				NoViableAltException nvae =
-					new NoViableAltException("", 4, 0, input);
+					new NoViableAltException("", 5, 0, input);
 				throw nvae;
 			}
 
-			switch (alt4) {
+			switch (alt5) {
 				case 1 :
 					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:115:9: INTLIT '.' ( '0' .. '9' )*
 					{
@@ -153,42 +169,6 @@ public class tigerLexer extends Lexer {
 
 					match('.'); 
 					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:115:20: ( '0' .. '9' )*
-					loop2:
-					while (true) {
-						int alt2=2;
-						int LA2_0 = input.LA(1);
-						if ( ((LA2_0 >= '0' && LA2_0 <= '9')) ) {
-							alt2=1;
-						}
-
-						switch (alt2) {
-						case 1 :
-							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:
-							{
-							if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
-								input.consume();
-							}
-							else {
-								MismatchedSetException mse = new MismatchedSetException(null,input);
-								recover(mse);
-								throw mse;
-							}
-							}
-							break;
-
-						default :
-							break loop2;
-						}
-					}
-
-					}
-					break;
-				case 2 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:116:9: '.' ( '0' .. '9' )+
-					{
-					match('.'); 
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:116:13: ( '0' .. '9' )+
-					int cnt3=0;
 					loop3:
 					while (true) {
 						int alt3=2;
@@ -213,11 +193,47 @@ public class tigerLexer extends Lexer {
 							break;
 
 						default :
-							if ( cnt3 >= 1 ) break loop3;
-							EarlyExitException eee = new EarlyExitException(3, input);
+							break loop3;
+						}
+					}
+
+					}
+					break;
+				case 2 :
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:116:9: '.' ( '0' .. '9' )+
+					{
+					match('.'); 
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:116:13: ( '0' .. '9' )+
+					int cnt4=0;
+					loop4:
+					while (true) {
+						int alt4=2;
+						int LA4_0 = input.LA(1);
+						if ( ((LA4_0 >= '0' && LA4_0 <= '9')) ) {
+							alt4=1;
+						}
+
+						switch (alt4) {
+						case 1 :
+							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:
+							{
+							if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
+								input.consume();
+							}
+							else {
+								MismatchedSetException mse = new MismatchedSetException(null,input);
+								recover(mse);
+								throw mse;
+							}
+							}
+							break;
+
+						default :
+							if ( cnt4 >= 1 ) break loop4;
+							EarlyExitException eee = new EarlyExitException(4, input);
 							throw eee;
 						}
-						cnt3++;
+						cnt4++;
 					}
 
 					}
@@ -244,25 +260,25 @@ public class tigerLexer extends Lexer {
 			match("/*"); 
 
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:142:15: ( options {greedy=false; } : . )*
-			loop5:
+			loop6:
 			while (true) {
-				int alt5=2;
-				int LA5_0 = input.LA(1);
-				if ( (LA5_0=='*') ) {
-					int LA5_1 = input.LA(2);
-					if ( (LA5_1=='/') ) {
-						alt5=2;
+				int alt6=2;
+				int LA6_0 = input.LA(1);
+				if ( (LA6_0=='*') ) {
+					int LA6_1 = input.LA(2);
+					if ( (LA6_1=='/') ) {
+						alt6=2;
 					}
-					else if ( ((LA5_1 >= '\u0000' && LA5_1 <= '.')||(LA5_1 >= '0' && LA5_1 <= '\uFFFF')) ) {
-						alt5=1;
+					else if ( ((LA6_1 >= '\u0000' && LA6_1 <= '.')||(LA6_1 >= '0' && LA6_1 <= '\uFFFF')) ) {
+						alt6=1;
 					}
 
 				}
-				else if ( ((LA5_0 >= '\u0000' && LA5_0 <= ')')||(LA5_0 >= '+' && LA5_0 <= '\uFFFF')) ) {
-					alt5=1;
+				else if ( ((LA6_0 >= '\u0000' && LA6_0 <= ')')||(LA6_0 >= '+' && LA6_0 <= '\uFFFF')) ) {
+					alt6=1;
 				}
 
-				switch (alt5) {
+				switch (alt6) {
 				case 1 :
 					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:142:43: .
 					{
@@ -271,7 +287,7 @@ public class tigerLexer extends Lexer {
 					break;
 
 				default :
-					break loop5;
+					break loop6;
 				}
 			}
 
@@ -1214,15 +1230,15 @@ public class tigerLexer extends Lexer {
 				throw mse;
 			}
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:298:30: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
-			loop6:
+			loop7:
 			while (true) {
-				int alt6=2;
-				int LA6_0 = input.LA(1);
-				if ( ((LA6_0 >= '0' && LA6_0 <= '9')||(LA6_0 >= 'A' && LA6_0 <= 'Z')||LA6_0=='_'||(LA6_0 >= 'a' && LA6_0 <= 'z')) ) {
-					alt6=1;
+				int alt7=2;
+				int LA7_0 = input.LA(1);
+				if ( ((LA7_0 >= '0' && LA7_0 <= '9')||(LA7_0 >= 'A' && LA7_0 <= 'Z')||LA7_0=='_'||(LA7_0 >= 'a' && LA7_0 <= 'z')) ) {
+					alt7=1;
 				}
 
-				switch (alt6) {
+				switch (alt7) {
 				case 1 :
 					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:
 					{
@@ -1238,7 +1254,7 @@ public class tigerLexer extends Lexer {
 					break;
 
 				default :
-					break loop6;
+					break loop7;
 				}
 			}
 
@@ -1256,9 +1272,9 @@ public class tigerLexer extends Lexer {
 	@Override
 	public void mTokens() throws RecognitionException {
 		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:8: ( INTLIT | FIXEDPTLIT | COMMENT | FUNCTION_KEY | BEGIN_KEY | END_KEY | VOID_KEY | MAIN_KEY | TYPE_KEY | ARRAY_KEY | OF_KEY | INT_KEY | FIXEDPT_KEY | VAR_KEY | IF_KEY | THEN_KEY | ENDIF_KEY | ELSE_KEY | WHILE_KEY | ENDDO_KEY | FOR_KEY | ID_KEY | TO_KEY | DO_KEY | BREAK_KEY | RETURN_KEY | COMMA | COMMA_SPACE | COLON | SEMI | LPAREN | RPAREN | LBRACK | RBRACK | PLUS | MINUS | MULT | DIV | EQ | NEQ | LESSER | LESSEREQ | GREATER | GREATEREQ | AND | OR | ASSIGN | ID )
-		int alt7=48;
-		alt7 = dfa7.predict(input);
-		switch (alt7) {
+		int alt8=48;
+		alt8 = dfa8.predict(input);
+		switch (alt8) {
 			case 1 :
 				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:10: INTLIT
 				{
@@ -1600,28 +1616,29 @@ public class tigerLexer extends Lexer {
 	}
 
 
-	protected DFA7 dfa7 = new DFA7(this);
-	static final String DFA7_eotS =
-		"\1\uffff\1\40\1\uffff\1\42\14\37\1\71\1\73\11\uffff\1\76\1\100\6\uffff"+
-		"\14\37\1\115\1\37\1\117\1\37\1\121\1\122\1\37\1\124\1\37\11\uffff\2\37"+
-		"\1\130\2\37\1\135\2\37\1\140\3\37\1\uffff\1\37\1\uffff\1\145\2\uffff\1"+
-		"\37\1\uffff\3\37\1\uffff\4\37\1\uffff\1\156\1\157\1\uffff\1\160\1\161"+
-		"\1\162\1\37\1\uffff\4\37\1\170\1\171\1\172\1\173\5\uffff\1\174\1\175\3"+
-		"\37\6\uffff\1\u0081\1\37\1\u0083\1\uffff\1\u0084\2\uffff";
-	static final String DFA7_eofS =
-		"\u0085\uffff";
-	static final String DFA7_minS =
-		"\1\46\1\56\1\uffff\1\52\1\151\1\145\1\154\2\141\1\150\1\162\1\146\1\144"+
-		"\1\150\1\157\1\145\1\40\1\75\11\uffff\2\75\6\uffff\1\156\1\170\1\162\1"+
-		"\147\1\145\1\144\1\163\1\151\1\162\1\151\1\160\1\145\1\60\1\162\1\60\1"+
-		"\164\2\60\1\151\1\60\1\164\11\uffff\1\143\1\145\1\60\1\151\1\141\1\60"+
-		"\1\145\1\144\1\60\1\156\1\145\1\156\1\uffff\1\141\1\uffff\1\60\2\uffff"+
-		"\1\154\1\uffff\1\165\1\164\1\144\1\uffff\1\156\1\153\1\146\1\157\1\uffff"+
-		"\2\60\1\uffff\3\60\1\171\1\uffff\1\145\1\162\1\151\1\160\4\60\5\uffff"+
-		"\2\60\1\156\1\157\1\164\6\uffff\1\60\1\156\1\60\1\uffff\1\60\2\uffff";
-	static final String DFA7_maxS =
-		"\1\174\1\71\1\uffff\1\52\1\165\1\162\1\156\1\157\1\141\1\171\1\162\1\146"+
-		"\1\156\1\150\1\157\1\145\1\40\1\75\11\uffff\1\76\1\75\6\uffff\1\156\1"+
+	protected DFA8 dfa8 = new DFA8(this);
+	static final String DFA8_eotS =
+		"\1\uffff\1\40\1\41\1\uffff\1\43\14\37\1\72\1\74\10\uffff\1\77\1\101\7"+
+		"\uffff\14\37\1\116\1\37\1\120\1\37\1\122\1\123\1\37\1\125\1\37\11\uffff"+
+		"\2\37\1\131\2\37\1\136\2\37\1\141\3\37\1\uffff\1\37\1\uffff\1\146\2\uffff"+
+		"\1\37\1\uffff\3\37\1\uffff\4\37\1\uffff\1\157\1\160\1\uffff\1\161\1\162"+
+		"\1\163\1\37\1\uffff\4\37\1\171\1\172\1\173\1\174\5\uffff\1\175\1\176\3"+
+		"\37\6\uffff\1\u0082\1\37\1\u0084\1\uffff\1\u0085\2\uffff";
+	static final String DFA8_eofS =
+		"\u0086\uffff";
+	static final String DFA8_minS =
+		"\1\46\1\60\1\56\1\uffff\1\52\1\151\1\145\1\154\2\141\1\150\1\162\1\146"+
+		"\1\144\1\150\1\157\1\145\1\40\1\75\10\uffff\2\75\7\uffff\1\156\1\170\1"+
+		"\162\1\147\1\145\1\144\1\163\1\151\1\162\1\151\1\160\1\145\1\60\1\162"+
+		"\1\60\1\164\2\60\1\151\1\60\1\164\11\uffff\1\143\1\145\1\60\1\151\1\141"+
+		"\1\60\1\145\1\144\1\60\1\156\1\145\1\156\1\uffff\1\141\1\uffff\1\60\2"+
+		"\uffff\1\154\1\uffff\1\165\1\164\1\144\1\uffff\1\156\1\153\1\146\1\157"+
+		"\1\uffff\2\60\1\uffff\3\60\1\171\1\uffff\1\145\1\162\1\151\1\160\4\60"+
+		"\5\uffff\2\60\1\156\1\157\1\164\6\uffff\1\60\1\156\1\60\1\uffff\1\60\2"+
+		"\uffff";
+	static final String DFA8_maxS =
+		"\1\174\2\71\1\uffff\1\52\1\165\1\162\1\156\1\157\1\141\1\171\1\162\1\146"+
+		"\1\156\1\150\1\157\1\145\1\40\1\75\10\uffff\1\76\1\75\7\uffff\1\156\1"+
 		"\170\1\162\1\147\1\145\1\144\1\163\1\151\1\162\1\151\1\160\1\145\1\172"+
 		"\1\162\1\172\1\164\2\172\1\151\1\172\1\164\11\uffff\1\143\1\145\1\172"+
 		"\1\151\1\141\1\172\1\145\1\144\1\172\1\156\1\145\1\156\1\uffff\1\141\1"+
@@ -1629,37 +1646,38 @@ public class tigerLexer extends Lexer {
 		"\1\146\1\157\1\uffff\2\172\1\uffff\3\172\1\171\1\uffff\1\145\1\162\1\151"+
 		"\1\160\4\172\5\uffff\2\172\1\156\1\157\1\164\6\uffff\1\172\1\156\1\172"+
 		"\1\uffff\1\172\2\uffff";
-	static final String DFA7_acceptS =
-		"\2\uffff\1\2\17\uffff\1\36\1\37\1\40\1\41\1\42\1\43\1\44\1\45\1\47\2\uffff"+
-		"\1\55\1\56\1\60\1\1\1\3\1\46\25\uffff\1\34\1\33\1\57\1\35\1\50\1\52\1"+
-		"\51\1\54\1\53\14\uffff\1\27\1\uffff\1\13\1\uffff\1\17\1\26\1\uffff\1\30"+
-		"\3\uffff\1\25\4\uffff\1\6\2\uffff\1\16\4\uffff\1\14\10\uffff\1\22\1\7"+
-		"\1\10\1\11\1\20\5\uffff\1\5\1\31\1\21\1\24\1\12\1\23\3\uffff\1\32\1\uffff"+
-		"\1\15\1\4";
-	static final String DFA7_specialS =
-		"\u0085\uffff}>";
-	static final String[] DFA7_transitionS = {
-			"\1\35\1\uffff\1\23\1\24\1\31\1\27\1\20\1\30\1\2\1\3\12\1\1\21\1\22\1"+
-			"\33\1\32\1\34\2\uffff\32\37\1\25\1\uffff\1\26\1\uffff\1\37\1\uffff\1"+
-			"\12\1\5\1\37\1\16\1\6\1\4\2\37\1\14\3\37\1\10\1\37\1\13\2\37\1\17\1\37"+
-			"\1\11\1\37\1\7\1\15\3\37\1\uffff\1\36",
-			"\1\2\1\uffff\12\1",
+	static final String DFA8_acceptS =
+		"\3\uffff\1\2\17\uffff\1\36\1\37\1\40\1\41\1\42\1\43\1\45\1\47\2\uffff"+
+		"\1\55\1\56\1\60\1\44\1\1\1\3\1\46\25\uffff\1\34\1\33\1\57\1\35\1\50\1"+
+		"\52\1\51\1\54\1\53\14\uffff\1\27\1\uffff\1\13\1\uffff\1\17\1\26\1\uffff"+
+		"\1\30\3\uffff\1\25\4\uffff\1\6\2\uffff\1\16\4\uffff\1\14\10\uffff\1\22"+
+		"\1\7\1\10\1\11\1\20\5\uffff\1\5\1\31\1\21\1\24\1\12\1\23\3\uffff\1\32"+
+		"\1\uffff\1\15\1\4";
+	static final String DFA8_specialS =
+		"\u0086\uffff}>";
+	static final String[] DFA8_transitionS = {
+			"\1\35\1\uffff\1\24\1\25\1\31\1\30\1\21\1\1\1\3\1\4\12\2\1\22\1\23\1\33"+
+			"\1\32\1\34\2\uffff\32\37\1\26\1\uffff\1\27\1\uffff\1\37\1\uffff\1\13"+
+			"\1\6\1\37\1\17\1\7\1\5\2\37\1\15\3\37\1\11\1\37\1\14\2\37\1\20\1\37\1"+
+			"\12\1\37\1\10\1\16\3\37\1\uffff\1\36",
+			"\12\2",
+			"\1\3\1\uffff\12\2",
 			"",
-			"\1\41",
-			"\1\44\5\uffff\1\45\5\uffff\1\43",
-			"\1\46\14\uffff\1\47",
-			"\1\51\1\uffff\1\50",
-			"\1\53\15\uffff\1\52",
-			"\1\54",
-			"\1\56\6\uffff\1\57\11\uffff\1\55",
-			"\1\60",
+			"\1\42",
+			"\1\45\5\uffff\1\46\5\uffff\1\44",
+			"\1\47\14\uffff\1\50",
+			"\1\52\1\uffff\1\51",
+			"\1\54\15\uffff\1\53",
+			"\1\55",
+			"\1\57\6\uffff\1\60\11\uffff\1\56",
 			"\1\61",
-			"\1\64\1\uffff\1\63\7\uffff\1\62",
-			"\1\65",
+			"\1\62",
+			"\1\65\1\uffff\1\64\7\uffff\1\63",
 			"\1\66",
 			"\1\67",
 			"\1\70",
-			"\1\72",
+			"\1\71",
+			"\1\73",
 			"",
 			"",
 			"",
@@ -1668,16 +1686,15 @@ public class tigerLexer extends Lexer {
 			"",
 			"",
 			"",
-			"",
-			"\1\75\1\74",
-			"\1\77",
-			"",
+			"\1\76\1\75",
+			"\1\100",
 			"",
 			"",
 			"",
 			"",
 			"",
-			"\1\101",
+			"",
+			"",
 			"\1\102",
 			"\1\103",
 			"\1\104",
@@ -1689,52 +1706,53 @@ public class tigerLexer extends Lexer {
 			"\1\112",
 			"\1\113",
 			"\1\114",
+			"\1\115",
 			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
-			"\1\116",
+			"\1\117",
 			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
-			"\1\120",
+			"\1\121",
 			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
 			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
-			"\1\123",
+			"\1\124",
 			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
-			"\1\125",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
 			"\1\126",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
 			"\1\127",
+			"\1\130",
 			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
-			"\1\131",
 			"\1\132",
-			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\3\37\1\134\4\37\1\133\21\37",
-			"\1\136",
+			"\1\133",
+			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\3\37\1\135\4\37\1\134\21\37",
 			"\1\137",
+			"\1\140",
 			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
-			"\1\141",
 			"\1\142",
 			"\1\143",
-			"",
 			"\1\144",
+			"",
+			"\1\145",
 			"",
 			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
 			"",
 			"",
-			"\1\146",
-			"",
 			"\1\147",
+			"",
 			"\1\150",
 			"\1\151",
-			"",
 			"\1\152",
+			"",
 			"\1\153",
 			"\1\154",
 			"\1\155",
+			"\1\156",
 			"",
 			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
 			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
@@ -1742,12 +1760,12 @@ public class tigerLexer extends Lexer {
 			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
 			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
 			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
-			"\1\163",
-			"",
 			"\1\164",
+			"",
 			"\1\165",
 			"\1\166",
 			"\1\167",
+			"\1\170",
 			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
 			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
 			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
@@ -1759,9 +1777,9 @@ public class tigerLexer extends Lexer {
 			"",
 			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
 			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
-			"\1\176",
 			"\1\177",
 			"\1\u0080",
+			"\1\u0081",
 			"",
 			"",
 			"",
@@ -1769,7 +1787,7 @@ public class tigerLexer extends Lexer {
 			"",
 			"",
 			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
-			"\1\u0082",
+			"\1\u0083",
 			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
 			"",
 			"\12\37\7\uffff\32\37\4\uffff\1\37\1\uffff\32\37",
@@ -1777,34 +1795,34 @@ public class tigerLexer extends Lexer {
 			""
 	};
 
-	static final short[] DFA7_eot = DFA.unpackEncodedString(DFA7_eotS);
-	static final short[] DFA7_eof = DFA.unpackEncodedString(DFA7_eofS);
-	static final char[] DFA7_min = DFA.unpackEncodedStringToUnsignedChars(DFA7_minS);
-	static final char[] DFA7_max = DFA.unpackEncodedStringToUnsignedChars(DFA7_maxS);
-	static final short[] DFA7_accept = DFA.unpackEncodedString(DFA7_acceptS);
-	static final short[] DFA7_special = DFA.unpackEncodedString(DFA7_specialS);
-	static final short[][] DFA7_transition;
+	static final short[] DFA8_eot = DFA.unpackEncodedString(DFA8_eotS);
+	static final short[] DFA8_eof = DFA.unpackEncodedString(DFA8_eofS);
+	static final char[] DFA8_min = DFA.unpackEncodedStringToUnsignedChars(DFA8_minS);
+	static final char[] DFA8_max = DFA.unpackEncodedStringToUnsignedChars(DFA8_maxS);
+	static final short[] DFA8_accept = DFA.unpackEncodedString(DFA8_acceptS);
+	static final short[] DFA8_special = DFA.unpackEncodedString(DFA8_specialS);
+	static final short[][] DFA8_transition;
 
 	static {
-		int numStates = DFA7_transitionS.length;
-		DFA7_transition = new short[numStates][];
+		int numStates = DFA8_transitionS.length;
+		DFA8_transition = new short[numStates][];
 		for (int i=0; i<numStates; i++) {
-			DFA7_transition[i] = DFA.unpackEncodedString(DFA7_transitionS[i]);
+			DFA8_transition[i] = DFA.unpackEncodedString(DFA8_transitionS[i]);
 		}
 	}
 
-	protected class DFA7 extends DFA {
+	protected class DFA8 extends DFA {
 
-		public DFA7(BaseRecognizer recognizer) {
+		public DFA8(BaseRecognizer recognizer) {
 			this.recognizer = recognizer;
-			this.decisionNumber = 7;
-			this.eot = DFA7_eot;
-			this.eof = DFA7_eof;
-			this.min = DFA7_min;
-			this.max = DFA7_max;
-			this.accept = DFA7_accept;
-			this.special = DFA7_special;
-			this.transition = DFA7_transition;
+			this.decisionNumber = 8;
+			this.eot = DFA8_eot;
+			this.eof = DFA8_eof;
+			this.min = DFA8_min;
+			this.max = DFA8_max;
+			this.accept = DFA8_accept;
+			this.special = DFA8_special;
+			this.transition = DFA8_transition;
 		}
 		@Override
 		public String getDescription() {
