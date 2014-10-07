@@ -180,7 +180,7 @@ binary_operator
 	:	(PLUS|MINUS|MULT|DIV|EQ|NEQ|LESSER|GREATER|LESSEREQ|GREATEREQ|AND|OR)
 	;
 
-expr_list // Token alt 31
+expr_list
 	:	expr (COMMA expr)*
 	;
 
@@ -223,7 +223,6 @@ func_param_list
   | 
   ;
 
-// Keywords
 keywords
 	: FUNCTION_KEY
 	| BEGIN_KEY
@@ -342,7 +341,7 @@ RETURN_KEY
 	: 'return'
 	;
 
-// Punctuaion symbols/binary operators
+// Punctuation symbols/binary operators
 COMMA 	:	',';
 COLON 	:	':';
 SEMI	:	';';
