@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g 2014-10-07 19:04:54
+// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g 2014-10-07 19:43:11
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -81,14 +81,14 @@ public class tigerParser extends DebugParser {
 
 
 	public static final String[] ruleNames = new String[] {
-		"invalidRule", "declaration_statement", "optional_init", "var_declaration_list", 
-		"expr_list", "block", "value_tail", "func_param_list", "param_list", "index_oper", 
-		"stat", "type_id", "block_list", "type_declaration", "var_declaration", 
-		"base_type", "id_list", "func_call_tail", "funct_declaration", "type_declaration_list", 
-		"type", "binop_p0", "param", "tiger_program", "index_expr", "binop_p2", 
-		"stat_seq", "binop_p1", "funct_declaration_tail", "binop_p3", "main_function_tail", 
-		"funct_declaration_list", "constval", "expr", "ret_type", "value", "keywords", 
-		"binary_operator"
+		"invalidRule", "binop_p2", "type_id", "func_call_tail", "stat_seq", "binary_operator", 
+		"expr_list", "value_tail", "index_oper", "funct_declaration_list", "param_list", 
+		"var_declaration", "tiger_program", "declaration_statement", "index_expr", 
+		"base_type", "main_function_tail", "binop_p0", "block_list", "value", 
+		"type_declaration_list", "expr", "funct_declaration_tail", "type", "ret_type", 
+		"binop_p1", "type_declaration", "funct_declaration", "constval", "binop_p3", 
+		"func_param_list", "stat", "param", "block", "keywords", "var_declaration_list", 
+		"id_list", "optional_init"
 	};
 
 	public static final boolean[] decisionCanBacktrack = new boolean[] {
