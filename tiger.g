@@ -151,7 +151,7 @@ stat
 	| block
 	;
 		
-expr 	:	(constval | ID (value_tail | func_call_tail) | LPAREN expr RPAREN) (binop_p0 expr)? // Token alt 25
+expr 	:	(constval | ID (value_tail | func_call_tail) | LPAREN expr RPAREN) (binop_p0 expr)?
 	;
 	
 binop_p0:	(AND | OR | binop_p1);
