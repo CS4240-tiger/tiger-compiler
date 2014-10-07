@@ -4,7 +4,62 @@ options {
     k = 1;
     backtrack = no;
   }
-  
+
+@parser::members {
+  @Override
+    public void reportError(RecognitionException e) {
+      displayRecognitionError(this.getTokenNames(), e);
+  }
+  @Override
+    public void displayRecognitionError(String[] tokenNames, RecognitionException e) {
+        //entire function
+        String code = e.input.toString();
+        //line index
+        int lineIndex = e.line;
+        //split into an array by lines
+        String lines[] = code.split("\\r?\\n");
+        //get the line of code with everything before the first charracter turned into spaces
+        String lineCode = lines[lineIndex-1].replaceAll("\t", " ");
+        //turned to char array
+        if (e.charPositionInLine == 0) {
+          lineCode = "' '" + lineCode;
+        } else if (e.charPositionInLine == lineCode.length()) {
+          lineCode = lineCode + "' '";
+        } else {
+          lineCode = lineCode.substring(0,e.charPositionInLine) + "'" + lineCode.charAt(e.charPositionInLine) + "'" + lineCode.substring(e.charPositionInLine+1,lineCode.length());
+        }
+        lineCode = lineCode.replaceFirst(".*?(?=[a-zA-Z0-9\'])", "");
+        System.err.println("Error At Line "+String.valueOf(lineIndex)+": "+ lineCode + " ("+getErrorMessage(e, tokenNames)+")");
+    }
+}
+
+@lexer::members {
+  @Override
+    public void reportError(RecognitionException e) {
+      displayRecognitionError(this.getTokenNames(), e);
+  }
+  @Override
+    public void displayRecognitionError(String[] tokenNames, RecognitionException e) {
+      //entire function
+        String code = e.input.toString();
+        //line index
+        int lineIndex = e.line;
+        //split into an array by lines
+        String lines[] = code.split("\\r?\\n");
+        //get the line of code with everything before the first charracter turned into spaces
+        String lineCode = lines[lineIndex-1].replaceAll("\t", " ");
+        if (e.charPositionInLine == 0) {
+          lineCode = "' '" + lineCode;
+        } else if (e.charPositionInLine == lineCode.length()) {
+          lineCode = lineCode + "' '";
+        } else {
+          lineCode = lineCode.substring(0,e.charPositionInLine) + "'" + lineCode.charAt(e.charPositionInLine) + "'" + lineCode.substring(e.charPositionInLine+1,lineCode.length());
+        }
+        lineCode = lineCode.replaceFirst(".*?(?=[a-zA-Z0-9\'])", "");
+        System.err.println("Error At Line "+String.valueOf(lineIndex)+": "+ lineCode);
+    }
+}
+
 tiger_program
 	:	type_declaration_list funct_declaration_list
 	;
