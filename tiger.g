@@ -92,12 +92,7 @@ param_list
 param 	:	ID COLON type_id;
 
 block_list 
-	:	block block_tail
-	;
-
-block_tail 
-	:	block block_tail
-	|	
+	:	block+
 	;
 
 block 	:	BEGIN_KEY declaration_statement stat_seq END_KEY SEMI;
@@ -139,8 +134,7 @@ id_list :	ID (COMMA id_list)?
 	;
 
 optional_init 
-	:	  
-	| 	ASSIGN expr
+	:	(ASSIGN expr)?
 	;
 
 stat_seq 
@@ -186,8 +180,7 @@ expr_list
 
 value 	:	ID value_tail;
 value_tail 
-	:	LBRACK index_expr RBRACK (LBRACK index_expr RBRACK)?
-	|	 
+	:	(LBRACK index_expr RBRACK (LBRACK index_expr RBRACK)?)?
 	;
 
 index_expr 
@@ -219,8 +212,7 @@ func_call_tail
   ;
   
 func_param_list
-  : expr (COMMA expr)*
-  | 
+  : (expr (COMMA expr)*)?
   ;
 
 keywords
