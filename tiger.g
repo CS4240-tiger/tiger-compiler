@@ -144,7 +144,7 @@ optional_init
 	;
 
 stat_seq 
-	:	stat*
+	:	stat+
 	;
 
 stat 
