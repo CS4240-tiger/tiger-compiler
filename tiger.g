@@ -3,6 +3,7 @@ grammar tiger;
 options {
     k = 1;
     backtrack = no;
+    output = AST;
   }
 
 @parser::members {
@@ -69,7 +70,7 @@ funct_declaration_list
 	;
 
 funct_declaration
-	:	((type_id funct_declaration_tail) | (VOID_KEY (funct_declaration_tail | main_function_tail))) BEGIN_KEY block_list END_KEY SEMI
+	:	((type_id funct_declaration_tail) | (VOID_KEY (funct_declaration_tail | main_function_tail)))^ BEGIN_KEY! block_list^ END_KEY! SEMI!
 	;
 
 funct_declaration_tail
@@ -95,7 +96,7 @@ block_list
 	:	block+
 	;
 
-block 	:	BEGIN_KEY declaration_statement stat_seq END_KEY SEMI;
+block 	:	BEGIN_KEY^ (declaration_statement stat_seq)^ END_KEY! SEMI!;
 
 declaration_statement 
 	:	type_declaration_list var_declaration_list
@@ -110,11 +111,11 @@ var_declaration_list
 	;
 
 type_declaration 
-	:	TYPE_KEY ID EQ type SEMI
+	:	(TYPE_KEY ID)^ EQ^ type SEMI!
 	;
 	
 type	:	base_type
-	|	ARRAY_KEY LBRACK INTLIT RBRACK (LBRACK INTLIT RBRACK)? OF_KEY base_type
+	|	(ARRAY_KEY LBRACK INTLIT RBRACK (LBRACK INTLIT RBRACK)?)^ OF_KEY^ (base_type)^
 	;
 
 type_id :	base_type
@@ -127,14 +128,10 @@ base_type
 	;
 
 var_declaration 
-	:	VAR_KEY id_list COLON type_id optional_init SEMI
+	:	(VAR_KEY id_list COLON^ type_id)^ (ASSIGN^ expr)? SEMI!
 	;
 
-id_list :	ID (COMMA id_list)?
-	;
-
-optional_init 
-	:	(ASSIGN expr)?
+id_list :	ID (COMMA! id_list)?
 	;
 
 stat_seq 
@@ -142,16 +139,16 @@ stat_seq
 	;
 
 stat 
-	: IF_KEY expr THEN_KEY stat_seq (ENDIF_KEY SEMI|ELSE_KEY stat_seq ENDIF_KEY SEMI)
-	| WHILE_KEY expr DO_KEY stat_seq ENDDO_KEY SEMI
-	| FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI
-  	| ID ((value_tail ASSIGN expr_list) | (func_call_tail)) SEMI
+	: IF_KEY^ expr THEN_KEY stat_seq (ENDIF_KEY! SEMI!|ELSE_KEY stat_seq ENDIF_KEY! SEMI!)
+	| WHILE_KEY^ expr DO_KEY stat_seq ENDDO_KEY SEMI!
+	| FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY! SEMI!
+  	| ID ((value_tail ASSIGN^ expr_list) | (func_call_tail)) SEMI!
 	| BREAK_KEY SEMI
 	| RETURN_KEY expr SEMI
 	| block
 	;
 		
-expr 	:	(constval | ID (value_tail | func_call_tail) | LPAREN expr RPAREN) (binop_p0 expr)?
+expr 	:	(constval | ID (value_tail | func_call_tail) | LPAREN expr RPAREN) (binop_p0^ expr)?
 	;
 	
 binop_p0:	(AND | OR | binop_p1);
@@ -175,7 +172,7 @@ binary_operator
 	;
 
 expr_list
-	:	expr (COMMA expr)*
+	:	expr (COMMA! expr)*
 	;
 
 value 	:	ID value_tail;
@@ -184,7 +181,7 @@ value_tail
 	;
 
 index_expr 
-	:	(INTLIT | ID) (index_oper index_expr)?
+	:	(INTLIT | ID) (index_oper^ index_expr)?
 	;
 
 index_oper
