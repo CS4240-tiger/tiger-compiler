@@ -4,6 +4,7 @@ options {
     k = 1;
     backtrack = no;
     output = AST;
+    ASTLabelType = CommonTree;
   }
 
 @parser::members {

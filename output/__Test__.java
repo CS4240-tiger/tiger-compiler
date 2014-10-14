@@ -1,7 +1,8 @@
 import java.io.*;
+
 import org.antlr.runtime.*;
 import org.antlr.runtime.debug.DebugEventSocketProxy;
-
+import org.antlr.runtime.tree.CommonTree;
 
 public class __Test__ {
 
@@ -9,9 +10,10 @@ public class __Test__ {
         tigerLexer lex = new tigerLexer(new ANTLRFileStream("C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\TestCases\\testcase.tig", "UTF8"));
         CommonTokenStream tokens = new CommonTokenStream(lex);
 
-        tigerParser g = new tigerParser(tokens, 49100, null);
+        tigerParser g = new tigerParser(tokens);
         try {
-            g.tiger_program();
+            CommonTree ast = g.tiger_program().getTree();
+            Thread.sleep(1); // DEBUG: examine result AST in Debug mode 
         } catch (RecognitionException e) {
             e.printStackTrace();
         }
