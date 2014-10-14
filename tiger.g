@@ -90,7 +90,7 @@ param_list
 	:	(param (COMMA param)*)?
 	;
 
-param 	:	ID COLON type_id;
+param 	:	ID COLON^ type_id;
 
 block_list 
 	:	block+
@@ -139,16 +139,18 @@ stat_seq
 	;
 
 stat 
-	: IF_KEY^ expr THEN_KEY stat_seq (ENDIF_KEY! SEMI!|ELSE_KEY stat_seq ENDIF_KEY! SEMI!)
-	| WHILE_KEY^ expr DO_KEY stat_seq ENDDO_KEY SEMI!
-	| FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY! SEMI!
+	: IF_KEY expr THEN_KEY stat_seq (ENDIF_KEY SEMI|ELSE_KEY stat_seq ENDIF_KEY SEMI)
+		-> ^(IF_KEY expr stat_seq ^(ELSE_KEY stat_seq)?)
+	| WHILE_KEY^ expr DO_KEY! stat_seq ENDDO_KEY! SEMI!
+	| FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI
+		-> ^(FOR_KEY ^(TO_KEY ^(ASSIGN ID index_expr) index_expr) stat_seq)
   	| ID ((value_tail ASSIGN^ expr_list) | (func_call_tail)) SEMI!
-	| BREAK_KEY SEMI
-	| RETURN_KEY expr SEMI
+	| BREAK_KEY SEMI!
+	| RETURN_KEY^ expr SEMI!
 	| block
 	;
 		
-expr 	:	(constval | ID (value_tail | func_call_tail) | LPAREN expr RPAREN) (binop_p0^ expr)?
+expr 	:	(constval | ID (value_tail | func_call_tail) | LPAREN! expr RPAREN!) (binop_p0^ expr)?
 	;
 	
 binop_p0:	(AND | OR | binop_p1);
@@ -209,7 +211,7 @@ func_call_tail
   ;
   
 func_param_list
-  : (expr (COMMA expr)*)?
+  : (expr (COMMA! expr)*)?
   ;
 
 keywords
