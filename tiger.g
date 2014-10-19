@@ -8,6 +8,8 @@ options {
 }
 
 @parser::header {
+	package edu.gatech.cc.cs4240_spring.tiger;
+	
 	import java.util.Map;
 	import java.util.HashMap;
 	import org.antlr.runtime.tree.CommonTree;
@@ -122,15 +124,20 @@ ret_type
 
 param_list 
 	:	(param (COMMA param)*)?
+	->	^(param)*
 	;
 
-param 	:	ID COLON^ type_id;
+param 	:	ID COLON type_id
+	->	^(COLON ID type_id)
+	;
 
 block_list 
 	:	block+
 	;
 
-block 	:	BEGIN_KEY^ (declaration_statement stat_seq)^ END_KEY! SEMI!;
+block 	:	BEGIN_KEY (declaration_statement stat_seq) END_KEY SEMI
+	->	^(BEGIN_KEY declaration_statement stat_seq)
+	;
 
 declaration_statement 
 	:	type_declaration_list var_declaration_list
@@ -145,7 +152,8 @@ var_declaration_list
 	;
 
 type_declaration 
-	:	(TYPE_KEY ID)^ EQ^ type SEMI!
+	:	TYPE_KEY ID EQ type SEMI
+	->	^(EQ ID TYPE_KEY)
 	;
 	
 type	:	base_type
@@ -162,10 +170,12 @@ base_type
 	;
 
 var_declaration 
-	:	(VAR_KEY id_list COLON^ type_id)^ (ASSIGN^ expr)? SEMI!
+	:	VAR_KEY id_list COLON type_id (ASSIGN expr) SEMI
+	->	^(ASSIGN ^(COLON id_list type_id) expr)
 	;
 
-id_list :	ID (COMMA! id_list)?
+id_list :	ID (COMMA id_list)?
+	->	ID id_list
 	;
 
 stat_seq 
@@ -175,7 +185,8 @@ stat_seq
 stat 
 	: IF_KEY expr THEN_KEY stat_seq (ENDIF_KEY SEMI|ELSE_KEY stat_seq ENDIF_KEY SEMI)
 		-> ^(IF_KEY expr stat_seq ^(ELSE_KEY stat_seq)?)
-	| WHILE_KEY^ expr DO_KEY! stat_seq ENDDO_KEY! SEMI!
+	| WHILE_KEY expr DO_KEY stat_seq ENDDO_KEY SEMI
+		-> ^(WHILE_KEY expr stat_seq)
 	| FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI
 		-> ^(FOR_KEY ^(TO_KEY ^(ASSIGN ID index_expr) index_expr) stat_seq)
   	| ID ((value_tail ASSIGN^ expr_list) | (func_call_tail)) SEMI!
@@ -184,9 +195,9 @@ stat
 	| block
 	;
 		
-expr 	:	(constval | ID (value_tail | func_call_tail) | LPAREN! expr RPAREN!) (binop_p0^ expr)?
+expr 	:	(constval | ID (value_tail | func_call_tail) | LPAREN expr RPAREN) (binop_p0^ expr)?
 	;
-	
+
 binop_p0:	(AND | OR | binop_p1);
 binop_p1:	(EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | binop_p2);     
 binop_p2:	(MINUS | PLUS | binop_p3);
@@ -245,7 +256,8 @@ func_call_tail
 	;
   
 func_param_list
-	: (expr (COMMA! expr)*)?
+	: (expr (COMMA expr)*)?
+	-> ^(expr)*
 	;
 
 keywords
