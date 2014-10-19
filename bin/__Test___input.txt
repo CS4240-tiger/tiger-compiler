@@ -1,6 +1,6 @@
 /* Variable declaration and subroutine call */
 void main()
-beginerror
+begin
 	begin
 		var factParam : int;
 		factParam := 5;
