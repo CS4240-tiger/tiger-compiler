@@ -1,4 +1,5 @@
-tree grammar tigerTreeWalker;
+tree
+ grammar tigerTreeWalker;
 
 options {
   tokenVocab=tiger;
