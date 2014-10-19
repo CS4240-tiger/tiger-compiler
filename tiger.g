@@ -7,7 +7,14 @@ options {
     ASTLabelType = CommonTree;
   }
 
+@parser::header {
+  import java.util.Map;
+  import java.util.HashMap;
+}
+
 @parser::members {
+  public Map<String, Function> functions = new HashMap<String, Function>();
+    
   @Override
     public void reportError(RecognitionException e) {
       displayRecognitionError(this.getTokenNames(), e);
@@ -60,6 +67,19 @@ options {
         lineCode = lineCode.replaceFirst(".*?(?=[a-zA-Z0-9\'])", "");
         System.err.println("Error At Line "+String.valueOf(lineIndex)+": "+ lineCode);
     }
+    
+
+    private void defineFunction(String id, Object params, Object block) {
+    // Parameters
+    CommonTree paramTree = params == null ? new CommonTree() : (CommonTree) params;
+
+    // Code block tree
+    CommonTree blockTree = (CommonTree) block;
+
+    // The function name with the number of parameters after it, is the unique key
+    String key = id + paramTree.getChildCount();
+    functions.put(key, new TigerFunction(id, paramTree, blockTree));
+  }
 }
 
 tiger_program
@@ -71,15 +91,8 @@ funct_declaration_list
 	;
 
 funct_declaration
-	:	((type_id funct_declaration_tail) | (VOID_KEY (funct_declaration_tail | main_function_tail)))^ BEGIN_KEY! block_list^ END_KEY! SEMI!
-	;
-
-funct_declaration_tail
-  : FUNCTION_KEY ID LPAREN param_list RPAREN
-  ;
-
-main_function_tail
-	:	MAIN_KEY LPAREN RPAREN
+	:	(ret_type (FUNCTION_KEY ID | MAIN_KEY))^ LPAREN! param_list RPAREN! BEGIN_KEY! block_list END_KEY! SEMI!
+		{defineFunction($ID.text, $param_list.tree, $block_list.tree);}
 	;
 
 ret_type 

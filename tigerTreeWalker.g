@@ -12,17 +12,9 @@ tiger_program
 funct_declaration_list
 	:	funct_declaration*
 	;
-
+	
 funct_declaration
-	:	((type_id funct_declaration_tail) | (VOID_KEY (funct_declaration_tail | main_function_tail))) BEGIN_KEY block_list END_KEY SEMI
-	;
-
-funct_declaration_tail
-  : FUNCTION_KEY ID LPAREN param_list RPAREN
-  ;
-
-main_function_tail
-	:	MAIN_KEY LPAREN RPAREN
+	:	(ret_type (FUNCTION_KEY ID | MAIN_KEY)) LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
 	;
 
 ret_type 
