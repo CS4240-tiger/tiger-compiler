@@ -1,8 +1,8 @@
-// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g 2014-10-19 13:04:35
+// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g 2014-10-19 13:17:36
 
-  import java.util.Map;
-  import java.util.HashMap;
-  import org.antlr.runtime.tree.CommonTree;
+	import java.util.Map;
+	import java.util.HashMap;
+	import org.antlr.runtime.tree.CommonTree;
 
 
 import org.antlr.runtime.*;
@@ -105,45 +105,55 @@ public class tigerParser extends Parser {
 	@Override public String getGrammarFileName() { return "C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g"; }
 
 
-	  public Map<String, TigerFunction> functions = new HashMap<String, TigerFunction>();
+		public Map<String, TigerFunction> functions = new HashMap<String, TigerFunction>();
 	    
-	  @Override
-	    public void reportError(RecognitionException e) {
-	      displayRecognitionError(this.getTokenNames(), e);
-	  }
-	  @Override
-	    public void displayRecognitionError(String[] tokenNames, RecognitionException e) {
-	        //entire function
-	        String code = e.input.toString();
-	        //line index
-	        int lineIndex = e.line;
-	        //split into an array by lines
-	        String lines[] = code.split("\\r?\\n");
-	        //get the line of code with everything before the first charracter turned into spaces
-	        String lineCode = lines[lineIndex-1].replaceAll("\t", " ");
-	        //turned to char array
-	        if (e.charPositionInLine == 0) {
-	          lineCode = "' '" + lineCode;
-	        } else if (e.charPositionInLine == lineCode.length()) {
-	          lineCode = lineCode + "' '";
-	        } else {
-	          lineCode = lineCode.substring(0,e.charPositionInLine) + "'" + lineCode.charAt(e.charPositionInLine) + "'" + lineCode.substring(e.charPositionInLine+1,lineCode.length());
-	        }
-	        lineCode = lineCode.replaceFirst(".*?(?=[a-zA-Z0-9\'])", "");
-	        System.err.println("Error At Line "+String.valueOf(lineIndex)+": "+ lineCode + " ("+getErrorMessage(e, tokenNames)+")");
-	    }
+		@Override
+		public void reportError(RecognitionException e) {
+			displayRecognitionError(this.getTokenNames(), e);
+		}
+		
+		@Override
+		public void displayRecognitionError(String[] tokenNames, RecognitionException e) {
+			/*
+			 * Function code
+			 */
+			String code = e.input.toString();
+			/*
+			 * Line index
+			 */
+			int lineIndex = e.line;
+			
+			// Split into an array by lines
+			String lines[] = code.split("\\r?\\n");
+			
+	        // Get the line of code with everything before 
+			// the first character turned into spaces
+			String lineCode = lines[lineIndex-1].replaceAll("\t", " ");
+	        // Turn into char array
+			if (e.charPositionInLine == 0) {
+				lineCode = "' '" + lineCode;
+			} else if (e.charPositionInLine == lineCode.length()) {
+				lineCode = lineCode + "' '";
+			} else {
+				lineCode = lineCode.substring(0,e.charPositionInLine) 
+				+ "'" + lineCode.charAt(e.charPositionInLine) 
+				+ "'" + lineCode.substring(e.charPositionInLine + 1,lineCode.length());
+			}
+			lineCode = lineCode.replaceFirst(".*?(?=[a-zA-Z0-9\'])", "");
+			System.err.println("Error at line " + String.valueOf(lineIndex) + ": " + lineCode + " ("+getErrorMessage(e, tokenNames)+")");
+		}
 	    
-	    private void defineFunction(String id, Object params, Object block) {
-	         // Parameters
-	         CommonTree paramTree = params == null ? new CommonTree() : (CommonTree) params;
+		private void defineFunction(String id, Object params, Object block) {
+			// Parameters
+			CommonTree paramTree = params == null ? new CommonTree() : (CommonTree) params;
 
-	         // Code block tree
-	         CommonTree blockTree = (CommonTree) block;
+			// Code block tree
+			CommonTree blockTree = (CommonTree) block;
 
-	         // The function name with the number of parameters after it, is the unique key
-	         String key = id + paramTree.getChildCount();
-	         functions.put(key, new TigerFunction(id, paramTree, blockTree));
-	    }
+			// The function name with the number of parameters after it, is the unique key
+			String key = id + paramTree.getChildCount();
+			functions.put(key, new TigerFunction(id, paramTree, blockTree));
+		}
 
 
 	public static class tiger_program_return extends ParserRuleReturnScope {
@@ -154,7 +164,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "tiger_program"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:85:1: tiger_program : type_declaration_list funct_declaration_list ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:105:1: tiger_program : type_declaration_list funct_declaration_list ;
 	public final tigerParser.tiger_program_return tiger_program() throws RecognitionException {
 		tigerParser.tiger_program_return retval = new tigerParser.tiger_program_return();
 		retval.start = input.LT(1);
@@ -166,19 +176,19 @@ public class tigerParser extends Parser {
 
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:86:2: ( type_declaration_list funct_declaration_list )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:86:4: type_declaration_list funct_declaration_list
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:106:2: ( type_declaration_list funct_declaration_list )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:106:4: type_declaration_list funct_declaration_list
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			pushFollow(FOLLOW_type_declaration_list_in_tiger_program89);
+			pushFollow(FOLLOW_type_declaration_list_in_tiger_program75);
 			type_declaration_list1=type_declaration_list();
 			state._fsp--;
 
 			adaptor.addChild(root_0, type_declaration_list1.getTree());
 
-			pushFollow(FOLLOW_funct_declaration_list_in_tiger_program91);
+			pushFollow(FOLLOW_funct_declaration_list_in_tiger_program77);
 			funct_declaration_list2=funct_declaration_list();
 			state._fsp--;
 
@@ -213,7 +223,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "funct_declaration_list"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:89:1: funct_declaration_list : ( funct_declaration )* ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:109:1: funct_declaration_list : ( funct_declaration )* ;
 	public final tigerParser.funct_declaration_list_return funct_declaration_list() throws RecognitionException {
 		tigerParser.funct_declaration_list_return retval = new tigerParser.funct_declaration_list_return();
 		retval.start = input.LT(1);
@@ -224,13 +234,13 @@ public class tigerParser extends Parser {
 
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:90:2: ( ( funct_declaration )* )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:90:4: ( funct_declaration )*
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:110:2: ( ( funct_declaration )* )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:110:4: ( funct_declaration )*
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:90:4: ( funct_declaration )*
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:110:4: ( funct_declaration )*
 			loop1:
 			while (true) {
 				int alt1=2;
@@ -241,9 +251,9 @@ public class tigerParser extends Parser {
 
 				switch (alt1) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:90:4: funct_declaration
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:110:4: funct_declaration
 					{
-					pushFollow(FOLLOW_funct_declaration_in_funct_declaration_list103);
+					pushFollow(FOLLOW_funct_declaration_in_funct_declaration_list89);
 					funct_declaration3=funct_declaration();
 					state._fsp--;
 
@@ -286,7 +296,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "funct_declaration"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:93:1: funct_declaration : ( ret_type ( FUNCTION_KEY ID | MAIN_KEY ) ) ^ LPAREN ! param_list RPAREN ! BEGIN_KEY ! block_list END_KEY ! SEMI !;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:113:1: funct_declaration : ( ret_type ( FUNCTION_KEY ID | MAIN_KEY ) ) ^ LPAREN ! param_list RPAREN ! BEGIN_KEY ! block_list END_KEY ! SEMI !;
 	public final tigerParser.funct_declaration_return funct_declaration() throws RecognitionException {
 		tigerParser.funct_declaration_return retval = new tigerParser.funct_declaration_return();
 		retval.start = input.LT(1);
@@ -315,22 +325,22 @@ public class tigerParser extends Parser {
 		CommonTree SEMI14_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:94:2: ( ( ret_type ( FUNCTION_KEY ID | MAIN_KEY ) ) ^ LPAREN ! param_list RPAREN ! BEGIN_KEY ! block_list END_KEY ! SEMI !)
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:94:4: ( ret_type ( FUNCTION_KEY ID | MAIN_KEY ) ) ^ LPAREN ! param_list RPAREN ! BEGIN_KEY ! block_list END_KEY ! SEMI !
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:114:2: ( ( ret_type ( FUNCTION_KEY ID | MAIN_KEY ) ) ^ LPAREN ! param_list RPAREN ! BEGIN_KEY ! block_list END_KEY ! SEMI !)
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:114:4: ( ret_type ( FUNCTION_KEY ID | MAIN_KEY ) ) ^ LPAREN ! param_list RPAREN ! BEGIN_KEY ! block_list END_KEY ! SEMI !
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:94:4: ( ret_type ( FUNCTION_KEY ID | MAIN_KEY ) )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:94:5: ret_type ( FUNCTION_KEY ID | MAIN_KEY )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:114:4: ( ret_type ( FUNCTION_KEY ID | MAIN_KEY ) )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:114:5: ret_type ( FUNCTION_KEY ID | MAIN_KEY )
 			{
-			pushFollow(FOLLOW_ret_type_in_funct_declaration116);
+			pushFollow(FOLLOW_ret_type_in_funct_declaration102);
 			ret_type4=ret_type();
 			state._fsp--;
 
 			adaptor.addChild(root_0, ret_type4.getTree());
 
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:94:14: ( FUNCTION_KEY ID | MAIN_KEY )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:114:14: ( FUNCTION_KEY ID | MAIN_KEY )
 			int alt2=2;
 			int LA2_0 = input.LA(1);
 			if ( (LA2_0==FUNCTION_KEY) ) {
@@ -348,22 +358,22 @@ public class tigerParser extends Parser {
 
 			switch (alt2) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:94:15: FUNCTION_KEY ID
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:114:15: FUNCTION_KEY ID
 					{
-					FUNCTION_KEY5=(Token)match(input,FUNCTION_KEY,FOLLOW_FUNCTION_KEY_in_funct_declaration119); 
+					FUNCTION_KEY5=(Token)match(input,FUNCTION_KEY,FOLLOW_FUNCTION_KEY_in_funct_declaration105); 
 					FUNCTION_KEY5_tree = (CommonTree)adaptor.create(FUNCTION_KEY5);
 					adaptor.addChild(root_0, FUNCTION_KEY5_tree);
 
-					ID6=(Token)match(input,ID,FOLLOW_ID_in_funct_declaration121); 
+					ID6=(Token)match(input,ID,FOLLOW_ID_in_funct_declaration107); 
 					ID6_tree = (CommonTree)adaptor.create(ID6);
 					adaptor.addChild(root_0, ID6_tree);
 
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:94:33: MAIN_KEY
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:114:33: MAIN_KEY
 					{
-					MAIN_KEY7=(Token)match(input,MAIN_KEY,FOLLOW_MAIN_KEY_in_funct_declaration125); 
+					MAIN_KEY7=(Token)match(input,MAIN_KEY,FOLLOW_MAIN_KEY_in_funct_declaration111); 
 					MAIN_KEY7_tree = (CommonTree)adaptor.create(MAIN_KEY7);
 					adaptor.addChild(root_0, MAIN_KEY7_tree);
 
@@ -374,23 +384,23 @@ public class tigerParser extends Parser {
 
 			}
 
-			LPAREN8=(Token)match(input,LPAREN,FOLLOW_LPAREN_in_funct_declaration130); 
-			pushFollow(FOLLOW_param_list_in_funct_declaration133);
+			LPAREN8=(Token)match(input,LPAREN,FOLLOW_LPAREN_in_funct_declaration116); 
+			pushFollow(FOLLOW_param_list_in_funct_declaration119);
 			param_list9=param_list();
 			state._fsp--;
 
 			adaptor.addChild(root_0, param_list9.getTree());
 
-			RPAREN10=(Token)match(input,RPAREN,FOLLOW_RPAREN_in_funct_declaration135); 
-			BEGIN_KEY11=(Token)match(input,BEGIN_KEY,FOLLOW_BEGIN_KEY_in_funct_declaration138); 
-			pushFollow(FOLLOW_block_list_in_funct_declaration141);
+			RPAREN10=(Token)match(input,RPAREN,FOLLOW_RPAREN_in_funct_declaration121); 
+			BEGIN_KEY11=(Token)match(input,BEGIN_KEY,FOLLOW_BEGIN_KEY_in_funct_declaration124); 
+			pushFollow(FOLLOW_block_list_in_funct_declaration127);
 			block_list12=block_list();
 			state._fsp--;
 
 			adaptor.addChild(root_0, block_list12.getTree());
 
-			END_KEY13=(Token)match(input,END_KEY,FOLLOW_END_KEY_in_funct_declaration143); 
-			SEMI14=(Token)match(input,SEMI,FOLLOW_SEMI_in_funct_declaration146); 
+			END_KEY13=(Token)match(input,END_KEY,FOLLOW_END_KEY_in_funct_declaration129); 
+			SEMI14=(Token)match(input,SEMI,FOLLOW_SEMI_in_funct_declaration132); 
 			defineFunction((ID6!=null?ID6.getText():null), (param_list9!=null?((CommonTree)param_list9.getTree()):null), (block_list12!=null?((CommonTree)block_list12.getTree()):null));
 			}
 
@@ -421,7 +431,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "ret_type"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:98:1: ret_type : ( VOID_KEY | type_id );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:118:1: ret_type : ( VOID_KEY | type_id );
 	public final tigerParser.ret_type_return ret_type() throws RecognitionException {
 		tigerParser.ret_type_return retval = new tigerParser.ret_type_return();
 		retval.start = input.LT(1);
@@ -434,7 +444,7 @@ public class tigerParser extends Parser {
 		CommonTree VOID_KEY15_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:99:2: ( VOID_KEY | type_id )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:119:2: ( VOID_KEY | type_id )
 			int alt3=2;
 			int LA3_0 = input.LA(1);
 			if ( (LA3_0==VOID_KEY) ) {
@@ -452,24 +462,24 @@ public class tigerParser extends Parser {
 
 			switch (alt3) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:99:4: VOID_KEY
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:119:4: VOID_KEY
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
-					VOID_KEY15=(Token)match(input,VOID_KEY,FOLLOW_VOID_KEY_in_ret_type163); 
+					VOID_KEY15=(Token)match(input,VOID_KEY,FOLLOW_VOID_KEY_in_ret_type149); 
 					VOID_KEY15_tree = (CommonTree)adaptor.create(VOID_KEY15);
 					adaptor.addChild(root_0, VOID_KEY15_tree);
 
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:100:4: type_id
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:120:4: type_id
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
-					pushFollow(FOLLOW_type_id_in_ret_type168);
+					pushFollow(FOLLOW_type_id_in_ret_type154);
 					type_id16=type_id();
 					state._fsp--;
 
@@ -506,7 +516,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "param_list"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:103:1: param_list : ( param ( COMMA param )* )? ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:123:1: param_list : ( param ( COMMA param )* )? ;
 	public final tigerParser.param_list_return param_list() throws RecognitionException {
 		tigerParser.param_list_return retval = new tigerParser.param_list_return();
 		retval.start = input.LT(1);
@@ -520,13 +530,13 @@ public class tigerParser extends Parser {
 		CommonTree COMMA18_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:104:2: ( ( param ( COMMA param )* )? )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:104:4: ( param ( COMMA param )* )?
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:124:2: ( ( param ( COMMA param )* )? )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:124:4: ( param ( COMMA param )* )?
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:104:4: ( param ( COMMA param )* )?
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:124:4: ( param ( COMMA param )* )?
 			int alt5=2;
 			int LA5_0 = input.LA(1);
 			if ( (LA5_0==ID) ) {
@@ -534,15 +544,15 @@ public class tigerParser extends Parser {
 			}
 			switch (alt5) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:104:5: param ( COMMA param )*
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:124:5: param ( COMMA param )*
 					{
-					pushFollow(FOLLOW_param_in_param_list181);
+					pushFollow(FOLLOW_param_in_param_list167);
 					param17=param();
 					state._fsp--;
 
 					adaptor.addChild(root_0, param17.getTree());
 
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:104:11: ( COMMA param )*
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:124:11: ( COMMA param )*
 					loop4:
 					while (true) {
 						int alt4=2;
@@ -553,13 +563,13 @@ public class tigerParser extends Parser {
 
 						switch (alt4) {
 						case 1 :
-							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:104:12: COMMA param
+							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:124:12: COMMA param
 							{
-							COMMA18=(Token)match(input,COMMA,FOLLOW_COMMA_in_param_list184); 
+							COMMA18=(Token)match(input,COMMA,FOLLOW_COMMA_in_param_list170); 
 							COMMA18_tree = (CommonTree)adaptor.create(COMMA18);
 							adaptor.addChild(root_0, COMMA18_tree);
 
-							pushFollow(FOLLOW_param_in_param_list186);
+							pushFollow(FOLLOW_param_in_param_list172);
 							param19=param();
 							state._fsp--;
 
@@ -607,7 +617,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "param"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:107:1: param : ID COLON ^ type_id ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:127:1: param : ID COLON ^ type_id ;
 	public final tigerParser.param_return param() throws RecognitionException {
 		tigerParser.param_return retval = new tigerParser.param_return();
 		retval.start = input.LT(1);
@@ -622,21 +632,21 @@ public class tigerParser extends Parser {
 		CommonTree COLON21_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:107:8: ( ID COLON ^ type_id )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:107:10: ID COLON ^ type_id
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:127:8: ( ID COLON ^ type_id )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:127:10: ID COLON ^ type_id
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			ID20=(Token)match(input,ID,FOLLOW_ID_in_param201); 
+			ID20=(Token)match(input,ID,FOLLOW_ID_in_param187); 
 			ID20_tree = (CommonTree)adaptor.create(ID20);
 			adaptor.addChild(root_0, ID20_tree);
 
-			COLON21=(Token)match(input,COLON,FOLLOW_COLON_in_param203); 
+			COLON21=(Token)match(input,COLON,FOLLOW_COLON_in_param189); 
 			COLON21_tree = (CommonTree)adaptor.create(COLON21);
 			root_0 = (CommonTree)adaptor.becomeRoot(COLON21_tree, root_0);
 
-			pushFollow(FOLLOW_type_id_in_param206);
+			pushFollow(FOLLOW_type_id_in_param192);
 			type_id22=type_id();
 			state._fsp--;
 
@@ -671,7 +681,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "block_list"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:109:1: block_list : ( block )+ ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:129:1: block_list : ( block )+ ;
 	public final tigerParser.block_list_return block_list() throws RecognitionException {
 		tigerParser.block_list_return retval = new tigerParser.block_list_return();
 		retval.start = input.LT(1);
@@ -682,13 +692,13 @@ public class tigerParser extends Parser {
 
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:110:2: ( ( block )+ )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:110:4: ( block )+
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:130:2: ( ( block )+ )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:130:4: ( block )+
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:110:4: ( block )+
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:130:4: ( block )+
 			int cnt6=0;
 			loop6:
 			while (true) {
@@ -700,9 +710,9 @@ public class tigerParser extends Parser {
 
 				switch (alt6) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:110:4: block
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:130:4: block
 					{
-					pushFollow(FOLLOW_block_in_block_list216);
+					pushFollow(FOLLOW_block_in_block_list202);
 					block23=block();
 					state._fsp--;
 
@@ -748,7 +758,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "block"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:113:1: block : BEGIN_KEY ^ ( declaration_statement stat_seq ) ^ END_KEY ! SEMI !;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:133:1: block : BEGIN_KEY ^ ( declaration_statement stat_seq ) ^ END_KEY ! SEMI !;
 	public final tigerParser.block_return block() throws RecognitionException {
 		tigerParser.block_return retval = new tigerParser.block_return();
 		retval.start = input.LT(1);
@@ -766,26 +776,26 @@ public class tigerParser extends Parser {
 		CommonTree SEMI28_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:113:8: ( BEGIN_KEY ^ ( declaration_statement stat_seq ) ^ END_KEY ! SEMI !)
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:113:10: BEGIN_KEY ^ ( declaration_statement stat_seq ) ^ END_KEY ! SEMI !
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:133:8: ( BEGIN_KEY ^ ( declaration_statement stat_seq ) ^ END_KEY ! SEMI !)
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:133:10: BEGIN_KEY ^ ( declaration_statement stat_seq ) ^ END_KEY ! SEMI !
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			BEGIN_KEY24=(Token)match(input,BEGIN_KEY,FOLLOW_BEGIN_KEY_in_block228); 
+			BEGIN_KEY24=(Token)match(input,BEGIN_KEY,FOLLOW_BEGIN_KEY_in_block214); 
 			BEGIN_KEY24_tree = (CommonTree)adaptor.create(BEGIN_KEY24);
 			root_0 = (CommonTree)adaptor.becomeRoot(BEGIN_KEY24_tree, root_0);
 
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:113:21: ( declaration_statement stat_seq )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:113:22: declaration_statement stat_seq
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:133:21: ( declaration_statement stat_seq )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:133:22: declaration_statement stat_seq
 			{
-			pushFollow(FOLLOW_declaration_statement_in_block232);
+			pushFollow(FOLLOW_declaration_statement_in_block218);
 			declaration_statement25=declaration_statement();
 			state._fsp--;
 
 			adaptor.addChild(root_0, declaration_statement25.getTree());
 
-			pushFollow(FOLLOW_stat_seq_in_block234);
+			pushFollow(FOLLOW_stat_seq_in_block220);
 			stat_seq26=stat_seq();
 			state._fsp--;
 
@@ -793,8 +803,8 @@ public class tigerParser extends Parser {
 
 			}
 
-			END_KEY27=(Token)match(input,END_KEY,FOLLOW_END_KEY_in_block238); 
-			SEMI28=(Token)match(input,SEMI,FOLLOW_SEMI_in_block241); 
+			END_KEY27=(Token)match(input,END_KEY,FOLLOW_END_KEY_in_block224); 
+			SEMI28=(Token)match(input,SEMI,FOLLOW_SEMI_in_block227); 
 			}
 
 			retval.stop = input.LT(-1);
@@ -824,7 +834,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "declaration_statement"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:115:1: declaration_statement : type_declaration_list var_declaration_list ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:135:1: declaration_statement : type_declaration_list var_declaration_list ;
 	public final tigerParser.declaration_statement_return declaration_statement() throws RecognitionException {
 		tigerParser.declaration_statement_return retval = new tigerParser.declaration_statement_return();
 		retval.start = input.LT(1);
@@ -836,19 +846,19 @@ public class tigerParser extends Parser {
 
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:116:2: ( type_declaration_list var_declaration_list )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:116:4: type_declaration_list var_declaration_list
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:136:2: ( type_declaration_list var_declaration_list )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:136:4: type_declaration_list var_declaration_list
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			pushFollow(FOLLOW_type_declaration_list_in_declaration_statement252);
+			pushFollow(FOLLOW_type_declaration_list_in_declaration_statement238);
 			type_declaration_list29=type_declaration_list();
 			state._fsp--;
 
 			adaptor.addChild(root_0, type_declaration_list29.getTree());
 
-			pushFollow(FOLLOW_var_declaration_list_in_declaration_statement254);
+			pushFollow(FOLLOW_var_declaration_list_in_declaration_statement240);
 			var_declaration_list30=var_declaration_list();
 			state._fsp--;
 
@@ -883,7 +893,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "type_declaration_list"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:119:1: type_declaration_list : ( type_declaration )* ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:139:1: type_declaration_list : ( type_declaration )* ;
 	public final tigerParser.type_declaration_list_return type_declaration_list() throws RecognitionException {
 		tigerParser.type_declaration_list_return retval = new tigerParser.type_declaration_list_return();
 		retval.start = input.LT(1);
@@ -894,13 +904,13 @@ public class tigerParser extends Parser {
 
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:120:2: ( ( type_declaration )* )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:120:5: ( type_declaration )*
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:140:2: ( ( type_declaration )* )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:140:5: ( type_declaration )*
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:120:5: ( type_declaration )*
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:140:5: ( type_declaration )*
 			loop7:
 			while (true) {
 				int alt7=2;
@@ -911,9 +921,9 @@ public class tigerParser extends Parser {
 
 				switch (alt7) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:120:5: type_declaration
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:140:5: type_declaration
 					{
-					pushFollow(FOLLOW_type_declaration_in_type_declaration_list268);
+					pushFollow(FOLLOW_type_declaration_in_type_declaration_list254);
 					type_declaration31=type_declaration();
 					state._fsp--;
 
@@ -956,7 +966,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "var_declaration_list"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:123:1: var_declaration_list : ( var_declaration )* ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:143:1: var_declaration_list : ( var_declaration )* ;
 	public final tigerParser.var_declaration_list_return var_declaration_list() throws RecognitionException {
 		tigerParser.var_declaration_list_return retval = new tigerParser.var_declaration_list_return();
 		retval.start = input.LT(1);
@@ -967,13 +977,13 @@ public class tigerParser extends Parser {
 
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:124:2: ( ( var_declaration )* )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:124:4: ( var_declaration )*
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:144:2: ( ( var_declaration )* )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:144:4: ( var_declaration )*
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:124:4: ( var_declaration )*
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:144:4: ( var_declaration )*
 			loop8:
 			while (true) {
 				int alt8=2;
@@ -984,9 +994,9 @@ public class tigerParser extends Parser {
 
 				switch (alt8) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:124:4: var_declaration
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:144:4: var_declaration
 					{
-					pushFollow(FOLLOW_var_declaration_in_var_declaration_list282);
+					pushFollow(FOLLOW_var_declaration_in_var_declaration_list268);
 					var_declaration32=var_declaration();
 					state._fsp--;
 
@@ -1029,7 +1039,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "type_declaration"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:127:1: type_declaration : ( TYPE_KEY ID ) ^ EQ ^ type SEMI !;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:147:1: type_declaration : ( TYPE_KEY ID ) ^ EQ ^ type SEMI !;
 	public final tigerParser.type_declaration_return type_declaration() throws RecognitionException {
 		tigerParser.type_declaration_return retval = new tigerParser.type_declaration_return();
 		retval.start = input.LT(1);
@@ -1048,36 +1058,36 @@ public class tigerParser extends Parser {
 		CommonTree SEMI37_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:128:2: ( ( TYPE_KEY ID ) ^ EQ ^ type SEMI !)
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:128:4: ( TYPE_KEY ID ) ^ EQ ^ type SEMI !
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:148:2: ( ( TYPE_KEY ID ) ^ EQ ^ type SEMI !)
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:148:4: ( TYPE_KEY ID ) ^ EQ ^ type SEMI !
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:128:4: ( TYPE_KEY ID )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:128:5: TYPE_KEY ID
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:148:4: ( TYPE_KEY ID )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:148:5: TYPE_KEY ID
 			{
-			TYPE_KEY33=(Token)match(input,TYPE_KEY,FOLLOW_TYPE_KEY_in_type_declaration296); 
+			TYPE_KEY33=(Token)match(input,TYPE_KEY,FOLLOW_TYPE_KEY_in_type_declaration282); 
 			TYPE_KEY33_tree = (CommonTree)adaptor.create(TYPE_KEY33);
 			adaptor.addChild(root_0, TYPE_KEY33_tree);
 
-			ID34=(Token)match(input,ID,FOLLOW_ID_in_type_declaration298); 
+			ID34=(Token)match(input,ID,FOLLOW_ID_in_type_declaration284); 
 			ID34_tree = (CommonTree)adaptor.create(ID34);
 			adaptor.addChild(root_0, ID34_tree);
 
 			}
 
-			EQ35=(Token)match(input,EQ,FOLLOW_EQ_in_type_declaration302); 
+			EQ35=(Token)match(input,EQ,FOLLOW_EQ_in_type_declaration288); 
 			EQ35_tree = (CommonTree)adaptor.create(EQ35);
 			root_0 = (CommonTree)adaptor.becomeRoot(EQ35_tree, root_0);
 
-			pushFollow(FOLLOW_type_in_type_declaration305);
+			pushFollow(FOLLOW_type_in_type_declaration291);
 			type36=type();
 			state._fsp--;
 
 			adaptor.addChild(root_0, type36.getTree());
 
-			SEMI37=(Token)match(input,SEMI,FOLLOW_SEMI_in_type_declaration307); 
+			SEMI37=(Token)match(input,SEMI,FOLLOW_SEMI_in_type_declaration293); 
 			}
 
 			retval.stop = input.LT(-1);
@@ -1107,7 +1117,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "type"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:131:1: type : ( base_type | ( ARRAY_KEY LBRACK INTLIT RBRACK ( LBRACK INTLIT RBRACK )? ) ^ OF_KEY ^ ( base_type ) ^);
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:151:1: type : ( base_type | ( ARRAY_KEY LBRACK INTLIT RBRACK ( LBRACK INTLIT RBRACK )? ) ^ OF_KEY ^ ( base_type ) ^);
 	public final tigerParser.type_return type() throws RecognitionException {
 		tigerParser.type_return retval = new tigerParser.type_return();
 		retval.start = input.LT(1);
@@ -1135,7 +1145,7 @@ public class tigerParser extends Parser {
 		CommonTree OF_KEY46_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:131:6: ( base_type | ( ARRAY_KEY LBRACK INTLIT RBRACK ( LBRACK INTLIT RBRACK )? ) ^ OF_KEY ^ ( base_type ) ^)
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:151:6: ( base_type | ( ARRAY_KEY LBRACK INTLIT RBRACK ( LBRACK INTLIT RBRACK )? ) ^ OF_KEY ^ ( base_type ) ^)
 			int alt10=2;
 			int LA10_0 = input.LA(1);
 			if ( (LA10_0==FIXEDPT_KEY||LA10_0==INT_KEY) ) {
@@ -1153,12 +1163,12 @@ public class tigerParser extends Parser {
 
 			switch (alt10) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:131:8: base_type
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:151:8: base_type
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
-					pushFollow(FOLLOW_base_type_in_type319);
+					pushFollow(FOLLOW_base_type_in_type305);
 					base_type38=base_type();
 					state._fsp--;
 
@@ -1167,31 +1177,31 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:132:4: ( ARRAY_KEY LBRACK INTLIT RBRACK ( LBRACK INTLIT RBRACK )? ) ^ OF_KEY ^ ( base_type ) ^
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:152:4: ( ARRAY_KEY LBRACK INTLIT RBRACK ( LBRACK INTLIT RBRACK )? ) ^ OF_KEY ^ ( base_type ) ^
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:132:4: ( ARRAY_KEY LBRACK INTLIT RBRACK ( LBRACK INTLIT RBRACK )? )
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:132:5: ARRAY_KEY LBRACK INTLIT RBRACK ( LBRACK INTLIT RBRACK )?
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:152:4: ( ARRAY_KEY LBRACK INTLIT RBRACK ( LBRACK INTLIT RBRACK )? )
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:152:5: ARRAY_KEY LBRACK INTLIT RBRACK ( LBRACK INTLIT RBRACK )?
 					{
-					ARRAY_KEY39=(Token)match(input,ARRAY_KEY,FOLLOW_ARRAY_KEY_in_type325); 
+					ARRAY_KEY39=(Token)match(input,ARRAY_KEY,FOLLOW_ARRAY_KEY_in_type311); 
 					ARRAY_KEY39_tree = (CommonTree)adaptor.create(ARRAY_KEY39);
 					adaptor.addChild(root_0, ARRAY_KEY39_tree);
 
-					LBRACK40=(Token)match(input,LBRACK,FOLLOW_LBRACK_in_type327); 
+					LBRACK40=(Token)match(input,LBRACK,FOLLOW_LBRACK_in_type313); 
 					LBRACK40_tree = (CommonTree)adaptor.create(LBRACK40);
 					adaptor.addChild(root_0, LBRACK40_tree);
 
-					INTLIT41=(Token)match(input,INTLIT,FOLLOW_INTLIT_in_type329); 
+					INTLIT41=(Token)match(input,INTLIT,FOLLOW_INTLIT_in_type315); 
 					INTLIT41_tree = (CommonTree)adaptor.create(INTLIT41);
 					adaptor.addChild(root_0, INTLIT41_tree);
 
-					RBRACK42=(Token)match(input,RBRACK,FOLLOW_RBRACK_in_type331); 
+					RBRACK42=(Token)match(input,RBRACK,FOLLOW_RBRACK_in_type317); 
 					RBRACK42_tree = (CommonTree)adaptor.create(RBRACK42);
 					adaptor.addChild(root_0, RBRACK42_tree);
 
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:132:36: ( LBRACK INTLIT RBRACK )?
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:152:36: ( LBRACK INTLIT RBRACK )?
 					int alt9=2;
 					int LA9_0 = input.LA(1);
 					if ( (LA9_0==LBRACK) ) {
@@ -1199,17 +1209,17 @@ public class tigerParser extends Parser {
 					}
 					switch (alt9) {
 						case 1 :
-							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:132:37: LBRACK INTLIT RBRACK
+							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:152:37: LBRACK INTLIT RBRACK
 							{
-							LBRACK43=(Token)match(input,LBRACK,FOLLOW_LBRACK_in_type334); 
+							LBRACK43=(Token)match(input,LBRACK,FOLLOW_LBRACK_in_type320); 
 							LBRACK43_tree = (CommonTree)adaptor.create(LBRACK43);
 							adaptor.addChild(root_0, LBRACK43_tree);
 
-							INTLIT44=(Token)match(input,INTLIT,FOLLOW_INTLIT_in_type336); 
+							INTLIT44=(Token)match(input,INTLIT,FOLLOW_INTLIT_in_type322); 
 							INTLIT44_tree = (CommonTree)adaptor.create(INTLIT44);
 							adaptor.addChild(root_0, INTLIT44_tree);
 
-							RBRACK45=(Token)match(input,RBRACK,FOLLOW_RBRACK_in_type338); 
+							RBRACK45=(Token)match(input,RBRACK,FOLLOW_RBRACK_in_type324); 
 							RBRACK45_tree = (CommonTree)adaptor.create(RBRACK45);
 							adaptor.addChild(root_0, RBRACK45_tree);
 
@@ -1220,14 +1230,14 @@ public class tigerParser extends Parser {
 
 					}
 
-					OF_KEY46=(Token)match(input,OF_KEY,FOLLOW_OF_KEY_in_type344); 
+					OF_KEY46=(Token)match(input,OF_KEY,FOLLOW_OF_KEY_in_type330); 
 					OF_KEY46_tree = (CommonTree)adaptor.create(OF_KEY46);
 					root_0 = (CommonTree)adaptor.becomeRoot(OF_KEY46_tree, root_0);
 
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:132:70: ( base_type )
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:132:71: base_type
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:152:70: ( base_type )
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:152:71: base_type
 					{
-					pushFollow(FOLLOW_base_type_in_type348);
+					pushFollow(FOLLOW_base_type_in_type334);
 					base_type47=base_type();
 					state._fsp--;
 
@@ -1266,7 +1276,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "type_id"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:135:1: type_id : ( base_type | ID );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:155:1: type_id : ( base_type | ID );
 	public final tigerParser.type_id_return type_id() throws RecognitionException {
 		tigerParser.type_id_return retval = new tigerParser.type_id_return();
 		retval.start = input.LT(1);
@@ -1279,7 +1289,7 @@ public class tigerParser extends Parser {
 		CommonTree ID49_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:135:9: ( base_type | ID )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:155:9: ( base_type | ID )
 			int alt11=2;
 			int LA11_0 = input.LA(1);
 			if ( (LA11_0==FIXEDPT_KEY||LA11_0==INT_KEY) ) {
@@ -1297,12 +1307,12 @@ public class tigerParser extends Parser {
 
 			switch (alt11) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:135:11: base_type
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:155:11: base_type
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
-					pushFollow(FOLLOW_base_type_in_type_id360);
+					pushFollow(FOLLOW_base_type_in_type_id346);
 					base_type48=base_type();
 					state._fsp--;
 
@@ -1311,12 +1321,12 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:136:4: ID
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:156:4: ID
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
-					ID49=(Token)match(input,ID,FOLLOW_ID_in_type_id365); 
+					ID49=(Token)match(input,ID,FOLLOW_ID_in_type_id351); 
 					ID49_tree = (CommonTree)adaptor.create(ID49);
 					adaptor.addChild(root_0, ID49_tree);
 
@@ -1351,7 +1361,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "base_type"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:139:1: base_type : ( INT_KEY | FIXEDPT_KEY );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:159:1: base_type : ( INT_KEY | FIXEDPT_KEY );
 	public final tigerParser.base_type_return base_type() throws RecognitionException {
 		tigerParser.base_type_return retval = new tigerParser.base_type_return();
 		retval.start = input.LT(1);
@@ -1363,7 +1373,7 @@ public class tigerParser extends Parser {
 		CommonTree set50_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:140:2: ( INT_KEY | FIXEDPT_KEY )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:160:2: ( INT_KEY | FIXEDPT_KEY )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:
 			{
 			root_0 = (CommonTree)adaptor.nil();
@@ -1408,7 +1418,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "var_declaration"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:144:1: var_declaration : ( VAR_KEY id_list COLON ^ type_id ) ^ ( ASSIGN ^ expr )? SEMI !;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:164:1: var_declaration : ( VAR_KEY id_list COLON ^ type_id ) ^ ( ASSIGN ^ expr )? SEMI !;
 	public final tigerParser.var_declaration_return var_declaration() throws RecognitionException {
 		tigerParser.var_declaration_return retval = new tigerParser.var_declaration_return();
 		retval.start = input.LT(1);
@@ -1429,30 +1439,30 @@ public class tigerParser extends Parser {
 		CommonTree SEMI57_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:145:2: ( ( VAR_KEY id_list COLON ^ type_id ) ^ ( ASSIGN ^ expr )? SEMI !)
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:145:4: ( VAR_KEY id_list COLON ^ type_id ) ^ ( ASSIGN ^ expr )? SEMI !
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:165:2: ( ( VAR_KEY id_list COLON ^ type_id ) ^ ( ASSIGN ^ expr )? SEMI !)
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:165:4: ( VAR_KEY id_list COLON ^ type_id ) ^ ( ASSIGN ^ expr )? SEMI !
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:145:4: ( VAR_KEY id_list COLON ^ type_id )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:145:5: VAR_KEY id_list COLON ^ type_id
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:165:4: ( VAR_KEY id_list COLON ^ type_id )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:165:5: VAR_KEY id_list COLON ^ type_id
 			{
-			VAR_KEY51=(Token)match(input,VAR_KEY,FOLLOW_VAR_KEY_in_var_declaration394); 
+			VAR_KEY51=(Token)match(input,VAR_KEY,FOLLOW_VAR_KEY_in_var_declaration380); 
 			VAR_KEY51_tree = (CommonTree)adaptor.create(VAR_KEY51);
 			adaptor.addChild(root_0, VAR_KEY51_tree);
 
-			pushFollow(FOLLOW_id_list_in_var_declaration396);
+			pushFollow(FOLLOW_id_list_in_var_declaration382);
 			id_list52=id_list();
 			state._fsp--;
 
 			adaptor.addChild(root_0, id_list52.getTree());
 
-			COLON53=(Token)match(input,COLON,FOLLOW_COLON_in_var_declaration398); 
+			COLON53=(Token)match(input,COLON,FOLLOW_COLON_in_var_declaration384); 
 			COLON53_tree = (CommonTree)adaptor.create(COLON53);
 			root_0 = (CommonTree)adaptor.becomeRoot(COLON53_tree, root_0);
 
-			pushFollow(FOLLOW_type_id_in_var_declaration401);
+			pushFollow(FOLLOW_type_id_in_var_declaration387);
 			type_id54=type_id();
 			state._fsp--;
 
@@ -1460,7 +1470,7 @@ public class tigerParser extends Parser {
 
 			}
 
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:145:38: ( ASSIGN ^ expr )?
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:165:38: ( ASSIGN ^ expr )?
 			int alt12=2;
 			int LA12_0 = input.LA(1);
 			if ( (LA12_0==ASSIGN) ) {
@@ -1468,13 +1478,13 @@ public class tigerParser extends Parser {
 			}
 			switch (alt12) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:145:39: ASSIGN ^ expr
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:165:39: ASSIGN ^ expr
 					{
-					ASSIGN55=(Token)match(input,ASSIGN,FOLLOW_ASSIGN_in_var_declaration406); 
+					ASSIGN55=(Token)match(input,ASSIGN,FOLLOW_ASSIGN_in_var_declaration392); 
 					ASSIGN55_tree = (CommonTree)adaptor.create(ASSIGN55);
 					root_0 = (CommonTree)adaptor.becomeRoot(ASSIGN55_tree, root_0);
 
-					pushFollow(FOLLOW_expr_in_var_declaration409);
+					pushFollow(FOLLOW_expr_in_var_declaration395);
 					expr56=expr();
 					state._fsp--;
 
@@ -1485,7 +1495,7 @@ public class tigerParser extends Parser {
 
 			}
 
-			SEMI57=(Token)match(input,SEMI,FOLLOW_SEMI_in_var_declaration413); 
+			SEMI57=(Token)match(input,SEMI,FOLLOW_SEMI_in_var_declaration399); 
 			}
 
 			retval.stop = input.LT(-1);
@@ -1515,7 +1525,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "id_list"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:148:1: id_list : ID ( COMMA ! id_list )? ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:168:1: id_list : ID ( COMMA ! id_list )? ;
 	public final tigerParser.id_list_return id_list() throws RecognitionException {
 		tigerParser.id_list_return retval = new tigerParser.id_list_return();
 		retval.start = input.LT(1);
@@ -1530,17 +1540,17 @@ public class tigerParser extends Parser {
 		CommonTree COMMA59_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:148:9: ( ID ( COMMA ! id_list )? )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:148:11: ID ( COMMA ! id_list )?
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:168:9: ( ID ( COMMA ! id_list )? )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:168:11: ID ( COMMA ! id_list )?
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			ID58=(Token)match(input,ID,FOLLOW_ID_in_id_list424); 
+			ID58=(Token)match(input,ID,FOLLOW_ID_in_id_list410); 
 			ID58_tree = (CommonTree)adaptor.create(ID58);
 			adaptor.addChild(root_0, ID58_tree);
 
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:148:14: ( COMMA ! id_list )?
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:168:14: ( COMMA ! id_list )?
 			int alt13=2;
 			int LA13_0 = input.LA(1);
 			if ( (LA13_0==COMMA) ) {
@@ -1548,10 +1558,10 @@ public class tigerParser extends Parser {
 			}
 			switch (alt13) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:148:15: COMMA ! id_list
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:168:15: COMMA ! id_list
 					{
-					COMMA59=(Token)match(input,COMMA,FOLLOW_COMMA_in_id_list427); 
-					pushFollow(FOLLOW_id_list_in_id_list430);
+					COMMA59=(Token)match(input,COMMA,FOLLOW_COMMA_in_id_list413); 
+					pushFollow(FOLLOW_id_list_in_id_list416);
 					id_list60=id_list();
 					state._fsp--;
 
@@ -1591,7 +1601,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "stat_seq"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:151:1: stat_seq : ( stat )+ ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:171:1: stat_seq : ( stat )+ ;
 	public final tigerParser.stat_seq_return stat_seq() throws RecognitionException {
 		tigerParser.stat_seq_return retval = new tigerParser.stat_seq_return();
 		retval.start = input.LT(1);
@@ -1602,13 +1612,13 @@ public class tigerParser extends Parser {
 
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:152:2: ( ( stat )+ )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:152:4: ( stat )+
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:172:2: ( ( stat )+ )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:172:4: ( stat )+
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:152:4: ( stat )+
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:172:4: ( stat )+
 			int cnt14=0;
 			loop14:
 			while (true) {
@@ -1620,9 +1630,9 @@ public class tigerParser extends Parser {
 
 				switch (alt14) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:152:4: stat
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:172:4: stat
 					{
-					pushFollow(FOLLOW_stat_in_stat_seq444);
+					pushFollow(FOLLOW_stat_in_stat_seq430);
 					stat61=stat();
 					state._fsp--;
 
@@ -1668,7 +1678,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "stat"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:155:1: stat : ( IF_KEY expr THEN_KEY stat_seq ( ENDIF_KEY SEMI | ELSE_KEY stat_seq ENDIF_KEY SEMI ) -> ^( IF_KEY expr stat_seq ( ^( ELSE_KEY stat_seq ) )? ) | WHILE_KEY ^ expr DO_KEY ! stat_seq ENDDO_KEY ! SEMI !| FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI -> ^( FOR_KEY ^( TO_KEY ^( ASSIGN ID index_expr ) index_expr ) stat_seq ) | ID ( ( value_tail ASSIGN ^ expr_list ) | ( func_call_tail ) ) SEMI !| BREAK_KEY SEMI !| RETURN_KEY ^ expr SEMI !| block );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:175:1: stat : ( IF_KEY expr THEN_KEY stat_seq ( ENDIF_KEY SEMI | ELSE_KEY stat_seq ENDIF_KEY SEMI ) -> ^( IF_KEY expr stat_seq ( ^( ELSE_KEY stat_seq ) )? ) | WHILE_KEY ^ expr DO_KEY ! stat_seq ENDDO_KEY ! SEMI !| FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI -> ^( FOR_KEY ^( TO_KEY ^( ASSIGN ID index_expr ) index_expr ) stat_seq ) | ID ( ( value_tail ASSIGN ^ expr_list ) | ( func_call_tail ) ) SEMI !| BREAK_KEY SEMI !| RETURN_KEY ^ expr SEMI !| block );
 	public final tigerParser.stat_return stat() throws RecognitionException {
 		tigerParser.stat_return retval = new tigerParser.stat_return();
 		retval.start = input.LT(1);
@@ -1755,7 +1765,7 @@ public class tigerParser extends Parser {
 		RewriteRuleSubtreeStream stream_stat_seq=new RewriteRuleSubtreeStream(adaptor,"rule stat_seq");
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:156:2: ( IF_KEY expr THEN_KEY stat_seq ( ENDIF_KEY SEMI | ELSE_KEY stat_seq ENDIF_KEY SEMI ) -> ^( IF_KEY expr stat_seq ( ^( ELSE_KEY stat_seq ) )? ) | WHILE_KEY ^ expr DO_KEY ! stat_seq ENDDO_KEY ! SEMI !| FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI -> ^( FOR_KEY ^( TO_KEY ^( ASSIGN ID index_expr ) index_expr ) stat_seq ) | ID ( ( value_tail ASSIGN ^ expr_list ) | ( func_call_tail ) ) SEMI !| BREAK_KEY SEMI !| RETURN_KEY ^ expr SEMI !| block )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:176:2: ( IF_KEY expr THEN_KEY stat_seq ( ENDIF_KEY SEMI | ELSE_KEY stat_seq ENDIF_KEY SEMI ) -> ^( IF_KEY expr stat_seq ( ^( ELSE_KEY stat_seq ) )? ) | WHILE_KEY ^ expr DO_KEY ! stat_seq ENDDO_KEY ! SEMI !| FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI -> ^( FOR_KEY ^( TO_KEY ^( ASSIGN ID index_expr ) index_expr ) stat_seq ) | ID ( ( value_tail ASSIGN ^ expr_list ) | ( func_call_tail ) ) SEMI !| BREAK_KEY SEMI !| RETURN_KEY ^ expr SEMI !| block )
 			int alt17=7;
 			switch ( input.LA(1) ) {
 			case IF_KEY:
@@ -1800,25 +1810,25 @@ public class tigerParser extends Parser {
 			}
 			switch (alt17) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:156:4: IF_KEY expr THEN_KEY stat_seq ( ENDIF_KEY SEMI | ELSE_KEY stat_seq ENDIF_KEY SEMI )
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:176:4: IF_KEY expr THEN_KEY stat_seq ( ENDIF_KEY SEMI | ELSE_KEY stat_seq ENDIF_KEY SEMI )
 					{
-					IF_KEY62=(Token)match(input,IF_KEY,FOLLOW_IF_KEY_in_stat457);  
+					IF_KEY62=(Token)match(input,IF_KEY,FOLLOW_IF_KEY_in_stat443);  
 					stream_IF_KEY.add(IF_KEY62);
 
-					pushFollow(FOLLOW_expr_in_stat459);
+					pushFollow(FOLLOW_expr_in_stat445);
 					expr63=expr();
 					state._fsp--;
 
 					stream_expr.add(expr63.getTree());
-					THEN_KEY64=(Token)match(input,THEN_KEY,FOLLOW_THEN_KEY_in_stat461);  
+					THEN_KEY64=(Token)match(input,THEN_KEY,FOLLOW_THEN_KEY_in_stat447);  
 					stream_THEN_KEY.add(THEN_KEY64);
 
-					pushFollow(FOLLOW_stat_seq_in_stat463);
+					pushFollow(FOLLOW_stat_seq_in_stat449);
 					stat_seq65=stat_seq();
 					state._fsp--;
 
 					stream_stat_seq.add(stat_seq65.getTree());
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:156:34: ( ENDIF_KEY SEMI | ELSE_KEY stat_seq ENDIF_KEY SEMI )
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:176:34: ( ENDIF_KEY SEMI | ELSE_KEY stat_seq ENDIF_KEY SEMI )
 					int alt15=2;
 					int LA15_0 = input.LA(1);
 					if ( (LA15_0==ENDIF_KEY) ) {
@@ -1836,31 +1846,31 @@ public class tigerParser extends Parser {
 
 					switch (alt15) {
 						case 1 :
-							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:156:35: ENDIF_KEY SEMI
+							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:176:35: ENDIF_KEY SEMI
 							{
-							ENDIF_KEY66=(Token)match(input,ENDIF_KEY,FOLLOW_ENDIF_KEY_in_stat466);  
+							ENDIF_KEY66=(Token)match(input,ENDIF_KEY,FOLLOW_ENDIF_KEY_in_stat452);  
 							stream_ENDIF_KEY.add(ENDIF_KEY66);
 
-							SEMI67=(Token)match(input,SEMI,FOLLOW_SEMI_in_stat468);  
+							SEMI67=(Token)match(input,SEMI,FOLLOW_SEMI_in_stat454);  
 							stream_SEMI.add(SEMI67);
 
 							}
 							break;
 						case 2 :
-							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:156:50: ELSE_KEY stat_seq ENDIF_KEY SEMI
+							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:176:50: ELSE_KEY stat_seq ENDIF_KEY SEMI
 							{
-							ELSE_KEY68=(Token)match(input,ELSE_KEY,FOLLOW_ELSE_KEY_in_stat470);  
+							ELSE_KEY68=(Token)match(input,ELSE_KEY,FOLLOW_ELSE_KEY_in_stat456);  
 							stream_ELSE_KEY.add(ELSE_KEY68);
 
-							pushFollow(FOLLOW_stat_seq_in_stat472);
+							pushFollow(FOLLOW_stat_seq_in_stat458);
 							stat_seq69=stat_seq();
 							state._fsp--;
 
 							stream_stat_seq.add(stat_seq69.getTree());
-							ENDIF_KEY70=(Token)match(input,ENDIF_KEY,FOLLOW_ENDIF_KEY_in_stat474);  
+							ENDIF_KEY70=(Token)match(input,ENDIF_KEY,FOLLOW_ENDIF_KEY_in_stat460);  
 							stream_ENDIF_KEY.add(ENDIF_KEY70);
 
-							SEMI71=(Token)match(input,SEMI,FOLLOW_SEMI_in_stat476);  
+							SEMI71=(Token)match(input,SEMI,FOLLOW_SEMI_in_stat462);  
 							stream_SEMI.add(SEMI71);
 
 							}
@@ -1869,7 +1879,7 @@ public class tigerParser extends Parser {
 					}
 
 					// AST REWRITE
-					// elements: IF_KEY, expr, stat_seq, stat_seq, ELSE_KEY
+					// elements: expr, ELSE_KEY, stat_seq, stat_seq, IF_KEY
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -1879,17 +1889,17 @@ public class tigerParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (CommonTree)adaptor.nil();
-					// 157:3: -> ^( IF_KEY expr stat_seq ( ^( ELSE_KEY stat_seq ) )? )
+					// 177:3: -> ^( IF_KEY expr stat_seq ( ^( ELSE_KEY stat_seq ) )? )
 					{
-						// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:157:6: ^( IF_KEY expr stat_seq ( ^( ELSE_KEY stat_seq ) )? )
+						// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:177:6: ^( IF_KEY expr stat_seq ( ^( ELSE_KEY stat_seq ) )? )
 						{
 						CommonTree root_1 = (CommonTree)adaptor.nil();
 						root_1 = (CommonTree)adaptor.becomeRoot(stream_IF_KEY.nextNode(), root_1);
 						adaptor.addChild(root_1, stream_expr.nextTree());
 						adaptor.addChild(root_1, stream_stat_seq.nextTree());
-						// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:157:29: ( ^( ELSE_KEY stat_seq ) )?
-						if ( stream_stat_seq.hasNext()||stream_ELSE_KEY.hasNext() ) {
-							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:157:29: ^( ELSE_KEY stat_seq )
+						// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:177:29: ( ^( ELSE_KEY stat_seq ) )?
+						if ( stream_ELSE_KEY.hasNext()||stream_stat_seq.hasNext() ) {
+							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:177:29: ^( ELSE_KEY stat_seq )
 							{
 							CommonTree root_2 = (CommonTree)adaptor.nil();
 							root_2 = (CommonTree)adaptor.becomeRoot(stream_ELSE_KEY.nextNode(), root_2);
@@ -1898,8 +1908,8 @@ public class tigerParser extends Parser {
 							}
 
 						}
-						stream_stat_seq.reset();
 						stream_ELSE_KEY.reset();
+						stream_stat_seq.reset();
 
 						adaptor.addChild(root_0, root_1);
 						}
@@ -1912,73 +1922,73 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:158:4: WHILE_KEY ^ expr DO_KEY ! stat_seq ENDDO_KEY ! SEMI !
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:178:4: WHILE_KEY ^ expr DO_KEY ! stat_seq ENDDO_KEY ! SEMI !
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
-					WHILE_KEY72=(Token)match(input,WHILE_KEY,FOLLOW_WHILE_KEY_in_stat501); 
+					WHILE_KEY72=(Token)match(input,WHILE_KEY,FOLLOW_WHILE_KEY_in_stat487); 
 					WHILE_KEY72_tree = (CommonTree)adaptor.create(WHILE_KEY72);
 					root_0 = (CommonTree)adaptor.becomeRoot(WHILE_KEY72_tree, root_0);
 
-					pushFollow(FOLLOW_expr_in_stat504);
+					pushFollow(FOLLOW_expr_in_stat490);
 					expr73=expr();
 					state._fsp--;
 
 					adaptor.addChild(root_0, expr73.getTree());
 
-					DO_KEY74=(Token)match(input,DO_KEY,FOLLOW_DO_KEY_in_stat506); 
-					pushFollow(FOLLOW_stat_seq_in_stat509);
+					DO_KEY74=(Token)match(input,DO_KEY,FOLLOW_DO_KEY_in_stat492); 
+					pushFollow(FOLLOW_stat_seq_in_stat495);
 					stat_seq75=stat_seq();
 					state._fsp--;
 
 					adaptor.addChild(root_0, stat_seq75.getTree());
 
-					ENDDO_KEY76=(Token)match(input,ENDDO_KEY,FOLLOW_ENDDO_KEY_in_stat511); 
-					SEMI77=(Token)match(input,SEMI,FOLLOW_SEMI_in_stat514); 
+					ENDDO_KEY76=(Token)match(input,ENDDO_KEY,FOLLOW_ENDDO_KEY_in_stat497); 
+					SEMI77=(Token)match(input,SEMI,FOLLOW_SEMI_in_stat500); 
 					}
 					break;
 				case 3 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:159:4: FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:179:4: FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI
 					{
-					FOR_KEY78=(Token)match(input,FOR_KEY,FOLLOW_FOR_KEY_in_stat520);  
+					FOR_KEY78=(Token)match(input,FOR_KEY,FOLLOW_FOR_KEY_in_stat506);  
 					stream_FOR_KEY.add(FOR_KEY78);
 
-					ID79=(Token)match(input,ID,FOLLOW_ID_in_stat522);  
+					ID79=(Token)match(input,ID,FOLLOW_ID_in_stat508);  
 					stream_ID.add(ID79);
 
-					ASSIGN80=(Token)match(input,ASSIGN,FOLLOW_ASSIGN_in_stat524);  
+					ASSIGN80=(Token)match(input,ASSIGN,FOLLOW_ASSIGN_in_stat510);  
 					stream_ASSIGN.add(ASSIGN80);
 
-					pushFollow(FOLLOW_index_expr_in_stat526);
+					pushFollow(FOLLOW_index_expr_in_stat512);
 					index_expr81=index_expr();
 					state._fsp--;
 
 					stream_index_expr.add(index_expr81.getTree());
-					TO_KEY82=(Token)match(input,TO_KEY,FOLLOW_TO_KEY_in_stat528);  
+					TO_KEY82=(Token)match(input,TO_KEY,FOLLOW_TO_KEY_in_stat514);  
 					stream_TO_KEY.add(TO_KEY82);
 
-					pushFollow(FOLLOW_index_expr_in_stat530);
+					pushFollow(FOLLOW_index_expr_in_stat516);
 					index_expr83=index_expr();
 					state._fsp--;
 
 					stream_index_expr.add(index_expr83.getTree());
-					DO_KEY84=(Token)match(input,DO_KEY,FOLLOW_DO_KEY_in_stat532);  
+					DO_KEY84=(Token)match(input,DO_KEY,FOLLOW_DO_KEY_in_stat518);  
 					stream_DO_KEY.add(DO_KEY84);
 
-					pushFollow(FOLLOW_stat_seq_in_stat534);
+					pushFollow(FOLLOW_stat_seq_in_stat520);
 					stat_seq85=stat_seq();
 					state._fsp--;
 
 					stream_stat_seq.add(stat_seq85.getTree());
-					ENDDO_KEY86=(Token)match(input,ENDDO_KEY,FOLLOW_ENDDO_KEY_in_stat536);  
+					ENDDO_KEY86=(Token)match(input,ENDDO_KEY,FOLLOW_ENDDO_KEY_in_stat522);  
 					stream_ENDDO_KEY.add(ENDDO_KEY86);
 
-					SEMI87=(Token)match(input,SEMI,FOLLOW_SEMI_in_stat538);  
+					SEMI87=(Token)match(input,SEMI,FOLLOW_SEMI_in_stat524);  
 					stream_SEMI.add(SEMI87);
 
 					// AST REWRITE
-					// elements: index_expr, ID, FOR_KEY, TO_KEY, index_expr, ASSIGN, stat_seq
+					// elements: FOR_KEY, ASSIGN, stat_seq, TO_KEY, index_expr, ID, index_expr
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -1988,17 +1998,17 @@ public class tigerParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (CommonTree)adaptor.nil();
-					// 160:3: -> ^( FOR_KEY ^( TO_KEY ^( ASSIGN ID index_expr ) index_expr ) stat_seq )
+					// 180:3: -> ^( FOR_KEY ^( TO_KEY ^( ASSIGN ID index_expr ) index_expr ) stat_seq )
 					{
-						// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:160:6: ^( FOR_KEY ^( TO_KEY ^( ASSIGN ID index_expr ) index_expr ) stat_seq )
+						// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:180:6: ^( FOR_KEY ^( TO_KEY ^( ASSIGN ID index_expr ) index_expr ) stat_seq )
 						{
 						CommonTree root_1 = (CommonTree)adaptor.nil();
 						root_1 = (CommonTree)adaptor.becomeRoot(stream_FOR_KEY.nextNode(), root_1);
-						// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:160:16: ^( TO_KEY ^( ASSIGN ID index_expr ) index_expr )
+						// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:180:16: ^( TO_KEY ^( ASSIGN ID index_expr ) index_expr )
 						{
 						CommonTree root_2 = (CommonTree)adaptor.nil();
 						root_2 = (CommonTree)adaptor.becomeRoot(stream_TO_KEY.nextNode(), root_2);
-						// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:160:25: ^( ASSIGN ID index_expr )
+						// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:180:25: ^( ASSIGN ID index_expr )
 						{
 						CommonTree root_3 = (CommonTree)adaptor.nil();
 						root_3 = (CommonTree)adaptor.becomeRoot(stream_ASSIGN.nextNode(), root_3);
@@ -2023,16 +2033,16 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 4 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:161:6: ID ( ( value_tail ASSIGN ^ expr_list ) | ( func_call_tail ) ) SEMI !
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:181:6: ID ( ( value_tail ASSIGN ^ expr_list ) | ( func_call_tail ) ) SEMI !
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
-					ID88=(Token)match(input,ID,FOLLOW_ID_in_stat569); 
+					ID88=(Token)match(input,ID,FOLLOW_ID_in_stat555); 
 					ID88_tree = (CommonTree)adaptor.create(ID88);
 					adaptor.addChild(root_0, ID88_tree);
 
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:161:9: ( ( value_tail ASSIGN ^ expr_list ) | ( func_call_tail ) )
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:181:9: ( ( value_tail ASSIGN ^ expr_list ) | ( func_call_tail ) )
 					int alt16=2;
 					int LA16_0 = input.LA(1);
 					if ( (LA16_0==EOF||LA16_0==AND||LA16_0==ASSIGN||LA16_0==COMMA||(LA16_0 >= DIV && LA16_0 <= DO_KEY)||LA16_0==EQ||(LA16_0 >= GREATER && LA16_0 <= GREATEREQ)||(LA16_0 >= LBRACK && LA16_0 <= LESSEREQ)||(LA16_0 >= MINUS && LA16_0 <= NEQ)||(LA16_0 >= OR && LA16_0 <= PLUS)||(LA16_0 >= RPAREN && LA16_0 <= SEMI)||LA16_0==THEN_KEY) ) {
@@ -2050,22 +2060,22 @@ public class tigerParser extends Parser {
 
 					switch (alt16) {
 						case 1 :
-							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:161:10: ( value_tail ASSIGN ^ expr_list )
+							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:181:10: ( value_tail ASSIGN ^ expr_list )
 							{
-							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:161:10: ( value_tail ASSIGN ^ expr_list )
-							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:161:11: value_tail ASSIGN ^ expr_list
+							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:181:10: ( value_tail ASSIGN ^ expr_list )
+							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:181:11: value_tail ASSIGN ^ expr_list
 							{
-							pushFollow(FOLLOW_value_tail_in_stat573);
+							pushFollow(FOLLOW_value_tail_in_stat559);
 							value_tail89=value_tail();
 							state._fsp--;
 
 							adaptor.addChild(root_0, value_tail89.getTree());
 
-							ASSIGN90=(Token)match(input,ASSIGN,FOLLOW_ASSIGN_in_stat575); 
+							ASSIGN90=(Token)match(input,ASSIGN,FOLLOW_ASSIGN_in_stat561); 
 							ASSIGN90_tree = (CommonTree)adaptor.create(ASSIGN90);
 							root_0 = (CommonTree)adaptor.becomeRoot(ASSIGN90_tree, root_0);
 
-							pushFollow(FOLLOW_expr_list_in_stat578);
+							pushFollow(FOLLOW_expr_list_in_stat564);
 							expr_list91=expr_list();
 							state._fsp--;
 
@@ -2076,12 +2086,12 @@ public class tigerParser extends Parser {
 							}
 							break;
 						case 2 :
-							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:161:43: ( func_call_tail )
+							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:181:43: ( func_call_tail )
 							{
-							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:161:43: ( func_call_tail )
-							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:161:44: func_call_tail
+							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:181:43: ( func_call_tail )
+							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:181:44: func_call_tail
 							{
-							pushFollow(FOLLOW_func_call_tail_in_stat584);
+							pushFollow(FOLLOW_func_call_tail_in_stat570);
 							func_call_tail92=func_call_tail();
 							state._fsp--;
 
@@ -2094,48 +2104,48 @@ public class tigerParser extends Parser {
 
 					}
 
-					SEMI93=(Token)match(input,SEMI,FOLLOW_SEMI_in_stat588); 
+					SEMI93=(Token)match(input,SEMI,FOLLOW_SEMI_in_stat574); 
 					}
 					break;
 				case 5 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:162:4: BREAK_KEY SEMI !
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:182:4: BREAK_KEY SEMI !
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
-					BREAK_KEY94=(Token)match(input,BREAK_KEY,FOLLOW_BREAK_KEY_in_stat594); 
+					BREAK_KEY94=(Token)match(input,BREAK_KEY,FOLLOW_BREAK_KEY_in_stat580); 
 					BREAK_KEY94_tree = (CommonTree)adaptor.create(BREAK_KEY94);
 					adaptor.addChild(root_0, BREAK_KEY94_tree);
 
-					SEMI95=(Token)match(input,SEMI,FOLLOW_SEMI_in_stat596); 
+					SEMI95=(Token)match(input,SEMI,FOLLOW_SEMI_in_stat582); 
 					}
 					break;
 				case 6 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:163:4: RETURN_KEY ^ expr SEMI !
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:183:4: RETURN_KEY ^ expr SEMI !
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
-					RETURN_KEY96=(Token)match(input,RETURN_KEY,FOLLOW_RETURN_KEY_in_stat602); 
+					RETURN_KEY96=(Token)match(input,RETURN_KEY,FOLLOW_RETURN_KEY_in_stat588); 
 					RETURN_KEY96_tree = (CommonTree)adaptor.create(RETURN_KEY96);
 					root_0 = (CommonTree)adaptor.becomeRoot(RETURN_KEY96_tree, root_0);
 
-					pushFollow(FOLLOW_expr_in_stat605);
+					pushFollow(FOLLOW_expr_in_stat591);
 					expr97=expr();
 					state._fsp--;
 
 					adaptor.addChild(root_0, expr97.getTree());
 
-					SEMI98=(Token)match(input,SEMI,FOLLOW_SEMI_in_stat607); 
+					SEMI98=(Token)match(input,SEMI,FOLLOW_SEMI_in_stat593); 
 					}
 					break;
 				case 7 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:164:4: block
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:184:4: block
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
-					pushFollow(FOLLOW_block_in_stat613);
+					pushFollow(FOLLOW_block_in_stat599);
 					block99=block();
 					state._fsp--;
 
@@ -2172,7 +2182,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "expr"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:167:1: expr : ( constval | ID ( value_tail | func_call_tail ) | LPAREN ! expr RPAREN !) ( binop_p0 ^ expr )? ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:187:1: expr : ( constval | ID ( value_tail | func_call_tail ) | LPAREN ! expr RPAREN !) ( binop_p0 ^ expr )? ;
 	public final tigerParser.expr_return expr() throws RecognitionException {
 		tigerParser.expr_return retval = new tigerParser.expr_return();
 		retval.start = input.LT(1);
@@ -2194,13 +2204,13 @@ public class tigerParser extends Parser {
 		CommonTree RPAREN106_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:167:7: ( ( constval | ID ( value_tail | func_call_tail ) | LPAREN ! expr RPAREN !) ( binop_p0 ^ expr )? )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:167:9: ( constval | ID ( value_tail | func_call_tail ) | LPAREN ! expr RPAREN !) ( binop_p0 ^ expr )?
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:187:7: ( ( constval | ID ( value_tail | func_call_tail ) | LPAREN ! expr RPAREN !) ( binop_p0 ^ expr )? )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:187:9: ( constval | ID ( value_tail | func_call_tail ) | LPAREN ! expr RPAREN !) ( binop_p0 ^ expr )?
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:167:9: ( constval | ID ( value_tail | func_call_tail ) | LPAREN ! expr RPAREN !)
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:187:9: ( constval | ID ( value_tail | func_call_tail ) | LPAREN ! expr RPAREN !)
 			int alt19=3;
 			switch ( input.LA(1) ) {
 			case FIXEDPTLIT:
@@ -2226,9 +2236,9 @@ public class tigerParser extends Parser {
 			}
 			switch (alt19) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:167:10: constval
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:187:10: constval
 					{
-					pushFollow(FOLLOW_constval_in_expr627);
+					pushFollow(FOLLOW_constval_in_expr613);
 					constval100=constval();
 					state._fsp--;
 
@@ -2237,13 +2247,13 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:167:21: ID ( value_tail | func_call_tail )
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:187:21: ID ( value_tail | func_call_tail )
 					{
-					ID101=(Token)match(input,ID,FOLLOW_ID_in_expr631); 
+					ID101=(Token)match(input,ID,FOLLOW_ID_in_expr617); 
 					ID101_tree = (CommonTree)adaptor.create(ID101);
 					adaptor.addChild(root_0, ID101_tree);
 
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:167:24: ( value_tail | func_call_tail )
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:187:24: ( value_tail | func_call_tail )
 					int alt18=2;
 					int LA18_0 = input.LA(1);
 					if ( (LA18_0==EOF||LA18_0==AND||LA18_0==ASSIGN||LA18_0==COMMA||(LA18_0 >= DIV && LA18_0 <= DO_KEY)||LA18_0==EQ||(LA18_0 >= GREATER && LA18_0 <= GREATEREQ)||(LA18_0 >= LBRACK && LA18_0 <= LESSEREQ)||(LA18_0 >= MINUS && LA18_0 <= NEQ)||(LA18_0 >= OR && LA18_0 <= PLUS)||(LA18_0 >= RPAREN && LA18_0 <= SEMI)||LA18_0==THEN_KEY) ) {
@@ -2261,9 +2271,9 @@ public class tigerParser extends Parser {
 
 					switch (alt18) {
 						case 1 :
-							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:167:25: value_tail
+							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:187:25: value_tail
 							{
-							pushFollow(FOLLOW_value_tail_in_expr634);
+							pushFollow(FOLLOW_value_tail_in_expr620);
 							value_tail102=value_tail();
 							state._fsp--;
 
@@ -2272,9 +2282,9 @@ public class tigerParser extends Parser {
 							}
 							break;
 						case 2 :
-							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:167:38: func_call_tail
+							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:187:38: func_call_tail
 							{
-							pushFollow(FOLLOW_func_call_tail_in_expr638);
+							pushFollow(FOLLOW_func_call_tail_in_expr624);
 							func_call_tail103=func_call_tail();
 							state._fsp--;
 
@@ -2288,22 +2298,22 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 3 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:167:56: LPAREN ! expr RPAREN !
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:187:56: LPAREN ! expr RPAREN !
 					{
-					LPAREN104=(Token)match(input,LPAREN,FOLLOW_LPAREN_in_expr643); 
-					pushFollow(FOLLOW_expr_in_expr646);
+					LPAREN104=(Token)match(input,LPAREN,FOLLOW_LPAREN_in_expr629); 
+					pushFollow(FOLLOW_expr_in_expr632);
 					expr105=expr();
 					state._fsp--;
 
 					adaptor.addChild(root_0, expr105.getTree());
 
-					RPAREN106=(Token)match(input,RPAREN,FOLLOW_RPAREN_in_expr648); 
+					RPAREN106=(Token)match(input,RPAREN,FOLLOW_RPAREN_in_expr634); 
 					}
 					break;
 
 			}
 
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:167:78: ( binop_p0 ^ expr )?
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:187:78: ( binop_p0 ^ expr )?
 			int alt20=2;
 			int LA20_0 = input.LA(1);
 			if ( (LA20_0==AND||LA20_0==DIV||LA20_0==EQ||(LA20_0 >= GREATER && LA20_0 <= GREATEREQ)||(LA20_0 >= LESSER && LA20_0 <= LESSEREQ)||(LA20_0 >= MINUS && LA20_0 <= NEQ)||(LA20_0 >= OR && LA20_0 <= PLUS)) ) {
@@ -2311,14 +2321,14 @@ public class tigerParser extends Parser {
 			}
 			switch (alt20) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:167:79: binop_p0 ^ expr
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:187:79: binop_p0 ^ expr
 					{
-					pushFollow(FOLLOW_binop_p0_in_expr653);
+					pushFollow(FOLLOW_binop_p0_in_expr639);
 					binop_p0107=binop_p0();
 					state._fsp--;
 
 					root_0 = (CommonTree)adaptor.becomeRoot(binop_p0107.getTree(), root_0);
-					pushFollow(FOLLOW_expr_in_expr656);
+					pushFollow(FOLLOW_expr_in_expr642);
 					expr108=expr();
 					state._fsp--;
 
@@ -2358,7 +2368,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "binop_p0"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:170:1: binop_p0 : ( AND | OR | binop_p1 ) ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:190:1: binop_p0 : ( AND | OR | binop_p1 ) ;
 	public final tigerParser.binop_p0_return binop_p0() throws RecognitionException {
 		tigerParser.binop_p0_return retval = new tigerParser.binop_p0_return();
 		retval.start = input.LT(1);
@@ -2373,13 +2383,13 @@ public class tigerParser extends Parser {
 		CommonTree OR110_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:170:9: ( ( AND | OR | binop_p1 ) )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:170:11: ( AND | OR | binop_p1 )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:190:9: ( ( AND | OR | binop_p1 ) )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:190:11: ( AND | OR | binop_p1 )
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:170:11: ( AND | OR | binop_p1 )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:190:11: ( AND | OR | binop_p1 )
 			int alt21=3;
 			switch ( input.LA(1) ) {
 			case AND:
@@ -2413,27 +2423,27 @@ public class tigerParser extends Parser {
 			}
 			switch (alt21) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:170:12: AND
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:190:12: AND
 					{
-					AND109=(Token)match(input,AND,FOLLOW_AND_in_binop_p0669); 
+					AND109=(Token)match(input,AND,FOLLOW_AND_in_binop_p0655); 
 					AND109_tree = (CommonTree)adaptor.create(AND109);
 					adaptor.addChild(root_0, AND109_tree);
 
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:170:18: OR
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:190:18: OR
 					{
-					OR110=(Token)match(input,OR,FOLLOW_OR_in_binop_p0673); 
+					OR110=(Token)match(input,OR,FOLLOW_OR_in_binop_p0659); 
 					OR110_tree = (CommonTree)adaptor.create(OR110);
 					adaptor.addChild(root_0, OR110_tree);
 
 					}
 					break;
 				case 3 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:170:23: binop_p1
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:190:23: binop_p1
 					{
-					pushFollow(FOLLOW_binop_p1_in_binop_p0677);
+					pushFollow(FOLLOW_binop_p1_in_binop_p0663);
 					binop_p1111=binop_p1();
 					state._fsp--;
 
@@ -2473,7 +2483,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "binop_p1"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:171:1: binop_p1 : ( EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | binop_p2 ) ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:191:1: binop_p1 : ( EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | binop_p2 ) ;
 	public final tigerParser.binop_p1_return binop_p1() throws RecognitionException {
 		tigerParser.binop_p1_return retval = new tigerParser.binop_p1_return();
 		retval.start = input.LT(1);
@@ -2496,13 +2506,13 @@ public class tigerParser extends Parser {
 		CommonTree GREATEREQ117_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:171:9: ( ( EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | binop_p2 ) )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:171:11: ( EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | binop_p2 )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:191:9: ( ( EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | binop_p2 ) )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:191:11: ( EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | binop_p2 )
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:171:11: ( EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | binop_p2 )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:191:11: ( EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | binop_p2 )
 			int alt22=7;
 			switch ( input.LA(1) ) {
 			case EQ:
@@ -2550,63 +2560,63 @@ public class tigerParser extends Parser {
 			}
 			switch (alt22) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:171:12: EQ
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:191:12: EQ
 					{
-					EQ112=(Token)match(input,EQ,FOLLOW_EQ_in_binop_p1685); 
+					EQ112=(Token)match(input,EQ,FOLLOW_EQ_in_binop_p1671); 
 					EQ112_tree = (CommonTree)adaptor.create(EQ112);
 					adaptor.addChild(root_0, EQ112_tree);
 
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:171:17: NEQ
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:191:17: NEQ
 					{
-					NEQ113=(Token)match(input,NEQ,FOLLOW_NEQ_in_binop_p1689); 
+					NEQ113=(Token)match(input,NEQ,FOLLOW_NEQ_in_binop_p1675); 
 					NEQ113_tree = (CommonTree)adaptor.create(NEQ113);
 					adaptor.addChild(root_0, NEQ113_tree);
 
 					}
 					break;
 				case 3 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:171:23: LESSER
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:191:23: LESSER
 					{
-					LESSER114=(Token)match(input,LESSER,FOLLOW_LESSER_in_binop_p1693); 
+					LESSER114=(Token)match(input,LESSER,FOLLOW_LESSER_in_binop_p1679); 
 					LESSER114_tree = (CommonTree)adaptor.create(LESSER114);
 					adaptor.addChild(root_0, LESSER114_tree);
 
 					}
 					break;
 				case 4 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:171:32: GREATER
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:191:32: GREATER
 					{
-					GREATER115=(Token)match(input,GREATER,FOLLOW_GREATER_in_binop_p1697); 
+					GREATER115=(Token)match(input,GREATER,FOLLOW_GREATER_in_binop_p1683); 
 					GREATER115_tree = (CommonTree)adaptor.create(GREATER115);
 					adaptor.addChild(root_0, GREATER115_tree);
 
 					}
 					break;
 				case 5 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:171:42: LESSEREQ
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:191:42: LESSEREQ
 					{
-					LESSEREQ116=(Token)match(input,LESSEREQ,FOLLOW_LESSEREQ_in_binop_p1701); 
+					LESSEREQ116=(Token)match(input,LESSEREQ,FOLLOW_LESSEREQ_in_binop_p1687); 
 					LESSEREQ116_tree = (CommonTree)adaptor.create(LESSEREQ116);
 					adaptor.addChild(root_0, LESSEREQ116_tree);
 
 					}
 					break;
 				case 6 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:171:53: GREATEREQ
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:191:53: GREATEREQ
 					{
-					GREATEREQ117=(Token)match(input,GREATEREQ,FOLLOW_GREATEREQ_in_binop_p1705); 
+					GREATEREQ117=(Token)match(input,GREATEREQ,FOLLOW_GREATEREQ_in_binop_p1691); 
 					GREATEREQ117_tree = (CommonTree)adaptor.create(GREATEREQ117);
 					adaptor.addChild(root_0, GREATEREQ117_tree);
 
 					}
 					break;
 				case 7 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:171:65: binop_p2
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:191:65: binop_p2
 					{
-					pushFollow(FOLLOW_binop_p2_in_binop_p1709);
+					pushFollow(FOLLOW_binop_p2_in_binop_p1695);
 					binop_p2118=binop_p2();
 					state._fsp--;
 
@@ -2646,7 +2656,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "binop_p2"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:172:1: binop_p2 : ( MINUS | PLUS | binop_p3 ) ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:192:1: binop_p2 : ( MINUS | PLUS | binop_p3 ) ;
 	public final tigerParser.binop_p2_return binop_p2() throws RecognitionException {
 		tigerParser.binop_p2_return retval = new tigerParser.binop_p2_return();
 		retval.start = input.LT(1);
@@ -2661,13 +2671,13 @@ public class tigerParser extends Parser {
 		CommonTree PLUS120_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:172:9: ( ( MINUS | PLUS | binop_p3 ) )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:172:11: ( MINUS | PLUS | binop_p3 )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:192:9: ( ( MINUS | PLUS | binop_p3 ) )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:192:11: ( MINUS | PLUS | binop_p3 )
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:172:11: ( MINUS | PLUS | binop_p3 )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:192:11: ( MINUS | PLUS | binop_p3 )
 			int alt23=3;
 			switch ( input.LA(1) ) {
 			case MINUS:
@@ -2693,27 +2703,27 @@ public class tigerParser extends Parser {
 			}
 			switch (alt23) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:172:12: MINUS
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:192:12: MINUS
 					{
-					MINUS119=(Token)match(input,MINUS,FOLLOW_MINUS_in_binop_p2722); 
+					MINUS119=(Token)match(input,MINUS,FOLLOW_MINUS_in_binop_p2708); 
 					MINUS119_tree = (CommonTree)adaptor.create(MINUS119);
 					adaptor.addChild(root_0, MINUS119_tree);
 
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:172:20: PLUS
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:192:20: PLUS
 					{
-					PLUS120=(Token)match(input,PLUS,FOLLOW_PLUS_in_binop_p2726); 
+					PLUS120=(Token)match(input,PLUS,FOLLOW_PLUS_in_binop_p2712); 
 					PLUS120_tree = (CommonTree)adaptor.create(PLUS120);
 					adaptor.addChild(root_0, PLUS120_tree);
 
 					}
 					break;
 				case 3 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:172:27: binop_p3
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:192:27: binop_p3
 					{
-					pushFollow(FOLLOW_binop_p3_in_binop_p2730);
+					pushFollow(FOLLOW_binop_p3_in_binop_p2716);
 					binop_p3121=binop_p3();
 					state._fsp--;
 
@@ -2753,7 +2763,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "binop_p3"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:173:1: binop_p3 : ( MULT | DIV ) ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:193:1: binop_p3 : ( MULT | DIV ) ;
 	public final tigerParser.binop_p3_return binop_p3() throws RecognitionException {
 		tigerParser.binop_p3_return retval = new tigerParser.binop_p3_return();
 		retval.start = input.LT(1);
@@ -2765,7 +2775,7 @@ public class tigerParser extends Parser {
 		CommonTree set122_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:173:9: ( ( MULT | DIV ) )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:193:9: ( ( MULT | DIV ) )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:
 			{
 			root_0 = (CommonTree)adaptor.nil();
@@ -2810,7 +2820,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "constval"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:175:1: constval : ( INTLIT | FIXEDPTLIT );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:195:1: constval : ( INTLIT | FIXEDPTLIT );
 	public final tigerParser.constval_return constval() throws RecognitionException {
 		tigerParser.constval_return retval = new tigerParser.constval_return();
 		retval.start = input.LT(1);
@@ -2822,7 +2832,7 @@ public class tigerParser extends Parser {
 		CommonTree set123_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:175:9: ( INTLIT | FIXEDPTLIT )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:195:9: ( INTLIT | FIXEDPTLIT )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:
 			{
 			root_0 = (CommonTree)adaptor.nil();
@@ -2867,7 +2877,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "binary_operator"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:186:1: binary_operator : ( PLUS | MINUS | MULT | DIV | EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | AND | OR ) ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:206:1: binary_operator : ( PLUS | MINUS | MULT | DIV | EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | AND | OR ) ;
 	public final tigerParser.binary_operator_return binary_operator() throws RecognitionException {
 		tigerParser.binary_operator_return retval = new tigerParser.binary_operator_return();
 		retval.start = input.LT(1);
@@ -2879,7 +2889,7 @@ public class tigerParser extends Parser {
 		CommonTree set124_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:187:2: ( ( PLUS | MINUS | MULT | DIV | EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | AND | OR ) )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:207:2: ( ( PLUS | MINUS | MULT | DIV | EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | AND | OR ) )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:
 			{
 			root_0 = (CommonTree)adaptor.nil();
@@ -2924,7 +2934,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "expr_list"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:190:1: expr_list : expr ( COMMA ! expr )* ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:210:1: expr_list : expr ( COMMA ! expr )* ;
 	public final tigerParser.expr_list_return expr_list() throws RecognitionException {
 		tigerParser.expr_list_return retval = new tigerParser.expr_list_return();
 		retval.start = input.LT(1);
@@ -2938,19 +2948,19 @@ public class tigerParser extends Parser {
 		CommonTree COMMA126_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:191:2: ( expr ( COMMA ! expr )* )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:191:4: expr ( COMMA ! expr )*
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:211:2: ( expr ( COMMA ! expr )* )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:211:4: expr ( COMMA ! expr )*
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			pushFollow(FOLLOW_expr_in_expr_list862);
+			pushFollow(FOLLOW_expr_in_expr_list839);
 			expr125=expr();
 			state._fsp--;
 
 			adaptor.addChild(root_0, expr125.getTree());
 
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:191:9: ( COMMA ! expr )*
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:211:9: ( COMMA ! expr )*
 			loop24:
 			while (true) {
 				int alt24=2;
@@ -2961,10 +2971,10 @@ public class tigerParser extends Parser {
 
 				switch (alt24) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:191:10: COMMA ! expr
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:211:10: COMMA ! expr
 					{
-					COMMA126=(Token)match(input,COMMA,FOLLOW_COMMA_in_expr_list865); 
-					pushFollow(FOLLOW_expr_in_expr_list868);
+					COMMA126=(Token)match(input,COMMA,FOLLOW_COMMA_in_expr_list842); 
+					pushFollow(FOLLOW_expr_in_expr_list845);
 					expr127=expr();
 					state._fsp--;
 
@@ -3007,7 +3017,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "value"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:194:1: value : ID value_tail ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:214:1: value : ID value_tail ;
 	public final tigerParser.value_return value() throws RecognitionException {
 		tigerParser.value_return retval = new tigerParser.value_return();
 		retval.start = input.LT(1);
@@ -3020,17 +3030,17 @@ public class tigerParser extends Parser {
 		CommonTree ID128_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:194:8: ( ID value_tail )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:194:10: ID value_tail
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:214:8: ( ID value_tail )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:214:10: ID value_tail
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			ID128=(Token)match(input,ID,FOLLOW_ID_in_value881); 
+			ID128=(Token)match(input,ID,FOLLOW_ID_in_value858); 
 			ID128_tree = (CommonTree)adaptor.create(ID128);
 			adaptor.addChild(root_0, ID128_tree);
 
-			pushFollow(FOLLOW_value_tail_in_value883);
+			pushFollow(FOLLOW_value_tail_in_value860);
 			value_tail129=value_tail();
 			state._fsp--;
 
@@ -3065,7 +3075,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "value_tail"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:195:1: value_tail : ( LBRACK index_expr RBRACK ( LBRACK index_expr RBRACK )? )? ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:215:1: value_tail : ( LBRACK index_expr RBRACK ( LBRACK index_expr RBRACK )? )? ;
 	public final tigerParser.value_tail_return value_tail() throws RecognitionException {
 		tigerParser.value_tail_return retval = new tigerParser.value_tail_return();
 		retval.start = input.LT(1);
@@ -3085,13 +3095,13 @@ public class tigerParser extends Parser {
 		CommonTree RBRACK135_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:196:2: ( ( LBRACK index_expr RBRACK ( LBRACK index_expr RBRACK )? )? )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:196:4: ( LBRACK index_expr RBRACK ( LBRACK index_expr RBRACK )? )?
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:216:2: ( ( LBRACK index_expr RBRACK ( LBRACK index_expr RBRACK )? )? )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:216:4: ( LBRACK index_expr RBRACK ( LBRACK index_expr RBRACK )? )?
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:196:4: ( LBRACK index_expr RBRACK ( LBRACK index_expr RBRACK )? )?
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:216:4: ( LBRACK index_expr RBRACK ( LBRACK index_expr RBRACK )? )?
 			int alt26=2;
 			int LA26_0 = input.LA(1);
 			if ( (LA26_0==LBRACK) ) {
@@ -3099,23 +3109,23 @@ public class tigerParser extends Parser {
 			}
 			switch (alt26) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:196:5: LBRACK index_expr RBRACK ( LBRACK index_expr RBRACK )?
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:216:5: LBRACK index_expr RBRACK ( LBRACK index_expr RBRACK )?
 					{
-					LBRACK130=(Token)match(input,LBRACK,FOLLOW_LBRACK_in_value_tail893); 
+					LBRACK130=(Token)match(input,LBRACK,FOLLOW_LBRACK_in_value_tail870); 
 					LBRACK130_tree = (CommonTree)adaptor.create(LBRACK130);
 					adaptor.addChild(root_0, LBRACK130_tree);
 
-					pushFollow(FOLLOW_index_expr_in_value_tail895);
+					pushFollow(FOLLOW_index_expr_in_value_tail872);
 					index_expr131=index_expr();
 					state._fsp--;
 
 					adaptor.addChild(root_0, index_expr131.getTree());
 
-					RBRACK132=(Token)match(input,RBRACK,FOLLOW_RBRACK_in_value_tail897); 
+					RBRACK132=(Token)match(input,RBRACK,FOLLOW_RBRACK_in_value_tail874); 
 					RBRACK132_tree = (CommonTree)adaptor.create(RBRACK132);
 					adaptor.addChild(root_0, RBRACK132_tree);
 
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:196:30: ( LBRACK index_expr RBRACK )?
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:216:30: ( LBRACK index_expr RBRACK )?
 					int alt25=2;
 					int LA25_0 = input.LA(1);
 					if ( (LA25_0==LBRACK) ) {
@@ -3123,19 +3133,19 @@ public class tigerParser extends Parser {
 					}
 					switch (alt25) {
 						case 1 :
-							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:196:31: LBRACK index_expr RBRACK
+							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:216:31: LBRACK index_expr RBRACK
 							{
-							LBRACK133=(Token)match(input,LBRACK,FOLLOW_LBRACK_in_value_tail900); 
+							LBRACK133=(Token)match(input,LBRACK,FOLLOW_LBRACK_in_value_tail877); 
 							LBRACK133_tree = (CommonTree)adaptor.create(LBRACK133);
 							adaptor.addChild(root_0, LBRACK133_tree);
 
-							pushFollow(FOLLOW_index_expr_in_value_tail902);
+							pushFollow(FOLLOW_index_expr_in_value_tail879);
 							index_expr134=index_expr();
 							state._fsp--;
 
 							adaptor.addChild(root_0, index_expr134.getTree());
 
-							RBRACK135=(Token)match(input,RBRACK,FOLLOW_RBRACK_in_value_tail904); 
+							RBRACK135=(Token)match(input,RBRACK,FOLLOW_RBRACK_in_value_tail881); 
 							RBRACK135_tree = (CommonTree)adaptor.create(RBRACK135);
 							adaptor.addChild(root_0, RBRACK135_tree);
 
@@ -3178,7 +3188,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "index_expr"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:199:1: index_expr : ( INTLIT | ID ) ( index_oper ^ index_expr )? ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:219:1: index_expr : ( INTLIT | ID ) ( index_oper ^ index_expr )? ;
 	public final tigerParser.index_expr_return index_expr() throws RecognitionException {
 		tigerParser.index_expr_return retval = new tigerParser.index_expr_return();
 		retval.start = input.LT(1);
@@ -3192,8 +3202,8 @@ public class tigerParser extends Parser {
 		CommonTree set136_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:200:2: ( ( INTLIT | ID ) ( index_oper ^ index_expr )? )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:200:4: ( INTLIT | ID ) ( index_oper ^ index_expr )?
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:220:2: ( ( INTLIT | ID ) ( index_oper ^ index_expr )? )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:220:4: ( INTLIT | ID ) ( index_oper ^ index_expr )?
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
@@ -3208,7 +3218,7 @@ public class tigerParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:200:18: ( index_oper ^ index_expr )?
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:220:18: ( index_oper ^ index_expr )?
 			int alt27=2;
 			int LA27_0 = input.LA(1);
 			if ( ((LA27_0 >= MINUS && LA27_0 <= MULT)||LA27_0==PLUS) ) {
@@ -3216,14 +3226,14 @@ public class tigerParser extends Parser {
 			}
 			switch (alt27) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:200:19: index_oper ^ index_expr
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:220:19: index_oper ^ index_expr
 					{
-					pushFollow(FOLLOW_index_oper_in_index_expr929);
+					pushFollow(FOLLOW_index_oper_in_index_expr906);
 					index_oper137=index_oper();
 					state._fsp--;
 
 					root_0 = (CommonTree)adaptor.becomeRoot(index_oper137.getTree(), root_0);
-					pushFollow(FOLLOW_index_expr_in_index_expr932);
+					pushFollow(FOLLOW_index_expr_in_index_expr909);
 					index_expr138=index_expr();
 					state._fsp--;
 
@@ -3263,7 +3273,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "index_oper"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:203:1: index_oper : ( PLUS | MINUS | MULT ) ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:223:1: index_oper : ( PLUS | MINUS | MULT ) ;
 	public final tigerParser.index_oper_return index_oper() throws RecognitionException {
 		tigerParser.index_oper_return retval = new tigerParser.index_oper_return();
 		retval.start = input.LT(1);
@@ -3275,7 +3285,7 @@ public class tigerParser extends Parser {
 		CommonTree set139_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:204:2: ( ( PLUS | MINUS | MULT ) )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:224:2: ( ( PLUS | MINUS | MULT ) )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:
 			{
 			root_0 = (CommonTree)adaptor.nil();
@@ -3320,7 +3330,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "func_call_tail"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:223:1: func_call_tail : LPAREN func_param_list RPAREN ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:243:1: func_call_tail : LPAREN func_param_list RPAREN ;
 	public final tigerParser.func_call_tail_return func_call_tail() throws RecognitionException {
 		tigerParser.func_call_tail_return retval = new tigerParser.func_call_tail_return();
 		retval.start = input.LT(1);
@@ -3335,23 +3345,23 @@ public class tigerParser extends Parser {
 		CommonTree RPAREN142_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:224:3: ( LPAREN func_param_list RPAREN )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:224:5: LPAREN func_param_list RPAREN
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:244:2: ( LPAREN func_param_list RPAREN )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:244:4: LPAREN func_param_list RPAREN
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			LPAREN140=(Token)match(input,LPAREN,FOLLOW_LPAREN_in_func_call_tail1055); 
+			LPAREN140=(Token)match(input,LPAREN,FOLLOW_LPAREN_in_func_call_tail1025); 
 			LPAREN140_tree = (CommonTree)adaptor.create(LPAREN140);
 			adaptor.addChild(root_0, LPAREN140_tree);
 
-			pushFollow(FOLLOW_func_param_list_in_func_call_tail1057);
+			pushFollow(FOLLOW_func_param_list_in_func_call_tail1027);
 			func_param_list141=func_param_list();
 			state._fsp--;
 
 			adaptor.addChild(root_0, func_param_list141.getTree());
 
-			RPAREN142=(Token)match(input,RPAREN,FOLLOW_RPAREN_in_func_call_tail1059); 
+			RPAREN142=(Token)match(input,RPAREN,FOLLOW_RPAREN_in_func_call_tail1029); 
 			RPAREN142_tree = (CommonTree)adaptor.create(RPAREN142);
 			adaptor.addChild(root_0, RPAREN142_tree);
 
@@ -3384,7 +3394,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "func_param_list"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:227:1: func_param_list : ( expr ( COMMA ! expr )* )? ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:247:1: func_param_list : ( expr ( COMMA ! expr )* )? ;
 	public final tigerParser.func_param_list_return func_param_list() throws RecognitionException {
 		tigerParser.func_param_list_return retval = new tigerParser.func_param_list_return();
 		retval.start = input.LT(1);
@@ -3398,13 +3408,13 @@ public class tigerParser extends Parser {
 		CommonTree COMMA144_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:228:3: ( ( expr ( COMMA ! expr )* )? )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:228:5: ( expr ( COMMA ! expr )* )?
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:248:2: ( ( expr ( COMMA ! expr )* )? )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:248:4: ( expr ( COMMA ! expr )* )?
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:228:5: ( expr ( COMMA ! expr )* )?
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:248:4: ( expr ( COMMA ! expr )* )?
 			int alt29=2;
 			int LA29_0 = input.LA(1);
 			if ( (LA29_0==FIXEDPTLIT||LA29_0==ID||LA29_0==INTLIT||LA29_0==LPAREN) ) {
@@ -3412,15 +3422,15 @@ public class tigerParser extends Parser {
 			}
 			switch (alt29) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:228:6: expr ( COMMA ! expr )*
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:248:5: expr ( COMMA ! expr )*
 					{
-					pushFollow(FOLLOW_expr_in_func_param_list1075);
+					pushFollow(FOLLOW_expr_in_func_param_list1043);
 					expr143=expr();
 					state._fsp--;
 
 					adaptor.addChild(root_0, expr143.getTree());
 
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:228:11: ( COMMA ! expr )*
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:248:10: ( COMMA ! expr )*
 					loop28:
 					while (true) {
 						int alt28=2;
@@ -3431,10 +3441,10 @@ public class tigerParser extends Parser {
 
 						switch (alt28) {
 						case 1 :
-							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:228:12: COMMA ! expr
+							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:248:11: COMMA ! expr
 							{
-							COMMA144=(Token)match(input,COMMA,FOLLOW_COMMA_in_func_param_list1078); 
-							pushFollow(FOLLOW_expr_in_func_param_list1081);
+							COMMA144=(Token)match(input,COMMA,FOLLOW_COMMA_in_func_param_list1046); 
+							pushFollow(FOLLOW_expr_in_func_param_list1049);
 							expr145=expr();
 							state._fsp--;
 
@@ -3482,7 +3492,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "keywords"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:231:1: keywords : ( FUNCTION_KEY | BEGIN_KEY | END_KEY | VOID_KEY | MAIN_KEY | TYPE_KEY | ARRAY_KEY | OF_KEY | INT_KEY | FIXEDPT_KEY | VAR_KEY | IF_KEY | THEN_KEY | ENDIF_KEY | ELSE_KEY | WHILE_KEY | DO_KEY | ENDDO_KEY | FOR_KEY | ID_KEY | TO_KEY | BREAK_KEY | RETURN_KEY );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:251:1: keywords : ( FUNCTION_KEY | BEGIN_KEY | END_KEY | VOID_KEY | MAIN_KEY | TYPE_KEY | ARRAY_KEY | OF_KEY | INT_KEY | FIXEDPT_KEY | VAR_KEY | IF_KEY | THEN_KEY | ENDIF_KEY | ELSE_KEY | WHILE_KEY | DO_KEY | ENDDO_KEY | FOR_KEY | ID_KEY | TO_KEY | BREAK_KEY | RETURN_KEY );
 	public final tigerParser.keywords_return keywords() throws RecognitionException {
 		tigerParser.keywords_return retval = new tigerParser.keywords_return();
 		retval.start = input.LT(1);
@@ -3494,7 +3504,7 @@ public class tigerParser extends Parser {
 		CommonTree set146_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:232:2: ( FUNCTION_KEY | BEGIN_KEY | END_KEY | VOID_KEY | MAIN_KEY | TYPE_KEY | ARRAY_KEY | OF_KEY | INT_KEY | FIXEDPT_KEY | VAR_KEY | IF_KEY | THEN_KEY | ENDIF_KEY | ELSE_KEY | WHILE_KEY | DO_KEY | ENDDO_KEY | FOR_KEY | ID_KEY | TO_KEY | BREAK_KEY | RETURN_KEY )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:252:2: ( FUNCTION_KEY | BEGIN_KEY | END_KEY | VOID_KEY | MAIN_KEY | TYPE_KEY | ARRAY_KEY | OF_KEY | INT_KEY | FIXEDPT_KEY | VAR_KEY | IF_KEY | THEN_KEY | ENDIF_KEY | ELSE_KEY | WHILE_KEY | DO_KEY | ENDDO_KEY | FOR_KEY | ID_KEY | TO_KEY | BREAK_KEY | RETURN_KEY )
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:
 			{
 			root_0 = (CommonTree)adaptor.nil();
@@ -3534,144 +3544,144 @@ public class tigerParser extends Parser {
 
 
 
-	public static final BitSet FOLLOW_type_declaration_list_in_tiger_program89 = new BitSet(new long[]{0x0010000044200000L});
-	public static final BitSet FOLLOW_funct_declaration_list_in_tiger_program91 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_funct_declaration_in_funct_declaration_list103 = new BitSet(new long[]{0x0010000044200002L});
-	public static final BitSet FOLLOW_ret_type_in_funct_declaration116 = new BitSet(new long[]{0x0000000800800000L});
-	public static final BitSet FOLLOW_FUNCTION_KEY_in_funct_declaration119 = new BitSet(new long[]{0x0000000004000000L});
-	public static final BitSet FOLLOW_ID_in_funct_declaration121 = new BitSet(new long[]{0x0000000400000000L});
-	public static final BitSet FOLLOW_MAIN_KEY_in_funct_declaration125 = new BitSet(new long[]{0x0000000400000000L});
-	public static final BitSet FOLLOW_LPAREN_in_funct_declaration130 = new BitSet(new long[]{0x0000200004000000L});
-	public static final BitSet FOLLOW_param_list_in_funct_declaration133 = new BitSet(new long[]{0x0000200000000000L});
-	public static final BitSet FOLLOW_RPAREN_in_funct_declaration135 = new BitSet(new long[]{0x0000000000000080L});
-	public static final BitSet FOLLOW_BEGIN_KEY_in_funct_declaration138 = new BitSet(new long[]{0x0000000000000080L});
-	public static final BitSet FOLLOW_block_list_in_funct_declaration141 = new BitSet(new long[]{0x0000000000040000L});
-	public static final BitSet FOLLOW_END_KEY_in_funct_declaration143 = new BitSet(new long[]{0x0000400000000000L});
-	public static final BitSet FOLLOW_SEMI_in_funct_declaration146 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_VOID_KEY_in_ret_type163 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_type_id_in_ret_type168 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_param_in_param_list181 = new BitSet(new long[]{0x0000000000000802L});
-	public static final BitSet FOLLOW_COMMA_in_param_list184 = new BitSet(new long[]{0x0000000004000000L});
-	public static final BitSet FOLLOW_param_in_param_list186 = new BitSet(new long[]{0x0000000000000802L});
-	public static final BitSet FOLLOW_ID_in_param201 = new BitSet(new long[]{0x0000000000000400L});
-	public static final BitSet FOLLOW_COLON_in_param203 = new BitSet(new long[]{0x0000000044200000L});
-	public static final BitSet FOLLOW_type_id_in_param206 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_block_in_block_list216 = new BitSet(new long[]{0x0000000000000082L});
-	public static final BitSet FOLLOW_BEGIN_KEY_in_block228 = new BitSet(new long[]{0x000C000000000000L});
-	public static final BitSet FOLLOW_declaration_statement_in_block232 = new BitSet(new long[]{0x0020100014400180L});
-	public static final BitSet FOLLOW_stat_seq_in_block234 = new BitSet(new long[]{0x0000000000040000L});
-	public static final BitSet FOLLOW_END_KEY_in_block238 = new BitSet(new long[]{0x0000400000000000L});
-	public static final BitSet FOLLOW_SEMI_in_block241 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_type_declaration_list_in_declaration_statement252 = new BitSet(new long[]{0x0008000000000000L});
-	public static final BitSet FOLLOW_var_declaration_list_in_declaration_statement254 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_type_declaration_in_type_declaration_list268 = new BitSet(new long[]{0x0004000000000002L});
-	public static final BitSet FOLLOW_var_declaration_in_var_declaration_list282 = new BitSet(new long[]{0x0008000000000002L});
-	public static final BitSet FOLLOW_TYPE_KEY_in_type_declaration296 = new BitSet(new long[]{0x0000000004000000L});
-	public static final BitSet FOLLOW_ID_in_type_declaration298 = new BitSet(new long[]{0x0000000000080000L});
-	public static final BitSet FOLLOW_EQ_in_type_declaration302 = new BitSet(new long[]{0x0000000040200020L});
-	public static final BitSet FOLLOW_type_in_type_declaration305 = new BitSet(new long[]{0x0000400000000000L});
-	public static final BitSet FOLLOW_SEMI_in_type_declaration307 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_base_type_in_type319 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ARRAY_KEY_in_type325 = new BitSet(new long[]{0x0000000080000000L});
-	public static final BitSet FOLLOW_LBRACK_in_type327 = new BitSet(new long[]{0x0000000020000000L});
-	public static final BitSet FOLLOW_INTLIT_in_type329 = new BitSet(new long[]{0x0000080000000000L});
-	public static final BitSet FOLLOW_RBRACK_in_type331 = new BitSet(new long[]{0x0000010080000000L});
-	public static final BitSet FOLLOW_LBRACK_in_type334 = new BitSet(new long[]{0x0000000020000000L});
-	public static final BitSet FOLLOW_INTLIT_in_type336 = new BitSet(new long[]{0x0000080000000000L});
-	public static final BitSet FOLLOW_RBRACK_in_type338 = new BitSet(new long[]{0x0000010000000000L});
-	public static final BitSet FOLLOW_OF_KEY_in_type344 = new BitSet(new long[]{0x0000000040200000L});
-	public static final BitSet FOLLOW_base_type_in_type348 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_base_type_in_type_id360 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_type_id365 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_VAR_KEY_in_var_declaration394 = new BitSet(new long[]{0x0000000004000000L});
-	public static final BitSet FOLLOW_id_list_in_var_declaration396 = new BitSet(new long[]{0x0000000000000400L});
-	public static final BitSet FOLLOW_COLON_in_var_declaration398 = new BitSet(new long[]{0x0000000044200000L});
-	public static final BitSet FOLLOW_type_id_in_var_declaration401 = new BitSet(new long[]{0x0000400000000040L});
-	public static final BitSet FOLLOW_ASSIGN_in_var_declaration406 = new BitSet(new long[]{0x0000000424100000L});
-	public static final BitSet FOLLOW_expr_in_var_declaration409 = new BitSet(new long[]{0x0000400000000000L});
-	public static final BitSet FOLLOW_SEMI_in_var_declaration413 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_id_list424 = new BitSet(new long[]{0x0000000000000802L});
-	public static final BitSet FOLLOW_COMMA_in_id_list427 = new BitSet(new long[]{0x0000000004000000L});
-	public static final BitSet FOLLOW_id_list_in_id_list430 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_stat_in_stat_seq444 = new BitSet(new long[]{0x0020100014400182L});
-	public static final BitSet FOLLOW_IF_KEY_in_stat457 = new BitSet(new long[]{0x0000000424100000L});
-	public static final BitSet FOLLOW_expr_in_stat459 = new BitSet(new long[]{0x0001000000000000L});
-	public static final BitSet FOLLOW_THEN_KEY_in_stat461 = new BitSet(new long[]{0x0020100014400180L});
-	public static final BitSet FOLLOW_stat_seq_in_stat463 = new BitSet(new long[]{0x0000000000028000L});
-	public static final BitSet FOLLOW_ENDIF_KEY_in_stat466 = new BitSet(new long[]{0x0000400000000000L});
-	public static final BitSet FOLLOW_SEMI_in_stat468 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ELSE_KEY_in_stat470 = new BitSet(new long[]{0x0020100014400180L});
-	public static final BitSet FOLLOW_stat_seq_in_stat472 = new BitSet(new long[]{0x0000000000020000L});
-	public static final BitSet FOLLOW_ENDIF_KEY_in_stat474 = new BitSet(new long[]{0x0000400000000000L});
-	public static final BitSet FOLLOW_SEMI_in_stat476 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_WHILE_KEY_in_stat501 = new BitSet(new long[]{0x0000000424100000L});
-	public static final BitSet FOLLOW_expr_in_stat504 = new BitSet(new long[]{0x0000000000004000L});
-	public static final BitSet FOLLOW_DO_KEY_in_stat506 = new BitSet(new long[]{0x0020100014400180L});
-	public static final BitSet FOLLOW_stat_seq_in_stat509 = new BitSet(new long[]{0x0000000000010000L});
-	public static final BitSet FOLLOW_ENDDO_KEY_in_stat511 = new BitSet(new long[]{0x0000400000000000L});
-	public static final BitSet FOLLOW_SEMI_in_stat514 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_FOR_KEY_in_stat520 = new BitSet(new long[]{0x0000000004000000L});
-	public static final BitSet FOLLOW_ID_in_stat522 = new BitSet(new long[]{0x0000000000000040L});
-	public static final BitSet FOLLOW_ASSIGN_in_stat524 = new BitSet(new long[]{0x0000000024000000L});
-	public static final BitSet FOLLOW_index_expr_in_stat526 = new BitSet(new long[]{0x0002000000000000L});
-	public static final BitSet FOLLOW_TO_KEY_in_stat528 = new BitSet(new long[]{0x0000000024000000L});
-	public static final BitSet FOLLOW_index_expr_in_stat530 = new BitSet(new long[]{0x0000000000004000L});
-	public static final BitSet FOLLOW_DO_KEY_in_stat532 = new BitSet(new long[]{0x0020100014400180L});
-	public static final BitSet FOLLOW_stat_seq_in_stat534 = new BitSet(new long[]{0x0000000000010000L});
-	public static final BitSet FOLLOW_ENDDO_KEY_in_stat536 = new BitSet(new long[]{0x0000400000000000L});
-	public static final BitSet FOLLOW_SEMI_in_stat538 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_stat569 = new BitSet(new long[]{0x0000000480000040L});
-	public static final BitSet FOLLOW_value_tail_in_stat573 = new BitSet(new long[]{0x0000000000000040L});
-	public static final BitSet FOLLOW_ASSIGN_in_stat575 = new BitSet(new long[]{0x0000000424100000L});
-	public static final BitSet FOLLOW_expr_list_in_stat578 = new BitSet(new long[]{0x0000400000000000L});
-	public static final BitSet FOLLOW_func_call_tail_in_stat584 = new BitSet(new long[]{0x0000400000000000L});
-	public static final BitSet FOLLOW_SEMI_in_stat588 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_BREAK_KEY_in_stat594 = new BitSet(new long[]{0x0000400000000000L});
-	public static final BitSet FOLLOW_SEMI_in_stat596 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_RETURN_KEY_in_stat602 = new BitSet(new long[]{0x0000000424100000L});
-	public static final BitSet FOLLOW_expr_in_stat605 = new BitSet(new long[]{0x0000400000000000L});
-	public static final BitSet FOLLOW_SEMI_in_stat607 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_block_in_stat613 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_constval_in_expr627 = new BitSet(new long[]{0x0000067303082012L});
-	public static final BitSet FOLLOW_ID_in_expr631 = new BitSet(new long[]{0x0000067783082010L});
-	public static final BitSet FOLLOW_value_tail_in_expr634 = new BitSet(new long[]{0x0000067303082012L});
-	public static final BitSet FOLLOW_func_call_tail_in_expr638 = new BitSet(new long[]{0x0000067303082012L});
-	public static final BitSet FOLLOW_LPAREN_in_expr643 = new BitSet(new long[]{0x0000000424100000L});
-	public static final BitSet FOLLOW_expr_in_expr646 = new BitSet(new long[]{0x0000200000000000L});
-	public static final BitSet FOLLOW_RPAREN_in_expr648 = new BitSet(new long[]{0x0000067303082012L});
-	public static final BitSet FOLLOW_binop_p0_in_expr653 = new BitSet(new long[]{0x0000000424100000L});
-	public static final BitSet FOLLOW_expr_in_expr656 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_AND_in_binop_p0669 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_OR_in_binop_p0673 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_binop_p1_in_binop_p0677 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_EQ_in_binop_p1685 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_NEQ_in_binop_p1689 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LESSER_in_binop_p1693 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_GREATER_in_binop_p1697 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LESSEREQ_in_binop_p1701 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_GREATEREQ_in_binop_p1705 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_binop_p2_in_binop_p1709 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_MINUS_in_binop_p2722 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_PLUS_in_binop_p2726 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_binop_p3_in_binop_p2730 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_expr_in_expr_list862 = new BitSet(new long[]{0x0000000000000802L});
-	public static final BitSet FOLLOW_COMMA_in_expr_list865 = new BitSet(new long[]{0x0000000424100000L});
-	public static final BitSet FOLLOW_expr_in_expr_list868 = new BitSet(new long[]{0x0000000000000802L});
-	public static final BitSet FOLLOW_ID_in_value881 = new BitSet(new long[]{0x0000000080000000L});
-	public static final BitSet FOLLOW_value_tail_in_value883 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LBRACK_in_value_tail893 = new BitSet(new long[]{0x0000000024000000L});
-	public static final BitSet FOLLOW_index_expr_in_value_tail895 = new BitSet(new long[]{0x0000080000000000L});
-	public static final BitSet FOLLOW_RBRACK_in_value_tail897 = new BitSet(new long[]{0x0000000080000002L});
-	public static final BitSet FOLLOW_LBRACK_in_value_tail900 = new BitSet(new long[]{0x0000000024000000L});
-	public static final BitSet FOLLOW_index_expr_in_value_tail902 = new BitSet(new long[]{0x0000080000000000L});
-	public static final BitSet FOLLOW_RBRACK_in_value_tail904 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_set_in_index_expr920 = new BitSet(new long[]{0x0000043000000002L});
-	public static final BitSet FOLLOW_index_oper_in_index_expr929 = new BitSet(new long[]{0x0000000024000000L});
-	public static final BitSet FOLLOW_index_expr_in_index_expr932 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LPAREN_in_func_call_tail1055 = new BitSet(new long[]{0x0000200424100000L});
-	public static final BitSet FOLLOW_func_param_list_in_func_call_tail1057 = new BitSet(new long[]{0x0000200000000000L});
-	public static final BitSet FOLLOW_RPAREN_in_func_call_tail1059 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_expr_in_func_param_list1075 = new BitSet(new long[]{0x0000000000000802L});
-	public static final BitSet FOLLOW_COMMA_in_func_param_list1078 = new BitSet(new long[]{0x0000000424100000L});
-	public static final BitSet FOLLOW_expr_in_func_param_list1081 = new BitSet(new long[]{0x0000000000000802L});
+	public static final BitSet FOLLOW_type_declaration_list_in_tiger_program75 = new BitSet(new long[]{0x0010000044200000L});
+	public static final BitSet FOLLOW_funct_declaration_list_in_tiger_program77 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_funct_declaration_in_funct_declaration_list89 = new BitSet(new long[]{0x0010000044200002L});
+	public static final BitSet FOLLOW_ret_type_in_funct_declaration102 = new BitSet(new long[]{0x0000000800800000L});
+	public static final BitSet FOLLOW_FUNCTION_KEY_in_funct_declaration105 = new BitSet(new long[]{0x0000000004000000L});
+	public static final BitSet FOLLOW_ID_in_funct_declaration107 = new BitSet(new long[]{0x0000000400000000L});
+	public static final BitSet FOLLOW_MAIN_KEY_in_funct_declaration111 = new BitSet(new long[]{0x0000000400000000L});
+	public static final BitSet FOLLOW_LPAREN_in_funct_declaration116 = new BitSet(new long[]{0x0000200004000000L});
+	public static final BitSet FOLLOW_param_list_in_funct_declaration119 = new BitSet(new long[]{0x0000200000000000L});
+	public static final BitSet FOLLOW_RPAREN_in_funct_declaration121 = new BitSet(new long[]{0x0000000000000080L});
+	public static final BitSet FOLLOW_BEGIN_KEY_in_funct_declaration124 = new BitSet(new long[]{0x0000000000000080L});
+	public static final BitSet FOLLOW_block_list_in_funct_declaration127 = new BitSet(new long[]{0x0000000000040000L});
+	public static final BitSet FOLLOW_END_KEY_in_funct_declaration129 = new BitSet(new long[]{0x0000400000000000L});
+	public static final BitSet FOLLOW_SEMI_in_funct_declaration132 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_VOID_KEY_in_ret_type149 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_type_id_in_ret_type154 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_param_in_param_list167 = new BitSet(new long[]{0x0000000000000802L});
+	public static final BitSet FOLLOW_COMMA_in_param_list170 = new BitSet(new long[]{0x0000000004000000L});
+	public static final BitSet FOLLOW_param_in_param_list172 = new BitSet(new long[]{0x0000000000000802L});
+	public static final BitSet FOLLOW_ID_in_param187 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_COLON_in_param189 = new BitSet(new long[]{0x0000000044200000L});
+	public static final BitSet FOLLOW_type_id_in_param192 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_block_in_block_list202 = new BitSet(new long[]{0x0000000000000082L});
+	public static final BitSet FOLLOW_BEGIN_KEY_in_block214 = new BitSet(new long[]{0x000C000000000000L});
+	public static final BitSet FOLLOW_declaration_statement_in_block218 = new BitSet(new long[]{0x0020100014400180L});
+	public static final BitSet FOLLOW_stat_seq_in_block220 = new BitSet(new long[]{0x0000000000040000L});
+	public static final BitSet FOLLOW_END_KEY_in_block224 = new BitSet(new long[]{0x0000400000000000L});
+	public static final BitSet FOLLOW_SEMI_in_block227 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_type_declaration_list_in_declaration_statement238 = new BitSet(new long[]{0x0008000000000000L});
+	public static final BitSet FOLLOW_var_declaration_list_in_declaration_statement240 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_type_declaration_in_type_declaration_list254 = new BitSet(new long[]{0x0004000000000002L});
+	public static final BitSet FOLLOW_var_declaration_in_var_declaration_list268 = new BitSet(new long[]{0x0008000000000002L});
+	public static final BitSet FOLLOW_TYPE_KEY_in_type_declaration282 = new BitSet(new long[]{0x0000000004000000L});
+	public static final BitSet FOLLOW_ID_in_type_declaration284 = new BitSet(new long[]{0x0000000000080000L});
+	public static final BitSet FOLLOW_EQ_in_type_declaration288 = new BitSet(new long[]{0x0000000040200020L});
+	public static final BitSet FOLLOW_type_in_type_declaration291 = new BitSet(new long[]{0x0000400000000000L});
+	public static final BitSet FOLLOW_SEMI_in_type_declaration293 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_base_type_in_type305 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ARRAY_KEY_in_type311 = new BitSet(new long[]{0x0000000080000000L});
+	public static final BitSet FOLLOW_LBRACK_in_type313 = new BitSet(new long[]{0x0000000020000000L});
+	public static final BitSet FOLLOW_INTLIT_in_type315 = new BitSet(new long[]{0x0000080000000000L});
+	public static final BitSet FOLLOW_RBRACK_in_type317 = new BitSet(new long[]{0x0000010080000000L});
+	public static final BitSet FOLLOW_LBRACK_in_type320 = new BitSet(new long[]{0x0000000020000000L});
+	public static final BitSet FOLLOW_INTLIT_in_type322 = new BitSet(new long[]{0x0000080000000000L});
+	public static final BitSet FOLLOW_RBRACK_in_type324 = new BitSet(new long[]{0x0000010000000000L});
+	public static final BitSet FOLLOW_OF_KEY_in_type330 = new BitSet(new long[]{0x0000000040200000L});
+	public static final BitSet FOLLOW_base_type_in_type334 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_base_type_in_type_id346 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_type_id351 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_VAR_KEY_in_var_declaration380 = new BitSet(new long[]{0x0000000004000000L});
+	public static final BitSet FOLLOW_id_list_in_var_declaration382 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_COLON_in_var_declaration384 = new BitSet(new long[]{0x0000000044200000L});
+	public static final BitSet FOLLOW_type_id_in_var_declaration387 = new BitSet(new long[]{0x0000400000000040L});
+	public static final BitSet FOLLOW_ASSIGN_in_var_declaration392 = new BitSet(new long[]{0x0000000424100000L});
+	public static final BitSet FOLLOW_expr_in_var_declaration395 = new BitSet(new long[]{0x0000400000000000L});
+	public static final BitSet FOLLOW_SEMI_in_var_declaration399 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_id_list410 = new BitSet(new long[]{0x0000000000000802L});
+	public static final BitSet FOLLOW_COMMA_in_id_list413 = new BitSet(new long[]{0x0000000004000000L});
+	public static final BitSet FOLLOW_id_list_in_id_list416 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_stat_in_stat_seq430 = new BitSet(new long[]{0x0020100014400182L});
+	public static final BitSet FOLLOW_IF_KEY_in_stat443 = new BitSet(new long[]{0x0000000424100000L});
+	public static final BitSet FOLLOW_expr_in_stat445 = new BitSet(new long[]{0x0001000000000000L});
+	public static final BitSet FOLLOW_THEN_KEY_in_stat447 = new BitSet(new long[]{0x0020100014400180L});
+	public static final BitSet FOLLOW_stat_seq_in_stat449 = new BitSet(new long[]{0x0000000000028000L});
+	public static final BitSet FOLLOW_ENDIF_KEY_in_stat452 = new BitSet(new long[]{0x0000400000000000L});
+	public static final BitSet FOLLOW_SEMI_in_stat454 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ELSE_KEY_in_stat456 = new BitSet(new long[]{0x0020100014400180L});
+	public static final BitSet FOLLOW_stat_seq_in_stat458 = new BitSet(new long[]{0x0000000000020000L});
+	public static final BitSet FOLLOW_ENDIF_KEY_in_stat460 = new BitSet(new long[]{0x0000400000000000L});
+	public static final BitSet FOLLOW_SEMI_in_stat462 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_WHILE_KEY_in_stat487 = new BitSet(new long[]{0x0000000424100000L});
+	public static final BitSet FOLLOW_expr_in_stat490 = new BitSet(new long[]{0x0000000000004000L});
+	public static final BitSet FOLLOW_DO_KEY_in_stat492 = new BitSet(new long[]{0x0020100014400180L});
+	public static final BitSet FOLLOW_stat_seq_in_stat495 = new BitSet(new long[]{0x0000000000010000L});
+	public static final BitSet FOLLOW_ENDDO_KEY_in_stat497 = new BitSet(new long[]{0x0000400000000000L});
+	public static final BitSet FOLLOW_SEMI_in_stat500 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_FOR_KEY_in_stat506 = new BitSet(new long[]{0x0000000004000000L});
+	public static final BitSet FOLLOW_ID_in_stat508 = new BitSet(new long[]{0x0000000000000040L});
+	public static final BitSet FOLLOW_ASSIGN_in_stat510 = new BitSet(new long[]{0x0000000024000000L});
+	public static final BitSet FOLLOW_index_expr_in_stat512 = new BitSet(new long[]{0x0002000000000000L});
+	public static final BitSet FOLLOW_TO_KEY_in_stat514 = new BitSet(new long[]{0x0000000024000000L});
+	public static final BitSet FOLLOW_index_expr_in_stat516 = new BitSet(new long[]{0x0000000000004000L});
+	public static final BitSet FOLLOW_DO_KEY_in_stat518 = new BitSet(new long[]{0x0020100014400180L});
+	public static final BitSet FOLLOW_stat_seq_in_stat520 = new BitSet(new long[]{0x0000000000010000L});
+	public static final BitSet FOLLOW_ENDDO_KEY_in_stat522 = new BitSet(new long[]{0x0000400000000000L});
+	public static final BitSet FOLLOW_SEMI_in_stat524 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_stat555 = new BitSet(new long[]{0x0000000480000040L});
+	public static final BitSet FOLLOW_value_tail_in_stat559 = new BitSet(new long[]{0x0000000000000040L});
+	public static final BitSet FOLLOW_ASSIGN_in_stat561 = new BitSet(new long[]{0x0000000424100000L});
+	public static final BitSet FOLLOW_expr_list_in_stat564 = new BitSet(new long[]{0x0000400000000000L});
+	public static final BitSet FOLLOW_func_call_tail_in_stat570 = new BitSet(new long[]{0x0000400000000000L});
+	public static final BitSet FOLLOW_SEMI_in_stat574 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_BREAK_KEY_in_stat580 = new BitSet(new long[]{0x0000400000000000L});
+	public static final BitSet FOLLOW_SEMI_in_stat582 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_RETURN_KEY_in_stat588 = new BitSet(new long[]{0x0000000424100000L});
+	public static final BitSet FOLLOW_expr_in_stat591 = new BitSet(new long[]{0x0000400000000000L});
+	public static final BitSet FOLLOW_SEMI_in_stat593 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_block_in_stat599 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_constval_in_expr613 = new BitSet(new long[]{0x0000067303082012L});
+	public static final BitSet FOLLOW_ID_in_expr617 = new BitSet(new long[]{0x0000067783082010L});
+	public static final BitSet FOLLOW_value_tail_in_expr620 = new BitSet(new long[]{0x0000067303082012L});
+	public static final BitSet FOLLOW_func_call_tail_in_expr624 = new BitSet(new long[]{0x0000067303082012L});
+	public static final BitSet FOLLOW_LPAREN_in_expr629 = new BitSet(new long[]{0x0000000424100000L});
+	public static final BitSet FOLLOW_expr_in_expr632 = new BitSet(new long[]{0x0000200000000000L});
+	public static final BitSet FOLLOW_RPAREN_in_expr634 = new BitSet(new long[]{0x0000067303082012L});
+	public static final BitSet FOLLOW_binop_p0_in_expr639 = new BitSet(new long[]{0x0000000424100000L});
+	public static final BitSet FOLLOW_expr_in_expr642 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_AND_in_binop_p0655 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_OR_in_binop_p0659 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_binop_p1_in_binop_p0663 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_EQ_in_binop_p1671 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NEQ_in_binop_p1675 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LESSER_in_binop_p1679 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_GREATER_in_binop_p1683 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LESSEREQ_in_binop_p1687 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_GREATEREQ_in_binop_p1691 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_binop_p2_in_binop_p1695 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_MINUS_in_binop_p2708 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_PLUS_in_binop_p2712 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_binop_p3_in_binop_p2716 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_expr_in_expr_list839 = new BitSet(new long[]{0x0000000000000802L});
+	public static final BitSet FOLLOW_COMMA_in_expr_list842 = new BitSet(new long[]{0x0000000424100000L});
+	public static final BitSet FOLLOW_expr_in_expr_list845 = new BitSet(new long[]{0x0000000000000802L});
+	public static final BitSet FOLLOW_ID_in_value858 = new BitSet(new long[]{0x0000000080000000L});
+	public static final BitSet FOLLOW_value_tail_in_value860 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LBRACK_in_value_tail870 = new BitSet(new long[]{0x0000000024000000L});
+	public static final BitSet FOLLOW_index_expr_in_value_tail872 = new BitSet(new long[]{0x0000080000000000L});
+	public static final BitSet FOLLOW_RBRACK_in_value_tail874 = new BitSet(new long[]{0x0000000080000002L});
+	public static final BitSet FOLLOW_LBRACK_in_value_tail877 = new BitSet(new long[]{0x0000000024000000L});
+	public static final BitSet FOLLOW_index_expr_in_value_tail879 = new BitSet(new long[]{0x0000080000000000L});
+	public static final BitSet FOLLOW_RBRACK_in_value_tail881 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_set_in_index_expr897 = new BitSet(new long[]{0x0000043000000002L});
+	public static final BitSet FOLLOW_index_oper_in_index_expr906 = new BitSet(new long[]{0x0000000024000000L});
+	public static final BitSet FOLLOW_index_expr_in_index_expr909 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LPAREN_in_func_call_tail1025 = new BitSet(new long[]{0x0000200424100000L});
+	public static final BitSet FOLLOW_func_param_list_in_func_call_tail1027 = new BitSet(new long[]{0x0000200000000000L});
+	public static final BitSet FOLLOW_RPAREN_in_func_call_tail1029 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_expr_in_func_param_list1043 = new BitSet(new long[]{0x0000000000000802L});
+	public static final BitSet FOLLOW_COMMA_in_func_param_list1046 = new BitSet(new long[]{0x0000000424100000L});
+	public static final BitSet FOLLOW_expr_in_func_param_list1049 = new BitSet(new long[]{0x0000000000000802L});
 }
