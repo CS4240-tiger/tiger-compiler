@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g 2014-10-19 12:56:02
+// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g 2014-10-19 13:00:25
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -84,19 +84,6 @@ public class tigerLexer extends Lexer {
 	        lineCode = lineCode.replaceFirst(".*?(?=[a-zA-Z0-9\'])", "");
 	        System.err.println("Error At Line "+String.valueOf(lineIndex)+": "+ lineCode);
 	    }
-	    
-
-	    private void defineFunction(String id, Object params, Object block) {
-	    // Parameters
-	    CommonTree paramTree = params == null ? new CommonTree() : (CommonTree) params;
-
-	    // Code block tree
-	    CommonTree blockTree = (CommonTree) block;
-
-	    // The function name with the number of parameters after it, is the unique key
-	    String key = id + paramTree.getChildCount();
-	    functions.put(key, new TigerFunction(id, paramTree, blockTree));
-	  }
 
 
 	// delegates

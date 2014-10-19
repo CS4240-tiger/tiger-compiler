@@ -10,6 +10,7 @@ options {
 @parser::header {
   import java.util.Map;
   import java.util.HashMap;
+  import org.antlr.runtime.tree.CommonTree;
 }
 
 @parser::members {
@@ -40,6 +41,18 @@ options {
         lineCode = lineCode.replaceFirst(".*?(?=[a-zA-Z0-9\'])", "");
         System.err.println("Error At Line "+String.valueOf(lineIndex)+": "+ lineCode + " ("+getErrorMessage(e, tokenNames)+")");
     }
+    
+    private void defineFunction(String id, Object params, Object block) {
+         // Parameters
+         CommonTree paramTree = params == null ? new CommonTree() : (CommonTree) params;
+
+         // Code block tree
+         CommonTree blockTree = (CommonTree) block;
+
+         // The function name with the number of parameters after it, is the unique key
+         String key = id + paramTree.getChildCount();
+         functions.put(key, new TigerFunction(id, paramTree, blockTree));
+    }
 }
 
 @lexer::members {
@@ -67,19 +80,6 @@ options {
         lineCode = lineCode.replaceFirst(".*?(?=[a-zA-Z0-9\'])", "");
         System.err.println("Error At Line "+String.valueOf(lineIndex)+": "+ lineCode);
     }
-    
-
-    private void defineFunction(String id, Object params, Object block) {
-    // Parameters
-    CommonTree paramTree = params == null ? new CommonTree() : (CommonTree) params;
-
-    // Code block tree
-    CommonTree blockTree = (CommonTree) block;
-
-    // The function name with the number of parameters after it, is the unique key
-    String key = id + paramTree.getChildCount();
-    functions.put(key, new TigerFunction(id, paramTree, blockTree));
-  }
 }
 
 tiger_program

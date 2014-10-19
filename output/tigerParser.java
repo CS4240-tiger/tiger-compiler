@@ -1,7 +1,8 @@
-// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g 2014-10-19 12:56:01
+// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g 2014-10-19 13:00:24
 
   import java.util.Map;
   import java.util.HashMap;
+  import org.antlr.runtime.tree.CommonTree;
 
 
 import org.antlr.runtime.*;
@@ -130,6 +131,18 @@ public class tigerParser extends Parser {
 	        }
 	        lineCode = lineCode.replaceFirst(".*?(?=[a-zA-Z0-9\'])", "");
 	        System.err.println("Error At Line "+String.valueOf(lineIndex)+": "+ lineCode + " ("+getErrorMessage(e, tokenNames)+")");
+	    }
+	    
+	    private void defineFunction(String id, Object params, Object block) {
+	         // Parameters
+	         CommonTree paramTree = params == null ? new CommonTree() : (CommonTree) params;
+
+	         // Code block tree
+	         CommonTree blockTree = (CommonTree) block;
+
+	         // The function name with the number of parameters after it, is the unique key
+	         String key = id + paramTree.getChildCount();
+	         functions.put(key, new TigerFunction(id, paramTree, blockTree));
 	    }
 
 
@@ -1856,7 +1869,7 @@ public class tigerParser extends Parser {
 					}
 
 					// AST REWRITE
-					// elements: IF_KEY, expr, stat_seq, stat_seq, ELSE_KEY
+					// elements: ELSE_KEY, expr, stat_seq, IF_KEY, stat_seq
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -1875,7 +1888,7 @@ public class tigerParser extends Parser {
 						adaptor.addChild(root_1, stream_expr.nextTree());
 						adaptor.addChild(root_1, stream_stat_seq.nextTree());
 						// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:157:29: ( ^( ELSE_KEY stat_seq ) )?
-						if ( stream_stat_seq.hasNext()||stream_ELSE_KEY.hasNext() ) {
+						if ( stream_ELSE_KEY.hasNext()||stream_stat_seq.hasNext() ) {
 							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:157:29: ^( ELSE_KEY stat_seq )
 							{
 							CommonTree root_2 = (CommonTree)adaptor.nil();
@@ -1885,8 +1898,8 @@ public class tigerParser extends Parser {
 							}
 
 						}
-						stream_stat_seq.reset();
 						stream_ELSE_KEY.reset();
+						stream_stat_seq.reset();
 
 						adaptor.addChild(root_0, root_1);
 						}
@@ -1965,7 +1978,7 @@ public class tigerParser extends Parser {
 					stream_SEMI.add(SEMI87);
 
 					// AST REWRITE
-					// elements: TO_KEY, ID, stat_seq, index_expr, FOR_KEY, index_expr, ASSIGN
+					// elements: ID, TO_KEY, FOR_KEY, stat_seq, ASSIGN, index_expr, index_expr
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
