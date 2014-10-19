@@ -1,4 +1,6 @@
 import org.antlr.runtime.*;
+import org.antlr.runtime.tree.CommonTree;
+import org.antlr.runtime.tree.CommonTreeNodeStream;
 
 public class __Test__ {
 
@@ -8,7 +10,12 @@ public class __Test__ {
 
         tigerParser g = new tigerParser(tokens);
         try {
-            g.tiger_program();
+            CommonTree parseTree = g.tiger_program().getTree();
+            CommonTreeNodeStream nodes = new CommonTreeNodeStream(parseTree);
+            tigerTreeWalker walker = new tigerTreeWalker(nodes, g.functions);
+            TigerNode walkResult = walker.tiger_program();
+            System.out.println(walker.tiger_program() == null ? 
+            		"Returned null" : walkResult.eval());
         } catch (RecognitionException e) {
             e.printStackTrace();
         }

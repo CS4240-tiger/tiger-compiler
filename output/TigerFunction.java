@@ -73,7 +73,7 @@ public class TigerFunction {
 		// If no issue, assign all parameters given to local variables in the owning Scope
 		// IDs will be provided by constructor; callParams will provide values
 		for (int i = 0; i < params.size(); i++) {
-			scope.assign(params.get(i), callParams.get(i).evaluate());
+			scope.assign(params.get(i), callParams.get(i).eval());
 		}
 
 		try {
@@ -81,7 +81,7 @@ public class TigerFunction {
 			tigerTreeWalker walker = new tigerTreeWalker(nodes, scope, tigerFunctions);
 			
 			// Walk this code block's tree
-			return walker.block().evaluate();
+			return walker.block().eval();
 		} catch (RecognitionException e) {
 			// Problem, don't recover from this
 			throw new RuntimeException("Error: Unexpected RecognitionException", e);
