@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g 2014-10-19 13:00:24
+// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g 2014-10-19 13:04:35
 
   import java.util.Map;
   import java.util.HashMap;
@@ -105,7 +105,7 @@ public class tigerParser extends Parser {
 	@Override public String getGrammarFileName() { return "C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g"; }
 
 
-	  public Map<String, Function> functions = new HashMap<String, Function>();
+	  public Map<String, TigerFunction> functions = new HashMap<String, TigerFunction>();
 	    
 	  @Override
 	    public void reportError(RecognitionException e) {
@@ -1869,7 +1869,7 @@ public class tigerParser extends Parser {
 					}
 
 					// AST REWRITE
-					// elements: ELSE_KEY, expr, stat_seq, IF_KEY, stat_seq
+					// elements: IF_KEY, expr, stat_seq, stat_seq, ELSE_KEY
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -1888,7 +1888,7 @@ public class tigerParser extends Parser {
 						adaptor.addChild(root_1, stream_expr.nextTree());
 						adaptor.addChild(root_1, stream_stat_seq.nextTree());
 						// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:157:29: ( ^( ELSE_KEY stat_seq ) )?
-						if ( stream_ELSE_KEY.hasNext()||stream_stat_seq.hasNext() ) {
+						if ( stream_stat_seq.hasNext()||stream_ELSE_KEY.hasNext() ) {
 							// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:157:29: ^( ELSE_KEY stat_seq )
 							{
 							CommonTree root_2 = (CommonTree)adaptor.nil();
@@ -1898,8 +1898,8 @@ public class tigerParser extends Parser {
 							}
 
 						}
-						stream_ELSE_KEY.reset();
 						stream_stat_seq.reset();
+						stream_ELSE_KEY.reset();
 
 						adaptor.addChild(root_0, root_1);
 						}
@@ -1978,7 +1978,7 @@ public class tigerParser extends Parser {
 					stream_SEMI.add(SEMI87);
 
 					// AST REWRITE
-					// elements: ID, TO_KEY, FOR_KEY, stat_seq, ASSIGN, index_expr, index_expr
+					// elements: index_expr, ID, FOR_KEY, TO_KEY, index_expr, ASSIGN, stat_seq
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 

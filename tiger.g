@@ -14,7 +14,7 @@ options {
 }
 
 @parser::members {
-  public Map<String, Function> functions = new HashMap<String, Function>();
+  public Map<String, TigerFunction> functions = new HashMap<String, TigerFunction>();
     
   @Override
     public void reportError(RecognitionException e) {
