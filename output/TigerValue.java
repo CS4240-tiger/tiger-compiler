@@ -259,6 +259,9 @@ public class TigerValue implements Comparable<TigerValue> {
 	private class InvalidValueException extends RuntimeException {
 		private static final long serialVersionUID = 5027885730307151886L;
 
+		/**
+		 * An exception thrown when a value provided is not a valid type.
+		 */
 		private InvalidValueException(Object value) {
 			super("Error: Value " + value.getClass().toString().toUpperCase() 
 					+ " provided is of invalid type!");
@@ -271,9 +274,13 @@ public class TigerValue implements Comparable<TigerValue> {
 	 */
 	private class NullValueException extends RuntimeException {
 		private static final long serialVersionUID = 4722560517569560784L;
-
+		
+		/**
+		 * An exception thrown when a null value is passed into a 
+		 * TigerValue's constructor.
+		 */
 		private NullValueException() {
-			super("Provided value cannot be null!");
+			super("Error: Provided value cannot be null!");
 		}
 	}
 	
@@ -282,9 +289,12 @@ public class TigerValue implements Comparable<TigerValue> {
 	 */
 	private class IncomparableException extends RuntimeException {
 		private static final long serialVersionUID = -7270594830942550820L;
-
+		
+		/**
+		 * An exception thrown when two TigerValues cannot be compared.
+		 */
 		private IncomparableException(TigerValue value1, TigerValue value2) {
-			super(value1 + " and " + value2 + " cannot be compared!");
+			super("Error: " + value1 + " and " + value2 + " cannot be compared!");
 		}
 	}
 }
