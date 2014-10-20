@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g 2014-10-20 18:14:41
+// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g 2014-10-20 18:28:49
 
 	import java.util.Map;
 	import java.util.HashMap;
@@ -101,18 +101,18 @@ public class tigerParser extends DebugParser {
 
 
 	public static final String[] ruleNames = new String[] {
-		"invalidRule", "base_type", "binop_p0", "synpred8_tiger", "if_stat", "void_func", 
-		"for_stat", "synpred4_tiger", "index_oper", "var_declaration_list", "synpred13_tiger", 
-		"binop_p2", "index_expr", "declaration_statement", "synpred9_tiger", "binop_p3", 
-		"keywords", "intlit", "synpred11_tiger", "synpred5_tiger", "param", "expr", 
-		"synpred6_tiger", "funct_declaration", "value", "synpred3_tiger", "type", 
-		"synpred1_tiger", "while_stat", "block_list", "type_declaration_list", 
-		"type_declaration", "constval", "binop_p1", "binary_operator", "synpred2_tiger", 
-		"id_list", "synpred14_tiger", "stat_seq", "block", "break_stat", "funct_declaration_list", 
-		"expr_list", "return_func", "stat", "func_param_list", "type_id", "synpred7_tiger", 
-		"synpred15_tiger", "ret_type", "func_call", "assign_stat", "fixedptlit", 
-		"synpred12_tiger", "return_stat", "param_list", "var_declaration", "synpred10_tiger", 
-		"tiger_program"
+		"invalidRule", "stat_seq", "stat", "for_stat", "synpred15_tiger", "synpred5_tiger", 
+		"binop_p3", "index_oper", "binop_p1", "synpred4_tiger", "synpred12_tiger", 
+		"binop_p0", "intlit", "expr_list", "synpred8_tiger", "expr", "synpred2_tiger", 
+		"param", "type_declaration", "id_list", "binary_operator", "type_declaration_list", 
+		"if_stat", "block_list", "synpred13_tiger", "block", "base_type", "param_list", 
+		"synpred1_tiger", "type", "synpred11_tiger", "while_stat", "ret_type", 
+		"fixedptlit", "synpred7_tiger", "funct_declaration", "return_stat", "void_func", 
+		"keywords", "binop_p2", "break_stat", "synpred6_tiger", "index_expr", 
+		"var_declaration_list", "funct_declaration_list", "synpred3_tiger", "synpred9_tiger", 
+		"declaration_statement", "value", "tiger_program", "func_call", "synpred14_tiger", 
+		"var_declaration", "constval", "func_param_list", "synpred10_tiger", "return_func", 
+		"assign_stat", "type_id"
 	};
 
 	public static final boolean[] decisionCanBacktrack = new boolean[] {
@@ -803,7 +803,7 @@ public class tigerParser extends DebugParser {
 					if ( state.backtracking==0 ) stream_SEMI.add(SEMI25);
 
 					// AST REWRITE
-					// elements: ID, param_list, block_list
+					// elements: param_list, block_list, ID
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -1274,7 +1274,7 @@ public class tigerParser extends DebugParser {
 			if (state.failed) return retval;
 			if ( state.backtracking==0 ) stream_type_id.add(type_id41.getTree());
 			// AST REWRITE
-			// elements: COLON, type_id, ID
+			// elements: type_id, COLON, ID
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -1922,7 +1922,7 @@ public class tigerParser extends DebugParser {
 			if ( state.backtracking==0 ) stream_SEMI.add(SEMI56);
 
 			// AST REWRITE
-			// elements: type, EQ, ID
+			// elements: ID, type, EQ
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -1992,7 +1992,7 @@ public class tigerParser extends DebugParser {
 
 
 	// $ANTLR start "type"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:184:1: type : ( base_type | ( ARRAY_KEY LBRACK intlit RBRACK LBRACK intlit RBRACK )=> ARRAY_KEY LBRACK intlit RBRACK LBRACK intlit RBRACK OF_KEY base_type -> ^( ARRAY_KEY ^( AST_2D_ARRAY intlit intlit ) base_type ) | ARRAY_KEY LBRACK intlit RBRACK OF_KEY base_type -> ^( ARRAY_KEY intlit base_type ) );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:184:1: type : ( base_type | ( ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK LBRACK UNSIGNED_INTLIT RBRACK )=> ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK LBRACK UNSIGNED_INTLIT RBRACK OF_KEY base_type -> ^( ARRAY_KEY ^( AST_2D_ARRAY UNSIGNED_INTLIT UNSIGNED_INTLIT ) base_type ) | ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK OF_KEY base_type -> ^( ARRAY_KEY UNSIGNED_INTLIT base_type ) );
 	public final tigerParser.type_return type() throws RecognitionException {
 		tigerParser.type_return retval = new tigerParser.type_return();
 		retval.start = input.LT(1);
@@ -2001,37 +2001,40 @@ public class tigerParser extends DebugParser {
 
 		Token ARRAY_KEY58=null;
 		Token LBRACK59=null;
+		Token UNSIGNED_INTLIT60=null;
 		Token RBRACK61=null;
 		Token LBRACK62=null;
+		Token UNSIGNED_INTLIT63=null;
 		Token RBRACK64=null;
 		Token OF_KEY65=null;
 		Token ARRAY_KEY67=null;
 		Token LBRACK68=null;
+		Token UNSIGNED_INTLIT69=null;
 		Token RBRACK70=null;
 		Token OF_KEY71=null;
 		ParserRuleReturnScope base_type57 =null;
-		ParserRuleReturnScope intlit60 =null;
-		ParserRuleReturnScope intlit63 =null;
 		ParserRuleReturnScope base_type66 =null;
-		ParserRuleReturnScope intlit69 =null;
 		ParserRuleReturnScope base_type72 =null;
 
 		CommonTree ARRAY_KEY58_tree=null;
 		CommonTree LBRACK59_tree=null;
+		CommonTree UNSIGNED_INTLIT60_tree=null;
 		CommonTree RBRACK61_tree=null;
 		CommonTree LBRACK62_tree=null;
+		CommonTree UNSIGNED_INTLIT63_tree=null;
 		CommonTree RBRACK64_tree=null;
 		CommonTree OF_KEY65_tree=null;
 		CommonTree ARRAY_KEY67_tree=null;
 		CommonTree LBRACK68_tree=null;
+		CommonTree UNSIGNED_INTLIT69_tree=null;
 		CommonTree RBRACK70_tree=null;
 		CommonTree OF_KEY71_tree=null;
 		RewriteRuleTokenStream stream_RBRACK=new RewriteRuleTokenStream(adaptor,"token RBRACK");
 		RewriteRuleTokenStream stream_OF_KEY=new RewriteRuleTokenStream(adaptor,"token OF_KEY");
 		RewriteRuleTokenStream stream_ARRAY_KEY=new RewriteRuleTokenStream(adaptor,"token ARRAY_KEY");
 		RewriteRuleTokenStream stream_LBRACK=new RewriteRuleTokenStream(adaptor,"token LBRACK");
+		RewriteRuleTokenStream stream_UNSIGNED_INTLIT=new RewriteRuleTokenStream(adaptor,"token UNSIGNED_INTLIT");
 		RewriteRuleSubtreeStream stream_base_type=new RewriteRuleSubtreeStream(adaptor,"rule base_type");
-		RewriteRuleSubtreeStream stream_intlit=new RewriteRuleSubtreeStream(adaptor,"rule intlit");
 
 		try { dbg.enterRule(getGrammarFileName(), "type");
 		if ( getRuleLevel()==0 ) {dbg.commence();}
@@ -2039,7 +2042,7 @@ public class tigerParser extends DebugParser {
 		dbg.location(184, 0);
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:184:6: ( base_type | ( ARRAY_KEY LBRACK intlit RBRACK LBRACK intlit RBRACK )=> ARRAY_KEY LBRACK intlit RBRACK LBRACK intlit RBRACK OF_KEY base_type -> ^( ARRAY_KEY ^( AST_2D_ARRAY intlit intlit ) base_type ) | ARRAY_KEY LBRACK intlit RBRACK OF_KEY base_type -> ^( ARRAY_KEY intlit base_type ) )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:184:6: ( base_type | ( ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK LBRACK UNSIGNED_INTLIT RBRACK )=> ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK LBRACK UNSIGNED_INTLIT RBRACK OF_KEY base_type -> ^( ARRAY_KEY ^( AST_2D_ARRAY UNSIGNED_INTLIT UNSIGNED_INTLIT ) base_type ) | ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK OF_KEY base_type -> ^( ARRAY_KEY UNSIGNED_INTLIT base_type ) )
 			int alt10=3;
 			try { dbg.enterDecision(10, decisionCanBacktrack[10]);
 
@@ -2089,7 +2092,7 @@ public class tigerParser extends DebugParser {
 				case 2 :
 					dbg.enterAlt(2);
 
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:185:4: ( ARRAY_KEY LBRACK intlit RBRACK LBRACK intlit RBRACK )=> ARRAY_KEY LBRACK intlit RBRACK LBRACK intlit RBRACK OF_KEY base_type
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:185:4: ( ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK LBRACK UNSIGNED_INTLIT RBRACK )=> ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK LBRACK UNSIGNED_INTLIT RBRACK OF_KEY base_type
 					{
 					dbg.location(186,6);
 					ARRAY_KEY58=(Token)match(input,ARRAY_KEY,FOLLOW_ARRAY_KEY_in_type503); if (state.failed) return retval; 
@@ -2098,35 +2101,31 @@ public class tigerParser extends DebugParser {
 					LBRACK59=(Token)match(input,LBRACK,FOLLOW_LBRACK_in_type505); if (state.failed) return retval; 
 					if ( state.backtracking==0 ) stream_LBRACK.add(LBRACK59);
 					dbg.location(186,23);
-					pushFollow(FOLLOW_intlit_in_type507);
-					intlit60=intlit();
-					state._fsp--;
-					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_intlit.add(intlit60.getTree());dbg.location(186,30);
+					UNSIGNED_INTLIT60=(Token)match(input,UNSIGNED_INTLIT,FOLLOW_UNSIGNED_INTLIT_in_type507); if (state.failed) return retval; 
+					if ( state.backtracking==0 ) stream_UNSIGNED_INTLIT.add(UNSIGNED_INTLIT60);
+					dbg.location(186,39);
 					RBRACK61=(Token)match(input,RBRACK,FOLLOW_RBRACK_in_type509); if (state.failed) return retval; 
 					if ( state.backtracking==0 ) stream_RBRACK.add(RBRACK61);
-					dbg.location(186,37);
+					dbg.location(186,46);
 					LBRACK62=(Token)match(input,LBRACK,FOLLOW_LBRACK_in_type511); if (state.failed) return retval; 
 					if ( state.backtracking==0 ) stream_LBRACK.add(LBRACK62);
-					dbg.location(186,44);
-					pushFollow(FOLLOW_intlit_in_type513);
-					intlit63=intlit();
-					state._fsp--;
-					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_intlit.add(intlit63.getTree());dbg.location(186,51);
+					dbg.location(186,53);
+					UNSIGNED_INTLIT63=(Token)match(input,UNSIGNED_INTLIT,FOLLOW_UNSIGNED_INTLIT_in_type513); if (state.failed) return retval; 
+					if ( state.backtracking==0 ) stream_UNSIGNED_INTLIT.add(UNSIGNED_INTLIT63);
+					dbg.location(186,69);
 					RBRACK64=(Token)match(input,RBRACK,FOLLOW_RBRACK_in_type515); if (state.failed) return retval; 
 					if ( state.backtracking==0 ) stream_RBRACK.add(RBRACK64);
-					dbg.location(186,58);
+					dbg.location(186,76);
 					OF_KEY65=(Token)match(input,OF_KEY,FOLLOW_OF_KEY_in_type517); if (state.failed) return retval; 
 					if ( state.backtracking==0 ) stream_OF_KEY.add(OF_KEY65);
-					dbg.location(186,65);
+					dbg.location(186,83);
 					pushFollow(FOLLOW_base_type_in_type519);
 					base_type66=base_type();
 					state._fsp--;
 					if (state.failed) return retval;
 					if ( state.backtracking==0 ) stream_base_type.add(base_type66.getTree());
 					// AST REWRITE
-					// elements: intlit, base_type, ARRAY_KEY, intlit
+					// elements: ARRAY_KEY, UNSIGNED_INTLIT, base_type, UNSIGNED_INTLIT
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -2137,26 +2136,26 @@ public class tigerParser extends DebugParser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (CommonTree)adaptor.nil();
-					// 187:2: -> ^( ARRAY_KEY ^( AST_2D_ARRAY intlit intlit ) base_type )
+					// 187:2: -> ^( ARRAY_KEY ^( AST_2D_ARRAY UNSIGNED_INTLIT UNSIGNED_INTLIT ) base_type )
 					{
 						dbg.location(187,5);
-						// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:187:5: ^( ARRAY_KEY ^( AST_2D_ARRAY intlit intlit ) base_type )
+						// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:187:5: ^( ARRAY_KEY ^( AST_2D_ARRAY UNSIGNED_INTLIT UNSIGNED_INTLIT ) base_type )
 						{
 						CommonTree root_1 = (CommonTree)adaptor.nil();
 						dbg.location(187,7);
 						root_1 = (CommonTree)adaptor.becomeRoot(stream_ARRAY_KEY.nextNode(), root_1);
 						dbg.location(187,17);
-						// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:187:17: ^( AST_2D_ARRAY intlit intlit )
+						// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:187:17: ^( AST_2D_ARRAY UNSIGNED_INTLIT UNSIGNED_INTLIT )
 						{
 						CommonTree root_2 = (CommonTree)adaptor.nil();
 						dbg.location(187,19);
 						root_2 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(AST_2D_ARRAY, "AST_2D_ARRAY"), root_2);
 						dbg.location(187,32);
-						adaptor.addChild(root_2, stream_intlit.nextTree());dbg.location(187,39);
-						adaptor.addChild(root_2, stream_intlit.nextTree());
+						adaptor.addChild(root_2, stream_UNSIGNED_INTLIT.nextNode());dbg.location(187,48);
+						adaptor.addChild(root_2, stream_UNSIGNED_INTLIT.nextNode());
 						adaptor.addChild(root_1, root_2);
 						}
-						dbg.location(187,47);
+						dbg.location(187,65);
 						adaptor.addChild(root_1, stream_base_type.nextTree());
 						adaptor.addChild(root_0, root_1);
 						}
@@ -2172,7 +2171,7 @@ public class tigerParser extends DebugParser {
 				case 3 :
 					dbg.enterAlt(3);
 
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:188:4: ARRAY_KEY LBRACK intlit RBRACK OF_KEY base_type
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:188:4: ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK OF_KEY base_type
 					{
 					dbg.location(188,4);
 					ARRAY_KEY67=(Token)match(input,ARRAY_KEY,FOLLOW_ARRAY_KEY_in_type541); if (state.failed) return retval; 
@@ -2181,24 +2180,22 @@ public class tigerParser extends DebugParser {
 					LBRACK68=(Token)match(input,LBRACK,FOLLOW_LBRACK_in_type543); if (state.failed) return retval; 
 					if ( state.backtracking==0 ) stream_LBRACK.add(LBRACK68);
 					dbg.location(188,21);
-					pushFollow(FOLLOW_intlit_in_type545);
-					intlit69=intlit();
-					state._fsp--;
-					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_intlit.add(intlit69.getTree());dbg.location(188,28);
+					UNSIGNED_INTLIT69=(Token)match(input,UNSIGNED_INTLIT,FOLLOW_UNSIGNED_INTLIT_in_type545); if (state.failed) return retval; 
+					if ( state.backtracking==0 ) stream_UNSIGNED_INTLIT.add(UNSIGNED_INTLIT69);
+					dbg.location(188,37);
 					RBRACK70=(Token)match(input,RBRACK,FOLLOW_RBRACK_in_type547); if (state.failed) return retval; 
 					if ( state.backtracking==0 ) stream_RBRACK.add(RBRACK70);
-					dbg.location(188,35);
+					dbg.location(188,44);
 					OF_KEY71=(Token)match(input,OF_KEY,FOLLOW_OF_KEY_in_type549); if (state.failed) return retval; 
 					if ( state.backtracking==0 ) stream_OF_KEY.add(OF_KEY71);
-					dbg.location(188,42);
+					dbg.location(188,51);
 					pushFollow(FOLLOW_base_type_in_type551);
 					base_type72=base_type();
 					state._fsp--;
 					if (state.failed) return retval;
 					if ( state.backtracking==0 ) stream_base_type.add(base_type72.getTree());
 					// AST REWRITE
-					// elements: base_type, ARRAY_KEY, intlit
+					// elements: UNSIGNED_INTLIT, base_type, ARRAY_KEY
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -2209,16 +2206,16 @@ public class tigerParser extends DebugParser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (CommonTree)adaptor.nil();
-					// 189:2: -> ^( ARRAY_KEY intlit base_type )
+					// 189:2: -> ^( ARRAY_KEY UNSIGNED_INTLIT base_type )
 					{
 						dbg.location(189,5);
-						// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:189:5: ^( ARRAY_KEY intlit base_type )
+						// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:189:5: ^( ARRAY_KEY UNSIGNED_INTLIT base_type )
 						{
 						CommonTree root_1 = (CommonTree)adaptor.nil();
 						dbg.location(189,7);
 						root_1 = (CommonTree)adaptor.becomeRoot(stream_ARRAY_KEY.nextNode(), root_1);
 						dbg.location(189,17);
-						adaptor.addChild(root_1, stream_intlit.nextTree());dbg.location(189,24);
+						adaptor.addChild(root_1, stream_UNSIGNED_INTLIT.nextNode());dbg.location(189,33);
 						adaptor.addChild(root_1, stream_base_type.nextTree());
 						adaptor.addChild(root_0, root_1);
 						}
@@ -2564,7 +2561,7 @@ public class tigerParser extends DebugParser {
 					if ( state.backtracking==0 ) stream_SEMI.add(SEMI82);
 
 					// AST REWRITE
-					// elements: type_id, ASSIGN, COLON, id_list, expr
+					// elements: type_id, COLON, ASSIGN, expr, id_list
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -2633,7 +2630,7 @@ public class tigerParser extends DebugParser {
 					if ( state.backtracking==0 ) stream_SEMI.add(SEMI87);
 
 					// AST REWRITE
-					// elements: id_list, type_id, COLON
+					// elements: type_id, COLON, id_list
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -3344,7 +3341,7 @@ public class tigerParser extends DebugParser {
 			} finally {dbg.exitSubRule(16);}
 
 			// AST REWRITE
-			// elements: IF_KEY, ELSE_KEY, expr, stat_seq, stat_seq
+			// elements: IF_KEY, stat_seq, expr, ELSE_KEY, stat_seq
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -3367,7 +3364,7 @@ public class tigerParser extends DebugParser {
 				adaptor.addChild(root_1, stream_expr.nextTree());dbg.location(229,20);
 				adaptor.addChild(root_1, stream_stat_seq.nextTree());dbg.location(229,29);
 				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:229:29: ( ^( ELSE_KEY stat_seq ) )?
-				if ( stream_ELSE_KEY.hasNext()||stream_stat_seq.hasNext() ) {
+				if ( stream_stat_seq.hasNext()||stream_ELSE_KEY.hasNext() ) {
 					dbg.location(229,29);
 					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:229:29: ^( ELSE_KEY stat_seq )
 					{
@@ -3380,8 +3377,8 @@ public class tigerParser extends DebugParser {
 					}
 
 				}
-				stream_ELSE_KEY.reset();
 				stream_stat_seq.reset();
+				stream_ELSE_KEY.reset();
 
 				adaptor.addChild(root_0, root_1);
 				}
@@ -3491,7 +3488,7 @@ public class tigerParser extends DebugParser {
 			if ( state.backtracking==0 ) stream_SEMI.add(SEMI116);
 
 			// AST REWRITE
-			// elements: expr, stat_seq, WHILE_KEY
+			// elements: stat_seq, expr, WHILE_KEY
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -3645,7 +3642,7 @@ public class tigerParser extends DebugParser {
 			if ( state.backtracking==0 ) stream_SEMI.add(SEMI126);
 
 			// AST REWRITE
-			// elements: ID, TO_KEY, stat_seq, FOR_KEY, ASSIGN, index_expr, index_expr
+			// elements: ID, TO_KEY, stat_seq, index_expr, FOR_KEY, index_expr, ASSIGN
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -3783,7 +3780,7 @@ public class tigerParser extends DebugParser {
 			if ( state.backtracking==0 ) stream_SEMI.add(SEMI130);
 
 			// AST REWRITE
-			// elements: expr_list, ASSIGN, value
+			// elements: ASSIGN, expr_list, value
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -3900,7 +3897,7 @@ public class tigerParser extends DebugParser {
 			if ( state.backtracking==0 ) stream_RPAREN.add(RPAREN134);
 
 			// AST REWRITE
-			// elements: func_param_list, ID
+			// elements: ID, func_param_list
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -4105,7 +4102,7 @@ public class tigerParser extends DebugParser {
 			if ( state.backtracking==0 ) stream_SEMI.add(SEMI139);
 
 			// AST REWRITE
-			// elements: RETURN_KEY, expr
+			// elements: expr, RETURN_KEY
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -4324,7 +4321,7 @@ public class tigerParser extends DebugParser {
 					if (state.failed) return retval;
 					if ( state.backtracking==0 ) stream_expr.add(expr142.getTree());
 					// AST REWRITE
-					// elements: binop_p0, expr, constval
+					// elements: constval, expr, binop_p0
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -4468,7 +4465,7 @@ public class tigerParser extends DebugParser {
 					if (state.failed) return retval;
 					if ( state.backtracking==0 ) stream_expr.add(expr150.getTree());
 					// AST REWRITE
-					// elements: binop_p0, value, expr
+					// elements: value, expr, binop_p0
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -4546,7 +4543,7 @@ public class tigerParser extends DebugParser {
 					if (state.failed) return retval;
 					if ( state.backtracking==0 ) stream_expr.add(expr156.getTree());
 					// AST REWRITE
-					// elements: binop_p0, expr, expr
+					// elements: expr, binop_p0, expr
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -6234,7 +6231,7 @@ public class tigerParser extends DebugParser {
 					if (state.failed) return retval;
 					if ( state.backtracking==0 ) stream_index_expr.add(index_expr202.getTree());
 					// AST REWRITE
-					// elements: index_oper, index_expr, ID
+					// elements: ID, index_oper, index_expr
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -6668,30 +6665,24 @@ public class tigerParser extends DebugParser {
 
 	// $ANTLR start synpred2_tiger
 	public final void synpred2_tiger_fragment() throws RecognitionException {
-		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:185:4: ( ARRAY_KEY LBRACK intlit RBRACK LBRACK intlit RBRACK )
+		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:185:4: ( ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK LBRACK UNSIGNED_INTLIT RBRACK )
 		dbg.enterAlt(1);
 
-		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:185:5: ARRAY_KEY LBRACK intlit RBRACK LBRACK intlit RBRACK
+		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:185:5: ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK LBRACK UNSIGNED_INTLIT RBRACK
 		{
 		dbg.location(185,5);
 		match(input,ARRAY_KEY,FOLLOW_ARRAY_KEY_in_synpred2_tiger483); if (state.failed) return;
 		dbg.location(185,15);
 		match(input,LBRACK,FOLLOW_LBRACK_in_synpred2_tiger485); if (state.failed) return;
 		dbg.location(185,22);
-		pushFollow(FOLLOW_intlit_in_synpred2_tiger487);
-		intlit();
-		state._fsp--;
-		if (state.failed) return;
-		dbg.location(185,29);
+		match(input,UNSIGNED_INTLIT,FOLLOW_UNSIGNED_INTLIT_in_synpred2_tiger487); if (state.failed) return;
+		dbg.location(185,38);
 		match(input,RBRACK,FOLLOW_RBRACK_in_synpred2_tiger489); if (state.failed) return;
-		dbg.location(185,36);
+		dbg.location(185,45);
 		match(input,LBRACK,FOLLOW_LBRACK_in_synpred2_tiger491); if (state.failed) return;
-		dbg.location(185,43);
-		pushFollow(FOLLOW_intlit_in_synpred2_tiger493);
-		intlit();
-		state._fsp--;
-		if (state.failed) return;
-		dbg.location(185,50);
+		dbg.location(185,52);
+		match(input,UNSIGNED_INTLIT,FOLLOW_UNSIGNED_INTLIT_in_synpred2_tiger493); if (state.failed) return;
+		dbg.location(185,68);
 		match(input,RBRACK,FOLLOW_RBRACK_in_synpred2_tiger495); if (state.failed) return;
 
 		}
@@ -7251,17 +7242,17 @@ public class tigerParser extends DebugParser {
 	public static final BitSet FOLLOW_SEMI_in_type_declaration455 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_base_type_in_type477 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_ARRAY_KEY_in_type503 = new BitSet(new long[]{0x0000002000000000L});
-	public static final BitSet FOLLOW_LBRACK_in_type505 = new BitSet(new long[]{0x0400040000000000L});
-	public static final BitSet FOLLOW_intlit_in_type507 = new BitSet(new long[]{0x0002000000000000L});
+	public static final BitSet FOLLOW_LBRACK_in_type505 = new BitSet(new long[]{0x0400000000000000L});
+	public static final BitSet FOLLOW_UNSIGNED_INTLIT_in_type507 = new BitSet(new long[]{0x0002000000000000L});
 	public static final BitSet FOLLOW_RBRACK_in_type509 = new BitSet(new long[]{0x0000002000000000L});
-	public static final BitSet FOLLOW_LBRACK_in_type511 = new BitSet(new long[]{0x0400040000000000L});
-	public static final BitSet FOLLOW_intlit_in_type513 = new BitSet(new long[]{0x0002000000000000L});
+	public static final BitSet FOLLOW_LBRACK_in_type511 = new BitSet(new long[]{0x0400000000000000L});
+	public static final BitSet FOLLOW_UNSIGNED_INTLIT_in_type513 = new BitSet(new long[]{0x0002000000000000L});
 	public static final BitSet FOLLOW_RBRACK_in_type515 = new BitSet(new long[]{0x0000400000000000L});
 	public static final BitSet FOLLOW_OF_KEY_in_type517 = new BitSet(new long[]{0x0000001010000000L});
 	public static final BitSet FOLLOW_base_type_in_type519 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_ARRAY_KEY_in_type541 = new BitSet(new long[]{0x0000002000000000L});
-	public static final BitSet FOLLOW_LBRACK_in_type543 = new BitSet(new long[]{0x0400040000000000L});
-	public static final BitSet FOLLOW_intlit_in_type545 = new BitSet(new long[]{0x0002000000000000L});
+	public static final BitSet FOLLOW_LBRACK_in_type543 = new BitSet(new long[]{0x0400000000000000L});
+	public static final BitSet FOLLOW_UNSIGNED_INTLIT_in_type545 = new BitSet(new long[]{0x0002000000000000L});
 	public static final BitSet FOLLOW_RBRACK_in_type547 = new BitSet(new long[]{0x0000400000000000L});
 	public static final BitSet FOLLOW_OF_KEY_in_type549 = new BitSet(new long[]{0x0000001010000000L});
 	public static final BitSet FOLLOW_base_type_in_type551 = new BitSet(new long[]{0x0000000000000002L});
@@ -7399,11 +7390,11 @@ public class tigerParser extends DebugParser {
 	public static final BitSet FOLLOW_VOID_KEY_in_synpred1_tiger201 = new BitSet(new long[]{0x0000000040000000L});
 	public static final BitSet FOLLOW_FUNCTION_KEY_in_synpred1_tiger203 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_ARRAY_KEY_in_synpred2_tiger483 = new BitSet(new long[]{0x0000002000000000L});
-	public static final BitSet FOLLOW_LBRACK_in_synpred2_tiger485 = new BitSet(new long[]{0x0400040000000000L});
-	public static final BitSet FOLLOW_intlit_in_synpred2_tiger487 = new BitSet(new long[]{0x0002000000000000L});
+	public static final BitSet FOLLOW_LBRACK_in_synpred2_tiger485 = new BitSet(new long[]{0x0400000000000000L});
+	public static final BitSet FOLLOW_UNSIGNED_INTLIT_in_synpred2_tiger487 = new BitSet(new long[]{0x0002000000000000L});
 	public static final BitSet FOLLOW_RBRACK_in_synpred2_tiger489 = new BitSet(new long[]{0x0000002000000000L});
-	public static final BitSet FOLLOW_LBRACK_in_synpred2_tiger491 = new BitSet(new long[]{0x0400040000000000L});
-	public static final BitSet FOLLOW_intlit_in_synpred2_tiger493 = new BitSet(new long[]{0x0002000000000000L});
+	public static final BitSet FOLLOW_LBRACK_in_synpred2_tiger491 = new BitSet(new long[]{0x0400000000000000L});
+	public static final BitSet FOLLOW_UNSIGNED_INTLIT_in_synpred2_tiger493 = new BitSet(new long[]{0x0002000000000000L});
 	public static final BitSet FOLLOW_RBRACK_in_synpred2_tiger495 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_VAR_KEY_in_synpred3_tiger606 = new BitSet(new long[]{0x0000000200000000L});
 	public static final BitSet FOLLOW_id_list_in_synpred3_tiger608 = new BitSet(new long[]{0x0000000000040000L});

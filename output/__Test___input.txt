@@ -1,99 +1,34 @@
-/* the use of type-declaration-list */
+type Table = array[10][10] of int;
+type Number = int;
 
-/* check if the type-declaration name doesn't have to match*/
+var rows : int := 10;
+var cols : int := 10;
+var table : Table;
 
+table function multTable(t : table) begin
+    for i := 0 to rows do
+        for j := 0 to rows do
+            table[i][j] := i*j;
+        enddo;
+        while a = 10 do
+            print(a);
+        enddo;
+    enddo;
+end;
 
-
-type DoubleArray = array [20][20] of int;
-
-
-/* the use of funct-declaration-list */
-/* this part is for defining functions to be used in the main_function */
-
-/* Smaller function
-   Get 2 int parameter, return smaller one
-*/
-
- int function Smaller ( a : int, b : int ) 
-	begin			
-	 	begin
-			var toReturn : int:=0;
-			if (a < b) then
-				toReturn := a;
-			else if (a > b) then
-				toReturn := b;
-			else
-				toReturn := 0;
-			endif;
-			endif; 
-			return toReturn;  /*this part is in the rule 'stat'*/
-		end;
-	end;
-
-/* This is for testing function returns void*/
-
- void function Void_Check ()
-	begin
-		begin
-
-			var idd : int := 3;
-			if idd < 5 then
-				idd := 4;
-			endif;
-
-		end;
-	end;
-
-
-	
-/* Concat function
-   Get parameter a : int, b : fixedpt, concatenate b after a
-   Ex : a = 2, b = 1.1 = > toReturn = 2.11
-   if parameter a or b <0, return -1
-*/
-
-fixedpt function Concat ( a : int, b : fixedpt)
-	begin
-		begin
-			var toReturn : fixedpt:=0;
-			if a < 0 | b<0 then
-				toReturn :=1;
-			else
-				while b < 1 do
-					b := b / 10;
-				enddo;
-				toReturn := a + b;
-			endif;
-
-			return toReturn;
-		end;
-	end;
-
-	
-
-void  main()  
-	 begin 
-		begin
-			type ArrayInt = array [100] of int;
-			var X, Y : ArrayInt := 10;
-			var i, sum : int := 0;
-			begin
-				for i := 1 to 100 do
-					sum := sum+ X[i] * Y[i];
-				enddo;
-				printi(sum);	
-			end;
-		end; 
-		begin
-			var Z : DoubleArray := 2;
-			var i: int := 0;
-			begin
-				for i:= 1 to 399 do
-					z[i+1] := z[i] * z[i+1];
-				enddo;
-				printi(sum);
-			end;
-		end;
-					
-			
-	 end ;
+main() begin
+    for i := 0 to rows do
+        for j := 0 to rows do
+            print(table[i][j]);
+            if i = 10 then 
+                print(i);
+            endif;
+            if a = 10 then
+                print(a);
+            else if a <> 10 then
+                print(a);
+                endif;
+            endif;
+        enddo;
+    enddo;
+end;
