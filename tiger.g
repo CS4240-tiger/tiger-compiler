@@ -12,11 +12,12 @@ tokens {
 	AST_FUNC_DECL;
 	AST_PARAM;
 	AST_ARRAY_DECL;
+	AST_ARRAY_INDEX;
+	AST_RETURN_STAT;
+	AST_FUNC_CALL;
 }
 
 @parser::header {
-	package edu.gatech.cc.cs4240_spring.tiger;
-	
 	import java.util.Map;
 	import java.util.HashMap;
 	import org.antlr.runtime.tree.CommonTree;
@@ -149,7 +150,7 @@ block_list
 
 block 	:	BEGIN_KEY (declaration_statement stat_seq) END_KEY SEMI 
 	-> 	^(AST_BLOCK declaration_statement stat_seq)
-		;
+	;
 
 declaration_statement 
 	:	type_declaration_list var_declaration_list
@@ -170,7 +171,7 @@ type_declaration
 	
 type	:	base_type
 	|	(ARRAY_KEY LBRACK INTLIT RBRACK (LBRACK INTLIT RBRACK)?) OF_KEY (base_type)
-	->	^(OF_KEY (ARRAY_KEY LBRACK INTLIT RBRACK (LBRACK INTLIT RBRACK)?) base_type) // problem
+	->	^(ARRAY_KEY AST_ARRAY_INDEX base_type)
 	;
 
 type_id :	base_type
@@ -183,12 +184,13 @@ base_type
 	;
 
 var_declaration 
-	:	VAR_KEY id_list COLON type_id (ASSIGN expr) SEMI
-	->	^(ASSIGN ^(COLON id_list type_id) expr)
+	:	(VAR_KEY id_list COLON^ type_id)^ (ASSIGN^ expr)? SEMI!
 	;
+	
+	// (VAR_KEY id_list COLON^ type_id)^ (ASSIGN^ expr)? SEMI!
 
 id_list :	ID (COMMA id_list)?
-	->	ID id_list
+	->	^(ID)*
 	;
 
 stat_seq 
@@ -196,24 +198,54 @@ stat_seq
 	;
 
 stat 
-	: IF_KEY expr THEN_KEY stat_seq (ENDIF_KEY SEMI|ELSE_KEY stat_seq ENDIF_KEY SEMI)
-		-> ^(IF_KEY expr stat_seq ^(ELSE_KEY stat_seq)?)
-	| WHILE_KEY expr DO_KEY stat_seq ENDDO_KEY SEMI
-		-> ^(WHILE_KEY expr stat_seq)
-	| FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI
-		-> ^(FOR_KEY ^(TO_KEY ^(ASSIGN ID index_expr) index_expr) stat_seq)
-  	| (ID value_tail) => ID value_tail ASSIGN^ expr_list SEMI!
-  	| func_call SEMI!
-	| BREAK_KEY SEMI!
-	| RETURN_KEY^ expr SEMI!
+	: if_stat
+	| while_stat
+	| for_stat
+  	| (assign_stat) => assign_stat
+  	| func_call
+	| break_stat
+	| return_stat
 	| block
 	;
 
+if_stat	:	IF_KEY expr THEN_KEY stat_seq (ENDIF_KEY SEMI|ELSE_KEY stat_seq ENDIF_KEY SEMI)
+	-> 	^(IF_KEY expr stat_seq ^(ELSE_KEY stat_seq)?)
+	;
+
+while_stat
+	:	WHILE_KEY expr DO_KEY stat_seq ENDDO_KEY SEMI
+	->	^(WHILE_KEY expr stat_seq)
+	;
+
+for_stat:	FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI
+	->	^(FOR_KEY ^(TO_KEY ^(ASSIGN ID index_expr) index_expr) stat_seq)
+	;
+
+assign_stat
+	:	(value) => value ASSIGN expr_list SEMI
+	->	^(ASSIGN value expr_list)
+	;
+
 func_call
-	:	ID LPAREN func_param_list RPAREN	
+	:	ID LPAREN func_param_list RPAREN SEMI
+	->	^(AST_FUNC_CALL ID func_param_list)
 	;
 	
-expr 	:	(constval | ID (value_tail | func_call_tail) | LPAREN! expr RPAREN!) (binop_p0^ expr)?
+break_stat
+	:	BREAK_KEY SEMI
+	->	BREAK_KEY
+	;
+	
+return_stat
+	:	RETURN_KEY expr SEMI
+	->	^(AST_RETURN_STAT RETURN_KEY expr)
+	;
+
+	
+expr 	:	constval (binop_p0^ expr)?
+	|	(value) => value (binop_p0^ expr)?
+	|	func_call (binop_p0^ expr)?
+	|	LPAREN! expr RPAREN! (binop_p0^ expr)?
 	;
 
 binop_p0:	(AND | OR | binop_p1);
@@ -237,16 +269,16 @@ binary_operator
 	;
 
 expr_list
-	:	expr (COMMA! expr)*
+	:	expr (COMMA expr)*
+	->	^(expr)*
 	;
 
-value 	:	ID value_tail;
-value_tail 
-	:	(LBRACK index_expr RBRACK (LBRACK index_expr RBRACK)?)?
+value 	:	ID (LBRACK index_expr RBRACK (LBRACK index_expr RBRACK)?)?
 	;
 
 index_expr 
-	:	(INTLIT | ID) (index_oper^ index_expr)?
+	:	INTLIT (index_oper^ index_expr)?
+	|	 ID (index_oper^ index_expr)?
 	;
 
 index_oper
@@ -267,10 +299,6 @@ CARRAGE_RET
 
 WHITESPACE
 	:	' ' {$channel=HIDDEN;}
-	;
-
-func_call_tail
-	: LPAREN func_param_list RPAREN
 	;
   
 func_param_list
