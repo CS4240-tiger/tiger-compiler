@@ -161,7 +161,7 @@ block_list
 	;
 
 block 	:	BEGIN_KEY (declaration_statement stat_seq) END_KEY SEMI 
-	-> 	^(AST_BLOCK declaration_statement? stat_seq)
+	-> 	^(AST_BLOCK declaration_statement stat_seq)
 	;
 
 declaration_statement 
@@ -259,7 +259,7 @@ return_stat
 	;
 
 	
-expr 	:	(constval binop_p0^) => constval binop_p0 expr
+expr 	:	(constval binop_p0) => constval binop_p0 expr
 	->	^(binop_p0 constval expr)
 	|	constval
 	|	(ID LPAREN) => func_call // func_call normally conflicts with value

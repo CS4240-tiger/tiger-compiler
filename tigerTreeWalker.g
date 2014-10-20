@@ -5,6 +5,17 @@ options {
 	ASTLabelType=CommonTree;
 }
 
+tokens {
+	AST_BLOCK;
+	AST_PARAM_LIST;
+	AST_RETURN_STAT;
+	AST_FUNC_CALL;
+	AST_ID_LIST;
+	AST_EXPR_LIST;
+	AST_EXPR_PAREN;
+	AST_2D_ARRAY;
+}
+
 @header {
 	import java.util.Map;
 	import java.util.HashMap;
@@ -25,56 +36,57 @@ options {
 	}
 }
 
-tiger_program returns [TigerNode node]
+tiger_program
 	:	type_declaration_list funct_declaration_list
 	;
 	
-funct_declaration_list returns [java.util.List<String> list] 
-	:	funct_declaration*
-	;
-	
-funct_declaration returns [TigerNode node]
-	:	(ret_type (FUNCTION_KEY ID | MAIN_KEY)) LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
+funct_declaration_list
+	:	funct_declaration+
 	;
 
+funct_declaration
+	:	^(ID param_list block_list)
+	|	^(MAIN_KEY block_list)
+	;
+	
 ret_type 
 	:	VOID_KEY
 	|	type_id
 	;
 
-param_list returns [java.util.List<String> list] 
-	:	(param (COMMA param)*)?
+param_list 
+	:	^(AST_PARAM_LIST (param+)?)
 	;
 
-param returns [TigerNode node] 	
-	:	ID COLON type_id
+param 	:	^(COLON ID type_id)
 	;
 
-block_list returns [java.util.List<String> list] 
+block_list 
 	:	block+
 	;
 
-block returns [TigerNode node] 	
-	:	BEGIN_KEY declaration_statement stat_seq END_KEY SEMI;
+block 	:	^(AST_BLOCK declaration_statement stat_seq)
+	;
 
 declaration_statement 
 	:	type_declaration_list var_declaration_list
 	;
 	
-type_declaration_list returns [java.util.List<String> list]  
+type_declaration_list 
 	:	 type_declaration*
 	;
 	
-var_declaration_list returns [java.util.List<String> list]  
+var_declaration_list 
 	:	var_declaration*
 	;
 
-type_declaration returns [TigerNode node]  
-	:	TYPE_KEY ID EQ type SEMI
+type_declaration 
+	:	^(EQ ID type)
 	;
 	
 type	:	base_type
-	|	ARRAY_KEY LBRACK INTLIT RBRACK (LBRACK INTLIT RBRACK)? OF_KEY base_type
+	|	^(ARRAY_KEY ^(AST_2D_ARRAY UNSIGNED_INTLIT UNSIGNED_INTLIT) base_type)
+	|	^(ARRAY_KEY UNSIGNED_INTLIT base_type)
 	;
 
 type_id :	base_type
@@ -86,70 +98,106 @@ base_type
 	|	FIXEDPT_KEY
 	;
 
-var_declaration returns [TigerNode node]  
-	:	VAR_KEY id_list COLON type_id optional_init SEMI
+var_declaration 
+	:	^(ASSIGN ^(COLON id_list type_id) expr)
+	|	^(COLON id_list type_id)
 	;
 
-id_list returns [java.util.List<String> list] 
-	:	ID (COMMA id_list)?
+
+id_list :	^(AST_ID_LIST ID+)
 	;
 
-optional_init 
-	:	(ASSIGN expr)?
-	;
-
-stat_seq returns [java.util.List<String> list] 
+stat_seq 
 	:	stat+
 	;
 
-stat returns [TigerNode node] 
-	: IF_KEY expr THEN_KEY stat_seq (ENDIF_KEY SEMI|ELSE_KEY stat_seq ENDIF_KEY SEMI)
-	| WHILE_KEY expr DO_KEY stat_seq ENDDO_KEY SEMI
-	| FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI
-  	| ID ((value_tail ASSIGN expr_list) | (func_call_tail)) SEMI
-	| BREAK_KEY SEMI
-	| RETURN_KEY expr SEMI
+stat 
+	: if_stat
+	| while_stat
+	| for_stat
+  	| (value ASSIGN) => assign_stat // assign_stat conflicts with func_call
+  	| func_call SEMI
+	| break_stat
+	| return_stat
 	| block
 	;
-		
-expr returns [TigerNode node] 	
-	:	(constval | ID (value_tail | func_call_tail) | LPAREN expr RPAREN) (binop_p0 expr)?
+
+if_stat	:	(IF_KEY expr stat_seq ELSE_KEY stat_seq) => ^(IF_KEY expr stat_seq ^(ELSE_KEY stat_seq))
+	|	^(IF_KEY expr stat_seq)
+	;
+
+while_stat
+	:	^(WHILE_KEY expr stat_seq)
+	;
+
+for_stat:	^(FOR_KEY ^(TO_KEY ^(ASSIGN ID index_expr) index_expr) stat_seq)
+	;
+
+assign_stat
+	:	^(ASSIGN value expr_list)
+	;
+
+func_call
+	:	^(AST_FUNC_CALL ID func_param_list)
 	;
 	
+break_stat
+	:	BREAK_KEY
+	;
+	
+return_stat
+	:	^(AST_RETURN_STAT RETURN_KEY expr)
+	;
+
+	
+expr 	:	^(binop_p0 constval expr)
+	|	constval
+	|	^(binop_p0 func_call expr)
+	|	^(binop_p0 value expr)
+	|	value
+	|	^(binop_p0 ^(AST_EXPR_PAREN expr) ^(AST_EXPR_PAREN expr))
+	|	^(AST_EXPR_PAREN expr)
+	;
+
 binop_p0:	(AND | OR | binop_p1);
 binop_p1:	(EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | binop_p2);     
 binop_p2:	(MINUS | PLUS | binop_p3);
 binop_p3:	(MULT | DIV);
 	
-constval:	INTLIT
-	|	FIXEDPTLIT
+constval:	(fixedptlit) => fixedptlit
+	|	intlit
 	;
 
+intlit :	MINUS? UNSIGNED_INTLIT;
+
+fixedptlit
+	:   MINUS? UNSIGNED_FIXEDPTLIT
+	;
+	
 binary_operator
 	:	(PLUS|MINUS|MULT|DIV|EQ|NEQ|LESSER|GREATER|LESSEREQ|GREATEREQ|AND|OR)
 	;
 
-expr_list returns [java.util.List<String> list] 
-	:	expr (COMMA expr)*
+expr_list
+	:	^(AST_EXPR_LIST expr+)
 	;
 
-value 	:	ID value_tail;
-value_tail 
-	:	(LBRACK index_expr RBRACK (LBRACK index_expr RBRACK)?)?
+value 	:	(ID LBRACK index_expr RBRACK LBRACK) => ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK
+	|	(ID LBRACK) => ID LBRACK index_expr RBRACK
+	|	ID
 	;
 
-index_expr returns [TigerNode node]
-	:	(INTLIT | ID) (index_oper index_expr)?
+index_expr 
+	:	^(index_oper intlit index_expr)
+	|	intlit
+	|	^(index_oper ID index_expr)
+	|	ID
 	;
 
 index_oper
 	:	(PLUS|MINUS|MULT)
 	;
-
-func_call_tail
-  : LPAREN func_param_list RPAREN
-  ;
   
-func_param_list returns [java.util.List<String> list] 
-  : (expr (COMMA expr)*)?
-  ;
+func_param_list
+	: ^(AST_PARAM_LIST (expr+)?)
+	;
