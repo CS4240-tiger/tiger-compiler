@@ -7,6 +7,13 @@ options {
 	ASTLabelType = CommonTree;
 }
 
+tokens {
+	AST_BLOCK;
+	AST_FUNC_DECL;
+	AST_PARAM;
+	AST_ARRAY_DECL;
+}
+
 @parser::header {
 	package edu.gatech.cc.cs4240_spring.tiger;
 	
@@ -105,7 +112,7 @@ options {
 }
 
 tiger_program
-	:	type_declaration_list funct_declaration_list
+	:	type_declaration_list funct_declaration_list //main_function
 	;
 	
 funct_declaration_list
@@ -113,8 +120,13 @@ funct_declaration_list
 	;
 
 funct_declaration
-	:	(ret_type (FUNCTION_KEY ID | MAIN_KEY))^ LPAREN! param_list RPAREN! BEGIN_KEY! block_list END_KEY! SEMI!
+	:	ret_type FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
+	->	^(AST_FUNC_DECL[ID] param_list block_list)
 		{defineFunction($ID.text, $param_list.tree, $block_list.tree);}
+	;
+
+main_function
+	:	(VOID_KEY MAIN_KEY LPAREN RPAREN) => VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY block_list END_KEY SEMI
 	;
 
 ret_type 
@@ -124,7 +136,7 @@ ret_type
 
 param_list 
 	:	(param (COMMA param)*)?
-	->	^(param)*
+	->	AST_PARAM[param]*
 	;
 
 param 	:	ID COLON type_id
@@ -135,9 +147,9 @@ block_list
 	:	block+
 	;
 
-block 	:	BEGIN_KEY (declaration_statement stat_seq) END_KEY SEMI
-	->	^(BEGIN_KEY declaration_statement stat_seq)
-	;
+block 	:	BEGIN_KEY (declaration_statement stat_seq) END_KEY SEMI 
+	-> 	^(AST_BLOCK declaration_statement stat_seq)
+		;
 
 declaration_statement 
 	:	type_declaration_list var_declaration_list
@@ -152,12 +164,13 @@ var_declaration_list
 	;
 
 type_declaration 
-	:	TYPE_KEY ID EQ type SEMI
-	->	^(EQ ID TYPE_KEY)
+	:	(TYPE_KEY ID) EQ type SEMI
+	->	^(EQ ID type)
 	;
 	
 type	:	base_type
-	|	(ARRAY_KEY LBRACK INTLIT RBRACK (LBRACK INTLIT RBRACK)?)^ OF_KEY^ (base_type)^
+	|	(ARRAY_KEY LBRACK INTLIT RBRACK (LBRACK INTLIT RBRACK)?) OF_KEY (base_type)
+	->	^(OF_KEY (ARRAY_KEY LBRACK INTLIT RBRACK (LBRACK INTLIT RBRACK)?) base_type) // problem
 	;
 
 type_id :	base_type
@@ -189,13 +202,18 @@ stat
 		-> ^(WHILE_KEY expr stat_seq)
 	| FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI
 		-> ^(FOR_KEY ^(TO_KEY ^(ASSIGN ID index_expr) index_expr) stat_seq)
-  	| ID ((value_tail ASSIGN^ expr_list) | (func_call_tail)) SEMI!
+  	| (ID value_tail) => ID value_tail ASSIGN^ expr_list SEMI!
+  	| func_call SEMI!
 	| BREAK_KEY SEMI!
 	| RETURN_KEY^ expr SEMI!
 	| block
 	;
-		
-expr 	:	(constval | ID (value_tail | func_call_tail) | LPAREN expr RPAREN) (binop_p0^ expr)?
+
+func_call
+	:	ID LPAREN func_param_list RPAREN	
+	;
+	
+expr 	:	(constval | ID (value_tail | func_call_tail) | LPAREN! expr RPAREN!) (binop_p0^ expr)?
 	;
 
 binop_p0:	(AND | OR | binop_p1);
