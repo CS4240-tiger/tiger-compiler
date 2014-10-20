@@ -182,11 +182,11 @@ type_declaration
 	;
 	
 type	:	base_type
-	|	(ARRAY_KEY LBRACK INTLIT RBRACK LBRACK INTLIT RBRACK) 
-	=> 	ARRAY_KEY LBRACK INTLIT RBRACK LBRACK INTLIT RBRACK OF_KEY base_type
-	->	^(ARRAY_KEY ^(AST_2D_ARRAY INTLIT INTLIT) base_type)
-	|	ARRAY_KEY LBRACK INTLIT RBRACK OF_KEY base_type
-	->	^(ARRAY_KEY INTLIT base_type)
+	|	(ARRAY_KEY LBRACK intlit RBRACK LBRACK intlit RBRACK) 
+	=> 	ARRAY_KEY LBRACK intlit RBRACK LBRACK intlit RBRACK OF_KEY base_type
+	->	^(ARRAY_KEY ^(AST_2D_ARRAY intlit intlit) base_type)
+	|	ARRAY_KEY LBRACK intlit RBRACK OF_KEY base_type
+	->	^(ARRAY_KEY intlit base_type)
 	;
 
 type_id :	base_type
@@ -279,17 +279,23 @@ binop_p1:	(EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | binop_p2);
 binop_p2:	(MINUS | PLUS | binop_p3);
 binop_p3:	(MULT | DIV);
 	
-constval:	INTLIT
-	|	FIXEDPTLIT
+constval:	(fixedptlit) => fixedptlit
+	|	intlit
 	;
 
-INTLIT :	MINUS? '0'..'9'+;
+intlit :	MINUS? UNSIGNED_INTLIT;
 
-FIXEDPTLIT
-	:   INTLIT '.' ('0'..'9')* 
-	|   '.' ('0'..'9')+
+UNSIGNED_INTLIT	
+	:	'0'..'9'+;
+
+fixedptlit
+	:   MINUS? UNSIGNED_FIXEDPTLIT
 	;
 
+UNSIGNED_FIXEDPTLIT
+	:  ('0'..'9')* '.' ('0'..'9')* 
+	;
+	
 binary_operator
 	:	(PLUS|MINUS|MULT|DIV|EQ|NEQ|LESSER|GREATER|LESSEREQ|GREATEREQ|AND|OR)
 	;
@@ -305,9 +311,9 @@ value 	:	(ID LBRACK index_expr RBRACK LBRACK) => ID LBRACK index_expr RBRACK LBR
 	;
 
 index_expr 
-	:	(INTLIT index_oper) => INTLIT index_oper index_expr
-	->	^(index_oper INTLIT index_expr)
-	|	INTLIT
+	:	(intlit index_oper) => intlit index_oper index_expr
+	->	^(index_oper intlit index_expr)
+	|	intlit
 	|	(ID index_oper) => ID index_oper index_expr
 	->	^(index_oper ID index_expr)
 	|	ID
