@@ -1,34 +1,45 @@
-type Table = array[10][10] of int;
-type Number = int;
+type Array = array [5] of int;
 
-var rows : int := 10;
-var cols : int := 10;
-var table : Table;
-
-table function multTable(t : table) begin
-    for i := 0 to rows do
-        for j := 0 to rows do
-            table[i][j] := i*j;
-        enddo;
-        while a = 10 do
-            print(a);
-        enddo;
-    enddo;
+/* increments b by 5 */
+int function addFive(b : int)
+begin
+begin
+	var i : int := 0;
+	while (i < 5) do
+		b := b + 1;
+		i := i + 1;
+	enddo;
+	return b;
+end;
 end;
 
-main() begin
-    for i := 0 to rows do
-        for j := 0 to rows do
-            print(table[i][j]);
-            if i = 10 then 
-                print(i);
-            endif;
-            if a = 10 then
-                print(a);
-            else if a <> 10 then
-                print(a);
-                endif;
-            endif;
-        enddo;
-    enddo;
+void function showIntFloat(i : int, j : fixedpt)
+begin
+begin
+	/*Print integer i and float j*/
+end;
+end;
+
+void main()
+begin
+begin
+	type Float = fixedpt;
+	var a : Array;
+	var b : Float := 0.243;
+	for i := 0 to 4 do
+		if i <= 1 then
+			a[i] := addFive(i);
+		else
+			a[i] := addFive(i+10);
+		endif;
+		if (i*1)+1 = 4 then	/* skips last iteration */
+			break;
+		endif;
+	enddo;
+
+	begin
+	showIntFloat(a[3]*2, b+3.2);
+	end;
+
+end;
 end;

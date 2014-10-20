@@ -119,7 +119,7 @@ tiger_program
 	;
 	
 funct_declaration_list
-	:	funct_declaration*
+	:	funct_declaration+
 	;
 
 funct_declaration
