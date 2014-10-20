@@ -9,12 +9,13 @@ options {
 
 tokens {
 	AST_BLOCK;
-	AST_FUNC_DECL;
-	AST_PARAM;
-	AST_ARRAY_DECL;
-	AST_ARRAY_INDEX;
+	AST_PARAM_LIST;
 	AST_RETURN_STAT;
 	AST_FUNC_CALL;
+	AST_ID_LIST;
+	AST_EXPR_LIST;
+	AST_EXPR_PAREN;
+	AST_2D_ARRAY;
 }
 
 @parser::header {
@@ -24,7 +25,7 @@ tokens {
 }
 
 @parser::members {
-	public Map<String, TigerFunction> functions = new HashMap<String, TigerFunction>();
+	//public Map<String, TigerFunction> functions = new HashMap<String, TigerFunction>();
     
 	@Override
 	public void reportError(RecognitionException e) {
@@ -62,7 +63,7 @@ tokens {
 		System.err.println("Error at line " + String.valueOf(lineIndex) + ": " + lineCode + " ("+getErrorMessage(e, tokenNames)+")");
 	}
     
-	private void defineFunction(String id, Object params, Object block) {
+	/*private void defineFunction(String id, Object params, Object block) {
 		// Parameters
 		CommonTree paramTree = params == null ? new CommonTree() : (CommonTree) params;
 
@@ -72,7 +73,7 @@ tokens {
 		// The function name with the number of parameters after it, is the unique key
 		String key = id + paramTree.getChildCount();
 		functions.put(key, new TigerFunction(id, paramTree, blockTree));
-	}
+	}*/
 }
 
 @lexer::members {
@@ -107,13 +108,14 @@ tokens {
 			+ "'" + lineCode.charAt(e.charPositionInLine) 
 			+ "'" + lineCode.substring(e.charPositionInLine + 1,lineCode.length());
 		}
+		
 		lineCode = lineCode.replaceFirst(".*?(?=[a-zA-Z0-9\'])", "");
 		System.err.println("Error at line " + String.valueOf(lineIndex) + ": " + lineCode + " ("+getErrorMessage(e, tokenNames)+")");
 	}
 }
 
 tiger_program
-	:	type_declaration_list funct_declaration_list //main_function
+	:	type_declaration_list funct_declaration_list
 	;
 	
 funct_declaration_list
@@ -121,13 +123,23 @@ funct_declaration_list
 	;
 
 funct_declaration
-	:	ret_type FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
-	->	^(AST_FUNC_DECL[ID] param_list block_list)
-		{defineFunction($ID.text, $param_list.tree, $block_list.tree);}
+	:	return_func
+	|	void_func
+		//{defineFunction($ID.text, $param_list.tree, $block_list.tree);}
+		//{defineFunction($MAIN_KEY.text, null, $block_list.tree);}
 	;
 
-main_function
-	:	(VOID_KEY MAIN_KEY LPAREN RPAREN) => VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY block_list END_KEY SEMI
+return_func
+	:	type_id FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
+	->	^(ID param_list block_list)
+	;
+
+void_func
+	:	(VOID_KEY FUNCTION_KEY) => VOID_KEY FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
+	->	^(ID param_list block_list)
+	|	VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY block_list END_KEY SEMI
+	->	^(MAIN_KEY block_list)
+
 	;
 
 ret_type 
@@ -137,7 +149,7 @@ ret_type
 
 param_list 
 	:	(param (COMMA param)*)?
-	->	AST_PARAM[param]*
+	->	^(AST_PARAM_LIST (param+)?)
 	;
 
 param 	:	ID COLON type_id
@@ -149,7 +161,7 @@ block_list
 	;
 
 block 	:	BEGIN_KEY (declaration_statement stat_seq) END_KEY SEMI 
-	-> 	^(AST_BLOCK declaration_statement stat_seq)
+	-> 	^(AST_BLOCK declaration_statement? stat_seq)
 	;
 
 declaration_statement 
@@ -165,13 +177,16 @@ var_declaration_list
 	;
 
 type_declaration 
-	:	(TYPE_KEY ID) EQ type SEMI
+	:	TYPE_KEY ID EQ type SEMI
 	->	^(EQ ID type)
 	;
 	
 type	:	base_type
-	|	(ARRAY_KEY LBRACK INTLIT RBRACK (LBRACK INTLIT RBRACK)?) OF_KEY (base_type)
-	->	^(ARRAY_KEY AST_ARRAY_INDEX base_type)
+	|	(ARRAY_KEY LBRACK INTLIT RBRACK LBRACK INTLIT RBRACK) 
+	=> 	ARRAY_KEY LBRACK INTLIT RBRACK LBRACK INTLIT RBRACK OF_KEY base_type
+	->	^(ARRAY_KEY ^(AST_2D_ARRAY INTLIT INTLIT) base_type)
+	|	ARRAY_KEY LBRACK INTLIT RBRACK OF_KEY base_type
+	->	^(ARRAY_KEY INTLIT base_type)
 	;
 
 type_id :	base_type
@@ -184,13 +199,15 @@ base_type
 	;
 
 var_declaration 
-	:	(VAR_KEY id_list COLON^ type_id)^ (ASSIGN^ expr)? SEMI!
+	:	(VAR_KEY id_list COLON type_id ASSIGN) => VAR_KEY id_list COLON type_id ASSIGN expr SEMI
+	->	^(ASSIGN ^(COLON id_list type_id) expr)
+	|	VAR_KEY id_list COLON type_id SEMI
+	->	^(COLON id_list type_id)
 	;
-	
-	// (VAR_KEY id_list COLON^ type_id)^ (ASSIGN^ expr)? SEMI!
+
 
 id_list :	ID (COMMA id_list)?
-	->	^(ID)*
+	->	^(AST_ID_LIST ID+)
 	;
 
 stat_seq 
@@ -201,8 +218,8 @@ stat
 	: if_stat
 	| while_stat
 	| for_stat
-  	| (assign_stat) => assign_stat
-  	| func_call
+  	| (value ASSIGN) => assign_stat // assign_stat conflicts with func_call
+  	| func_call SEMI
 	| break_stat
 	| return_stat
 	| block
@@ -227,7 +244,7 @@ assign_stat
 	;
 
 func_call
-	:	ID LPAREN func_param_list RPAREN SEMI
+	:	ID LPAREN func_param_list RPAREN
 	->	^(AST_FUNC_CALL ID func_param_list)
 	;
 	
@@ -242,10 +259,19 @@ return_stat
 	;
 
 	
-expr 	:	constval (binop_p0^ expr)?
-	|	(value) => value (binop_p0^ expr)?
-	|	func_call (binop_p0^ expr)?
-	|	LPAREN! expr RPAREN! (binop_p0^ expr)?
+expr 	:	(constval binop_p0^) => constval binop_p0 expr
+	->	^(binop_p0 constval expr)
+	|	constval
+	|	(ID LPAREN) => func_call // func_call normally conflicts with value
+	|	(ID LPAREN binop_p0) => func_call binop_p0 expr
+	->	^(binop_p0 func_call expr)
+	|	(value binop_p0) => value binop_p0 expr
+	->	^(binop_p0 value expr)
+	|	value
+	|	(LPAREN expr RPAREN binop_p0) => LPAREN expr RPAREN binop_p0 expr
+	->	^(binop_p0 ^(AST_EXPR_PAREN expr) ^(AST_EXPR_PAREN expr))
+	|	LPAREN expr RPAREN
+	->	^(AST_EXPR_PAREN expr)
 	;
 
 binop_p0:	(AND | OR | binop_p1);
@@ -270,15 +296,21 @@ binary_operator
 
 expr_list
 	:	expr (COMMA expr)*
-	->	^(expr)*
+	->	^(AST_EXPR_LIST expr+)
 	;
 
-value 	:	ID (LBRACK index_expr RBRACK (LBRACK index_expr RBRACK)?)?
+value 	:	(ID LBRACK index_expr RBRACK LBRACK) => ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK
+	|	(ID LBRACK) => ID LBRACK index_expr RBRACK
+	|	ID
 	;
 
 index_expr 
-	:	INTLIT (index_oper^ index_expr)?
-	|	 ID (index_oper^ index_expr)?
+	:	(INTLIT index_oper) => INTLIT index_oper index_expr
+	->	^(index_oper INTLIT index_expr)
+	|	INTLIT
+	|	(ID index_oper) => ID index_oper index_expr
+	->	^(index_oper ID index_expr)
+	|	ID
 	;
 
 index_oper
@@ -303,7 +335,7 @@ WHITESPACE
   
 func_param_list
 	: (expr (COMMA expr)*)?
-	-> ^(expr)*
+	-> ^(AST_PARAM_LIST (expr+)?)
 	;
 
 keywords
