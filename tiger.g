@@ -7,6 +7,13 @@ options {
 	ASTLabelType = CommonTree;
 }
 
+tokens {
+	AST_BLOCK;
+	AST_FUNC_DECL;
+	AST_PARAM;
+	AST_ARRAY_DECL;
+}
+
 @parser::header {
 	import java.util.Map;
 	import java.util.HashMap;
@@ -103,7 +110,7 @@ options {
 }
 
 tiger_program
-	:	type_declaration_list funct_declaration_list
+	:	type_declaration_list funct_declaration_list //main_function
 	;
 	
 funct_declaration_list
@@ -111,8 +118,13 @@ funct_declaration_list
 	;
 
 funct_declaration
-	:	(ret_type (FUNCTION_KEY ID | MAIN_KEY))^ LPAREN! param_list RPAREN! BEGIN_KEY! block_list END_KEY! SEMI!
+	:	ret_type FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
+	->	^(AST_FUNC_DECL[ID] param_list block_list)
 		{defineFunction($ID.text, $param_list.tree, $block_list.tree);}
+	;
+
+main_function
+	:	(VOID_KEY MAIN_KEY LPAREN RPAREN) => VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY block_list END_KEY SEMI
 	;
 
 ret_type 
@@ -122,15 +134,20 @@ ret_type
 
 param_list 
 	:	(param (COMMA param)*)?
+	->	AST_PARAM[param]*
 	;
 
-param 	:	ID COLON^ type_id;
+param 	:	ID COLON type_id
+	->	^(COLON ID type_id)
+	;
 
 block_list 
 	:	block+
 	;
 
-block 	:	BEGIN_KEY^ (declaration_statement stat_seq)^ END_KEY! SEMI!;
+block 	:	BEGIN_KEY (declaration_statement stat_seq) END_KEY SEMI 
+	-> 	^(AST_BLOCK declaration_statement stat_seq)
+	;
 
 declaration_statement 
 	:	type_declaration_list var_declaration_list
@@ -145,11 +162,13 @@ var_declaration_list
 	;
 
 type_declaration 
-	:	(TYPE_KEY ID)^ EQ^ type SEMI!
+	:	(TYPE_KEY ID) EQ type SEMI
+	->	^(EQ ID type)
 	;
 	
 type	:	base_type
-	|	(ARRAY_KEY LBRACK INTLIT RBRACK (LBRACK INTLIT RBRACK)?)^ OF_KEY^ (base_type)^
+	|	(ARRAY_KEY LBRACK INTLIT RBRACK (LBRACK INTLIT RBRACK)?) OF_KEY (base_type)
+	->	^(OF_KEY (ARRAY_KEY LBRACK INTLIT RBRACK (LBRACK INTLIT RBRACK)?) base_type) // problem
 	;
 
 type_id :	base_type
