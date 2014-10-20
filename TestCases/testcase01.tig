@@ -1,0 +1,252 @@
+/* CS 4240 team 1
+   project phase 1 large program...
+   this program demonstrates matrix multipication and square root operations.
+   includes supporting math functions.
+*/
+
+type Mat33 = array[3][3] of fixedpt;
+type decimal = fixedpt; /*for grammar demonstration purposes.*/
+
+decimal function consecutive_blocks_function_returns_id_type()
+begin
+    begin
+        flush();
+    end;
+    begin
+        type Integer = int;
+        begin
+            var x, y, z: Integer := 123.123;
+            z := check_size(x, y);
+            x := y + z * (y + z * y);
+            y := y + 4 * (3 + 2 / 1);
+            y := x <= z;
+            z := y = x;
+        end;
+        begin
+            type Integer = int;
+            return 0.000;
+        end;
+    end;
+end;
+
+/* this is a comment with keywords:  function main */
+void function array_expressions()
+begin
+    begin
+        begin
+            type IntArray = array[10] of int;
+            type Int2DArray = array[10][10] of int;
+            var arr_1D: IntArray := 0;
+            var arr_2D__: Int2DArray := 1;
+            var index: int := 2;
+            
+            arr_2D__[0][0] := arr_1D[0] + 5 * 2;
+            arr_2D__[1][1] := arr_2D[3 + 1 * index][0] + 5 * arr_1D[0];
+            arr_1D[index] := 5 * 2 + arr_1D[5];
+            arr_1D[1] := 0 * arr_2D[1][1];
+        end;
+        break;
+    end;
+end;
+
+void function consecutive_void_functions()
+begin
+    begin
+        printi(0);
+    end;
+end;
+
+/* check matrix sizes to make sure that they are compatible for multipication
+   checks A*B for compatibility */
+int function check_size(Awidth: int, Bwidth: int) 
+begin
+	begin
+	if (Awidth=Bwidth) then
+		return 1;
+	else
+		return 0;
+  	endif;
+	end;
+end; 
+
+/* computes num^power */
+fixedpt function m_pow(num: fixedpt, power: int) 
+begin
+	begin
+		if (power = 0) then
+			return num;
+		else
+			begin
+				var out : fixedpt;
+				out := num;
+				for i := 1 to power-1 do
+					out := out + num;
+				enddo;
+				return out;
+			end;
+		endif;
+	end;
+end;
+
+/* returns the number of digits to the left of the decimal place in the
+ * input
+ */
+int function num_length(num: fixedpt)
+begin
+	begin
+	var out : int := 0;
+	while (num>=1) do
+		out := out + 1;	
+		num := num/10;
+	enddo;
+
+	return out;
+	end;
+end;
+
+/* uses the method suggested on wikipedia to generate
+ * an initial guess for the square root */
+fixedpt function generate_sqrt_guess(num: fixedpt)
+begin
+	begin
+	var nlength,n,tenfactor : int;
+	var a : fixedpt;
+	var out : fixedpt := 0;
+	nlength := num_length(num);
+	n := nlength/2;
+	tenfactor := m_pow(10,2*n);
+	a := num/tenfactor;
+	if (a < 10) then
+		begin
+			var pow_result : fixedpt;
+			pow_result := m_pow(10,n);
+			return 2*pow_result;
+		end;
+	else
+		begin
+			var pow_result : fixedpt;
+			pow_result := m_pow(10,n);
+			return 6*pow_result;
+		end;
+	endif;
+	end;
+end;
+
+/* absolute value function */
+fixedpt function m_abs(num: fixedpt)
+begin
+	begin
+	if(num < 0) then
+		return 0-num;
+	else
+		return num;
+	endif;
+	end;
+end;
+
+/* computes the square root of a number using the "babylonian" method */
+fixedpt function m_sqrt(num: fixedpt)
+begin
+	begin
+	var guess,x,e,pow_result,abs_result : fixedpt;
+	var counter : int := 0;
+	guess := generate_sqrt_guess(num);
+	x := guess;
+	pow_result := m_pow(x,2); 
+	e := (num - pow_result)/(2*x);
+
+	abs_result := m_abs(e);
+	while (abs_result/x > 0.01 & counter < 100) do
+		x := x+e;
+		pow_result := m_pow(x,2); 
+		e := (num - pow_result)/(2*x);
+		counter := counter+1;
+		abs_result := m_abs(e);
+	enddo;	
+
+	return x;
+	end;
+end;
+
+/* for demonstration purposes only */
+fixedpt function random_function(num: fixedpt)
+begin
+	begin
+	var a : int := 12;	
+	var b : fixedpt := 2.2;
+	var c : fixedpt;	
+
+	c := 1&0|1+(2*4/6+3)*(3<4&9>=5+2)/5>6-4*9/2<>2;
+	return 2.2;
+	end;
+end;
+
+
+
+void main() 
+begin
+	begin
+	var C : Mat33 := 0; /*0 initialization*/
+	var Cheight, Cwidth : int;
+	var A, B : Mat33;
+	var Aheight : int := 3;
+	var Awidth : int := 3;
+	var Bheight : int := 3;
+	var Bwidth : int := 3;
+	var check_size_result : int;
+        /*A={{1,2,3},{4,5,6},{7,8,9}};*/
+	/*B={{4,5,2},{1,1,1},{2,1,2}};*/
+
+	A[0][0]:=1;
+	A[0][1]:=2.022;
+	A[0][2]:=3.1;
+	A[1][0]:=4.4;
+	A[1][1]:=5;
+	A[1][2]:=6;
+	A[2][0]:=7.10;
+	A[2][1]:=8;
+	A[2][2]:=9;
+
+	B[0][0]:=4.1;
+	B[0][1]:=5;
+	B[0][2]:=2;
+	B[1][0]:=1.9;
+	B[1][1]:=0.123;
+	B[1][2]:=1.22;
+	B[2][0]:=2.232;
+	B[2][1]:=0;
+	B[2][2]:=0.0;
+
+	
+	check_size_result := check_size(Awidth, Bheight);
+	if(check_size_result = 0) then
+		exit(0); /*matrices are of incorrect size to multiply*/
+	endif;
+
+	for j := 0 to Bwidth-1 do
+		for i := 0 to Aheight-1 do
+			C[i][j]:=0;
+			for dindex := 0 to Aheight-1 do
+				C[i][j] := C[i][j] + A[i][dindex] * B[dindex][j];
+			enddo;
+		enddo;
+	enddo;
+
+	/* then, let's compute elementwise sqrt of C because we can */
+	Cheight := Aheight;
+	Cwidth := Bwidth;
+	for i := 0 to Cheight-1 do
+		for j := 0 to Cwidth-1 do
+			C[i][j] := m_sqrt(C[i][j]);
+		enddo;
+	enddo;
+
+	/* finally, let's output elements of C */
+	for i := 0 to Cheight-1 do
+		for j := 0 to Cwidth-1 do
+			printi(C[i][j]);
+		enddo;
+	enddo;
+
+  end;
+end;

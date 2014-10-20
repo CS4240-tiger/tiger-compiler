@@ -1,0 +1,45 @@
+type Array = array [5] of int;
+
+/* increments b by 5 */
+int function addFive(b : int)
+begin
+begin
+	var i : int := 0;
+	while (i < 5) do
+		b := b + 1;
+		i := i + 1;
+	enddo;
+	return b;
+end;
+end;
+
+void function showIntFloat(i : int, j : fixedpt)
+begin
+begin
+	/*Print integer i and float j*/
+end;
+end;
+
+void main()
+begin
+begin
+	type Float = fixedpt;
+	var a : Array;
+	var b : Float := 0.243;
+	for i := 0 to 4 do
+		if i <= 1 then
+			a[i] := addFive(i);
+		else
+			a[i] := addFive(i+10);
+		endif;
+		if (i*1)+1 = 4 then	/* skips last iteration */
+			break;
+		endif;
+	enddo;
+
+	begin
+	showIntFloat(a[3]*2, b+3.2);
+	end;
+
+end;
+end;

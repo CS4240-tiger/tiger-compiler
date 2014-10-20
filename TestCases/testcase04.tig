@@ -1,0 +1,56 @@
+/*Test Program with most of the Tiger grammar constructs*/
+
+/* Helper Function with multiple parameters */
+int function square(n:int, m:int)
+begin
+  begin
+    return n*n;
+  end;
+end;
+
+/*Main Function*/
+void main() 
+begin
+  begin
+
+    /*Type declaration*/
+    type ArrayInt = array [100] of int; var X, Y : ArrayInt := 10;
+
+    /*Variable Declaration not definition*/
+	var i:int;
+
+    /*Integer Variable Declaration*/
+    var i, sum : int := 0;
+
+    /*FixedPoint variable declaration*/
+    var x: fixedpt := 43.50;
+
+    begin
+
+      /*For loop*/
+      for i := 1 to 100 do
+        sum := sum + X[i] * Y[i];
+      enddo;   
+
+       
+      begin
+        /*While construct with mutiple predicates 
+          and multiple statements*/
+        while((a>4)  & (b<2)) do
+          printi(i);
+          printi(y); 
+        enddo;
+      end;
+
+      /* If/Then/Else Construct */
+      if(a>4) then
+        printi(b);
+      else
+        printi(c);
+      endif;
+
+      /*Function invocation with mutiple args*/
+      printi(sum, a); 
+    end;
+  end;
+end;

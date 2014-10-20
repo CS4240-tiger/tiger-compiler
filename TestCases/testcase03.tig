@@ -1,0 +1,73 @@
+void function dotproduct()
+begin
+	begin
+		type ArrayInt = array [100] of int;
+		var X, Y : ArrayInt := 10;
+		var i, sum : int := 0;
+		begin
+			for i := 1 to 100 do
+				sum := sum + X[i] * Y[i];
+			enddo;
+			printi(sum);
+		end;
+	end;
+end;
+
+/* Computes the factorial of a given input >= 0 */
+int function fact(input : int)
+begin
+	begin
+		if (input = 0 | input = 1) then
+			return 1;
+		else
+			return input + fact(input - 1);
+		endif;
+	end;
+end;
+
+void function mainBinarySearch()
+begin
+	begin
+		type ArrayInt = array [100] of int;
+		var intArray: ArrayInt;
+		var x: int := 53;
+		var i: int :=0;
+		begin
+			for i := 0 to 100 do
+				arrayInt[i] := i;
+			enddo;
+		end;
+		print(binarySearch(arrayInt, x, 0, 100));
+	end;
+end;
+
+int function binarySearch(intArray: ArrayInt, searchfor: int, beginIndex: int, endIndex: int)
+begin
+	begin
+		var middleIndex : int := (endIndex - beginIndex)/2;
+		begin
+			if endIndex-beginIndex = 0 & intArray[middleIndex] <> searchfor then
+				return -1;
+			else if intArray[middleIndex] = searchfor then
+					return middleIndex;
+			else if intArray[middleIndex] < searchfor then
+					return binarySearch(intArray, searchfor, beginIndex, middleIndex - 1);
+			else if intArray[middleIndex] > searchfor then
+					return binarySearch(intArray, searchfor, middleIndex + 1, endIndex);
+			endif;
+			endif;
+			endif;
+			endif;				
+		end;
+	end;
+end;
+
+/* Variable declaration and subroutine call */
+void main()
+begin
+	begin
+		var factParam : int;
+		factParam := 5;
+		return fact(factParam);
+	end;
+end;

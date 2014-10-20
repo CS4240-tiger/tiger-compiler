@@ -1,0 +1,71 @@
+type FixedPtArray = array [2] of fixedpt;
+type Int2DArray = array [2] [3] of int;
+
+void function cakes()
+begin
+    begin
+        var b : int := 12;
+        b := 12;
+        if (((a + A) + a) < b * b) then
+            print(b);
+        else
+            print(a);
+        endif;
+    end;
+end;
+
+int function add(add1 : int, add2 : int)
+begin
+    begin
+        for x := 0 to add1 + 1 do
+            add2 := add2 + 1;
+        enddo;
+        return add2;
+    end;
+end;
+
+FixedPtArray function fixedptArrayStuff(arr : FixedPtArray)
+begin
+    begin
+        var finalArray : FixedPtArray := 1;
+        finalArray[0] := arr[0];
+        return finalArray;
+    end;
+end;
+
+void function loops()
+begin
+    begin
+        var k : fixedpt := 0.1;
+        while k <= 10 do
+            k := k * 2;
+        enddo;
+    end;
+    begin
+        while 1 <= 2 do
+            if 3 > 2 then
+                break;
+            endif;
+        enddo;
+    end;
+end;
+
+void main()
+begin
+    begin
+        type ArrayInt = array [100] of int; /* Declare ArrayInt as a new type */
+        var X, Y : ArrayInt := 10; /* Declare vars X and Y as arrays with initialization */
+        var i, sum : int := 0; 
+        var a : int := 10;
+        var A : int := 11; /* Should be different than a, since case sensitive */
+        var a1 : fixedpt := 10.1;
+        begin
+            for i := 1 to 100 do /* for loop for dot product */
+                sum := sum + X[i] * Y[i];
+            enddo;
+        printi(sum); /* library call to printi to print the dot product */
+        end;
+        cakes();
+        add(40, sum);
+    end;
+end;

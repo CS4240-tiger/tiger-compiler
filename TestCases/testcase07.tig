@@ -1,0 +1,41 @@
+type matrix = array [2][2] of int;
+type vector = array [4] of int;  
+type elem = int;
+
+matrix function add(a : matrix, b : matrix, indexes : vector) begin
+    begin
+        var ret : matrix := 0;
+        var i : int := 0;
+        while i < 2 do
+            for j := 0 to 1 do
+                begin
+                    var toAdd : elem;
+                    if indexes[2 * i + j] = 1 then
+                        toAdd := b[i][j];
+                    else
+                        toAdd := 0 - b[i][j];
+                    endif;
+                    c[i][j] := a[i][j] + toAdd;
+                end;
+            enddo;
+            i := i + 1;
+        enddo;
+        return c;
+    end;
+end;
+
+
+void main() begin
+    begin
+        var a, b, c, d, temp1, temp2, res: matrix;
+        var vec_1, vec_2, vec_3 : vector;
+
+        for i := 0 to 3 do
+            if i = 0 | 2 then vec_1[i] := 1; else vec_2[i] := 1; endif;
+        enddo;        
+
+        temp1 := add(a, b, vec_1);
+        temp2 := add(c, d, vec_2);
+        res := add(temp1, temp2, vec_1);
+    end;
+end;
