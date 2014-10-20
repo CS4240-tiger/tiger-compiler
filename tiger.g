@@ -25,7 +25,7 @@ tokens {
 }
 
 @parser::members {
-	//public Map<String, TigerFunction> functions = new HashMap<String, TigerFunction>();
+	public Map<String, TigerFunction> functions = new HashMap<String, TigerFunction>();
     
 	@Override
 	public void reportError(RecognitionException e) {
@@ -63,7 +63,7 @@ tokens {
 		System.err.println("Error at line " + String.valueOf(lineIndex) + ": " + lineCode + " ("+getErrorMessage(e, tokenNames)+")");
 	}
     
-	/*private void defineFunction(String id, Object params, Object block) {
+	private void defineFunction(String id, Object params, Object block) {
 		// Parameters
 		CommonTree paramTree = params == null ? new CommonTree() : (CommonTree) params;
 
@@ -73,7 +73,7 @@ tokens {
 		// The function name with the number of parameters after it, is the unique key
 		String key = id + paramTree.getChildCount();
 		functions.put(key, new TigerFunction(id, paramTree, blockTree));
-	}*/
+	}
 }
 
 @lexer::members {
@@ -125,21 +125,21 @@ funct_declaration_list
 funct_declaration
 	:	return_func
 	|	void_func
-		//{defineFunction($ID.text, $param_list.tree, $block_list.tree);}
-		//{defineFunction($MAIN_KEY.text, null, $block_list.tree);}
 	;
 
 return_func
 	:	type_id FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
 	->	^(ID param_list block_list)
+	{defineFunction($ID.text, $param_list.tree, $block_list.tree);}
 	;
 
 void_func
 	:	(VOID_KEY FUNCTION_KEY) => VOID_KEY FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
 	->	^(ID param_list block_list)
+		{defineFunction($VOID_KEY.text, ID, $block_list.tree);}
 	|	VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY block_list END_KEY SEMI
 	->	^(MAIN_KEY block_list)
-
+		{defineFunction($MAIN_KEY.text, null, $block_list.tree);}
 	;
 
 ret_type 
