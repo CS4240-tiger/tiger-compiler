@@ -9,7 +9,7 @@ public class __Test__ {
         tigerLexer lex = new tigerLexer(new ANTLRFileStream("C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\TestCases\\testcase03.tig", "UTF8"));
         CommonTokenStream tokens = new CommonTokenStream(lex);
 
-        tigerParser g = new tigerParser(tokens, 49100, null);
+        tigerParser g = new tigerParser(tokens);
         try {
             g.tiger_program();
         } catch (RecognitionException e) {
