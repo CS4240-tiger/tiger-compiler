@@ -135,7 +135,7 @@ return_func
 
 void_func
 	:	(VOID_KEY FUNCTION_KEY) => VOID_KEY FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
-		{defineFunction($VOID_KEY.text, ID, $block_list.tree);}
+		{defineFunction($VOID_KEY.text, $param_list.tree, $block_list.tree);}
 	->	^(ID param_list block_list)
 		
 	|	VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY block_list END_KEY SEMI
