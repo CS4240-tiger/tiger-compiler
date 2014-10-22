@@ -161,7 +161,7 @@ block_list
 	;
 
 block 	:	BEGIN_KEY (declaration_statement stat_seq) END_KEY SEMI 
-	-> 	^(AST_BLOCK stat_seq) // ^(AST_BLOCK declaration_statement stat_seq) <- Deal with declaration_statement later, before treewalk	
+	-> 	^(AST_BLOCK declaration_statement? stat_seq) // ^(AST_BLOCK declaration_statement stat_seq) <- Deal with declaration_statement later, before treewalk	
 	;
 
 declaration_statement 
