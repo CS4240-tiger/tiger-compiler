@@ -129,17 +129,18 @@ funct_declaration
 
 return_func
 	:	type_id FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
+	 	{defineFunction($ID.text, $param_list.tree, $block_list.tree);}
 	->	^(ID param_list block_list)
-	{defineFunction($ID.text, $param_list.tree, $block_list.tree);}
 	;
 
 void_func
 	:	(VOID_KEY FUNCTION_KEY) => VOID_KEY FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
-	->	^(ID param_list block_list)
 		{defineFunction($VOID_KEY.text, ID, $block_list.tree);}
+	->	^(ID param_list block_list)
+		
 	|	VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY block_list END_KEY SEMI
-	->	^(MAIN_KEY block_list)
 		{defineFunction($MAIN_KEY.text, null, $block_list.tree);}
+	->	^(MAIN_KEY block_list)
 	;
 
 ret_type 
