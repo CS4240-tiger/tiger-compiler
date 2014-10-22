@@ -25,7 +25,7 @@ tokens {
 }
 
 @parser::members {
-	public Map<String, TigerFunction> functions = new HashMap<String, TigerFunction>();
+	//public Map<String, TigerFunction> functions = new HashMap<String, TigerFunction>(); UNCOMMENT FOR TREE-WALKING
     
 	@Override
 	public void reportError(RecognitionException e) {
@@ -72,7 +72,7 @@ tokens {
 
 		// The function name with the number of parameters after it, is the unique key
 		String key = id + paramTree.getChildCount();
-		functions.put(key, new TigerFunction(id, paramTree, blockTree));
+		//functions.put(key, new TigerFunction(id, paramTree, blockTree)); UNCOMMENT FOR TREE-WALKING
 	}
 }
 
@@ -130,16 +130,16 @@ funct_declaration
 return_func
 	:	type_id FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
 	->	^(ID param_list block_list)
-	{defineFunction($ID.text, $param_list.tree, $block_list.tree);}
+	//{defineFunction($ID.text, $param_list.tree, $block_list.tree);} UNCOMMENT FOR TREE-WALKING
 	;
 
 void_func
 	:	(VOID_KEY FUNCTION_KEY) => VOID_KEY FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
 	->	^(ID param_list block_list)
-		{defineFunction($VOID_KEY.text, ID, $block_list.tree);}
+		//{defineFunction($VOID_KEY.text, ID, $block_list.tree);} UNCOMMENT FOR TREE-WALKING
 	|	VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY block_list END_KEY SEMI
 	->	^(MAIN_KEY block_list)
-		{defineFunction($MAIN_KEY.text, null, $block_list.tree);}
+		//{defineFunction($MAIN_KEY.text, null, $block_list.tree);} UNCOMMENT FOR TREE-WALKING
 	;
 
 ret_type 
@@ -161,7 +161,7 @@ block_list
 	;
 
 block 	:	BEGIN_KEY (declaration_statement stat_seq) END_KEY SEMI 
-	-> 	^(AST_BLOCK declaration_statement stat_seq)
+	-> 	^(AST_BLOCK stat_seq) // ^(AST_BLOCK declaration_statement stat_seq) <- Deal with declaration_statement later, before treewalk	
 	;
 
 declaration_statement 
