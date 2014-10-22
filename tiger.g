@@ -305,7 +305,8 @@ expr_list
 	->	^(AST_EXPR_LIST expr+)
 	;
 
-value 	:	(ID LBRACK index_expr RBRACK LBRACK) => ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK
+value 	
+  :	(ID LBRACK index_expr RBRACK LBRACK) => ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK
 	|	(ID LBRACK) => ID LBRACK index_expr RBRACK
 	|	ID
 	;
