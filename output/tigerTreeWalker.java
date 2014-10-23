@@ -1136,7 +1136,7 @@ public class tigerTreeWalker extends TreeParser {
 			else if ( (LA14_0==FOR_KEY) ) {
 				alt14=3;
 			}
-			else if ( (LA14_0==ASSIGN) && (synpred1_tigerTreeWalker())) {
+			else if ( (LA14_0==ASSIGN) && (synpred1_tigerTreeWalker())) { // Dies at ":=" here
 				alt14=4;
 			}
 			else if ( (LA14_0==AST_FUNC_CALL) ) {
