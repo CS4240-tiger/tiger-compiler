@@ -273,7 +273,7 @@ expr 	:	(constval binop_p0) => constval binop_p0 expr
 	->	^(binop_p0 value expr)
 	|	value
 	|	(LPAREN expr RPAREN binop_p0) => LPAREN expr RPAREN binop_p0 expr
-	->	^(binop_p0 ^(AST_EXPR_PAREN expr) ^(AST_EXPR_PAREN expr))
+	->	^(binop_p0 ^(AST_EXPR_PAREN expr) expr)
 	|	LPAREN expr RPAREN
 	->	^(AST_EXPR_PAREN expr)
 	;
@@ -310,7 +310,7 @@ expr_list
 	;
 
 value 	
-  :	(ID LBRACK index_expr RBRACK LBRACK) => ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK
+  	:	(ID LBRACK index_expr RBRACK LBRACK) => ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK
 	|	(ID LBRACK) => ID LBRACK index_expr RBRACK
 	|	ID
 	;

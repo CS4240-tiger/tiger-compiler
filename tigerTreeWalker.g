@@ -161,13 +161,21 @@ return_stat returns [TigerNode node]
 
 	
 expr returns [TigerNode node]
-	:	^(binop_p0 constval expr)
+	:	expr_op
 	|	constval
-	|	^(binop_p0 func_call expr)
-	|	^(binop_p0 value expr)
 	|	value
-	|	^(binop_p0 ^(AST_EXPR_PAREN expr) ^(AST_EXPR_PAREN expr))
 	|	^(AST_EXPR_PAREN expr)
+	;
+	
+expr_op
+	:	^(binop_p0 expr_end)
+	;
+
+expr_end
+	:	constval expr
+	|	func_call expr
+	|	value expr
+	|	^(AST_EXPR_PAREN expr) expr
 	;
 
 binop_p0:	(AND | OR | binop_p1);
