@@ -14,6 +14,7 @@ tokens {
 	AST_EXPR_LIST;
 	AST_EXPR_PAREN;
 	AST_2D_ARRAY;
+	AST_CONDITIONAL;
 }
 
 @header {
@@ -120,14 +121,15 @@ stat
 	| while_stat
 	| for_stat
   	| assign_stat // assign_stat conflicts with func_call
-  	| func_call SEMI
+  	| func_call
 	| break_stat
 	| return_stat
 	| block
 	;
 
 if_stat	returns [TigerNode node]
-	:	^(IF_KEY expr stat_seq ^(ELSE_KEY stat_seq)?)
+	:	(IF_KEY expr stat_seq ELSE_KEY) => ^(IF_KEY expr stat_seq ^(ELSE_KEY stat_seq))
+	|	^(IF_KEY expr stat_seq)
 	;
 
 while_stat returns [TigerNode node]
