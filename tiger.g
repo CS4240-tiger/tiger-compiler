@@ -226,8 +226,11 @@ stat
 	| block
 	;
 
-if_stat	:	IF_KEY expr THEN_KEY stat_seq (ENDIF_KEY SEMI|ELSE_KEY stat_seq ENDIF_KEY SEMI)
-	-> 	^(IF_KEY expr stat_seq ^(ELSE_KEY stat_seq)?)
+if_stat	:	(IF_KEY expr THEN_KEY stat_seq ELSE_KEY) 
+	=> 	IF_KEY expr THEN_KEY stat_seq ELSE_KEY stat_seq ENDIF_KEY SEMI
+	-> 	^(IF_KEY expr stat_seq ^(ELSE_KEY stat_seq))
+	|	IF_KEY expr THEN_KEY stat_seq ENDIF_KEY SEMI
+	->	^(IF_KEY expr stat_seq)
 	;
 
 while_stat
