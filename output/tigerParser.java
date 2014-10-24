@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g 2014-10-24 10:46:06
+// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g 2014-10-24 11:13:53
 
 	import java.util.Map;
 	import java.util.HashMap;
@@ -481,7 +481,7 @@ public class tigerParser extends Parser {
 
 			if ( state.backtracking==0 ) {defineFunction((ID8!=null?ID8.getText():null), (param_list10!=null?((CommonTree)param_list10.getTree()):null), (block_list13!=null?((CommonTree)block_list13.getTree()):null));}
 			// AST REWRITE
-			// elements: param_list, block_list, ID
+			// elements: ID, block_list, param_list
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -654,7 +654,7 @@ public class tigerParser extends Parser {
 
 					if ( state.backtracking==0 ) {defineFunction((VOID_KEY16!=null?VOID_KEY16.getText():null), (param_list20!=null?((CommonTree)param_list20.getTree()):null), (block_list23!=null?((CommonTree)block_list23.getTree()):null));}
 					// AST REWRITE
-					// elements: block_list, ID, param_list
+					// elements: block_list, param_list, ID
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -715,7 +715,7 @@ public class tigerParser extends Parser {
 
 					if ( state.backtracking==0 ) {defineFunction((MAIN_KEY27!=null?MAIN_KEY27.getText():null), null, (block_list31!=null?((CommonTree)block_list31.getTree()):null));}
 					// AST REWRITE
-					// elements: MAIN_KEY, block_list
+					// elements: block_list, MAIN_KEY
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -1034,7 +1034,7 @@ public class tigerParser extends Parser {
 			if (state.failed) return retval;
 			if ( state.backtracking==0 ) stream_type_id.add(type_id41.getTree());
 			// AST REWRITE
-			// elements: COLON, ID, type_id
+			// elements: ID, type_id, COLON
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -1538,7 +1538,7 @@ public class tigerParser extends Parser {
 			if ( state.backtracking==0 ) stream_SEMI.add(SEMI56);
 
 			// AST REWRITE
-			// elements: ID, EQ, type
+			// elements: type, EQ, ID
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -1713,7 +1713,7 @@ public class tigerParser extends Parser {
 					if (state.failed) return retval;
 					if ( state.backtracking==0 ) stream_base_type.add(base_type66.getTree());
 					// AST REWRITE
-					// elements: base_type, UNSIGNED_INTLIT, ARRAY_KEY, UNSIGNED_INTLIT
+					// elements: ARRAY_KEY, base_type, UNSIGNED_INTLIT, UNSIGNED_INTLIT
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -1775,7 +1775,7 @@ public class tigerParser extends Parser {
 					if (state.failed) return retval;
 					if ( state.backtracking==0 ) stream_base_type.add(base_type72.getTree());
 					// AST REWRITE
-					// elements: ARRAY_KEY, base_type, UNSIGNED_INTLIT
+					// elements: UNSIGNED_INTLIT, base_type, ARRAY_KEY
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -2073,7 +2073,7 @@ public class tigerParser extends Parser {
 					if ( state.backtracking==0 ) stream_SEMI.add(SEMI82);
 
 					// AST REWRITE
-					// elements: ASSIGN, COLON, expr, id_list, type_id
+					// elements: ASSIGN, type_id, COLON, id_list, expr
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -2134,7 +2134,7 @@ public class tigerParser extends Parser {
 					if ( state.backtracking==0 ) stream_SEMI.add(SEMI87);
 
 					// AST REWRITE
-					// elements: COLON, type_id, id_list
+					// elements: type_id, id_list, COLON
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -2696,7 +2696,7 @@ public class tigerParser extends Parser {
 					if ( state.backtracking==0 ) stream_SEMI.add(SEMI108);
 
 					// AST REWRITE
-					// elements: stat_seq, IF_KEY, expr, stat_seq, ELSE_KEY
+					// elements: IF_KEY, stat_seq, expr, ELSE_KEY, stat_seq
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -2872,7 +2872,7 @@ public class tigerParser extends Parser {
 			if ( state.backtracking==0 ) stream_SEMI.add(SEMI120);
 
 			// AST REWRITE
-			// elements: expr, WHILE_KEY, stat_seq
+			// elements: WHILE_KEY, stat_seq, expr
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -3006,7 +3006,7 @@ public class tigerParser extends Parser {
 			if ( state.backtracking==0 ) stream_SEMI.add(SEMI130);
 
 			// AST REWRITE
-			// elements: stat_seq, index_expr, ASSIGN, ID, index_expr, TO_KEY, FOR_KEY
+			// elements: TO_KEY, FOR_KEY, ASSIGN, index_expr, stat_seq, index_expr, ID
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -3120,7 +3120,7 @@ public class tigerParser extends Parser {
 			if ( state.backtracking==0 ) stream_SEMI.add(SEMI134);
 
 			// AST REWRITE
-			// elements: ASSIGN, expr_list, value
+			// elements: expr_list, ASSIGN, value
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -3578,7 +3578,7 @@ public class tigerParser extends Parser {
 					if (state.failed) return retval;
 					if ( state.backtracking==0 ) stream_expr.add(expr146.getTree());
 					// AST REWRITE
-					// elements: constval, binop_p0, expr
+					// elements: constval, expr, binop_p0
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -5073,7 +5073,7 @@ public class tigerParser extends Parser {
 					if (state.failed) return retval;
 					if ( state.backtracking==0 ) stream_index_expr.add(index_expr202.getTree());
 					// AST REWRITE
-					// elements: index_expr, intlit, index_oper
+					// elements: index_expr, index_oper, intlit
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -5134,7 +5134,7 @@ public class tigerParser extends Parser {
 					if (state.failed) return retval;
 					if ( state.backtracking==0 ) stream_index_expr.add(index_expr206.getTree());
 					// AST REWRITE
-					// elements: index_expr, index_oper, ID
+					// elements: ID, index_oper, index_expr
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 

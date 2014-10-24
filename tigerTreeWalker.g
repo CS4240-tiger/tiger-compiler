@@ -128,8 +128,11 @@ stat
 	;
 
 if_stat	returns [TigerNode node]
-	:	(IF_KEY expr stat_seq ELSE_KEY) => ^(IF_KEY expr stat_seq ^(ELSE_KEY stat_seq))
-	|	^(IF_KEY expr stat_seq)
+	:	^(IF_KEY expr stat_seq else_tail?)
+	;
+
+else_tail
+	:	^(ELSE_KEY stat_seq)
 	;
 
 while_stat returns [TigerNode node]
