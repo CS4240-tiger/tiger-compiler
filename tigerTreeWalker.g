@@ -119,7 +119,7 @@ stat
 	: if_stat
 	| while_stat
 	| for_stat
-  	| (value ASSIGN) => assign_stat // assign_stat conflicts with func_call
+  	| assign_stat // assign_stat conflicts with func_call
   	| func_call SEMI
 	| break_stat
 	| return_stat
