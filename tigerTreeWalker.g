@@ -162,6 +162,7 @@ return_stat returns [TigerNode node]
 	
 expr returns [TigerNode node]
 	:	expr_op
+	|	func_call 
 	|	constval
 	|	value
 	|	^(AST_EXPR_PAREN expr)
