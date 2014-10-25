@@ -223,6 +223,13 @@ public class tigerParser extends Parser {
 		finally {
 			// do for sure before leaving
 		}
+		
+		// Check if main function is last in program
+		if (!retval.tree.getChildren().get(retval.tree.getChildren().size() - 1).toString().equals("main"))
+		{
+			// It wasn't found or wasn't the last function
+			throw new RuntimeException("Error: main must be in your program, and must be the last function declared");
+		}
 		return retval;
 	}
 	// $ANTLR end "tiger_program"
