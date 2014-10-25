@@ -74,6 +74,15 @@ tokens {
 		String key = id + paramTree.getChildCount();
 		functions.put(key, new TigerFunction(id, paramTree, blockTree));
 	}
+	
+	// Checks if 'void main()' was the last signature declared
+	private void mainCheck(CommonTree parseTree) {
+		if (!parseTree.getChildren().get(parseTree.getChildren().size() - 1).toString().equals("main"))
+		{
+			// It wasn't found or wasn't the last function
+			throw new RuntimeException("Error: main must be in your program, and must be the last function declared");
+		}
+	}
 }
 
 @lexer::members {
@@ -112,10 +121,12 @@ tokens {
 		lineCode = lineCode.replaceFirst(".*?(?=[a-zA-Z0-9\'])", "");
 		System.err.println("Error at line " + String.valueOf(lineIndex) + ": " + lineCode + " ("+getErrorMessage(e, tokenNames)+")");
 	}
+	
 }
 
 tiger_program
 	:	type_declaration_list funct_declaration_list
+		{mainCheck((CommonTree)adaptor.rulePostProcessing(root_0));}
 	;
 	
 funct_declaration_list
@@ -202,7 +213,7 @@ base_type
 var_declaration 
 	:	(VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT) => VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT SEMI
 	->	^(ASSIGN ^(COLON id_list type_id) UNSIGNED_INTLIT)
-	|	(VAR_KEY id_list COLON type_id ASSIGN fixedptlit) =>VAR_KEY id_list COLON type_id ASSIGN fixedptlit SEMI
+	|	(VAR_KEY id_list COLON type_id ASSIGN fixedptlit) => VAR_KEY id_list COLON type_id ASSIGN fixedptlit SEMI
 	->	^(ASSIGN ^(COLON id_list type_id) fixedptlit)
 	|	VAR_KEY id_list COLON type_id SEMI
 	->	^(COLON id_list type_id)
@@ -222,14 +233,17 @@ stat
 	| while_stat
 	| for_stat
   	| (value ASSIGN) => assign_stat // assign_stat conflicts with func_call
-  	| func_call SEMI
+  	| func_call SEMI!
 	| break_stat
 	| return_stat
 	| block
 	;
 
-if_stat	:	IF_KEY expr THEN_KEY stat_seq (ENDIF_KEY SEMI|ELSE_KEY stat_seq ENDIF_KEY SEMI)
-	-> 	^(IF_KEY expr stat_seq ^(ELSE_KEY stat_seq)?)
+if_stat	:	(IF_KEY expr THEN_KEY stat_seq ELSE_KEY) 
+	=> 	IF_KEY expr THEN_KEY stat_seq ELSE_KEY stat_seq ENDIF_KEY SEMI
+	-> 	^(IF_KEY expr stat_seq ^(ELSE_KEY stat_seq))
+	|	IF_KEY expr THEN_KEY stat_seq ENDIF_KEY SEMI
+	->	^(IF_KEY expr stat_seq)
 	;
 
 while_stat
@@ -265,14 +279,11 @@ return_stat
 expr 	:	(constval binop_p0) => constval binop_p0 expr
 	->	^(binop_p0 constval expr)
 	|	constval
-	//|	(ID LPAREN) => func_call // func_call normally conflicts with value
-	//|	(ID LPAREN binop_p0) => func_call binop_p0 expr
-	//->	^(binop_p0 func_call expr)
 	|	(value binop_p0) => value binop_p0 expr
 	->	^(binop_p0 value expr)
 	|	value
 	|	(LPAREN expr RPAREN binop_p0) => LPAREN expr RPAREN binop_p0 expr
-	->	^(binop_p0 ^(AST_EXPR_PAREN expr) ^(AST_EXPR_PAREN expr))
+	->	^(binop_p0 ^(AST_EXPR_PAREN expr) expr)
 	|	LPAREN expr RPAREN
 	->	^(AST_EXPR_PAREN expr)
 	;
@@ -309,7 +320,7 @@ expr_list
 	;
 
 value 	
-        :	(ID LBRACK index_expr RBRACK LBRACK) => ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK
+  	:	(ID LBRACK index_expr RBRACK LBRACK) => ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK
 	|	(ID LBRACK) => ID LBRACK index_expr RBRACK
 	|	ID
 	;
@@ -344,7 +355,7 @@ WHITESPACE
 	;
   
 func_param_list
-	: (expr(COMMA expr)*)?
+	: (expr (COMMA expr)*)?
 	-> ^(AST_PARAM_LIST (expr+)?)
 	;
 

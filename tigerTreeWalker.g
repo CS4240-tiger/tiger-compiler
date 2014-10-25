@@ -14,6 +14,7 @@ tokens {
 	AST_EXPR_LIST;
 	AST_EXPR_PAREN;
 	AST_2D_ARRAY;
+	AST_CONDITIONAL;
 }
 
 @header {
@@ -103,10 +104,14 @@ base_type
 	;
 
 var_declaration returns [TigerNode node] 
-	:	^(ASSIGN ^(COLON id_list type_id) expr)
+	:	^(ASSIGN ^(COLON id_list type_id) unsigned_tail)
 	|	^(COLON id_list type_id)
 	;
-
+	
+unsigned_tail
+	:	UNSIGNED_INTLIT
+	|	fixedptlit
+	;
 
 id_list returns [java.util.List<String> list] 
 	:	^(AST_ID_LIST ID+)
@@ -120,16 +125,19 @@ stat
 	: if_stat
 	| while_stat
 	| for_stat
-  | (value ASSIGN) => assign_stat // assign_stat conflicts with func_call
-  | func_call SEMI
+  	| assign_stat
+  	| func_call
 	| break_stat
 	| return_stat
 	| block
 	;
 
 if_stat	returns [TigerNode node]
-	:	(IF_KEY expr stat_seq ELSE_KEY stat_seq) => ^(IF_KEY expr stat_seq ^(ELSE_KEY stat_seq))
-	|	^(IF_KEY expr stat_seq)
+	:	^(IF_KEY expr stat_seq else_tail?)
+	;
+
+else_tail
+	:	^(ELSE_KEY stat_seq)
 	;
 
 while_stat returns [TigerNode node]
@@ -158,13 +166,22 @@ return_stat returns [TigerNode node]
 
 	
 expr returns [TigerNode node]
-	:	^(binop_p0 constval expr)
+	:	expr_op
+	|	func_call 
 	|	constval
-	|	^(binop_p0 func_call expr)
-	|	^(binop_p0 value expr)
 	|	value
-	|	^(binop_p0 ^(AST_EXPR_PAREN expr) ^(AST_EXPR_PAREN expr))
 	|	^(AST_EXPR_PAREN expr)
+	;
+	
+expr_op
+	:	^(binop_p0 expr_end)
+	;
+
+expr_end
+	:	constval expr
+	|	func_call expr
+	|	value expr
+	|	^(AST_EXPR_PAREN expr) expr
 	;
 
 binop_p0:	(AND | OR | binop_p1);
