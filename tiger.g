@@ -25,8 +25,6 @@ tokens {
 }
 
 @parser::members {
-	public Map<String, TigerFunction> functions = new HashMap<String, TigerFunction>();
-    
 	@Override
 	public void reportError(RecognitionException e) {
 		displayRecognitionError(this.getTokenNames(), e);
@@ -61,18 +59,6 @@ tokens {
 		}
 		lineCode = lineCode.replaceFirst(".*?(?=[a-zA-Z0-9\'])", "");
 		System.err.println("Error at line " + String.valueOf(lineIndex) + ": " + lineCode + " ("+getErrorMessage(e, tokenNames)+")");
-	}
-    
-	private void defineFunction(String id, Object params, Object block) {
-		// Parameters
-		CommonTree paramTree = params == null ? new CommonTree() : (CommonTree) params;
-
-		// Code block tree
-		CommonTree blockTree = (CommonTree) block;
-
-		// The function name with the number of parameters after it, is the unique key
-		String key = id + paramTree.getChildCount();
-		functions.put(key, new TigerFunction(id, paramTree, blockTree));
 	}
 	
 	// Checks if 'void main()' was the last signature declared
@@ -140,17 +126,14 @@ funct_declaration
 
 return_func
 	:	type_id FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
-	 	{defineFunction($ID.text, $param_list.tree, $block_list.tree);}
 	->	^(ID param_list block_list)
 	;
 
 void_func
 	:	(VOID_KEY FUNCTION_KEY) => VOID_KEY FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
-		{defineFunction($VOID_KEY.text, $param_list.tree, $block_list.tree);}
 	->	^(ID param_list block_list)
 		
 	|	VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY block_list END_KEY SEMI
-		{defineFunction($MAIN_KEY.text, null, $block_list.tree);}
 	->	^(MAIN_KEY block_list)
 	;
 
