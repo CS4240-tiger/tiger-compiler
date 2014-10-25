@@ -109,18 +109,23 @@ public class tigerTreeWalker extends TreeParser {
 
 		public Map<String, TigerFunction> functions = null;
 		Scope scope = null;
+		
+		public tigerTreeWalker(CommonTreeNodeStream nodes, Scope scope, Map<String, TigerFunction> functions) {
+			super(nodes);
+			this.scope = scope;
+			this.functions = functions;
+			
+			// Check for main function at end
+			if (!this.functions.keySet().toArray()[this.functions.keySet().size() - 1].equals("main")) {
+				// Main is either not found or not the last function, throw an error
+				throw new RuntimeException("Error: main must be in your program, and must be the last function declared");
+			}
+		}
 	  
 		public tigerTreeWalker(CommonTreeNodeStream nodes, Map<String, TigerFunction> functions) {
 			this(nodes, new Scope(), functions);
 		}
 	  
-		public tigerTreeWalker(CommonTreeNodeStream nodes, Scope scope, Map<String, TigerFunction> functions) {
-			super(nodes);
-			this.scope = scope;
-			this.functions = functions;
-		}
-
-
 
 	// $ANTLR start "tiger_program"
 	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:40:1: tiger_program returns [TigerNode node] : type_declaration_list funct_declaration_list ;
