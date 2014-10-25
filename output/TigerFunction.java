@@ -106,6 +106,15 @@ public class TigerFunction {
 	}
 	
 	/**
+	 * Returns this TigerFunction's String identifier.
+	 * 
+	 * @return This TigerFunction's String identifier.
+	 */
+	public String getID() {
+		return id;
+	}
+	
+	/**
 	 * An exception thrown when parameters passed into a function do not 
 	 * match the number of arguments expected.
 	 */

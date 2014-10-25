@@ -116,7 +116,11 @@ public class tigerTreeWalker extends TreeParser {
 			this.functions = functions;
 			
 			// Check for main function at end
-			if (!this.functions.keySet().toArray()[this.functions.keySet().size() - 1].equals("main")) {
+			if (!this.functions.entrySet().toArray()[this.functions.keySet().size() - 1].equals("main")) {
+				TigerFunction[] test = ((TigerFunction[]) this.functions.entrySet().toArray());
+				TigerFunction test2 = test[this.functions.entrySet().size() - 1];
+				String test3 = test2.getID();
+
 				// Main is either not found or not the last function, throw an error
 				throw new RuntimeException("Error: main must be in your program, and must be the last function declared");
 			}
