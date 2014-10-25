@@ -6,7 +6,7 @@ import org.antlr.runtime.tree.CommonTreeNodeStream;
 
 public class TestTreeWalk {
 	public static void main(String args[]) throws Exception {
-        tigerLexer lex = new tigerLexer(new ANTLRFileStream("C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\TestCases\\testcase01.tig", "UTF8"));
+        tigerLexer lex = new tigerLexer(new ANTLRFileStream("C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\output\\__Test___input.txt", "UTF8"));
         CommonTokenStream tokens = new CommonTokenStream(lex);
 
         tigerParser g = new tigerParser(tokens);
