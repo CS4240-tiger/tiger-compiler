@@ -74,6 +74,15 @@ tokens {
 		String key = id + paramTree.getChildCount();
 		functions.put(key, new TigerFunction(id, paramTree, blockTree));
 	}
+	
+	// Checks if 'void main()' was the last signature declared
+	private void mainCheck(CommonTree parseTree) {
+		if (!parseTree.getChildren().get(parseTree.getChildren().size() - 1).toString().equals("main"))
+		{
+			// It wasn't found or wasn't the last function
+			throw new RuntimeException("Error: main must be in your program, and must be the last function declared");
+		}
+	}
 }
 
 @lexer::members {
@@ -112,10 +121,12 @@ tokens {
 		lineCode = lineCode.replaceFirst(".*?(?=[a-zA-Z0-9\'])", "");
 		System.err.println("Error at line " + String.valueOf(lineIndex) + ": " + lineCode + " ("+getErrorMessage(e, tokenNames)+")");
 	}
+	
 }
 
 tiger_program
 	:	type_declaration_list funct_declaration_list
+		{mainCheck((CommonTree)adaptor.rulePostProcessing(root_0));}
 	;
 	
 funct_declaration_list

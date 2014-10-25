@@ -168,7 +168,20 @@ begin
 	end;
 end;
 
-void main() /* Main not at end, should cause error */
+/* for demonstration purposes only */
+fixedpt function random_function(num: fixedpt)
+begin
+	begin
+	var a : int := 12;	
+	var b : fixedpt := 2.2;
+	var c : fixedpt;	
+
+	c := 1&0|1+(2*4/6+3)*(3<4&9>=5+2)/5>6-4*9/2<>2;
+	return 2.2;
+	end;
+end;
+
+void function main() /* Main not at end, should cause error */
 begin
 	begin
 	var C : Mat33 := 0; /*0 initialization*/
@@ -234,18 +247,4 @@ begin
 	enddo;
 
   end;
-end;
-
-
-/* for demonstration purposes only */
-fixedpt function random_function(num: fixedpt)
-begin
-	begin
-	var a : int := 12;	
-	var b : fixedpt := 2.2;
-	var c : fixedpt;	
-
-	c := 1&0|1+(2*4/6+3)*(3<4&9>=5+2)/5>6-4*9/2<>2;
-	return 2.2;
-	end;
 end;
