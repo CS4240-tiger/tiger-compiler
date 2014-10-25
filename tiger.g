@@ -200,8 +200,10 @@ base_type
 	;
 
 var_declaration 
-	:	(VAR_KEY id_list COLON type_id ASSIGN) => VAR_KEY id_list COLON type_id ASSIGN expr SEMI
-	->	^(ASSIGN ^(COLON id_list type_id) expr)
+	:	(VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT) => VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT SEMI
+	->	^(ASSIGN ^(COLON id_list type_id) UNSIGNED_INTLIT)
+	|	(VAR_KEY id_list COLON type_id ASSIGN fixedptlit) =>VAR_KEY id_list COLON type_id ASSIGN fixedptlit SEMI
+	->	^(ASSIGN ^(COLON id_list type_id) fixedptlit)
 	|	VAR_KEY id_list COLON type_id SEMI
 	->	^(COLON id_list type_id)
 	;
@@ -263,9 +265,9 @@ return_stat
 expr 	:	(constval binop_p0) => constval binop_p0 expr
 	->	^(binop_p0 constval expr)
 	|	constval
-	|	(ID LPAREN) => func_call // func_call normally conflicts with value
-	|	(ID LPAREN binop_p0) => func_call binop_p0 expr
-	->	^(binop_p0 func_call expr)
+	//|	(ID LPAREN) => func_call // func_call normally conflicts with value
+	//|	(ID LPAREN binop_p0) => func_call binop_p0 expr
+	//->	^(binop_p0 func_call expr)
 	|	(value binop_p0) => value binop_p0 expr
 	->	^(binop_p0 value expr)
 	|	value
@@ -307,7 +309,7 @@ expr_list
 	;
 
 value 	
-  :	(ID LBRACK index_expr RBRACK LBRACK) => ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK
+        :	(ID LBRACK index_expr RBRACK LBRACK) => ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK
 	|	(ID LBRACK) => ID LBRACK index_expr RBRACK
 	|	ID
 	;
@@ -342,7 +344,7 @@ WHITESPACE
 	;
   
 func_param_list
-	: (expr (COMMA expr)*)?
+	: (expr(COMMA expr)*)?
 	-> ^(AST_PARAM_LIST (expr+)?)
 	;
 

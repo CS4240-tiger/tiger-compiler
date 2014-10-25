@@ -92,7 +92,8 @@ type returns [TigerNode node]
 	|	^(ARRAY_KEY UNSIGNED_INTLIT base_type)
 	;
 
-type_id :	base_type
+type_id 
+  :	base_type
 	|	ID
 	;
 
@@ -119,8 +120,8 @@ stat
 	: if_stat
 	| while_stat
 	| for_stat
-  	| (value ASSIGN) => assign_stat // assign_stat conflicts with func_call
-  	| func_call SEMI
+  | (value ASSIGN) => assign_stat // assign_stat conflicts with func_call
+  | func_call SEMI
 	| break_stat
 	| return_stat
 	| block
