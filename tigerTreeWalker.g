@@ -149,7 +149,12 @@ for_stat returns [TigerNode node]
 	;
 
 assign_stat returns [TigerNode node]
-	:	^(ASSIGN value expr_list)
+	:	^(ASSIGN value assign_stat_tail)
+	;
+	
+assign_stat_tail
+	:	expr_list
+	|	func_call
 	;
 
 func_call returns [TigerNode node]
