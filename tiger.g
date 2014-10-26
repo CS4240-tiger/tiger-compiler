@@ -256,8 +256,10 @@ for_stat:	FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_K
 	;
 
 assign_stat
-	:	(value) => value ASSIGN expr_list SEMI
+	:	(value ASSIGN expr_list) => value ASSIGN expr_list SEMI
 	->	^(ASSIGN value expr_list)
+	|	value ASSIGN func_call SEMI
+	->	^(ASSIGN value func_call)
 	;
 
 func_call
