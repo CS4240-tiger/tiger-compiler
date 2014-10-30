@@ -1,0 +1,12 @@
+Symbols for Table:
+
+Vars, -> initial value. Linked list traversal w/ scope check.
+Types, -> Backing Type (Int, Float, etc)
+Functions, -> Return type (no need for params, since only one
+function of a name can exist)
+
+== All have <Scope> <ID> ==
+Do scope declaration in grammar. Each time leaving a block, 
+scope becomes parent scope. Assign <Scope> to that scope
+declaration when desired. This allows for each var/type/func
+to be scoped appropriately. 
