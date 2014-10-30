@@ -25,14 +25,13 @@ tokens {
 @members {
 	Scope scope = null;
   
-	public tigerTreeWalker(CommonTreeNodeStream nodes, Map<String, TigerFunction> functions) {
-		this(nodes, new Scope(), functions);
+	public tigerTreeWalker(CommonTreeNodeStream nodes) {
+		super(nodes);
 	}
   
-	public tigerTreeWalker(CommonTreeNodeStream nodes, Scope scope, Map<String, TigerFunction> functions) {
+	public tigerTreeWalker(CommonTreeNodeStream nodes, Scope scope) {
 		super(nodes);
 		this.scope = scope;
-		this.functions = functions;
 	}
 }
 

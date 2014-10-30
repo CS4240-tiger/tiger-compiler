@@ -112,7 +112,6 @@ tokens {
 
 tiger_program
 	:	type_declaration_list funct_declaration_list
-		{mainCheck((CommonTree)adaptor.rulePostProcessing(root_0));}
 	;
 	
 funct_declaration_list

@@ -13,10 +13,10 @@ public class TestTreeWalk {
         try {
             CommonTree parseTree = g.tiger_program().getTree();
             CommonTreeNodeStream treeNodes = new CommonTreeNodeStream(parseTree);
-            tigerTreeWalker treeWalker = new tigerTreeWalker(treeNodes, g.functions);
+            tigerTreeWalker treeWalker = new tigerTreeWalker(treeNodes);
             
-            TigerNode result = treeWalker.tiger_program();
-            System.out.println(result == null ? "Null." : result.eval());
+            treeWalker.tiger_program();
+            //System.out.println(result == null ? "Null." : result.eval());
         } catch (RecognitionException e) {
             e.printStackTrace();
         }
