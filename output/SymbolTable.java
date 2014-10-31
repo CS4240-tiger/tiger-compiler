@@ -46,6 +46,8 @@ public class SymbolTable {
 							resultVarList.get(index).setValue(addVar.getValue());
 							return;
 						}
+						
+						curScope = curScope.getParent();
 					}
 					
 				}
