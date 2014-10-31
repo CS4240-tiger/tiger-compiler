@@ -1,7 +1,7 @@
 /**
  * Valid primitive types in Tiger.
  */
-public enum TigerPrimitives {
+public enum TigerPrimitive {
 	/**
 	 * An int value.
 	 */
