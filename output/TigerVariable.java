@@ -27,7 +27,7 @@ public class TigerVariable extends SymbolTableEntry {
 	public TigerVariable(Scope scope, String id, Object value) {
 		super(scope, id);
 		this.value = value;
-		primitiveCheck();
+		primitiveCheck(value);
 		declaredType = type.name().toLowerCase();
 	}
 	
@@ -47,21 +47,33 @@ public class TigerVariable extends SymbolTableEntry {
 	
 	/**
 	 * Matches the backing value against a Tiger primitive.
+	 * 
+	 * @param value The value to check against Tiger primitives.
 	 */
-	private void primitiveCheck() {
+	private boolean primitiveCheck(Object value) {
+		boolean result = false;
+		
 		if (value instanceof Integer) {
 			type = TigerPrimitive.INT;
+			result = true;
 		} else if (value instanceof Double) {
 			type = TigerPrimitive.FIXEDPT;
+			result = true;
 		} else if (value instanceof Integer[]) {
 			type = TigerPrimitive.INT_ARRAY;
+			result = true;
 		} else if (value instanceof Double[]) {
 			type = TigerPrimitive.FIXEDPT_ARRAY;
+			result = true;
 		} else if (value instanceof Integer[][]) {
 			type = TigerPrimitive.INT_2D_ARRAY;
+			result = true;
 		} else if (value instanceof Double[][]) {
 			type = TigerPrimitive.FIXEDPT_2D_ARRAY;
+			result = true;
 		}
+		
+		return result;
 	}
 	
 	/**
@@ -80,5 +92,22 @@ public class TigerVariable extends SymbolTableEntry {
 	 */
 	public String getBackingType() {
 		return type.name().toLowerCase();
+	}
+	
+	/**
+	 * Returns the backing value of this variable.
+	 * 
+	 * @return The backing value of this variable.
+	 */
+	public Object getValue() {
+		return value;
+	}
+	
+	public void setValue(Object value) {
+		if (!primitiveCheck(value)) {
+			throw new RuntimeException("Error: Attempt to reassign existing value with differing type!");
+		}
+		
+		this.value = value;
 	}
 }

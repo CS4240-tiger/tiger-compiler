@@ -68,4 +68,24 @@ public class Scope {
 	public Scope getParent() {
 		return parent;
 	}
+	
+	/**
+	 * Returns the String identifier.
+	 * 
+	 * @return The String identifier.
+	 */
+	public String getId() {
+		return id;
+	}
+	
+	@Override
+	public boolean equals(Object scope) {
+		if (scope instanceof Scope) {
+			if (((Scope) scope).getId().equals(this.id)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
 }

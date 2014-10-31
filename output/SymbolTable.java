@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,7 +27,35 @@ public class SymbolTable {
 	 * @param entry The Entry to add.
 	 */
 	public void put(SymbolTableEntry entry) {
-		backingTable.put(entry.getId(), entry);
+		if (entry instanceof TigerVariable) {
+			if (backingTable.get(entry.getId()) == null) {
+				backingTable.put(entry.getId(), 
+						new VariableSymbolTableEntry(
+								entry.getScope(), 
+								entry.getId(), 
+								(TigerVariable) entry));
+			} else {
+				// Check if it exists
+				List<TigerVariable> resultVarList = ((VariableSymbolTableEntry) backingTable.get(entry.getId())).backingList;
+				TigerVariable addVar = ((TigerVariable) entry);
+				Scope curScope = addVar.getScope();
+				for (int index = 0; index < resultVarList.size(); index++) {
+					while (curScope != null) {
+						if (curScope.equals(resultVarList.get(index))) {
+							// Found value in this or parent Scope! Reassign it.
+							resultVarList.get(index).setValue(addVar.getValue());
+							return;
+						}
+					}
+					
+				}
+				
+				// Otherwise, not found in accessible scope; safe to declare new entry in current scope
+				resultVarList.add(addVar);
+			}
+		} else {	
+			backingTable.put(entry.getId(), entry);
+		}
 	}
 	
 	/**
