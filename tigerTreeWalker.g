@@ -23,29 +23,27 @@ tokens {
 }
 
 @members {
-	public Map<String, TigerFunction> functions = null;
 	Scope scope = null;
   
-	public tigerTreeWalker(CommonTreeNodeStream nodes, Map<String, TigerFunction> functions) {
-		this(nodes, new Scope(), functions);
+	public tigerTreeWalker(CommonTreeNodeStream nodes) {
+		super(nodes);
 	}
   
-	public tigerTreeWalker(CommonTreeNodeStream nodes, Scope scope, Map<String, TigerFunction> functions) {
+	public tigerTreeWalker(CommonTreeNodeStream nodes, Scope scope) {
 		super(nodes);
 		this.scope = scope;
-		this.functions = functions;
 	}
 }
 
-tiger_program returns [TigerNode node]
+tiger_program
 	:	type_declaration_list funct_declaration_list
 	;
 	
-funct_declaration_list returns [java.util.List<TigerNode> list] 
+funct_declaration_list 
 	:	funct_declaration+
 	;
 
-funct_declaration returns [TigerNode node]
+funct_declaration
 	:	^(ID param_list block_list)
 	|	^(MAIN_KEY block_list)
 	;
@@ -55,19 +53,19 @@ ret_type
 	|	type_id
 	;
 
-param_list returns [java.util.List<TigerNode> list]  
+param_list  
 	:	^(AST_PARAM_LIST (param+)?)
 	;
 
-param returns [TigerNode node] 	
+param 	
 	:	^(COLON ID type_id)
 	;
 
-block_list returns [java.util.List<TigerNode> list]  
+block_list  
 	:	block+
 	;
 
-block returns [TigerNode node] 	
+block 	
  	:	^(AST_BLOCK declaration_statement stat_seq)
 	;
 
@@ -75,19 +73,19 @@ declaration_statement
 	:	type_declaration_list var_declaration_list
 	;
 	
-type_declaration_list returns [java.util.List<TigerNode> list] 
+type_declaration_list 
 	:	 type_declaration*
 	;
 	
-var_declaration_list returns [java.util.List<TigerNode> list] 
+var_declaration_list 
 	:	var_declaration*
 	;
 
-type_declaration returns [TigerNode node] 
+type_declaration 
 	:	^(EQ ID type)
 	;
 	
-type returns [TigerNode node]
+type
 	:	base_type
 	|	^(ARRAY_KEY ^(AST_2D_ARRAY UNSIGNED_INTLIT UNSIGNED_INTLIT) base_type)
 	|	^(ARRAY_KEY UNSIGNED_INTLIT base_type)
@@ -103,7 +101,7 @@ base_type
 	|	FIXEDPT_KEY
 	;
 
-var_declaration returns [TigerNode node] 
+var_declaration 
 	:	^(ASSIGN ^(COLON id_list type_id) unsigned_tail)
 	|	^(COLON id_list type_id)
 	;
@@ -113,11 +111,11 @@ unsigned_tail
 	|	fixedptlit
 	;
 
-id_list returns [java.util.List<String> list] 
+id_list 
 	:	^(AST_ID_LIST ID+)
 	;
 
-stat_seq returns [java.util.List<TigerNode> list]
+stat_seq
 	:	stat+
 	;
 
@@ -132,7 +130,7 @@ stat
 	| block
 	;
 
-if_stat	returns [TigerNode node]
+if_stat
 	:	^(IF_KEY expr stat_seq else_tail?)
 	;
 
@@ -140,37 +138,32 @@ else_tail
 	:	^(ELSE_KEY stat_seq)
 	;
 
-while_stat returns [TigerNode node]
+while_stat
 	:	^(WHILE_KEY expr stat_seq)
 	;
 
-for_stat returns [TigerNode node]
+for_stat
 	:	^(FOR_KEY ^(TO_KEY ^(ASSIGN ID index_expr) index_expr) stat_seq)
 	;
 
-assign_stat returns [TigerNode node]
-	:	^(ASSIGN value assign_stat_tail)
-	;
-	
-assign_stat_tail
-	:	expr_list
-	|	func_call
+assign_stat
+	:	^(ASSIGN value expr_list)
 	;
 
-func_call returns [TigerNode node]
+func_call
 	:	^(AST_FUNC_CALL ID func_param_list)
 	;
 	
-break_stat returns [TigerNode node]
+break_stat
 	:	BREAK_KEY
 	;
 	
-return_stat returns [TigerNode node]
+return_stat
 	:	^(AST_RETURN_STAT RETURN_KEY expr)
 	;
 
 	
-expr returns [TigerNode node]
+expr
 	:	expr_op
 	|	func_call 
 	|	constval
@@ -194,7 +187,7 @@ binop_p1:	(EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | binop_p2);
 binop_p2:	(MINUS | PLUS | binop_p3);
 binop_p3:	(MULT | DIV);
 	
-constval returns [TigerNode node]
+constval
 	:	(fixedptlit) => fixedptlit
 	|	intlit
 	;
@@ -209,17 +202,17 @@ binary_operator
 	:	(PLUS|MINUS|MULT|DIV|EQ|NEQ|LESSER|GREATER|LESSEREQ|GREATEREQ|AND|OR)
 	;
 
-expr_list returns [java.util.List<TigerNode> list]
+expr_list
 	:	^(AST_EXPR_LIST expr+)
 	;
 
-value returns [TigerNode node]
+value
 	:	(ID LBRACK index_expr RBRACK LBRACK) => ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK
 	|	(ID LBRACK) => ID LBRACK index_expr RBRACK
 	|	ID
 	;
 
-index_expr returns [TigerNode node]
+index_expr
 	:	^(index_oper intlit index_expr)
 	|	intlit
 	|	^(index_oper ID index_expr)
@@ -230,6 +223,6 @@ index_oper
 	:	(PLUS|MINUS|MULT)
 	;
   
-func_param_list returns [java.util.List<TigerNode> list]
+func_param_list
 	: ^(AST_PARAM_LIST (expr+)?)
 	;
