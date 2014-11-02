@@ -1,4 +1,4 @@
-// $ANTLR 3.5 /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g 2014-11-02 01:21:13
+// $ANTLR 3.5.1 /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g 2014-11-02 01:43:54
 
 	import java.util.Map;
 	import java.util.HashMap;
@@ -180,7 +180,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "tiger_program"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:121:1: tiger_program : type_declaration_list funct_declaration_list ;
-	public final tigerParser.tiger_program_return tiger_program() throws  {
+	public final tigerParser.tiger_program_return tiger_program() throws RecognitionException {
 		tigerParser.tiger_program_return retval = new tigerParser.tiger_program_return();
 		retval.start = input.LT(1);
 
@@ -240,7 +240,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "funct_declaration_list"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:125:1: funct_declaration_list : ( funct_declaration )+ ;
-	public final tigerParser.funct_declaration_list_return funct_declaration_list() throws  {
+	public final tigerParser.funct_declaration_list_return funct_declaration_list() throws RecognitionException {
 		tigerParser.funct_declaration_list_return retval = new tigerParser.funct_declaration_list_return();
 		retval.start = input.LT(1);
 
@@ -319,7 +319,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "funct_declaration"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:129:1: funct_declaration : ( return_func | void_func );
-	public final tigerParser.funct_declaration_return funct_declaration() throws  {
+	public final tigerParser.funct_declaration_return funct_declaration() throws RecognitionException {
 		tigerParser.funct_declaration_return retval = new tigerParser.funct_declaration_return();
 		retval.start = input.LT(1);
 
@@ -407,7 +407,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "return_func"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:134:1: return_func : type_id FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI -> ^( ID type_id param_list block_list ) ;
-	public final tigerParser.return_func_return return_func() throws  {
+	public final tigerParser.return_func_return return_func() throws RecognitionException {
 		tigerParser.return_func_return retval = new tigerParser.return_func_return();
 		retval.start = input.LT(1);
 
@@ -483,7 +483,7 @@ public class tigerParser extends Parser {
 			if ( state.backtracking==0 ) stream_SEMI.add(SEMI15);
 
 			// AST REWRITE
-			// elements: param_list, ID, block_list, type_id
+			// elements: ID, type_id, param_list, block_list
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -507,8 +507,8 @@ public class tigerParser extends Parser {
 				}
 
 				adaptor.addChild(root_0, 
-				      	    symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, (ID8!=null?ID8.getText():null), (type_id6!=null?input.toString(type_id6.start,type_id6.stop):null))); 
-				            CURRENT_SCOPE = new Scope(CURRENT_SCOPE, (ID8!=null?ID8.getText():null)); 
+				      	    symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, (ID8!=null?ID8.getText():null), (type_id6!=null?input.toString(type_id6.start,type_id6.stop):null))) 
+				            //CURRENT_SCOPE = new Scope(CURRENT_SCOPE, (ID8!=null?ID8.getText():null)); 
 				      		);
 			}
 
@@ -547,7 +547,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "void_func"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:142:1: void_func : ( ( VOID_KEY FUNCTION_KEY )=> VOID_KEY FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI -> ^( ID VOID_KEY param_list block_list ) | VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY block_list END_KEY SEMI -> ^( MAIN_KEY block_list ) );
-	public final tigerParser.void_func_return void_func() throws  {
+	public final tigerParser.void_func_return void_func() throws RecognitionException {
 		tigerParser.void_func_return retval = new tigerParser.void_func_return();
 		retval.start = input.LT(1);
 
@@ -660,7 +660,7 @@ public class tigerParser extends Parser {
 					if ( state.backtracking==0 ) stream_SEMI.add(SEMI25);
 
 					// AST REWRITE
-					// elements: ID, block_list, VOID_KEY, param_list
+					// elements: VOID_KEY, ID, block_list, param_list
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -685,7 +685,7 @@ public class tigerParser extends Parser {
 
 						adaptor.addChild(root_0, 
 							    symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, (ID18!=null?ID18.getText():null), (VOID_KEY16!=null?VOID_KEY16.getText():null))); 
-							    CURRENT_SCOPE = new Scope(CURRENT_SCOPE, (ID18!=null?ID18.getText():null)); 
+							    //CURRENT_SCOPE = new Scope(CURRENT_SCOPE, (ID18!=null?ID18.getText():null)); 
 							    );
 					}
 
@@ -725,7 +725,7 @@ public class tigerParser extends Parser {
 					if ( state.backtracking==0 ) stream_SEMI.add(SEMI33);
 
 					// AST REWRITE
-					// elements: block_list, MAIN_KEY
+					// elements: MAIN_KEY, block_list
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -748,7 +748,7 @@ public class tigerParser extends Parser {
 
 						adaptor.addChild(root_0, 
 						      	   symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, (MAIN_KEY27!=null?MAIN_KEY27.getText():null), (VOID_KEY26!=null?VOID_KEY26.getText():null))); 
-						           CURRENT_SCOPE = new Scope(CURRENT_SCOPE, (MAIN_KEY27!=null?MAIN_KEY27.getText():null)); 
+						           //CURRENT_SCOPE = new Scope(CURRENT_SCOPE, (MAIN_KEY27!=null?MAIN_KEY27.getText():null)); 
 						            );
 					}
 
@@ -789,7 +789,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "ret_type"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:156:1: ret_type : ( VOID_KEY | type_id );
-	public final tigerParser.ret_type_return ret_type() throws  {
+	public final tigerParser.ret_type_return ret_type() throws RecognitionException {
 		tigerParser.ret_type_return retval = new tigerParser.ret_type_return();
 		retval.start = input.LT(1);
 
@@ -878,7 +878,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "param_list"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:161:1: param_list : ( param ( COMMA param )* )? -> ^( AST_PARAM_LIST ( ( param )+ )? ) ;
-	public final tigerParser.param_list_return param_list() throws  {
+	public final tigerParser.param_list_return param_list() throws RecognitionException {
 		tigerParser.param_list_return retval = new tigerParser.param_list_return();
 		retval.start = input.LT(1);
 
@@ -1016,7 +1016,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "param"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:166:1: param : ID COLON type_id -> ^( COLON ID type_id ) ;
-	public final tigerParser.param_return param() throws  {
+	public final tigerParser.param_return param() throws RecognitionException {
 		tigerParser.param_return retval = new tigerParser.param_return();
 		retval.start = input.LT(1);
 
@@ -1107,7 +1107,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "block_list"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:171:1: block_list : ( block )+ ;
-	public final tigerParser.block_list_return block_list() throws  {
+	public final tigerParser.block_list_return block_list() throws RecognitionException {
 		tigerParser.block_list_return retval = new tigerParser.block_list_return();
 		retval.start = input.LT(1);
 
@@ -1186,7 +1186,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "block"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:175:1: block : BEGIN_KEY ( declaration_statement stat_seq ) END_KEY SEMI -> ^( AST_BLOCK ( declaration_statement )? stat_seq ) ;
-	public final tigerParser.block_return block() throws  {
+	public final tigerParser.block_return block() throws RecognitionException {
 		tigerParser.block_return retval = new tigerParser.block_return();
 		retval.start = input.LT(1);
 
@@ -1236,7 +1236,7 @@ public class tigerParser extends Parser {
 			if ( state.backtracking==0 ) stream_SEMI.add(SEMI47);
 
 			// AST REWRITE
-			// elements: declaration_statement, stat_seq
+			// elements: stat_seq, declaration_statement
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -1264,7 +1264,7 @@ public class tigerParser extends Parser {
 				}
 
 				adaptor.addChild(root_0, 
-					    CURRENT_SCOPE = new Scope(CURRENT_SCOPE, (BEGIN_KEY43!=null?BEGIN_KEY43.getText():null));
+					    CURRENT_SCOPE = new Scope(CURRENT_SCOPE, (BEGIN_KEY43!=null?BEGIN_KEY43.getText():null))
 					);
 			}
 
@@ -1303,7 +1303,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "declaration_statement"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:182:1: declaration_statement : type_declaration_list var_declaration_list ;
-	public final tigerParser.declaration_statement_return declaration_statement() throws  {
+	public final tigerParser.declaration_statement_return declaration_statement() throws RecognitionException {
 		tigerParser.declaration_statement_return retval = new tigerParser.declaration_statement_return();
 		retval.start = input.LT(1);
 
@@ -1363,7 +1363,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "type_declaration_list"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:186:1: type_declaration_list : ( type_declaration )* ;
-	public final tigerParser.type_declaration_list_return type_declaration_list() throws  {
+	public final tigerParser.type_declaration_list_return type_declaration_list() throws RecognitionException {
 		tigerParser.type_declaration_list_return retval = new tigerParser.type_declaration_list_return();
 		retval.start = input.LT(1);
 
@@ -1437,7 +1437,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "var_declaration_list"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:190:1: var_declaration_list : ( var_declaration )* ;
-	public final tigerParser.var_declaration_list_return var_declaration_list() throws  {
+	public final tigerParser.var_declaration_list_return var_declaration_list() throws RecognitionException {
 		tigerParser.var_declaration_list_return retval = new tigerParser.var_declaration_list_return();
 		retval.start = input.LT(1);
 
@@ -1511,7 +1511,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "type_declaration"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:194:1: type_declaration : TYPE_KEY ID EQ type SEMI -> ^( EQ ID type ) ;
-	public final tigerParser.type_declaration_return type_declaration() throws  {
+	public final tigerParser.type_declaration_return type_declaration() throws RecognitionException {
 		tigerParser.type_declaration_return retval = new tigerParser.type_declaration_return();
 		retval.start = input.LT(1);
 
@@ -1614,7 +1614,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "type"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:199:1: type : ( base_type | ( ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK LBRACK UNSIGNED_INTLIT RBRACK )=> ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK LBRACK UNSIGNED_INTLIT RBRACK OF_KEY base_type -> ^( ARRAY_KEY ^( AST_2D_ARRAY UNSIGNED_INTLIT UNSIGNED_INTLIT ) base_type ) | ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK OF_KEY base_type -> ^( ARRAY_KEY UNSIGNED_INTLIT base_type ) );
-	public final tigerParser.type_return type() throws  {
+	public final tigerParser.type_return type() throws RecognitionException {
 		tigerParser.type_return retval = new tigerParser.type_return();
 		retval.start = input.LT(1);
 
@@ -1792,7 +1792,7 @@ public class tigerParser extends Parser {
 					if (state.failed) return retval;
 					if ( state.backtracking==0 ) stream_base_type.add(base_type72.getTree());
 					// AST REWRITE
-					// elements: base_type, UNSIGNED_INTLIT, ARRAY_KEY
+					// elements: ARRAY_KEY, base_type, UNSIGNED_INTLIT
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -1853,7 +1853,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "type_id"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:208:1: type_id : ( base_type | ID );
-	public final tigerParser.type_id_return type_id() throws  {
+	public final tigerParser.type_id_return type_id() throws RecognitionException {
 		tigerParser.type_id_return retval = new tigerParser.type_id_return();
 		retval.start = input.LT(1);
 
@@ -1942,7 +1942,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "base_type"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:213:1: base_type : ( INT_KEY | FIXEDPT_KEY );
-	public final tigerParser.base_type_return base_type() throws  {
+	public final tigerParser.base_type_return base_type() throws RecognitionException {
 		tigerParser.base_type_return retval = new tigerParser.base_type_return();
 		retval.start = input.LT(1);
 
@@ -2002,7 +2002,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "var_declaration"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:218:1: var_declaration : ( ( VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT )=> VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT SEMI -> ^( ASSIGN ^( COLON id_list type_id ) UNSIGNED_INTLIT ) | ( VAR_KEY id_list COLON type_id ASSIGN fixedptlit )=> VAR_KEY id_list COLON type_id ASSIGN fixedptlit SEMI -> ^( ASSIGN ^( COLON id_list type_id ) fixedptlit ) | VAR_KEY id_list COLON type_id SEMI -> ^( COLON id_list type_id ) );
-	public final tigerParser.var_declaration_return var_declaration() throws  {
+	public final tigerParser.var_declaration_return var_declaration() throws RecognitionException {
 		tigerParser.var_declaration_return retval = new tigerParser.var_declaration_return();
 		retval.start = input.LT(1);
 
@@ -2104,7 +2104,7 @@ public class tigerParser extends Parser {
 					if ( state.backtracking==0 ) stream_SEMI.add(SEMI82);
 
 					// AST REWRITE
-					// elements: UNSIGNED_INTLIT, id_list, type_id, COLON, ASSIGN
+					// elements: type_id, id_list, UNSIGNED_INTLIT, ASSIGN, COLON
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -2135,7 +2135,7 @@ public class tigerParser extends Parser {
 						}
 
 						adaptor.addChild(root_0, 
-							  outln((id_list77!=null?input.toString(id_list77.start,id_list77.stop):null));
+							  outln((id_list77!=null?input.toString(id_list77.start,id_list77.stop):null))
 							  //String[] ids = idlist.split(",");
 							);
 					}
@@ -2177,7 +2177,7 @@ public class tigerParser extends Parser {
 					if ( state.backtracking==0 ) stream_SEMI.add(SEMI89);
 
 					// AST REWRITE
-					// elements: COLON, type_id, ASSIGN, fixedptlit, id_list
+					// elements: fixedptlit, COLON, type_id, ASSIGN, id_list
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -2238,7 +2238,7 @@ public class tigerParser extends Parser {
 					if ( state.backtracking==0 ) stream_SEMI.add(SEMI94);
 
 					// AST REWRITE
-					// elements: type_id, COLON, id_list
+					// elements: COLON, id_list, type_id
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -2299,7 +2299,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "id_list"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:231:1: id_list : ID ( COMMA id_list )? -> ^( AST_ID_LIST ( ID )+ ) ;
-	public final tigerParser.id_list_return id_list() throws  {
+	public final tigerParser.id_list_return id_list() throws RecognitionException {
 		tigerParser.id_list_return retval = new tigerParser.id_list_return();
 		retval.start = input.LT(1);
 
@@ -2411,7 +2411,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "stat_seq"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:236:1: stat_seq : ( stat )+ ;
-	public final tigerParser.stat_seq_return stat_seq() throws  {
+	public final tigerParser.stat_seq_return stat_seq() throws RecognitionException {
 		tigerParser.stat_seq_return retval = new tigerParser.stat_seq_return();
 		retval.start = input.LT(1);
 
@@ -2490,7 +2490,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "stat"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:240:1: stat : ( if_stat | while_stat | for_stat | ( value ASSIGN )=> assign_stat | func_call SEMI !| break_stat | return_stat | block );
-	public final tigerParser.stat_return stat() throws  {
+	public final tigerParser.stat_return stat() throws RecognitionException {
 		tigerParser.stat_return retval = new tigerParser.stat_return();
 		retval.start = input.LT(1);
 
@@ -2705,7 +2705,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "if_stat"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:251:1: if_stat : ( ( IF_KEY expr THEN_KEY stat_seq ELSE_KEY )=> IF_KEY expr THEN_KEY stat_seq ELSE_KEY stat_seq ENDIF_KEY SEMI -> ^( IF_KEY expr stat_seq ^( ELSE_KEY stat_seq ) ) | IF_KEY expr THEN_KEY stat_seq ENDIF_KEY SEMI -> ^( IF_KEY expr stat_seq ) );
-	public final tigerParser.if_stat_return if_stat() throws  {
+	public final tigerParser.if_stat_return if_stat() throws RecognitionException {
 		tigerParser.if_stat_return retval = new tigerParser.if_stat_return();
 		retval.start = input.LT(1);
 
@@ -2800,7 +2800,7 @@ public class tigerParser extends Parser {
 					if ( state.backtracking==0 ) stream_SEMI.add(SEMI115);
 
 					// AST REWRITE
-					// elements: ELSE_KEY, stat_seq, stat_seq, IF_KEY, expr
+					// elements: stat_seq, IF_KEY, expr, ELSE_KEY, stat_seq
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -2864,7 +2864,7 @@ public class tigerParser extends Parser {
 					if ( state.backtracking==0 ) stream_SEMI.add(SEMI121);
 
 					// AST REWRITE
-					// elements: IF_KEY, stat_seq, expr
+					// elements: stat_seq, expr, IF_KEY
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -2925,7 +2925,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "while_stat"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:259:1: while_stat : WHILE_KEY expr DO_KEY stat_seq ENDDO_KEY SEMI -> ^( WHILE_KEY expr stat_seq ) ;
-	public final tigerParser.while_stat_return while_stat() throws  {
+	public final tigerParser.while_stat_return while_stat() throws RecognitionException {
 		tigerParser.while_stat_return retval = new tigerParser.while_stat_return();
 		retval.start = input.LT(1);
 
@@ -3035,7 +3035,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "for_stat"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:264:1: for_stat : FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI -> ^( FOR_KEY ^( TO_KEY ^( ASSIGN ID index_expr ) index_expr ) stat_seq ) ;
-	public final tigerParser.for_stat_return for_stat() throws  {
+	public final tigerParser.for_stat_return for_stat() throws RecognitionException {
 		tigerParser.for_stat_return retval = new tigerParser.for_stat_return();
 		retval.start = input.LT(1);
 
@@ -3110,7 +3110,7 @@ public class tigerParser extends Parser {
 			if ( state.backtracking==0 ) stream_SEMI.add(SEMI137);
 
 			// AST REWRITE
-			// elements: TO_KEY, FOR_KEY, stat_seq, ID, ASSIGN, index_expr, index_expr
+			// elements: ASSIGN, index_expr, ID, TO_KEY, stat_seq, index_expr, FOR_KEY
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -3185,7 +3185,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "assign_stat"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:268:1: assign_stat : ( ( value ASSIGN func_call )=> value ASSIGN func_call SEMI -> ^( ASSIGN value func_call ) | value ASSIGN expr_list SEMI -> ^( ASSIGN value expr_list ) );
-	public final tigerParser.assign_stat_return assign_stat() throws  {
+	public final tigerParser.assign_stat_return assign_stat() throws RecognitionException {
 		tigerParser.assign_stat_return retval = new tigerParser.assign_stat_return();
 		retval.start = input.LT(1);
 
@@ -3253,7 +3253,7 @@ public class tigerParser extends Parser {
 					if ( state.backtracking==0 ) stream_SEMI.add(SEMI141);
 
 					// AST REWRITE
-					// elements: func_call, ASSIGN, value
+					// elements: value, func_call, ASSIGN
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -3303,7 +3303,7 @@ public class tigerParser extends Parser {
 					if ( state.backtracking==0 ) stream_SEMI.add(SEMI145);
 
 					// AST REWRITE
-					// elements: ASSIGN, expr_list, value
+					// elements: expr_list, value, ASSIGN
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -3364,7 +3364,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "func_call"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:275:1: func_call : ID LPAREN func_param_list RPAREN -> ^( AST_FUNC_CALL ID func_param_list ) ;
-	public final tigerParser.func_call_return func_call() throws  {
+	public final tigerParser.func_call_return func_call() throws RecognitionException {
 		tigerParser.func_call_return retval = new tigerParser.func_call_return();
 		retval.start = input.LT(1);
 
@@ -3402,7 +3402,7 @@ public class tigerParser extends Parser {
 			if ( state.backtracking==0 ) stream_RPAREN.add(RPAREN149);
 
 			// AST REWRITE
-			// elements: func_param_list, ID
+			// elements: ID, func_param_list
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -3461,7 +3461,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "break_stat"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:280:1: break_stat : BREAK_KEY SEMI -> BREAK_KEY ;
-	public final tigerParser.break_stat_return break_stat() throws  {
+	public final tigerParser.break_stat_return break_stat() throws RecognitionException {
 		tigerParser.break_stat_return retval = new tigerParser.break_stat_return();
 		retval.start = input.LT(1);
 
@@ -3537,7 +3537,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "return_stat"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:285:1: return_stat : RETURN_KEY expr SEMI -> ^( AST_RETURN_STAT RETURN_KEY expr ) ;
-	public final tigerParser.return_stat_return return_stat() throws  {
+	public final tigerParser.return_stat_return return_stat() throws RecognitionException {
 		tigerParser.return_stat_return retval = new tigerParser.return_stat_return();
 		retval.start = input.LT(1);
 
@@ -3628,7 +3628,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "expr"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:291:1: expr : ( ( constval binop_p0 )=> constval binop_p0 expr -> ^( binop_p0 constval expr ) | constval | ( value binop_p0 )=> value binop_p0 expr -> ^( binop_p0 value expr ) | value | ( LPAREN expr RPAREN binop_p0 )=> LPAREN expr RPAREN binop_p0 expr -> ^( binop_p0 ^( AST_EXPR_PAREN expr ) expr ) | LPAREN expr RPAREN -> ^( AST_EXPR_PAREN expr ) );
-	public final tigerParser.expr_return expr() throws  {
+	public final tigerParser.expr_return expr() throws RecognitionException {
 		tigerParser.expr_return retval = new tigerParser.expr_return();
 		retval.start = input.LT(1);
 
@@ -3752,7 +3752,7 @@ public class tigerParser extends Parser {
 					if (state.failed) return retval;
 					if ( state.backtracking==0 ) stream_expr.add(expr157.getTree());
 					// AST REWRITE
-					// elements: binop_p0, constval, expr
+					// elements: constval, binop_p0, expr
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -3996,7 +3996,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "binop_p0"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:304:1: binop_p0 : ( AND | OR | binop_p1 ) ;
-	public final tigerParser.binop_p0_return binop_p0() throws  {
+	public final tigerParser.binop_p0_return binop_p0() throws RecognitionException {
 		tigerParser.binop_p0_return retval = new tigerParser.binop_p0_return();
 		retval.start = input.LT(1);
 
@@ -4117,7 +4117,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "binop_p1"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:305:1: binop_p1 : ( EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | binop_p2 ) ;
-	public final tigerParser.binop_p1_return binop_p1() throws  {
+	public final tigerParser.binop_p1_return binop_p1() throws RecognitionException {
 		tigerParser.binop_p1_return retval = new tigerParser.binop_p1_return();
 		retval.start = input.LT(1);
 
@@ -4304,7 +4304,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "binop_p2"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:306:1: binop_p2 : ( MINUS | PLUS | binop_p3 ) ;
-	public final tigerParser.binop_p2_return binop_p2() throws  {
+	public final tigerParser.binop_p2_return binop_p2() throws RecognitionException {
 		tigerParser.binop_p2_return retval = new tigerParser.binop_p2_return();
 		retval.start = input.LT(1);
 
@@ -4417,7 +4417,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "binop_p3"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:307:1: binop_p3 : ( MULT | DIV ) ;
-	public final tigerParser.binop_p3_return binop_p3() throws  {
+	public final tigerParser.binop_p3_return binop_p3() throws RecognitionException {
 		tigerParser.binop_p3_return retval = new tigerParser.binop_p3_return();
 		retval.start = input.LT(1);
 
@@ -4477,7 +4477,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "constval"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:309:1: constval : ( ( fixedptlit )=> fixedptlit | intlit );
-	public final tigerParser.constval_return constval() throws  {
+	public final tigerParser.constval_return constval() throws RecognitionException {
 		tigerParser.constval_return retval = new tigerParser.constval_return();
 		retval.start = input.LT(1);
 
@@ -4575,7 +4575,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "intlit"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:314:1: intlit : ( MINUS )? UNSIGNED_INTLIT ;
-	public final tigerParser.intlit_return intlit() throws  {
+	public final tigerParser.intlit_return intlit() throws RecognitionException {
 		tigerParser.intlit_return retval = new tigerParser.intlit_return();
 		retval.start = input.LT(1);
 
@@ -4652,7 +4652,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "fixedptlit"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:319:1: fixedptlit : ( MINUS )? UNSIGNED_FIXEDPTLIT ;
-	public final tigerParser.fixedptlit_return fixedptlit() throws  {
+	public final tigerParser.fixedptlit_return fixedptlit() throws RecognitionException {
 		tigerParser.fixedptlit_return retval = new tigerParser.fixedptlit_return();
 		retval.start = input.LT(1);
 
@@ -4729,7 +4729,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "binary_operator"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:327:1: binary_operator : ( PLUS | MINUS | MULT | DIV | EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | AND | OR ) ;
-	public final tigerParser.binary_operator_return binary_operator() throws  {
+	public final tigerParser.binary_operator_return binary_operator() throws RecognitionException {
 		tigerParser.binary_operator_return retval = new tigerParser.binary_operator_return();
 		retval.start = input.LT(1);
 
@@ -4789,7 +4789,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "expr_list"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:331:1: expr_list : expr ( COMMA expr )* -> ^( AST_EXPR_LIST ( expr )+ ) ;
-	public final tigerParser.expr_list_return expr_list() throws  {
+	public final tigerParser.expr_list_return expr_list() throws RecognitionException {
 		tigerParser.expr_list_return retval = new tigerParser.expr_list_return();
 		retval.start = input.LT(1);
 
@@ -4907,7 +4907,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "value"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:336:1: value : ( ( ID LBRACK index_expr RBRACK LBRACK )=> ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK | ( ID LBRACK )=> ID LBRACK index_expr RBRACK | ID );
-	public final tigerParser.value_return value() throws  {
+	public final tigerParser.value_return value() throws RecognitionException {
 		tigerParser.value_return retval = new tigerParser.value_return();
 		retval.start = input.LT(1);
 
@@ -5089,7 +5089,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "index_expr"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:342:1: index_expr : ( ( intlit index_oper )=> intlit index_oper index_expr -> ^( index_oper intlit index_expr ) | intlit | ( ID index_oper )=> ID index_oper index_expr -> ^( index_oper ID index_expr ) | ID );
-	public final tigerParser.index_expr_return index_expr() throws  {
+	public final tigerParser.index_expr_return index_expr() throws RecognitionException {
 		tigerParser.index_expr_return retval = new tigerParser.index_expr_return();
 		retval.start = input.LT(1);
 
@@ -5177,7 +5177,7 @@ public class tigerParser extends Parser {
 					if (state.failed) return retval;
 					if ( state.backtracking==0 ) stream_index_expr.add(index_expr209.getTree());
 					// AST REWRITE
-					// elements: index_oper, intlit, index_expr
+					// elements: index_expr, intlit, index_oper
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -5238,7 +5238,7 @@ public class tigerParser extends Parser {
 					if (state.failed) return retval;
 					if ( state.backtracking==0 ) stream_index_expr.add(index_expr213.getTree());
 					// AST REWRITE
-					// elements: ID, index_oper, index_expr
+					// elements: index_oper, index_expr, ID
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -5313,7 +5313,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "index_oper"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:351:1: index_oper : ( PLUS | MINUS | MULT ) ;
-	public final tigerParser.index_oper_return index_oper() throws  {
+	public final tigerParser.index_oper_return index_oper() throws RecognitionException {
 		tigerParser.index_oper_return retval = new tigerParser.index_oper_return();
 		retval.start = input.LT(1);
 
@@ -5373,7 +5373,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "func_param_list"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:371:1: func_param_list : ( expr ( COMMA expr )* )? -> ^( AST_PARAM_LIST ( ( expr )+ )? ) ;
-	public final tigerParser.func_param_list_return func_param_list() throws  {
+	public final tigerParser.func_param_list_return func_param_list() throws RecognitionException {
 		tigerParser.func_param_list_return retval = new tigerParser.func_param_list_return();
 		retval.start = input.LT(1);
 
@@ -5511,7 +5511,7 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start "keywords"
 	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:376:1: keywords : ( FUNCTION_KEY | BEGIN_KEY | END_KEY | VOID_KEY | MAIN_KEY | TYPE_KEY | ARRAY_KEY | OF_KEY | INT_KEY | FIXEDPT_KEY | VAR_KEY | IF_KEY | THEN_KEY | ENDIF_KEY | ELSE_KEY | WHILE_KEY | DO_KEY | ENDDO_KEY | FOR_KEY | ID_KEY | TO_KEY | BREAK_KEY | RETURN_KEY );
-	public final tigerParser.keywords_return keywords() throws  {
+	public final tigerParser.keywords_return keywords() throws RecognitionException {
 		tigerParser.keywords_return retval = new tigerParser.keywords_return();
 		retval.start = input.LT(1);
 
@@ -5562,83 +5562,104 @@ public class tigerParser extends Parser {
 	// $ANTLR end "keywords"
 
 	// $ANTLR start synpred1_tiger
-	public final void synpred1_tiger_fragment() throws  {
+	public final void synpred1_tiger_fragment() throws RecognitionException {
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:143:4: ( VOID_KEY FUNCTION_KEY )
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:143:5: VOID_KEY FUNCTION_KEY
 		{
 		match(input,VOID_KEY,FOLLOW_VOID_KEY_in_synpred1_tiger199); if (state.failed) return;
+
 		match(input,FUNCTION_KEY,FOLLOW_FUNCTION_KEY_in_synpred1_tiger201); if (state.failed) return;
+
 		}
 
 	}
 	// $ANTLR end synpred1_tiger
 
 	// $ANTLR start synpred2_tiger
-	public final void synpred2_tiger_fragment() throws  {
+	public final void synpred2_tiger_fragment() throws RecognitionException {
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:201:4: ( ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK LBRACK UNSIGNED_INTLIT RBRACK )
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:201:5: ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK LBRACK UNSIGNED_INTLIT RBRACK
 		{
 		match(input,ARRAY_KEY,FOLLOW_ARRAY_KEY_in_synpred2_tiger501); if (state.failed) return;
+
 		match(input,LBRACK,FOLLOW_LBRACK_in_synpred2_tiger503); if (state.failed) return;
+
 		match(input,UNSIGNED_INTLIT,FOLLOW_UNSIGNED_INTLIT_in_synpred2_tiger505); if (state.failed) return;
+
 		match(input,RBRACK,FOLLOW_RBRACK_in_synpred2_tiger507); if (state.failed) return;
+
 		match(input,LBRACK,FOLLOW_LBRACK_in_synpred2_tiger509); if (state.failed) return;
+
 		match(input,UNSIGNED_INTLIT,FOLLOW_UNSIGNED_INTLIT_in_synpred2_tiger511); if (state.failed) return;
+
 		match(input,RBRACK,FOLLOW_RBRACK_in_synpred2_tiger513); if (state.failed) return;
+
 		}
 
 	}
 	// $ANTLR end synpred2_tiger
 
 	// $ANTLR start synpred3_tiger
-	public final void synpred3_tiger_fragment() throws  {
+	public final void synpred3_tiger_fragment() throws RecognitionException {
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:219:4: ( VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT )
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:219:5: VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT
 		{
 		match(input,VAR_KEY,FOLLOW_VAR_KEY_in_synpred3_tiger627); if (state.failed) return;
+
 		pushFollow(FOLLOW_id_list_in_synpred3_tiger629);
 		id_list();
 		state._fsp--;
 		if (state.failed) return;
+
 		match(input,COLON,FOLLOW_COLON_in_synpred3_tiger631); if (state.failed) return;
+
 		pushFollow(FOLLOW_type_id_in_synpred3_tiger633);
 		type_id();
 		state._fsp--;
 		if (state.failed) return;
+
 		match(input,ASSIGN,FOLLOW_ASSIGN_in_synpred3_tiger635); if (state.failed) return;
+
 		match(input,UNSIGNED_INTLIT,FOLLOW_UNSIGNED_INTLIT_in_synpred3_tiger637); if (state.failed) return;
+
 		}
 
 	}
 	// $ANTLR end synpred3_tiger
 
 	// $ANTLR start synpred4_tiger
-	public final void synpred4_tiger_fragment() throws  {
+	public final void synpred4_tiger_fragment() throws RecognitionException {
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:224:4: ( VAR_KEY id_list COLON type_id ASSIGN fixedptlit )
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:224:5: VAR_KEY id_list COLON type_id ASSIGN fixedptlit
 		{
 		match(input,VAR_KEY,FOLLOW_VAR_KEY_in_synpred4_tiger679); if (state.failed) return;
+
 		pushFollow(FOLLOW_id_list_in_synpred4_tiger681);
 		id_list();
 		state._fsp--;
 		if (state.failed) return;
+
 		match(input,COLON,FOLLOW_COLON_in_synpred4_tiger683); if (state.failed) return;
+
 		pushFollow(FOLLOW_type_id_in_synpred4_tiger685);
 		type_id();
 		state._fsp--;
 		if (state.failed) return;
+
 		match(input,ASSIGN,FOLLOW_ASSIGN_in_synpred4_tiger687); if (state.failed) return;
+
 		pushFollow(FOLLOW_fixedptlit_in_synpred4_tiger689);
 		fixedptlit();
 		state._fsp--;
 		if (state.failed) return;
+
 		}
 
 	}
 	// $ANTLR end synpred4_tiger
 
 	// $ANTLR start synpred5_tiger
-	public final void synpred5_tiger_fragment() throws  {
+	public final void synpred5_tiger_fragment() throws RecognitionException {
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:244:5: ( value ASSIGN )
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:244:6: value ASSIGN
 		{
@@ -5646,35 +5667,42 @@ public class tigerParser extends Parser {
 		value();
 		state._fsp--;
 		if (state.failed) return;
+
 		match(input,ASSIGN,FOLLOW_ASSIGN_in_synpred5_tiger822); if (state.failed) return;
+
 		}
 
 	}
 	// $ANTLR end synpred5_tiger
 
 	// $ANTLR start synpred6_tiger
-	public final void synpred6_tiger_fragment() throws  {
+	public final void synpred6_tiger_fragment() throws RecognitionException {
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:252:5: ( IF_KEY expr THEN_KEY stat_seq ELSE_KEY )
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:252:6: IF_KEY expr THEN_KEY stat_seq ELSE_KEY
 		{
 		match(input,IF_KEY,FOLLOW_IF_KEY_in_synpred6_tiger866); if (state.failed) return;
+
 		pushFollow(FOLLOW_expr_in_synpred6_tiger868);
 		expr();
 		state._fsp--;
 		if (state.failed) return;
+
 		match(input,THEN_KEY,FOLLOW_THEN_KEY_in_synpred6_tiger870); if (state.failed) return;
+
 		pushFollow(FOLLOW_stat_seq_in_synpred6_tiger872);
 		stat_seq();
 		state._fsp--;
 		if (state.failed) return;
+
 		match(input,ELSE_KEY,FOLLOW_ELSE_KEY_in_synpred6_tiger874); if (state.failed) return;
+
 		}
 
 	}
 	// $ANTLR end synpred6_tiger
 
 	// $ANTLR start synpred7_tiger
-	public final void synpred7_tiger_fragment() throws  {
+	public final void synpred7_tiger_fragment() throws RecognitionException {
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:269:4: ( value ASSIGN func_call )
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:269:5: value ASSIGN func_call
 		{
@@ -5682,18 +5710,21 @@ public class tigerParser extends Parser {
 		value();
 		state._fsp--;
 		if (state.failed) return;
+
 		match(input,ASSIGN,FOLLOW_ASSIGN_in_synpred7_tiger1036); if (state.failed) return;
+
 		pushFollow(FOLLOW_func_call_in_synpred7_tiger1038);
 		func_call();
 		state._fsp--;
 		if (state.failed) return;
+
 		}
 
 	}
 	// $ANTLR end synpred7_tiger
 
 	// $ANTLR start synpred8_tiger
-	public final void synpred8_tiger_fragment() throws  {
+	public final void synpred8_tiger_fragment() throws RecognitionException {
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:292:5: ( constval binop_p0 )
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:292:6: constval binop_p0
 		{
@@ -5701,17 +5732,19 @@ public class tigerParser extends Parser {
 		constval();
 		state._fsp--;
 		if (state.failed) return;
+
 		pushFollow(FOLLOW_binop_p0_in_synpred8_tiger1175);
 		binop_p0();
 		state._fsp--;
 		if (state.failed) return;
+
 		}
 
 	}
 	// $ANTLR end synpred8_tiger
 
 	// $ANTLR start synpred9_tiger
-	public final void synpred9_tiger_fragment() throws  {
+	public final void synpred9_tiger_fragment() throws RecognitionException {
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:295:4: ( value binop_p0 )
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:295:5: value binop_p0
 		{
@@ -5719,37 +5752,43 @@ public class tigerParser extends Parser {
 		value();
 		state._fsp--;
 		if (state.failed) return;
+
 		pushFollow(FOLLOW_binop_p0_in_synpred9_tiger1208);
 		binop_p0();
 		state._fsp--;
 		if (state.failed) return;
+
 		}
 
 	}
 	// $ANTLR end synpred9_tiger
 
 	// $ANTLR start synpred10_tiger
-	public final void synpred10_tiger_fragment() throws  {
+	public final void synpred10_tiger_fragment() throws RecognitionException {
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:298:4: ( LPAREN expr RPAREN binop_p0 )
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:298:5: LPAREN expr RPAREN binop_p0
 		{
 		match(input,LPAREN,FOLLOW_LPAREN_in_synpred10_tiger1239); if (state.failed) return;
+
 		pushFollow(FOLLOW_expr_in_synpred10_tiger1241);
 		expr();
 		state._fsp--;
 		if (state.failed) return;
+
 		match(input,RPAREN,FOLLOW_RPAREN_in_synpred10_tiger1243); if (state.failed) return;
+
 		pushFollow(FOLLOW_binop_p0_in_synpred10_tiger1245);
 		binop_p0();
 		state._fsp--;
 		if (state.failed) return;
+
 		}
 
 	}
 	// $ANTLR end synpred10_tiger
 
 	// $ANTLR start synpred11_tiger
-	public final void synpred11_tiger_fragment() throws  {
+	public final void synpred11_tiger_fragment() throws RecognitionException {
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:310:5: ( fixedptlit )
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:310:6: fixedptlit
 		{
@@ -5757,43 +5796,51 @@ public class tigerParser extends Parser {
 		fixedptlit();
 		state._fsp--;
 		if (state.failed) return;
+
 		}
 
 	}
 	// $ANTLR end synpred11_tiger
 
 	// $ANTLR start synpred12_tiger
-	public final void synpred12_tiger_fragment() throws  {
+	public final void synpred12_tiger_fragment() throws RecognitionException {
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:337:6: ( ID LBRACK index_expr RBRACK LBRACK )
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:337:7: ID LBRACK index_expr RBRACK LBRACK
 		{
 		match(input,ID,FOLLOW_ID_in_synpred12_tiger1544); if (state.failed) return;
+
 		match(input,LBRACK,FOLLOW_LBRACK_in_synpred12_tiger1546); if (state.failed) return;
+
 		pushFollow(FOLLOW_index_expr_in_synpred12_tiger1548);
 		index_expr();
 		state._fsp--;
 		if (state.failed) return;
+
 		match(input,RBRACK,FOLLOW_RBRACK_in_synpred12_tiger1550); if (state.failed) return;
+
 		match(input,LBRACK,FOLLOW_LBRACK_in_synpred12_tiger1552); if (state.failed) return;
+
 		}
 
 	}
 	// $ANTLR end synpred12_tiger
 
 	// $ANTLR start synpred13_tiger
-	public final void synpred13_tiger_fragment() throws  {
+	public final void synpred13_tiger_fragment() throws RecognitionException {
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:338:4: ( ID LBRACK )
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:338:5: ID LBRACK
 		{
 		match(input,ID,FOLLOW_ID_in_synpred13_tiger1575); if (state.failed) return;
+
 		match(input,LBRACK,FOLLOW_LBRACK_in_synpred13_tiger1577); if (state.failed) return;
+
 		}
 
 	}
 	// $ANTLR end synpred13_tiger
 
 	// $ANTLR start synpred14_tiger
-	public final void synpred14_tiger_fragment() throws  {
+	public final void synpred14_tiger_fragment() throws RecognitionException {
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:343:4: ( intlit index_oper )
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:343:5: intlit index_oper
 		{
@@ -5801,25 +5848,29 @@ public class tigerParser extends Parser {
 		intlit();
 		state._fsp--;
 		if (state.failed) return;
+
 		pushFollow(FOLLOW_index_oper_in_synpred14_tiger1608);
 		index_oper();
 		state._fsp--;
 		if (state.failed) return;
+
 		}
 
 	}
 	// $ANTLR end synpred14_tiger
 
 	// $ANTLR start synpred15_tiger
-	public final void synpred15_tiger_fragment() throws  {
+	public final void synpred15_tiger_fragment() throws RecognitionException {
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:346:4: ( ID index_oper )
 		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:346:5: ID index_oper
 		{
 		match(input,ID,FOLLOW_ID_in_synpred15_tiger1639); if (state.failed) return;
+
 		pushFollow(FOLLOW_index_oper_in_synpred15_tiger1641);
 		index_oper();
 		state._fsp--;
 		if (state.failed) return;
+
 		}
 
 	}

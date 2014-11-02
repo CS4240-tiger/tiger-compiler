@@ -135,7 +135,7 @@ return_func
 	:	type_id FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
 	->	^(ID type_id param_list block_list) {
       	    symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $type_id.text)); 
-            CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text); 
+            //CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text); 
       		}
 	;
 
@@ -143,13 +143,13 @@ void_func
 	:	(VOID_KEY FUNCTION_KEY) => VOID_KEY FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
 	->	^(ID VOID_KEY param_list block_list) {
 	    symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $VOID_KEY.text)); 
-	    CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text); 
+	    //CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text); 
 	    }
 		
 	|	VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY block_list END_KEY SEMI
 	->	^(MAIN_KEY block_list) {
       	   symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $MAIN_KEY.text, $VOID_KEY.text)); 
-           CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text); 
+           //CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text); 
             }
 	;
 
