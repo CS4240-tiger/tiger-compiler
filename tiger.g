@@ -159,7 +159,8 @@ param_list
 	->	^(AST_PARAM_LIST (param+)?)
 	;
 
-param 	:	ID COLON type_id
+param 	
+  :	ID COLON type_id
 	->	^(COLON ID type_id)
 	;
 
@@ -169,7 +170,9 @@ block_list
 
 block 	
   :	BEGIN_KEY (declaration_statement stat_seq) END_KEY SEMI 
-	-> 	^(AST_BLOCK declaration_statement? stat_seq)
+	-> 	^(AST_BLOCK declaration_statement? stat_seq) {
+	    CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text);
+	}
 	;
 
 declaration_statement 
@@ -210,7 +213,12 @@ base_type
 
 var_declaration 
 	:	(VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT) => VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT SEMI
-	->	^(ASSIGN ^(COLON id_list type_id) UNSIGNED_INTLIT)
+	->	^(ASSIGN ^(COLON id_list type_id) UNSIGNED_INTLIT) {
+	  String idlist = $id_list.text;
+	  System.out.println(idlist);
+	  //String[] ids = idlist.split(",");
+	  
+	}
 	|	(VAR_KEY id_list COLON type_id ASSIGN fixedptlit) => VAR_KEY id_list COLON type_id ASSIGN fixedptlit SEMI
 	->	^(ASSIGN ^(COLON id_list type_id) fixedptlit)
 	|	VAR_KEY id_list COLON type_id SEMI
