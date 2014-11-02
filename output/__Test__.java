@@ -9,7 +9,7 @@ public class __Test__ {
         tigerParser g = new tigerParser(tokens);
         try {
             g.tiger_program();
-            System.out.println("passed!");
+            //System.out.println("passed!");
         } catch (RecognitionException e) {
             e.printStackTrace();
         }

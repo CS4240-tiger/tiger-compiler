@@ -26,8 +26,12 @@ tokens {
 
 @parser::members {
   
-  private SymbolTable symbTable = new SymbolTable(); //Map<String, SymbolTableEntry>
+  private SymbolTable symbolTable = new SymbolTable(); //Map<String, SymbolTableEntry>
   private Scope CURRENT_SCOPE = new Scope();
+
+  private static void outln(Object obj) {
+    System.out.println(obj);
+  }
 
 	@Override
 	public void reportError(RecognitionException e) {
@@ -130,23 +134,23 @@ funct_declaration
 return_func
 	:	type_id FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
 	->	^(ID type_id param_list block_list) {
-      symbolTable.put($ID.text, new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $type_id.text)); 
-      CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text); 
-      }
+      	    symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $type_id.text)); 
+            CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text); 
+      		}
 	;
 
 void_func
 	:	(VOID_KEY FUNCTION_KEY) => VOID_KEY FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
 	->	^(ID VOID_KEY param_list block_list) {
-	    symbolTable.put($ID.text, new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $VOID_KEY.text)); 
+	    symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $VOID_KEY.text)); 
 	    CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text); 
 	    }
 		
 	|	VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY block_list END_KEY SEMI
 	->	^(MAIN_KEY block_list) {
-      symbolTable.put($MAIN_KEY.text, new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $VOID_KEY.text)); 
-      CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text); 
-      }
+      	   symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $MAIN_KEY.text, $VOID_KEY.text)); 
+           CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text); 
+            }
 	;
 
 ret_type 
@@ -169,9 +173,9 @@ block_list
 	;
 
 block 	
-  :	BEGIN_KEY (declaration_statement stat_seq) END_KEY SEMI 
+  	:	BEGIN_KEY (declaration_statement stat_seq) END_KEY SEMI 
 	-> 	^(AST_BLOCK declaration_statement? stat_seq) {
-	    CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text);
+	    CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $BEGIN_KEY.text);
 	}
 	;
 
@@ -214,10 +218,8 @@ base_type
 var_declaration 
 	:	(VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT) => VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT SEMI
 	->	^(ASSIGN ^(COLON id_list type_id) UNSIGNED_INTLIT) {
-	  String idlist = $id_list.text;
-	  System.out.println(idlist);
+	  outln($id_list.text);
 	  //String[] ids = idlist.split(",");
-	  
 	}
 	|	(VAR_KEY id_list COLON type_id ASSIGN fixedptlit) => VAR_KEY id_list COLON type_id ASSIGN fixedptlit SEMI
 	->	^(ASSIGN ^(COLON id_list type_id) fixedptlit)
