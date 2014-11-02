@@ -25,6 +25,10 @@ tokens {
 }
 
 @parser::members {
+  
+  private SymbolTable symbTable = new SymbolTable(); //Map<String, SymbolTableEntry>
+  private Scope CURRENT_SCOPE = new Scope();
+
 	@Override
 	public void reportError(RecognitionException e) {
 		displayRecognitionError(this.getTokenNames(), e);
@@ -125,15 +129,24 @@ funct_declaration
 
 return_func
 	:	type_id FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
-	->	^(ID param_list block_list)
+	->	^(ID type_id param_list block_list) {
+      symbolTable.put($ID.text, new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $type_id.text)); 
+      CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text); 
+      }
 	;
 
 void_func
 	:	(VOID_KEY FUNCTION_KEY) => VOID_KEY FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
-	->	^(ID param_list block_list)
+	->	^(ID VOID_KEY param_list block_list) {
+	    symbolTable.put($ID.text, new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $VOID_KEY.text)); 
+	    CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text); 
+	    }
 		
 	|	VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY block_list END_KEY SEMI
-	->	^(MAIN_KEY block_list)
+	->	^(MAIN_KEY block_list) {
+      symbolTable.put($MAIN_KEY.text, new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $VOID_KEY.text)); 
+      CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text); 
+      }
 	;
 
 ret_type 
@@ -154,7 +167,8 @@ block_list
 	:	block+
 	;
 
-block 	:	BEGIN_KEY (declaration_statement stat_seq) END_KEY SEMI 
+block 	
+  :	BEGIN_KEY (declaration_statement stat_seq) END_KEY SEMI 
 	-> 	^(AST_BLOCK declaration_statement? stat_seq)
 	;
 
@@ -175,7 +189,8 @@ type_declaration
 	->	^(EQ ID type)
 	;
 	
-type	:	base_type
+type	
+  :	base_type
 	|	(ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK LBRACK UNSIGNED_INTLIT RBRACK) 
 	=> 	ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK LBRACK UNSIGNED_INTLIT RBRACK OF_KEY base_type
 	->	^(ARRAY_KEY ^(AST_2D_ARRAY UNSIGNED_INTLIT UNSIGNED_INTLIT) base_type)
@@ -183,7 +198,8 @@ type	:	base_type
 	->	^(ARRAY_KEY UNSIGNED_INTLIT base_type)
 	;
 
-type_id :	base_type
+type_id 
+  :	base_type
 	|	ID
 	;
 
@@ -202,7 +218,8 @@ var_declaration
 	;
 
 
-id_list :	ID (COMMA id_list)?
+id_list 
+  :	ID (COMMA id_list)?
 	->	^(AST_ID_LIST ID+)
 	;
 
@@ -214,14 +231,15 @@ stat
 	: if_stat
 	| while_stat
 	| for_stat
-  	| (value ASSIGN) => assign_stat // assign_stat conflicts with func_call
-  	| func_call SEMI!
+  | (value ASSIGN) => assign_stat // assign_stat conflicts with func_call
+  | func_call SEMI!
 	| break_stat
 	| return_stat
 	| block
 	;
 
-if_stat	:	(IF_KEY expr THEN_KEY stat_seq ELSE_KEY) 
+if_stat	
+  :	(IF_KEY expr THEN_KEY stat_seq ELSE_KEY) 
 	=> 	IF_KEY expr THEN_KEY stat_seq ELSE_KEY stat_seq ENDIF_KEY SEMI
 	-> 	^(IF_KEY expr stat_seq ^(ELSE_KEY stat_seq))
 	|	IF_KEY expr THEN_KEY stat_seq ENDIF_KEY SEMI
@@ -260,7 +278,8 @@ return_stat
 	;
 
 	
-expr 	:	(constval binop_p0) => constval binop_p0 expr
+expr 	
+  :	(constval binop_p0) => constval binop_p0 expr
 	->	^(binop_p0 constval expr)
 	|	constval
 	|	(value binop_p0) => value binop_p0 expr
@@ -277,7 +296,8 @@ binop_p1:	(EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | binop_p2);
 binop_p2:	(MINUS | PLUS | binop_p3);
 binop_p3:	(MULT | DIV);
 	
-constval:	(fixedptlit) => fixedptlit
+constval
+  :	(fixedptlit) => fixedptlit
 	|	intlit
 	;
 
