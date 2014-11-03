@@ -24,94 +24,228 @@ public final class IRMap {
 	
 	/* Binary operation (op, y, z, x) */
 	
+	/**
+	 * Adds (a + b) and stores the result in target temporary variable.
+	 * 
+	 * @param a The first value to add.
+	 * @param b The second value to add.
+	 * @param target A target temporary variable.
+	 * @return The generated IR code.
+	 */
 	public static String add(String a, String b, String target) {
 		
 	}
 	
+	/**
+	 * Subtracts (a - b) and stores the result in target temporary variable.
+	 * 
+	 * @param a The first value to subtract.
+	 * @param b The second value to subtract.
+	 * @param target A target temporary variable.
+	 * @return The generated IR code.
+	 */
 	public static String sub(String a, String b, String target) {
 		
 	}
 	
+	/**
+	 * Multiplies (a * b) and stores the result in target temporary variable.
+	 * 
+	 * @param a The first value to multiply.
+	 * @param b The second value to multiply.
+	 * @param target A target temporary variable.
+	 * @return The generated IR code.
+	 */
 	public static String mult(String a, String b, String target) {
 		
 	}
 	
+	/**
+	 * Divides (a / b) and stores the result in target temporary variable.
+	 * 
+	 * @param a The first value to divide.
+	 * @param b The second value to divide.
+	 * @param target A target temporary variable.
+	 * @return The generated IR code.
+	 */
 	public static String div(String a, String b, String target) {
 		
 	}
 	
+	/**
+	 * ANDs (a & b) and stores the result in target temporary variable.
+	 * 
+	 * @param a The first value to AND.
+	 * @param b The second value to AND.
+	 * @param target A target temporary variable.
+	 * @return The generated IR code.
+	 */
 	public static String and(String a, String b, String target) {
 		
 	}
 	
+	/**
+	 * ORs (a | b) and stores the result in target temporary variable.
+	 * 
+	 * @param a The first value to OR.
+	 * @param b The second value to OR.
+	 * @param target A target temporary variable.
+	 * @return The generated IR code.
+	 */
 	public static String or(String a, String b, String target) {
 		
 	}
 	
 	/* Goto (op, label) */
 	
+	/**
+	 * 
+	 * @param label
+	 * @return The generated IR code.
+	 */
 	public static String gotoLabel(String label) {
 		
 	}
 	
 	/* Branch (op, y, z, label) */
 	
+	/**
+	 * 
+	 * @param a
+	 * @param b
+	 * @param label
+	 * @return The generated IR code.
+	 */
 	public static String breq(String a, String b, String label) {
 		
 	}
 	
+	/**
+	 * 
+	 * @param a
+	 * @param b
+	 * @param label
+	 * @return The generated IR code.
+	 */
 	public static String brneq(String a, String b, String label) {
 		
 	}
 	
+	/**
+	 * 
+	 * @param a
+	 * @param b
+	 * @param label
+	 * @return The generated IR code.
+	 */
 	public static String brlt(String a, String b, String label) {
 		
 	}
 	
+	/**
+	 * 
+	 * @param a
+	 * @param b
+	 * @param label
+	 * @return The generated IR code.
+	 */
 	public static String brgt(String a, String b, String label) {
 		
 	}
 	
+	/**
+	 * 
+	 * @param a
+	 * @param b
+	 * @param label
+	 * @return The generated IR code.
+	 */
 	public static String brgeq(String a, String b, String label) {
 		
 	}
 	
+	/**
+	 * 
+	 * @param a
+	 * @param b
+	 * @param label
+	 * @return The generated IR code.
+	 */
 	public static String brleq(String a, String b, String label) {
 		
 	}
 	
 	/* Return (op, x) */
 	
+	/**
+	 * 
+	 * @param a
+	 * @return The generated IR code.
+	 */
 	public static String returnVal(String a) {
 		
 	}
 	
 	/* Function call, no return value (op, func_name, [param1 .. n]) */
 	
+	/**
+	 * 
+	 * @param func_name
+	 * @param params
+	 * @return The generated IR code.
+	 */
 	public static String call(String func_name, String[] params) {
 		
 	}
 	
 	/* Function call, with return value (op, x, func_name, [param1 .. n]) */
 	
+	/**
+	 * 
+	 * @param a
+	 * @param func_name
+	 * @param params
+	 * @return The generated IR code.
+	 */
 	public static String callr(String a, String func_name, String[] params) {
 		
 	}
 	
 	/* Store into array (op, array_name, offset, x) */
 	
+	/**
+	 * 
+	 * @param array_name
+	 * @param offset
+	 * @param value
+	 * @return The generated IR code.
+	 */
 	public static String array_store(String array_name, int offset, String value) {
 		
 	}
 	
 	/* Load from array (op, x, array_name, offset) */
 	
+	/**
+	 * 
+	 * @param a
+	 * @param array_name
+	 * @param offset
+	 * @return The generated IR code.
+	 */
 	public static String array_load(String a, String array_name, int offset) {
 		
 	}
 	
 	/* Array assignment (op, x, size, value) */
 	
+	/**
+	 * 
+	 * @param x
+	 * @param size
+	 * @param value
+	 * @return The generated IR code.
+	 */
 	public static String assign(String x, int size, int value) {
 		
 	}
