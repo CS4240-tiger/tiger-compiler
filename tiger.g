@@ -167,7 +167,7 @@ void_func
 block_end
 	:	END_KEY SEMI
 		{
-			CURRENT_SCOPE = CURRENT_SCOPE.getParent();
+			//CURRENT_SCOPE = CURRENT_SCOPE.getParent();
 		}
 	;
 
@@ -193,8 +193,8 @@ block_list
 block 	
   	:	BEGIN_KEY (declaration_statement stat_seq) block_end
   	{
-	    	CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $BEGIN_KEY.text);
-	}
+	    	//CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $BEGIN_KEY.text);
+	  }
 	-> 	^(AST_BLOCK declaration_statement? stat_seq) 
 	;
 
@@ -239,9 +239,7 @@ var_declaration
 	->	^(ASSIGN ^(COLON id_list type_id) fixedptlit)
 	|	(VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT) => VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT SEMI
 	{
-		String idlist = $id_list.text;
-		outln($id_list.text);
-	  
+		String idlist = $id_list.text; 
 		String[] ids = idlist.split(",");
 		for (String id: ids) {
 			symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), new TigerVariable(CURRENT_SCOPE,id.replaceAll("\\s",""), toInteger($UNSIGNED_INTLIT.text))));
