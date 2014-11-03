@@ -39,6 +39,13 @@ tokens {
 		displayRecognitionError(this.getTokenNames(), e);
 	}
 	
+	
+	public Integer toInteger(String s) {
+		int value;
+		value = Integer.parseInt(s);
+		return new Integer(value); 
+	}
+	
 	@Override
 	public void displayRecognitionError(String[] tokenNames, RecognitionException e) {
 		/*
@@ -232,8 +239,13 @@ var_declaration
 	->	^(ASSIGN ^(COLON id_list type_id) fixedptlit)
 	|	(VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT) => VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT SEMI
 	{
-	  outln($id_list.text);
-	  //String[] ids = idlist.split(",");
+		String idlist = $id_list.text;
+		outln($id_list.text);
+	  
+		String[] ids = idlist.split(",");
+		for (String id: ids) {
+			symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), new TigerVariable(CURRENT_SCOPE,id.replaceAll("\\s",""), toInteger($UNSIGNED_INTLIT.text))));
+		}
 	}
 	->	^(ASSIGN ^(COLON id_list type_id) UNSIGNED_INTLIT) 
 	|	VAR_KEY id_list COLON type_id SEMI
