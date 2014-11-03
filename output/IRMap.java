@@ -255,13 +255,15 @@ public final class IRMap {
 	/* Array assignment (op, x, size, value) */
 	
 	/**
+	 * Populates an array with a static value.
+	 * NOTE: value is of type String to handle all value types.
 	 * 
-	 * @param x
-	 * @param size
-	 * @param value
+	 * @param array_name The name of the array.
+	 * @param size The size of the array.
+	 * @param value The value to set all locations in the array to.
 	 * @return The generated IR code.
 	 */
-	public static String assign(String x, int size, int value) {
+	public static String assign(String array_name, int size, String value) {
 		
 	}
 }
