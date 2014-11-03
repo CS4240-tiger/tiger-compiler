@@ -9,6 +9,11 @@ import java.util.Map;
  * and return types, whatever applicable.
  */
 public class SymbolTable {
+	
+	/**
+	 * size of symbolTable
+	 */
+	private int size;
 	/**
 	 * The backing hashtable of this SymbolTable.
 	 */
@@ -57,6 +62,8 @@ public class SymbolTable {
 			}
 		} else {	
 			backingTable.put(entry.getId(), entry);
+			size++;
+			System.out.println(size);
 		}
 	}
 	

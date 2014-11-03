@@ -39,6 +39,12 @@ tokens {
 		displayRecognitionError(this.getTokenNames(), e);
 	}
 	
+	public Integer toInteger(String s) {
+	  int value;
+    value = Integer.parseInt(s);
+    return new Integer(value); 
+}
+	
 	@Override
 	public void displayRecognitionError(String[] tokenNames, RecognitionException e) {
 		/*
@@ -135,25 +141,25 @@ funct_declaration
 return_func
 	:	type_id FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list func_tail
 		{
-      	    		symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $type_id.text));
-      	    		CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
-      		}
+      	    symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $type_id.text)); 
+            CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text); 
+      	}
 	->	^(ID type_id param_list block_list)
 	;
 
 void_func
-	:	(VOID_KEY FUNCTION_KEY) => VOID_KEY FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list func_tail
-		{
-			symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $VOID_KEY.text));
-			CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
-		}
+	:	(VOID_KEY FUNCTION_KEY) => VOID_KEY FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
+	{
+	    symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $VOID_KEY.text)); 
+	    CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text); 
+	    }
 	->	^(ID VOID_KEY param_list block_list) 
 		
-	|	VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY block_list func_tail
-		{
-      	   		symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $MAIN_KEY.text, $VOID_KEY.text)); 
-			CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text); 
-            	}
+	|	VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY block_list END_KEY SEMI
+	{
+      	   symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $MAIN_KEY.text, $VOID_KEY.text)); 
+           CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text); 
+    }
 	->	^(MAIN_KEY block_list) 
 	;
 
@@ -232,8 +238,11 @@ var_declaration
 	->	^(ASSIGN ^(COLON id_list type_id) fixedptlit)
 	|	(VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT) => VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT SEMI
 	{
-	  outln($id_list.text);
-	  //String[] ids = idlist.split(",");
+	  String idlist = $id_list.text;
+	  String[] ids = idlist.split(",");
+	  for (String id: ids) {
+	    symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), new TigerVariable(CURRENT_SCOPE,id.replaceAll("\\s",""), toInteger($UNSIGNED_INTLIT.text))));
+	  }
 	}
 	->	^(ASSIGN ^(COLON id_list type_id) UNSIGNED_INTLIT) 
 	|	VAR_KEY id_list COLON type_id SEMI
