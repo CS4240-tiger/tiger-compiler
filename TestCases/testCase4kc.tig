@@ -1,7 +1,7 @@
 void main() 
 begin
    begin
-      var x, y, z: int := 123;
-	  x := 124;
+      var x, y, z: fixedpt := 123.00;
+	  x := 124.00;
    end;
 end;

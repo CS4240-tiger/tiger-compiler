@@ -39,6 +39,10 @@ tokens {
 		displayRecognitionError(this.getTokenNames(), e);
 	}
 	
+	public Double toDouble(String s) {
+		double value = Double.parseDouble(s);
+		return new Double(value);
+	}
 	
 	public Integer toInteger(String s) {
 		int value;
@@ -235,7 +239,15 @@ base_type
 	;
 
 var_declaration 
-	:	(VAR_KEY id_list COLON type_id ASSIGN fixedptlit) => VAR_KEY id_list COLON type_id ASSIGN fixedptlit SEMI
+	:	(VAR_KEY id_list COLON type_id ASSIGN fixedptlit) => VAR_KEY id_list COLON type_id ASSIGN fixedptlit SEMI 
+	{
+	        outln($fixedptlit.text);
+	  	String idlist = $id_list.text; 
+    		String[] ids = idlist.split(",");
+    		for (String id: ids) {
+      			symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), new TigerVariable(CURRENT_SCOPE,id.replaceAll("\\s",""), toDouble($fixedptlit.text))));
+      		}
+	}
 	->	^(ASSIGN ^(COLON id_list type_id) fixedptlit)
 	|	(VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT) => VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT SEMI
 	{
@@ -247,6 +259,13 @@ var_declaration
 	}
 	->	^(ASSIGN ^(COLON id_list type_id) UNSIGNED_INTLIT) 
 	|	VAR_KEY id_list COLON type_id SEMI
+	{
+   		String idlist = $id_list.text; 
+    		String[] ids = idlist.split(",");
+    		for (String id: ids) {
+      			symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), new TigerVariable(CURRENT_SCOPE,id.replaceAll("\\s",""), new Integer(0))));
+    		}
+  }
 	->	^(COLON id_list type_id)
 	;
 
