@@ -227,10 +227,11 @@ public final class IRMap {
 	/* Store into array (op, array_name, offset, x) */
 	
 	/**
+	 * Stores a value into an array's index.
 	 * 
-	 * @param array_name
-	 * @param offset
-	 * @param value
+	 * @param array_name The name of the array.
+	 * @param offset The index into the array.
+	 * @param value The value to store into the array at index.
 	 * @return The generated IR code.
 	 */
 	public static String array_store(String array_name, int offset, String value) {
@@ -240,10 +241,11 @@ public final class IRMap {
 	/* Load from array (op, x, array_name, offset) */
 	
 	/**
+	 * Loads a value from an array's index into a variable.
 	 * 
-	 * @param a
-	 * @param array_name
-	 * @param offset
+	 * @param a A variable to load the array's value at index in to.
+	 * @param array_name The name of the array.
+	 * @param offset The index into the array.
 	 * @return The generated IR code.
 	 */
 	public static String array_load(String a, String array_name, int offset) {
