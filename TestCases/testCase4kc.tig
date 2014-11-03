@@ -1,6 +1,7 @@
 void main() 
 begin
    begin
-      var x, y, z: int := 3;
+      var x, y, z: int := 123;
+	  x := 124;
    end;
 end;

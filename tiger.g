@@ -133,28 +133,35 @@ funct_declaration
 	;
 
 return_func
-	:	type_id FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
+	:	type_id FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list func_tail
 		{
-      	    symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $type_id.text)); 
-            //CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text); 
+      	    		symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $type_id.text));
+      	    		CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
       		}
 	->	^(ID type_id param_list block_list)
 	;
 
 void_func
-	:	(VOID_KEY FUNCTION_KEY) => VOID_KEY FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list END_KEY SEMI
-	{
-	    symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $VOID_KEY.text)); 
-	    //CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text); 
-	    }
+	:	(VOID_KEY FUNCTION_KEY) => VOID_KEY FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list func_tail
+		{
+			symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $VOID_KEY.text));
+			CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
+		}
 	->	^(ID VOID_KEY param_list block_list) 
 		
-	|	VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY block_list END_KEY SEMI
-	{
-      	   symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $MAIN_KEY.text, $VOID_KEY.text)); 
-           //CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text); 
-            }
+	|	VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY block_list func_tail
+		{
+      	   		symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $MAIN_KEY.text, $VOID_KEY.text)); 
+			CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text); 
+            	}
 	->	^(MAIN_KEY block_list) 
+	;
+
+func_tail
+	:	END_KEY SEMI
+		{
+			CURRENT_SCOPE = CURRENT_SCOPE.getParent();
+		}
 	;
 
 ret_type 
@@ -221,14 +228,14 @@ base_type
 	;
 
 var_declaration 
-	:	(VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT) => VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT SEMI
+	:	(VAR_KEY id_list COLON type_id ASSIGN fixedptlit) => VAR_KEY id_list COLON type_id ASSIGN fixedptlit SEMI
+	->	^(ASSIGN ^(COLON id_list type_id) fixedptlit)
+	|	(VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT) => VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT SEMI
 	{
 	  outln($id_list.text);
 	  //String[] ids = idlist.split(",");
 	}
 	->	^(ASSIGN ^(COLON id_list type_id) UNSIGNED_INTLIT) 
-	|	(VAR_KEY id_list COLON type_id ASSIGN fixedptlit) => VAR_KEY id_list COLON type_id ASSIGN fixedptlit SEMI
-	->	^(ASSIGN ^(COLON id_list type_id) fixedptlit)
 	|	VAR_KEY id_list COLON type_id SEMI
 	->	^(COLON id_list type_id)
 	;
