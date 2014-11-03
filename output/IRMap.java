@@ -186,8 +186,9 @@ public final class IRMap {
 	/* Return (op, x) */
 	
 	/**
+	 * Returns a value.
 	 * 
-	 * @param a
+	 * @param a The value to return.
 	 * @return The generated IR code.
 	 */
 	public static String returnVal(String a) {
