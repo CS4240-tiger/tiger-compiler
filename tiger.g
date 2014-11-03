@@ -21,12 +21,15 @@ tokens {
 @parser::header {
 	import java.util.Map;
 	import java.util.HashMap;
+	import java.util.List;
+	import java.util.ArrayList;
 	import org.antlr.runtime.tree.CommonTree;
 }
 
 @parser::members {
   
   private SymbolTable symbolTable = new SymbolTable(); 
+  private List<String> irOutput = new ArrayList<String>();
   private Scope GLOBAL_SCOPE = new Scope();
   private Scope CURRENT_SCOPE = GLOBAL_SCOPE;
 
@@ -143,6 +146,8 @@ return_func
 	:	type_id FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list block_end
 		{
       	    		symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $type_id.text));
+      	    		irOutput.add(IRGenerator.funct_declaration($type_id.text, $ID.text, $param_list.text));
+      	    		
       	    		CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
       		}
 	->	^(ID type_id param_list block_list)

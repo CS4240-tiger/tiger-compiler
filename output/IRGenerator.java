@@ -9,10 +9,12 @@ public class IRGenerator {
 	/**
 	 * Returns an IR translation of a Tiger function declaration.
 	 * 
-	 * @param tigerInput The input Tiger line.
+	 * @param type The return type of the function.
+	 * @param functID The ID of the function.
+	 * @param params The parameters this function accepts.
 	 * @return An IR translation of a Tiger function declaration.
 	 */
-	public static String funct_declaration(String tigerInput) {
+	public static String funct_declaration(String type, String functID, String[] params) {
 		// TODO: implement
 		return "";
 	}
