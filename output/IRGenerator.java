@@ -8,13 +8,14 @@ public class IRGenerator {
 	
 	/**
 	 * Returns an IR translation of a Tiger function declaration.
+	 * NOTE: Everything but params can be populated from SymbolTable.
 	 * 
-	 * @param type The return type of the function.
+	 * @param type The return type of the function - look this up in the symbol table!
 	 * @param functID The ID of the function.
 	 * @param params The parameters this function accepts.
 	 * @return An IR translation of a Tiger function declaration.
 	 */
-	public static String funct_declaration(String type, String functID, String[] params) {
+	public static String funct_declaration(TigerPrimitive type, String functID, String[] params) {
 		// TODO: implement
 		return "";
 	}
