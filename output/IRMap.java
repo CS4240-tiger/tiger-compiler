@@ -187,6 +187,7 @@ public final class IRMap {
 	
 	/**
 	 * Returns a value.
+	 * NOTE: The IR function is "return," but this is reserved in Java.
 	 * 
 	 * @param a The value to return.
 	 * @return The generated IR code.
@@ -198,9 +199,10 @@ public final class IRMap {
 	/* Function call, no return value (op, func_name, [param1 .. n]) */
 	
 	/**
+	 * Calls a void function (no return value).
 	 * 
-	 * @param func_name
-	 * @param params
+	 * @param func_name The name of the function to call.
+	 * @param params An array of parameters to pass into the function.
 	 * @return The generated IR code.
 	 */
 	public static String call(String func_name, String[] params) {
@@ -210,10 +212,12 @@ public final class IRMap {
 	/* Function call, with return value (op, x, func_name, [param1 .. n]) */
 	
 	/**
+	 * Calls a function with a return value and assigns the 
+	 * return value to a variable.
 	 * 
-	 * @param a
-	 * @param func_name
-	 * @param params
+	 * @param a A variable to assign to the function's return value.
+	 * @param func_name The name of the function to call.
+	 * @param params An array of parameters to pass into the function.
 	 * @return The generated IR code.
 	 */
 	public static String callr(String a, String func_name, String[] params) {
