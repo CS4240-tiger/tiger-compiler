@@ -14,7 +14,7 @@ public final class IRMap {
 	 * @return The generated IR code.
 	 */
 	public static String assign(String a, String b) {
-		String base = "assign, $a, $b";
+		String base = "assign, $a, $b, ";
 
 		base = base.replace("$a", a);
 		base = base.replace("$b", b);
@@ -142,7 +142,11 @@ public final class IRMap {
 	 * @return The generated IR code.
 	 */
 	public static String gotoLabel(String label) {
+		String base = "goto, $label, , ";
 		
+		base = base.replace("$label", label);
+		
+		return base;
 	}
 	
 	/* Branch (op, y, z, label) */
@@ -156,7 +160,13 @@ public final class IRMap {
 	 * @return The generated IR code.
 	 */
 	public static String breq(String a, String b, String label) {
+		String base = "breq, $a, $b, $label";
 		
+		base = base.replace("$a", a);
+		base = base.replace("$b", b);
+		base = base.replace("$label", label);
+		
+		return base;
 	}
 	
 	/**
@@ -168,7 +178,13 @@ public final class IRMap {
 	 * @return The generated IR code.
 	 */
 	public static String brneq(String a, String b, String label) {
+		String base = "brneq, $a, $b, $label";
 		
+		base = base.replace("$a", a);
+		base = base.replace("$b", b);
+		base = base.replace("$label", label);
+		
+		return base;
 	}
 	
 	/**
@@ -180,7 +196,13 @@ public final class IRMap {
 	 * @return The generated IR code.
 	 */
 	public static String brlt(String a, String b, String label) {
+		String base = "brlt, $a, $b, $label";
 		
+		base = base.replace("$a", a);
+		base = base.replace("$b", b);
+		base = base.replace("$label", label);
+		
+		return base;
 	}
 	
 	/**
@@ -192,7 +214,13 @@ public final class IRMap {
 	 * @return The generated IR code.
 	 */
 	public static String brgt(String a, String b, String label) {
+		String base = "brgt, $a, $b, $label";
 		
+		base = base.replace("$a", a);
+		base = base.replace("$b", b);
+		base = base.replace("$label", label);
+		
+		return base;
 	}
 	
 	/**
@@ -204,7 +232,13 @@ public final class IRMap {
 	 * @return The generated IR code.
 	 */
 	public static String brgeq(String a, String b, String label) {
+		String base = "brgeq, $a, $b, $label";
 		
+		base = base.replace("$a", a);
+		base = base.replace("$b", b);
+		base = base.replace("$label", label);
+		
+		return base;
 	}
 	
 	/**
@@ -216,7 +250,13 @@ public final class IRMap {
 	 * @return The generated IR code.
 	 */
 	public static String brleq(String a, String b, String label) {
+		String base = "brleq, $a, $b, $label";
 		
+		base = base.replace("$a", a);
+		base = base.replace("$b", b);
+		base = base.replace("$label", label);
+		
+		return base;
 	}
 	
 	/* Return (op, x) */
