@@ -100,6 +100,7 @@ public final class IRMap {
 	
 	/**
 	 * Jumps to a specified label in the program.
+	 * NOTE: The IR function is "goto," but this is reserved in Java.
 	 * 
 	 * @param label The label to jump to.
 	 * @return The generated IR code.
@@ -111,10 +112,11 @@ public final class IRMap {
 	/* Branch (op, y, z, label) */
 	
 	/**
+	 * If (a == b), branch to label.
 	 * 
-	 * @param a
-	 * @param b
-	 * @param label
+	 * @param a The first value to compare. 
+	 * @param b The second value to compare.
+	 * @param label The label to jump to if true.
 	 * @return The generated IR code.
 	 */
 	public static String breq(String a, String b, String label) {
@@ -122,10 +124,11 @@ public final class IRMap {
 	}
 	
 	/**
+	 * If (a != b), branch to label.
 	 * 
-	 * @param a
-	 * @param b
-	 * @param label
+	 * @param a The first value to compare.
+	 * @param b The second value to compare.
+	 * @param label The label to jump to if true.
 	 * @return The generated IR code.
 	 */
 	public static String brneq(String a, String b, String label) {
@@ -133,10 +136,11 @@ public final class IRMap {
 	}
 	
 	/**
+	 * If (a < b), branch to label.
 	 * 
-	 * @param a
-	 * @param b
-	 * @param label
+	 * @param a The first value to compare.
+	 * @param b The second value to compare.
+	 * @param label The label to jump to if true.
 	 * @return The generated IR code.
 	 */
 	public static String brlt(String a, String b, String label) {
@@ -144,10 +148,11 @@ public final class IRMap {
 	}
 	
 	/**
+	 * If (a > b), branch to label.
 	 * 
-	 * @param a
-	 * @param b
-	 * @param label
+	 * @param a The first value to compare.
+	 * @param b The second value to compare.
+	 * @param label The label to jump to if true.
 	 * @return The generated IR code.
 	 */
 	public static String brgt(String a, String b, String label) {
@@ -155,10 +160,11 @@ public final class IRMap {
 	}
 	
 	/**
+	 * If (a >= b), branch to label.
 	 * 
-	 * @param a
-	 * @param b
-	 * @param label
+	 * @param a The first value to compare.
+	 * @param b The second value to compare.
+	 * @param label The label to jump to if true.
 	 * @return The generated IR code.
 	 */
 	public static String brgeq(String a, String b, String label) {
@@ -166,10 +172,11 @@ public final class IRMap {
 	}
 	
 	/**
+	 * If (a <= b), branch to label.
 	 * 
-	 * @param a
-	 * @param b
-	 * @param label
+	 * @param a The first value to compare.
+	 * @param b The second value to compare.
+	 * @param label The label to jump to if true.
 	 * @return The generated IR code.
 	 */
 	public static String brleq(String a, String b, String label) {
