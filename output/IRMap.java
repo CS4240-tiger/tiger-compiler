@@ -99,8 +99,9 @@ public final class IRMap {
 	/* Goto (op, label) */
 	
 	/**
+	 * Jumps to a specified label in the program.
 	 * 
-	 * @param label
+	 * @param label The label to jump to.
 	 * @return The generated IR code.
 	 */
 	public static String gotoLabel(String label) {
