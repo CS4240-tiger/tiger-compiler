@@ -33,7 +33,13 @@ public final class IRMap {
 	 * @return The generated IR code.
 	 */
 	public static String add(String a, String b, String target) {
+		String base = "add, $a, $b, $target";
 		
+		base = base.replace("$a", a);
+		base = base.replace("$b", b);
+		base = base.replace("$target", target);
+		
+		return base;
 	}
 	
 	/**
@@ -45,7 +51,13 @@ public final class IRMap {
 	 * @return The generated IR code.
 	 */
 	public static String sub(String a, String b, String target) {
+		String base = "sub, $a, $b, $target";
 		
+		base = base.replace("$a", a);
+		base = base.replace("$b", b);
+		base = base.replace("$target", target);
+		
+		return base;
 	}
 	
 	/**
@@ -57,7 +69,13 @@ public final class IRMap {
 	 * @return The generated IR code.
 	 */
 	public static String mult(String a, String b, String target) {
+		String base = "mult, $a, $b, $target";
 		
+		base = base.replace("$a", a);
+		base = base.replace("$b", b);
+		base = base.replace("$target", target);
+		
+		return base;
 	}
 	
 	/**
@@ -69,7 +87,13 @@ public final class IRMap {
 	 * @return The generated IR code.
 	 */
 	public static String div(String a, String b, String target) {
+		String base = "div, $a, $b, $target";
 		
+		base = base.replace("$a", a);
+		base = base.replace("$b", b);
+		base = base.replace("$target", target);
+		
+		return base;
 	}
 	
 	/**
@@ -81,7 +105,13 @@ public final class IRMap {
 	 * @return The generated IR code.
 	 */
 	public static String and(String a, String b, String target) {
+		String base = "and, $a, $b, $target";
 		
+		base = base.replace("$a", a);
+		base = base.replace("$b", b);
+		base = base.replace("$target", target);
+		
+		return base;
 	}
 	
 	/**
@@ -93,7 +123,13 @@ public final class IRMap {
 	 * @return The generated IR code.
 	 */
 	public static String or(String a, String b, String target) {
+		String base = "or, $a, $b, $target";
 		
+		base = base.replace("$a", a);
+		base = base.replace("$b", b);
+		base = base.replace("$target", target);
+		
+		return base;
 	}
 	
 	/* Goto (op, label) */
