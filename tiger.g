@@ -167,7 +167,9 @@ void_func
 block_end
 	:	END_KEY SEMI
 		{
-			CURRENT_SCOPE = CURRENT_SCOPE.getParent();
+			if (CURRENT_SCOPE != GLOBAL_SCOPE) {
+				CURRENT_SCOPE = CURRENT_SCOPE.getParent();
+			}
 		}
 	;
 
