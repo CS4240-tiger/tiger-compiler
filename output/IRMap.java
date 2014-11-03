@@ -269,7 +269,11 @@ public final class IRMap {
 	 * @return The generated IR code.
 	 */
 	public static String returnVal(String a) {
+		String base = "return, $a, , ";
 		
+		base = base.replace("$a", a);
+		
+		return base;
 	}
 	
 	/* Function call, no return value (op, func_name, [param1 .. n]) */
@@ -282,7 +286,19 @@ public final class IRMap {
 	 * @return The generated IR code.
 	 */
 	public static String call(String func_name, String[] params) {
+		String base = "call, $func_name, $params";
 		
+		base = base.replace("$func_name", func_name);
+		
+		// Convert params into simple comma-delimited String
+		String flatParams = params[0];
+		for (int paramIndex = 1; paramIndex < params.length; paramIndex++) {
+			flatParams += (", " + params[paramIndex]);
+		}
+		
+		base = base.replace("$params", flatParams);
+		
+		return base;
 	}
 	
 	/* Function call, with return value (op, x, func_name, [param1 .. n]) */
@@ -297,7 +313,20 @@ public final class IRMap {
 	 * @return The generated IR code.
 	 */
 	public static String callr(String a, String func_name, String[] params) {
+		String base = "callr, $a, $func_name, $params";
 		
+		base = base.replace("$a", a);
+		base = base.replace("$func_name", func_name);
+		
+		// Convert params into simple comma-delimited String
+		String flatParams = params[0];
+		for (int paramIndex = 1; paramIndex < params.length; paramIndex++) {
+			flatParams += (", " + params[paramIndex]);
+		}
+		
+		base = base.replace("$params", flatParams);
+		
+		return base;
 	}
 	
 	/* Store into array (op, array_name, offset, x) */
