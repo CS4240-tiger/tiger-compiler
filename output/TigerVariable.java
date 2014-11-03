@@ -27,9 +27,8 @@ public class TigerVariable extends SymbolTableEntry {
 	public TigerVariable(Scope scope, String id, Object value) {
 		super(scope, id);
 		this.value = value;
-		if (primitiveCheck(value)) {
-			declaredType = type.name().toLowerCase();
-		}
+		primitiveCheck(value);
+		declaredType = type.name().toLowerCase();
 	}
 	
 	/**
