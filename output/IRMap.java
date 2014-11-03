@@ -340,7 +340,13 @@ public final class IRMap {
 	 * @return The generated IR code.
 	 */
 	public static String array_store(String array_name, int offset, String value) {
+		String base = "array_store, $array_name, $offset, $value";
 		
+		base = base.replace("$array_name", array_name);
+		base = base.replace("$offset", String.valueOf(offset));
+		base = base.replace("$value", value);
+		
+		return base;
 	}
 	
 	/* Load from array (op, x, array_name, offset) */
@@ -354,7 +360,13 @@ public final class IRMap {
 	 * @return The generated IR code.
 	 */
 	public static String array_load(String a, String array_name, int offset) {
+		String base = "array_load, $a, $array_name, $offset";
 		
+		base = base.replace("$a", a);
+		base = base.replace("$array_name", array_name);
+		base = base.replace("$offset", String.valueOf(offset));
+		
+		return base;
 	}
 	
 	/* Array assignment (op, x, size, value) */
@@ -369,7 +381,13 @@ public final class IRMap {
 	 * @return The generated IR code.
 	 */
 	public static String assign(String array_name, int size, String value) {
+		String base = "assign, $array_name, $size, $value";
 		
+		base = base.replace("$array_name", array_name);
+		base = base.replace("$size", String.valueOf(size));
+		base = base.replace("$value", value);
+		
+		return base;
 	}
 }
 
