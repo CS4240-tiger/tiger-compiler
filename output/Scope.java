@@ -39,7 +39,11 @@ public class Scope {
 		this.parent = parent;
 		this.numChildren = 0;
 		parent.numChildren++;
-		this.id = id;
+		if (parent.getId().equals(id)) {
+			this.id = parent.id + parent.numChildren;
+		} else {
+			this.id = id;
+		}
 	}
 	
 	/**
