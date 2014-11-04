@@ -146,11 +146,16 @@ public class IRGenerator {
 		return result;
 	}
 	
+	/**
+	 * Returns an IR translation of an expression that produces a 
+	 * constant or variable with no further expansion.
+	 * 
+	 * @param value The value to pass through.
+	 * @return An IR translation of a constant- or variable-terminating expression.
+	 */
 	public static String expr(String value) {
-		String result = "";
-		// TODO: implement
-		
-		return result;
+		// No further processing needed
+		return value;
 	}
 	
 	public static String expr(String expr1, String expr2) {
