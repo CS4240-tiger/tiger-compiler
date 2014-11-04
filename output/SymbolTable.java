@@ -71,7 +71,8 @@ public class SymbolTable {
 	 * Gets a SymbolTableEntry from this SymbolTable.
 	 * 
 	 * @param key The String id of the SymbolTableEntry to get.
-	 * @param scope the current scope that we are curently in?
+	 * @param scope the current scope that we are currently in?
+	 * @return the symbol table entry
 	 */
 	public SymbolTableEntry get(String key, Scope scope) {
 		SymbolTableEntry entry = backingTable.get(key);
@@ -95,6 +96,13 @@ public class SymbolTable {
 				}
 			}
 			// Not in accessible scope
+			return null;
+		}
+		else if (entry instanceof TypeSymbolTableEntry) {
+			//check if we can access this type
+			if (entry.getScope().isAncestor(scope)) {
+				return entry;
+			} 
 			return null;
 		}
 		

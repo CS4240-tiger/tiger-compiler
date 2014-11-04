@@ -41,7 +41,6 @@ tokens {
 		displayRecognitionError(this.getTokenNames(), e);
 	}
 	public Object[] make1DArray(String s, Integer width, String value) {
-	  int width = width.intValue();
 	  int val = Integer.parseInt(value);
 	  if (s.equals("int")){
       Integer[] IntArray = new Integer[width];
@@ -50,14 +49,13 @@ tokens {
       }
       return IntArray;
     } else if (s.equals("fixedpt")) {
-      Double[] DoubleArray = new Double[dimension];
-      symbolTable.put(new TigerVariable(CURRENT_SCOPE, idName, DoubleArray));
+      Double[] DoubleArray = new Double[width];
+      return DoubleArray;
     }
+    return null;
 	}
 	
 	public Object[][] make2DArray(String s, Integer width, Integer height, String value) {
-	  int height = heightintValue();
-	  int width = width.intValue();
 	  int val = Integer.parseInt(value);
 	  if (s.equals("int")){
 	    Integer[][] IntArray = new Integer[width][height];
@@ -66,11 +64,12 @@ tokens {
 	        IntArray[i][j] = new Integer(val);
 	      }
 	    }
-	    return intArray;
+	    return IntArray;
 	  } else if (s.equals("fixedpt")) {
-	    Double[][] DoubleArray = new Double[dimension1][dimension2];
-	    symbolTable.put(new TigerVariable(CURRENT_SCOPE, idName, DoubleArray));
+	    Double[][] DoubleArray = new Double[width][height];
+	    return DoubleArray;
 	  }
+	  return null;
 	}
 	
 	public Double toDouble(String s) {
@@ -257,25 +256,25 @@ type_declaration
 type[String id]	
   :	base_type {
     if ($base_type.text.equals("int")) { 
-      symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), TigerPrimitive.INT);
+      symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), TigerPrimitive.INT));
     } else if ($base_type.text.equals("fixedpt")) {
-      symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), TigerPrimitive.FIXEDPT);
+      symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), TigerPrimitive.FIXEDPT));
     }
   }
 	|	(ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK LBRACK UNSIGNED_INTLIT RBRACK) 
 	=> 	ARRAY_KEY LBRACK var1=UNSIGNED_INTLIT RBRACK LBRACK var2=UNSIGNED_INTLIT RBRACK OF_KEY base_type {
 	  if ($base_type.text.equals("int")) { 
-	    symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), TigerPrimitive.INT_2D_ARRAY, toInteger($var1.text),toInteger($var2.text));
+	    symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), TigerPrimitive.INT_2D_ARRAY, toInteger($var1.text),toInteger($var2.text)));
 	  } else if ($base_type.text.equals("fixedpt")) {
-	    symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), TigerPrimitive.FIXEDPT_2D_ARRAY, toInteger($var1.text),toInteger($var2.text));
+	    symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), TigerPrimitive.FIXEDPT_2D_ARRAY, toInteger($var1.text),toInteger($var2.text)));
 	  }
 	}
 	->	^(ARRAY_KEY ^(AST_2D_ARRAY UNSIGNED_INTLIT UNSIGNED_INTLIT) base_type)
 	|	ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK OF_KEY base_type {
 	  if ($base_type.text.equals("int")) { 
-      symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), TigerPrimitive.INT_ARRAY, toInteger($UNSIGNED_INTLIT.text));
+      symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), TigerPrimitive.INT_ARRAY, toInteger($UNSIGNED_INTLIT.text)));
     } else if ($base_type.text.equals("fixedpt")) {
-      symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), TigerPrimitive.FIXEDPT_ARRAY, toInteger($UNSIGNED_INTLIT.text));
+      symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), TigerPrimitive.FIXEDPT_ARRAY, toInteger($UNSIGNED_INTLIT.text)));
     }
 	}
 	->	^(ARRAY_KEY UNSIGNED_INTLIT base_type)
@@ -301,8 +300,7 @@ var_declaration
       }
 	}
 	->	^(ASSIGN ^(COLON id_list type_id) fixedptlit)
-	|	(VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT) => VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT SEMI
-	{
+	|	(VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT) => VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT SEMI {
 		String idlist = $id_list.text; 
 		String[] ids = idlist.split(",");
 		//if not a base type
@@ -335,13 +333,17 @@ var_declaration
           //gets rid of white space
           id = id.replaceAll("\\s","");
           //puts the variablesymboltable in there and connects it with the type
-          symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, toInteger($UNSIGNED_INTLIT), $type_id.text), type));
+          symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, toInteger($UNSIGNED_INTLIT.text), $type_id.text), type));
         }
 		  } else {
-		    System.out.println("The type "+$type_id+" is not of type int");
+		    System.out.println("The type "+$type_id.text+" is not of type int");
 		  }
 		} else {
+		  for (String id: ids) {
+          //gets rid of white space
+        id = id.replaceAll("\\s","");
 		    symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, toInteger($UNSIGNED_INTLIT.text))));
+		  }
 		}
 	}
 	->	^(ASSIGN ^(COLON id_list type_id) UNSIGNED_INTLIT) 
@@ -350,9 +352,9 @@ var_declaration
    		String idlist = $id_list.text; 
     		String[] ids = idlist.split(",");
     		for (String id: ids) {
-      			symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), new TigerVariable(CURRENT_SCOPE,id.replaceAll("\\s",""), new Integer(0))));
+      			symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), new TigerVariable(CURRENT_SCOPE,id, new Integer(0))));
     		}
-  }
+  	}
 	->	^(COLON id_list type_id)
 	;
 
