@@ -258,7 +258,9 @@ type[String id]
     if ($base_type.text.equals("int")) { 
       symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), TigerPrimitive.INT));
     } else if ($base_type.text.equals("fixedpt")) {
+      System.out.println("about to add");
       symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), TigerPrimitive.FIXEDPT));
+      System.out.println("added");
     }
   }
 	|	(ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK LBRACK UNSIGNED_INTLIT RBRACK) 
@@ -307,36 +309,40 @@ var_declaration
 		if (!$type_id.text.equals("int") && !$type_id.text.equals("fixedpt")) {
 		  //gets the type and makes the variables for INT_ARRAY, INT_2D_ARRAY, and INT
 		  TypeSymbolTableEntry type = (TypeSymbolTableEntry)symbolTable.get($type_id.text,CURRENT_SCOPE);
-		  TigerPrimitive getPrim = type.getBackingType();
-		  if (getPrim == TigerPrimitive.INT_ARRAY) {
-		    //instantiates the 1D array
-		    Integer[] intArray = (Integer[])make1DArray("int",type.getWidth(),$UNSIGNED_INTLIT.text);
-		    for (String id: ids) {
-		      //gets rid of white space
-          id = id.replaceAll("\\s","");
-          //puts the variablesymboltable in there and connects it with the type
-          
-          symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, intArray, $type_id.text), type));
-        }
-        //now making 2D int arrays
-		  } else if (getPrim == TigerPrimitive.INT_2D_ARRAY) {
-		    //instantiates the 2D array
-		    Integer[][] int2DArray = (Integer[][])make2DArray("int", type.getWidth(), type.getHeight(), $UNSIGNED_INTLIT.text);
-		    for (String id: ids) {
-          //gets rid of white space
-          id = id.replaceAll("\\s","");
-          //puts the variablesymboltable in there and connects it with the type
-          symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, int2DArray, $type_id.text), type));
-        }
-		  } else if (getPrim == TigerPrimitive.INT) {
-		    for (String id: ids) {
-          //gets rid of white space
-          id = id.replaceAll("\\s","");
-          //puts the variablesymboltable in there and connects it with the type
-          symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, toInteger($UNSIGNED_INTLIT.text), $type_id.text), type));
-        }
+		  //if it exists and in the right scope
+		  if (type != null) {
+			  TigerPrimitive getPrim = type.getBackingType();
+			  if (getPrim == TigerPrimitive.INT_ARRAY) {
+			    //instantiates the 1D array
+			    Integer[] intArray = (Integer[])make1DArray("int",type.getWidth(),$UNSIGNED_INTLIT.text);
+			    for (String id: ids) {
+			      //gets rid of white space
+	          id = id.replaceAll("\\s","");
+	          //puts the variablesymboltable in there and connects it with the type
+	          symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, intArray, $type_id.text), type));
+	        }
+	        //now making 2D int arrays
+			  } else if (getPrim == TigerPrimitive.INT_2D_ARRAY) {
+			    //instantiates the 2D array
+			    Integer[][] int2DArray = (Integer[][])make2DArray("int", type.getWidth(), type.getHeight(), $UNSIGNED_INTLIT.text);
+			    for (String id: ids) {
+	          //gets rid of white space
+	          id = id.replaceAll("\\s","");
+	          //puts the variablesymboltable in there and connects it with the type
+	          symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, int2DArray, $type_id.text), type));
+	        }
+			  } else if (getPrim == TigerPrimitive.INT) {
+			    for (String id: ids) {
+	          //gets rid of white space
+	          id = id.replaceAll("\\s","");
+	          //puts the variablesymboltable in there and connects it with the type
+	          symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, toInteger($UNSIGNED_INTLIT.text), $type_id.text), type));
+	        }
+			  } else {
+			    System.out.println("The type "+$type_id.text+" is not of type int");
+			  }
 		  } else {
-		    System.out.println("The type "+$type_id.text+" is not of type int");
+		    System.out.println("The type "+$type_id.text+" does not exist or is not in scope with "+$id_list.text);
 		  }
 		} else {
 		  for (String id: ids) {

@@ -97,8 +97,7 @@ public class SymbolTable {
 			}
 			// Not in accessible scope
 			return null;
-		}
-		else if (entry instanceof TypeSymbolTableEntry) {
+		} else if (entry instanceof TypeSymbolTableEntry) {
 			//check if we can access this type
 			if (entry.getScope().isAncestor(scope)) {
 				return entry;

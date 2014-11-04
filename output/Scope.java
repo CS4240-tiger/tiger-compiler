@@ -79,7 +79,7 @@ public class Scope {
 	 * @return true if it is an ancestor
 	 */
 	public boolean isAncestor(Scope child) {
-		while (!child.isGlobalScope()) {
+		while (child != null) {
 			if (this.id.equals(child.getId())) {
 				return true;
 			}

@@ -1,14 +1,13 @@
+
 void main() 
 begin
    begin
-    var d: fixedpt := 125.00;
-   	begin
-      var x, y, z: fixedpt := 123.00;
-	  x := 124.00;
-	end;
-	begin
-	  var a, b, c: fixedpt := 123.00;
-	  b := 124.00;
-	end;
+   	type decimal = fixedpt;
+   	var t:decimal := 123.0;
+   	t := 123.0;
+   end;
+   begin
+    var x:decimal := 123;
+    x:=123;
    end;
 end;
