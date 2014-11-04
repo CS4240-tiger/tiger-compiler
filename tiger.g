@@ -38,6 +38,28 @@ tokens {
 	public void reportError(RecognitionException e) {
 		displayRecognitionError(this.getTokenNames(), e);
 	}
+	public void make1DArray(String s, String var1, String idName) {
+	  int dimension = Integer.parseInt(var1);
+	  if (s.equals("int")){
+      Integer[] IntArray = new Integer[dimension];
+      symbolTable.put(new TigerVariable(CURRENT_SCOPE, idName, IntArray));
+    } else if (s.equals("fixedpt")) {
+      Double[] DoubleArray = new Double[dimension];
+      symbolTable.put(new TigerVariable(CURRENT_SCOPE, idName, DoubleArray));
+    }
+	}
+	
+	public void make2DArray(String s, String var1, String var2, String idName) {
+	  int dimension1 = Integer.parseInt(var1);
+	  int dimension2 = Integer.parseInt(var2);
+	  if (s.equals("int")){
+	    Integer[][] IntArray = new Integer[dimension1][dimension2];
+	    symbolTable.put(new TigerVariable(CURRENT_SCOPE, idName, IntArray));
+	  } else if (s.equals("fixedpt")) {
+	    Double[][] DoubleArray = new Double[dimension1][dimension2];
+	    symbolTable.put(new TigerVariable(CURRENT_SCOPE, idName, DoubleArray));
+	  }
+	}
 	
 	public Double toDouble(String s) {
 		double value = Double.parseDouble(s);
@@ -170,9 +192,6 @@ void_func
 
 block_end
 	:	END_KEY SEMI
-		{
-			//CURRENT_SCOPE = CURRENT_SCOPE.getParent();
-		}
 	;
 
 ret_type 
@@ -196,9 +215,6 @@ block_list
 
 block 	
   	:	BEGIN_KEY (declaration_statement stat_seq) block_end
-  	{
-	    	//CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $BEGIN_KEY.text);
-	  }
 	-> 	^(AST_BLOCK declaration_statement? stat_seq) 
 	;
 
@@ -215,16 +231,20 @@ var_declaration_list
 	;
 
 type_declaration 
-	:	TYPE_KEY ID EQ type SEMI
+	:	TYPE_KEY ID EQ type[$ID.text] SEMI
 	->	^(EQ ID type)
 	;
 	
-type	
+type[String id]	
   :	base_type
 	|	(ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK LBRACK UNSIGNED_INTLIT RBRACK) 
-	=> 	ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK LBRACK UNSIGNED_INTLIT RBRACK OF_KEY base_type
+	=> 	ARRAY_KEY LBRACK var1=UNSIGNED_INTLIT RBRACK LBRACK var2=UNSIGNED_INTLIT RBRACK OF_KEY base_type {
+	  make2DArray($base_type.text, $var1.text,$var2.text, id);
+	}
 	->	^(ARRAY_KEY ^(AST_2D_ARRAY UNSIGNED_INTLIT UNSIGNED_INTLIT) base_type)
-	|	ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK OF_KEY base_type
+	|	ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK OF_KEY base_type {
+	  make1DArray($base_type.text, $UNSIGNED_INTLIT.text, id);
+	}
 	->	^(ARRAY_KEY UNSIGNED_INTLIT base_type)
 	;
 
@@ -417,8 +437,8 @@ func_param_list
 
 keywords
 	: FUNCTION_KEY
-	| BEGIN_KEY {CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $BEGIN_KEY.text);}
-	| END_KEY {CURRENT_SCOPE = CURRENT_SCOPE.getParent();}
+	| BEGIN_KEY 
+	| END_KEY 
 	| VOID_KEY
 	| MAIN_KEY
 	| TYPE_KEY
@@ -433,7 +453,7 @@ keywords
 	| ELSE_KEY
 	| WHILE_KEY
 	| DO_KEY
-	| ENDDO_KEY
+	| ENDDO_KEY 
 	| FOR_KEY
 	| ID_KEY
 	| TO_KEY
