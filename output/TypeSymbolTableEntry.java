@@ -10,12 +10,12 @@ class TypeSymbolTableEntry extends SymbolTableEntry {
 	/**
 	 * For arrays. This is used for the length for 1D arrays and the first dimension for 2D arrays.
 	 */
-	private int width;
+	private Integer width;
 	
 	/**
 	 * For arrays. This is used for the second dimension for 2D arrays.
 	 */
-	private int height;
+	private Integer height;
 	
 	/**
 	 * Constructs a new TypeSymbolTableEntry with specified backing type.
@@ -27,8 +27,8 @@ class TypeSymbolTableEntry extends SymbolTableEntry {
 	protected TypeSymbolTableEntry(Scope scope, String id, TigerPrimitive type) {
 		super(scope, id);
 		this.type = type;
-		this.width = 0;
-		this.height = 0;
+		this.width = new Integer(0);
+		this.height = new Integer(0);
 	}
 	
 	/**
@@ -38,11 +38,11 @@ class TypeSymbolTableEntry extends SymbolTableEntry {
 	 * @param id The String identifier of this TypeSymbolTableEntry.
 	 * @param type The backing type of this TypeSymbolTableEntry.
 	 */
-	protected TypeSymbolTableEntry(Scope scope, String id, TigerPrimitive type, int length) {
+	protected TypeSymbolTableEntry(Scope scope, String id, TigerPrimitive type, Integer length) {
 		super(scope, id);
 		this.type = type;
 		this.width = length;
-		this.height = 0;
+		this.height = new Integer(0);
 	}
 	
 	/**
@@ -52,7 +52,7 @@ class TypeSymbolTableEntry extends SymbolTableEntry {
 	 * @param id The String identifier of this TypeSymbolTableEntry.
 	 * @param type The backing type of this TypeSymbolTableEntry.
 	 */
-	protected TypeSymbolTableEntry(Scope scope, String id, TigerPrimitive type, int length, int height) {
+	protected TypeSymbolTableEntry(Scope scope, String id, TigerPrimitive type, Integer length, Integer height) {
 		super(scope, id);
 		this.type = type;
 		this.width = length;
