@@ -1,7 +1,13 @@
 void main() 
 begin
    begin
+   	begin
       var x, y, z: fixedpt := 123.00;
 	  x := 124.00;
+	end;
+	begin
+	  var a, b, c: fixedpt := 123.00;
+	  b := 124.00;
+	end;
    end;
 end;
