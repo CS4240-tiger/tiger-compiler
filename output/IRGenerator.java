@@ -86,5 +86,45 @@ public class IRGenerator {
 		return result;
 	}
 	
-	// TODO: Continue from type_declaration downwards
+	public static String while_stat() {
+		String result = "";
+		// TODO: implement
+		
+		return result;
+	}
+	
+	public static String for_stat() {
+		String result = "";
+		// TODO: implement
+		
+		return result;
+	}
+	
+	public static String assign_stat() {
+		String result = "";
+		// TODO: implement
+		
+		return result;
+	}
+	
+	public static String func_call() {
+		String result = "";
+		// TODO: implement
+		
+		return result;
+	}
+	
+	public static String break_stat() {
+		String result = "";
+		// TODO: implement
+		
+		return result;
+	}
+	
+	public static String return_stat() {
+		String result = "";
+		// TODO: implement
+		
+		return result;
+	}
 }
