@@ -7,6 +7,7 @@ options {
 	ASTLabelType = CommonTree;
 }
 
+
 tokens {
 	AST_BLOCK;
 	AST_PARAM_LIST;
@@ -18,6 +19,7 @@ tokens {
 	AST_2D_ARRAY;
 }
 
+
 @parser::header {
 	import java.util.Map;
 	import java.util.HashMap;
@@ -25,7 +27,7 @@ tokens {
 }
 
 @parser::members {
-  
+  private String func_name;
   private SymbolTable symbolTable = new SymbolTable(); 
   private Scope GLOBAL_SCOPE = new Scope();
   private Scope CURRENT_SCOPE = GLOBAL_SCOPE;
@@ -164,34 +166,36 @@ funct_declaration
 	:	return_func
 	|	void_func
 	;
-
+	
 return_func
-	:	type_id FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list block_end
+	:	type_id FUNCTION_KEY ID {func_name = $ID.text;} LPAREN param_list RPAREN begin block_list block_end
 		{
       	    		symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $type_id.text));
-      	    		CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
+      	    		//CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
       		}
 	->	^(ID type_id param_list block_list)
 	;
 
 void_func
-	:	(VOID_KEY FUNCTION_KEY) => VOID_KEY FUNCTION_KEY ID LPAREN param_list RPAREN BEGIN_KEY block_list block_end
+	:	(VOID_KEY FUNCTION_KEY) => VOID_KEY FUNCTION_KEY ID {func_name = $ID.text;} LPAREN param_list RPAREN begin block_list block_end
 		{
 			symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $VOID_KEY.text));
-			CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
+			//CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
 		}
 	->	^(ID VOID_KEY param_list block_list) 
 		
-	|	VOID_KEY MAIN_KEY LPAREN RPAREN BEGIN_KEY block_list block_end
+	|	VOID_KEY MAIN_KEY {func_name = $MAIN_KEY.text;} LPAREN RPAREN begin block_list block_end
 		{
       	   		symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $MAIN_KEY.text, $VOID_KEY.text)); 
-			CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text); 
+			//CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text); 
             	}
 	->	^(MAIN_KEY block_list) 
 	;
 
 block_end
-	:	END_KEY SEMI
+	:	END_KEY SEMI {
+	  CURRENT_SCOPE = CURRENT_SCOPE.getParent();
+	}
 	;
 
 ret_type 
@@ -209,15 +213,20 @@ param
 	->	^(COLON ID type_id)
 	;
 
-block_list 
+block_list
 	:	block+
 	;
 
 block 	
-  	:	BEGIN_KEY (declaration_statement stat_seq) block_end
+  	:	begin (declaration_statement stat_seq) block_end
 	-> 	^(AST_BLOCK declaration_statement? stat_seq) 
 	;
 
+begin
+  : BEGIN_KEY {
+    CURRENT_SCOPE = new Scope(CURRENT_SCOPE, func_name);
+  }
+  ;
 declaration_statement 
 	:	type_declaration_list var_declaration_list
 	;
@@ -295,11 +304,11 @@ id_list
 	->	^(AST_ID_LIST ID+)
 	;
 
-stat_seq 
+stat_seq
 	:	stat+
 	;
 
-stat 
+stat
 	: if_stat
 	| while_stat
 	| for_stat
@@ -311,8 +320,7 @@ stat
 	;
 
 if_stat	
-  :	(IF_KEY expr THEN_KEY stat_seq ELSE_KEY) 
-	=> 	IF_KEY expr THEN_KEY stat_seq ELSE_KEY stat_seq ENDIF_KEY SEMI
+  :	(IF_KEY expr THEN_KEY stat_seq ELSE_KEY) => 	IF_KEY expr THEN_KEY stat_seq ELSE_KEY stat_seq ENDIF_KEY SEMI
 	-> 	^(IF_KEY expr stat_seq ^(ELSE_KEY stat_seq))
 	|	IF_KEY expr THEN_KEY stat_seq ENDIF_KEY SEMI
 	->	^(IF_KEY expr stat_seq)
@@ -323,7 +331,8 @@ while_stat
 	->	^(WHILE_KEY expr stat_seq)
 	;
 
-for_stat:	FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI
+for_stat
+  :	FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI
 	->	^(FOR_KEY ^(TO_KEY ^(ASSIGN ID index_expr) index_expr) stat_seq)
 	;
 

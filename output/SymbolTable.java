@@ -63,7 +63,7 @@ public class SymbolTable {
 		} else {	
 			backingTable.put(entry.getId(), entry);
 			size++;
-			System.out.println(size);
+			System.out.println(entry.getScope().getId()+":"+entry.getId());
 		}
 	}
 	
