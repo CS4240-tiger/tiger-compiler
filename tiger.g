@@ -317,6 +317,7 @@ var_declaration
 		      //gets rid of white space
           id = id.replaceAll("\\s","");
           //puts the variablesymboltable in there and connects it with the type
+          
           symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, intArray, $type_id.text), type));
         }
         //now making 2D int arrays
