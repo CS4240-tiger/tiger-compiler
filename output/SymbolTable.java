@@ -71,6 +71,7 @@ public class SymbolTable {
 	 * Gets a SymbolTableEntry from this SymbolTable.
 	 * 
 	 * @param key The String id of the SymbolTableEntry to get.
+	 * @param scope the current scope that we are curently in?
 	 */
 	public SymbolTableEntry get(String key, Scope scope) {
 		SymbolTableEntry entry = backingTable.get(key);
@@ -84,18 +85,17 @@ public class SymbolTable {
 				result = ((VariableSymbolTableEntry) entry).backingList.get(index);
 				entryScope = result.getScope();
 				
-				while (entryScope != null) {
-					if (scope.equals(entryScope)) {
+				while (scope != null) {
+					if (entryScope.equals(scope)) {
 						return result;
 					} else {
 						// Check any parent scopes
-						entryScope = entryScope.getParent();
+						scope = scope.getParent();
 					}
 				}
 			}
-			
 			// Not in accessible scope
-			return result;
+			return null;
 		}
 		
 		return entry;

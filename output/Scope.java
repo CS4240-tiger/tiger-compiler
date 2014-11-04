@@ -72,6 +72,21 @@ public class Scope {
 	public Scope getParent() {
 		return parent;
 	}
+	/**
+	 * Checks whether or not this scope is the ancestor of another scope
+	 * @param child
+	 * @return false if it is not an ancestor
+	 * @return true if it is an ancestor
+	 */
+	public boolean isAncestor(Scope child) {
+		while (!child.isGlobalScope()) {
+			if (this.id.equals(child.getId())) {
+				return true;
+			}
+			child = child.getParent();
+		}
+		return false;
+	}
 	
 	/**
 	 * Returns the String identifier.
