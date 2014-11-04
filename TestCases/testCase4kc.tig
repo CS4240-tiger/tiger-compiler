@@ -1,6 +1,7 @@
 void main() 
 begin
    begin
+    var d: fixedpt := 125.00;
    	begin
       var x, y, z: fixedpt := 123.00;
 	  x := 124.00;

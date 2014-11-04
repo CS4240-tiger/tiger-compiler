@@ -40,7 +40,7 @@ begin
             var arr_2D__: Int2DArray := 1;
             var index: int := 2;
             
-            arr_2D__[0][0] := arr_1D[0] + 5 * 2;
+            arr_2D__[0][0] := arr_1D[0][0] + 5 * 2;
             arr_2D__[1][1] := arr_2D[3 + 1 * index][0] + 5 * arr_1D[0];
             arr_1D[index] := 5 * 2 + arr_1D[5];
             arr_1D[1] := 0 * arr_2D[1][1];

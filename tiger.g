@@ -240,12 +240,18 @@ var_declaration_list
 	;
 
 type_declaration 
-	:	TYPE_KEY ID EQ type[$ID.text] SEMI
+	:	TYPE_KEY ID EQ type[$ID.text] SEMI 
 	->	^(EQ ID type)
 	;
 	
 type[String id]	
-  :	base_type
+  :	base_type {
+    if ($base_type.text.equals("int")) {
+      symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), new TigerVariable(CURRENT_SCOPE,id.replaceAll("\\s",""), toInteger($fixedptlit.text))));
+    } else if ($base_type.text.equals("fixedpt")) {
+      symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), new TigerVariable(CURRENT_SCOPE,id.replaceAll("\\s",""), toDouble($base_type.text))));
+    }
+  }
 	|	(ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK LBRACK UNSIGNED_INTLIT RBRACK) 
 	=> 	ARRAY_KEY LBRACK var1=UNSIGNED_INTLIT RBRACK LBRACK var2=UNSIGNED_INTLIT RBRACK OF_KEY base_type {
 	  make2DArray($base_type.text, $var1.text,$var2.text, id);
@@ -270,7 +276,6 @@ base_type
 var_declaration 
 	:	(VAR_KEY id_list COLON type_id ASSIGN fixedptlit) => VAR_KEY id_list COLON type_id ASSIGN fixedptlit SEMI 
 	{
-	    outln($fixedptlit.text);
 	  	String idlist = $id_list.text; 
     	String[] ids = idlist.split(",");
     	for (String id: ids) {
