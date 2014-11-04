@@ -40,12 +40,35 @@ tokens {
 	public void reportError(RecognitionException e) {
 		displayRecognitionError(this.getTokenNames(), e);
 	}
+	/**
+	* checks if another id exists in the symbol table
+	* @return true if this id is also a name of a type or function name
+	* @return false if no such id exists or that id is a variable name
+	*
+	**/
+	public boolean idExists(String id) {
+	  SymbolTableEntry entry= symbolTable.get(id, CURRENT_SCOPE);
+	  if (entry != null || entry instanceof TypeSymbolTableEntry || entry instanceof FunctionSymbolTableEntry) {
+	    System.out.println(id +" is already a name of a function or a type");
+	    return true;
+	  }
+	  return false;
+	}
+	
+	/**
+	* makes a 1D array of either an Integer or Double type
+	* @param s the string "int" or "fixedpt"
+	* @param width the length of the array 
+	* @param value the initial value that will be converted to either an integer or double
+	* @return either an Integer or Double array initialized
+	**/
 	public Object[] make1DArray(String s, Integer width, String value) {
-	  int val = Integer.parseInt(value);
 	  if (s.equals("int")){
+	    //toInteger method defined below
+	    Integer val = toInteger(value);
       Integer[] IntArray = new Integer[width];
       for (int i = 0; i < width; i++) {
-         IntArray[i] = new Integer(val);
+         IntArray[i] = val;
       }
       return IntArray;
     } else if (s.equals("fixedpt")) {
@@ -55,13 +78,22 @@ tokens {
     return null;
 	}
 	
+  /**
+  * makes a 2D array of either an Integer or Double type
+  * @param s the string "int" or "fixedpt"
+  * @param width the width, or x component, of the array 
+  * @param height the height, or y component, of the array
+  * @param value the initial value that will be converted to either an integer or double
+  * @return either an Integer or Double array initialized
+  **/
 	public Object[][] make2DArray(String s, Integer width, Integer height, String value) {
-	  int val = Integer.parseInt(value);
 	  if (s.equals("int")){
+	    //toInteger method defined below
+	    Integer val = toInteger(value);
 	    Integer[][] IntArray = new Integer[width][height];
 	    for (int i = 0; i < width; i++) {
 	      for (int j = 0; j < height; j++) {
-	        IntArray[i][j] = new Integer(val);
+	        IntArray[i][j] = val;
 	      }
 	    }
 	    return IntArray;
@@ -195,7 +227,7 @@ void_func
 		
 	|	VOID_KEY MAIN_KEY {func_name = $MAIN_KEY.text;} LPAREN RPAREN begin block_list block_end
 		{
-      	   		symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $MAIN_KEY.text, $VOID_KEY.text)); 
+      symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $MAIN_KEY.text, $VOID_KEY.text)); 
 			//CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text); 
             	}
 	->	^(MAIN_KEY block_list) 
@@ -318,8 +350,10 @@ var_declaration
 			    for (String id: ids) {
 			      //gets rid of white space
 	          id = id.replaceAll("\\s","");
+	          if (!idExists(id)) {
 	          //puts the variablesymboltable in there and connects it with the type
-	          symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, intArray, $type_id.text), type));
+	            symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, intArray, $type_id.text), type));
+	          }
 	        }
 	        //now making 2D int arrays
 			  } else if (getPrim == TigerPrimitive.INT_2D_ARRAY) {
@@ -329,14 +363,18 @@ var_declaration
 	          //gets rid of white space
 	          id = id.replaceAll("\\s","");
 	          //puts the variablesymboltable in there and connects it with the type
-	          symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, int2DArray, $type_id.text), type));
+	          if (!idExists(id)) {
+	            symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, int2DArray, $type_id.text), type));
+	          }
 	        }
 			  } else if (getPrim == TigerPrimitive.INT) {
 			    for (String id: ids) {
 	          //gets rid of white space
 	          id = id.replaceAll("\\s","");
 	          //puts the variablesymboltable in there and connects it with the type
-	          symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, toInteger($UNSIGNED_INTLIT.text), $type_id.text), type));
+	          if (!idExists(id)) {
+	            symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, toInteger($UNSIGNED_INTLIT.text), $type_id.text), type));
+	          }
 	        }
 			  } else {
 			    System.out.println("The type "+$type_id.text+" is not of type int");
@@ -348,7 +386,9 @@ var_declaration
 		  for (String id: ids) {
           //gets rid of white space
         id = id.replaceAll("\\s","");
-		    symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, toInteger($UNSIGNED_INTLIT.text))));
+        if (!idExists(id)) {
+          symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, toInteger($UNSIGNED_INTLIT.text))));
+        }
 		  }
 		}
 	}
