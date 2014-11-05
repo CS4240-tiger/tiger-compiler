@@ -350,10 +350,7 @@ var_declaration
 			    for (String id: ids) {
 			      //gets rid of white space
 	          id = id.replaceAll("\\s","");
-	          if (!idExists(id)) {
-	          //puts the variablesymboltable in there and connects it with the type
 	            symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, intArray, $type_id.text), type));
-	          }
 	        }
 	        //now making 2D int arrays
 			  } else if (getPrim == TigerPrimitive.INT_2D_ARRAY) {
@@ -363,18 +360,14 @@ var_declaration
 	          //gets rid of white space
 	          id = id.replaceAll("\\s","");
 	          //puts the variablesymboltable in there and connects it with the type
-	          if (!idExists(id)) {
 	            symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, int2DArray, $type_id.text), type));
-	          }
 	        }
 			  } else if (getPrim == TigerPrimitive.INT) {
 			    for (String id: ids) {
 	          //gets rid of white space
 	          id = id.replaceAll("\\s","");
 	          //puts the variablesymboltable in there and connects it with the type
-	          if (!idExists(id)) {
 	            symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, toInteger($UNSIGNED_INTLIT.text), $type_id.text), type));
-	          }
 	        }
 			  } else {
 			    System.out.println("The type "+$type_id.text+" is not of type int");
@@ -386,9 +379,7 @@ var_declaration
 		  for (String id: ids) {
           //gets rid of white space
         id = id.replaceAll("\\s","");
-        if (!idExists(id)) {
           symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, toInteger($UNSIGNED_INTLIT.text))));
-        }
 		  }
 		}
 	}
