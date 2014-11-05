@@ -330,7 +330,7 @@ var_declaration
 	  	String idlist = $id_list.text; 
     	String[] ids = idlist.split(",");
     	for (String id: ids) {
-      	symbolTable.put(new TigerVariable(CURRENT_SCOPE,id.replaceAll("\\s",""), toDouble($fixedptlit.text)));
+      	symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), new TigerVariable(CURRENT_SCOPE,id.replaceAll("\\s",""), toDouble($fixedptlit.text))));
       }
 	}
 	->	^(ASSIGN ^(COLON id_list type_id) fixedptlit)
@@ -350,7 +350,7 @@ var_declaration
 			    for (String id: ids) {
 			      //gets rid of white space
 	          id = id.replaceAll("\\s","");
-	            symbolTable.put(new TigerVariable(CURRENT_SCOPE,id, intArray, $type_id.text));
+	            symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, intArray, $type_id.text), type));
 	        }
 	        //now making 2D int arrays
 			  } else if (getPrim == TigerPrimitive.INT_2D_ARRAY) {
@@ -360,14 +360,14 @@ var_declaration
 	          //gets rid of white space
 	          id = id.replaceAll("\\s","");
 	          //puts the variablesymboltable in there and connects it with the type
-	            symbolTable.put(new TigerVariable(CURRENT_SCOPE,id, int2DArray, $type_id.text)));
+	            symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, int2DArray, $type_id.text), type));
 	        }
 			  } else if (getPrim == TigerPrimitive.INT) {
 			    for (String id: ids) {
 	          //gets rid of white space
 	          id = id.replaceAll("\\s","");
 	          //puts the variablesymboltable in there and connects it with the type
-	            symbolTable.put(new TigerVariable(CURRENT_SCOPE,id, toInteger($UNSIGNED_INTLIT.text)));
+	            symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, toInteger($UNSIGNED_INTLIT.text), $type_id.text), type));
 	        }
 			  } else {
 			    System.out.println("The type "+$type_id.text+" is not of type int");
@@ -379,7 +379,7 @@ var_declaration
 		  for (String id: ids) {
           //gets rid of white space
         id = id.replaceAll("\\s","");
-          symbolTable.put(new TigerVariable(CURRENT_SCOPE,id, toInteger($UNSIGNED_INTLIT.text)));
+          symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, toInteger($UNSIGNED_INTLIT.text))));
 		  }
 		}
 	}
@@ -389,7 +389,7 @@ var_declaration
    		String idlist = $id_list.text; 
     		String[] ids = idlist.split(",");
     		for (String id: ids) {
-      			symbolTable.put(new TigerVariable(CURRENT_SCOPE,id, new Integer(0)));
+      			symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), new TigerVariable(CURRENT_SCOPE,id, new Integer(0))));
     		}
   	}
 	->	^(COLON id_list type_id)
