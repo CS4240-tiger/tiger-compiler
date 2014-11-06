@@ -7,7 +7,6 @@ options {
 	ASTLabelType = CommonTree;
 }
 
-
 tokens {
 	AST_BLOCK;
 	AST_PARAM_LIST;
@@ -23,12 +22,15 @@ tokens {
 @parser::header {
 	import java.util.Map;
 	import java.util.HashMap;
+	import java.util.List;
+	import java.util.ArrayList;
 	import org.antlr.runtime.tree.CommonTree;
 }
 
 @parser::members {
   private String func_name;
   private SymbolTable symbolTable = new SymbolTable(); 
+  private List<String> irOutput = new ArrayList<String>();
   private Scope GLOBAL_SCOPE = new Scope();
   private Scope CURRENT_SCOPE = GLOBAL_SCOPE;
 
@@ -211,8 +213,10 @@ funct_declaration
 return_func
 	:	type_id FUNCTION_KEY ID {func_name = $ID.text;} LPAREN param_list RPAREN begin block_list block_end
 		{
-      	    		symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $type_id.text));
-      	    		//CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
+      	    		symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $type_id.text));	
+      	    		irOutput.add(IRGenerator.funct_declaration($ID.text));
+      	    		
+      	    		CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
       		}
 	->	^(ID type_id param_list block_list)
 	;
@@ -221,22 +225,25 @@ void_func
 	:	(VOID_KEY FUNCTION_KEY) => VOID_KEY FUNCTION_KEY ID {func_name = $ID.text;} LPAREN param_list RPAREN begin block_list block_end
 		{
 			symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $VOID_KEY.text));
-			//CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
+			CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
 		}
 	->	^(ID VOID_KEY param_list block_list) 
 		
 	|	VOID_KEY MAIN_KEY {func_name = $MAIN_KEY.text;} LPAREN RPAREN begin block_list block_end
 		{
       symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $MAIN_KEY.text, $VOID_KEY.text)); 
-			//CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text); 
+			CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text); 
             	}
 	->	^(MAIN_KEY block_list) 
 	;
 
 block_end
-	:	END_KEY SEMI {
-	  CURRENT_SCOPE = CURRENT_SCOPE.getParent();
-	}
+	:	END_KEY SEMI
+		{
+			if (CURRENT_SCOPE != GLOBAL_SCOPE) {
+				CURRENT_SCOPE = CURRENT_SCOPE.getParent();
+			}
+		}
 	;
 
 ret_type 

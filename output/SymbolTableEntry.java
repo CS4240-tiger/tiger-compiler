@@ -1,3 +1,7 @@
+/**
+ * A SymbolTableEntry represents a symbol encountered during parsing which
+ * can be inserted into a symbol table for semantic checks and translation.
+ */
 public class SymbolTableEntry {
 	/**
 	 * The parent Scope of this SymbolTableEntry.
