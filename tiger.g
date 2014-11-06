@@ -304,17 +304,17 @@ type[String id]
   }
 	|	(ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK LBRACK UNSIGNED_INTLIT RBRACK) 
 	=> 	ARRAY_KEY LBRACK var1=UNSIGNED_INTLIT RBRACK LBRACK var2=UNSIGNED_INTLIT RBRACK OF_KEY type_id {
-	  if ($base_type.text.equals("int")) { 
+	  if ($type_id.text.equals("int")) { 
 	    symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), TigerPrimitive.INT_2D_ARRAY, toInteger($var1.text),toInteger($var2.text)));
-	  } else if ($base_type.text.equals("fixedpt")) {
+	  } else if ($type_id.text.equals("fixedpt")) {
 	    symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), TigerPrimitive.FIXEDPT_2D_ARRAY, toInteger($var1.text),toInteger($var2.text)));
 	  }
 	}
 	->	^(ARRAY_KEY ^(AST_2D_ARRAY UNSIGNED_INTLIT UNSIGNED_INTLIT) type_id)
 	|	ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK OF_KEY type_id {
-	  if ($base_type.text.equals("int")) { 
+	  if ($type_id.text.equals("int")) { 
       symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), TigerPrimitive.INT_ARRAY, toInteger($UNSIGNED_INTLIT.text)));
-    } else if ($base_type.text.equals("fixedpt")) {
+    } else if ($type_id.text.equals("fixedpt")) {
       symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), TigerPrimitive.FIXEDPT_ARRAY, toInteger($UNSIGNED_INTLIT.text)));
     }
 	}
@@ -387,7 +387,7 @@ var_declaration
 			    System.out.println("The type "+$type_id.text+" is not of type int");
 			  }
 		  } else {
-		    System.out.println("The type "+$type_id.text+" does not exist or is not in scope with "+$id_list.text);
+		    System.out.println("The type "+$type_id.text+" does not exist or is not in scope with "+$id_list.text+" on line "+String.valueOf($type_id.start.getLine()));
 		  }
 		} else {
 		  for (String id: ids) {
