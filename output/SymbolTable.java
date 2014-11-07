@@ -9,9 +9,8 @@ import java.util.Map;
  * and return types, whatever applicable.
  */
 public class SymbolTable {
-	
 	/**
-	 * size of symbolTable
+	 * The size of this SymbolTable.
 	 */
 	private int size;
 	/**
@@ -116,4 +115,14 @@ public class SymbolTable {
 	public void remove(String key) {
 		backingTable.remove(key);
 	}
+
+	/**
+	 * Returns the size of this SymbolTable.
+	 * 
+	 * @return The size of this SymbolTable.
+	 */
+	public int getSize() {
+		return size;
+	}
+
 }

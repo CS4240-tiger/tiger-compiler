@@ -39,25 +39,25 @@ public class IRGenerator {
 	 * @param expr1 The first expression to compare.
 	 * @param expr2 The second expression to compare.
 	 * @param compare The comparison operator to apply to the two expressions.
-	 * @param irTrueStat The code to execute if the result of the comparison is true.
-	 * @param irFalseStat The code to execute of the result of the comparison is false.
+	 * @param statSeqTrue The code to execute if the result of the comparison is true.
+	 * @param statSeqFalse The code to execute of the result of the comparison is false.
 	 * @return An IR translation of an if statement.
 	 */
-	public static String if_stat(String expr1, String expr2, Comparator compare, 
-			List<String> irTrueStat, List<String> irFalseStat) {
+	public static String if_stat(String expr1, String expr2, Binop compare, 
+			List<String> statSeqTrue, List<String> statSeqFalse) {
 		
 		String result = "";
 		
 		// Generate a unique (hopefully) label to go to if statement is false
 		String elseLabel = String.valueOf(expr2.hashCode())
 				.substring((expr2.length() / 2), (expr2.length() / 2) + 5)
-				 + "-else:";
+				 + "-else:\n";
 		
 		// Insert it at beginning of irFalseStat.
 		
 		// If there is an else block, it will jump to the beginning of that block;
 		// otherwise it will fall through to the end
-		irFalseStat.add(0, elseLabel);
+		statSeqFalse.add(0, elseLabel);
 		
 		switch (compare) {
 		case EQUAL:
@@ -79,16 +79,71 @@ public class IRGenerator {
 			result += IRMap.brgeq(expr1, expr2, elseLabel);
 			break;
 		default:
-			// This should not happen
-			throw new RuntimeException("ERROR: Conditional statement invalid in IR generation");
+			// If binary operator is not comparator
+			throw new RuntimeException("ERROR: Conditional statement invalid, this is not a comparator!");
+		}
+		
+		for (String stat : statSeqTrue) {
+			result += stat;
+			result += "\n";
+		}
+		
+		for (String stat : statSeqFalse) {
+			result += stat;
+			result += "\n";
 		}
 		
 		return result;
 	}
 	
-	public static String while_stat() {
+	
+	public static String while_stat(String expr1, String expr2, Binop compare, List<String> statSeq) {
 		String result = "";
-		// TODO: implement
+		
+		// Generate a unique (hopefully) label to loop to if statement is still true
+		String startDo = String.valueOf(expr2.hashCode())
+				.substring((expr2.length() / 4), (expr2.length() / 4) + 5)
+				 + "-while-do:\n";
+		
+		// Generate a unique (hopefully) label to go to if statement is false
+		String endDo = String.valueOf(expr2.hashCode())
+				.substring((expr2.length() / 2), (expr2.length() / 2) + 5)
+				 + "-while-enddo:\n";
+		
+		// Insert start label at beginning of loop.
+		result += startDo;
+		
+		switch (compare) {
+		case EQUAL:
+			result += IRMap.breq(expr1, expr2, endDo);
+			break;
+		case NOT_EQUAL:
+			result += IRMap.brneq(expr1, expr2, endDo);
+			break;
+		case LESS_THAN:
+			result += IRMap.brlt(expr1, expr2, endDo);
+			break;
+		case GREATER_THAN:
+			result += IRMap.brgt(expr1, expr2, endDo);
+			break;
+		case LESS_THAN_OR_EQUAL:
+			result += IRMap.brleq(expr1, expr2, endDo);
+			break;
+		case GREATER_THAN_OR_EQUAL:
+			result += IRMap.brgeq(expr1, expr2, endDo);
+			break;
+		default:
+			// If binary operator is not comparator
+			throw new RuntimeException("ERROR: Conditional statement invalid, this is not a comparator!");
+		}
+		
+		for (String stat : statSeq) {
+			result += stat;
+			result += "\n";
+		}
+		
+		// Insert end label at end of statSeq.
+		result += "\n" + endDo;
 		
 		return result;
 	}
@@ -165,17 +220,112 @@ public class IRGenerator {
 	 * @param val1 The first value.
 	 * @param val2 The second value.
 	 * @param binop The binary operation to perform on the two values.
+	 * @param target The target temporary value to store the result.
 	 * @return The String result. If the values are both literals, the result will be evaluated and return a single literal.
 	 */
-	public static String expr_binop(String val1, String val2, Binop binop) {
+	public static String expr_binop(String val1, String val2, Binop binop, String target) {
 		String result = "";
+		boolean areLiterals = (isInteger(val1) || isDouble(val1)) 
+				&& (isInteger(val2) || isDouble(val2));
+		boolean bothInteger = isInteger(val1) && isInteger(val2);
+		switch (binop) {
+		case MINUS:
+			if (areLiterals) {
+				if (bothInteger) {
+					result = String.valueOf(Integer.parseInt(val1) - Integer.parseInt(val2));
+				} else {
+					// Either one or both are fixedpt, cast to fixedpt
+					result = String.valueOf(Double.parseDouble(val1) - Double.parseDouble(val2));
+				}
+			} else {
+				result = IRMap.sub(val1, val2, target);
+			}
+			
+			break;
+		case PLUS:
+			if (areLiterals) {
+				if (bothInteger) {
+					result = String.valueOf(Integer.parseInt(val1) + Integer.parseInt(val2));
+				} else {
+					// Either one or both are fixedpt, cast to fixedpt
+					result = String.valueOf(Double.parseDouble(val1) + Double.parseDouble(val2));
+				}
+			} else {
+				result = IRMap.add(val1, val2, target);
+			}
+			
+			break;
+		case MULT:
+			if (areLiterals) {
+				if (bothInteger) {
+					result = String.valueOf(Integer.parseInt(val1) * Integer.parseInt(val2));
+				} else {
+					// Either one or both are fixedpt, cast to fixedpt
+					result = String.valueOf(Double.parseDouble(val1) * Double.parseDouble(val2));
+				}
+			} else {
+				result = IRMap.mult(val1, val2, target);
+			}
+			
+			break;
+		case DIV:
+			if (areLiterals) {
+				if (bothInteger) {
+					result = String.valueOf(Integer.parseInt(val1) / Integer.parseInt(val2));
+				} else {
+					// Either one or both are fixedpt, cast to fixedpt
+					result = String.valueOf(Double.parseDouble(val1) / Double.parseDouble(val2));
+				}
+			} else {
+				result = IRMap.div(val1, val2, target);
+			}
+			
+			break;
+		case AND:
+			result = IRMap.and(val1, val2, target);
+
+			break;
+		case OR:
+			result = IRMap.or(val1, val2, target);
+			
+			break;
+		default:
+			// This should not happen
+			throw new RuntimeException("ERROR: Binop is not valid in expr!");
+		}
 		
 		return result;
 	}
-	public static String expr(String expr1, String expr2) {
-		String result = "";
-		// TODO: implement 
+	
+	/**
+	 * Checks a value to see if it is an integer.
+	 * 
+	 * @param value The String value to check.
+	 * @return true if the value is a valid integer; false otherwise.
+	 */
+	private static boolean isInteger(String value) {
+		try {
+			Integer.parseInt(value);
+		} catch (NumberFormatException e) {
+			return false;
+		}
 		
-		return result;
+		return true;
+	}
+	
+	/**
+	 * Checks a value to see if it is a double.
+	 * 
+	 * @param value The String value to check.
+	 * @return true if the value is a valid double; false otherwise.
+	 */
+	private static boolean isDouble(String value) {
+		try {
+			Double.parseDouble(value);
+		} catch (NumberFormatException e) {
+			return false;
+		}
+		
+		return true;
 	}
 }
