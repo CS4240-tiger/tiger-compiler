@@ -4,6 +4,10 @@ import java.util.List;
 /**
  * A VariableSymbolTableEntry is an SymbolTableEntry for variable declarations.
  * It contains a backing List to handle overlapping names in different Scopes.
+ * <br /><br />
+ * <b>NOTE</b>: Please don't push this directly to the SymbolTable. This messes up Scope 
+ * handling by the SymbolTable itself and ends up making more work for you. Push 
+ * TigerVariables instead.
  */
 public class VariableSymbolTableEntry extends SymbolTableEntry {
 	protected List<TigerVariable> backingList;
