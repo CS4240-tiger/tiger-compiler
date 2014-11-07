@@ -423,7 +423,7 @@ var_declaration
    		String idlist = $id_list.text; 
     		String[] ids = idlist.split(",");
     		for (String id: ids) {
-      			symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), new TigerVariable(CURRENT_SCOPE,id, new Integer(0))));
+      			symbolTable.put(new TigerVariable(CURRENT_SCOPE, id, new Integer(0)));
     		}
   	}
 	->	^(COLON id_list type_id)
