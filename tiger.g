@@ -346,64 +346,77 @@ var_declaration
      	 	}
 	}
 	->	^(ASSIGN ^(COLON id_list type_id) fixedptlit)
-	|	(VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT) => VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT SEMI {
+	|	(VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT) => VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT SEMI 
+	{
 		String idlist = $id_list.text; 
 		String[] ids = idlist.split(",");
-		//if not a base type
+		
+		// Check if it's not a base type
 		if (!($type_id.text.equals("int") && $type_id.text.equals("fixedpt"))) {
-		  //gets the type and makes the variables for INT_ARRAY, INT_2D_ARRAY, and INT
-		  SymbolTableEntry type = symbolTable.get($type_id.text, CURRENT_SCOPE);
-		  //if it exists and in the right scope
-		  if (type != null && type instanceof TypeSymbolTableEntry) {
-			  TigerPrimitive getPrim = type.getBackingType();
-			  if (getPrim == TigerPrimitive.INT_ARRAY) {
-			    //instantiates the 1D array
-			    Integer[] intArray = (Integer[])make1DArray("int",type.getWidth(),$UNSIGNED_INTLIT.text);
-			    for (String id: ids) {
-			      //gets rid of white space
-	          id = id.replaceAll("\\s","");
-	          if (!idExists(id)) {
-	          //puts the variablesymboltable in there and connects it with the type
-	            symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, intArray, $type_id.text), type));
-	          }
-	        }
-	        //now making 2D int arrays
-			  } else if (getPrim == TigerPrimitive.INT_2D_ARRAY) {
-			    //instantiates the 2D array
-			    Integer[][] int2DArray = (Integer[][])make2DArray("int", type.getWidth(), type.getHeight(), $UNSIGNED_INTLIT.text);
-			    for (String id: ids) {
-	          //gets rid of white space
-	          id = id.replaceAll("\\s","");
-	          //puts the variablesymboltable in there and connects it with the type
-	          if (!idExists(id)) {
-	            symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, int2DArray, $type_id.text), type));
-	          }
-	        }
-			  } else if (getPrim == TigerPrimitive.INT) {
-			    for (String id: ids) {
-	          //gets rid of white space
-	          id = id.replaceAll("\\s","");
-	          //puts the variablesymboltable in there and connects it with the type
-	          if (!idExists(id)) {
-	            symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, toInteger($UNSIGNED_INTLIT.text), $type_id.text), type));
-	          }
-	        }
-			  } else {
-			    System.out.println("The type "+$type_id.text+" is not of type int");
-			  }
-		  } else {
-		    System.out.println("The type "+$type_id.text+" does not exist or is not in scope with "+$id_list.text+" on line "+String.valueOf($type_id.start.getLine()));
-		  }
+			// Gets the type and makes the variables for INT_ARRAY, INT_2D_ARRAY, and INT
+			SymbolTableEntry type = symbolTable.get($type_id.text, CURRENT_SCOPE);
+			// Check existence
+			if (type != null && type instanceof TypeSymbolTableEntry) {
+				switch (((TypeSymbolTableEntry) type).getBackingType()) {
+				
+				case TigerPrimitive.INT_ARRAY:
+					// Instantiates the 1D array
+					Integer[] intArray = (Integer[]) make1DArray("int", 
+						type.getWidth(), $UNSIGNED_INTLIT.text);
+					
+					for (String id: ids) {
+						// Gets rid of white space and adds to symbol table
+						symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
+							id.replaceAll("\\s",""), 
+							intArray, $type_id.text));
+					}
+					
+					break;
+					
+				case TigerPrimitive.INT_2D_ARRAY:
+					// Instantiates the 2D array
+					Integer[][] int2DArray = (Integer[][]) make2DArray("int", 
+						type.getWidth(), type.getHeight(), $UNSIGNED_INTLIT.text);
+					for (String id: ids) {
+						// Gets rid of white space and adds to symbol table
+						symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
+							id.replaceAll("\\s",""), 
+							int2DArray, $type_id.text));
+					}
+					
+					break;
+					
+				case TigerPrimitive.INT:
+					for (String id: ids) {
+						// Gets rid of white space and adds to symbol table
+						symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
+							id.replaceAll("\\s",""), 
+							toInteger($UNSIGNED_INTLIT.text), $type_id.text));
+					}
+					
+					break;
+					
+				default:
+					System.out.println("The type " + $type_id.text 
+						+ " is not of type int");
+					
+					break;
+				}
+			} else {
+				System.out.println("The type " + $type_id.text + 
+					" does not exist or is not in an accessible scope from " 
+					+ $id_list.text + " on line " + $type_id.start.getLine());
+			}
 		} else {
-		  for (String id: ids) {
-          //gets rid of white space
-        id = id.replaceAll("\\s","");
-        if (!idExists(id)) {
-          symbolTable.put(new VariableSymbolTableEntry(CURRENT_SCOPE,id, new TigerVariable(CURRENT_SCOPE,id, toInteger($UNSIGNED_INTLIT.text))));
+			// Else push new type
+			for (String id: ids) {
+				// Gets rid of white space and adds to symbol table
+				symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
+				id.replaceAll("\\s",""), toInteger($UNSIGNED_INTLIT.text), 
+				$type_id.text));
+			}
         }
-		  }
-		}
-	}
+        	}
 	->	^(ASSIGN ^(COLON id_list type_id) UNSIGNED_INTLIT) 
 	|	VAR_KEY id_list COLON type_id SEMI
 	{
