@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g 2014-11-06 18:49:13
+// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g 2014-11-06 22:08:02
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -126,10 +126,10 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = UNSIGNED_INTLIT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:501:2: ( ( '0' .. '9' )+ )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:501:4: ( '0' .. '9' )+
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:519:2: ( ( '0' .. '9' )+ )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:519:4: ( '0' .. '9' )+
 			{
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:501:4: ( '0' .. '9' )+
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:519:4: ( '0' .. '9' )+
 			int cnt1=0;
 			loop1:
 			while (true) {
@@ -178,10 +178,10 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = UNSIGNED_FIXEDPTLIT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:508:2: ( ( '0' .. '9' )* '.' ( '0' .. '9' )* )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:508:5: ( '0' .. '9' )* '.' ( '0' .. '9' )*
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:526:2: ( ( '0' .. '9' )* '.' ( '0' .. '9' )* )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:526:5: ( '0' .. '9' )* '.' ( '0' .. '9' )*
 			{
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:508:5: ( '0' .. '9' )*
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:526:5: ( '0' .. '9' )*
 			loop2:
 			while (true) {
 				int alt2=2;
@@ -211,7 +211,7 @@ public class tigerLexer extends Lexer {
 			}
 
 			match('.'); 
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:508:21: ( '0' .. '9' )*
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:526:21: ( '0' .. '9' )*
 			loop3:
 			while (true) {
 				int alt3=2;
@@ -256,12 +256,12 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = COMMENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:540:2: ( '/*' ( options {greedy=false; } : . )* '*/' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:540:7: '/*' ( options {greedy=false; } : . )* '*/'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:558:2: ( '/*' ( options {greedy=false; } : . )* '*/' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:558:7: '/*' ( options {greedy=false; } : . )* '*/'
 			{
 			match("/*"); 
 
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:540:12: ( options {greedy=false; } : . )*
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:558:12: ( options {greedy=false; } : . )*
 			loop4:
 			while (true) {
 				int alt4=2;
@@ -282,7 +282,7 @@ public class tigerLexer extends Lexer {
 
 				switch (alt4) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:540:40: .
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:558:40: .
 					{
 					matchAny(); 
 					}
@@ -312,8 +312,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = TAB;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:543:5: ( '\\t' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:543:7: '\\t'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:561:5: ( '\\t' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:561:7: '\\t'
 			{
 			match('\t'); 
 			_channel=HIDDEN;
@@ -333,8 +333,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = NEWLINE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:545:2: ( '\\n' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:545:4: '\\n'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:563:2: ( '\\n' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:563:4: '\\n'
 			{
 			match('\n'); 
 			_channel=HIDDEN;
@@ -354,8 +354,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = CARRAGE_RET;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:548:2: ( '\\r' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:548:4: '\\r'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:566:2: ( '\\r' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:566:4: '\\r'
 			{
 			match('\r'); 
 			_channel=HIDDEN;
@@ -375,8 +375,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = WHITESPACE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:552:2: ( ' ' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:552:4: ' '
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:570:2: ( ' ' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:570:4: ' '
 			{
 			match(' '); 
 			_channel=HIDDEN;
@@ -396,8 +396,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = FUNCTION_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:587:2: ( 'function' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:587:4: 'function'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:605:2: ( 'function' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:605:4: 'function'
 			{
 			match("function"); 
 
@@ -417,8 +417,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = BEGIN_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:591:2: ( 'begin' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:591:4: 'begin'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:609:2: ( 'begin' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:609:4: 'begin'
 			{
 			match("begin"); 
 
@@ -438,8 +438,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = END_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:595:2: ( 'end' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:595:4: 'end'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:613:2: ( 'end' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:613:4: 'end'
 			{
 			match("end"); 
 
@@ -459,8 +459,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = VOID_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:599:2: ( 'void' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:599:4: 'void'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:617:2: ( 'void' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:617:4: 'void'
 			{
 			match("void"); 
 
@@ -480,8 +480,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = MAIN_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:603:2: ( 'main' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:603:4: 'main'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:621:2: ( 'main' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:621:4: 'main'
 			{
 			match("main"); 
 
@@ -501,8 +501,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = TYPE_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:607:2: ( 'type' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:607:4: 'type'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:625:2: ( 'type' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:625:4: 'type'
 			{
 			match("type"); 
 
@@ -522,8 +522,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ARRAY_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:611:2: ( 'array' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:611:4: 'array'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:629:2: ( 'array' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:629:4: 'array'
 			{
 			match("array"); 
 
@@ -543,8 +543,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = OF_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:615:2: ( 'of' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:615:4: 'of'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:633:2: ( 'of' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:633:4: 'of'
 			{
 			match("of"); 
 
@@ -564,8 +564,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = INT_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:619:2: ( 'int' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:619:4: 'int'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:637:2: ( 'int' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:637:4: 'int'
 			{
 			match("int"); 
 
@@ -585,8 +585,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = FIXEDPT_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:623:2: ( 'fixedpt' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:623:4: 'fixedpt'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:641:2: ( 'fixedpt' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:641:4: 'fixedpt'
 			{
 			match("fixedpt"); 
 
@@ -606,8 +606,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = VAR_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:627:2: ( 'var' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:627:4: 'var'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:645:2: ( 'var' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:645:4: 'var'
 			{
 			match("var"); 
 
@@ -627,8 +627,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = IF_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:631:2: ( 'if' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:631:4: 'if'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:649:2: ( 'if' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:649:4: 'if'
 			{
 			match("if"); 
 
@@ -648,8 +648,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = THEN_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:635:2: ( 'then' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:635:4: 'then'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:653:2: ( 'then' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:653:4: 'then'
 			{
 			match("then"); 
 
@@ -669,8 +669,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ENDIF_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:639:2: ( 'endif' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:639:4: 'endif'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:657:2: ( 'endif' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:657:4: 'endif'
 			{
 			match("endif"); 
 
@@ -690,8 +690,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ELSE_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:643:2: ( 'else' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:643:4: 'else'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:661:2: ( 'else' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:661:4: 'else'
 			{
 			match("else"); 
 
@@ -711,8 +711,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = WHILE_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:647:2: ( 'while' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:647:4: 'while'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:665:2: ( 'while' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:665:4: 'while'
 			{
 			match("while"); 
 
@@ -732,8 +732,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ENDDO_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:651:2: ( 'enddo' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:651:4: 'enddo'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:669:2: ( 'enddo' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:669:4: 'enddo'
 			{
 			match("enddo"); 
 
@@ -753,8 +753,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = FOR_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:655:2: ( 'for' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:655:4: 'for'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:673:2: ( 'for' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:673:4: 'for'
 			{
 			match("for"); 
 
@@ -774,8 +774,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ID_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:659:2: ( 'id' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:659:4: 'id'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:677:2: ( 'id' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:677:4: 'id'
 			{
 			match("id"); 
 
@@ -795,8 +795,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = TO_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:663:2: ( 'to' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:663:4: 'to'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:681:2: ( 'to' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:681:4: 'to'
 			{
 			match("to"); 
 
@@ -816,8 +816,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = DO_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:667:2: ( 'do' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:667:4: 'do'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:685:2: ( 'do' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:685:4: 'do'
 			{
 			match("do"); 
 
@@ -837,8 +837,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = BREAK_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:671:2: ( 'break' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:671:4: 'break'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:689:2: ( 'break' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:689:4: 'break'
 			{
 			match("break"); 
 
@@ -858,8 +858,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = RETURN_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:675:2: ( 'return' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:675:4: 'return'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:693:2: ( 'return' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:693:4: 'return'
 			{
 			match("return"); 
 
@@ -879,8 +879,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = COMMA;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:679:8: ( ',' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:679:10: ','
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:697:8: ( ',' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:697:10: ','
 			{
 			match(','); 
 			}
@@ -899,8 +899,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = COLON;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:680:8: ( ':' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:680:10: ':'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:698:8: ( ':' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:698:10: ':'
 			{
 			match(':'); 
 			}
@@ -919,8 +919,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = SEMI;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:681:6: ( ';' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:681:8: ';'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:699:6: ( ';' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:699:8: ';'
 			{
 			match(';'); 
 			}
@@ -939,8 +939,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = LPAREN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:682:8: ( '(' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:682:10: '('
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:700:8: ( '(' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:700:10: '('
 			{
 			match('('); 
 			}
@@ -959,8 +959,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = RPAREN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:683:8: ( ')' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:683:10: ')'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:701:8: ( ')' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:701:10: ')'
 			{
 			match(')'); 
 			}
@@ -979,8 +979,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = LBRACK;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:684:8: ( '[' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:684:10: '['
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:702:8: ( '[' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:702:10: '['
 			{
 			match('['); 
 			}
@@ -999,8 +999,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = RBRACK;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:685:8: ( ']' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:685:10: ']'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:703:8: ( ']' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:703:10: ']'
 			{
 			match(']'); 
 			}
@@ -1019,8 +1019,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = PLUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:686:6: ( '+' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:686:8: '+'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:704:6: ( '+' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:704:8: '+'
 			{
 			match('+'); 
 			}
@@ -1039,8 +1039,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = MINUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:687:7: ( '-' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:687:9: '-'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:705:7: ( '-' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:705:9: '-'
 			{
 			match('-'); 
 			}
@@ -1059,8 +1059,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = MULT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:688:6: ( '*' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:688:8: '*'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:706:6: ( '*' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:706:8: '*'
 			{
 			match('*'); 
 			}
@@ -1079,8 +1079,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = DIV;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:689:5: ( '/' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:689:7: '/'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:707:5: ( '/' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:707:7: '/'
 			{
 			match('/'); 
 			}
@@ -1099,8 +1099,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = EQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:690:4: ( '=' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:690:6: '='
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:708:4: ( '=' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:708:6: '='
 			{
 			match('='); 
 			}
@@ -1119,8 +1119,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = NEQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:691:5: ( '<>' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:691:7: '<>'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:709:5: ( '<>' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:709:7: '<>'
 			{
 			match("<>"); 
 
@@ -1140,8 +1140,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = LESSER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:692:8: ( '<' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:692:10: '<'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:710:8: ( '<' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:710:10: '<'
 			{
 			match('<'); 
 			}
@@ -1160,8 +1160,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = LESSEREQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:693:9: ( '<=' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:693:11: '<='
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:711:9: ( '<=' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:711:11: '<='
 			{
 			match("<="); 
 
@@ -1181,8 +1181,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = GREATER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:694:9: ( '>' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:694:11: '>'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:712:9: ( '>' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:712:11: '>'
 			{
 			match('>'); 
 			}
@@ -1201,8 +1201,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = GREATEREQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:696:2: ( '>=' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:696:4: '>='
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:714:2: ( '>=' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:714:4: '>='
 			{
 			match(">="); 
 
@@ -1222,8 +1222,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = AND;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:697:5: ( '&' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:697:7: '&'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:715:5: ( '&' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:715:7: '&'
 			{
 			match('&'); 
 			}
@@ -1242,8 +1242,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = OR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:698:4: ( '|' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:698:6: '|'
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:716:4: ( '|' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:716:6: '|'
 			{
 			match('|'); 
 			}
@@ -1262,8 +1262,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ASSIGN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:699:8: ( ':=' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:699:10: ':='
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:717:8: ( ':=' )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:717:10: ':='
 			{
 			match(":="); 
 
@@ -1283,8 +1283,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ID;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:701:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:701:7: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:719:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:719:7: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 				input.consume();
@@ -1294,7 +1294,7 @@ public class tigerLexer extends Lexer {
 				recover(mse);
 				throw mse;
 			}
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:701:30: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:719:30: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
 			loop5:
 			while (true) {
 				int alt5=2;

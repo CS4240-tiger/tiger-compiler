@@ -215,7 +215,7 @@ return_func
 	:	type_id FUNCTION_KEY ID {func_name = $ID.text;} LPAREN param_list RPAREN begin block_list block_end
 		{
       	    		symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $type_id.text));	
-      	    		irOutput.add(IRGenerator.funct_declaration($ID.text));
+      	    		irOutput.add(IRGenerator.funct_declaration(func_name));
       	    		
       	    		CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
       		}
@@ -226,7 +226,7 @@ void_func
 	:	(VOID_KEY FUNCTION_KEY) => VOID_KEY FUNCTION_KEY ID {func_name = $ID.text;} LPAREN param_list RPAREN begin block_list block_end
 		{
 			symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $VOID_KEY.text));
-			irOutput.add(IRGenerator.funct_declaration($ID.text));
+			irOutput.add(IRGenerator.funct_declaration(func_name));
 			
 			CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
 		}
@@ -235,7 +235,7 @@ void_func
 	|	VOID_KEY MAIN_KEY {func_name = $MAIN_KEY.text;} LPAREN RPAREN begin block_list block_end
 		{
      			symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $MAIN_KEY.text, $VOID_KEY.text));
-     			irOutput.add(IRGenerator.funct_declaration($ID.text));
+     			irOutput.add(IRGenerator.funct_declaration(func_name));
      			
 			CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text); 
             	}
@@ -342,7 +342,7 @@ var_declaration
 	  	String idlist = $id_list.text; 
     		String[] ids = idlist.split(",");
     		for (String id: ids) {
-      			symbolTable.put(new TigerVariable(CURRENT_SCOPE, id.replaceAll("\\s",""), $fixedptlit.text);
+      			symbolTable.put(new TigerVariable(CURRENT_SCOPE, id.replaceAll("\\s",""), $fixedptlit.text));
      	 	}
 	}
 	->	^(ASSIGN ^(COLON id_list type_id) fixedptlit)
@@ -359,10 +359,10 @@ var_declaration
 			if (type != null && type instanceof TypeSymbolTableEntry) {
 				switch (((TypeSymbolTableEntry) type).getBackingType()) {
 				
-				case TigerPrimitive.INT_ARRAY:
+				case INT_ARRAY:
 					// Instantiates the 1D array
 					Integer[] intArray = (Integer[]) make1DArray("int", 
-						type.getWidth(), $UNSIGNED_INTLIT.text);
+						((TypeSymbolTableEntry) type).getWidth(), $UNSIGNED_INTLIT.text);
 					
 					for (String id: ids) {
 						// Gets rid of white space and adds to symbol table
@@ -373,10 +373,11 @@ var_declaration
 					
 					break;
 					
-				case TigerPrimitive.INT_2D_ARRAY:
+				case INT_2D_ARRAY:
 					// Instantiates the 2D array
 					Integer[][] int2DArray = (Integer[][]) make2DArray("int", 
-						type.getWidth(), type.getHeight(), $UNSIGNED_INTLIT.text);
+						((TypeSymbolTableEntry) type).getWidth(), 
+						((TypeSymbolTableEntry) type).getHeight(), $UNSIGNED_INTLIT.text);
 					for (String id: ids) {
 						// Gets rid of white space and adds to symbol table
 						symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
@@ -386,7 +387,7 @@ var_declaration
 					
 					break;
 					
-				case TigerPrimitive.INT:
+				case INT:
 					for (String id: ids) {
 						// Gets rid of white space and adds to symbol table
 						symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
