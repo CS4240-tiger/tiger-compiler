@@ -159,8 +159,28 @@ public class IRGenerator {
 		return result;
 	}
 	
-	public static String for_stat() {
+	/**
+	 * Returns an IR translation of a for statement.
+	 * 
+	 * These statements must already be translated to IR!
+	 * 
+	 * @param var The variable to increment.
+	 * @param start The starting value of the variable.
+	 * @param end The ending value to conclude the loop.
+	 * @param statSeq The code to execute if (start != end).
+	 * @return An IR translation of a for statement.
+	 */
+	public static String for_stat(String var, int start, int end, List<String> statSeq) {
 		String result = "";
+		// Generate a unique (hopefully) label to loop to if statement is still true
+		String startDo = String.valueOf(var.hashCode())
+				.substring((var.length() / 4), (var.length() / 4) + 5)
+				 + "-for-do:\n";
+		// ...and for concluding the loop
+		String endDo = String.valueOf(var.hashCode())
+				.substring((var.length() / 4), (var.length() / 4) + 5)
+				 + "-for-enddo:\n";
+		
 		// TODO: implement
 		
 		return result;
