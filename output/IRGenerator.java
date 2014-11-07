@@ -153,12 +153,25 @@ public class IRGenerator {
 	 * @param value The value to pass through.
 	 * @return An IR translation of a constant- or variable-terminating expression.
 	 */
-	public static String expr(String value) {
+	public static String expr_val(String value) {
 		// No further processing needed
 		return value;
 	}
 	
-	
+	/**
+	 * Returns an IR translation of an expression applied to a binary operator
+	 * that produces a resultant value.
+	 * 
+	 * @param val1 The first value.
+	 * @param val2 The second value.
+	 * @param binop The binary operation to perform on the two values.
+	 * @return The String result. If the values are both literals, the result will be evaluated and return a single literal.
+	 */
+	public static String expr_binop(String val1, String val2, Binop binop) {
+		String result = "";
+		
+		return result;
+	}
 	public static String expr(String expr1, String expr2) {
 		String result = "";
 		// TODO: implement 
