@@ -408,12 +408,11 @@ var_declaration
 					+ $id_list.text + " on line " + $type_id.start.getLine());
 			}
 		} else {
-			// Else push new type
+			// Else, it's a primitive already
 			for (String id: ids) {
 				// Gets rid of white space and adds to symbol table
 				symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
-				id.replaceAll("\\s",""), toInteger($UNSIGNED_INTLIT.text), 
-				$type_id.text));
+				id.replaceAll("\\s",""), toInteger($UNSIGNED_INTLIT.text)));
 			}
         }
         	}
