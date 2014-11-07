@@ -196,14 +196,12 @@ public class IRGenerator {
 	
 	/**
 	 * Returns an IR translation of a return statement.
-	 * Stores the result into a return temporary value.
 	 * 
+	 * @param target The target temporary variable or value returned by expr.
 	 * @return An IR translation of a return statement.
 	 */
-	public static String return_stat() {
-		String result = "";
-		
-		return result;
+	public static String return_stat(String target) {
+		return IRMap.returnVal(target);
 	}
 	
 	/**
