@@ -350,11 +350,11 @@ var_declaration
 		String idlist = $id_list.text; 
 		String[] ids = idlist.split(",");
 		//if not a base type
-		if (!$type_id.text.equals("int") && !$type_id.text.equals("fixedpt")) {
+		if (!($type_id.text.equals("int") && $type_id.text.equals("fixedpt"))) {
 		  //gets the type and makes the variables for INT_ARRAY, INT_2D_ARRAY, and INT
-		  TypeSymbolTableEntry type = (TypeSymbolTableEntry)symbolTable.get($type_id.text,CURRENT_SCOPE);
+		  SymbolTableEntry type = symbolTable.get($type_id.text, CURRENT_SCOPE);
 		  //if it exists and in the right scope
-		  if (type != null) {
+		  if (type != null && type instanceof TypeSymbolTableEntry) {
 			  TigerPrimitive getPrim = type.getBackingType();
 			  if (getPrim == TigerPrimitive.INT_ARRAY) {
 			    //instantiates the 1D array
