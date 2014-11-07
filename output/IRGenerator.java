@@ -194,9 +194,14 @@ public class IRGenerator {
 		return result;
 	}
 	
+	/**
+	 * Returns an IR translation of a return statement.
+	 * Stores the result into a return temporary value.
+	 * 
+	 * @return An IR translation of a return statement.
+	 */
 	public static String return_stat() {
 		String result = "";
-		// TODO: implement
 		
 		return result;
 	}
