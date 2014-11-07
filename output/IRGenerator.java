@@ -96,7 +96,18 @@ public class IRGenerator {
 		return result;
 	}
 	
-	
+	/**
+	 * Returns an IR translation of a while statement.
+	 * 
+	 * These statements must be already translated into IR!
+	 * 
+	 * @param expr1 The first expression to compare.
+	 * @param expr2 The second expression to compare.
+	 * @param compare The comparison operator to apply to the two expressions.
+	 * @param statSeqTrue The code to execute if the result of the comparison is true.
+	 * @param statSeqFalse The code to execute of the result of the comparison is false.
+	 * @return An IR translation of a while statement.
+	 */
 	public static String while_stat(String expr1, String expr2, Binop compare, List<String> statSeq) {
 		String result = "";
 		
@@ -155,11 +166,16 @@ public class IRGenerator {
 		return result;
 	}
 	
-	public static String assign_stat() {
-		String result = "";
-		// TODO: implement
-		
-		return result;
+	/**
+	 * Returns an IR translation of an assignment statement.
+	 * Assigns a variable to a value or the target temporary variable from expr.
+	 * 
+	 * @param var The variable symbol to assign.
+	 * @param targetVal The value or target temporary to assign to var.
+	 * @return An IR translation of an assignment statement.
+	 */
+	public static String assign_stat(String var, String targetVal) {
+		return IRMap.assign(var, targetVal);
 	}
 	
 	/**
