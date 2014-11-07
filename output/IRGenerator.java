@@ -184,9 +184,10 @@ public class IRGenerator {
 	 * 
 	 * @param function The FunctionSymbolTableEntry of the function to call.
 	 * @param args An array of arguments to pass into the function.
+	 * @param target A target temporary variable to store the result in.
 	 * @return An IR translation of a function call.
 	 */
-	public static String func_call(FunctionSymbolTableEntry function, String[] args) {
+	public static String func_call(FunctionSymbolTableEntry function, String[] args, String target) {
 		String result = "";
 		
 		if (function.getReturnType().toLowerCase().equals("void")) {
@@ -197,17 +198,21 @@ public class IRGenerator {
 			
 			// Store the result in t0; if we actually assign this to something 
 			// meaningful, we can reassign to a different temporary in assign_stat
-			result += IRMap.callr("t0", function.getId(), args);
+			result += IRMap.callr(target, function.getId(), args);
 		}
 		
 		return result;
 	}
 	
-	public static String break_stat() {
-		String result = "";
-		// TODO: implement
-		
-		return result;
+	/**
+	 * Returns an IR translation of a break statement.
+	 * Breaks out of the closest loop by jumping to a for- or while-loop label.
+	 * 
+	 * @param label The label to jump to.
+	 * @return An IR translation of a break statement.
+	 */
+	public static String break_stat(String label) {
+		return IRMap.gotoLabel(label);
 	}
 	
 	/**
