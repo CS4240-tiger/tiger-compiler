@@ -61,7 +61,11 @@ tokens {
       }
       return IntArray;
     } else if (s.equals("fixedpt")) {
+      Double val = toDouble(value);
       Double[] DoubleArray = new Double[width];
+      for (int i = 0; i < width; i++) {
+        DoubleArray[i] = val;
+      }
       return DoubleArray;
     }
     return null;
@@ -87,7 +91,13 @@ tokens {
 	    }
 	    return IntArray;
 	  } else if (s.equals("fixedpt")) {
+	    Double val = toDouble(value);
 	    Double[][] DoubleArray = new Double[width][height];
+	    for (int i = 0; i < width; i++) {
+	      for (int j = 0; j < height; j++) {
+	        DoubleArray[i][j] = val;
+	      }
+	    }
 	    return DoubleArray;
 	  }
 	  return null;
@@ -324,12 +334,74 @@ base_type
 
 var_declaration 
 	:	(VAR_KEY id_list COLON type_id ASSIGN fixedptlit) => VAR_KEY id_list COLON type_id ASSIGN fixedptlit SEMI 
-	{
+	{   
 	  	String idlist = $id_list.text; 
     		String[] ids = idlist.split(",");
-    		for (String id: ids) {
+    		// Check if it's not a base type
+    		if (!($type_id.text.equals("int") && $type_id.text.equals("fixedpt"))) {
+    		  // Gets the type and makes the variables for INT_ARRAY, INT_2D_ARRAY, and INT
+    		  SymbolTableEntry type = symbolTable.get($type_id.text, CURRENT_SCOPE);
+    		  
+    		  if (type != null && type instanceof TypeSymbolTableEntry) {
+    		  
+    		    switch (((TypeSymbolTableEntry) type).getBackingType()) {
+    		    
+    		    case FIXEDPT_ARRAY:
+    		      // Instantiates the 1D array
+    		      Double[] fpArray = (Double[]) make1DArray("fixedpt", 
+    		        ((TypeSymbolTableEntry) type).getWidth(), $fixedptlit.text);
+          
+    		      for (String id: ids) {
+    		        // Gets rid of white space and adds to symbol table
+    		        symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
+    		          id.replaceAll("\\s",""), 
+    		          fpArray, $type_id.text));
+    		      }
+          
+    		    break;
+    		    
+    		    case FIXEDPT_2D_ARRAY:
+             // Instantiates the 2D array
+             Double[][] fp2DArray = (Double[][]) make2DArray("fixedpt", 
+               ((TypeSymbolTableEntry) type).getWidth(), 
+               ((TypeSymbolTableEntry) type).getHeight(), $fixedptlit.text);
+             for (String id: ids) {
+                // Gets rid of white space and adds to symbol table
+                symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
+                  id.replaceAll("\\s",""), 
+                  fp2DArray, $type_id.text));
+             }
+          
+            break;
+            
+            case FIXEDPT:
+              for (String id: ids) {
+              // Gets rid of white space and adds to symbol table
+              symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
+                id.replaceAll("\\s",""), 
+                toDouble($fixedptlit.text), $type_id.text));
+              }
+          
+            break;
+          
+            default:
+              System.out.println("The type " + $type_id.text + " on line " + $type_id.start.getLine()
+              + " is not of type int");
+          
+            break;
+            
+    		    }
+    		  } else {
+    		    System.out.println("The type " + $type_id.text + 
+    		      " does not exist or is not in an accessible scope from " 
+    		      + $id_list.text + " on line " + $type_id.start.getLine());
+    		  }
+    		} else {
+    		  for (String id: ids) {
       			symbolTable.put(new TigerVariable(CURRENT_SCOPE, id.replaceAll("\\s",""), toDouble($fixedptlit.text)));
-     	 	}
+      		}
+      	}
+      	
 	}
 	->	^(ASSIGN ^(COLON id_list type_id) fixedptlit)
 	|	(VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT) => VAR_KEY id_list COLON type_id ASSIGN UNSIGNED_INTLIT SEMI 
@@ -384,7 +456,7 @@ var_declaration
 					break;
 					
 				default:
-					System.out.println("The type " + $type_id.text 
+					System.out.println("The type " + $type_id.text + " on line " + $type_id.start.getLine()
 						+ " is not of type int");
 					
 					break;
