@@ -31,42 +31,57 @@ public class SymbolTable {
 	 * @param entry The Entry to add.
 	 */
 	public void put(SymbolTableEntry entry) {
-		
-		if (entry instanceof TigerVariable) {
-			if (backingTable.get(entry.getId()) == null) {
-				backingTable.put(entry.getId(), 
-						new VariableSymbolTableEntry(
-								entry.getScope(), 
-								entry.getId(), 
-								(TigerVariable) entry));
-			} else {
-				// Check if it exists
-				List<TigerVariable> resultVarList = ((VariableSymbolTableEntry) backingTable.get(entry.getId())).backingList;
-				TigerVariable addVar = ((TigerVariable) entry);
-				Scope curScope = addVar.getScope();
-				for (int index = 0; index < resultVarList.size(); index++) {
-					while (curScope != null) {
-						if (curScope.equals(resultVarList.get(index))) {
-							// Found value in this or parent Scope! Reassign it.
-							resultVarList.get(index).setValue(addVar.getValue());
-							return;
+		if (!idExists(entry.getId(),entry.getScope())) {
+			if (entry instanceof TigerVariable) {
+				if (backingTable.get(entry.getId()) == null) {
+					backingTable.put(entry.getId(), 
+							new VariableSymbolTableEntry(
+									entry.getScope(), 
+									entry.getId(), 
+									(TigerVariable) entry));
+				} else {
+					// Check if it exists
+					List<TigerVariable> resultVarList = ((VariableSymbolTableEntry) backingTable.get(entry.getId())).backingList;
+					TigerVariable addVar = ((TigerVariable) entry);
+					Scope curScope = addVar.getScope();
+					for (int index = 0; index < resultVarList.size(); index++) {
+						while (curScope != null) {
+							if (curScope.equals(resultVarList.get(index))) {
+								// Found value in this or parent Scope! Reassign it.
+								resultVarList.get(index).setValue(addVar.getValue());
+								return;
+							}
+							
+							curScope = curScope.getParent();
 						}
 						
-						curScope = curScope.getParent();
 					}
 					
+					// Otherwise, not found in accessible scope; safe to declare new entry in current scope
+					resultVarList.add(addVar);
 				}
-				
-				// Otherwise, not found in accessible scope; safe to declare new entry in current scope
-				resultVarList.add(addVar);
+			} else {	
+				backingTable.put(entry.getId(), entry);
+				size++;
+				System.out.println(entry.getScope().getId()+":"+entry.getId());
 			}
-		} else {	
-			backingTable.put(entry.getId(), entry);
-			size++;
-			System.out.println(entry.getScope().getId()+":"+entry.getId());
 		}
 	}
 	
+	/**
+	* checks if another id exists in the symbol table
+	* @return true if this id is also a name of a type or function name
+	* @return false if no such id exists or that id is a variable name
+	*
+	**/
+	public boolean idExists(String id, Scope thisScope) {
+	  SymbolTableEntry entry= get(id, thisScope);
+	  if (entry != null || entry instanceof TypeSymbolTableEntry || entry instanceof FunctionSymbolTableEntry) {
+	    System.out.println(id +" is already a name of a function or a type");
+	    return true;
+	  }
+	  return false;
+	}
 	
 	/**
 	 * Gets a SymbolTableEntry from this SymbolTable.

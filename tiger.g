@@ -43,20 +43,6 @@ tokens {
 	public void reportError(RecognitionException e) {
 		displayRecognitionError(this.getTokenNames(), e);
 	}
-	/**
-	* checks if another id exists in the symbol table
-	* @return true if this id is also a name of a type or function name
-	* @return false if no such id exists or that id is a variable name
-	*
-	**/
-	public boolean idExists(String id) {
-	  SymbolTableEntry entry= symbolTable.get(id, CURRENT_SCOPE);
-	  if (entry != null || entry instanceof TypeSymbolTableEntry || entry instanceof FunctionSymbolTableEntry) {
-	    System.out.println(id +" is already a name of a function or a type");
-	    return true;
-	  }
-	  return false;
-	}
 	
 	/**
 	* makes a 1D array of either an Integer or Double type
@@ -366,11 +352,9 @@ var_declaration
 					
 					for (String id: ids) {
 						// Gets rid of white space and adds to symbol table
-						if (!idExists(id)) {
 						  symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
 						    id.replaceAll("\\s",""), 
 						    intArray, $type_id.text));
-						}
 					}
 					
 					break;
@@ -382,11 +366,9 @@ var_declaration
 						((TypeSymbolTableEntry) type).getHeight(), $UNSIGNED_INTLIT.text);
 					for (String id: ids) {
 						// Gets rid of white space and adds to symbol table
-						if (!idExists(id)) {
               symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
                 id.replaceAll("\\s",""), 
                 int2DArray, $type_id.text));
-            }
 					}
 					
 					break;
@@ -394,11 +376,9 @@ var_declaration
 				case INT:
 					for (String id: ids) {
 						// Gets rid of white space and adds to symbol table
-						if (!idExists(id)) {
 							symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
 								id.replaceAll("\\s",""), 
 								toInteger($UNSIGNED_INTLIT.text), $type_id.text));
-							}
 					}
 					
 					break;

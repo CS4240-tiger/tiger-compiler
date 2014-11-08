@@ -3,11 +3,11 @@ void main()
 begin
    begin
    	type decimal = fixedpt;
-   	var t:decimal := 123.0;
+   	var decimal:decimal := 123.0;
    	t := 123.0;
    end;
    begin
-    var x:decimal := 123;
+    var decimal:decimal := 123;
     x:=123;
    end;
 end;
