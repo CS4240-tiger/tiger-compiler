@@ -31,6 +31,7 @@ public class SymbolTable {
 	 * @param entry The Entry to add.
 	 */
 	public void put(SymbolTableEntry entry) {
+		
 		if (entry instanceof TigerVariable) {
 			if (backingTable.get(entry.getId()) == null) {
 				backingTable.put(entry.getId(), 
@@ -65,6 +66,7 @@ public class SymbolTable {
 			System.out.println(entry.getScope().getId()+":"+entry.getId());
 		}
 	}
+	
 	
 	/**
 	 * Gets a SymbolTableEntry from this SymbolTable.

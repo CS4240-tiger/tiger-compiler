@@ -342,7 +342,7 @@ var_declaration
 	  	String idlist = $id_list.text; 
     		String[] ids = idlist.split(",");
     		for (String id: ids) {
-      			symbolTable.put(new TigerVariable(CURRENT_SCOPE, id.replaceAll("\\s",""), $fixedptlit.text));
+      			symbolTable.put(new TigerVariable(CURRENT_SCOPE, id.replaceAll("\\s",""), toDouble($fixedptlit.text)));
      	 	}
 	}
 	->	^(ASSIGN ^(COLON id_list type_id) fixedptlit)
@@ -366,9 +366,11 @@ var_declaration
 					
 					for (String id: ids) {
 						// Gets rid of white space and adds to symbol table
-						symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
-							id.replaceAll("\\s",""), 
-							intArray, $type_id.text));
+						if (!idExists(id)) {
+						  symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
+						    id.replaceAll("\\s",""), 
+						    intArray, $type_id.text));
+						}
 					}
 					
 					break;
@@ -380,9 +382,11 @@ var_declaration
 						((TypeSymbolTableEntry) type).getHeight(), $UNSIGNED_INTLIT.text);
 					for (String id: ids) {
 						// Gets rid of white space and adds to symbol table
-						symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
-							id.replaceAll("\\s",""), 
-							int2DArray, $type_id.text));
+						if (!idExists(id)) {
+              symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
+                id.replaceAll("\\s",""), 
+                int2DArray, $type_id.text));
+            }
 					}
 					
 					break;
@@ -390,9 +394,11 @@ var_declaration
 				case INT:
 					for (String id: ids) {
 						// Gets rid of white space and adds to symbol table
-						symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
-							id.replaceAll("\\s",""), 
-							toInteger($UNSIGNED_INTLIT.text), $type_id.text));
+						if (!idExists(id)) {
+							symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
+								id.replaceAll("\\s",""), 
+								toInteger($UNSIGNED_INTLIT.text), $type_id.text));
+							}
 					}
 					
 					break;
