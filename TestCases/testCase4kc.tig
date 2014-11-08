@@ -2,9 +2,9 @@
 void main() 
 begin
    begin
-   	type decimal = fixedpt;
-   	var decimal:decimal := 123.0;
-   	t := 123.0;
+   	type ArrayInt = array [100] of int;
+   	var t:ArrayInt;
+   	t := 123;
    end;
    begin
     var decimal:decimal := 123;

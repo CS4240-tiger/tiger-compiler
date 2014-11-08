@@ -38,6 +38,10 @@ tokens {
   private static void outln(Object obj) {
     System.out.println(obj);
   }
+  
+  public String strip(String id) {
+    return id.replaceAll("\\s","");
+  }
 
 	@Override
 	public void reportError(RecognitionException e) {
@@ -296,27 +300,27 @@ type_declaration
 type[String id]	
   :	base_type {
     if ($base_type.text.equals("int")) { 
-      symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), TigerPrimitive.INT));
+      symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,strip(id), TigerPrimitive.INT));
     } else if ($base_type.text.equals("fixedpt")) {
       System.out.println("about to add");
-      symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), TigerPrimitive.FIXEDPT));
+      symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,strip(id), TigerPrimitive.FIXEDPT));
       System.out.println("added");
     }
   }
 	|	(ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK LBRACK UNSIGNED_INTLIT RBRACK) 
 	=> 	ARRAY_KEY LBRACK var1=UNSIGNED_INTLIT RBRACK LBRACK var2=UNSIGNED_INTLIT RBRACK OF_KEY type_id {
 	  if ($type_id.text.equals("int")) { 
-	    symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), TigerPrimitive.INT_2D_ARRAY, toInteger($var1.text),toInteger($var2.text)));
+	    symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,strip(id), TigerPrimitive.INT_2D_ARRAY, toInteger($var1.text),toInteger($var2.text)));
 	  } else if ($type_id.text.equals("fixedpt")) {
-	    symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), TigerPrimitive.FIXEDPT_2D_ARRAY, toInteger($var1.text),toInteger($var2.text)));
+	    symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,strip(id), TigerPrimitive.FIXEDPT_2D_ARRAY, toInteger($var1.text),toInteger($var2.text)));
 	  }
 	}
 	->	^(ARRAY_KEY ^(AST_2D_ARRAY UNSIGNED_INTLIT UNSIGNED_INTLIT) type_id)
 	|	ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK OF_KEY type_id {
 	  if ($type_id.text.equals("int")) { 
-      symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), TigerPrimitive.INT_ARRAY, toInteger($UNSIGNED_INTLIT.text)));
+      symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,strip(id), TigerPrimitive.INT_ARRAY, toInteger($UNSIGNED_INTLIT.text)));
     } else if ($type_id.text.equals("fixedpt")) {
-      symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,id.replaceAll("\\s",""), TigerPrimitive.FIXEDPT_ARRAY, toInteger($UNSIGNED_INTLIT.text)));
+      symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,strip(id), TigerPrimitive.FIXEDPT_ARRAY, toInteger($UNSIGNED_INTLIT.text)));
     }
 	}
 	->	^(ARRAY_KEY UNSIGNED_INTLIT type_id)
@@ -354,7 +358,7 @@ var_declaration
     		      for (String id: ids) {
     		        // Gets rid of white space and adds to symbol table
     		        symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
-    		          id.replaceAll("\\s",""), 
+    		          strip(id), 
     		          fpArray, $type_id.text));
     		      }
           
@@ -368,7 +372,7 @@ var_declaration
              for (String id: ids) {
                 // Gets rid of white space and adds to symbol table
                 symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
-                  id.replaceAll("\\s",""), 
+                  strip(id), 
                   fp2DArray, $type_id.text));
              }
           
@@ -378,7 +382,7 @@ var_declaration
               for (String id: ids) {
               // Gets rid of white space and adds to symbol table
               symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
-                id.replaceAll("\\s",""), 
+                strip(id), 
                 toDouble($fixedptlit.text), $type_id.text));
               }
           
@@ -398,7 +402,7 @@ var_declaration
     		  }
     		} else {
     		  for (String id: ids) {
-      			symbolTable.put(new TigerVariable(CURRENT_SCOPE, id.replaceAll("\\s",""), toDouble($fixedptlit.text)));
+      			symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), toDouble($fixedptlit.text)));
       		}
       	}
       	
@@ -425,7 +429,7 @@ var_declaration
 					for (String id: ids) {
 						// Gets rid of white space and adds to symbol table
 						  symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
-						    id.replaceAll("\\s",""), 
+						    strip(id), 
 						    intArray, $type_id.text));
 					}
 					
@@ -439,7 +443,7 @@ var_declaration
 					for (String id: ids) {
 						// Gets rid of white space and adds to symbol table
               symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
-                id.replaceAll("\\s",""), 
+                strip(id), 
                 int2DArray, $type_id.text));
 					}
 					
@@ -449,7 +453,7 @@ var_declaration
 					for (String id: ids) {
 						// Gets rid of white space and adds to symbol table
 							symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
-								id.replaceAll("\\s",""), 
+								strip(id), 
 								toInteger($UNSIGNED_INTLIT.text), $type_id.text));
 					}
 					
@@ -471,7 +475,7 @@ var_declaration
 			for (String id: ids) {
 				// Gets rid of white space and adds to symbol table
 				symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
-				id.replaceAll("\\s",""), toInteger($UNSIGNED_INTLIT.text)));
+				strip(id), toInteger($UNSIGNED_INTLIT.text)));
 			}
         }
         	}
@@ -481,7 +485,7 @@ var_declaration
    		String idlist = $id_list.text; 
     		String[] ids = idlist.split(",");
     		for (String id: ids) {
-      			symbolTable.put(new TigerVariable(CURRENT_SCOPE, id, new Integer(0)));
+      			symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), new Integer(0)));
     		}
   	}
 	->	^(COLON id_list type_id)
@@ -548,21 +552,37 @@ return_stat
 	;
 
 	
-expr 	
-  :	(constval binop_p0) => constval binop_p0 expr
-	->	^(binop_p0 constval expr)
+Boolexpr
+  :	(constval Boolop) => constval Boolop Boolexpr
+	->	^(Boolop constval Boolexpr)
 	|	constval
-	|	(value binop_p0) => value binop_p0 expr
-	->	^(binop_p0 value expr)
+	|	(value Boolop) => value Boolop Boolexpr
+	->	^(Boolop value Boolexpr)
 	|	value
-	|	(LPAREN expr RPAREN binop_p0) => LPAREN expr RPAREN binop_p0 expr
-	->	^(binop_p0 ^(AST_EXPR_PAREN expr) expr)
-	|	LPAREN expr RPAREN
-	->	^(AST_EXPR_PAREN expr)
+	|	(LPAREN Boolexpr RPAREN Boolop) => LPAREN Boolexpr RPAREN Boolop Boolexpr
+	->	^(Boolop ^(AST_EXPR_PAREN Boolexpr) Boolexpr)
+	|	LPAREN Boolexpr RPAREN
+	->	^(AST_EXPR_PAREN Boolexpr)
 	;
 
+Numexpr
+  : (constval Numop) => constval Numop Numexpr
+  ->  ^(Numop constval Numexpr)
+  | constval
+  | (value Numexpr) => value Numop Numexpr
+  ->  ^(Numop value Numexpr)
+  | value
+  | (LPAREN Numexpr RPAREN Numop) => LPAREN Numexpr RPAREN Numop Numexpr
+  ->  ^(Numop ^(AST_EXPR_PAREN Numexpr) Numexpr)
+  | LPAREN Numexpr RPAREN
+  ->  ^(AST_EXPR_PAREN Numexpr)
+  ;
+
+Boolop: binop_p0;
+Numop: binop_p2;
+
 binop_p0:	(AND | OR | binop_p1);
-binop_p1:	(EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | binop_p2);     
+binop_p1:	(EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ);     
 binop_p2:	(MINUS | PLUS | binop_p3);
 binop_p3:	(MULT | DIV);
 	
@@ -589,12 +609,17 @@ binary_operator
 	;
 
 expr_list
-	:	expr (COMMA expr)*
-	->	^(AST_EXPR_LIST expr+)
+	:	Boolexpr (COMMA Boolexpr)*
+	->	^(AST_EXPR_LIST Boolexpr+)
+	| Numexpr (COMMA Numexpr)*
+	-> ^(AST_EXPR_LIST Numexpr+)
 	;
 
 value 	
-  	:	(ID LBRACK index_expr RBRACK LBRACK) => ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK
+  	:	(ID LBRACK index_expr RBRACK LBRACK) => ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK {
+  	  SymbolTableEntry entry = symbolTable.get(strip($ID.text),CURRENT_SCOPE);
+  	  
+  	}
 	|	(ID LBRACK) => ID LBRACK index_expr RBRACK
 	|	ID
 	;
