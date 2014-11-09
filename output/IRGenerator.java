@@ -181,7 +181,20 @@ public class IRGenerator {
 				.substring((var.length() / 4), (var.length() / 4) + 5)
 				 + "-for-enddo:\n";
 		
-		// TODO: implement
+		// Set initial value of variable
+		result += IRMap.assign(var, String.valueOf(start)) + "\n";
+		
+		// Insert start label at beginning of loop.
+		result += startDo;
+		
+		for (String stat : statSeq) {
+			result += stat;
+			result += "\n";
+		}
+		
+		result += IRMap.add(var, String.valueOf(1), var) + "\n";
+		result += IRMap.brneq(var, String.valueOf(end), startDo) + "\n";
+		result += endDo; // Not required, but useful for readability
 		
 		return result;
 	}
@@ -371,5 +384,15 @@ public class IRGenerator {
 		}
 		
 		return true;
+	}
+	
+	/**
+	 * Emits an input IRMap String and appends a newline character to the end.
+	 * 
+	 * @param input An input IRMap String.
+	 * @return An IR output line.
+	 */
+	private String emit(String input) {
+		return input + "\n";
 	}
 }
