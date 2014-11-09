@@ -385,6 +385,9 @@ var_declaration
     		        symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
     		          strip(id), 
     		          fpArray, $type_id.text));
+    		          
+    		          // ...and add to IR
+    			 irOutput.add(IRMap.assign(id, fpArray.length, $fixedptlit.text));
     		      }
           
     		    break;
@@ -399,6 +402,9 @@ var_declaration
                 symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
                   strip(id), 
                   fp2DArray, $type_id.text));
+                  
+                // ...and add to IR
+    		irOutput.add(IRMap.assign(id, fp2DArray.length, $fixedptlit.text));
              }
           
             break;
@@ -409,6 +415,9 @@ var_declaration
               symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
                 strip(id), 
                 toDouble($fixedptlit.text), $type_id.text));
+                
+                // ...and add to IR
+    		irOutput.add(IRGenerator.declaration_statement(id, $fixedptlit.text));
               }
           
             break;
@@ -428,6 +437,9 @@ var_declaration
     		} else {
     		  for (String id: ids) {
       			symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), toDouble($fixedptlit.text)));
+      			
+      			// ...and add to IR
+    			irOutput.add(IRGenerator.declaration_statement(id, $fixedptlit.text));
       		}
       	}
       	
@@ -456,6 +468,9 @@ var_declaration
 						  symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
 						    strip(id), 
 						    intArray, $type_id.text));
+						    
+						    // ...and add to IR
+    			 			    irOutput.add(IRMap.assign(id, intArray.length, $UNSIGNED_INTLIT.text));
 					}
 					
 					break;
@@ -467,9 +482,12 @@ var_declaration
 						((TypeSymbolTableEntry) type).getHeight(), $UNSIGNED_INTLIT.text);
 					for (String id: ids) {
 						// Gets rid of white space and adds to symbol table
-              symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
-                strip(id), 
-                int2DArray, $type_id.text));
+					              symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
+					                strip(id), 
+					                int2DArray, $type_id.text));
+					                
+					                // ...and add to IR
+					    		irOutput.add(IRMap.assign(id, int2DArray.length, $UNSIGNED_INTLIT.text));
 					}
 					
 					break;
@@ -480,6 +498,8 @@ var_declaration
 							symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
 								strip(id), 
 								toInteger($UNSIGNED_INTLIT.text), $type_id.text));
+							// ...and add to IR
+							irOutput.add(IRGenerator.declaration_statement(id, $UNSIGNED_INTLIT.text));
 					}
 					
 					break;
@@ -501,6 +521,9 @@ var_declaration
 				// Gets rid of white space and adds to symbol table
 				symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
 				strip(id), toInteger($UNSIGNED_INTLIT.text)));
+				
+				// ...and add to IR
+				irOutput.add(IRGenerator.declaration_statement(id, $UNSIGNED_INTLIT.text));
 			}
         }
         	}
@@ -511,6 +534,8 @@ var_declaration
     		String[] ids = idlist.split(",");
     		for (String id: ids) {
       			symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), new Integer(0)));
+      			// ...and add to IR
+			irOutput.add(IRGenerator.declaration_statement(id, "0"));
     		}
   	}
 	->	^(COLON id_list type_id)
@@ -555,7 +580,7 @@ for_stat
 	;
 
 assign_stat
-	:	(value ASSIGN func_call) =>value ASSIGN func_call SEMI
+	:	(value ASSIGN func_call) => value ASSIGN func_call SEMI
   ->  ^(ASSIGN value func_call)
   | (value ASSIGN numExpr1) => value ASSIGN numExpr1 SEMI {
     System.out.println($numExpr1.type);

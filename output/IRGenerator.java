@@ -31,6 +31,7 @@ public class IRGenerator {
 		return IRMap.assign(id, value);
 	}
 	
+	
 	/**
 	 * Returns an IR translation of an if statement.
 	 * NOTE: irTrueStat is the IR representation of what follows after (if .. then ..),
