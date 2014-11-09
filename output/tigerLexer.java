@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g 2014-11-08 19:31:30
+// $ANTLR 3.5.1 /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g 2014-11-08 19:57:19
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -126,10 +126,10 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = UNSIGNED_INTLIT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:640:2: ( ( '0' .. '9' )+ )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:640:4: ( '0' .. '9' )+
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:643:2: ( ( '0' .. '9' )+ )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:643:4: ( '0' .. '9' )+
 			{
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:640:4: ( '0' .. '9' )+
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:643:4: ( '0' .. '9' )+
 			int cnt1=0;
 			loop1:
 			while (true) {
@@ -178,10 +178,10 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = UNSIGNED_FIXEDPTLIT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:647:2: ( ( '0' .. '9' )* '.' ( '0' .. '9' )* )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:647:5: ( '0' .. '9' )* '.' ( '0' .. '9' )*
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:650:2: ( ( '0' .. '9' )* '.' ( '0' .. '9' )* )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:650:5: ( '0' .. '9' )* '.' ( '0' .. '9' )*
 			{
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:647:5: ( '0' .. '9' )*
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:650:5: ( '0' .. '9' )*
 			loop2:
 			while (true) {
 				int alt2=2;
@@ -211,7 +211,7 @@ public class tigerLexer extends Lexer {
 			}
 
 			match('.'); 
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:647:21: ( '0' .. '9' )*
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:650:21: ( '0' .. '9' )*
 			loop3:
 			while (true) {
 				int alt3=2;
@@ -256,12 +256,12 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = COMMENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:684:2: ( '/*' ( options {greedy=false; } : . )* '*/' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:684:7: '/*' ( options {greedy=false; } : . )* '*/'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:687:2: ( '/*' ( options {greedy=false; } : . )* '*/' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:687:7: '/*' ( options {greedy=false; } : . )* '*/'
 			{
 			match("/*"); 
 
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:684:12: ( options {greedy=false; } : . )*
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:687:12: ( options {greedy=false; } : . )*
 			loop4:
 			while (true) {
 				int alt4=2;
@@ -282,7 +282,7 @@ public class tigerLexer extends Lexer {
 
 				switch (alt4) {
 				case 1 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:684:40: .
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:687:40: .
 					{
 					matchAny(); 
 					}
@@ -312,8 +312,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = TAB;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:687:5: ( '\\t' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:687:7: '\\t'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:690:5: ( '\\t' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:690:7: '\\t'
 			{
 			match('\t'); 
 			_channel=HIDDEN;
@@ -333,8 +333,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = NEWLINE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:689:2: ( '\\n' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:689:4: '\\n'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:692:2: ( '\\n' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:692:4: '\\n'
 			{
 			match('\n'); 
 			_channel=HIDDEN;
@@ -354,8 +354,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = CARRAGE_RET;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:692:2: ( '\\r' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:692:4: '\\r'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:695:2: ( '\\r' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:695:4: '\\r'
 			{
 			match('\r'); 
 			_channel=HIDDEN;
@@ -375,8 +375,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = WHITESPACE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:696:2: ( ' ' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:696:4: ' '
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:699:2: ( ' ' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:699:4: ' '
 			{
 			match(' '); 
 			_channel=HIDDEN;
@@ -396,8 +396,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = FUNCTION_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:731:2: ( 'function' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:731:4: 'function'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:734:2: ( 'function' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:734:4: 'function'
 			{
 			match("function"); 
 
@@ -417,8 +417,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = BEGIN_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:735:2: ( 'begin' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:735:4: 'begin'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:738:2: ( 'begin' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:738:4: 'begin'
 			{
 			match("begin"); 
 
@@ -438,8 +438,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = END_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:739:2: ( 'end' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:739:4: 'end'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:742:2: ( 'end' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:742:4: 'end'
 			{
 			match("end"); 
 
@@ -459,8 +459,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = VOID_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:743:2: ( 'void' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:743:4: 'void'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:746:2: ( 'void' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:746:4: 'void'
 			{
 			match("void"); 
 
@@ -480,8 +480,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = MAIN_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:747:2: ( 'main' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:747:4: 'main'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:750:2: ( 'main' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:750:4: 'main'
 			{
 			match("main"); 
 
@@ -501,8 +501,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = TYPE_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:751:2: ( 'type' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:751:4: 'type'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:754:2: ( 'type' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:754:4: 'type'
 			{
 			match("type"); 
 
@@ -522,8 +522,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ARRAY_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:755:2: ( 'array' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:755:4: 'array'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:758:2: ( 'array' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:758:4: 'array'
 			{
 			match("array"); 
 
@@ -543,8 +543,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = OF_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:759:2: ( 'of' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:759:4: 'of'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:762:2: ( 'of' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:762:4: 'of'
 			{
 			match("of"); 
 
@@ -564,8 +564,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = INT_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:763:2: ( 'int' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:763:4: 'int'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:766:2: ( 'int' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:766:4: 'int'
 			{
 			match("int"); 
 
@@ -585,8 +585,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = FIXEDPT_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:767:2: ( 'fixedpt' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:767:4: 'fixedpt'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:770:2: ( 'fixedpt' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:770:4: 'fixedpt'
 			{
 			match("fixedpt"); 
 
@@ -606,8 +606,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = VAR_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:771:2: ( 'var' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:771:4: 'var'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:774:2: ( 'var' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:774:4: 'var'
 			{
 			match("var"); 
 
@@ -627,8 +627,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = IF_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:775:2: ( 'if' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:775:4: 'if'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:778:2: ( 'if' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:778:4: 'if'
 			{
 			match("if"); 
 
@@ -648,8 +648,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = THEN_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:779:2: ( 'then' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:779:4: 'then'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:782:2: ( 'then' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:782:4: 'then'
 			{
 			match("then"); 
 
@@ -669,8 +669,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ENDIF_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:783:2: ( 'endif' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:783:4: 'endif'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:786:2: ( 'endif' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:786:4: 'endif'
 			{
 			match("endif"); 
 
@@ -690,8 +690,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ELSE_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:787:2: ( 'else' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:787:4: 'else'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:790:2: ( 'else' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:790:4: 'else'
 			{
 			match("else"); 
 
@@ -711,8 +711,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = WHILE_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:791:2: ( 'while' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:791:4: 'while'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:794:2: ( 'while' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:794:4: 'while'
 			{
 			match("while"); 
 
@@ -732,8 +732,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ENDDO_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:795:2: ( 'enddo' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:795:4: 'enddo'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:798:2: ( 'enddo' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:798:4: 'enddo'
 			{
 			match("enddo"); 
 
@@ -753,8 +753,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = FOR_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:799:2: ( 'for' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:799:4: 'for'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:802:2: ( 'for' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:802:4: 'for'
 			{
 			match("for"); 
 
@@ -774,8 +774,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ID_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:803:2: ( 'id' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:803:4: 'id'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:806:2: ( 'id' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:806:4: 'id'
 			{
 			match("id"); 
 
@@ -795,8 +795,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = TO_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:807:2: ( 'to' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:807:4: 'to'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:810:2: ( 'to' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:810:4: 'to'
 			{
 			match("to"); 
 
@@ -816,8 +816,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = DO_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:811:2: ( 'do' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:811:4: 'do'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:814:2: ( 'do' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:814:4: 'do'
 			{
 			match("do"); 
 
@@ -837,8 +837,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = BREAK_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:815:2: ( 'break' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:815:4: 'break'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:818:2: ( 'break' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:818:4: 'break'
 			{
 			match("break"); 
 
@@ -858,8 +858,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = RETURN_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:819:2: ( 'return' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:819:4: 'return'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:822:2: ( 'return' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:822:4: 'return'
 			{
 			match("return"); 
 
@@ -879,8 +879,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = COMMA;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:823:8: ( ',' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:823:10: ','
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:826:8: ( ',' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:826:10: ','
 			{
 			match(','); 
 			}
@@ -899,8 +899,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = COLON;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:824:8: ( ':' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:824:10: ':'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:827:8: ( ':' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:827:10: ':'
 			{
 			match(':'); 
 			}
@@ -919,8 +919,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = SEMI;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:825:6: ( ';' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:825:8: ';'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:828:6: ( ';' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:828:8: ';'
 			{
 			match(';'); 
 			}
@@ -939,8 +939,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = LPAREN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:826:8: ( '(' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:826:10: '('
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:829:8: ( '(' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:829:10: '('
 			{
 			match('('); 
 			}
@@ -959,8 +959,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = RPAREN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:827:8: ( ')' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:827:10: ')'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:830:8: ( ')' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:830:10: ')'
 			{
 			match(')'); 
 			}
@@ -979,8 +979,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = LBRACK;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:828:8: ( '[' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:828:10: '['
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:831:8: ( '[' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:831:10: '['
 			{
 			match('['); 
 			}
@@ -999,8 +999,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = RBRACK;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:829:8: ( ']' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:829:10: ']'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:832:8: ( ']' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:832:10: ']'
 			{
 			match(']'); 
 			}
@@ -1019,8 +1019,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = PLUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:830:6: ( '+' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:830:8: '+'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:833:6: ( '+' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:833:8: '+'
 			{
 			match('+'); 
 			}
@@ -1039,8 +1039,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = MINUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:831:7: ( '-' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:831:9: '-'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:834:7: ( '-' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:834:9: '-'
 			{
 			match('-'); 
 			}
@@ -1059,8 +1059,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = MULT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:832:6: ( '*' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:832:8: '*'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:835:6: ( '*' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:835:8: '*'
 			{
 			match('*'); 
 			}
@@ -1079,8 +1079,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = DIV;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:833:5: ( '/' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:833:7: '/'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:836:5: ( '/' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:836:7: '/'
 			{
 			match('/'); 
 			}
@@ -1099,8 +1099,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = EQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:834:4: ( '=' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:834:6: '='
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:837:4: ( '=' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:837:6: '='
 			{
 			match('='); 
 			}
@@ -1119,8 +1119,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = NEQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:835:5: ( '<>' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:835:7: '<>'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:838:5: ( '<>' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:838:7: '<>'
 			{
 			match("<>"); 
 
@@ -1140,8 +1140,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = LESSER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:836:8: ( '<' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:836:10: '<'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:839:8: ( '<' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:839:10: '<'
 			{
 			match('<'); 
 			}
@@ -1160,8 +1160,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = LESSEREQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:837:9: ( '<=' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:837:11: '<='
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:840:9: ( '<=' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:840:11: '<='
 			{
 			match("<="); 
 
@@ -1181,8 +1181,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = GREATER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:838:9: ( '>' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:838:11: '>'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:841:9: ( '>' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:841:11: '>'
 			{
 			match('>'); 
 			}
@@ -1201,8 +1201,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = GREATEREQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:840:2: ( '>=' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:840:4: '>='
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:843:2: ( '>=' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:843:4: '>='
 			{
 			match(">="); 
 
@@ -1222,8 +1222,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = AND;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:841:5: ( '&' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:841:7: '&'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:844:5: ( '&' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:844:7: '&'
 			{
 			match('&'); 
 			}
@@ -1242,8 +1242,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = OR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:842:4: ( '|' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:842:6: '|'
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:845:4: ( '|' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:845:6: '|'
 			{
 			match('|'); 
 			}
@@ -1262,8 +1262,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ASSIGN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:843:8: ( ':=' )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:843:10: ':='
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:846:8: ( ':=' )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:846:10: ':='
 			{
 			match(":="); 
 
@@ -1283,8 +1283,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ID;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:845:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:845:7: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:848:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:848:7: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 				input.consume();
@@ -1294,7 +1294,7 @@ public class tigerLexer extends Lexer {
 				recover(mse);
 				throw mse;
 			}
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:845:30: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:848:30: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
 			loop5:
 			while (true) {
 				int alt5=2;

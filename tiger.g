@@ -513,14 +513,14 @@ stat
 	;
 
 if_stat	
-  :	(IF_KEY boolExpr1 THEN_KEY stat_seq ELSE_KEY) => 	IF_KEY boolExpr1 THEN_KEY stat_seq ELSE_KEY stat_seq ENDIF_KEY SEMI
+  :	(IF_KEY LPAREN boolExpr1 RPAREN THEN_KEY stat_seq ELSE_KEY) => 	IF_KEY LPAREN boolExpr1 RPAREN THEN_KEY stat_seq ELSE_KEY stat_seq ENDIF_KEY SEMI
 	-> 	^(IF_KEY boolExpr1 stat_seq ^(ELSE_KEY stat_seq))
-	|	IF_KEY boolExpr1 THEN_KEY stat_seq ENDIF_KEY SEMI
+	|	IF_KEY LPAREN boolExpr1 RPAREN THEN_KEY stat_seq ENDIF_KEY SEMI
 	->	^(IF_KEY boolExpr1 stat_seq)
 	;
 
 while_stat
-	:	WHILE_KEY boolExpr1 DO_KEY stat_seq ENDDO_KEY SEMI
+	:	WHILE_KEY LPAREN boolExpr1 RPAREN DO_KEY stat_seq ENDDO_KEY SEMI
 	->	^(WHILE_KEY boolExpr1 stat_seq)
 	;
 
@@ -532,8 +532,10 @@ for_stat
 assign_stat
 	:	(value ASSIGN func_call) => value ASSIGN func_call SEMI
 	->	^(ASSIGN value func_call)
-	|	value ASSIGN numExpr1 SEMI
+	|	(value ASSIGN numExpr1) => value ASSIGN numExpr1 SEMI
 	->	^(ASSIGN value numExpr1)
+	| value ASSIGN boolExpr1 SEMI
+	-> ^(ASSIGN value boolExpr1)
 	;
 
 func_call
@@ -570,7 +572,8 @@ numExpr2
   ;
          
 numExpr3 
-  : ID 
+  : (value) => value
+  | ID 
   | constval
   | LPAREN numExpr1 RPAREN
   ;
@@ -588,7 +591,7 @@ boolExpr2
   -> ^(LESSER numExpr1 numExpr1)
   | (numExpr1 GREATER) => numExpr1 GREATER numExpr1
   -> ^(GREATER numExpr1 numExpr1)
-  | (numExpr1 EQ) numExpr1 EQ  numExpr1
+  | (numExpr1 EQ) => numExpr1 EQ  numExpr1
   -> ^(EQ numExpr1 numExpr1)
   | (numExpr1 NEQ) => numExpr1 NEQ numExpr1
   -> ^(NEQ numExpr1 numExpr1)
@@ -659,7 +662,7 @@ expr_list
 	;
 
 value 	
-  	:	(ID LBRACK index_expr RBRACK LBRACK) => ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK {
+  :	(ID LBRACK index_expr RBRACK LBRACK) => ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK {
   	  SymbolTableEntry entry = symbolTable.get(strip($ID.text),CURRENT_SCOPE);
   	  
   	}
