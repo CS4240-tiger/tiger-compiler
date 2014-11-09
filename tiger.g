@@ -317,22 +317,22 @@ type[String id]
     }
   }
 	|	(ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK LBRACK UNSIGNED_INTLIT RBRACK) 
-	=> 	ARRAY_KEY LBRACK var1=UNSIGNED_INTLIT RBRACK LBRACK var2=UNSIGNED_INTLIT RBRACK OF_KEY type_id {
-	  if ($type_id.text.equals("int")) { 
+	=> 	ARRAY_KEY LBRACK var1=UNSIGNED_INTLIT RBRACK LBRACK var2=UNSIGNED_INTLIT RBRACK OF_KEY base_type {
+	  if ($base_type.text.equals("int")) { 
 	    symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,strip(id), TigerPrimitive.INT_2D_ARRAY, toInteger($var1.text),toInteger($var2.text)));
-	  } else if ($type_id.text.equals("fixedpt")) {
+	  } else if ($base_type.text.equals("fixedpt")) {
 	    symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,strip(id), TigerPrimitive.FIXEDPT_2D_ARRAY, toInteger($var1.text),toInteger($var2.text)));
-	  }
+	  } 
 	}
-	->	^(ARRAY_KEY ^(AST_2D_ARRAY UNSIGNED_INTLIT UNSIGNED_INTLIT) type_id)
-	|	ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK OF_KEY type_id {
-	  if ($type_id.text.equals("int")) { 
+	->	^(ARRAY_KEY ^(AST_2D_ARRAY UNSIGNED_INTLIT UNSIGNED_INTLIT) base_type)
+	|	ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK OF_KEY base_type {
+	  if ($base_type.text.equals("int")) { 
       symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,strip(id), TigerPrimitive.INT_ARRAY, toInteger($UNSIGNED_INTLIT.text)));
-    } else if ($type_id.text.equals("fixedpt")) {
+    } else if ($base_type.text.equals("fixedpt")) {
       symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,strip(id), TigerPrimitive.FIXEDPT_ARRAY, toInteger($UNSIGNED_INTLIT.text)));
     }
 	}
-	->	^(ARRAY_KEY UNSIGNED_INTLIT type_id)
+	->	^(ARRAY_KEY UNSIGNED_INTLIT base_type)
 	;
 
 type_id 
@@ -495,12 +495,93 @@ var_declaration
         	}
 	->	^(ASSIGN ^(COLON id_list type_id) UNSIGNED_INTLIT) 
 	|	VAR_KEY id_list COLON type_id SEMI
-	{
+	{   
    		String idlist = $id_list.text; 
-    		String[] ids = idlist.split(",");
-    		for (String id: ids) {
-      			symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), new Integer(0)));;
+    	String[] ids = idlist.split(",");
+    	if (!strip($type_id.text).equals("int") && !strip($type_id.text).equals("fixedpt")) {
+    	  //type of declared type is transferred to the variables
+    		SymbolTableEntry type = symbolTable.get($type_id.text, CURRENT_SCOPE);
+    		//checks if it exists 
+    		if (type != null && type instanceof TypeSymbolTableEntry) {
+    		  TigerPrimitive backingType = ((TypeSymbolTableEntry) type).getBackingType();
+    		  //prints warning that arrays are not initialized if the type are arrays and sets the value to null
+    		  if (backingType == TigerPrimitive.INT_ARRAY || backingType == TigerPrimitive.FIXEDPT_ARRAY || backingType == TigerPrimitive.INT_2D_ARRAY || backingType == TigerPrimitive.FIXEDPT_2D_ARRAY) {
+    		    switch (((TypeSymbolTableEntry) type).getBackingType()) {
+    		      case INT_ARRAY:
+    		        // Instantiates the 1D array into 0s
+    		        Integer[] intArray = (Integer[]) make1DArray("int", 
+    		        ((TypeSymbolTableEntry) type).getWidth(), "0");
+          
+    		        for (String id: ids) {
+    		          // Gets rid of white space and adds to symbol table
+    		          symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
+    		            strip(id), 
+    		            intArray, $type_id.text));
+                }
+              break;
+              case INT_2D_ARRAY:
+			          // Instantiates the 2D array
+			          Integer[][] int2DArray = (Integer[][]) make2DArray("int", 
+			            ((TypeSymbolTableEntry) type).getWidth(), 
+			            ((TypeSymbolTableEntry) type).getHeight(), "0");
+			          for (String id: ids) {
+			            // Gets rid of white space and adds to symbol table
+				           symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
+				             strip(id), 
+				             int2DArray, $type_id.text));
+			          }
+			        break;
+			        case FIXEDPT_ARRAY:
+	              // Instantiates the 1D array
+	              Double[] fpArray = (Double[]) make1DArray("fixedpt", 
+	                ((TypeSymbolTableEntry) type).getWidth(), "0.0");
+	          
+	              for (String id: ids) {
+	                // Gets rid of white space and adds to symbol table
+	                symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
+	                  strip(id), 
+	                  fpArray, $type_id.text));
+	              }
+	            break;
+	            case FIXEDPT_2D_ARRAY:
+	             // Instantiates the 2D array
+	             Double[][] fp2DArray = (Double[][]) make2DArray("fixedpt", 
+	               ((TypeSymbolTableEntry) type).getWidth(), 
+	               ((TypeSymbolTableEntry) type).getHeight(), "0.0");
+	             for (String id: ids) {
+	                // Gets rid of white space and adds to symbol table
+	                symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
+	                  strip(id), 
+	                  fp2DArray, $type_id.text));
+	             }
+             break;
+    		    }
+    		  } else {
+    		    //apparently gets set to null if not array according to piazza
+    		    System.out.println("WARNING:"+$id_list.text +" are are not initialized on line "+ $type_id.start.getLine()+ " and will be set to null");
+	    		  for (String id: ids) {
+	    		    symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), null, strip($type_id.text)));
+	    		  }
+    		  }
+    		} else {
+    		  System.out.println("The type " + $type_id.text + 
+          " does not exist or is not in an accessible scope from " 
+          + $id_list.text + " on line " + $type_id.start.getLine());
     		}
+    	} else {
+    	  // prints out warning
+    	  System.out.println("WARNING:"+$id_list.text +" are are not initialized on line "+ $type_id.start.getLine()+ " and will be set to null");
+    		//initialiazes for both int and fixedpt.. to null
+    	  if (strip($type_id.text).equals("int")) {
+		   		for (String id: ids) {
+	     			symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), null, TigerPrimitive.INT));
+		   		}
+	   		} else if (strip($type_id.text).equals("fixedpt")) {
+	   		   for (String id: ids) {
+            symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), null, TigerPrimitive.FIXEDPT));
+          }
+	   		}
+   		}
   	}
 	->	^(COLON id_list type_id)
 	;
@@ -611,6 +692,9 @@ numExpr3 returns [String type]
   }
   | constval {
     $type = $constval.type;
+  }
+  | func_call {
+    
   }
   | LPAREN numExpr1 RPAREN
   ;
