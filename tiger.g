@@ -35,7 +35,12 @@ tokens {
   private int currentTemp = 0;
   private Scope GLOBAL_SCOPE = new Scope();
   private Scope CURRENT_SCOPE = GLOBAL_SCOPE;
-
+  private int currentTemporary = 0;
+  
+  private String emitCurrentTemporary() {
+  	return "t" + currentTemporary;
+  }
+  
   private static void outln(Object obj) {
     System.out.println(obj);
   }
@@ -246,7 +251,7 @@ return_func
       	    		
       	    		CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
       		}
-	->	^(ID type_id param_list block_list)
+	->	^(ID param_list block_list)
 	;
 
 void_func
@@ -257,7 +262,7 @@ void_func
 			
 			CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
 		}
-	->	^(ID VOID_KEY param_list block_list) 
+	->	^(ID param_list block_list) 
 		
 	|	VOID_KEY MAIN_KEY {func_name = $MAIN_KEY.text;} LPAREN RPAREN begin block_list block_end
 		{
@@ -612,6 +617,7 @@ numExpr1 returns [String type]
       System.out.println("Typing mismatch at line " + $val1.start.getLine() + " between values " + $val1.text + " and " + $val2.text);
     }
   }
+  -> ^(bin_op3 numExpr2+)
   | numExpr2 {
     $type = $numExpr2.type;
   }
@@ -629,6 +635,7 @@ numExpr2 returns [String type]
       System.out.println("Typing mismatch at line " + $val1.start.getLine() + " between values " + $val1.text + " and " + $val2.text);
     }
   }
+  -> ^(bin_op4 numExpr3+)
   | numExpr3 {
     $type = $numExpr3.type;
   }
@@ -652,6 +659,7 @@ numExpr3 returns [String type]
   
 boolExpr1 
   : (boolExpr2 bin_op1) => boolExpr2 (bin_op1 boolExpr2)+ 
+  -> ^(bin_op1 boolExpr2+)
   | boolExpr2
   ;
   
@@ -662,8 +670,10 @@ bin_op1
           
 boolExpr2 
   : (numExpr1 bin_op2) => numExpr1 (bin_op2 numExpr1)+
+  -> ^(bin_op2 numExpr1+)
   | numExpr1
   ;
+  
 bin_op2
   : LESSER
   | GREATER

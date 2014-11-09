@@ -87,8 +87,8 @@ type_declaration
 	
 type
 	:	base_type
-	|	^(ARRAY_KEY ^(AST_2D_ARRAY UNSIGNED_INTLIT UNSIGNED_INTLIT) base_type)
-	|	^(ARRAY_KEY UNSIGNED_INTLIT base_type)
+	|	^(ARRAY_KEY ^(AST_2D_ARRAY UNSIGNED_INTLIT UNSIGNED_INTLIT) type_id)
+	|	^(ARRAY_KEY UNSIGNED_INTLIT type_id)
 	;
 
 type_id 
@@ -131,7 +131,7 @@ stat
 	;
 
 if_stat
-	:	^(IF_KEY expr stat_seq else_tail?)
+	:	^(IF_KEY boolExpr1 stat_seq else_tail?)
 	;
 
 else_tail
@@ -139,7 +139,7 @@ else_tail
 	;
 
 while_stat
-	:	^(WHILE_KEY expr stat_seq)
+	:	^(WHILE_KEY boolExpr1 stat_seq)
 	;
 
 for_stat
@@ -147,7 +147,11 @@ for_stat
 	;
 
 assign_stat
-	:	^(ASSIGN value expr_list)
+	:	^(ASSIGN value assign_tail)
+	;
+
+assign_tail
+	:	numExpr1 | func_call
 	;
 
 func_call
@@ -159,33 +163,59 @@ break_stat
 	;
 	
 return_stat
-	:	^(AST_RETURN_STAT RETURN_KEY expr)
+	:	^(AST_RETURN_STAT RETURN_KEY boolExpr1)
 	;
 
-	
-expr
-	:	expr_op
-	|	func_call 
-	|	constval
-	|	value
-	|	^(AST_EXPR_PAREN expr)
-	;
-	
-expr_op
-	:	^(binop_p0 expr_end)
-	;
+boolExpr1 
+  : ^(bin_op2 boolExpr2+)
+  | boolExpr2
+  ;	
 
-expr_end
-	:	constval expr
-	|	func_call expr
-	|	value expr
-	|	^(AST_EXPR_PAREN expr) expr
-	;
+          
+boolExpr2 
+  : ^(bin_op1 numExpr1+)
+  | numExpr1
+  ;
 
-binop_p0:	(AND | OR | binop_p1);
-binop_p1:	(EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | binop_p2);     
-binop_p2:	(MINUS | PLUS | binop_p3);
-binop_p3:	(MULT | DIV);
+numExpr1 returns [String type]
+  : ^(bin_op3 numExpr2+)
+  | numExpr2
+  ;
+
+numExpr2 returns [String type]
+  : ^(bin_op4 numExpr3+)
+  | numExpr3
+  ;
+         
+numExpr3 returns [String type]
+  : value
+  | constval
+  | LPAREN numExpr1 RPAREN
+  ;
+  
+bin_op1
+  : AND
+  | OR
+  ;
+ 
+bin_op2
+  : LESSER
+  | GREATER
+  | EQ
+  | NEQ
+  | LESSEREQ
+  | GREATEREQ
+  ;
+ 
+bin_op3
+  : PLUS
+  | MINUS
+  ;
+
+bin_op4
+  : MULT
+  | DIV
+  ;
 	
 constval
 	:	(fixedptlit) => fixedptlit
@@ -203,7 +233,7 @@ binary_operator
 	;
 
 expr_list
-	:	^(AST_EXPR_LIST expr+)
+	:	^(AST_EXPR_LIST boolExpr1+)
 	;
 
 value
@@ -224,5 +254,5 @@ index_oper
 	;
   
 func_param_list
-	: ^(AST_PARAM_LIST (expr+)?)
+	: ^(AST_PARAM_LIST (numExpr1+)?)
 	;
