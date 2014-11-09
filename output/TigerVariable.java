@@ -16,6 +16,22 @@ public class TigerVariable extends SymbolTableEntry {
 	private String declaredType;
 	
 	/**
+	 * Constructs a new TigerVariable with provided Scope, String identifier, and backing value and backing type.
+	 * This is for when the value is not initialized and set to null
+	 * 
+	 * @param scope The parent Scope of this variable.
+	 * @param id The String identifier of this variable.
+	 * @param value The backing value of this variable.
+	 * @param backingType the backing type of the variable
+	 */
+	public TigerVariable(Scope scope, String id, Object value, TigerPrimitive backingType) {
+		super(scope,id);
+		this.value = value;
+		this.type = backingType;
+		this.declaredType = type.name().toLowerCase(); 
+	}
+	
+	/**
 	 * Constructs a new TigerVariable with provided Scope, String identifier, and backing value.
 	 * This constructor is designed for primitive variable declarations, and the declared type
 	 * will be set to the primitive this variable matches against.
