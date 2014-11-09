@@ -28,6 +28,7 @@ tokens {
 }
 
 @parser::members {
+  private static final String OUTPUT_IR_FILENAME = "ir-output.tigir";
   private String func_name;
   private SymbolTable symbolTable = new SymbolTable(); 
   private List<String> irOutput = new ArrayList<String>();
@@ -219,6 +220,13 @@ tokens {
 
 tiger_program
 	:	type_declaration_list funct_declaration_list
+	{
+		if (IRGenerator.writeIRToFile(OUTPUT_IR_FILENAME, irOutput)) {
+			System.out.println("IR written to " + OUTPUT_IR_FILENAME + "!");
+		} else {
+			System.out.println("IR write failed!");
+		}
+	}
 	;
 	
 funct_declaration_list
