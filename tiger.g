@@ -530,8 +530,6 @@ for_stat
 assign_stat
 	:	(value ASSIGN func_call) =>value ASSIGN func_call SEMI
   ->  ^(ASSIGN value func_call)
-	| (value ASSIGN boolExpr1) => value ASSIGN boolExpr1 SEMI
-  -> ^(ASSIGN value boolExpr1)
   | (value ASSIGN numExpr1) => value ASSIGN numExpr1 SEMI
   -> ^(ASSIGN value numExpr1)
 	;
@@ -554,19 +552,23 @@ return_stat
 	;
 
 numExpr1 
-  : (numExpr2 PLUS) => numExpr2 PLUS numExpr2
-  -> ^(PLUS numExpr2 numExpr2)
-  | (numExpr2 MINUS) => numExpr2 MINUS numExpr2
-  -> ^(MINUS numExpr2 numExpr2)
+  : (numExpr2 bin_op3) => numExpr2 (bin_op3 numExpr2)+
   | numExpr2
+  ;
+
+bin_op3
+  : PLUS
+  | MINUS
   ;
   
 numExpr2 
-  : (numExpr3 MULT) => numExpr3 MULT numExpr3
-  -> ^(MULT numExpr3 numExpr3)
-  | (numExpr3 DIV) => numExpr3 DIV numExpr3
-  -> ^(DIV numExpr3 numExpr3)
+  : (numExpr3 bin_op4) => numExpr3 (bin_op4 numExpr3)+
   | numExpr3
+  ;
+
+bin_op4
+  : MULT
+  | DIV
   ;
          
 numExpr3 
@@ -574,29 +576,29 @@ numExpr3
   | constval
   | LPAREN numExpr1 RPAREN
   ;
+
   
 boolExpr1 
-  : (boolExpr2 AND) => boolExpr2 AND boolExpr2 
-  -> ^(AND boolExpr2 boolExpr2)
-  | (boolExpr2 OR) => boolExpr2 OR boolExpr2
-  -> ^(OR boolExpr2 boolExpr2)
+  : (boolExpr2 bin_op1) => boolExpr2 (bin_op1 boolExpr2)+ 
   | boolExpr2
+  ;
+  
+bin_op1
+  : AND
+  | OR
   ;
           
 boolExpr2 
-  : (numExpr1 LESSER) => numExpr1 LESSER numExpr1
-  -> ^(LESSER numExpr1 numExpr1)
-  | (numExpr1 GREATER) => numExpr1 GREATER numExpr1
-  -> ^(GREATER numExpr1 numExpr1)
-  | (numExpr1 EQ) => numExpr1 EQ  numExpr1
-  -> ^(EQ numExpr1 numExpr1)
-  | (numExpr1 NEQ) => numExpr1 NEQ numExpr1
-  -> ^(NEQ numExpr1 numExpr1)
-  | (numExpr1 LESSEREQ) => numExpr1 LESSEREQ numExpr1
-  -> ^(LESSEREQ numExpr1 numExpr1)
-  | (numExpr1 GREATEREQ) => numExpr1 GREATEREQ numExpr1
-  -> ^(GREATEREQ numExpr1 numExpr1)
+  : (numExpr1 bin_op2) => numExpr1 (bin_op2 numExpr1)+
   | numExpr1
+  ;
+bin_op2
+  : LESSER
+  | GREATER
+  | EQ
+  | NEQ
+  | LESSEREQ
+  | GREATEREQ
   ;
 	
 constval
