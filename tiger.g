@@ -532,6 +532,8 @@ for_stat
 assign_stat
 	:	(value ASSIGN func_call) => value ASSIGN func_call SEMI
 	->	^(ASSIGN value func_call)
+	| (value ASSIGN boolExpr1) => value ASSIGN boolExpr1 SEMI
+	-> ^(ASSIGN value boolExpr1)
 	| value ASSIGN numExpr1 SEMI
 	-> ^(ASSIGN value numExpr1)
 	;
@@ -576,10 +578,10 @@ numExpr3
   ;
 
 boolExpr1 
-  : (boolExpr2 AND) => boolExpr2 AND boolExpr2
-  -> ^(AND boolExpr2 boolExpr2)
-  | (boolExpr2 OR) => boolExpr2 OR boolExpr2
-  -> ^(OR boolExpr2 boolExpr2)
+  : (numExpr1 AND) => numExpr1 AND numExpr1
+  -> ^(AND numExpr1 numExpr1)
+  | (numExpr1 OR) => numExpr1 OR numExpr1
+  -> ^(OR numExpr1 numExpr1)
   | boolExpr2
   ;
           
