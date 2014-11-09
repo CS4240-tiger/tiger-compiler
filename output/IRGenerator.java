@@ -364,7 +364,7 @@ public class IRGenerator {
 		try {
 			FileWriter writer = new FileWriter(filename);
 			for (String irLine : inputIR) {
-				writer.write(irLine);			
+				writer.write(emit(irLine));
 			}
 			
 			writer.close();
