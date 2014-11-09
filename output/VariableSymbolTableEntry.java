@@ -11,7 +11,6 @@ import java.util.List;
  */
 public class VariableSymbolTableEntry extends SymbolTableEntry {
 	protected List<TigerVariable> backingList;
-	private TypeSymbolTableEntry type;
 	
 	/**
 	 * Constructs a new VariableSymbolTableEntry with given Scope and id.
@@ -24,12 +23,5 @@ public class VariableSymbolTableEntry extends SymbolTableEntry {
 		super(scope, id);
 		backingList = new LinkedList<TigerVariable>();
 		backingList.add(value);
-	}
-	
-	protected VariableSymbolTableEntry(Scope scope, String id, TigerVariable value, TypeSymbolTableEntry type) {
-		super(scope, id);
-		backingList = new LinkedList<TigerVariable>();
-		backingList.add(value);
-		this.type = type;
 	}
 }
