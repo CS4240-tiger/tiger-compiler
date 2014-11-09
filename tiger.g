@@ -28,18 +28,10 @@ tokens {
 }
 
 @parser::members {
-  private static final String OUTPUT_IR_FILENAME = "ir-output.tigir";
   private String func_name;
   private SymbolTable symbolTable = new SymbolTable(); 
-  private List<String> irOutput = new ArrayList<String>();
-  private int currentTemp = 0;
   private Scope GLOBAL_SCOPE = new Scope();
   private Scope CURRENT_SCOPE = GLOBAL_SCOPE;
-  private int currentTemporary = 0;
-  
-  private String emitCurrentTemporary() {
-  	return "t" + currentTemporary;
-  }
   
   private static void outln(Object obj) {
     System.out.println(obj);
@@ -225,13 +217,6 @@ tokens {
 
 tiger_program
 	:	type_declaration_list funct_declaration_list
-	{
-		if (IRGenerator.writeIRToFile(OUTPUT_IR_FILENAME, irOutput)) {
-			System.out.println("IR written to " + OUTPUT_IR_FILENAME + "!");
-		} else {
-			System.out.println("IR write failed!");
-		}
-	}
 	;
 	
 funct_declaration_list
@@ -246,9 +231,7 @@ funct_declaration
 return_func
 	:	type_id FUNCTION_KEY ID {func_name = $ID.text;} LPAREN param_list RPAREN begin block_list block_end
 		{
-      	    		symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $type_id.text));	
-      	    		irOutput.add(IRGenerator.funct_declaration(func_name));
-      	    		
+      	    		symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $type_id.text));
       	    		CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
       		}
 	->	^(ID param_list block_list)
@@ -257,9 +240,7 @@ return_func
 void_func
 	:	(VOID_KEY FUNCTION_KEY) => VOID_KEY FUNCTION_KEY ID {func_name = $ID.text;} LPAREN param_list RPAREN begin block_list block_end
 		{
-			symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $VOID_KEY.text));
-			irOutput.add(IRGenerator.funct_declaration(func_name));
-			
+			symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $VOID_KEY.text));			
 			CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
 		}
 	->	^(ID param_list block_list) 
@@ -267,8 +248,6 @@ void_func
 	|	VOID_KEY MAIN_KEY {func_name = $MAIN_KEY.text;} LPAREN RPAREN begin block_list block_end
 		{
      			symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $MAIN_KEY.text, $VOID_KEY.text));
-     			irOutput.add(IRGenerator.funct_declaration(func_name));
-     			
 			CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text); 
             	}
 	->	^(MAIN_KEY block_list) 
@@ -390,9 +369,7 @@ var_declaration
     		        symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
     		          strip(id), 
     		          fpArray, $type_id.text));
-    		          
-    		          // ...and add to IR
-    			 irOutput.add(IRMap.assign(id, fpArray.length, $fixedptlit.text));
+    			 
     		      }
           
     		    break;
@@ -407,9 +384,6 @@ var_declaration
                 symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
                   strip(id), 
                   fp2DArray, $type_id.text));
-                  
-                // ...and add to IR
-    		irOutput.add(IRMap.assign(id, fp2DArray.length, $fixedptlit.text));
              }
           
             break;
@@ -420,9 +394,7 @@ var_declaration
               symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
                 strip(id), 
                 toDouble($fixedptlit.text), $type_id.text));
-                
-                // ...and add to IR
-    		irOutput.add(IRGenerator.declaration_statement(id, $fixedptlit.text));
+               
               }
           
             break;
@@ -443,8 +415,6 @@ var_declaration
     		  for (String id: ids) {
       			symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), toDouble($fixedptlit.text)));
       			
-      			// ...and add to IR
-    			irOutput.add(IRGenerator.declaration_statement(id, $fixedptlit.text));
       		}
       	}
       	
@@ -474,8 +444,6 @@ var_declaration
 						    strip(id), 
 						    intArray, $type_id.text));
 						    
-						    // ...and add to IR
-    			 			    irOutput.add(IRMap.assign(id, intArray.length, $UNSIGNED_INTLIT.text));
 					}
 					
 					break;
@@ -490,9 +458,6 @@ var_declaration
 					              symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
 					                strip(id), 
 					                int2DArray, $type_id.text));
-					                
-					                // ...and add to IR
-					    		irOutput.add(IRMap.assign(id, int2DArray.length, $UNSIGNED_INTLIT.text));
 					}
 					
 					break;
@@ -503,8 +468,6 @@ var_declaration
 							symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
 								strip(id), 
 								toInteger($UNSIGNED_INTLIT.text), $type_id.text));
-							// ...and add to IR
-							irOutput.add(IRGenerator.declaration_statement(id, $UNSIGNED_INTLIT.text));
 					}
 					
 					break;
@@ -527,8 +490,6 @@ var_declaration
 				symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
 				strip(id), toInteger($UNSIGNED_INTLIT.text)));
 				
-				// ...and add to IR
-				irOutput.add(IRGenerator.declaration_statement(id, $UNSIGNED_INTLIT.text));
 			}
         }
         	}
@@ -538,9 +499,7 @@ var_declaration
    		String idlist = $id_list.text; 
     		String[] ids = idlist.split(",");
     		for (String id: ids) {
-      			symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), new Integer(0)));
-      			// ...and add to IR
-			irOutput.add(IRGenerator.declaration_statement(id, "0"));
+      			symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), new Integer(0)));;
     		}
   	}
 	->	^(COLON id_list type_id)

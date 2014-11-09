@@ -23,20 +23,29 @@ tokens {
 }
 
 @members {
-	Scope scope = null;
+	// IR stuff
+	private static final String OUTPUT_IR_FILENAME = "ir-output.tigir";
+	private List<String> irOutput = new ArrayList<String>();
+	private int currentTemporary = 0;
   
 	public tigerTreeWalker(CommonTreeNodeStream nodes) {
 		super(nodes);
 	}
   
-	public tigerTreeWalker(CommonTreeNodeStream nodes, Scope scope) {
-		super(nodes);
-		this.scope = scope;
-	}
+  	private String emitCurrentTemporary() {
+  		return "t" + currentTemporary;
+  	}
 }
 
 tiger_program
 	:	type_declaration_list funct_declaration_list
+	{
+		if (IRGenerator.writeIRToFile(OUTPUT_IR_FILENAME, irOutput)) {
+			System.out.println("IR written to " + OUTPUT_IR_FILENAME + "!");
+		} else {
+			System.out.println("IR write failed!");
+		}
+	}
 	;
 	
 funct_declaration_list 
@@ -45,7 +54,13 @@ funct_declaration_list
 
 funct_declaration
 	:	^(ID param_list block_list)
+	{
+		irOutput.add(IRGenerator.funct_declaration($ID.text));
+	}
 	|	^(MAIN_KEY block_list)
+	{
+		irOutput.add(IRGenerator.funct_declaration($MAIN_KEY.text));
+	}
 	;
 	
 ret_type 
@@ -91,28 +106,48 @@ type
 	|	^(ARRAY_KEY UNSIGNED_INTLIT type_id)
 	;
 
-type_id 
-  :	base_type
-	|	ID
+type_id returns [String typeString]
+  	:	base_type {typeString = $base_type.retString;}
+	|	ID {typeString = $ID.text;}
 	;
 
-base_type
-	:	INT_KEY
-	|	FIXEDPT_KEY
+base_type returns [String retString]
+	:	INT_KEY {retString = $INT_KEY.text;}
+	|	FIXEDPT_KEY {retString = $FIXEDPT_KEY.text;}
 	;
 
 var_declaration 
-	:	^(ASSIGN ^(COLON id_list type_id) unsigned_tail)
+	:	^(ASSIGN ^(COLON id_list type_id) (unsigned_tail))
+	{	
+		for (String id : $id_list.idList) {
+			irOutput.add(IRGenerator.declaration_statement(id, $unsigned_tail.stringVal));
+		}
+		
+	}
 	|	^(COLON id_list type_id)
+	{
+		for (String id : $id_list.idList) {
+			irOutput.add(IRGenerator.declaration_statement(id, "0"));
+		}
+	}
 	;
 	
-unsigned_tail
+unsigned_tail returns [String stringVal]
 	:	UNSIGNED_INTLIT
+	{
+		stringVal = $UNSIGNED_INTLIT.text;
+	}
 	|	fixedptlit
+	{
+		stringVal = $fixedptlit.text;
+	}
 	;
 
-id_list 
-	:	^(AST_ID_LIST ID+)
+id_list returns [List<String> idList]
+	@init {
+		$idList = new ArrayList<String>();
+	}
+	:	^(AST_ID_LIST (ID {$idList.add(String.valueOf(ID));})+)
 	;
 
 stat_seq
@@ -222,7 +257,16 @@ constval
 	|	intlit
 	;
 
-intlit :	MINUS? UNSIGNED_INTLIT;
+intlit returns [String intStringVal]
+	:	(MINUS) => MINUS UNSIGNED_INTLIT
+	{
+		intStringVal = $MINUS.text + $UNSIGNED_INTLIT.text;
+	}
+	|	UNSIGNED_INTLIT
+	{
+		intStringVal = $UNSIGNED_INTLIT.text;
+	}
+	;
 
 fixedptlit
 	:   MINUS? UNSIGNED_FIXEDPTLIT
