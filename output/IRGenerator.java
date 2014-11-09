@@ -51,7 +51,7 @@ public class IRGenerator {
 		// Generate a unique (hopefully) label to go to if statement is false
 		String elseLabel = String.valueOf(expr2.hashCode())
 				.substring((expr2.length() / 2), (expr2.length() / 2) + 5)
-				 + "-else:\n";
+				 + "-else:";
 		
 		// Insert it at beginning of irFalseStat.
 		
@@ -84,13 +84,11 @@ public class IRGenerator {
 		}
 		
 		for (String stat : statSeqTrue) {
-			result += stat;
-			result += "\n";
+			result += emit(stat);
 		}
 		
 		for (String stat : statSeqFalse) {
-			result += stat;
-			result += "\n";
+			result += emit(stat);
 		}
 		
 		return result;
@@ -114,15 +112,15 @@ public class IRGenerator {
 		// Generate a unique (hopefully) label to loop to if statement is still true
 		String startDo = String.valueOf(expr2.hashCode())
 				.substring((expr2.length() / 4), (expr2.length() / 4) + 5)
-				 + "-while-do:\n";
+				 + "-while-do:";
 		
 		// Generate a unique (hopefully) label to go to if statement is false
 		String endDo = String.valueOf(expr2.hashCode())
 				.substring((expr2.length() / 2), (expr2.length() / 2) + 5)
-				 + "-while-enddo:\n";
+				 + "-while-enddo:";
 		
 		// Insert start label at beginning of loop.
-		result += startDo;
+		result += emit(startDo);
 		
 		switch (compare) {
 		case EQUAL:
@@ -149,12 +147,11 @@ public class IRGenerator {
 		}
 		
 		for (String stat : statSeq) {
-			result += stat;
-			result += "\n";
+			result += emit(stat);
 		}
 		
 		// Insert end label at end of statSeq.
-		result += "\n" + endDo;
+		result += emit(endDo);
 		
 		return result;
 	}
@@ -175,26 +172,25 @@ public class IRGenerator {
 		// Generate a unique (hopefully) label to loop to if statement is still true
 		String startDo = String.valueOf(var.hashCode())
 				.substring((var.length() / 4), (var.length() / 4) + 5)
-				 + "-for-do:\n";
+				 + "-for-do:";
 		// ...and for concluding the loop
 		String endDo = String.valueOf(var.hashCode())
 				.substring((var.length() / 4), (var.length() / 4) + 5)
-				 + "-for-enddo:\n";
+				 + "-for-enddo:";
 		
 		// Set initial value of variable
-		result += IRMap.assign(var, String.valueOf(start)) + "\n";
+		result += emit(IRMap.assign(var, String.valueOf(start)));
 		
 		// Insert start label at beginning of loop.
-		result += startDo;
+		result += emit(startDo);
 		
 		for (String stat : statSeq) {
-			result += stat;
-			result += "\n";
+			result += emit(stat);
 		}
 		
-		result += IRMap.add(var, String.valueOf(1), var) + "\n";
-		result += IRMap.brneq(var, String.valueOf(end), startDo) + "\n";
-		result += endDo; // Not required, but useful for readability
+		result += emit(IRMap.add(var, String.valueOf(1), var));
+		result += emit(IRMap.brneq(var, String.valueOf(end), startDo));
+		result += emit(endDo); // Not required, but useful for readability
 		
 		return result;
 	}
@@ -392,7 +388,7 @@ public class IRGenerator {
 	 * @param input An input IRMap String.
 	 * @return An IR output line.
 	 */
-	private String emit(String input) {
+	private static String emit(String input) {
 		return input + "\n";
 	}
 }
