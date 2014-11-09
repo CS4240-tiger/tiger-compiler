@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g 2014-11-08 20:09:44
+// $ANTLR 3.5.1 /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g 2014-11-08 20:28:44
 
 	import java.util.Map;
 	import java.util.HashMap;
@@ -565,7 +565,7 @@ public class tigerParser extends Parser {
 			      	    		CURRENT_SCOPE = new Scope(CURRENT_SCOPE, (ID8!=null?ID8.getText():null));
 			      		}
 			// AST REWRITE
-			// elements: param_list, type_id, ID, block_list
+			// elements: type_id, param_list, block_list, ID
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -737,7 +737,7 @@ public class tigerParser extends Parser {
 								CURRENT_SCOPE = new Scope(CURRENT_SCOPE, (ID17!=null?ID17.getText():null));
 							}
 					// AST REWRITE
-					// elements: block_list, ID, param_list, VOID_KEY
+					// elements: ID, param_list, block_list, VOID_KEY
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -806,7 +806,7 @@ public class tigerParser extends Parser {
 								CURRENT_SCOPE = new Scope(CURRENT_SCOPE, (MAIN_KEY25!=null?MAIN_KEY25.getText():null)); 
 					            	}
 					// AST REWRITE
-					// elements: MAIN_KEY, block_list
+					// elements: block_list, MAIN_KEY
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -1192,7 +1192,7 @@ public class tigerParser extends Parser {
 			if (state.failed) return retval;
 			if ( state.backtracking==0 ) stream_type_id.add(type_id40.getTree());
 			// AST REWRITE
-			// elements: type_id, COLON, ID
+			// elements: COLON, type_id, ID
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -1376,7 +1376,7 @@ public class tigerParser extends Parser {
 			if (state.failed) return retval;
 			if ( state.backtracking==0 ) stream_block_end.add(block_end45.getTree());
 			// AST REWRITE
-			// elements: stat_seq, declaration_statement
+			// elements: declaration_statement, stat_seq
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -1749,7 +1749,7 @@ public class tigerParser extends Parser {
 			if ( state.backtracking==0 ) stream_SEMI.add(SEMI55);
 
 			// AST REWRITE
-			// elements: ID, type, EQ
+			// elements: EQ, ID, type
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -1940,7 +1940,7 @@ public class tigerParser extends Parser {
 						  }
 						}
 					// AST REWRITE
-					// elements: UNSIGNED_INTLIT, ARRAY_KEY, type_id, UNSIGNED_INTLIT
+					// elements: UNSIGNED_INTLIT, type_id, ARRAY_KEY, UNSIGNED_INTLIT
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -2009,7 +2009,7 @@ public class tigerParser extends Parser {
 					    }
 						}
 					// AST REWRITE
-					// elements: ARRAY_KEY, UNSIGNED_INTLIT, type_id
+					// elements: UNSIGNED_INTLIT, type_id, ARRAY_KEY
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -2392,7 +2392,7 @@ public class tigerParser extends Parser {
 					      	
 						}
 					// AST REWRITE
-					// elements: type_id, ASSIGN, id_list, COLON, fixedptlit
+					// elements: ASSIGN, fixedptlit, COLON, id_list, type_id
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -2529,7 +2529,7 @@ public class tigerParser extends Parser {
 					        }
 					        	}
 					// AST REWRITE
-					// elements: type_id, id_list, ASSIGN, COLON, UNSIGNED_INTLIT
+					// elements: UNSIGNED_INTLIT, ASSIGN, id_list, type_id, COLON
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -2597,7 +2597,7 @@ public class tigerParser extends Parser {
 					    		}
 					  	}
 					// AST REWRITE
-					// elements: COLON, id_list, type_id
+					// elements: COLON, type_id, id_list
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -3175,7 +3175,7 @@ public class tigerParser extends Parser {
 					if ( state.backtracking==0 ) stream_SEMI.add(SEMI114);
 
 					// AST REWRITE
-					// elements: boolExpr1, ELSE_KEY, stat_seq, IF_KEY, stat_seq
+					// elements: stat_seq, stat_seq, ELSE_KEY, boolExpr1, IF_KEY
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -3245,7 +3245,7 @@ public class tigerParser extends Parser {
 					if ( state.backtracking==0 ) stream_SEMI.add(SEMI122);
 
 					// AST REWRITE
-					// elements: IF_KEY, stat_seq, boolExpr1
+					// elements: boolExpr1, stat_seq, IF_KEY
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -3369,7 +3369,7 @@ public class tigerParser extends Parser {
 			if ( state.backtracking==0 ) stream_SEMI.add(SEMI130);
 
 			// AST REWRITE
-			// elements: stat_seq, boolExpr1, WHILE_KEY
+			// elements: WHILE_KEY, stat_seq, boolExpr1
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -3503,7 +3503,7 @@ public class tigerParser extends Parser {
 			if ( state.backtracking==0 ) stream_SEMI.add(SEMI140);
 
 			// AST REWRITE
-			// elements: ID, FOR_KEY, index_expr, ASSIGN, index_expr, TO_KEY, stat_seq
+			// elements: FOR_KEY, index_expr, index_expr, ASSIGN, stat_seq, ID, TO_KEY
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -3577,7 +3577,7 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "assign_stat"
-	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:532:1: assign_stat : ( ( value ASSIGN func_call )=> value ASSIGN func_call SEMI -> ^( ASSIGN value func_call ) | ( value ASSIGN boolExpr1 )=> value ASSIGN boolExpr1 SEMI -> ^( ASSIGN value boolExpr1 ) | value ASSIGN numExpr1 SEMI -> ^( ASSIGN value numExpr1 ) );
+	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:532:1: assign_stat : ( ( value ASSIGN func_call )=> value ASSIGN func_call SEMI -> ^( ASSIGN value func_call ) | value ASSIGN numExpr1 SEMI -> ^( ASSIGN value numExpr1 ) );
 	public final tigerParser.assign_stat_return assign_stat() throws RecognitionException {
 		tigerParser.assign_stat_return retval = new tigerParser.assign_stat_return();
 		retval.start = input.LT(1);
@@ -3588,42 +3588,32 @@ public class tigerParser extends Parser {
 		Token SEMI144=null;
 		Token ASSIGN146=null;
 		Token SEMI148=null;
-		Token ASSIGN150=null;
-		Token SEMI152=null;
 		ParserRuleReturnScope value141 =null;
 		ParserRuleReturnScope func_call143 =null;
 		ParserRuleReturnScope value145 =null;
-		ParserRuleReturnScope boolExpr1147 =null;
-		ParserRuleReturnScope value149 =null;
-		ParserRuleReturnScope numExpr1151 =null;
+		ParserRuleReturnScope numExpr1147 =null;
 
 		CommonTree ASSIGN142_tree=null;
 		CommonTree SEMI144_tree=null;
 		CommonTree ASSIGN146_tree=null;
 		CommonTree SEMI148_tree=null;
-		CommonTree ASSIGN150_tree=null;
-		CommonTree SEMI152_tree=null;
 		RewriteRuleTokenStream stream_SEMI=new RewriteRuleTokenStream(adaptor,"token SEMI");
 		RewriteRuleTokenStream stream_ASSIGN=new RewriteRuleTokenStream(adaptor,"token ASSIGN");
 		RewriteRuleSubtreeStream stream_numExpr1=new RewriteRuleSubtreeStream(adaptor,"rule numExpr1");
 		RewriteRuleSubtreeStream stream_func_call=new RewriteRuleSubtreeStream(adaptor,"rule func_call");
 		RewriteRuleSubtreeStream stream_value=new RewriteRuleSubtreeStream(adaptor,"rule value");
-		RewriteRuleSubtreeStream stream_boolExpr1=new RewriteRuleSubtreeStream(adaptor,"rule boolExpr1");
 
 		try {
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:533:2: ( ( value ASSIGN func_call )=> value ASSIGN func_call SEMI -> ^( ASSIGN value func_call ) | ( value ASSIGN boolExpr1 )=> value ASSIGN boolExpr1 SEMI -> ^( ASSIGN value boolExpr1 ) | value ASSIGN numExpr1 SEMI -> ^( ASSIGN value numExpr1 ) )
-			int alt17=3;
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:533:2: ( ( value ASSIGN func_call )=> value ASSIGN func_call SEMI -> ^( ASSIGN value func_call ) | value ASSIGN numExpr1 SEMI -> ^( ASSIGN value numExpr1 ) )
+			int alt17=2;
 			int LA17_0 = input.LA(1);
 			if ( (LA17_0==ID) ) {
 				int LA17_1 = input.LA(2);
 				if ( (synpred7_tiger()) ) {
 					alt17=1;
 				}
-				else if ( (synpred8_tiger()) ) {
-					alt17=2;
-				}
 				else if ( (true) ) {
-					alt17=3;
+					alt17=2;
 				}
 
 			}
@@ -3687,26 +3677,26 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 2 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:535:4: ( value ASSIGN boolExpr1 )=> value ASSIGN boolExpr1 SEMI
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:535:4: value ASSIGN numExpr1 SEMI
 					{
-					pushFollow(FOLLOW_value_in_assign_stat1149);
+					pushFollow(FOLLOW_value_in_assign_stat1139);
 					value145=value();
 					state._fsp--;
 					if (state.failed) return retval;
 					if ( state.backtracking==0 ) stream_value.add(value145.getTree());
-					ASSIGN146=(Token)match(input,ASSIGN,FOLLOW_ASSIGN_in_assign_stat1151); if (state.failed) return retval; 
+					ASSIGN146=(Token)match(input,ASSIGN,FOLLOW_ASSIGN_in_assign_stat1141); if (state.failed) return retval; 
 					if ( state.backtracking==0 ) stream_ASSIGN.add(ASSIGN146);
 
-					pushFollow(FOLLOW_boolExpr1_in_assign_stat1153);
-					boolExpr1147=boolExpr1();
+					pushFollow(FOLLOW_numExpr1_in_assign_stat1143);
+					numExpr1147=numExpr1();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_boolExpr1.add(boolExpr1147.getTree());
-					SEMI148=(Token)match(input,SEMI,FOLLOW_SEMI_in_assign_stat1155); if (state.failed) return retval; 
+					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1147.getTree());
+					SEMI148=(Token)match(input,SEMI,FOLLOW_SEMI_in_assign_stat1145); if (state.failed) return retval; 
 					if ( state.backtracking==0 ) stream_SEMI.add(SEMI148);
 
 					// AST REWRITE
-					// elements: boolExpr1, value, ASSIGN
+					// elements: value, numExpr1, ASSIGN
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -3717,59 +3707,9 @@ public class tigerParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (CommonTree)adaptor.nil();
-					// 536:2: -> ^( ASSIGN value boolExpr1 )
+					// 536:2: -> ^( ASSIGN value numExpr1 )
 					{
-						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:536:5: ^( ASSIGN value boolExpr1 )
-						{
-						CommonTree root_1 = (CommonTree)adaptor.nil();
-						root_1 = (CommonTree)adaptor.becomeRoot(stream_ASSIGN.nextNode(), root_1);
-						adaptor.addChild(root_1, stream_value.nextTree());
-						adaptor.addChild(root_1, stream_boolExpr1.nextTree());
-						adaptor.addChild(root_0, root_1);
-						}
-
-					}
-
-
-					retval.tree = root_0;
-					}
-
-					}
-					break;
-				case 3 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:537:4: value ASSIGN numExpr1 SEMI
-					{
-					pushFollow(FOLLOW_value_in_assign_stat1171);
-					value149=value();
-					state._fsp--;
-					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_value.add(value149.getTree());
-					ASSIGN150=(Token)match(input,ASSIGN,FOLLOW_ASSIGN_in_assign_stat1173); if (state.failed) return retval; 
-					if ( state.backtracking==0 ) stream_ASSIGN.add(ASSIGN150);
-
-					pushFollow(FOLLOW_numExpr1_in_assign_stat1175);
-					numExpr1151=numExpr1();
-					state._fsp--;
-					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1151.getTree());
-					SEMI152=(Token)match(input,SEMI,FOLLOW_SEMI_in_assign_stat1177); if (state.failed) return retval; 
-					if ( state.backtracking==0 ) stream_SEMI.add(SEMI152);
-
-					// AST REWRITE
-					// elements: value, ASSIGN, numExpr1
-					// token labels: 
-					// rule labels: retval
-					// token list labels: 
-					// rule list labels: 
-					// wildcard labels: 
-					if ( state.backtracking==0 ) {
-					retval.tree = root_0;
-					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
-
-					root_0 = (CommonTree)adaptor.nil();
-					// 538:2: -> ^( ASSIGN value numExpr1 )
-					{
-						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:538:5: ^( ASSIGN value numExpr1 )
+						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:536:5: ^( ASSIGN value numExpr1 )
 						{
 						CommonTree root_1 = (CommonTree)adaptor.nil();
 						root_1 = (CommonTree)adaptor.becomeRoot(stream_ASSIGN.nextNode(), root_1);
@@ -3816,46 +3756,46 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "func_call"
-	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:541:1: func_call : ID LPAREN func_param_list RPAREN -> ^( AST_FUNC_CALL ID func_param_list ) ;
+	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:539:1: func_call : ID LPAREN func_param_list RPAREN -> ^( AST_FUNC_CALL ID func_param_list ) ;
 	public final tigerParser.func_call_return func_call() throws RecognitionException {
 		tigerParser.func_call_return retval = new tigerParser.func_call_return();
 		retval.start = input.LT(1);
 
 		CommonTree root_0 = null;
 
-		Token ID153=null;
-		Token LPAREN154=null;
-		Token RPAREN156=null;
-		ParserRuleReturnScope func_param_list155 =null;
+		Token ID149=null;
+		Token LPAREN150=null;
+		Token RPAREN152=null;
+		ParserRuleReturnScope func_param_list151 =null;
 
-		CommonTree ID153_tree=null;
-		CommonTree LPAREN154_tree=null;
-		CommonTree RPAREN156_tree=null;
+		CommonTree ID149_tree=null;
+		CommonTree LPAREN150_tree=null;
+		CommonTree RPAREN152_tree=null;
 		RewriteRuleTokenStream stream_RPAREN=new RewriteRuleTokenStream(adaptor,"token RPAREN");
 		RewriteRuleTokenStream stream_ID=new RewriteRuleTokenStream(adaptor,"token ID");
 		RewriteRuleTokenStream stream_LPAREN=new RewriteRuleTokenStream(adaptor,"token LPAREN");
 		RewriteRuleSubtreeStream stream_func_param_list=new RewriteRuleSubtreeStream(adaptor,"rule func_param_list");
 
 		try {
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:542:2: ( ID LPAREN func_param_list RPAREN -> ^( AST_FUNC_CALL ID func_param_list ) )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:542:4: ID LPAREN func_param_list RPAREN
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:540:2: ( ID LPAREN func_param_list RPAREN -> ^( AST_FUNC_CALL ID func_param_list ) )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:540:4: ID LPAREN func_param_list RPAREN
 			{
-			ID153=(Token)match(input,ID,FOLLOW_ID_in_func_call1199); if (state.failed) return retval; 
-			if ( state.backtracking==0 ) stream_ID.add(ID153);
+			ID149=(Token)match(input,ID,FOLLOW_ID_in_func_call1167); if (state.failed) return retval; 
+			if ( state.backtracking==0 ) stream_ID.add(ID149);
 
-			LPAREN154=(Token)match(input,LPAREN,FOLLOW_LPAREN_in_func_call1201); if (state.failed) return retval; 
-			if ( state.backtracking==0 ) stream_LPAREN.add(LPAREN154);
+			LPAREN150=(Token)match(input,LPAREN,FOLLOW_LPAREN_in_func_call1169); if (state.failed) return retval; 
+			if ( state.backtracking==0 ) stream_LPAREN.add(LPAREN150);
 
-			pushFollow(FOLLOW_func_param_list_in_func_call1203);
-			func_param_list155=func_param_list();
+			pushFollow(FOLLOW_func_param_list_in_func_call1171);
+			func_param_list151=func_param_list();
 			state._fsp--;
 			if (state.failed) return retval;
-			if ( state.backtracking==0 ) stream_func_param_list.add(func_param_list155.getTree());
-			RPAREN156=(Token)match(input,RPAREN,FOLLOW_RPAREN_in_func_call1205); if (state.failed) return retval; 
-			if ( state.backtracking==0 ) stream_RPAREN.add(RPAREN156);
+			if ( state.backtracking==0 ) stream_func_param_list.add(func_param_list151.getTree());
+			RPAREN152=(Token)match(input,RPAREN,FOLLOW_RPAREN_in_func_call1173); if (state.failed) return retval; 
+			if ( state.backtracking==0 ) stream_RPAREN.add(RPAREN152);
 
 			// AST REWRITE
-			// elements: ID, func_param_list
+			// elements: func_param_list, ID
 			// token labels: 
 			// rule labels: retval
 			// token list labels: 
@@ -3866,9 +3806,9 @@ public class tigerParser extends Parser {
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 			root_0 = (CommonTree)adaptor.nil();
-			// 543:2: -> ^( AST_FUNC_CALL ID func_param_list )
+			// 541:2: -> ^( AST_FUNC_CALL ID func_param_list )
 			{
-				// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:543:5: ^( AST_FUNC_CALL ID func_param_list )
+				// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:541:5: ^( AST_FUNC_CALL ID func_param_list )
 				{
 				CommonTree root_1 = (CommonTree)adaptor.nil();
 				root_1 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(AST_FUNC_CALL, "AST_FUNC_CALL"), root_1);
@@ -3913,30 +3853,30 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "break_stat"
-	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:546:1: break_stat : BREAK_KEY SEMI -> BREAK_KEY ;
+	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:544:1: break_stat : BREAK_KEY SEMI -> BREAK_KEY ;
 	public final tigerParser.break_stat_return break_stat() throws RecognitionException {
 		tigerParser.break_stat_return retval = new tigerParser.break_stat_return();
 		retval.start = input.LT(1);
 
 		CommonTree root_0 = null;
 
-		Token BREAK_KEY157=null;
-		Token SEMI158=null;
+		Token BREAK_KEY153=null;
+		Token SEMI154=null;
 
-		CommonTree BREAK_KEY157_tree=null;
-		CommonTree SEMI158_tree=null;
+		CommonTree BREAK_KEY153_tree=null;
+		CommonTree SEMI154_tree=null;
 		RewriteRuleTokenStream stream_SEMI=new RewriteRuleTokenStream(adaptor,"token SEMI");
 		RewriteRuleTokenStream stream_BREAK_KEY=new RewriteRuleTokenStream(adaptor,"token BREAK_KEY");
 
 		try {
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:547:2: ( BREAK_KEY SEMI -> BREAK_KEY )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:547:4: BREAK_KEY SEMI
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:545:2: ( BREAK_KEY SEMI -> BREAK_KEY )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:545:4: BREAK_KEY SEMI
 			{
-			BREAK_KEY157=(Token)match(input,BREAK_KEY,FOLLOW_BREAK_KEY_in_break_stat1228); if (state.failed) return retval; 
-			if ( state.backtracking==0 ) stream_BREAK_KEY.add(BREAK_KEY157);
+			BREAK_KEY153=(Token)match(input,BREAK_KEY,FOLLOW_BREAK_KEY_in_break_stat1196); if (state.failed) return retval; 
+			if ( state.backtracking==0 ) stream_BREAK_KEY.add(BREAK_KEY153);
 
-			SEMI158=(Token)match(input,SEMI,FOLLOW_SEMI_in_break_stat1230); if (state.failed) return retval; 
-			if ( state.backtracking==0 ) stream_SEMI.add(SEMI158);
+			SEMI154=(Token)match(input,SEMI,FOLLOW_SEMI_in_break_stat1198); if (state.failed) return retval; 
+			if ( state.backtracking==0 ) stream_SEMI.add(SEMI154);
 
 			// AST REWRITE
 			// elements: BREAK_KEY
@@ -3950,7 +3890,7 @@ public class tigerParser extends Parser {
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 			root_0 = (CommonTree)adaptor.nil();
-			// 548:2: -> BREAK_KEY
+			// 546:2: -> BREAK_KEY
 			{
 				adaptor.addChild(root_0, stream_BREAK_KEY.nextNode());
 			}
@@ -3989,36 +3929,36 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "return_stat"
-	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:551:1: return_stat : ( ( RETURN_KEY boolExpr1 )=> RETURN_KEY boolExpr1 SEMI -> ^( AST_RETURN_STAT RETURN_KEY boolExpr1 ) | RETURN_KEY numExpr1 SEMI -> ^( AST_RETURN_STAT RETURN_KEY numExpr1 ) );
+	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:549:1: return_stat : ( ( RETURN_KEY boolExpr1 )=> RETURN_KEY boolExpr1 SEMI -> ^( AST_RETURN_STAT RETURN_KEY boolExpr1 ) | RETURN_KEY numExpr1 SEMI -> ^( AST_RETURN_STAT RETURN_KEY numExpr1 ) );
 	public final tigerParser.return_stat_return return_stat() throws RecognitionException {
 		tigerParser.return_stat_return retval = new tigerParser.return_stat_return();
 		retval.start = input.LT(1);
 
 		CommonTree root_0 = null;
 
-		Token RETURN_KEY159=null;
-		Token SEMI161=null;
-		Token RETURN_KEY162=null;
-		Token SEMI164=null;
-		ParserRuleReturnScope boolExpr1160 =null;
-		ParserRuleReturnScope numExpr1163 =null;
+		Token RETURN_KEY155=null;
+		Token SEMI157=null;
+		Token RETURN_KEY158=null;
+		Token SEMI160=null;
+		ParserRuleReturnScope boolExpr1156 =null;
+		ParserRuleReturnScope numExpr1159 =null;
 
-		CommonTree RETURN_KEY159_tree=null;
-		CommonTree SEMI161_tree=null;
-		CommonTree RETURN_KEY162_tree=null;
-		CommonTree SEMI164_tree=null;
+		CommonTree RETURN_KEY155_tree=null;
+		CommonTree SEMI157_tree=null;
+		CommonTree RETURN_KEY158_tree=null;
+		CommonTree SEMI160_tree=null;
 		RewriteRuleTokenStream stream_RETURN_KEY=new RewriteRuleTokenStream(adaptor,"token RETURN_KEY");
 		RewriteRuleTokenStream stream_SEMI=new RewriteRuleTokenStream(adaptor,"token SEMI");
 		RewriteRuleSubtreeStream stream_numExpr1=new RewriteRuleSubtreeStream(adaptor,"rule numExpr1");
 		RewriteRuleSubtreeStream stream_boolExpr1=new RewriteRuleSubtreeStream(adaptor,"rule boolExpr1");
 
 		try {
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:552:2: ( ( RETURN_KEY boolExpr1 )=> RETURN_KEY boolExpr1 SEMI -> ^( AST_RETURN_STAT RETURN_KEY boolExpr1 ) | RETURN_KEY numExpr1 SEMI -> ^( AST_RETURN_STAT RETURN_KEY numExpr1 ) )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:550:2: ( ( RETURN_KEY boolExpr1 )=> RETURN_KEY boolExpr1 SEMI -> ^( AST_RETURN_STAT RETURN_KEY boolExpr1 ) | RETURN_KEY numExpr1 SEMI -> ^( AST_RETURN_STAT RETURN_KEY numExpr1 ) )
 			int alt18=2;
 			int LA18_0 = input.LA(1);
 			if ( (LA18_0==RETURN_KEY) ) {
 				int LA18_1 = input.LA(2);
-				if ( (synpred9_tiger()) ) {
+				if ( (synpred8_tiger()) ) {
 					alt18=1;
 				}
 				else if ( (true) ) {
@@ -4036,18 +3976,18 @@ public class tigerParser extends Parser {
 
 			switch (alt18) {
 				case 1 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:552:4: ( RETURN_KEY boolExpr1 )=> RETURN_KEY boolExpr1 SEMI
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:550:4: ( RETURN_KEY boolExpr1 )=> RETURN_KEY boolExpr1 SEMI
 					{
-					RETURN_KEY159=(Token)match(input,RETURN_KEY,FOLLOW_RETURN_KEY_in_return_stat1255); if (state.failed) return retval; 
-					if ( state.backtracking==0 ) stream_RETURN_KEY.add(RETURN_KEY159);
+					RETURN_KEY155=(Token)match(input,RETURN_KEY,FOLLOW_RETURN_KEY_in_return_stat1223); if (state.failed) return retval; 
+					if ( state.backtracking==0 ) stream_RETURN_KEY.add(RETURN_KEY155);
 
-					pushFollow(FOLLOW_boolExpr1_in_return_stat1257);
-					boolExpr1160=boolExpr1();
+					pushFollow(FOLLOW_boolExpr1_in_return_stat1225);
+					boolExpr1156=boolExpr1();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_boolExpr1.add(boolExpr1160.getTree());
-					SEMI161=(Token)match(input,SEMI,FOLLOW_SEMI_in_return_stat1259); if (state.failed) return retval; 
-					if ( state.backtracking==0 ) stream_SEMI.add(SEMI161);
+					if ( state.backtracking==0 ) stream_boolExpr1.add(boolExpr1156.getTree());
+					SEMI157=(Token)match(input,SEMI,FOLLOW_SEMI_in_return_stat1227); if (state.failed) return retval; 
+					if ( state.backtracking==0 ) stream_SEMI.add(SEMI157);
 
 					// AST REWRITE
 					// elements: boolExpr1, RETURN_KEY
@@ -4061,9 +4001,9 @@ public class tigerParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (CommonTree)adaptor.nil();
-					// 553:2: -> ^( AST_RETURN_STAT RETURN_KEY boolExpr1 )
+					// 551:2: -> ^( AST_RETURN_STAT RETURN_KEY boolExpr1 )
 					{
-						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:553:5: ^( AST_RETURN_STAT RETURN_KEY boolExpr1 )
+						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:551:5: ^( AST_RETURN_STAT RETURN_KEY boolExpr1 )
 						{
 						CommonTree root_1 = (CommonTree)adaptor.nil();
 						root_1 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(AST_RETURN_STAT, "AST_RETURN_STAT"), root_1);
@@ -4081,18 +4021,18 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 2 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:554:4: RETURN_KEY numExpr1 SEMI
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:552:4: RETURN_KEY numExpr1 SEMI
 					{
-					RETURN_KEY162=(Token)match(input,RETURN_KEY,FOLLOW_RETURN_KEY_in_return_stat1275); if (state.failed) return retval; 
-					if ( state.backtracking==0 ) stream_RETURN_KEY.add(RETURN_KEY162);
+					RETURN_KEY158=(Token)match(input,RETURN_KEY,FOLLOW_RETURN_KEY_in_return_stat1243); if (state.failed) return retval; 
+					if ( state.backtracking==0 ) stream_RETURN_KEY.add(RETURN_KEY158);
 
-					pushFollow(FOLLOW_numExpr1_in_return_stat1277);
-					numExpr1163=numExpr1();
+					pushFollow(FOLLOW_numExpr1_in_return_stat1245);
+					numExpr1159=numExpr1();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1163.getTree());
-					SEMI164=(Token)match(input,SEMI,FOLLOW_SEMI_in_return_stat1279); if (state.failed) return retval; 
-					if ( state.backtracking==0 ) stream_SEMI.add(SEMI164);
+					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1159.getTree());
+					SEMI160=(Token)match(input,SEMI,FOLLOW_SEMI_in_return_stat1247); if (state.failed) return retval; 
+					if ( state.backtracking==0 ) stream_SEMI.add(SEMI160);
 
 					// AST REWRITE
 					// elements: numExpr1, RETURN_KEY
@@ -4106,9 +4046,9 @@ public class tigerParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (CommonTree)adaptor.nil();
-					// 555:2: -> ^( AST_RETURN_STAT RETURN_KEY numExpr1 )
+					// 553:2: -> ^( AST_RETURN_STAT RETURN_KEY numExpr1 )
 					{
-						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:555:5: ^( AST_RETURN_STAT RETURN_KEY numExpr1 )
+						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:553:5: ^( AST_RETURN_STAT RETURN_KEY numExpr1 )
 						{
 						CommonTree root_1 = (CommonTree)adaptor.nil();
 						root_1 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(AST_RETURN_STAT, "AST_RETURN_STAT"), root_1);
@@ -4155,38 +4095,38 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "numExpr1"
-	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:558:1: numExpr1 : ( ( numExpr2 PLUS )=> numExpr2 PLUS numExpr2 -> ^( PLUS numExpr2 numExpr2 ) | ( numExpr2 MINUS )=> numExpr2 MINUS numExpr2 -> ^( MINUS numExpr2 numExpr2 ) | numExpr2 );
+	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:556:1: numExpr1 : ( ( numExpr2 PLUS )=> numExpr2 PLUS numExpr2 -> ^( PLUS numExpr2 numExpr2 ) | ( numExpr2 MINUS )=> numExpr2 MINUS numExpr2 -> ^( MINUS numExpr2 numExpr2 ) | numExpr2 );
 	public final tigerParser.numExpr1_return numExpr1() throws RecognitionException {
 		tigerParser.numExpr1_return retval = new tigerParser.numExpr1_return();
 		retval.start = input.LT(1);
 
 		CommonTree root_0 = null;
 
-		Token PLUS166=null;
-		Token MINUS169=null;
-		ParserRuleReturnScope numExpr2165 =null;
+		Token PLUS162=null;
+		Token MINUS165=null;
+		ParserRuleReturnScope numExpr2161 =null;
+		ParserRuleReturnScope numExpr2163 =null;
+		ParserRuleReturnScope numExpr2164 =null;
+		ParserRuleReturnScope numExpr2166 =null;
 		ParserRuleReturnScope numExpr2167 =null;
-		ParserRuleReturnScope numExpr2168 =null;
-		ParserRuleReturnScope numExpr2170 =null;
-		ParserRuleReturnScope numExpr2171 =null;
 
-		CommonTree PLUS166_tree=null;
-		CommonTree MINUS169_tree=null;
+		CommonTree PLUS162_tree=null;
+		CommonTree MINUS165_tree=null;
 		RewriteRuleTokenStream stream_PLUS=new RewriteRuleTokenStream(adaptor,"token PLUS");
 		RewriteRuleTokenStream stream_MINUS=new RewriteRuleTokenStream(adaptor,"token MINUS");
 		RewriteRuleSubtreeStream stream_numExpr2=new RewriteRuleSubtreeStream(adaptor,"rule numExpr2");
 
 		try {
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:559:3: ( ( numExpr2 PLUS )=> numExpr2 PLUS numExpr2 -> ^( PLUS numExpr2 numExpr2 ) | ( numExpr2 MINUS )=> numExpr2 MINUS numExpr2 -> ^( MINUS numExpr2 numExpr2 ) | numExpr2 )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:557:3: ( ( numExpr2 PLUS )=> numExpr2 PLUS numExpr2 -> ^( PLUS numExpr2 numExpr2 ) | ( numExpr2 MINUS )=> numExpr2 MINUS numExpr2 -> ^( MINUS numExpr2 numExpr2 ) | numExpr2 )
 			int alt19=3;
 			switch ( input.LA(1) ) {
 			case ID:
 				{
 				int LA19_1 = input.LA(2);
-				if ( (synpred10_tiger()) ) {
+				if ( (synpred9_tiger()) ) {
 					alt19=1;
 				}
-				else if ( (synpred11_tiger()) ) {
+				else if ( (synpred10_tiger()) ) {
 					alt19=2;
 				}
 				else if ( (true) ) {
@@ -4198,10 +4138,10 @@ public class tigerParser extends Parser {
 			case MINUS:
 				{
 				int LA19_2 = input.LA(2);
-				if ( (synpred10_tiger()) ) {
+				if ( (synpred9_tiger()) ) {
 					alt19=1;
 				}
-				else if ( (synpred11_tiger()) ) {
+				else if ( (synpred10_tiger()) ) {
 					alt19=2;
 				}
 				else if ( (true) ) {
@@ -4213,10 +4153,10 @@ public class tigerParser extends Parser {
 			case UNSIGNED_FIXEDPTLIT:
 				{
 				int LA19_3 = input.LA(2);
-				if ( (synpred10_tiger()) ) {
+				if ( (synpred9_tiger()) ) {
 					alt19=1;
 				}
-				else if ( (synpred11_tiger()) ) {
+				else if ( (synpred10_tiger()) ) {
 					alt19=2;
 				}
 				else if ( (true) ) {
@@ -4228,10 +4168,10 @@ public class tigerParser extends Parser {
 			case UNSIGNED_INTLIT:
 				{
 				int LA19_4 = input.LA(2);
-				if ( (synpred10_tiger()) ) {
+				if ( (synpred9_tiger()) ) {
 					alt19=1;
 				}
-				else if ( (synpred11_tiger()) ) {
+				else if ( (synpred10_tiger()) ) {
 					alt19=2;
 				}
 				else if ( (true) ) {
@@ -4243,10 +4183,10 @@ public class tigerParser extends Parser {
 			case LPAREN:
 				{
 				int LA19_5 = input.LA(2);
-				if ( (synpred10_tiger()) ) {
+				if ( (synpred9_tiger()) ) {
 					alt19=1;
 				}
-				else if ( (synpred11_tiger()) ) {
+				else if ( (synpred10_tiger()) ) {
 					alt19=2;
 				}
 				else if ( (true) ) {
@@ -4263,23 +4203,23 @@ public class tigerParser extends Parser {
 			}
 			switch (alt19) {
 				case 1 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:559:5: ( numExpr2 PLUS )=> numExpr2 PLUS numExpr2
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:557:5: ( numExpr2 PLUS )=> numExpr2 PLUS numExpr2
 					{
-					pushFollow(FOLLOW_numExpr2_in_numExpr11311);
-					numExpr2165=numExpr2();
+					pushFollow(FOLLOW_numExpr2_in_numExpr11279);
+					numExpr2161=numExpr2();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_numExpr2.add(numExpr2165.getTree());
-					PLUS166=(Token)match(input,PLUS,FOLLOW_PLUS_in_numExpr11313); if (state.failed) return retval; 
-					if ( state.backtracking==0 ) stream_PLUS.add(PLUS166);
+					if ( state.backtracking==0 ) stream_numExpr2.add(numExpr2161.getTree());
+					PLUS162=(Token)match(input,PLUS,FOLLOW_PLUS_in_numExpr11281); if (state.failed) return retval; 
+					if ( state.backtracking==0 ) stream_PLUS.add(PLUS162);
 
-					pushFollow(FOLLOW_numExpr2_in_numExpr11315);
-					numExpr2167=numExpr2();
+					pushFollow(FOLLOW_numExpr2_in_numExpr11283);
+					numExpr2163=numExpr2();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_numExpr2.add(numExpr2167.getTree());
+					if ( state.backtracking==0 ) stream_numExpr2.add(numExpr2163.getTree());
 					// AST REWRITE
-					// elements: numExpr2, numExpr2, PLUS
+					// elements: PLUS, numExpr2, numExpr2
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -4290,9 +4230,9 @@ public class tigerParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (CommonTree)adaptor.nil();
-					// 560:3: -> ^( PLUS numExpr2 numExpr2 )
+					// 558:3: -> ^( PLUS numExpr2 numExpr2 )
 					{
-						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:560:6: ^( PLUS numExpr2 numExpr2 )
+						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:558:6: ^( PLUS numExpr2 numExpr2 )
 						{
 						CommonTree root_1 = (CommonTree)adaptor.nil();
 						root_1 = (CommonTree)adaptor.becomeRoot(stream_PLUS.nextNode(), root_1);
@@ -4310,23 +4250,23 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 2 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:561:5: ( numExpr2 MINUS )=> numExpr2 MINUS numExpr2
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:559:5: ( numExpr2 MINUS )=> numExpr2 MINUS numExpr2
 					{
-					pushFollow(FOLLOW_numExpr2_in_numExpr11341);
-					numExpr2168=numExpr2();
+					pushFollow(FOLLOW_numExpr2_in_numExpr11309);
+					numExpr2164=numExpr2();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_numExpr2.add(numExpr2168.getTree());
-					MINUS169=(Token)match(input,MINUS,FOLLOW_MINUS_in_numExpr11343); if (state.failed) return retval; 
-					if ( state.backtracking==0 ) stream_MINUS.add(MINUS169);
+					if ( state.backtracking==0 ) stream_numExpr2.add(numExpr2164.getTree());
+					MINUS165=(Token)match(input,MINUS,FOLLOW_MINUS_in_numExpr11311); if (state.failed) return retval; 
+					if ( state.backtracking==0 ) stream_MINUS.add(MINUS165);
 
-					pushFollow(FOLLOW_numExpr2_in_numExpr11345);
-					numExpr2170=numExpr2();
+					pushFollow(FOLLOW_numExpr2_in_numExpr11313);
+					numExpr2166=numExpr2();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_numExpr2.add(numExpr2170.getTree());
+					if ( state.backtracking==0 ) stream_numExpr2.add(numExpr2166.getTree());
 					// AST REWRITE
-					// elements: MINUS, numExpr2, numExpr2
+					// elements: numExpr2, numExpr2, MINUS
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -4337,9 +4277,9 @@ public class tigerParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (CommonTree)adaptor.nil();
-					// 562:3: -> ^( MINUS numExpr2 numExpr2 )
+					// 560:3: -> ^( MINUS numExpr2 numExpr2 )
 					{
-						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:562:6: ^( MINUS numExpr2 numExpr2 )
+						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:560:6: ^( MINUS numExpr2 numExpr2 )
 						{
 						CommonTree root_1 = (CommonTree)adaptor.nil();
 						root_1 = (CommonTree)adaptor.becomeRoot(stream_MINUS.nextNode(), root_1);
@@ -4357,16 +4297,16 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 3 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:563:5: numExpr2
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:561:5: numExpr2
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
-					pushFollow(FOLLOW_numExpr2_in_numExpr11363);
-					numExpr2171=numExpr2();
+					pushFollow(FOLLOW_numExpr2_in_numExpr11331);
+					numExpr2167=numExpr2();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, numExpr2171.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, numExpr2167.getTree());
 
 					}
 					break;
@@ -4400,38 +4340,38 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "numExpr2"
-	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:566:1: numExpr2 : ( ( numExpr3 MULT )=> numExpr3 MULT numExpr3 -> ^( MULT numExpr3 numExpr3 ) | ( numExpr3 DIV )=> numExpr3 DIV numExpr3 -> ^( DIV numExpr3 numExpr3 ) | numExpr3 );
+	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:564:1: numExpr2 : ( ( numExpr3 MULT )=> numExpr3 MULT numExpr3 -> ^( MULT numExpr3 numExpr3 ) | ( numExpr3 DIV )=> numExpr3 DIV numExpr3 -> ^( DIV numExpr3 numExpr3 ) | numExpr3 );
 	public final tigerParser.numExpr2_return numExpr2() throws RecognitionException {
 		tigerParser.numExpr2_return retval = new tigerParser.numExpr2_return();
 		retval.start = input.LT(1);
 
 		CommonTree root_0 = null;
 
-		Token MULT173=null;
-		Token DIV176=null;
-		ParserRuleReturnScope numExpr3172 =null;
+		Token MULT169=null;
+		Token DIV172=null;
+		ParserRuleReturnScope numExpr3168 =null;
+		ParserRuleReturnScope numExpr3170 =null;
+		ParserRuleReturnScope numExpr3171 =null;
+		ParserRuleReturnScope numExpr3173 =null;
 		ParserRuleReturnScope numExpr3174 =null;
-		ParserRuleReturnScope numExpr3175 =null;
-		ParserRuleReturnScope numExpr3177 =null;
-		ParserRuleReturnScope numExpr3178 =null;
 
-		CommonTree MULT173_tree=null;
-		CommonTree DIV176_tree=null;
+		CommonTree MULT169_tree=null;
+		CommonTree DIV172_tree=null;
 		RewriteRuleTokenStream stream_DIV=new RewriteRuleTokenStream(adaptor,"token DIV");
 		RewriteRuleTokenStream stream_MULT=new RewriteRuleTokenStream(adaptor,"token MULT");
 		RewriteRuleSubtreeStream stream_numExpr3=new RewriteRuleSubtreeStream(adaptor,"rule numExpr3");
 
 		try {
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:567:3: ( ( numExpr3 MULT )=> numExpr3 MULT numExpr3 -> ^( MULT numExpr3 numExpr3 ) | ( numExpr3 DIV )=> numExpr3 DIV numExpr3 -> ^( DIV numExpr3 numExpr3 ) | numExpr3 )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:565:3: ( ( numExpr3 MULT )=> numExpr3 MULT numExpr3 -> ^( MULT numExpr3 numExpr3 ) | ( numExpr3 DIV )=> numExpr3 DIV numExpr3 -> ^( DIV numExpr3 numExpr3 ) | numExpr3 )
 			int alt20=3;
 			switch ( input.LA(1) ) {
 			case ID:
 				{
 				int LA20_1 = input.LA(2);
-				if ( (synpred12_tiger()) ) {
+				if ( (synpred11_tiger()) ) {
 					alt20=1;
 				}
-				else if ( (synpred13_tiger()) ) {
+				else if ( (synpred12_tiger()) ) {
 					alt20=2;
 				}
 				else if ( (true) ) {
@@ -4443,10 +4383,10 @@ public class tigerParser extends Parser {
 			case MINUS:
 				{
 				int LA20_2 = input.LA(2);
-				if ( (synpred12_tiger()) ) {
+				if ( (synpred11_tiger()) ) {
 					alt20=1;
 				}
-				else if ( (synpred13_tiger()) ) {
+				else if ( (synpred12_tiger()) ) {
 					alt20=2;
 				}
 				else if ( (true) ) {
@@ -4458,10 +4398,10 @@ public class tigerParser extends Parser {
 			case UNSIGNED_FIXEDPTLIT:
 				{
 				int LA20_3 = input.LA(2);
-				if ( (synpred12_tiger()) ) {
+				if ( (synpred11_tiger()) ) {
 					alt20=1;
 				}
-				else if ( (synpred13_tiger()) ) {
+				else if ( (synpred12_tiger()) ) {
 					alt20=2;
 				}
 				else if ( (true) ) {
@@ -4473,10 +4413,10 @@ public class tigerParser extends Parser {
 			case UNSIGNED_INTLIT:
 				{
 				int LA20_4 = input.LA(2);
-				if ( (synpred12_tiger()) ) {
+				if ( (synpred11_tiger()) ) {
 					alt20=1;
 				}
-				else if ( (synpred13_tiger()) ) {
+				else if ( (synpred12_tiger()) ) {
 					alt20=2;
 				}
 				else if ( (true) ) {
@@ -4488,10 +4428,10 @@ public class tigerParser extends Parser {
 			case LPAREN:
 				{
 				int LA20_5 = input.LA(2);
-				if ( (synpred12_tiger()) ) {
+				if ( (synpred11_tiger()) ) {
 					alt20=1;
 				}
-				else if ( (synpred13_tiger()) ) {
+				else if ( (synpred12_tiger()) ) {
 					alt20=2;
 				}
 				else if ( (true) ) {
@@ -4508,21 +4448,21 @@ public class tigerParser extends Parser {
 			}
 			switch (alt20) {
 				case 1 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:567:5: ( numExpr3 MULT )=> numExpr3 MULT numExpr3
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:565:5: ( numExpr3 MULT )=> numExpr3 MULT numExpr3
 					{
-					pushFollow(FOLLOW_numExpr3_in_numExpr21387);
-					numExpr3172=numExpr3();
+					pushFollow(FOLLOW_numExpr3_in_numExpr21355);
+					numExpr3168=numExpr3();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_numExpr3.add(numExpr3172.getTree());
-					MULT173=(Token)match(input,MULT,FOLLOW_MULT_in_numExpr21389); if (state.failed) return retval; 
-					if ( state.backtracking==0 ) stream_MULT.add(MULT173);
+					if ( state.backtracking==0 ) stream_numExpr3.add(numExpr3168.getTree());
+					MULT169=(Token)match(input,MULT,FOLLOW_MULT_in_numExpr21357); if (state.failed) return retval; 
+					if ( state.backtracking==0 ) stream_MULT.add(MULT169);
 
-					pushFollow(FOLLOW_numExpr3_in_numExpr21391);
-					numExpr3174=numExpr3();
+					pushFollow(FOLLOW_numExpr3_in_numExpr21359);
+					numExpr3170=numExpr3();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_numExpr3.add(numExpr3174.getTree());
+					if ( state.backtracking==0 ) stream_numExpr3.add(numExpr3170.getTree());
 					// AST REWRITE
 					// elements: numExpr3, MULT, numExpr3
 					// token labels: 
@@ -4535,9 +4475,9 @@ public class tigerParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (CommonTree)adaptor.nil();
-					// 568:3: -> ^( MULT numExpr3 numExpr3 )
+					// 566:3: -> ^( MULT numExpr3 numExpr3 )
 					{
-						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:568:6: ^( MULT numExpr3 numExpr3 )
+						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:566:6: ^( MULT numExpr3 numExpr3 )
 						{
 						CommonTree root_1 = (CommonTree)adaptor.nil();
 						root_1 = (CommonTree)adaptor.becomeRoot(stream_MULT.nextNode(), root_1);
@@ -4555,23 +4495,23 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 2 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:569:5: ( numExpr3 DIV )=> numExpr3 DIV numExpr3
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:567:5: ( numExpr3 DIV )=> numExpr3 DIV numExpr3
 					{
-					pushFollow(FOLLOW_numExpr3_in_numExpr21417);
-					numExpr3175=numExpr3();
+					pushFollow(FOLLOW_numExpr3_in_numExpr21385);
+					numExpr3171=numExpr3();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_numExpr3.add(numExpr3175.getTree());
-					DIV176=(Token)match(input,DIV,FOLLOW_DIV_in_numExpr21419); if (state.failed) return retval; 
-					if ( state.backtracking==0 ) stream_DIV.add(DIV176);
+					if ( state.backtracking==0 ) stream_numExpr3.add(numExpr3171.getTree());
+					DIV172=(Token)match(input,DIV,FOLLOW_DIV_in_numExpr21387); if (state.failed) return retval; 
+					if ( state.backtracking==0 ) stream_DIV.add(DIV172);
 
-					pushFollow(FOLLOW_numExpr3_in_numExpr21421);
-					numExpr3177=numExpr3();
+					pushFollow(FOLLOW_numExpr3_in_numExpr21389);
+					numExpr3173=numExpr3();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_numExpr3.add(numExpr3177.getTree());
+					if ( state.backtracking==0 ) stream_numExpr3.add(numExpr3173.getTree());
 					// AST REWRITE
-					// elements: numExpr3, DIV, numExpr3
+					// elements: DIV, numExpr3, numExpr3
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -4582,9 +4522,9 @@ public class tigerParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (CommonTree)adaptor.nil();
-					// 570:3: -> ^( DIV numExpr3 numExpr3 )
+					// 568:3: -> ^( DIV numExpr3 numExpr3 )
 					{
-						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:570:6: ^( DIV numExpr3 numExpr3 )
+						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:568:6: ^( DIV numExpr3 numExpr3 )
 						{
 						CommonTree root_1 = (CommonTree)adaptor.nil();
 						root_1 = (CommonTree)adaptor.becomeRoot(stream_DIV.nextNode(), root_1);
@@ -4602,16 +4542,16 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 3 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:571:5: numExpr3
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:569:5: numExpr3
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
-					pushFollow(FOLLOW_numExpr3_in_numExpr21439);
-					numExpr3178=numExpr3();
+					pushFollow(FOLLOW_numExpr3_in_numExpr21407);
+					numExpr3174=numExpr3();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, numExpr3178.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, numExpr3174.getTree());
 
 					}
 					break;
@@ -4645,24 +4585,24 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "numExpr3"
-	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:574:1: numExpr3 : ( value | constval | LPAREN numExpr1 RPAREN );
+	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:572:1: numExpr3 : ( value | constval | LPAREN numExpr1 RPAREN );
 	public final tigerParser.numExpr3_return numExpr3() throws RecognitionException {
 		tigerParser.numExpr3_return retval = new tigerParser.numExpr3_return();
 		retval.start = input.LT(1);
 
 		CommonTree root_0 = null;
 
-		Token LPAREN181=null;
-		Token RPAREN183=null;
-		ParserRuleReturnScope value179 =null;
-		ParserRuleReturnScope constval180 =null;
-		ParserRuleReturnScope numExpr1182 =null;
+		Token LPAREN177=null;
+		Token RPAREN179=null;
+		ParserRuleReturnScope value175 =null;
+		ParserRuleReturnScope constval176 =null;
+		ParserRuleReturnScope numExpr1178 =null;
 
-		CommonTree LPAREN181_tree=null;
-		CommonTree RPAREN183_tree=null;
+		CommonTree LPAREN177_tree=null;
+		CommonTree RPAREN179_tree=null;
 
 		try {
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:575:3: ( value | constval | LPAREN numExpr1 RPAREN )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:573:3: ( value | constval | LPAREN numExpr1 RPAREN )
 			int alt21=3;
 			switch ( input.LA(1) ) {
 			case ID:
@@ -4690,55 +4630,55 @@ public class tigerParser extends Parser {
 			}
 			switch (alt21) {
 				case 1 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:575:5: value
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:573:5: value
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
-					pushFollow(FOLLOW_value_in_numExpr31462);
-					value179=value();
+					pushFollow(FOLLOW_value_in_numExpr31430);
+					value175=value();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, value179.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, value175.getTree());
 
 					}
 					break;
 				case 2 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:576:5: constval
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:574:5: constval
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
-					pushFollow(FOLLOW_constval_in_numExpr31468);
-					constval180=constval();
+					pushFollow(FOLLOW_constval_in_numExpr31436);
+					constval176=constval();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, constval180.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, constval176.getTree());
 
 					}
 					break;
 				case 3 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:577:5: LPAREN numExpr1 RPAREN
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:575:5: LPAREN numExpr1 RPAREN
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
-					LPAREN181=(Token)match(input,LPAREN,FOLLOW_LPAREN_in_numExpr31474); if (state.failed) return retval;
+					LPAREN177=(Token)match(input,LPAREN,FOLLOW_LPAREN_in_numExpr31442); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					LPAREN181_tree = (CommonTree)adaptor.create(LPAREN181);
-					adaptor.addChild(root_0, LPAREN181_tree);
+					LPAREN177_tree = (CommonTree)adaptor.create(LPAREN177);
+					adaptor.addChild(root_0, LPAREN177_tree);
 					}
 
-					pushFollow(FOLLOW_numExpr1_in_numExpr31476);
-					numExpr1182=numExpr1();
+					pushFollow(FOLLOW_numExpr1_in_numExpr31444);
+					numExpr1178=numExpr1();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, numExpr1182.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, numExpr1178.getTree());
 
-					RPAREN183=(Token)match(input,RPAREN,FOLLOW_RPAREN_in_numExpr31478); if (state.failed) return retval;
+					RPAREN179=(Token)match(input,RPAREN,FOLLOW_RPAREN_in_numExpr31446); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					RPAREN183_tree = (CommonTree)adaptor.create(RPAREN183);
-					adaptor.addChild(root_0, RPAREN183_tree);
+					RPAREN179_tree = (CommonTree)adaptor.create(RPAREN179);
+					adaptor.addChild(root_0, RPAREN179_tree);
 					}
 
 					}
@@ -4773,38 +4713,38 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "boolExpr1"
-	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:580:1: boolExpr1 : ( ( boolExpr2 AND )=> boolExpr2 AND boolExpr2 -> ^( AND boolExpr2 boolExpr2 ) | ( boolExpr2 OR )=> boolExpr2 OR boolExpr2 -> ^( OR boolExpr2 boolExpr2 ) | boolExpr2 );
+	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:578:1: boolExpr1 : ( ( boolExpr2 AND )=> boolExpr2 AND boolExpr2 -> ^( AND boolExpr2 boolExpr2 ) | ( boolExpr2 OR )=> boolExpr2 OR boolExpr2 -> ^( OR boolExpr2 boolExpr2 ) | boolExpr2 );
 	public final tigerParser.boolExpr1_return boolExpr1() throws RecognitionException {
 		tigerParser.boolExpr1_return retval = new tigerParser.boolExpr1_return();
 		retval.start = input.LT(1);
 
 		CommonTree root_0 = null;
 
-		Token AND185=null;
-		Token OR188=null;
-		ParserRuleReturnScope boolExpr2184 =null;
+		Token AND181=null;
+		Token OR184=null;
+		ParserRuleReturnScope boolExpr2180 =null;
+		ParserRuleReturnScope boolExpr2182 =null;
+		ParserRuleReturnScope boolExpr2183 =null;
+		ParserRuleReturnScope boolExpr2185 =null;
 		ParserRuleReturnScope boolExpr2186 =null;
-		ParserRuleReturnScope boolExpr2187 =null;
-		ParserRuleReturnScope boolExpr2189 =null;
-		ParserRuleReturnScope boolExpr2190 =null;
 
-		CommonTree AND185_tree=null;
-		CommonTree OR188_tree=null;
+		CommonTree AND181_tree=null;
+		CommonTree OR184_tree=null;
 		RewriteRuleTokenStream stream_AND=new RewriteRuleTokenStream(adaptor,"token AND");
 		RewriteRuleTokenStream stream_OR=new RewriteRuleTokenStream(adaptor,"token OR");
 		RewriteRuleSubtreeStream stream_boolExpr2=new RewriteRuleSubtreeStream(adaptor,"rule boolExpr2");
 
 		try {
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:581:3: ( ( boolExpr2 AND )=> boolExpr2 AND boolExpr2 -> ^( AND boolExpr2 boolExpr2 ) | ( boolExpr2 OR )=> boolExpr2 OR boolExpr2 -> ^( OR boolExpr2 boolExpr2 ) | boolExpr2 )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:579:3: ( ( boolExpr2 AND )=> boolExpr2 AND boolExpr2 -> ^( AND boolExpr2 boolExpr2 ) | ( boolExpr2 OR )=> boolExpr2 OR boolExpr2 -> ^( OR boolExpr2 boolExpr2 ) | boolExpr2 )
 			int alt22=3;
 			switch ( input.LA(1) ) {
 			case ID:
 				{
 				int LA22_1 = input.LA(2);
-				if ( (synpred14_tiger()) ) {
+				if ( (synpred13_tiger()) ) {
 					alt22=1;
 				}
-				else if ( (synpred15_tiger()) ) {
+				else if ( (synpred14_tiger()) ) {
 					alt22=2;
 				}
 				else if ( (true) ) {
@@ -4816,10 +4756,10 @@ public class tigerParser extends Parser {
 			case MINUS:
 				{
 				int LA22_2 = input.LA(2);
-				if ( (synpred14_tiger()) ) {
+				if ( (synpred13_tiger()) ) {
 					alt22=1;
 				}
-				else if ( (synpred15_tiger()) ) {
+				else if ( (synpred14_tiger()) ) {
 					alt22=2;
 				}
 				else if ( (true) ) {
@@ -4831,10 +4771,10 @@ public class tigerParser extends Parser {
 			case UNSIGNED_FIXEDPTLIT:
 				{
 				int LA22_3 = input.LA(2);
-				if ( (synpred14_tiger()) ) {
+				if ( (synpred13_tiger()) ) {
 					alt22=1;
 				}
-				else if ( (synpred15_tiger()) ) {
+				else if ( (synpred14_tiger()) ) {
 					alt22=2;
 				}
 				else if ( (true) ) {
@@ -4846,10 +4786,10 @@ public class tigerParser extends Parser {
 			case UNSIGNED_INTLIT:
 				{
 				int LA22_4 = input.LA(2);
-				if ( (synpred14_tiger()) ) {
+				if ( (synpred13_tiger()) ) {
 					alt22=1;
 				}
-				else if ( (synpred15_tiger()) ) {
+				else if ( (synpred14_tiger()) ) {
 					alt22=2;
 				}
 				else if ( (true) ) {
@@ -4861,10 +4801,10 @@ public class tigerParser extends Parser {
 			case LPAREN:
 				{
 				int LA22_5 = input.LA(2);
-				if ( (synpred14_tiger()) ) {
+				if ( (synpred13_tiger()) ) {
 					alt22=1;
 				}
-				else if ( (synpred15_tiger()) ) {
+				else if ( (synpred14_tiger()) ) {
 					alt22=2;
 				}
 				else if ( (true) ) {
@@ -4881,23 +4821,23 @@ public class tigerParser extends Parser {
 			}
 			switch (alt22) {
 				case 1 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:581:5: ( boolExpr2 AND )=> boolExpr2 AND boolExpr2
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:579:5: ( boolExpr2 AND )=> boolExpr2 AND boolExpr2
 					{
-					pushFollow(FOLLOW_boolExpr2_in_boolExpr11500);
-					boolExpr2184=boolExpr2();
+					pushFollow(FOLLOW_boolExpr2_in_boolExpr11468);
+					boolExpr2180=boolExpr2();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_boolExpr2.add(boolExpr2184.getTree());
-					AND185=(Token)match(input,AND,FOLLOW_AND_in_boolExpr11502); if (state.failed) return retval; 
-					if ( state.backtracking==0 ) stream_AND.add(AND185);
+					if ( state.backtracking==0 ) stream_boolExpr2.add(boolExpr2180.getTree());
+					AND181=(Token)match(input,AND,FOLLOW_AND_in_boolExpr11470); if (state.failed) return retval; 
+					if ( state.backtracking==0 ) stream_AND.add(AND181);
 
-					pushFollow(FOLLOW_boolExpr2_in_boolExpr11504);
-					boolExpr2186=boolExpr2();
+					pushFollow(FOLLOW_boolExpr2_in_boolExpr11472);
+					boolExpr2182=boolExpr2();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_boolExpr2.add(boolExpr2186.getTree());
+					if ( state.backtracking==0 ) stream_boolExpr2.add(boolExpr2182.getTree());
 					// AST REWRITE
-					// elements: AND, boolExpr2, boolExpr2
+					// elements: boolExpr2, AND, boolExpr2
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -4908,9 +4848,9 @@ public class tigerParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (CommonTree)adaptor.nil();
-					// 582:3: -> ^( AND boolExpr2 boolExpr2 )
+					// 580:3: -> ^( AND boolExpr2 boolExpr2 )
 					{
-						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:582:6: ^( AND boolExpr2 boolExpr2 )
+						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:580:6: ^( AND boolExpr2 boolExpr2 )
 						{
 						CommonTree root_1 = (CommonTree)adaptor.nil();
 						root_1 = (CommonTree)adaptor.becomeRoot(stream_AND.nextNode(), root_1);
@@ -4928,23 +4868,23 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 2 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:583:5: ( boolExpr2 OR )=> boolExpr2 OR boolExpr2
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:581:5: ( boolExpr2 OR )=> boolExpr2 OR boolExpr2
 					{
-					pushFollow(FOLLOW_boolExpr2_in_boolExpr11530);
-					boolExpr2187=boolExpr2();
+					pushFollow(FOLLOW_boolExpr2_in_boolExpr11498);
+					boolExpr2183=boolExpr2();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_boolExpr2.add(boolExpr2187.getTree());
-					OR188=(Token)match(input,OR,FOLLOW_OR_in_boolExpr11532); if (state.failed) return retval; 
-					if ( state.backtracking==0 ) stream_OR.add(OR188);
+					if ( state.backtracking==0 ) stream_boolExpr2.add(boolExpr2183.getTree());
+					OR184=(Token)match(input,OR,FOLLOW_OR_in_boolExpr11500); if (state.failed) return retval; 
+					if ( state.backtracking==0 ) stream_OR.add(OR184);
 
-					pushFollow(FOLLOW_boolExpr2_in_boolExpr11534);
-					boolExpr2189=boolExpr2();
+					pushFollow(FOLLOW_boolExpr2_in_boolExpr11502);
+					boolExpr2185=boolExpr2();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_boolExpr2.add(boolExpr2189.getTree());
+					if ( state.backtracking==0 ) stream_boolExpr2.add(boolExpr2185.getTree());
 					// AST REWRITE
-					// elements: boolExpr2, OR, boolExpr2
+					// elements: boolExpr2, boolExpr2, OR
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -4955,9 +4895,9 @@ public class tigerParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (CommonTree)adaptor.nil();
-					// 584:3: -> ^( OR boolExpr2 boolExpr2 )
+					// 582:3: -> ^( OR boolExpr2 boolExpr2 )
 					{
-						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:584:6: ^( OR boolExpr2 boolExpr2 )
+						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:582:6: ^( OR boolExpr2 boolExpr2 )
 						{
 						CommonTree root_1 = (CommonTree)adaptor.nil();
 						root_1 = (CommonTree)adaptor.becomeRoot(stream_OR.nextNode(), root_1);
@@ -4975,16 +4915,16 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 3 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:585:5: boolExpr2
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:583:5: boolExpr2
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
-					pushFollow(FOLLOW_boolExpr2_in_boolExpr11552);
-					boolExpr2190=boolExpr2();
+					pushFollow(FOLLOW_boolExpr2_in_boolExpr11520);
+					boolExpr2186=boolExpr2();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, boolExpr2190.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, boolExpr2186.getTree());
 
 					}
 					break;
@@ -5018,38 +4958,38 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "boolExpr2"
-	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:588:1: boolExpr2 : ( ( numExpr1 LESSER )=> numExpr1 LESSER numExpr1 -> ^( LESSER numExpr1 numExpr1 ) | ( numExpr1 GREATER )=> numExpr1 GREATER numExpr1 -> ^( GREATER numExpr1 numExpr1 ) | ( numExpr1 EQ )=> numExpr1 EQ numExpr1 -> ^( EQ numExpr1 numExpr1 ) | ( numExpr1 NEQ )=> numExpr1 NEQ numExpr1 -> ^( NEQ numExpr1 numExpr1 ) | ( numExpr1 LESSEREQ )=> numExpr1 LESSEREQ numExpr1 -> ^( LESSEREQ numExpr1 numExpr1 ) | ( numExpr1 GREATEREQ )=> numExpr1 GREATEREQ numExpr1 -> ^( GREATEREQ numExpr1 numExpr1 ) );
+	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:586:1: boolExpr2 : ( ( numExpr1 LESSER )=> numExpr1 LESSER numExpr1 -> ^( LESSER numExpr1 numExpr1 ) | ( numExpr1 GREATER )=> numExpr1 GREATER numExpr1 -> ^( GREATER numExpr1 numExpr1 ) | ( numExpr1 EQ )=> numExpr1 EQ numExpr1 -> ^( EQ numExpr1 numExpr1 ) | ( numExpr1 NEQ )=> numExpr1 NEQ numExpr1 -> ^( NEQ numExpr1 numExpr1 ) | ( numExpr1 LESSEREQ )=> numExpr1 LESSEREQ numExpr1 -> ^( LESSEREQ numExpr1 numExpr1 ) | ( numExpr1 GREATEREQ )=> numExpr1 GREATEREQ numExpr1 -> ^( GREATEREQ numExpr1 numExpr1 ) );
 	public final tigerParser.boolExpr2_return boolExpr2() throws RecognitionException {
 		tigerParser.boolExpr2_return retval = new tigerParser.boolExpr2_return();
 		retval.start = input.LT(1);
 
 		CommonTree root_0 = null;
 
-		Token LESSER192=null;
-		Token GREATER195=null;
-		Token EQ198=null;
-		Token NEQ201=null;
-		Token LESSEREQ204=null;
-		Token GREATEREQ207=null;
-		ParserRuleReturnScope numExpr1191 =null;
+		Token LESSER188=null;
+		Token GREATER191=null;
+		Token EQ194=null;
+		Token NEQ197=null;
+		Token LESSEREQ200=null;
+		Token GREATEREQ203=null;
+		ParserRuleReturnScope numExpr1187 =null;
+		ParserRuleReturnScope numExpr1189 =null;
+		ParserRuleReturnScope numExpr1190 =null;
+		ParserRuleReturnScope numExpr1192 =null;
 		ParserRuleReturnScope numExpr1193 =null;
-		ParserRuleReturnScope numExpr1194 =null;
+		ParserRuleReturnScope numExpr1195 =null;
 		ParserRuleReturnScope numExpr1196 =null;
-		ParserRuleReturnScope numExpr1197 =null;
+		ParserRuleReturnScope numExpr1198 =null;
 		ParserRuleReturnScope numExpr1199 =null;
-		ParserRuleReturnScope numExpr1200 =null;
+		ParserRuleReturnScope numExpr1201 =null;
 		ParserRuleReturnScope numExpr1202 =null;
-		ParserRuleReturnScope numExpr1203 =null;
-		ParserRuleReturnScope numExpr1205 =null;
-		ParserRuleReturnScope numExpr1206 =null;
-		ParserRuleReturnScope numExpr1208 =null;
+		ParserRuleReturnScope numExpr1204 =null;
 
-		CommonTree LESSER192_tree=null;
-		CommonTree GREATER195_tree=null;
-		CommonTree EQ198_tree=null;
-		CommonTree NEQ201_tree=null;
-		CommonTree LESSEREQ204_tree=null;
-		CommonTree GREATEREQ207_tree=null;
+		CommonTree LESSER188_tree=null;
+		CommonTree GREATER191_tree=null;
+		CommonTree EQ194_tree=null;
+		CommonTree NEQ197_tree=null;
+		CommonTree LESSEREQ200_tree=null;
+		CommonTree GREATEREQ203_tree=null;
 		RewriteRuleTokenStream stream_NEQ=new RewriteRuleTokenStream(adaptor,"token NEQ");
 		RewriteRuleTokenStream stream_GREATER=new RewriteRuleTokenStream(adaptor,"token GREATER");
 		RewriteRuleTokenStream stream_LESSER=new RewriteRuleTokenStream(adaptor,"token LESSER");
@@ -5059,28 +4999,28 @@ public class tigerParser extends Parser {
 		RewriteRuleSubtreeStream stream_numExpr1=new RewriteRuleSubtreeStream(adaptor,"rule numExpr1");
 
 		try {
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:589:3: ( ( numExpr1 LESSER )=> numExpr1 LESSER numExpr1 -> ^( LESSER numExpr1 numExpr1 ) | ( numExpr1 GREATER )=> numExpr1 GREATER numExpr1 -> ^( GREATER numExpr1 numExpr1 ) | ( numExpr1 EQ )=> numExpr1 EQ numExpr1 -> ^( EQ numExpr1 numExpr1 ) | ( numExpr1 NEQ )=> numExpr1 NEQ numExpr1 -> ^( NEQ numExpr1 numExpr1 ) | ( numExpr1 LESSEREQ )=> numExpr1 LESSEREQ numExpr1 -> ^( LESSEREQ numExpr1 numExpr1 ) | ( numExpr1 GREATEREQ )=> numExpr1 GREATEREQ numExpr1 -> ^( GREATEREQ numExpr1 numExpr1 ) )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:587:3: ( ( numExpr1 LESSER )=> numExpr1 LESSER numExpr1 -> ^( LESSER numExpr1 numExpr1 ) | ( numExpr1 GREATER )=> numExpr1 GREATER numExpr1 -> ^( GREATER numExpr1 numExpr1 ) | ( numExpr1 EQ )=> numExpr1 EQ numExpr1 -> ^( EQ numExpr1 numExpr1 ) | ( numExpr1 NEQ )=> numExpr1 NEQ numExpr1 -> ^( NEQ numExpr1 numExpr1 ) | ( numExpr1 LESSEREQ )=> numExpr1 LESSEREQ numExpr1 -> ^( LESSEREQ numExpr1 numExpr1 ) | ( numExpr1 GREATEREQ )=> numExpr1 GREATEREQ numExpr1 -> ^( GREATEREQ numExpr1 numExpr1 ) )
 			int alt23=6;
 			switch ( input.LA(1) ) {
 			case ID:
 				{
 				int LA23_1 = input.LA(2);
-				if ( (synpred16_tiger()) ) {
+				if ( (synpred15_tiger()) ) {
 					alt23=1;
 				}
-				else if ( (synpred17_tiger()) ) {
+				else if ( (synpred16_tiger()) ) {
 					alt23=2;
 				}
-				else if ( (synpred18_tiger()) ) {
+				else if ( (synpred17_tiger()) ) {
 					alt23=3;
 				}
-				else if ( (synpred19_tiger()) ) {
+				else if ( (synpred18_tiger()) ) {
 					alt23=4;
 				}
-				else if ( (synpred20_tiger()) ) {
+				else if ( (synpred19_tiger()) ) {
 					alt23=5;
 				}
-				else if ( (synpred21_tiger()) ) {
+				else if ( (synpred20_tiger()) ) {
 					alt23=6;
 				}
 
@@ -5102,22 +5042,22 @@ public class tigerParser extends Parser {
 			case MINUS:
 				{
 				int LA23_2 = input.LA(2);
-				if ( (synpred16_tiger()) ) {
+				if ( (synpred15_tiger()) ) {
 					alt23=1;
 				}
-				else if ( (synpred17_tiger()) ) {
+				else if ( (synpred16_tiger()) ) {
 					alt23=2;
 				}
-				else if ( (synpred18_tiger()) ) {
+				else if ( (synpred17_tiger()) ) {
 					alt23=3;
 				}
-				else if ( (synpred19_tiger()) ) {
+				else if ( (synpred18_tiger()) ) {
 					alt23=4;
 				}
-				else if ( (synpred20_tiger()) ) {
+				else if ( (synpred19_tiger()) ) {
 					alt23=5;
 				}
-				else if ( (synpred21_tiger()) ) {
+				else if ( (synpred20_tiger()) ) {
 					alt23=6;
 				}
 
@@ -5139,22 +5079,22 @@ public class tigerParser extends Parser {
 			case UNSIGNED_FIXEDPTLIT:
 				{
 				int LA23_3 = input.LA(2);
-				if ( (synpred16_tiger()) ) {
+				if ( (synpred15_tiger()) ) {
 					alt23=1;
 				}
-				else if ( (synpred17_tiger()) ) {
+				else if ( (synpred16_tiger()) ) {
 					alt23=2;
 				}
-				else if ( (synpred18_tiger()) ) {
+				else if ( (synpred17_tiger()) ) {
 					alt23=3;
 				}
-				else if ( (synpred19_tiger()) ) {
+				else if ( (synpred18_tiger()) ) {
 					alt23=4;
 				}
-				else if ( (synpred20_tiger()) ) {
+				else if ( (synpred19_tiger()) ) {
 					alt23=5;
 				}
-				else if ( (synpred21_tiger()) ) {
+				else if ( (synpred20_tiger()) ) {
 					alt23=6;
 				}
 
@@ -5176,22 +5116,22 @@ public class tigerParser extends Parser {
 			case UNSIGNED_INTLIT:
 				{
 				int LA23_4 = input.LA(2);
-				if ( (synpred16_tiger()) ) {
+				if ( (synpred15_tiger()) ) {
 					alt23=1;
 				}
-				else if ( (synpred17_tiger()) ) {
+				else if ( (synpred16_tiger()) ) {
 					alt23=2;
 				}
-				else if ( (synpred18_tiger()) ) {
+				else if ( (synpred17_tiger()) ) {
 					alt23=3;
 				}
-				else if ( (synpred19_tiger()) ) {
+				else if ( (synpred18_tiger()) ) {
 					alt23=4;
 				}
-				else if ( (synpred20_tiger()) ) {
+				else if ( (synpred19_tiger()) ) {
 					alt23=5;
 				}
-				else if ( (synpred21_tiger()) ) {
+				else if ( (synpred20_tiger()) ) {
 					alt23=6;
 				}
 
@@ -5213,22 +5153,22 @@ public class tigerParser extends Parser {
 			case LPAREN:
 				{
 				int LA23_5 = input.LA(2);
-				if ( (synpred16_tiger()) ) {
+				if ( (synpred15_tiger()) ) {
 					alt23=1;
 				}
-				else if ( (synpred17_tiger()) ) {
+				else if ( (synpred16_tiger()) ) {
 					alt23=2;
 				}
-				else if ( (synpred18_tiger()) ) {
+				else if ( (synpred17_tiger()) ) {
 					alt23=3;
 				}
-				else if ( (synpred19_tiger()) ) {
+				else if ( (synpred18_tiger()) ) {
 					alt23=4;
 				}
-				else if ( (synpred20_tiger()) ) {
+				else if ( (synpred19_tiger()) ) {
 					alt23=5;
 				}
-				else if ( (synpred21_tiger()) ) {
+				else if ( (synpred20_tiger()) ) {
 					alt23=6;
 				}
 
@@ -5255,23 +5195,23 @@ public class tigerParser extends Parser {
 			}
 			switch (alt23) {
 				case 1 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:589:5: ( numExpr1 LESSER )=> numExpr1 LESSER numExpr1
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:587:5: ( numExpr1 LESSER )=> numExpr1 LESSER numExpr1
 					{
-					pushFollow(FOLLOW_numExpr1_in_boolExpr21584);
-					numExpr1191=numExpr1();
+					pushFollow(FOLLOW_numExpr1_in_boolExpr21552);
+					numExpr1187=numExpr1();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1191.getTree());
-					LESSER192=(Token)match(input,LESSER,FOLLOW_LESSER_in_boolExpr21586); if (state.failed) return retval; 
-					if ( state.backtracking==0 ) stream_LESSER.add(LESSER192);
+					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1187.getTree());
+					LESSER188=(Token)match(input,LESSER,FOLLOW_LESSER_in_boolExpr21554); if (state.failed) return retval; 
+					if ( state.backtracking==0 ) stream_LESSER.add(LESSER188);
 
-					pushFollow(FOLLOW_numExpr1_in_boolExpr21588);
-					numExpr1193=numExpr1();
+					pushFollow(FOLLOW_numExpr1_in_boolExpr21556);
+					numExpr1189=numExpr1();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1193.getTree());
+					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1189.getTree());
 					// AST REWRITE
-					// elements: numExpr1, numExpr1, LESSER
+					// elements: numExpr1, LESSER, numExpr1
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -5282,9 +5222,9 @@ public class tigerParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (CommonTree)adaptor.nil();
-					// 590:3: -> ^( LESSER numExpr1 numExpr1 )
+					// 588:3: -> ^( LESSER numExpr1 numExpr1 )
 					{
-						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:590:6: ^( LESSER numExpr1 numExpr1 )
+						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:588:6: ^( LESSER numExpr1 numExpr1 )
 						{
 						CommonTree root_1 = (CommonTree)adaptor.nil();
 						root_1 = (CommonTree)adaptor.becomeRoot(stream_LESSER.nextNode(), root_1);
@@ -5302,23 +5242,23 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 2 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:591:5: ( numExpr1 GREATER )=> numExpr1 GREATER numExpr1
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:589:5: ( numExpr1 GREATER )=> numExpr1 GREATER numExpr1
 					{
-					pushFollow(FOLLOW_numExpr1_in_boolExpr21614);
-					numExpr1194=numExpr1();
+					pushFollow(FOLLOW_numExpr1_in_boolExpr21582);
+					numExpr1190=numExpr1();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1194.getTree());
-					GREATER195=(Token)match(input,GREATER,FOLLOW_GREATER_in_boolExpr21616); if (state.failed) return retval; 
-					if ( state.backtracking==0 ) stream_GREATER.add(GREATER195);
+					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1190.getTree());
+					GREATER191=(Token)match(input,GREATER,FOLLOW_GREATER_in_boolExpr21584); if (state.failed) return retval; 
+					if ( state.backtracking==0 ) stream_GREATER.add(GREATER191);
 
-					pushFollow(FOLLOW_numExpr1_in_boolExpr21618);
-					numExpr1196=numExpr1();
+					pushFollow(FOLLOW_numExpr1_in_boolExpr21586);
+					numExpr1192=numExpr1();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1196.getTree());
+					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1192.getTree());
 					// AST REWRITE
-					// elements: numExpr1, GREATER, numExpr1
+					// elements: numExpr1, numExpr1, GREATER
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -5329,9 +5269,9 @@ public class tigerParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (CommonTree)adaptor.nil();
-					// 592:3: -> ^( GREATER numExpr1 numExpr1 )
+					// 590:3: -> ^( GREATER numExpr1 numExpr1 )
 					{
-						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:592:6: ^( GREATER numExpr1 numExpr1 )
+						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:590:6: ^( GREATER numExpr1 numExpr1 )
 						{
 						CommonTree root_1 = (CommonTree)adaptor.nil();
 						root_1 = (CommonTree)adaptor.becomeRoot(stream_GREATER.nextNode(), root_1);
@@ -5349,23 +5289,23 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 3 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:593:5: ( numExpr1 EQ )=> numExpr1 EQ numExpr1
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:591:5: ( numExpr1 EQ )=> numExpr1 EQ numExpr1
 					{
-					pushFollow(FOLLOW_numExpr1_in_boolExpr21644);
-					numExpr1197=numExpr1();
+					pushFollow(FOLLOW_numExpr1_in_boolExpr21612);
+					numExpr1193=numExpr1();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1197.getTree());
-					EQ198=(Token)match(input,EQ,FOLLOW_EQ_in_boolExpr21646); if (state.failed) return retval; 
-					if ( state.backtracking==0 ) stream_EQ.add(EQ198);
+					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1193.getTree());
+					EQ194=(Token)match(input,EQ,FOLLOW_EQ_in_boolExpr21614); if (state.failed) return retval; 
+					if ( state.backtracking==0 ) stream_EQ.add(EQ194);
 
-					pushFollow(FOLLOW_numExpr1_in_boolExpr21649);
-					numExpr1199=numExpr1();
+					pushFollow(FOLLOW_numExpr1_in_boolExpr21617);
+					numExpr1195=numExpr1();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1199.getTree());
+					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1195.getTree());
 					// AST REWRITE
-					// elements: EQ, numExpr1, numExpr1
+					// elements: numExpr1, EQ, numExpr1
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -5376,9 +5316,9 @@ public class tigerParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (CommonTree)adaptor.nil();
-					// 594:3: -> ^( EQ numExpr1 numExpr1 )
+					// 592:3: -> ^( EQ numExpr1 numExpr1 )
 					{
-						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:594:6: ^( EQ numExpr1 numExpr1 )
+						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:592:6: ^( EQ numExpr1 numExpr1 )
 						{
 						CommonTree root_1 = (CommonTree)adaptor.nil();
 						root_1 = (CommonTree)adaptor.becomeRoot(stream_EQ.nextNode(), root_1);
@@ -5396,23 +5336,23 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 4 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:595:5: ( numExpr1 NEQ )=> numExpr1 NEQ numExpr1
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:593:5: ( numExpr1 NEQ )=> numExpr1 NEQ numExpr1
 					{
-					pushFollow(FOLLOW_numExpr1_in_boolExpr21675);
-					numExpr1200=numExpr1();
+					pushFollow(FOLLOW_numExpr1_in_boolExpr21643);
+					numExpr1196=numExpr1();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1200.getTree());
-					NEQ201=(Token)match(input,NEQ,FOLLOW_NEQ_in_boolExpr21677); if (state.failed) return retval; 
-					if ( state.backtracking==0 ) stream_NEQ.add(NEQ201);
+					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1196.getTree());
+					NEQ197=(Token)match(input,NEQ,FOLLOW_NEQ_in_boolExpr21645); if (state.failed) return retval; 
+					if ( state.backtracking==0 ) stream_NEQ.add(NEQ197);
 
-					pushFollow(FOLLOW_numExpr1_in_boolExpr21679);
-					numExpr1202=numExpr1();
+					pushFollow(FOLLOW_numExpr1_in_boolExpr21647);
+					numExpr1198=numExpr1();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1202.getTree());
+					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1198.getTree());
 					// AST REWRITE
-					// elements: NEQ, numExpr1, numExpr1
+					// elements: numExpr1, numExpr1, NEQ
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -5423,9 +5363,9 @@ public class tigerParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (CommonTree)adaptor.nil();
-					// 596:3: -> ^( NEQ numExpr1 numExpr1 )
+					// 594:3: -> ^( NEQ numExpr1 numExpr1 )
 					{
-						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:596:6: ^( NEQ numExpr1 numExpr1 )
+						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:594:6: ^( NEQ numExpr1 numExpr1 )
 						{
 						CommonTree root_1 = (CommonTree)adaptor.nil();
 						root_1 = (CommonTree)adaptor.becomeRoot(stream_NEQ.nextNode(), root_1);
@@ -5443,21 +5383,21 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 5 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:597:5: ( numExpr1 LESSEREQ )=> numExpr1 LESSEREQ numExpr1
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:595:5: ( numExpr1 LESSEREQ )=> numExpr1 LESSEREQ numExpr1
 					{
-					pushFollow(FOLLOW_numExpr1_in_boolExpr21705);
-					numExpr1203=numExpr1();
+					pushFollow(FOLLOW_numExpr1_in_boolExpr21673);
+					numExpr1199=numExpr1();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1203.getTree());
-					LESSEREQ204=(Token)match(input,LESSEREQ,FOLLOW_LESSEREQ_in_boolExpr21707); if (state.failed) return retval; 
-					if ( state.backtracking==0 ) stream_LESSEREQ.add(LESSEREQ204);
+					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1199.getTree());
+					LESSEREQ200=(Token)match(input,LESSEREQ,FOLLOW_LESSEREQ_in_boolExpr21675); if (state.failed) return retval; 
+					if ( state.backtracking==0 ) stream_LESSEREQ.add(LESSEREQ200);
 
-					pushFollow(FOLLOW_numExpr1_in_boolExpr21709);
-					numExpr1205=numExpr1();
+					pushFollow(FOLLOW_numExpr1_in_boolExpr21677);
+					numExpr1201=numExpr1();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1205.getTree());
+					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1201.getTree());
 					// AST REWRITE
 					// elements: numExpr1, numExpr1, LESSEREQ
 					// token labels: 
@@ -5470,9 +5410,9 @@ public class tigerParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (CommonTree)adaptor.nil();
-					// 598:3: -> ^( LESSEREQ numExpr1 numExpr1 )
+					// 596:3: -> ^( LESSEREQ numExpr1 numExpr1 )
 					{
-						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:598:6: ^( LESSEREQ numExpr1 numExpr1 )
+						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:596:6: ^( LESSEREQ numExpr1 numExpr1 )
 						{
 						CommonTree root_1 = (CommonTree)adaptor.nil();
 						root_1 = (CommonTree)adaptor.becomeRoot(stream_LESSEREQ.nextNode(), root_1);
@@ -5490,23 +5430,23 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 6 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:599:5: ( numExpr1 GREATEREQ )=> numExpr1 GREATEREQ numExpr1
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:597:5: ( numExpr1 GREATEREQ )=> numExpr1 GREATEREQ numExpr1
 					{
-					pushFollow(FOLLOW_numExpr1_in_boolExpr21735);
-					numExpr1206=numExpr1();
+					pushFollow(FOLLOW_numExpr1_in_boolExpr21703);
+					numExpr1202=numExpr1();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1206.getTree());
-					GREATEREQ207=(Token)match(input,GREATEREQ,FOLLOW_GREATEREQ_in_boolExpr21737); if (state.failed) return retval; 
-					if ( state.backtracking==0 ) stream_GREATEREQ.add(GREATEREQ207);
+					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1202.getTree());
+					GREATEREQ203=(Token)match(input,GREATEREQ,FOLLOW_GREATEREQ_in_boolExpr21705); if (state.failed) return retval; 
+					if ( state.backtracking==0 ) stream_GREATEREQ.add(GREATEREQ203);
 
-					pushFollow(FOLLOW_numExpr1_in_boolExpr21739);
-					numExpr1208=numExpr1();
+					pushFollow(FOLLOW_numExpr1_in_boolExpr21707);
+					numExpr1204=numExpr1();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1208.getTree());
+					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1204.getTree());
 					// AST REWRITE
-					// elements: numExpr1, GREATEREQ, numExpr1
+					// elements: numExpr1, numExpr1, GREATEREQ
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -5517,9 +5457,9 @@ public class tigerParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (CommonTree)adaptor.nil();
-					// 600:3: -> ^( GREATEREQ numExpr1 numExpr1 )
+					// 598:3: -> ^( GREATEREQ numExpr1 numExpr1 )
 					{
-						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:600:6: ^( GREATEREQ numExpr1 numExpr1 )
+						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:598:6: ^( GREATEREQ numExpr1 numExpr1 )
 						{
 						CommonTree root_1 = (CommonTree)adaptor.nil();
 						root_1 = (CommonTree)adaptor.becomeRoot(stream_GREATEREQ.nextNode(), root_1);
@@ -5566,24 +5506,24 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "constval"
-	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:634:1: constval : ( ( fixedptlit )=> fixedptlit | intlit );
+	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:632:1: constval : ( ( fixedptlit )=> fixedptlit | intlit );
 	public final tigerParser.constval_return constval() throws RecognitionException {
 		tigerParser.constval_return retval = new tigerParser.constval_return();
 		retval.start = input.LT(1);
 
 		CommonTree root_0 = null;
 
-		ParserRuleReturnScope fixedptlit209 =null;
-		ParserRuleReturnScope intlit210 =null;
+		ParserRuleReturnScope fixedptlit205 =null;
+		ParserRuleReturnScope intlit206 =null;
 
 
 		try {
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:635:3: ( ( fixedptlit )=> fixedptlit | intlit )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:633:3: ( ( fixedptlit )=> fixedptlit | intlit )
 			int alt24=2;
 			int LA24_0 = input.LA(1);
 			if ( (LA24_0==MINUS) ) {
 				int LA24_1 = input.LA(2);
-				if ( (synpred22_tiger()) ) {
+				if ( (synpred21_tiger()) ) {
 					alt24=1;
 				}
 				else if ( (true) ) {
@@ -5591,7 +5531,7 @@ public class tigerParser extends Parser {
 				}
 
 			}
-			else if ( (LA24_0==UNSIGNED_FIXEDPTLIT) && (synpred22_tiger())) {
+			else if ( (LA24_0==UNSIGNED_FIXEDPTLIT) && (synpred21_tiger())) {
 				alt24=1;
 			}
 			else if ( (LA24_0==UNSIGNED_INTLIT) ) {
@@ -5607,30 +5547,30 @@ public class tigerParser extends Parser {
 
 			switch (alt24) {
 				case 1 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:635:5: ( fixedptlit )=> fixedptlit
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:633:5: ( fixedptlit )=> fixedptlit
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
-					pushFollow(FOLLOW_fixedptlit_in_constval1774);
-					fixedptlit209=fixedptlit();
+					pushFollow(FOLLOW_fixedptlit_in_constval1742);
+					fixedptlit205=fixedptlit();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, fixedptlit209.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, fixedptlit205.getTree());
 
 					}
 					break;
 				case 2 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:636:4: intlit
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:634:4: intlit
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
-					pushFollow(FOLLOW_intlit_in_constval1779);
-					intlit210=intlit();
+					pushFollow(FOLLOW_intlit_in_constval1747);
+					intlit206=intlit();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, intlit210.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, intlit206.getTree());
 
 					}
 					break;
@@ -5664,27 +5604,27 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "intlit"
-	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:639:1: intlit : ( MINUS )? UNSIGNED_INTLIT ;
+	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:637:1: intlit : ( MINUS )? UNSIGNED_INTLIT ;
 	public final tigerParser.intlit_return intlit() throws RecognitionException {
 		tigerParser.intlit_return retval = new tigerParser.intlit_return();
 		retval.start = input.LT(1);
 
 		CommonTree root_0 = null;
 
-		Token MINUS211=null;
-		Token UNSIGNED_INTLIT212=null;
+		Token MINUS207=null;
+		Token UNSIGNED_INTLIT208=null;
 
-		CommonTree MINUS211_tree=null;
-		CommonTree UNSIGNED_INTLIT212_tree=null;
+		CommonTree MINUS207_tree=null;
+		CommonTree UNSIGNED_INTLIT208_tree=null;
 
 		try {
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:639:8: ( ( MINUS )? UNSIGNED_INTLIT )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:639:10: ( MINUS )? UNSIGNED_INTLIT
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:637:8: ( ( MINUS )? UNSIGNED_INTLIT )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:637:10: ( MINUS )? UNSIGNED_INTLIT
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:639:10: ( MINUS )?
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:637:10: ( MINUS )?
 			int alt25=2;
 			int LA25_0 = input.LA(1);
 			if ( (LA25_0==MINUS) ) {
@@ -5692,12 +5632,12 @@ public class tigerParser extends Parser {
 			}
 			switch (alt25) {
 				case 1 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:639:10: MINUS
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:637:10: MINUS
 					{
-					MINUS211=(Token)match(input,MINUS,FOLLOW_MINUS_in_intlit1789); if (state.failed) return retval;
+					MINUS207=(Token)match(input,MINUS,FOLLOW_MINUS_in_intlit1757); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					MINUS211_tree = (CommonTree)adaptor.create(MINUS211);
-					adaptor.addChild(root_0, MINUS211_tree);
+					MINUS207_tree = (CommonTree)adaptor.create(MINUS207);
+					adaptor.addChild(root_0, MINUS207_tree);
 					}
 
 					}
@@ -5705,10 +5645,10 @@ public class tigerParser extends Parser {
 
 			}
 
-			UNSIGNED_INTLIT212=(Token)match(input,UNSIGNED_INTLIT,FOLLOW_UNSIGNED_INTLIT_in_intlit1792); if (state.failed) return retval;
+			UNSIGNED_INTLIT208=(Token)match(input,UNSIGNED_INTLIT,FOLLOW_UNSIGNED_INTLIT_in_intlit1760); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			UNSIGNED_INTLIT212_tree = (CommonTree)adaptor.create(UNSIGNED_INTLIT212);
-			adaptor.addChild(root_0, UNSIGNED_INTLIT212_tree);
+			UNSIGNED_INTLIT208_tree = (CommonTree)adaptor.create(UNSIGNED_INTLIT208);
+			adaptor.addChild(root_0, UNSIGNED_INTLIT208_tree);
 			}
 
 			}
@@ -5741,27 +5681,27 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "fixedptlit"
-	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:644:1: fixedptlit : ( MINUS )? UNSIGNED_FIXEDPTLIT ;
+	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:642:1: fixedptlit : ( MINUS )? UNSIGNED_FIXEDPTLIT ;
 	public final tigerParser.fixedptlit_return fixedptlit() throws RecognitionException {
 		tigerParser.fixedptlit_return retval = new tigerParser.fixedptlit_return();
 		retval.start = input.LT(1);
 
 		CommonTree root_0 = null;
 
-		Token MINUS213=null;
-		Token UNSIGNED_FIXEDPTLIT214=null;
+		Token MINUS209=null;
+		Token UNSIGNED_FIXEDPTLIT210=null;
 
-		CommonTree MINUS213_tree=null;
-		CommonTree UNSIGNED_FIXEDPTLIT214_tree=null;
+		CommonTree MINUS209_tree=null;
+		CommonTree UNSIGNED_FIXEDPTLIT210_tree=null;
 
 		try {
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:645:2: ( ( MINUS )? UNSIGNED_FIXEDPTLIT )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:645:6: ( MINUS )? UNSIGNED_FIXEDPTLIT
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:643:2: ( ( MINUS )? UNSIGNED_FIXEDPTLIT )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:643:6: ( MINUS )? UNSIGNED_FIXEDPTLIT
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:645:6: ( MINUS )?
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:643:6: ( MINUS )?
 			int alt26=2;
 			int LA26_0 = input.LA(1);
 			if ( (LA26_0==MINUS) ) {
@@ -5769,12 +5709,12 @@ public class tigerParser extends Parser {
 			}
 			switch (alt26) {
 				case 1 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:645:6: MINUS
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:643:6: MINUS
 					{
-					MINUS213=(Token)match(input,MINUS,FOLLOW_MINUS_in_fixedptlit1816); if (state.failed) return retval;
+					MINUS209=(Token)match(input,MINUS,FOLLOW_MINUS_in_fixedptlit1784); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					MINUS213_tree = (CommonTree)adaptor.create(MINUS213);
-					adaptor.addChild(root_0, MINUS213_tree);
+					MINUS209_tree = (CommonTree)adaptor.create(MINUS209);
+					adaptor.addChild(root_0, MINUS209_tree);
 					}
 
 					}
@@ -5782,10 +5722,10 @@ public class tigerParser extends Parser {
 
 			}
 
-			UNSIGNED_FIXEDPTLIT214=(Token)match(input,UNSIGNED_FIXEDPTLIT,FOLLOW_UNSIGNED_FIXEDPTLIT_in_fixedptlit1819); if (state.failed) return retval;
+			UNSIGNED_FIXEDPTLIT210=(Token)match(input,UNSIGNED_FIXEDPTLIT,FOLLOW_UNSIGNED_FIXEDPTLIT_in_fixedptlit1787); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
-			UNSIGNED_FIXEDPTLIT214_tree = (CommonTree)adaptor.create(UNSIGNED_FIXEDPTLIT214);
-			adaptor.addChild(root_0, UNSIGNED_FIXEDPTLIT214_tree);
+			UNSIGNED_FIXEDPTLIT210_tree = (CommonTree)adaptor.create(UNSIGNED_FIXEDPTLIT210);
+			adaptor.addChild(root_0, UNSIGNED_FIXEDPTLIT210_tree);
 			}
 
 			}
@@ -5818,28 +5758,28 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "binary_operator"
-	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:652:1: binary_operator : ( PLUS | MINUS | MULT | DIV | EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | AND | OR ) ;
+	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:650:1: binary_operator : ( PLUS | MINUS | MULT | DIV | EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | AND | OR ) ;
 	public final tigerParser.binary_operator_return binary_operator() throws RecognitionException {
 		tigerParser.binary_operator_return retval = new tigerParser.binary_operator_return();
 		retval.start = input.LT(1);
 
 		CommonTree root_0 = null;
 
-		Token set215=null;
+		Token set211=null;
 
-		CommonTree set215_tree=null;
+		CommonTree set211_tree=null;
 
 		try {
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:653:2: ( ( PLUS | MINUS | MULT | DIV | EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | AND | OR ) )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:651:2: ( ( PLUS | MINUS | MULT | DIV | EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | AND | OR ) )
 			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			set215=input.LT(1);
+			set211=input.LT(1);
 			if ( input.LA(1)==AND||input.LA(1)==DIV||input.LA(1)==EQ||(input.LA(1) >= GREATER && input.LA(1) <= GREATEREQ)||(input.LA(1) >= LESSER && input.LA(1) <= LESSEREQ)||(input.LA(1) >= MINUS && input.LA(1) <= NEQ)||(input.LA(1) >= OR && input.LA(1) <= PLUS) ) {
 				input.consume();
-				if ( state.backtracking==0 ) adaptor.addChild(root_0, (CommonTree)adaptor.create(set215));
+				if ( state.backtracking==0 ) adaptor.addChild(root_0, (CommonTree)adaptor.create(set211));
 				state.errorRecovery=false;
 				state.failed=false;
 			}
@@ -5878,34 +5818,34 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "expr_list"
-	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:656:1: expr_list : ( ( boolExpr1 )=> boolExpr1 ( COMMA boolExpr1 )* -> ^( AST_EXPR_LIST ( boolExpr1 )+ ) | numExpr1 ( COMMA numExpr1 )* -> ^( AST_EXPR_LIST ( numExpr1 )+ ) );
+	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:654:1: expr_list : ( ( boolExpr1 )=> boolExpr1 ( COMMA boolExpr1 )* -> ^( AST_EXPR_LIST ( boolExpr1 )+ ) | numExpr1 ( COMMA numExpr1 )* -> ^( AST_EXPR_LIST ( numExpr1 )+ ) );
 	public final tigerParser.expr_list_return expr_list() throws RecognitionException {
 		tigerParser.expr_list_return retval = new tigerParser.expr_list_return();
 		retval.start = input.LT(1);
 
 		CommonTree root_0 = null;
 
-		Token COMMA217=null;
-		Token COMMA220=null;
-		ParserRuleReturnScope boolExpr1216 =null;
-		ParserRuleReturnScope boolExpr1218 =null;
-		ParserRuleReturnScope numExpr1219 =null;
-		ParserRuleReturnScope numExpr1221 =null;
+		Token COMMA213=null;
+		Token COMMA216=null;
+		ParserRuleReturnScope boolExpr1212 =null;
+		ParserRuleReturnScope boolExpr1214 =null;
+		ParserRuleReturnScope numExpr1215 =null;
+		ParserRuleReturnScope numExpr1217 =null;
 
-		CommonTree COMMA217_tree=null;
-		CommonTree COMMA220_tree=null;
+		CommonTree COMMA213_tree=null;
+		CommonTree COMMA216_tree=null;
 		RewriteRuleTokenStream stream_COMMA=new RewriteRuleTokenStream(adaptor,"token COMMA");
 		RewriteRuleSubtreeStream stream_numExpr1=new RewriteRuleSubtreeStream(adaptor,"rule numExpr1");
 		RewriteRuleSubtreeStream stream_boolExpr1=new RewriteRuleSubtreeStream(adaptor,"rule boolExpr1");
 
 		try {
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:657:2: ( ( boolExpr1 )=> boolExpr1 ( COMMA boolExpr1 )* -> ^( AST_EXPR_LIST ( boolExpr1 )+ ) | numExpr1 ( COMMA numExpr1 )* -> ^( AST_EXPR_LIST ( numExpr1 )+ ) )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:655:2: ( ( boolExpr1 )=> boolExpr1 ( COMMA boolExpr1 )* -> ^( AST_EXPR_LIST ( boolExpr1 )+ ) | numExpr1 ( COMMA numExpr1 )* -> ^( AST_EXPR_LIST ( numExpr1 )+ ) )
 			int alt29=2;
 			switch ( input.LA(1) ) {
 			case ID:
 				{
 				int LA29_1 = input.LA(2);
-				if ( (synpred23_tiger()) ) {
+				if ( (synpred22_tiger()) ) {
 					alt29=1;
 				}
 				else if ( (true) ) {
@@ -5917,7 +5857,7 @@ public class tigerParser extends Parser {
 			case MINUS:
 				{
 				int LA29_2 = input.LA(2);
-				if ( (synpred23_tiger()) ) {
+				if ( (synpred22_tiger()) ) {
 					alt29=1;
 				}
 				else if ( (true) ) {
@@ -5929,7 +5869,7 @@ public class tigerParser extends Parser {
 			case UNSIGNED_FIXEDPTLIT:
 				{
 				int LA29_3 = input.LA(2);
-				if ( (synpred23_tiger()) ) {
+				if ( (synpred22_tiger()) ) {
 					alt29=1;
 				}
 				else if ( (true) ) {
@@ -5941,7 +5881,7 @@ public class tigerParser extends Parser {
 			case UNSIGNED_INTLIT:
 				{
 				int LA29_4 = input.LA(2);
-				if ( (synpred23_tiger()) ) {
+				if ( (synpred22_tiger()) ) {
 					alt29=1;
 				}
 				else if ( (true) ) {
@@ -5953,7 +5893,7 @@ public class tigerParser extends Parser {
 			case LPAREN:
 				{
 				int LA29_5 = input.LA(2);
-				if ( (synpred23_tiger()) ) {
+				if ( (synpred22_tiger()) ) {
 					alt29=1;
 				}
 				else if ( (true) ) {
@@ -5970,14 +5910,14 @@ public class tigerParser extends Parser {
 			}
 			switch (alt29) {
 				case 1 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:657:4: ( boolExpr1 )=> boolExpr1 ( COMMA boolExpr1 )*
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:655:4: ( boolExpr1 )=> boolExpr1 ( COMMA boolExpr1 )*
 					{
-					pushFollow(FOLLOW_boolExpr1_in_expr_list1899);
-					boolExpr1216=boolExpr1();
+					pushFollow(FOLLOW_boolExpr1_in_expr_list1867);
+					boolExpr1212=boolExpr1();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_boolExpr1.add(boolExpr1216.getTree());
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:657:29: ( COMMA boolExpr1 )*
+					if ( state.backtracking==0 ) stream_boolExpr1.add(boolExpr1212.getTree());
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:655:29: ( COMMA boolExpr1 )*
 					loop27:
 					while (true) {
 						int alt27=2;
@@ -5988,16 +5928,16 @@ public class tigerParser extends Parser {
 
 						switch (alt27) {
 						case 1 :
-							// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:657:30: COMMA boolExpr1
+							// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:655:30: COMMA boolExpr1
 							{
-							COMMA217=(Token)match(input,COMMA,FOLLOW_COMMA_in_expr_list1902); if (state.failed) return retval; 
-							if ( state.backtracking==0 ) stream_COMMA.add(COMMA217);
+							COMMA213=(Token)match(input,COMMA,FOLLOW_COMMA_in_expr_list1870); if (state.failed) return retval; 
+							if ( state.backtracking==0 ) stream_COMMA.add(COMMA213);
 
-							pushFollow(FOLLOW_boolExpr1_in_expr_list1904);
-							boolExpr1218=boolExpr1();
+							pushFollow(FOLLOW_boolExpr1_in_expr_list1872);
+							boolExpr1214=boolExpr1();
 							state._fsp--;
 							if (state.failed) return retval;
-							if ( state.backtracking==0 ) stream_boolExpr1.add(boolExpr1218.getTree());
+							if ( state.backtracking==0 ) stream_boolExpr1.add(boolExpr1214.getTree());
 							}
 							break;
 
@@ -6018,9 +5958,9 @@ public class tigerParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (CommonTree)adaptor.nil();
-					// 658:2: -> ^( AST_EXPR_LIST ( boolExpr1 )+ )
+					// 656:2: -> ^( AST_EXPR_LIST ( boolExpr1 )+ )
 					{
-						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:658:5: ^( AST_EXPR_LIST ( boolExpr1 )+ )
+						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:656:5: ^( AST_EXPR_LIST ( boolExpr1 )+ )
 						{
 						CommonTree root_1 = (CommonTree)adaptor.nil();
 						root_1 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(AST_EXPR_LIST, "AST_EXPR_LIST"), root_1);
@@ -6044,14 +5984,14 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 2 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:659:5: numExpr1 ( COMMA numExpr1 )*
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:657:5: numExpr1 ( COMMA numExpr1 )*
 					{
-					pushFollow(FOLLOW_numExpr1_in_expr_list1922);
-					numExpr1219=numExpr1();
+					pushFollow(FOLLOW_numExpr1_in_expr_list1890);
+					numExpr1215=numExpr1();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1219.getTree());
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:659:14: ( COMMA numExpr1 )*
+					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1215.getTree());
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:657:14: ( COMMA numExpr1 )*
 					loop28:
 					while (true) {
 						int alt28=2;
@@ -6062,16 +6002,16 @@ public class tigerParser extends Parser {
 
 						switch (alt28) {
 						case 1 :
-							// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:659:15: COMMA numExpr1
+							// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:657:15: COMMA numExpr1
 							{
-							COMMA220=(Token)match(input,COMMA,FOLLOW_COMMA_in_expr_list1925); if (state.failed) return retval; 
-							if ( state.backtracking==0 ) stream_COMMA.add(COMMA220);
+							COMMA216=(Token)match(input,COMMA,FOLLOW_COMMA_in_expr_list1893); if (state.failed) return retval; 
+							if ( state.backtracking==0 ) stream_COMMA.add(COMMA216);
 
-							pushFollow(FOLLOW_numExpr1_in_expr_list1927);
-							numExpr1221=numExpr1();
+							pushFollow(FOLLOW_numExpr1_in_expr_list1895);
+							numExpr1217=numExpr1();
 							state._fsp--;
 							if (state.failed) return retval;
-							if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1221.getTree());
+							if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1217.getTree());
 							}
 							break;
 
@@ -6092,9 +6032,9 @@ public class tigerParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (CommonTree)adaptor.nil();
-					// 660:3: -> ^( AST_EXPR_LIST ( numExpr1 )+ )
+					// 658:3: -> ^( AST_EXPR_LIST ( numExpr1 )+ )
 					{
-						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:660:7: ^( AST_EXPR_LIST ( numExpr1 )+ )
+						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:658:7: ^( AST_EXPR_LIST ( numExpr1 )+ )
 						{
 						CommonTree root_1 = (CommonTree)adaptor.nil();
 						root_1 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(AST_EXPR_LIST, "AST_EXPR_LIST"), root_1);
@@ -6147,46 +6087,46 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "value"
-	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:663:1: value : ( ( ID LBRACK index_expr RBRACK LBRACK )=> ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK | ( ID LBRACK )=> ID LBRACK index_expr RBRACK | ID );
+	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:661:1: value : ( ( ID LBRACK index_expr RBRACK LBRACK )=> ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK | ( ID LBRACK )=> ID LBRACK index_expr RBRACK | ID );
 	public final tigerParser.value_return value() throws RecognitionException {
 		tigerParser.value_return retval = new tigerParser.value_return();
 		retval.start = input.LT(1);
 
 		CommonTree root_0 = null;
 
-		Token ID222=null;
-		Token LBRACK223=null;
-		Token RBRACK225=null;
+		Token ID218=null;
+		Token LBRACK219=null;
+		Token RBRACK221=null;
+		Token LBRACK222=null;
+		Token RBRACK224=null;
+		Token ID225=null;
 		Token LBRACK226=null;
 		Token RBRACK228=null;
 		Token ID229=null;
-		Token LBRACK230=null;
-		Token RBRACK232=null;
-		Token ID233=null;
-		ParserRuleReturnScope index_expr224 =null;
+		ParserRuleReturnScope index_expr220 =null;
+		ParserRuleReturnScope index_expr223 =null;
 		ParserRuleReturnScope index_expr227 =null;
-		ParserRuleReturnScope index_expr231 =null;
 
-		CommonTree ID222_tree=null;
-		CommonTree LBRACK223_tree=null;
-		CommonTree RBRACK225_tree=null;
+		CommonTree ID218_tree=null;
+		CommonTree LBRACK219_tree=null;
+		CommonTree RBRACK221_tree=null;
+		CommonTree LBRACK222_tree=null;
+		CommonTree RBRACK224_tree=null;
+		CommonTree ID225_tree=null;
 		CommonTree LBRACK226_tree=null;
 		CommonTree RBRACK228_tree=null;
 		CommonTree ID229_tree=null;
-		CommonTree LBRACK230_tree=null;
-		CommonTree RBRACK232_tree=null;
-		CommonTree ID233_tree=null;
 
 		try {
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:664:3: ( ( ID LBRACK index_expr RBRACK LBRACK )=> ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK | ( ID LBRACK )=> ID LBRACK index_expr RBRACK | ID )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:662:3: ( ( ID LBRACK index_expr RBRACK LBRACK )=> ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK | ( ID LBRACK )=> ID LBRACK index_expr RBRACK | ID )
 			int alt30=3;
 			int LA30_0 = input.LA(1);
 			if ( (LA30_0==ID) ) {
 				int LA30_1 = input.LA(2);
-				if ( (synpred24_tiger()) ) {
+				if ( (synpred23_tiger()) ) {
 					alt30=1;
 				}
-				else if ( (synpred25_tiger()) ) {
+				else if ( (synpred24_tiger()) ) {
 					alt30=2;
 				}
 				else if ( (true) ) {
@@ -6204,101 +6144,101 @@ public class tigerParser extends Parser {
 
 			switch (alt30) {
 				case 1 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:664:5: ( ID LBRACK index_expr RBRACK LBRACK )=> ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:662:5: ( ID LBRACK index_expr RBRACK LBRACK )=> ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
-					ID222=(Token)match(input,ID,FOLLOW_ID_in_value1969); if (state.failed) return retval;
+					ID218=(Token)match(input,ID,FOLLOW_ID_in_value1937); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					ID222_tree = (CommonTree)adaptor.create(ID222);
-					adaptor.addChild(root_0, ID222_tree);
+					ID218_tree = (CommonTree)adaptor.create(ID218);
+					adaptor.addChild(root_0, ID218_tree);
 					}
 
-					LBRACK223=(Token)match(input,LBRACK,FOLLOW_LBRACK_in_value1971); if (state.failed) return retval;
+					LBRACK219=(Token)match(input,LBRACK,FOLLOW_LBRACK_in_value1939); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					LBRACK223_tree = (CommonTree)adaptor.create(LBRACK223);
-					adaptor.addChild(root_0, LBRACK223_tree);
+					LBRACK219_tree = (CommonTree)adaptor.create(LBRACK219);
+					adaptor.addChild(root_0, LBRACK219_tree);
 					}
 
-					pushFollow(FOLLOW_index_expr_in_value1973);
-					index_expr224=index_expr();
+					pushFollow(FOLLOW_index_expr_in_value1941);
+					index_expr220=index_expr();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, index_expr224.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, index_expr220.getTree());
 
-					RBRACK225=(Token)match(input,RBRACK,FOLLOW_RBRACK_in_value1975); if (state.failed) return retval;
+					RBRACK221=(Token)match(input,RBRACK,FOLLOW_RBRACK_in_value1943); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					RBRACK225_tree = (CommonTree)adaptor.create(RBRACK225);
-					adaptor.addChild(root_0, RBRACK225_tree);
+					RBRACK221_tree = (CommonTree)adaptor.create(RBRACK221);
+					adaptor.addChild(root_0, RBRACK221_tree);
 					}
 
-					LBRACK226=(Token)match(input,LBRACK,FOLLOW_LBRACK_in_value1977); if (state.failed) return retval;
+					LBRACK222=(Token)match(input,LBRACK,FOLLOW_LBRACK_in_value1945); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					LBRACK226_tree = (CommonTree)adaptor.create(LBRACK226);
-					adaptor.addChild(root_0, LBRACK226_tree);
+					LBRACK222_tree = (CommonTree)adaptor.create(LBRACK222);
+					adaptor.addChild(root_0, LBRACK222_tree);
 					}
 
-					pushFollow(FOLLOW_index_expr_in_value1979);
-					index_expr227=index_expr();
+					pushFollow(FOLLOW_index_expr_in_value1947);
+					index_expr223=index_expr();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, index_expr227.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, index_expr223.getTree());
 
-					RBRACK228=(Token)match(input,RBRACK,FOLLOW_RBRACK_in_value1981); if (state.failed) return retval;
+					RBRACK224=(Token)match(input,RBRACK,FOLLOW_RBRACK_in_value1949); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					RBRACK228_tree = (CommonTree)adaptor.create(RBRACK228);
-					adaptor.addChild(root_0, RBRACK228_tree);
+					RBRACK224_tree = (CommonTree)adaptor.create(RBRACK224);
+					adaptor.addChild(root_0, RBRACK224_tree);
 					}
 
 					if ( state.backtracking==0 ) {
-					  	  SymbolTableEntry entry = symbolTable.get(strip((ID222!=null?ID222.getText():null)),CURRENT_SCOPE);
+					  	  SymbolTableEntry entry = symbolTable.get(strip((ID218!=null?ID218.getText():null)),CURRENT_SCOPE);
 					  	  
 					  	}
 					}
 					break;
 				case 2 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:668:4: ( ID LBRACK )=> ID LBRACK index_expr RBRACK
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:666:4: ( ID LBRACK )=> ID LBRACK index_expr RBRACK
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
-					ID229=(Token)match(input,ID,FOLLOW_ID_in_value1996); if (state.failed) return retval;
+					ID225=(Token)match(input,ID,FOLLOW_ID_in_value1964); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					ID229_tree = (CommonTree)adaptor.create(ID229);
-					adaptor.addChild(root_0, ID229_tree);
+					ID225_tree = (CommonTree)adaptor.create(ID225);
+					adaptor.addChild(root_0, ID225_tree);
 					}
 
-					LBRACK230=(Token)match(input,LBRACK,FOLLOW_LBRACK_in_value1998); if (state.failed) return retval;
+					LBRACK226=(Token)match(input,LBRACK,FOLLOW_LBRACK_in_value1966); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					LBRACK230_tree = (CommonTree)adaptor.create(LBRACK230);
-					adaptor.addChild(root_0, LBRACK230_tree);
+					LBRACK226_tree = (CommonTree)adaptor.create(LBRACK226);
+					adaptor.addChild(root_0, LBRACK226_tree);
 					}
 
-					pushFollow(FOLLOW_index_expr_in_value2000);
-					index_expr231=index_expr();
+					pushFollow(FOLLOW_index_expr_in_value1968);
+					index_expr227=index_expr();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, index_expr231.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, index_expr227.getTree());
 
-					RBRACK232=(Token)match(input,RBRACK,FOLLOW_RBRACK_in_value2002); if (state.failed) return retval;
+					RBRACK228=(Token)match(input,RBRACK,FOLLOW_RBRACK_in_value1970); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					RBRACK232_tree = (CommonTree)adaptor.create(RBRACK232);
-					adaptor.addChild(root_0, RBRACK232_tree);
+					RBRACK228_tree = (CommonTree)adaptor.create(RBRACK228);
+					adaptor.addChild(root_0, RBRACK228_tree);
 					}
 
 					}
 					break;
 				case 3 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:669:4: ID
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:667:4: ID
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
-					ID233=(Token)match(input,ID,FOLLOW_ID_in_value2007); if (state.failed) return retval;
+					ID229=(Token)match(input,ID,FOLLOW_ID_in_value1975); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					ID233_tree = (CommonTree)adaptor.create(ID233);
-					adaptor.addChild(root_0, ID233_tree);
+					ID229_tree = (CommonTree)adaptor.create(ID229);
+					adaptor.addChild(root_0, ID229_tree);
 					}
 
 					}
@@ -6333,37 +6273,37 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "index_expr"
-	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:672:1: index_expr : ( ( intlit index_oper )=> intlit index_oper index_expr -> ^( index_oper intlit index_expr ) | intlit | ( ID index_oper )=> ID index_oper index_expr -> ^( index_oper ID index_expr ) | ID );
+	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:670:1: index_expr : ( ( intlit index_oper )=> intlit index_oper index_expr -> ^( index_oper intlit index_expr ) | intlit | ( ID index_oper )=> ID index_oper index_expr -> ^( index_oper ID index_expr ) | ID );
 	public final tigerParser.index_expr_return index_expr() throws RecognitionException {
 		tigerParser.index_expr_return retval = new tigerParser.index_expr_return();
 		retval.start = input.LT(1);
 
 		CommonTree root_0 = null;
 
-		Token ID238=null;
-		Token ID241=null;
-		ParserRuleReturnScope intlit234 =null;
+		Token ID234=null;
+		Token ID237=null;
+		ParserRuleReturnScope intlit230 =null;
+		ParserRuleReturnScope index_oper231 =null;
+		ParserRuleReturnScope index_expr232 =null;
+		ParserRuleReturnScope intlit233 =null;
 		ParserRuleReturnScope index_oper235 =null;
 		ParserRuleReturnScope index_expr236 =null;
-		ParserRuleReturnScope intlit237 =null;
-		ParserRuleReturnScope index_oper239 =null;
-		ParserRuleReturnScope index_expr240 =null;
 
-		CommonTree ID238_tree=null;
-		CommonTree ID241_tree=null;
+		CommonTree ID234_tree=null;
+		CommonTree ID237_tree=null;
 		RewriteRuleTokenStream stream_ID=new RewriteRuleTokenStream(adaptor,"token ID");
 		RewriteRuleSubtreeStream stream_index_oper=new RewriteRuleSubtreeStream(adaptor,"rule index_oper");
 		RewriteRuleSubtreeStream stream_index_expr=new RewriteRuleSubtreeStream(adaptor,"rule index_expr");
 		RewriteRuleSubtreeStream stream_intlit=new RewriteRuleSubtreeStream(adaptor,"rule intlit");
 
 		try {
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:673:2: ( ( intlit index_oper )=> intlit index_oper index_expr -> ^( index_oper intlit index_expr ) | intlit | ( ID index_oper )=> ID index_oper index_expr -> ^( index_oper ID index_expr ) | ID )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:671:2: ( ( intlit index_oper )=> intlit index_oper index_expr -> ^( index_oper intlit index_expr ) | intlit | ( ID index_oper )=> ID index_oper index_expr -> ^( index_oper ID index_expr ) | ID )
 			int alt31=4;
 			switch ( input.LA(1) ) {
 			case MINUS:
 				{
 				int LA31_1 = input.LA(2);
-				if ( (synpred26_tiger()) ) {
+				if ( (synpred25_tiger()) ) {
 					alt31=1;
 				}
 				else if ( (true) ) {
@@ -6375,7 +6315,7 @@ public class tigerParser extends Parser {
 			case UNSIGNED_INTLIT:
 				{
 				int LA31_2 = input.LA(2);
-				if ( (synpred26_tiger()) ) {
+				if ( (synpred25_tiger()) ) {
 					alt31=1;
 				}
 				else if ( (true) ) {
@@ -6387,7 +6327,7 @@ public class tigerParser extends Parser {
 			case ID:
 				{
 				int LA31_3 = input.LA(2);
-				if ( (synpred27_tiger()) ) {
+				if ( (synpred26_tiger()) ) {
 					alt31=3;
 				}
 				else if ( (true) ) {
@@ -6404,25 +6344,25 @@ public class tigerParser extends Parser {
 			}
 			switch (alt31) {
 				case 1 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:673:4: ( intlit index_oper )=> intlit index_oper index_expr
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:671:4: ( intlit index_oper )=> intlit index_oper index_expr
 					{
-					pushFollow(FOLLOW_intlit_in_index_expr2027);
-					intlit234=intlit();
+					pushFollow(FOLLOW_intlit_in_index_expr1995);
+					intlit230=intlit();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_intlit.add(intlit234.getTree());
-					pushFollow(FOLLOW_index_oper_in_index_expr2029);
-					index_oper235=index_oper();
+					if ( state.backtracking==0 ) stream_intlit.add(intlit230.getTree());
+					pushFollow(FOLLOW_index_oper_in_index_expr1997);
+					index_oper231=index_oper();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_index_oper.add(index_oper235.getTree());
-					pushFollow(FOLLOW_index_expr_in_index_expr2031);
-					index_expr236=index_expr();
+					if ( state.backtracking==0 ) stream_index_oper.add(index_oper231.getTree());
+					pushFollow(FOLLOW_index_expr_in_index_expr1999);
+					index_expr232=index_expr();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_index_expr.add(index_expr236.getTree());
+					if ( state.backtracking==0 ) stream_index_expr.add(index_expr232.getTree());
 					// AST REWRITE
-					// elements: intlit, index_oper, index_expr
+					// elements: intlit, index_expr, index_oper
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -6433,9 +6373,9 @@ public class tigerParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (CommonTree)adaptor.nil();
-					// 674:2: -> ^( index_oper intlit index_expr )
+					// 672:2: -> ^( index_oper intlit index_expr )
 					{
-						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:674:5: ^( index_oper intlit index_expr )
+						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:672:5: ^( index_oper intlit index_expr )
 						{
 						CommonTree root_1 = (CommonTree)adaptor.nil();
 						root_1 = (CommonTree)adaptor.becomeRoot(stream_index_oper.nextNode(), root_1);
@@ -6453,37 +6393,37 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 2 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:675:4: intlit
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:673:4: intlit
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
-					pushFollow(FOLLOW_intlit_in_index_expr2047);
-					intlit237=intlit();
+					pushFollow(FOLLOW_intlit_in_index_expr2015);
+					intlit233=intlit();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) adaptor.addChild(root_0, intlit237.getTree());
+					if ( state.backtracking==0 ) adaptor.addChild(root_0, intlit233.getTree());
 
 					}
 					break;
 				case 3 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:676:4: ( ID index_oper )=> ID index_oper index_expr
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:674:4: ( ID index_oper )=> ID index_oper index_expr
 					{
-					ID238=(Token)match(input,ID,FOLLOW_ID_in_index_expr2060); if (state.failed) return retval; 
-					if ( state.backtracking==0 ) stream_ID.add(ID238);
+					ID234=(Token)match(input,ID,FOLLOW_ID_in_index_expr2028); if (state.failed) return retval; 
+					if ( state.backtracking==0 ) stream_ID.add(ID234);
 
-					pushFollow(FOLLOW_index_oper_in_index_expr2062);
-					index_oper239=index_oper();
+					pushFollow(FOLLOW_index_oper_in_index_expr2030);
+					index_oper235=index_oper();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_index_oper.add(index_oper239.getTree());
-					pushFollow(FOLLOW_index_expr_in_index_expr2064);
-					index_expr240=index_expr();
+					if ( state.backtracking==0 ) stream_index_oper.add(index_oper235.getTree());
+					pushFollow(FOLLOW_index_expr_in_index_expr2032);
+					index_expr236=index_expr();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_index_expr.add(index_expr240.getTree());
+					if ( state.backtracking==0 ) stream_index_expr.add(index_expr236.getTree());
 					// AST REWRITE
-					// elements: index_expr, index_oper, ID
+					// elements: index_oper, index_expr, ID
 					// token labels: 
 					// rule labels: retval
 					// token list labels: 
@@ -6494,9 +6434,9 @@ public class tigerParser extends Parser {
 					RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 					root_0 = (CommonTree)adaptor.nil();
-					// 677:2: -> ^( index_oper ID index_expr )
+					// 675:2: -> ^( index_oper ID index_expr )
 					{
-						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:677:5: ^( index_oper ID index_expr )
+						// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:675:5: ^( index_oper ID index_expr )
 						{
 						CommonTree root_1 = (CommonTree)adaptor.nil();
 						root_1 = (CommonTree)adaptor.becomeRoot(stream_index_oper.nextNode(), root_1);
@@ -6514,15 +6454,15 @@ public class tigerParser extends Parser {
 					}
 					break;
 				case 4 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:678:4: ID
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:676:4: ID
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
-					ID241=(Token)match(input,ID,FOLLOW_ID_in_index_expr2080); if (state.failed) return retval;
+					ID237=(Token)match(input,ID,FOLLOW_ID_in_index_expr2048); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
-					ID241_tree = (CommonTree)adaptor.create(ID241);
-					adaptor.addChild(root_0, ID241_tree);
+					ID237_tree = (CommonTree)adaptor.create(ID237);
+					adaptor.addChild(root_0, ID237_tree);
 					}
 
 					}
@@ -6557,28 +6497,28 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "index_oper"
-	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:681:1: index_oper : ( PLUS | MINUS | MULT ) ;
+	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:679:1: index_oper : ( PLUS | MINUS | MULT ) ;
 	public final tigerParser.index_oper_return index_oper() throws RecognitionException {
 		tigerParser.index_oper_return retval = new tigerParser.index_oper_return();
 		retval.start = input.LT(1);
 
 		CommonTree root_0 = null;
 
-		Token set242=null;
+		Token set238=null;
 
-		CommonTree set242_tree=null;
+		CommonTree set238_tree=null;
 
 		try {
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:682:2: ( ( PLUS | MINUS | MULT ) )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:680:2: ( ( PLUS | MINUS | MULT ) )
 			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			set242=input.LT(1);
+			set238=input.LT(1);
 			if ( (input.LA(1) >= MINUS && input.LA(1) <= MULT)||input.LA(1)==PLUS ) {
 				input.consume();
-				if ( state.backtracking==0 ) adaptor.addChild(root_0, (CommonTree)adaptor.create(set242));
+				if ( state.backtracking==0 ) adaptor.addChild(root_0, (CommonTree)adaptor.create(set238));
 				state.errorRecovery=false;
 				state.failed=false;
 			}
@@ -6617,26 +6557,26 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "func_param_list"
-	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:701:1: func_param_list : ( numExpr1 ( COMMA numExpr1 )* )? -> ^( AST_PARAM_LIST ( ( numExpr1 )+ )? ) ;
+	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:699:1: func_param_list : ( numExpr1 ( COMMA numExpr1 )* )? -> ^( AST_PARAM_LIST ( ( numExpr1 )+ )? ) ;
 	public final tigerParser.func_param_list_return func_param_list() throws RecognitionException {
 		tigerParser.func_param_list_return retval = new tigerParser.func_param_list_return();
 		retval.start = input.LT(1);
 
 		CommonTree root_0 = null;
 
-		Token COMMA244=null;
-		ParserRuleReturnScope numExpr1243 =null;
-		ParserRuleReturnScope numExpr1245 =null;
+		Token COMMA240=null;
+		ParserRuleReturnScope numExpr1239 =null;
+		ParserRuleReturnScope numExpr1241 =null;
 
-		CommonTree COMMA244_tree=null;
+		CommonTree COMMA240_tree=null;
 		RewriteRuleTokenStream stream_COMMA=new RewriteRuleTokenStream(adaptor,"token COMMA");
 		RewriteRuleSubtreeStream stream_numExpr1=new RewriteRuleSubtreeStream(adaptor,"rule numExpr1");
 
 		try {
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:702:2: ( ( numExpr1 ( COMMA numExpr1 )* )? -> ^( AST_PARAM_LIST ( ( numExpr1 )+ )? ) )
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:702:4: ( numExpr1 ( COMMA numExpr1 )* )?
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:700:2: ( ( numExpr1 ( COMMA numExpr1 )* )? -> ^( AST_PARAM_LIST ( ( numExpr1 )+ )? ) )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:700:4: ( numExpr1 ( COMMA numExpr1 )* )?
 			{
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:702:4: ( numExpr1 ( COMMA numExpr1 )* )?
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:700:4: ( numExpr1 ( COMMA numExpr1 )* )?
 			int alt33=2;
 			int LA33_0 = input.LA(1);
 			if ( (LA33_0==ID||LA33_0==LPAREN||LA33_0==MINUS||(LA33_0 >= UNSIGNED_FIXEDPTLIT && LA33_0 <= UNSIGNED_INTLIT)) ) {
@@ -6644,14 +6584,14 @@ public class tigerParser extends Parser {
 			}
 			switch (alt33) {
 				case 1 :
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:702:5: numExpr1 ( COMMA numExpr1 )*
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:700:5: numExpr1 ( COMMA numExpr1 )*
 					{
-					pushFollow(FOLLOW_numExpr1_in_func_param_list2197);
-					numExpr1243=numExpr1();
+					pushFollow(FOLLOW_numExpr1_in_func_param_list2165);
+					numExpr1239=numExpr1();
 					state._fsp--;
 					if (state.failed) return retval;
-					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1243.getTree());
-					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:702:14: ( COMMA numExpr1 )*
+					if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1239.getTree());
+					// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:700:14: ( COMMA numExpr1 )*
 					loop32:
 					while (true) {
 						int alt32=2;
@@ -6662,16 +6602,16 @@ public class tigerParser extends Parser {
 
 						switch (alt32) {
 						case 1 :
-							// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:702:15: COMMA numExpr1
+							// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:700:15: COMMA numExpr1
 							{
-							COMMA244=(Token)match(input,COMMA,FOLLOW_COMMA_in_func_param_list2200); if (state.failed) return retval; 
-							if ( state.backtracking==0 ) stream_COMMA.add(COMMA244);
+							COMMA240=(Token)match(input,COMMA,FOLLOW_COMMA_in_func_param_list2168); if (state.failed) return retval; 
+							if ( state.backtracking==0 ) stream_COMMA.add(COMMA240);
 
-							pushFollow(FOLLOW_numExpr1_in_func_param_list2202);
-							numExpr1245=numExpr1();
+							pushFollow(FOLLOW_numExpr1_in_func_param_list2170);
+							numExpr1241=numExpr1();
 							state._fsp--;
 							if (state.failed) return retval;
-							if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1245.getTree());
+							if ( state.backtracking==0 ) stream_numExpr1.add(numExpr1241.getTree());
 							}
 							break;
 
@@ -6697,13 +6637,13 @@ public class tigerParser extends Parser {
 			RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.getTree():null);
 
 			root_0 = (CommonTree)adaptor.nil();
-			// 703:2: -> ^( AST_PARAM_LIST ( ( numExpr1 )+ )? )
+			// 701:2: -> ^( AST_PARAM_LIST ( ( numExpr1 )+ )? )
 			{
-				// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:703:5: ^( AST_PARAM_LIST ( ( numExpr1 )+ )? )
+				// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:701:5: ^( AST_PARAM_LIST ( ( numExpr1 )+ )? )
 				{
 				CommonTree root_1 = (CommonTree)adaptor.nil();
 				root_1 = (CommonTree)adaptor.becomeRoot((CommonTree)adaptor.create(AST_PARAM_LIST, "AST_PARAM_LIST"), root_1);
-				// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:703:22: ( ( numExpr1 )+ )?
+				// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:701:22: ( ( numExpr1 )+ )?
 				if ( stream_numExpr1.hasNext() ) {
 					if ( !(stream_numExpr1.hasNext()) ) {
 						throw new RewriteEarlyExitException();
@@ -6755,28 +6695,28 @@ public class tigerParser extends Parser {
 
 
 	// $ANTLR start "keywords"
-	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:706:1: keywords : ( FUNCTION_KEY | BEGIN_KEY | END_KEY | VOID_KEY | MAIN_KEY | TYPE_KEY | ARRAY_KEY | OF_KEY | INT_KEY | FIXEDPT_KEY | VAR_KEY | IF_KEY | THEN_KEY | ENDIF_KEY | ELSE_KEY | WHILE_KEY | DO_KEY | ENDDO_KEY | FOR_KEY | ID_KEY | TO_KEY | BREAK_KEY | RETURN_KEY );
+	// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:704:1: keywords : ( FUNCTION_KEY | BEGIN_KEY | END_KEY | VOID_KEY | MAIN_KEY | TYPE_KEY | ARRAY_KEY | OF_KEY | INT_KEY | FIXEDPT_KEY | VAR_KEY | IF_KEY | THEN_KEY | ENDIF_KEY | ELSE_KEY | WHILE_KEY | DO_KEY | ENDDO_KEY | FOR_KEY | ID_KEY | TO_KEY | BREAK_KEY | RETURN_KEY );
 	public final tigerParser.keywords_return keywords() throws RecognitionException {
 		tigerParser.keywords_return retval = new tigerParser.keywords_return();
 		retval.start = input.LT(1);
 
 		CommonTree root_0 = null;
 
-		Token set246=null;
+		Token set242=null;
 
-		CommonTree set246_tree=null;
+		CommonTree set242_tree=null;
 
 		try {
-			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:707:2: ( FUNCTION_KEY | BEGIN_KEY | END_KEY | VOID_KEY | MAIN_KEY | TYPE_KEY | ARRAY_KEY | OF_KEY | INT_KEY | FIXEDPT_KEY | VAR_KEY | IF_KEY | THEN_KEY | ENDIF_KEY | ELSE_KEY | WHILE_KEY | DO_KEY | ENDDO_KEY | FOR_KEY | ID_KEY | TO_KEY | BREAK_KEY | RETURN_KEY )
+			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:705:2: ( FUNCTION_KEY | BEGIN_KEY | END_KEY | VOID_KEY | MAIN_KEY | TYPE_KEY | ARRAY_KEY | OF_KEY | INT_KEY | FIXEDPT_KEY | VAR_KEY | IF_KEY | THEN_KEY | ENDIF_KEY | ELSE_KEY | WHILE_KEY | DO_KEY | ENDDO_KEY | FOR_KEY | ID_KEY | TO_KEY | BREAK_KEY | RETURN_KEY )
 			// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
-			set246=input.LT(1);
+			set242=input.LT(1);
 			if ( input.LA(1)==ARRAY_KEY||(input.LA(1) >= BEGIN_KEY && input.LA(1) <= BREAK_KEY)||(input.LA(1) >= DO_KEY && input.LA(1) <= END_KEY)||(input.LA(1) >= FIXEDPT_KEY && input.LA(1) <= FUNCTION_KEY)||(input.LA(1) >= ID_KEY && input.LA(1) <= INT_KEY)||input.LA(1)==MAIN_KEY||input.LA(1)==OF_KEY||input.LA(1)==RETURN_KEY||(input.LA(1) >= THEN_KEY && input.LA(1) <= TYPE_KEY)||(input.LA(1) >= VAR_KEY && input.LA(1) <= WHILE_KEY) ) {
 				input.consume();
-				if ( state.backtracking==0 ) adaptor.addChild(root_0, (CommonTree)adaptor.create(set246));
+				if ( state.backtracking==0 ) adaptor.addChild(root_0, (CommonTree)adaptor.create(set242));
 				state.errorRecovery=false;
 				state.failed=false;
 			}
@@ -6974,17 +6914,12 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start synpred8_tiger
 	public final void synpred8_tiger_fragment() throws RecognitionException {
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:535:4: ( value ASSIGN boolExpr1 )
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:535:5: value ASSIGN boolExpr1
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:550:4: ( RETURN_KEY boolExpr1 )
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:550:5: RETURN_KEY boolExpr1
 		{
-		pushFollow(FOLLOW_value_in_synpred8_tiger1140);
-		value();
-		state._fsp--;
-		if (state.failed) return;
+		match(input,RETURN_KEY,FOLLOW_RETURN_KEY_in_synpred8_tiger1216); if (state.failed) return;
 
-		match(input,ASSIGN,FOLLOW_ASSIGN_in_synpred8_tiger1142); if (state.failed) return;
-
-		pushFollow(FOLLOW_boolExpr1_in_synpred8_tiger1144);
+		pushFollow(FOLLOW_boolExpr1_in_synpred8_tiger1218);
 		boolExpr1();
 		state._fsp--;
 		if (state.failed) return;
@@ -6996,15 +6931,15 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start synpred9_tiger
 	public final void synpred9_tiger_fragment() throws RecognitionException {
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:552:4: ( RETURN_KEY boolExpr1 )
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:552:5: RETURN_KEY boolExpr1
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:557:5: ( numExpr2 PLUS )
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:557:6: numExpr2 PLUS
 		{
-		match(input,RETURN_KEY,FOLLOW_RETURN_KEY_in_synpred9_tiger1248); if (state.failed) return;
-
-		pushFollow(FOLLOW_boolExpr1_in_synpred9_tiger1250);
-		boolExpr1();
+		pushFollow(FOLLOW_numExpr2_in_synpred9_tiger1272);
+		numExpr2();
 		state._fsp--;
 		if (state.failed) return;
+
+		match(input,PLUS,FOLLOW_PLUS_in_synpred9_tiger1274); if (state.failed) return;
 
 		}
 
@@ -7013,15 +6948,15 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start synpred10_tiger
 	public final void synpred10_tiger_fragment() throws RecognitionException {
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:559:5: ( numExpr2 PLUS )
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:559:6: numExpr2 PLUS
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:559:5: ( numExpr2 MINUS )
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:559:6: numExpr2 MINUS
 		{
-		pushFollow(FOLLOW_numExpr2_in_synpred10_tiger1304);
+		pushFollow(FOLLOW_numExpr2_in_synpred10_tiger1302);
 		numExpr2();
 		state._fsp--;
 		if (state.failed) return;
 
-		match(input,PLUS,FOLLOW_PLUS_in_synpred10_tiger1306); if (state.failed) return;
+		match(input,MINUS,FOLLOW_MINUS_in_synpred10_tiger1304); if (state.failed) return;
 
 		}
 
@@ -7030,15 +6965,15 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start synpred11_tiger
 	public final void synpred11_tiger_fragment() throws RecognitionException {
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:561:5: ( numExpr2 MINUS )
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:561:6: numExpr2 MINUS
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:565:5: ( numExpr3 MULT )
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:565:6: numExpr3 MULT
 		{
-		pushFollow(FOLLOW_numExpr2_in_synpred11_tiger1334);
-		numExpr2();
+		pushFollow(FOLLOW_numExpr3_in_synpred11_tiger1348);
+		numExpr3();
 		state._fsp--;
 		if (state.failed) return;
 
-		match(input,MINUS,FOLLOW_MINUS_in_synpred11_tiger1336); if (state.failed) return;
+		match(input,MULT,FOLLOW_MULT_in_synpred11_tiger1350); if (state.failed) return;
 
 		}
 
@@ -7047,15 +6982,15 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start synpred12_tiger
 	public final void synpred12_tiger_fragment() throws RecognitionException {
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:567:5: ( numExpr3 MULT )
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:567:6: numExpr3 MULT
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:567:5: ( numExpr3 DIV )
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:567:6: numExpr3 DIV
 		{
-		pushFollow(FOLLOW_numExpr3_in_synpred12_tiger1380);
+		pushFollow(FOLLOW_numExpr3_in_synpred12_tiger1378);
 		numExpr3();
 		state._fsp--;
 		if (state.failed) return;
 
-		match(input,MULT,FOLLOW_MULT_in_synpred12_tiger1382); if (state.failed) return;
+		match(input,DIV,FOLLOW_DIV_in_synpred12_tiger1380); if (state.failed) return;
 
 		}
 
@@ -7064,15 +6999,15 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start synpred13_tiger
 	public final void synpred13_tiger_fragment() throws RecognitionException {
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:569:5: ( numExpr3 DIV )
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:569:6: numExpr3 DIV
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:579:5: ( boolExpr2 AND )
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:579:6: boolExpr2 AND
 		{
-		pushFollow(FOLLOW_numExpr3_in_synpred13_tiger1410);
-		numExpr3();
+		pushFollow(FOLLOW_boolExpr2_in_synpred13_tiger1461);
+		boolExpr2();
 		state._fsp--;
 		if (state.failed) return;
 
-		match(input,DIV,FOLLOW_DIV_in_synpred13_tiger1412); if (state.failed) return;
+		match(input,AND,FOLLOW_AND_in_synpred13_tiger1463); if (state.failed) return;
 
 		}
 
@@ -7081,15 +7016,15 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start synpred14_tiger
 	public final void synpred14_tiger_fragment() throws RecognitionException {
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:581:5: ( boolExpr2 AND )
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:581:6: boolExpr2 AND
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:581:5: ( boolExpr2 OR )
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:581:6: boolExpr2 OR
 		{
-		pushFollow(FOLLOW_boolExpr2_in_synpred14_tiger1493);
+		pushFollow(FOLLOW_boolExpr2_in_synpred14_tiger1491);
 		boolExpr2();
 		state._fsp--;
 		if (state.failed) return;
 
-		match(input,AND,FOLLOW_AND_in_synpred14_tiger1495); if (state.failed) return;
+		match(input,OR,FOLLOW_OR_in_synpred14_tiger1493); if (state.failed) return;
 
 		}
 
@@ -7098,15 +7033,15 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start synpred15_tiger
 	public final void synpred15_tiger_fragment() throws RecognitionException {
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:583:5: ( boolExpr2 OR )
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:583:6: boolExpr2 OR
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:587:5: ( numExpr1 LESSER )
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:587:6: numExpr1 LESSER
 		{
-		pushFollow(FOLLOW_boolExpr2_in_synpred15_tiger1523);
-		boolExpr2();
+		pushFollow(FOLLOW_numExpr1_in_synpred15_tiger1545);
+		numExpr1();
 		state._fsp--;
 		if (state.failed) return;
 
-		match(input,OR,FOLLOW_OR_in_synpred15_tiger1525); if (state.failed) return;
+		match(input,LESSER,FOLLOW_LESSER_in_synpred15_tiger1547); if (state.failed) return;
 
 		}
 
@@ -7115,15 +7050,15 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start synpred16_tiger
 	public final void synpred16_tiger_fragment() throws RecognitionException {
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:589:5: ( numExpr1 LESSER )
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:589:6: numExpr1 LESSER
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:589:5: ( numExpr1 GREATER )
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:589:6: numExpr1 GREATER
 		{
-		pushFollow(FOLLOW_numExpr1_in_synpred16_tiger1577);
+		pushFollow(FOLLOW_numExpr1_in_synpred16_tiger1575);
 		numExpr1();
 		state._fsp--;
 		if (state.failed) return;
 
-		match(input,LESSER,FOLLOW_LESSER_in_synpred16_tiger1579); if (state.failed) return;
+		match(input,GREATER,FOLLOW_GREATER_in_synpred16_tiger1577); if (state.failed) return;
 
 		}
 
@@ -7132,15 +7067,15 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start synpred17_tiger
 	public final void synpred17_tiger_fragment() throws RecognitionException {
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:591:5: ( numExpr1 GREATER )
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:591:6: numExpr1 GREATER
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:591:5: ( numExpr1 EQ )
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:591:6: numExpr1 EQ
 		{
-		pushFollow(FOLLOW_numExpr1_in_synpred17_tiger1607);
+		pushFollow(FOLLOW_numExpr1_in_synpred17_tiger1605);
 		numExpr1();
 		state._fsp--;
 		if (state.failed) return;
 
-		match(input,GREATER,FOLLOW_GREATER_in_synpred17_tiger1609); if (state.failed) return;
+		match(input,EQ,FOLLOW_EQ_in_synpred17_tiger1607); if (state.failed) return;
 
 		}
 
@@ -7149,15 +7084,15 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start synpred18_tiger
 	public final void synpred18_tiger_fragment() throws RecognitionException {
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:593:5: ( numExpr1 EQ )
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:593:6: numExpr1 EQ
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:593:5: ( numExpr1 NEQ )
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:593:6: numExpr1 NEQ
 		{
-		pushFollow(FOLLOW_numExpr1_in_synpred18_tiger1637);
+		pushFollow(FOLLOW_numExpr1_in_synpred18_tiger1636);
 		numExpr1();
 		state._fsp--;
 		if (state.failed) return;
 
-		match(input,EQ,FOLLOW_EQ_in_synpred18_tiger1639); if (state.failed) return;
+		match(input,NEQ,FOLLOW_NEQ_in_synpred18_tiger1638); if (state.failed) return;
 
 		}
 
@@ -7166,15 +7101,15 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start synpred19_tiger
 	public final void synpred19_tiger_fragment() throws RecognitionException {
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:595:5: ( numExpr1 NEQ )
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:595:6: numExpr1 NEQ
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:595:5: ( numExpr1 LESSEREQ )
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:595:6: numExpr1 LESSEREQ
 		{
-		pushFollow(FOLLOW_numExpr1_in_synpred19_tiger1668);
+		pushFollow(FOLLOW_numExpr1_in_synpred19_tiger1666);
 		numExpr1();
 		state._fsp--;
 		if (state.failed) return;
 
-		match(input,NEQ,FOLLOW_NEQ_in_synpred19_tiger1670); if (state.failed) return;
+		match(input,LESSEREQ,FOLLOW_LESSEREQ_in_synpred19_tiger1668); if (state.failed) return;
 
 		}
 
@@ -7183,15 +7118,15 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start synpred20_tiger
 	public final void synpred20_tiger_fragment() throws RecognitionException {
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:597:5: ( numExpr1 LESSEREQ )
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:597:6: numExpr1 LESSEREQ
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:597:5: ( numExpr1 GREATEREQ )
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:597:6: numExpr1 GREATEREQ
 		{
-		pushFollow(FOLLOW_numExpr1_in_synpred20_tiger1698);
+		pushFollow(FOLLOW_numExpr1_in_synpred20_tiger1696);
 		numExpr1();
 		state._fsp--;
 		if (state.failed) return;
 
-		match(input,LESSEREQ,FOLLOW_LESSEREQ_in_synpred20_tiger1700); if (state.failed) return;
+		match(input,GREATEREQ,FOLLOW_GREATEREQ_in_synpred20_tiger1698); if (state.failed) return;
 
 		}
 
@@ -7200,15 +7135,13 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start synpred21_tiger
 	public final void synpred21_tiger_fragment() throws RecognitionException {
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:599:5: ( numExpr1 GREATEREQ )
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:599:6: numExpr1 GREATEREQ
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:633:5: ( fixedptlit )
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:633:6: fixedptlit
 		{
-		pushFollow(FOLLOW_numExpr1_in_synpred21_tiger1728);
-		numExpr1();
+		pushFollow(FOLLOW_fixedptlit_in_synpred21_tiger1737);
+		fixedptlit();
 		state._fsp--;
 		if (state.failed) return;
-
-		match(input,GREATEREQ,FOLLOW_GREATEREQ_in_synpred21_tiger1730); if (state.failed) return;
 
 		}
 
@@ -7217,11 +7150,11 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start synpred22_tiger
 	public final void synpred22_tiger_fragment() throws RecognitionException {
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:635:5: ( fixedptlit )
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:635:6: fixedptlit
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:655:4: ( boolExpr1 )
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:655:5: boolExpr1
 		{
-		pushFollow(FOLLOW_fixedptlit_in_synpred22_tiger1769);
-		fixedptlit();
+		pushFollow(FOLLOW_boolExpr1_in_synpred22_tiger1862);
+		boolExpr1();
 		state._fsp--;
 		if (state.failed) return;
 
@@ -7232,13 +7165,21 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start synpred23_tiger
 	public final void synpred23_tiger_fragment() throws RecognitionException {
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:657:4: ( boolExpr1 )
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:657:5: boolExpr1
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:662:5: ( ID LBRACK index_expr RBRACK LBRACK )
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:662:6: ID LBRACK index_expr RBRACK LBRACK
 		{
-		pushFollow(FOLLOW_boolExpr1_in_synpred23_tiger1894);
-		boolExpr1();
+		match(input,ID,FOLLOW_ID_in_synpred23_tiger1924); if (state.failed) return;
+
+		match(input,LBRACK,FOLLOW_LBRACK_in_synpred23_tiger1926); if (state.failed) return;
+
+		pushFollow(FOLLOW_index_expr_in_synpred23_tiger1928);
+		index_expr();
 		state._fsp--;
 		if (state.failed) return;
+
+		match(input,RBRACK,FOLLOW_RBRACK_in_synpred23_tiger1930); if (state.failed) return;
+
+		match(input,LBRACK,FOLLOW_LBRACK_in_synpred23_tiger1932); if (state.failed) return;
 
 		}
 
@@ -7247,21 +7188,12 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start synpred24_tiger
 	public final void synpred24_tiger_fragment() throws RecognitionException {
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:664:5: ( ID LBRACK index_expr RBRACK LBRACK )
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:664:6: ID LBRACK index_expr RBRACK LBRACK
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:666:4: ( ID LBRACK )
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:666:5: ID LBRACK
 		{
-		match(input,ID,FOLLOW_ID_in_synpred24_tiger1956); if (state.failed) return;
+		match(input,ID,FOLLOW_ID_in_synpred24_tiger1957); if (state.failed) return;
 
-		match(input,LBRACK,FOLLOW_LBRACK_in_synpred24_tiger1958); if (state.failed) return;
-
-		pushFollow(FOLLOW_index_expr_in_synpred24_tiger1960);
-		index_expr();
-		state._fsp--;
-		if (state.failed) return;
-
-		match(input,RBRACK,FOLLOW_RBRACK_in_synpred24_tiger1962); if (state.failed) return;
-
-		match(input,LBRACK,FOLLOW_LBRACK_in_synpred24_tiger1964); if (state.failed) return;
+		match(input,LBRACK,FOLLOW_LBRACK_in_synpred24_tiger1959); if (state.failed) return;
 
 		}
 
@@ -7270,12 +7202,18 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start synpred25_tiger
 	public final void synpred25_tiger_fragment() throws RecognitionException {
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:668:4: ( ID LBRACK )
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:668:5: ID LBRACK
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:671:4: ( intlit index_oper )
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:671:5: intlit index_oper
 		{
-		match(input,ID,FOLLOW_ID_in_synpred25_tiger1989); if (state.failed) return;
+		pushFollow(FOLLOW_intlit_in_synpred25_tiger1988);
+		intlit();
+		state._fsp--;
+		if (state.failed) return;
 
-		match(input,LBRACK,FOLLOW_LBRACK_in_synpred25_tiger1991); if (state.failed) return;
+		pushFollow(FOLLOW_index_oper_in_synpred25_tiger1990);
+		index_oper();
+		state._fsp--;
+		if (state.failed) return;
 
 		}
 
@@ -7284,15 +7222,12 @@ public class tigerParser extends Parser {
 
 	// $ANTLR start synpred26_tiger
 	public final void synpred26_tiger_fragment() throws RecognitionException {
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:673:4: ( intlit index_oper )
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:673:5: intlit index_oper
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:674:4: ( ID index_oper )
+		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:674:5: ID index_oper
 		{
-		pushFollow(FOLLOW_intlit_in_synpred26_tiger2020);
-		intlit();
-		state._fsp--;
-		if (state.failed) return;
+		match(input,ID,FOLLOW_ID_in_synpred26_tiger2021); if (state.failed) return;
 
-		pushFollow(FOLLOW_index_oper_in_synpred26_tiger2022);
+		pushFollow(FOLLOW_index_oper_in_synpred26_tiger2023);
 		index_oper();
 		state._fsp--;
 		if (state.failed) return;
@@ -7302,151 +7237,8 @@ public class tigerParser extends Parser {
 	}
 	// $ANTLR end synpred26_tiger
 
-	// $ANTLR start synpred27_tiger
-	public final void synpred27_tiger_fragment() throws RecognitionException {
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:676:4: ( ID index_oper )
-		// /Users/cevanish12/Desktop/CS4240/tiger-compiler/tiger.g:676:5: ID index_oper
-		{
-		match(input,ID,FOLLOW_ID_in_synpred27_tiger2053); if (state.failed) return;
-
-		pushFollow(FOLLOW_index_oper_in_synpred27_tiger2055);
-		index_oper();
-		state._fsp--;
-		if (state.failed) return;
-
-		}
-
-	}
-	// $ANTLR end synpred27_tiger
-
 	// Delegated rules
 
-	public final boolean synpred1_tiger() {
-		state.backtracking++;
-		int start = input.mark();
-		try {
-			synpred1_tiger_fragment(); // can never throw exception
-		} catch (RecognitionException re) {
-			System.err.println("impossible: "+re);
-		}
-		boolean success = !state.failed;
-		input.rewind(start);
-		state.backtracking--;
-		state.failed=false;
-		return success;
-	}
-	public final boolean synpred14_tiger() {
-		state.backtracking++;
-		int start = input.mark();
-		try {
-			synpred14_tiger_fragment(); // can never throw exception
-		} catch (RecognitionException re) {
-			System.err.println("impossible: "+re);
-		}
-		boolean success = !state.failed;
-		input.rewind(start);
-		state.backtracking--;
-		state.failed=false;
-		return success;
-	}
-	public final boolean synpred16_tiger() {
-		state.backtracking++;
-		int start = input.mark();
-		try {
-			synpred16_tiger_fragment(); // can never throw exception
-		} catch (RecognitionException re) {
-			System.err.println("impossible: "+re);
-		}
-		boolean success = !state.failed;
-		input.rewind(start);
-		state.backtracking--;
-		state.failed=false;
-		return success;
-	}
-	public final boolean synpred4_tiger() {
-		state.backtracking++;
-		int start = input.mark();
-		try {
-			synpred4_tiger_fragment(); // can never throw exception
-		} catch (RecognitionException re) {
-			System.err.println("impossible: "+re);
-		}
-		boolean success = !state.failed;
-		input.rewind(start);
-		state.backtracking--;
-		state.failed=false;
-		return success;
-	}
-	public final boolean synpred9_tiger() {
-		state.backtracking++;
-		int start = input.mark();
-		try {
-			synpred9_tiger_fragment(); // can never throw exception
-		} catch (RecognitionException re) {
-			System.err.println("impossible: "+re);
-		}
-		boolean success = !state.failed;
-		input.rewind(start);
-		state.backtracking--;
-		state.failed=false;
-		return success;
-	}
-	public final boolean synpred20_tiger() {
-		state.backtracking++;
-		int start = input.mark();
-		try {
-			synpred20_tiger_fragment(); // can never throw exception
-		} catch (RecognitionException re) {
-			System.err.println("impossible: "+re);
-		}
-		boolean success = !state.failed;
-		input.rewind(start);
-		state.backtracking--;
-		state.failed=false;
-		return success;
-	}
-	public final boolean synpred22_tiger() {
-		state.backtracking++;
-		int start = input.mark();
-		try {
-			synpred22_tiger_fragment(); // can never throw exception
-		} catch (RecognitionException re) {
-			System.err.println("impossible: "+re);
-		}
-		boolean success = !state.failed;
-		input.rewind(start);
-		state.backtracking--;
-		state.failed=false;
-		return success;
-	}
-	public final boolean synpred24_tiger() {
-		state.backtracking++;
-		int start = input.mark();
-		try {
-			synpred24_tiger_fragment(); // can never throw exception
-		} catch (RecognitionException re) {
-			System.err.println("impossible: "+re);
-		}
-		boolean success = !state.failed;
-		input.rewind(start);
-		state.backtracking--;
-		state.failed=false;
-		return success;
-	}
-	public final boolean synpred27_tiger() {
-		state.backtracking++;
-		int start = input.mark();
-		try {
-			synpred27_tiger_fragment(); // can never throw exception
-		} catch (RecognitionException re) {
-			System.err.println("impossible: "+re);
-		}
-		boolean success = !state.failed;
-		input.rewind(start);
-		state.backtracking--;
-		state.failed=false;
-		return success;
-	}
 	public final boolean synpred6_tiger() {
 		state.backtracking++;
 		int start = input.mark();
@@ -7461,11 +7253,11 @@ public class tigerParser extends Parser {
 		state.failed=false;
 		return success;
 	}
-	public final boolean synpred12_tiger() {
+	public final boolean synpred1_tiger() {
 		state.backtracking++;
 		int start = input.mark();
 		try {
-			synpred12_tiger_fragment(); // can never throw exception
+			synpred1_tiger_fragment(); // can never throw exception
 		} catch (RecognitionException re) {
 			System.err.println("impossible: "+re);
 		}
@@ -7489,11 +7281,11 @@ public class tigerParser extends Parser {
 		state.failed=false;
 		return success;
 	}
-	public final boolean synpred15_tiger() {
+	public final boolean synpred12_tiger() {
 		state.backtracking++;
 		int start = input.mark();
 		try {
-			synpred15_tiger_fragment(); // can never throw exception
+			synpred12_tiger_fragment(); // can never throw exception
 		} catch (RecognitionException re) {
 			System.err.println("impossible: "+re);
 		}
@@ -7517,11 +7309,39 @@ public class tigerParser extends Parser {
 		state.failed=false;
 		return success;
 	}
+	public final boolean synpred15_tiger() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred15_tiger_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: "+re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed=false;
+		return success;
+	}
 	public final boolean synpred3_tiger() {
 		state.backtracking++;
 		int start = input.mark();
 		try {
 			synpred3_tiger_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: "+re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed=false;
+		return success;
+	}
+	public final boolean synpred14_tiger() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred14_tiger_fragment(); // can never throw exception
 		} catch (RecognitionException re) {
 			System.err.println("impossible: "+re);
 		}
@@ -7550,6 +7370,20 @@ public class tigerParser extends Parser {
 		int start = input.mark();
 		try {
 			synpred25_tiger_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: "+re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed=false;
+		return success;
+	}
+	public final boolean synpred16_tiger() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred16_tiger_fragment(); // can never throw exception
 		} catch (RecognitionException re) {
 			System.err.println("impossible: "+re);
 		}
@@ -7601,11 +7435,81 @@ public class tigerParser extends Parser {
 		state.failed=false;
 		return success;
 	}
+	public final boolean synpred4_tiger() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred4_tiger_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: "+re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed=false;
+		return success;
+	}
+	public final boolean synpred9_tiger() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred9_tiger_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: "+re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed=false;
+		return success;
+	}
+	public final boolean synpred20_tiger() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred20_tiger_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: "+re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed=false;
+		return success;
+	}
 	public final boolean synpred13_tiger() {
 		state.backtracking++;
 		int start = input.mark();
 		try {
 			synpred13_tiger_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: "+re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed=false;
+		return success;
+	}
+	public final boolean synpred24_tiger() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred24_tiger_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: "+re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed=false;
+		return success;
+	}
+	public final boolean synpred22_tiger() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred22_tiger_fragment(); // can never throw exception
 		} catch (RecognitionException re) {
 			System.err.println("impossible: "+re);
 		}
@@ -7657,11 +7561,11 @@ public class tigerParser extends Parser {
 		state.failed=false;
 		return success;
 	}
-	public final boolean synpred8_tiger() {
+	public final boolean synpred7_tiger() {
 		state.backtracking++;
 		int start = input.mark();
 		try {
-			synpred8_tiger_fragment(); // can never throw exception
+			synpred7_tiger_fragment(); // can never throw exception
 		} catch (RecognitionException re) {
 			System.err.println("impossible: "+re);
 		}
@@ -7671,11 +7575,11 @@ public class tigerParser extends Parser {
 		state.failed=false;
 		return success;
 	}
-	public final boolean synpred7_tiger() {
+	public final boolean synpred8_tiger() {
 		state.backtracking++;
 		int start = input.mark();
 		try {
-			synpred7_tiger_fragment(); // can never throw exception
+			synpred8_tiger_fragment(); // can never throw exception
 		} catch (RecognitionException re) {
 			System.err.println("impossible: "+re);
 		}
@@ -7847,105 +7751,101 @@ public class tigerParser extends Parser {
 	public static final BitSet FOLLOW_ASSIGN_in_assign_stat1119 = new BitSet(new long[]{0x0000000200000000L});
 	public static final BitSet FOLLOW_func_call_in_assign_stat1121 = new BitSet(new long[]{0x0010000000000000L});
 	public static final BitSet FOLLOW_SEMI_in_assign_stat1123 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_value_in_assign_stat1149 = new BitSet(new long[]{0x0000000000000040L});
-	public static final BitSet FOLLOW_ASSIGN_in_assign_stat1151 = new BitSet(new long[]{0x0600050200000000L});
-	public static final BitSet FOLLOW_boolExpr1_in_assign_stat1153 = new BitSet(new long[]{0x0010000000000000L});
-	public static final BitSet FOLLOW_SEMI_in_assign_stat1155 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_value_in_assign_stat1171 = new BitSet(new long[]{0x0000000000000040L});
-	public static final BitSet FOLLOW_ASSIGN_in_assign_stat1173 = new BitSet(new long[]{0x0600050200000000L});
-	public static final BitSet FOLLOW_numExpr1_in_assign_stat1175 = new BitSet(new long[]{0x0010000000000000L});
-	public static final BitSet FOLLOW_SEMI_in_assign_stat1177 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_func_call1199 = new BitSet(new long[]{0x0000010000000000L});
-	public static final BitSet FOLLOW_LPAREN_in_func_call1201 = new BitSet(new long[]{0x0608050200000000L});
-	public static final BitSet FOLLOW_func_param_list_in_func_call1203 = new BitSet(new long[]{0x0008000000000000L});
-	public static final BitSet FOLLOW_RPAREN_in_func_call1205 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_BREAK_KEY_in_break_stat1228 = new BitSet(new long[]{0x0010000000000000L});
-	public static final BitSet FOLLOW_SEMI_in_break_stat1230 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_RETURN_KEY_in_return_stat1255 = new BitSet(new long[]{0x0600050200000000L});
-	public static final BitSet FOLLOW_boolExpr1_in_return_stat1257 = new BitSet(new long[]{0x0010000000000000L});
-	public static final BitSet FOLLOW_SEMI_in_return_stat1259 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_RETURN_KEY_in_return_stat1275 = new BitSet(new long[]{0x0600050200000000L});
-	public static final BitSet FOLLOW_numExpr1_in_return_stat1277 = new BitSet(new long[]{0x0010000000000000L});
-	public static final BitSet FOLLOW_SEMI_in_return_stat1279 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_numExpr2_in_numExpr11311 = new BitSet(new long[]{0x0001000000000000L});
-	public static final BitSet FOLLOW_PLUS_in_numExpr11313 = new BitSet(new long[]{0x0600050200000000L});
-	public static final BitSet FOLLOW_numExpr2_in_numExpr11315 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_numExpr2_in_numExpr11341 = new BitSet(new long[]{0x0000040000000000L});
-	public static final BitSet FOLLOW_MINUS_in_numExpr11343 = new BitSet(new long[]{0x0600050200000000L});
-	public static final BitSet FOLLOW_numExpr2_in_numExpr11345 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_numExpr2_in_numExpr11363 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_numExpr3_in_numExpr21387 = new BitSet(new long[]{0x0000080000000000L});
-	public static final BitSet FOLLOW_MULT_in_numExpr21389 = new BitSet(new long[]{0x0600050200000000L});
-	public static final BitSet FOLLOW_numExpr3_in_numExpr21391 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_numExpr3_in_numExpr21417 = new BitSet(new long[]{0x0000000000200000L});
-	public static final BitSet FOLLOW_DIV_in_numExpr21419 = new BitSet(new long[]{0x0600050200000000L});
-	public static final BitSet FOLLOW_numExpr3_in_numExpr21421 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_numExpr3_in_numExpr21439 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_value_in_numExpr31462 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_constval_in_numExpr31468 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LPAREN_in_numExpr31474 = new BitSet(new long[]{0x0600050200000000L});
-	public static final BitSet FOLLOW_numExpr1_in_numExpr31476 = new BitSet(new long[]{0x0008000000000000L});
-	public static final BitSet FOLLOW_RPAREN_in_numExpr31478 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_boolExpr2_in_boolExpr11500 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_AND_in_boolExpr11502 = new BitSet(new long[]{0x0600050200000000L});
-	public static final BitSet FOLLOW_boolExpr2_in_boolExpr11504 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_boolExpr2_in_boolExpr11530 = new BitSet(new long[]{0x0000800000000000L});
-	public static final BitSet FOLLOW_OR_in_boolExpr11532 = new BitSet(new long[]{0x0600050200000000L});
-	public static final BitSet FOLLOW_boolExpr2_in_boolExpr11534 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_boolExpr2_in_boolExpr11552 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_numExpr1_in_boolExpr21584 = new BitSet(new long[]{0x0000004000000000L});
-	public static final BitSet FOLLOW_LESSER_in_boolExpr21586 = new BitSet(new long[]{0x0600050200000000L});
-	public static final BitSet FOLLOW_numExpr1_in_boolExpr21588 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_numExpr1_in_boolExpr21614 = new BitSet(new long[]{0x0000000080000000L});
-	public static final BitSet FOLLOW_GREATER_in_boolExpr21616 = new BitSet(new long[]{0x0600050200000000L});
-	public static final BitSet FOLLOW_numExpr1_in_boolExpr21618 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_numExpr1_in_boolExpr21644 = new BitSet(new long[]{0x0000000008000000L});
-	public static final BitSet FOLLOW_EQ_in_boolExpr21646 = new BitSet(new long[]{0x0600050200000000L});
-	public static final BitSet FOLLOW_numExpr1_in_boolExpr21649 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_numExpr1_in_boolExpr21675 = new BitSet(new long[]{0x0000100000000000L});
-	public static final BitSet FOLLOW_NEQ_in_boolExpr21677 = new BitSet(new long[]{0x0600050200000000L});
-	public static final BitSet FOLLOW_numExpr1_in_boolExpr21679 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_numExpr1_in_boolExpr21705 = new BitSet(new long[]{0x0000008000000000L});
-	public static final BitSet FOLLOW_LESSEREQ_in_boolExpr21707 = new BitSet(new long[]{0x0600050200000000L});
-	public static final BitSet FOLLOW_numExpr1_in_boolExpr21709 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_numExpr1_in_boolExpr21735 = new BitSet(new long[]{0x0000000100000000L});
-	public static final BitSet FOLLOW_GREATEREQ_in_boolExpr21737 = new BitSet(new long[]{0x0600050200000000L});
-	public static final BitSet FOLLOW_numExpr1_in_boolExpr21739 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_fixedptlit_in_constval1774 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_intlit_in_constval1779 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_MINUS_in_intlit1789 = new BitSet(new long[]{0x0400000000000000L});
-	public static final BitSet FOLLOW_UNSIGNED_INTLIT_in_intlit1792 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_MINUS_in_fixedptlit1816 = new BitSet(new long[]{0x0200000000000000L});
-	public static final BitSet FOLLOW_UNSIGNED_FIXEDPTLIT_in_fixedptlit1819 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_boolExpr1_in_expr_list1899 = new BitSet(new long[]{0x0000000000080002L});
-	public static final BitSet FOLLOW_COMMA_in_expr_list1902 = new BitSet(new long[]{0x0600050200000000L});
-	public static final BitSet FOLLOW_boolExpr1_in_expr_list1904 = new BitSet(new long[]{0x0000000000080002L});
-	public static final BitSet FOLLOW_numExpr1_in_expr_list1922 = new BitSet(new long[]{0x0000000000080002L});
-	public static final BitSet FOLLOW_COMMA_in_expr_list1925 = new BitSet(new long[]{0x0600050200000000L});
-	public static final BitSet FOLLOW_numExpr1_in_expr_list1927 = new BitSet(new long[]{0x0000000000080002L});
-	public static final BitSet FOLLOW_ID_in_value1969 = new BitSet(new long[]{0x0000002000000000L});
-	public static final BitSet FOLLOW_LBRACK_in_value1971 = new BitSet(new long[]{0x0400040200000000L});
-	public static final BitSet FOLLOW_index_expr_in_value1973 = new BitSet(new long[]{0x0002000000000000L});
-	public static final BitSet FOLLOW_RBRACK_in_value1975 = new BitSet(new long[]{0x0000002000000000L});
-	public static final BitSet FOLLOW_LBRACK_in_value1977 = new BitSet(new long[]{0x0400040200000000L});
-	public static final BitSet FOLLOW_index_expr_in_value1979 = new BitSet(new long[]{0x0002000000000000L});
-	public static final BitSet FOLLOW_RBRACK_in_value1981 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_value1996 = new BitSet(new long[]{0x0000002000000000L});
-	public static final BitSet FOLLOW_LBRACK_in_value1998 = new BitSet(new long[]{0x0400040200000000L});
-	public static final BitSet FOLLOW_index_expr_in_value2000 = new BitSet(new long[]{0x0002000000000000L});
-	public static final BitSet FOLLOW_RBRACK_in_value2002 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_value2007 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_intlit_in_index_expr2027 = new BitSet(new long[]{0x00010C0000000000L});
-	public static final BitSet FOLLOW_index_oper_in_index_expr2029 = new BitSet(new long[]{0x0400040200000000L});
-	public static final BitSet FOLLOW_index_expr_in_index_expr2031 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_intlit_in_index_expr2047 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_index_expr2060 = new BitSet(new long[]{0x00010C0000000000L});
-	public static final BitSet FOLLOW_index_oper_in_index_expr2062 = new BitSet(new long[]{0x0400040200000000L});
-	public static final BitSet FOLLOW_index_expr_in_index_expr2064 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_index_expr2080 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_numExpr1_in_func_param_list2197 = new BitSet(new long[]{0x0000000000080002L});
-	public static final BitSet FOLLOW_COMMA_in_func_param_list2200 = new BitSet(new long[]{0x0600050200000000L});
-	public static final BitSet FOLLOW_numExpr1_in_func_param_list2202 = new BitSet(new long[]{0x0000000000080002L});
+	public static final BitSet FOLLOW_value_in_assign_stat1139 = new BitSet(new long[]{0x0000000000000040L});
+	public static final BitSet FOLLOW_ASSIGN_in_assign_stat1141 = new BitSet(new long[]{0x0600050200000000L});
+	public static final BitSet FOLLOW_numExpr1_in_assign_stat1143 = new BitSet(new long[]{0x0010000000000000L});
+	public static final BitSet FOLLOW_SEMI_in_assign_stat1145 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_func_call1167 = new BitSet(new long[]{0x0000010000000000L});
+	public static final BitSet FOLLOW_LPAREN_in_func_call1169 = new BitSet(new long[]{0x0608050200000000L});
+	public static final BitSet FOLLOW_func_param_list_in_func_call1171 = new BitSet(new long[]{0x0008000000000000L});
+	public static final BitSet FOLLOW_RPAREN_in_func_call1173 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_BREAK_KEY_in_break_stat1196 = new BitSet(new long[]{0x0010000000000000L});
+	public static final BitSet FOLLOW_SEMI_in_break_stat1198 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_RETURN_KEY_in_return_stat1223 = new BitSet(new long[]{0x0600050200000000L});
+	public static final BitSet FOLLOW_boolExpr1_in_return_stat1225 = new BitSet(new long[]{0x0010000000000000L});
+	public static final BitSet FOLLOW_SEMI_in_return_stat1227 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_RETURN_KEY_in_return_stat1243 = new BitSet(new long[]{0x0600050200000000L});
+	public static final BitSet FOLLOW_numExpr1_in_return_stat1245 = new BitSet(new long[]{0x0010000000000000L});
+	public static final BitSet FOLLOW_SEMI_in_return_stat1247 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_numExpr2_in_numExpr11279 = new BitSet(new long[]{0x0001000000000000L});
+	public static final BitSet FOLLOW_PLUS_in_numExpr11281 = new BitSet(new long[]{0x0600050200000000L});
+	public static final BitSet FOLLOW_numExpr2_in_numExpr11283 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_numExpr2_in_numExpr11309 = new BitSet(new long[]{0x0000040000000000L});
+	public static final BitSet FOLLOW_MINUS_in_numExpr11311 = new BitSet(new long[]{0x0600050200000000L});
+	public static final BitSet FOLLOW_numExpr2_in_numExpr11313 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_numExpr2_in_numExpr11331 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_numExpr3_in_numExpr21355 = new BitSet(new long[]{0x0000080000000000L});
+	public static final BitSet FOLLOW_MULT_in_numExpr21357 = new BitSet(new long[]{0x0600050200000000L});
+	public static final BitSet FOLLOW_numExpr3_in_numExpr21359 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_numExpr3_in_numExpr21385 = new BitSet(new long[]{0x0000000000200000L});
+	public static final BitSet FOLLOW_DIV_in_numExpr21387 = new BitSet(new long[]{0x0600050200000000L});
+	public static final BitSet FOLLOW_numExpr3_in_numExpr21389 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_numExpr3_in_numExpr21407 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_value_in_numExpr31430 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_constval_in_numExpr31436 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LPAREN_in_numExpr31442 = new BitSet(new long[]{0x0600050200000000L});
+	public static final BitSet FOLLOW_numExpr1_in_numExpr31444 = new BitSet(new long[]{0x0008000000000000L});
+	public static final BitSet FOLLOW_RPAREN_in_numExpr31446 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_boolExpr2_in_boolExpr11468 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_AND_in_boolExpr11470 = new BitSet(new long[]{0x0600050200000000L});
+	public static final BitSet FOLLOW_boolExpr2_in_boolExpr11472 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_boolExpr2_in_boolExpr11498 = new BitSet(new long[]{0x0000800000000000L});
+	public static final BitSet FOLLOW_OR_in_boolExpr11500 = new BitSet(new long[]{0x0600050200000000L});
+	public static final BitSet FOLLOW_boolExpr2_in_boolExpr11502 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_boolExpr2_in_boolExpr11520 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_numExpr1_in_boolExpr21552 = new BitSet(new long[]{0x0000004000000000L});
+	public static final BitSet FOLLOW_LESSER_in_boolExpr21554 = new BitSet(new long[]{0x0600050200000000L});
+	public static final BitSet FOLLOW_numExpr1_in_boolExpr21556 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_numExpr1_in_boolExpr21582 = new BitSet(new long[]{0x0000000080000000L});
+	public static final BitSet FOLLOW_GREATER_in_boolExpr21584 = new BitSet(new long[]{0x0600050200000000L});
+	public static final BitSet FOLLOW_numExpr1_in_boolExpr21586 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_numExpr1_in_boolExpr21612 = new BitSet(new long[]{0x0000000008000000L});
+	public static final BitSet FOLLOW_EQ_in_boolExpr21614 = new BitSet(new long[]{0x0600050200000000L});
+	public static final BitSet FOLLOW_numExpr1_in_boolExpr21617 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_numExpr1_in_boolExpr21643 = new BitSet(new long[]{0x0000100000000000L});
+	public static final BitSet FOLLOW_NEQ_in_boolExpr21645 = new BitSet(new long[]{0x0600050200000000L});
+	public static final BitSet FOLLOW_numExpr1_in_boolExpr21647 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_numExpr1_in_boolExpr21673 = new BitSet(new long[]{0x0000008000000000L});
+	public static final BitSet FOLLOW_LESSEREQ_in_boolExpr21675 = new BitSet(new long[]{0x0600050200000000L});
+	public static final BitSet FOLLOW_numExpr1_in_boolExpr21677 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_numExpr1_in_boolExpr21703 = new BitSet(new long[]{0x0000000100000000L});
+	public static final BitSet FOLLOW_GREATEREQ_in_boolExpr21705 = new BitSet(new long[]{0x0600050200000000L});
+	public static final BitSet FOLLOW_numExpr1_in_boolExpr21707 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_fixedptlit_in_constval1742 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_intlit_in_constval1747 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_MINUS_in_intlit1757 = new BitSet(new long[]{0x0400000000000000L});
+	public static final BitSet FOLLOW_UNSIGNED_INTLIT_in_intlit1760 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_MINUS_in_fixedptlit1784 = new BitSet(new long[]{0x0200000000000000L});
+	public static final BitSet FOLLOW_UNSIGNED_FIXEDPTLIT_in_fixedptlit1787 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_boolExpr1_in_expr_list1867 = new BitSet(new long[]{0x0000000000080002L});
+	public static final BitSet FOLLOW_COMMA_in_expr_list1870 = new BitSet(new long[]{0x0600050200000000L});
+	public static final BitSet FOLLOW_boolExpr1_in_expr_list1872 = new BitSet(new long[]{0x0000000000080002L});
+	public static final BitSet FOLLOW_numExpr1_in_expr_list1890 = new BitSet(new long[]{0x0000000000080002L});
+	public static final BitSet FOLLOW_COMMA_in_expr_list1893 = new BitSet(new long[]{0x0600050200000000L});
+	public static final BitSet FOLLOW_numExpr1_in_expr_list1895 = new BitSet(new long[]{0x0000000000080002L});
+	public static final BitSet FOLLOW_ID_in_value1937 = new BitSet(new long[]{0x0000002000000000L});
+	public static final BitSet FOLLOW_LBRACK_in_value1939 = new BitSet(new long[]{0x0400040200000000L});
+	public static final BitSet FOLLOW_index_expr_in_value1941 = new BitSet(new long[]{0x0002000000000000L});
+	public static final BitSet FOLLOW_RBRACK_in_value1943 = new BitSet(new long[]{0x0000002000000000L});
+	public static final BitSet FOLLOW_LBRACK_in_value1945 = new BitSet(new long[]{0x0400040200000000L});
+	public static final BitSet FOLLOW_index_expr_in_value1947 = new BitSet(new long[]{0x0002000000000000L});
+	public static final BitSet FOLLOW_RBRACK_in_value1949 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_value1964 = new BitSet(new long[]{0x0000002000000000L});
+	public static final BitSet FOLLOW_LBRACK_in_value1966 = new BitSet(new long[]{0x0400040200000000L});
+	public static final BitSet FOLLOW_index_expr_in_value1968 = new BitSet(new long[]{0x0002000000000000L});
+	public static final BitSet FOLLOW_RBRACK_in_value1970 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_value1975 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_intlit_in_index_expr1995 = new BitSet(new long[]{0x00010C0000000000L});
+	public static final BitSet FOLLOW_index_oper_in_index_expr1997 = new BitSet(new long[]{0x0400040200000000L});
+	public static final BitSet FOLLOW_index_expr_in_index_expr1999 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_intlit_in_index_expr2015 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_index_expr2028 = new BitSet(new long[]{0x00010C0000000000L});
+	public static final BitSet FOLLOW_index_oper_in_index_expr2030 = new BitSet(new long[]{0x0400040200000000L});
+	public static final BitSet FOLLOW_index_expr_in_index_expr2032 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_index_expr2048 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_numExpr1_in_func_param_list2165 = new BitSet(new long[]{0x0000000000080002L});
+	public static final BitSet FOLLOW_COMMA_in_func_param_list2168 = new BitSet(new long[]{0x0600050200000000L});
+	public static final BitSet FOLLOW_numExpr1_in_func_param_list2170 = new BitSet(new long[]{0x0000000000080002L});
 	public static final BitSet FOLLOW_VOID_KEY_in_synpred1_tiger203 = new BitSet(new long[]{0x0000000040000000L});
 	public static final BitSet FOLLOW_FUNCTION_KEY_in_synpred1_tiger205 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_ARRAY_KEY_in_synpred2_tiger542 = new BitSet(new long[]{0x0000002000000000L});
@@ -7979,46 +7879,43 @@ public class tigerParser extends Parser {
 	public static final BitSet FOLLOW_value_in_synpred7_tiger1108 = new BitSet(new long[]{0x0000000000000040L});
 	public static final BitSet FOLLOW_ASSIGN_in_synpred7_tiger1110 = new BitSet(new long[]{0x0000000200000000L});
 	public static final BitSet FOLLOW_func_call_in_synpred7_tiger1112 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_value_in_synpred8_tiger1140 = new BitSet(new long[]{0x0000000000000040L});
-	public static final BitSet FOLLOW_ASSIGN_in_synpred8_tiger1142 = new BitSet(new long[]{0x0600050200000000L});
-	public static final BitSet FOLLOW_boolExpr1_in_synpred8_tiger1144 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_RETURN_KEY_in_synpred9_tiger1248 = new BitSet(new long[]{0x0600050200000000L});
-	public static final BitSet FOLLOW_boolExpr1_in_synpred9_tiger1250 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_numExpr2_in_synpred10_tiger1304 = new BitSet(new long[]{0x0001000000000000L});
-	public static final BitSet FOLLOW_PLUS_in_synpred10_tiger1306 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_numExpr2_in_synpred11_tiger1334 = new BitSet(new long[]{0x0000040000000000L});
-	public static final BitSet FOLLOW_MINUS_in_synpred11_tiger1336 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_numExpr3_in_synpred12_tiger1380 = new BitSet(new long[]{0x0000080000000000L});
-	public static final BitSet FOLLOW_MULT_in_synpred12_tiger1382 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_numExpr3_in_synpred13_tiger1410 = new BitSet(new long[]{0x0000000000200000L});
-	public static final BitSet FOLLOW_DIV_in_synpred13_tiger1412 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_boolExpr2_in_synpred14_tiger1493 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_AND_in_synpred14_tiger1495 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_boolExpr2_in_synpred15_tiger1523 = new BitSet(new long[]{0x0000800000000000L});
-	public static final BitSet FOLLOW_OR_in_synpred15_tiger1525 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_numExpr1_in_synpred16_tiger1577 = new BitSet(new long[]{0x0000004000000000L});
-	public static final BitSet FOLLOW_LESSER_in_synpred16_tiger1579 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_numExpr1_in_synpred17_tiger1607 = new BitSet(new long[]{0x0000000080000000L});
-	public static final BitSet FOLLOW_GREATER_in_synpred17_tiger1609 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_numExpr1_in_synpred18_tiger1637 = new BitSet(new long[]{0x0000000008000000L});
-	public static final BitSet FOLLOW_EQ_in_synpred18_tiger1639 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_numExpr1_in_synpred19_tiger1668 = new BitSet(new long[]{0x0000100000000000L});
-	public static final BitSet FOLLOW_NEQ_in_synpred19_tiger1670 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_numExpr1_in_synpred20_tiger1698 = new BitSet(new long[]{0x0000008000000000L});
-	public static final BitSet FOLLOW_LESSEREQ_in_synpred20_tiger1700 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_numExpr1_in_synpred21_tiger1728 = new BitSet(new long[]{0x0000000100000000L});
-	public static final BitSet FOLLOW_GREATEREQ_in_synpred21_tiger1730 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_fixedptlit_in_synpred22_tiger1769 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_boolExpr1_in_synpred23_tiger1894 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_synpred24_tiger1956 = new BitSet(new long[]{0x0000002000000000L});
-	public static final BitSet FOLLOW_LBRACK_in_synpred24_tiger1958 = new BitSet(new long[]{0x0400040200000000L});
-	public static final BitSet FOLLOW_index_expr_in_synpred24_tiger1960 = new BitSet(new long[]{0x0002000000000000L});
-	public static final BitSet FOLLOW_RBRACK_in_synpred24_tiger1962 = new BitSet(new long[]{0x0000002000000000L});
-	public static final BitSet FOLLOW_LBRACK_in_synpred24_tiger1964 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_synpred25_tiger1989 = new BitSet(new long[]{0x0000002000000000L});
-	public static final BitSet FOLLOW_LBRACK_in_synpred25_tiger1991 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_intlit_in_synpred26_tiger2020 = new BitSet(new long[]{0x00010C0000000000L});
-	public static final BitSet FOLLOW_index_oper_in_synpred26_tiger2022 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_synpred27_tiger2053 = new BitSet(new long[]{0x00010C0000000000L});
-	public static final BitSet FOLLOW_index_oper_in_synpred27_tiger2055 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_RETURN_KEY_in_synpred8_tiger1216 = new BitSet(new long[]{0x0600050200000000L});
+	public static final BitSet FOLLOW_boolExpr1_in_synpred8_tiger1218 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_numExpr2_in_synpred9_tiger1272 = new BitSet(new long[]{0x0001000000000000L});
+	public static final BitSet FOLLOW_PLUS_in_synpred9_tiger1274 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_numExpr2_in_synpred10_tiger1302 = new BitSet(new long[]{0x0000040000000000L});
+	public static final BitSet FOLLOW_MINUS_in_synpred10_tiger1304 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_numExpr3_in_synpred11_tiger1348 = new BitSet(new long[]{0x0000080000000000L});
+	public static final BitSet FOLLOW_MULT_in_synpred11_tiger1350 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_numExpr3_in_synpred12_tiger1378 = new BitSet(new long[]{0x0000000000200000L});
+	public static final BitSet FOLLOW_DIV_in_synpred12_tiger1380 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_boolExpr2_in_synpred13_tiger1461 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_AND_in_synpred13_tiger1463 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_boolExpr2_in_synpred14_tiger1491 = new BitSet(new long[]{0x0000800000000000L});
+	public static final BitSet FOLLOW_OR_in_synpred14_tiger1493 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_numExpr1_in_synpred15_tiger1545 = new BitSet(new long[]{0x0000004000000000L});
+	public static final BitSet FOLLOW_LESSER_in_synpred15_tiger1547 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_numExpr1_in_synpred16_tiger1575 = new BitSet(new long[]{0x0000000080000000L});
+	public static final BitSet FOLLOW_GREATER_in_synpred16_tiger1577 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_numExpr1_in_synpred17_tiger1605 = new BitSet(new long[]{0x0000000008000000L});
+	public static final BitSet FOLLOW_EQ_in_synpred17_tiger1607 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_numExpr1_in_synpred18_tiger1636 = new BitSet(new long[]{0x0000100000000000L});
+	public static final BitSet FOLLOW_NEQ_in_synpred18_tiger1638 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_numExpr1_in_synpred19_tiger1666 = new BitSet(new long[]{0x0000008000000000L});
+	public static final BitSet FOLLOW_LESSEREQ_in_synpred19_tiger1668 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_numExpr1_in_synpred20_tiger1696 = new BitSet(new long[]{0x0000000100000000L});
+	public static final BitSet FOLLOW_GREATEREQ_in_synpred20_tiger1698 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_fixedptlit_in_synpred21_tiger1737 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_boolExpr1_in_synpred22_tiger1862 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_synpred23_tiger1924 = new BitSet(new long[]{0x0000002000000000L});
+	public static final BitSet FOLLOW_LBRACK_in_synpred23_tiger1926 = new BitSet(new long[]{0x0400040200000000L});
+	public static final BitSet FOLLOW_index_expr_in_synpred23_tiger1928 = new BitSet(new long[]{0x0002000000000000L});
+	public static final BitSet FOLLOW_RBRACK_in_synpred23_tiger1930 = new BitSet(new long[]{0x0000002000000000L});
+	public static final BitSet FOLLOW_LBRACK_in_synpred23_tiger1932 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_synpred24_tiger1957 = new BitSet(new long[]{0x0000002000000000L});
+	public static final BitSet FOLLOW_LBRACK_in_synpred24_tiger1959 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_intlit_in_synpred25_tiger1988 = new BitSet(new long[]{0x00010C0000000000L});
+	public static final BitSet FOLLOW_index_oper_in_synpred25_tiger1990 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_synpred26_tiger2021 = new BitSet(new long[]{0x00010C0000000000L});
+	public static final BitSet FOLLOW_index_oper_in_synpred26_tiger2023 = new BitSet(new long[]{0x0000000000000002L});
 }

@@ -532,8 +532,6 @@ for_stat
 assign_stat
 	:	(value ASSIGN func_call) => value ASSIGN func_call SEMI
 	->	^(ASSIGN value func_call)
-	|	(value ASSIGN boolExpr1) => value ASSIGN boolExpr1 SEMI
-	->	^(ASSIGN value boolExpr1)
 	| value ASSIGN numExpr1 SEMI
 	-> ^(ASSIGN value numExpr1)
 	;
