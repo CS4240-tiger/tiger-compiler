@@ -302,9 +302,7 @@ type[String id]
     if ($base_type.text.equals("int")) { 
       symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,strip(id), TigerPrimitive.INT));
     } else if ($base_type.text.equals("fixedpt")) {
-      System.out.println("about to add");
       symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,strip(id), TigerPrimitive.FIXEDPT));
-      System.out.println("added");
     }
   }
 	|	(ARRAY_KEY LBRACK UNSIGNED_INTLIT RBRACK LBRACK UNSIGNED_INTLIT RBRACK) 
@@ -342,7 +340,7 @@ var_declaration
 	  	String idlist = $id_list.text; 
     		String[] ids = idlist.split(",");
     		// Check if it's not a base type
-    		if (!($type_id.text.equals("int") && $type_id.text.equals("fixedpt"))) {
+    		if (!strip($type_id.text).equals("int") && !strip($type_id.text).equals("fixedpt")) {
     		  // Gets the type and makes the variables for INT_ARRAY, INT_2D_ARRAY, and INT
     		  SymbolTableEntry type = symbolTable.get($type_id.text, CURRENT_SCOPE);
     		  
@@ -414,7 +412,7 @@ var_declaration
 		String[] ids = idlist.split(",");
 		
 		// Check if it's not a base type
-		if (!($type_id.text.equals("int") && $type_id.text.equals("fixedpt"))) {
+		if (!strip($type_id.text).equals("int") && !strip($type_id.text).equals("fixedpt")) {
 			// Gets the type and makes the variables for INT_ARRAY, INT_2D_ARRAY, and INT
 			SymbolTableEntry type = symbolTable.get($type_id.text, CURRENT_SCOPE);
 			// Check existence
@@ -530,12 +528,12 @@ for_stat
 	;
 
 assign_stat
-	:	(value ASSIGN func_call) => value ASSIGN func_call SEMI
-	->	^(ASSIGN value func_call)
+	:	(value ASSIGN func_call) =>value ASSIGN func_call SEMI
+  ->  ^(ASSIGN value func_call)
 	| (value ASSIGN boolExpr1) => value ASSIGN boolExpr1 SEMI
-	-> ^(ASSIGN value boolExpr1)
-	| value ASSIGN numExpr1 SEMI
-	-> ^(ASSIGN value numExpr1)
+  -> ^(ASSIGN value boolExpr1)
+  | (value ASSIGN numExpr1) => value ASSIGN numExpr1 SEMI
+  -> ^(ASSIGN value numExpr1)
 	;
 
 func_call
@@ -549,10 +547,10 @@ break_stat
 	;
 	
 return_stat
-	:	(RETURN_KEY boolExpr1) => RETURN_KEY boolExpr1 SEMI
-	->	^(AST_RETURN_STAT RETURN_KEY boolExpr1)
-	| RETURN_KEY numExpr1 SEMI
+	: (RETURN_KEY numExpr1) => RETURN_KEY numExpr1 SEMI
 	-> ^(AST_RETURN_STAT RETURN_KEY numExpr1)
+	| RETURN_KEY boolExpr1 SEMI
+  ->  ^(AST_RETURN_STAT RETURN_KEY boolExpr1)
 	;
 
 numExpr1 
@@ -572,16 +570,16 @@ numExpr2
   ;
          
 numExpr3 
-  : value
+  : (value) => value
   | constval
   | LPAREN numExpr1 RPAREN
   ;
-
+  
 boolExpr1 
-  : (numExpr1 AND) => numExpr1 AND numExpr1
-  -> ^(AND numExpr1 numExpr1)
-  | (numExpr1 OR) => numExpr1 OR numExpr1
-  -> ^(OR numExpr1 numExpr1)
+  : (boolExpr2 AND) => boolExpr2 AND boolExpr2 
+  -> ^(AND boolExpr2 boolExpr2)
+  | (boolExpr2 OR) => boolExpr2 OR boolExpr2
+  -> ^(OR boolExpr2 boolExpr2)
   | boolExpr2
   ;
           
@@ -598,38 +596,8 @@ boolExpr2
   -> ^(LESSEREQ numExpr1 numExpr1)
   | (numExpr1 GREATEREQ) => numExpr1 GREATEREQ numExpr1
   -> ^(GREATEREQ numExpr1 numExpr1)
+  | numExpr1
   ;
-
-/**binop_p0: (AND | OR | binop_p1);
-binop_p1: (EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ);     
-binop_p2: (MINUS | PLUS | binop_p3);
-binop_p3: (MULT | DIV);
-
-Boolexpr
-  :	(constval Boolop) => constval Boolop Boolexpr
-	->	^(Boolop constval Boolexpr)
-	|	constval
-	|	(value Boolop) => value Boolop Boolexpr
-	->	^(Boolop value Boolexpr)
-	|	value
-	|	(LPAREN Boolexpr RPAREN Boolop) => LPAREN Boolexpr RPAREN Boolop Boolexpr
-	->	^(Boolop ^(AST_EXPR_PAREN Boolexpr) Boolexpr)
-	|	LPAREN Boolexpr RPAREN
-	->	^(AST_EXPR_PAREN Boolexpr)
-	;
-
-Numexpr
-  : (constval Numop) => constval Numop Numexpr
-  ->  ^(Numop constval Numexpr)
-  | constval
-  | (value Numexpr) => value Numop Numexpr
-  ->  ^(Numop value Numexpr)
-  | value
-  | (LPAREN Numexpr RPAREN Numop) => LPAREN Numexpr RPAREN Numop Numexpr
-  ->  ^(Numop ^(AST_EXPR_PAREN Numexpr) Numexpr)
-  | LPAREN Numexpr RPAREN
-  ->  ^(AST_EXPR_PAREN Numexpr)
-  ;**/
 	
 constval
   :	(fixedptlit) => fixedptlit

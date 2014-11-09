@@ -4,10 +4,10 @@ begin
    begin
    	type ArrayInt = array [100] of int;
    	var t:ArrayInt;
-   	t := 123;
+   	t := 123 & 6 & 3 & 2;
    end;
    begin
     var decimal:decimal := 123;
-    x:=123;
+    x:=123 & 1;
    end;
 end;

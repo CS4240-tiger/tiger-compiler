@@ -39,7 +39,7 @@ public class SymbolTable {
 									entry.getScope(), 
 									entry.getId(), 
 									(TigerVariable) entry));
-					System.out.println(((TigerVariable)entry).getId()+":"+((TigerVariable)entry).getBackingType());
+					//System.out.println(((TigerVariable)entry).getId()+":"+((TigerVariable)entry).getBackingType());
 				} else {
 					// Check if it exists
 					List<TigerVariable> resultVarList = ((VariableSymbolTableEntry) backingTable.get(entry.getId())).backingList;
@@ -59,16 +59,16 @@ public class SymbolTable {
 					}
 					
 					// Otherwise, not found in accessible scope; safe to declare new entry in current scope
-					System.out.println(addVar.getId()+":"+addVar.getBackingType());
+					//System.out.println(addVar.getId()+":"+addVar.getBackingType());
 					resultVarList.add(addVar);
 				}
 			} else {	
 				backingTable.put(entry.getId(), entry);
 				size++;
-				if (entry instanceof TypeSymbolTableEntry) {
+				/**if (entry instanceof TypeSymbolTableEntry) {
 					System.out.println(String.valueOf(((TypeSymbolTableEntry)(entry)).getBackingType()) + ((TypeSymbolTableEntry)(entry)).getWidth());
 				}
-				System.out.println(entry.getScope().getId()+":"+entry.getId());
+				System.out.println(entry.getScope().getId()+":"+entry.getId());**/
 			}
 		}
 	}
@@ -81,7 +81,7 @@ public class SymbolTable {
 	**/
 	public boolean idExists(String id, Scope thisScope) {
 	  SymbolTableEntry entry= this.get(id, thisScope);
-	  if (entry != null || entry instanceof TypeSymbolTableEntry || entry instanceof FunctionSymbolTableEntry) {
+	  if (entry != null && (entry instanceof TypeSymbolTableEntry || entry instanceof FunctionSymbolTableEntry)) {
 	    System.out.println(id +" is already a name of a function or a type");
 	    return true;
 	  }

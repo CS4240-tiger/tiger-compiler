@@ -175,7 +175,6 @@ begin
 	var a : int := 12;	
 	var b : fixedpt := 2.2;
 	var c : fixedpt;	
-
 	c := 1&0|1+(2*4/6+3)*(3<4&9>=5+2)/5>6-4*9/2<>2;
 	return 2.2;
 	end;
