@@ -513,15 +513,15 @@ stat
 	;
 
 if_stat	
-  :	(IF_KEY expr THEN_KEY stat_seq ELSE_KEY) => 	IF_KEY expr THEN_KEY stat_seq ELSE_KEY stat_seq ENDIF_KEY SEMI
-	-> 	^(IF_KEY expr stat_seq ^(ELSE_KEY stat_seq))
-	|	IF_KEY expr THEN_KEY stat_seq ENDIF_KEY SEMI
-	->	^(IF_KEY expr stat_seq)
+  :	(IF_KEY boolExpr1 THEN_KEY stat_seq ELSE_KEY) => 	IF_KEY boolExpr1 THEN_KEY stat_seq ELSE_KEY stat_seq ENDIF_KEY SEMI
+	-> 	^(IF_KEY boolExpr1 stat_seq ^(ELSE_KEY stat_seq))
+	|	IF_KEY boolExpr1 THEN_KEY stat_seq ENDIF_KEY SEMI
+	->	^(IF_KEY boolExpr1 stat_seq)
 	;
 
 while_stat
-	:	WHILE_KEY expr DO_KEY stat_seq ENDDO_KEY SEMI
-	->	^(WHILE_KEY expr stat_seq)
+	:	WHILE_KEY boolExpr1 DO_KEY stat_seq ENDDO_KEY SEMI
+	->	^(WHILE_KEY boolExpr1 stat_seq)
 	;
 
 for_stat
@@ -532,8 +532,8 @@ for_stat
 assign_stat
 	:	(value ASSIGN func_call) => value ASSIGN func_call SEMI
 	->	^(ASSIGN value func_call)
-	|	value ASSIGN expr_list SEMI
-	->	^(ASSIGN value expr_list)
+	|	value ASSIGN numExpr1 SEMI
+	->	^(ASSIGN value numExpr1)
 	;
 
 func_call
@@ -547,11 +547,62 @@ break_stat
 	;
 	
 return_stat
-	:	RETURN_KEY expr SEMI
-	->	^(AST_RETURN_STAT RETURN_KEY expr)
+	:	(RETURN_KEY boolExpr1) => RETURN_KEY boolExpr1 SEMI
+	->	^(AST_RETURN_STAT RETURN_KEY boolExpr1)
+	| RETURN_KEY numExpr1 SEMI
+	-> ^(AST_RETURN_STAT RETURN_KEY numExpr1)
 	;
 
-	
+numExpr1 
+  : (numExpr2 PLUS) => numExpr2 PLUS numExpr2
+  -> ^(PLUS numExpr2 numExpr2)
+  | (numExpr2 MINUS) => numExpr2 MINUS numExpr2
+  -> ^(MINUS numExpr2 numExpr2)
+  | numExpr2
+  ;
+  
+numExpr2 
+  : (numExpr3 MULT) => numExpr3 MULT numExpr3
+  -> ^(MULT numExpr3 numExpr3)
+  | (numExpr3 DIV) => numExpr3 DIV numExpr3
+  -> ^(DIV numExpr3 numExpr3)
+  | numExpr3
+  ;
+         
+numExpr3 
+  : ID 
+  | constval
+  | LPAREN numExpr1 RPAREN
+  ;
+
+boolExpr1 
+  : (boolExpr2 AND) => boolExpr2 AND boolExpr2
+  -> ^(AND boolExpr2 boolExpr2)
+  | (boolExpr2 OR) => boolExpr2 OR boolExpr2
+  -> ^(OR boolExpr2 boolExpr2)
+  | boolExpr2
+  ;
+          
+boolExpr2 
+  : (numExpr1 LESSER) => numExpr1 LESSER numExpr1
+  -> ^(LESSER numExpr1 numExpr1)
+  | (numExpr1 GREATER) => numExpr1 GREATER numExpr1
+  -> ^(GREATER numExpr1 numExpr1)
+  | (numExpr1 EQ) numExpr1 EQ  numExpr1
+  -> ^(EQ numExpr1 numExpr1)
+  | (numExpr1 NEQ) => numExpr1 NEQ numExpr1
+  -> ^(NEQ numExpr1 numExpr1)
+  | (numExpr1 LESSEREQ) => numExpr1 LESSEREQ numExpr1
+  -> ^(LESSEREQ numExpr1 numExpr1)
+  | (numExpr1 GREATEREQ) => numExpr1 GREATEREQ numExpr1
+  -> ^(GREATEREQ numExpr1 numExpr1)
+  ;
+
+/**binop_p0: (AND | OR | binop_p1);
+binop_p1: (EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ);     
+binop_p2: (MINUS | PLUS | binop_p3);
+binop_p3: (MULT | DIV);
+
 Boolexpr
   :	(constval Boolop) => constval Boolop Boolexpr
 	->	^(Boolop constval Boolexpr)
@@ -576,15 +627,7 @@ Numexpr
   ->  ^(Numop ^(AST_EXPR_PAREN Numexpr) Numexpr)
   | LPAREN Numexpr RPAREN
   ->  ^(AST_EXPR_PAREN Numexpr)
-  ;
-
-Boolop: binop_p0;
-Numop: binop_p2;
-
-binop_p0:	(AND | OR | binop_p1);
-binop_p1:	(EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ);     
-binop_p2:	(MINUS | PLUS | binop_p3);
-binop_p3:	(MULT | DIV);
+  ;**/
 	
 constval
   :	(fixedptlit) => fixedptlit
@@ -609,10 +652,10 @@ binary_operator
 	;
 
 expr_list
-	:	Boolexpr (COMMA Boolexpr)*
-	->	^(AST_EXPR_LIST Boolexpr+)
-	| Numexpr (COMMA Numexpr)*
-	-> ^(AST_EXPR_LIST Numexpr+)
+	: (boolExpr1) => boolExpr1 (COMMA boolExpr1)*
+	-> ^(AST_EXPR_LIST boolExpr1+)
+	|  numExpr1 (COMMA numExpr1)*
+  ->  ^(AST_EXPR_LIST numExpr1+)
 	;
 
 value 	
@@ -654,8 +697,8 @@ WHITESPACE
 	;
   
 func_param_list
-	: (expr (COMMA expr)*)?
-	-> ^(AST_PARAM_LIST (expr+)?)
+	: (numExpr1 (COMMA numExpr1)*)?
+	-> ^(AST_PARAM_LIST (numExpr1+)?)
 	;
 
 keywords
