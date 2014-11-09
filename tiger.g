@@ -576,7 +576,7 @@ numExpr1 returns [String type]
   : (numExpr2 bin_op3) => val1=numExpr2 (bin_op3 val2=numExpr2)+ {
     $type = getTyping($val1.type, $val2.type);
     if ($type == null) {
-      System.out.println("Typing mismatch at " + $val1.start.getLine() + " between " + $val1.text + " and " + $val2.text);
+      System.out.println("Typing mismatch at line " + $val1.start.getLine() + " between values " + $val1.text + " and " + $val2.text);
     }
   }
   | numExpr2 {
@@ -593,7 +593,7 @@ numExpr2 returns [String type]
   : (numExpr3 bin_op4) => val1=numExpr3 (bin_op4 val2=numExpr3)+ {
     $type = getTyping($val1.type, $val2.type);
     if ($type == null) {
-      System.out.println("Typing mismatch at " + $val1.start.getLine() + " between " + $val1.text + " and " + $val2.text);
+      System.out.println("Typing mismatch at line " + $val1.start.getLine() + " between values " + $val1.text + " and " + $val2.text);
     }
   }
   | numExpr3 {

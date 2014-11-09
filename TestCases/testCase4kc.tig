@@ -2,7 +2,9 @@
 void main() 
 begin
    begin
-   	var t,p:int:= 3;
+   	type Integer = int;
+   	var t: Integer := 2;
+   	var p:int:= 3;
    	p := t + 3.2;
    end;
    begin
