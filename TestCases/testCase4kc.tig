@@ -2,9 +2,8 @@
 void main() 
 begin
    begin
-   	type ArrayInt = array [100] of int;
-   	var t:ArrayInt;
-   	t := 1 + 3 + 2 - 4 / 2 + 8 * 3 / 24 - 23 / 23;
+   	var t,p:int:= 3;
+   	p := t + 3.2;
    end;
    begin
     var decimal:decimal := 123;

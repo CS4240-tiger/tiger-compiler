@@ -39,6 +39,25 @@ tokens {
     System.out.println(obj);
   }
   
+  public String getTyping(String var1, String var2) {
+    if ((strip(var1).equals("int") && strip(var2).equals("fixedpt")) || (strip(var1).equals("fixedpt") && strip(var2).equals("int"))) {
+      return "fixedpt";
+    } else if (strip(var1).equals("int") && strip(var2).equals("int")) {
+      return "int";
+    } else if (strip(var1).equals("fixedpt") && strip(var2).equals("fixedpt")) {
+      return "fixedpt";
+    } else {
+      if (strip(var1).equals("int") && strip(var2).equals("fixedpt") && strip(var1).equals("fixedpt") && strip(var2).equals("int")) {
+        if (strip(var1).equals(strip(var2))) {
+          return strip(var1);
+        } else {
+          return null;
+        }
+      }
+      return null;
+    }
+  }
+  
   public String strip(String id) {
     return id.replaceAll("\\s","");
   }
@@ -530,7 +549,9 @@ for_stat
 assign_stat
 	:	(value ASSIGN func_call) =>value ASSIGN func_call SEMI
   ->  ^(ASSIGN value func_call)
-  | (value ASSIGN numExpr1) => value ASSIGN numExpr1 SEMI
+  | (value ASSIGN numExpr1) => value ASSIGN numExpr1 SEMI {
+    System.out.println($numExpr1.type);
+  }
   -> ^(ASSIGN value numExpr1)
 	;
 
@@ -551,9 +572,16 @@ return_stat
   ->  ^(AST_RETURN_STAT RETURN_KEY boolExpr1)
 	;
 
-numExpr1 
-  : (numExpr2 bin_op3) => numExpr2 (bin_op3 numExpr2)+
-  | numExpr2
+numExpr1 returns [String type]
+  : (numExpr2 bin_op3) => val1=numExpr2 (bin_op3 val2=numExpr2)+ {
+    $type = getTyping($val1.type, $val2.type);
+    if ($type == null) {
+      System.out.println("Typing mismatch at " + $val1.start.getLine() + " between " + $val1.text + " and " + $val2.text);
+    }
+  }
+  | numExpr2 {
+    $type = $numExpr2.type;
+  }
   ;
 
 bin_op3
@@ -561,9 +589,16 @@ bin_op3
   | MINUS
   ;
   
-numExpr2 
-  : (numExpr3 bin_op4) => numExpr3 (bin_op4 numExpr3)+
-  | numExpr3
+numExpr2 returns [String type]
+  : (numExpr3 bin_op4) => val1=numExpr3 (bin_op4 val2=numExpr3)+ {
+    $type = getTyping($val1.type, $val2.type);
+    if ($type == null) {
+      System.out.println("Typing mismatch at " + $val1.start.getLine() + " between " + $val1.text + " and " + $val2.text);
+    }
+  }
+  | numExpr3 {
+    $type = $numExpr3.type;
+  }
   ;
 
 bin_op4
@@ -571,9 +606,13 @@ bin_op4
   | DIV
   ;
          
-numExpr3 
-  : (value) => value
-  | constval
+numExpr3 returns [String type]
+  : (value) => value {
+    $type = $value.type;
+  }
+  | constval {
+    $type = $constval.type;
+  }
   | LPAREN numExpr1 RPAREN
   ;
 
@@ -601,9 +640,13 @@ bin_op2
   | GREATEREQ
   ;
 	
-constval
-  :	(fixedptlit) => fixedptlit
-	|	intlit
+constval returns [String type]
+  :	(fixedptlit) => fixedptlit {
+    $type = "fixedpt";
+  }
+	|	intlit {
+	  $type = "int";
+	}
 	;
 
 intlit :	MINUS? UNSIGNED_INTLIT;
@@ -630,13 +673,16 @@ expr_list
   ->  ^(AST_EXPR_LIST numExpr1+)
 	;
 
-value 	
+value returns [String type]
   :	(ID LBRACK index_expr RBRACK LBRACK) => ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK {
   	  SymbolTableEntry entry = symbolTable.get(strip($ID.text),CURRENT_SCOPE);
-  	  
+  	  System.out.println(((TigerVariable)entry).getType());
   	}
 	|	(ID LBRACK) => ID LBRACK index_expr RBRACK
-	|	ID
+	|	ID {
+      SymbolTableEntry entry = symbolTable.get(strip($ID.text),CURRENT_SCOPE);
+      $type = ((TigerVariable)entry).getType();
+    }
 	;
 
 index_expr 
