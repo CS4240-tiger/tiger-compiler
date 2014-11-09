@@ -16,7 +16,7 @@ public class TestTreeWalk {
             CommonTreeNodeStream treeNodes = new CommonTreeNodeStream(parseTree);
             tigerTreeWalker treeWalker = new tigerTreeWalker(treeNodes);
             
-            treeWalker.tiger_program();
+            //treeWalker.tiger_program();
             //System.out.println(result == null ? "Null." : result.eval());
         } catch (RecognitionException e) {
             e.printStackTrace();

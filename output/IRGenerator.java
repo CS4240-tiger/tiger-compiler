@@ -1,4 +1,6 @@
 import java.util.List;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * An IRGenerator serves to provide direct translations between 
@@ -348,6 +350,29 @@ public class IRGenerator {
 		}
 		
 		return result;
+	}
+	
+	/**
+	 * Attempts to write an input IR String list to a file.
+	 * 
+	 * @param filename The output file to write to.
+	 * @param inputIR A list of IR Strings.
+	 * @return True if write was successful; false otherwise.
+	 */
+	public static boolean writeIRToFile(String filename, List<String> inputIR) {
+		try {
+			FileWriter writer = new FileWriter(filename);
+			for (String irLine : inputIR) {
+				writer.write(irLine);			
+			}
+			
+			writer.close();
+		} catch (IOException e) {
+			System.out.println("ERROR: Writing IR to file failed!");
+			return false;
+		} 
+		
+		return true;
 	}
 	
 	/**
