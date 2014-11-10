@@ -108,19 +108,13 @@ type
 	;
 
 type_id returns [String typeString]
-	@init {
-		String typeString = "";
-	}
-  	:	base_type {typeString = $base_type.retString;}
-	|	ID {typeString = $ID.text;}
+  	:	base_type {$typeString = $base_type.retString;}
+	|	ID {$typeString = $ID.text;}
 	;
 
 base_type returns [String retString]
-	@init {
-		String retString = "";
-	}
-	:	INT_KEY {retString = $INT_KEY.text;}
-	|	FIXEDPT_KEY {retString = $FIXEDPT_KEY.text;}
+	:	INT_KEY {$retString = $INT_KEY.text;}
+	|	FIXEDPT_KEY {$retString = $FIXEDPT_KEY.text;}
 	;
 
 var_declaration 
@@ -140,16 +134,13 @@ var_declaration
 	;
 	
 unsigned_tail returns [String stringVal]
-	@init {
-		String stringVal;
-	}
 	:	UNSIGNED_INTLIT
 	{
-		stringVal = $UNSIGNED_INTLIT.text;
+		$stringVal = $UNSIGNED_INTLIT.text;
 	}
 	|	fixedptlit
 	{
-		stringVal = $fixedptlit.text;
+		$stringVal = $fixedptlit.fpStringVal;
 	}
 	;
 
@@ -157,7 +148,7 @@ id_list returns [List<String> idList]
 	@init {
 		$idList = new ArrayList<String>();
 	}
-	:	^(AST_ID_LIST (ID {$idList.add(String.valueOf(ID));})+)
+	:	^(AST_ID_LIST (ID {$idList.add($ID.text);})+)
 	;
 
 stat_seq
@@ -214,20 +205,19 @@ return_stat
 boolExpr1 returns [String expr]
   @init {
   	List<String> boolExpr2list = new ArrayList<String>();
-  	String expr = "";
   }
   : ^(bin_op1 (boolExpr2 {boolExpr2list.add($boolExpr2.expr);})+)
   {
     	for (String boolExpr2 : boolExpr2list) {
-  		expr += boolExpr2 + $bin_op1.text;
+  		$expr += boolExpr2 + $bin_op1.text;
   	}
   	
   	// Remove the last extra binop
-  	expr = expr.substring(0, expr.length() - 1);
+  	$expr = $expr.substring(0, $expr.length() - 1);
   }
   | boolExpr2
   {
-  	expr = $boolExpr2.expr;
+  	$expr = $boolExpr2.expr;
   }
   ;	
 
@@ -235,78 +225,72 @@ boolExpr1 returns [String expr]
 boolExpr2 returns [String expr]
   @init {
   	List<String> numExpr1list = new ArrayList<String>();
-  	String expr = "";
   }
   : ^(bin_op2 (numExpr1 {numExpr1list.add($numExpr1.expr);})+)
   {
     	for (String numExpr1 : numExpr1list) {
-  		expr += numExpr1 + $bin_op2.text;
+  		$expr += numExpr1 + $bin_op2.text;
   	}
   	
   	// Remove the last extra binop
-  	expr = expr.substring(0, expr.length() - 1);
+  	$expr = $expr.substring(0, $expr.length() - 1);
   }
   | numExpr1
   {
-  	expr = $numExpr1.expr;
+  	$expr = $numExpr1.expr;
   }
   ;
 
 numExpr1 returns [String expr]
   @init {
   	List<String> numExpr2list = new ArrayList<String>();
-  	String expr = "";
   }
   : ^(bin_op3 (numExpr2 {numExpr2list.add($numExpr2.expr);})+)
   {
   	for (String numExpr2 : numExpr2list) {
-  		expr += numExpr2 + $bin_op3.text;
+  		$expr += numExpr2 + $bin_op3.text;
   	}
   	
   	// Remove the last extra binop
-  	expr = expr.substring(0, expr.length() - 1);
+  	$expr = $expr.substring(0, $expr.length() - 1);
   }
   | numExpr2
   {
-  	expr = $numExpr2.expr;
+  	$expr = $numExpr2.expr;
   }
   ;
 
 numExpr2 returns [String expr]
   @init {
   	List<String> numExpr3list = new ArrayList<String>();
-  	String expr = "";
   }
   : ^(bin_op4 (numExpr3 {numExpr3list.add($numExpr3.expr);})+)
   {
   	for (String numExpr3 : numExpr3list) {
-  		expr += numExpr3 + $bin_op4.text;
+  		$expr += numExpr3 + $bin_op4.text;
   	}
   	
   	// Remove the last extra binop
-  	expr = expr.substring(0, expr.length() - 1);
+  	$expr = $expr.substring(0, $expr.length() - 1);
   }
   | numExpr3
   {
-  	expr = $numExpr3.expr;
+  	$expr = $numExpr3.expr;
   }
   ;
          
 numExpr3 returns [String expr]
-  @init {
-  	String expr;
-  }
   : value
   {
-  	expr = $value.text;
+  	$expr = $value.text;
   }
   | constval
   {
-  	expr = $constval.retStr;
+  	$expr = $constval.retStr;
   }
   | LPAREN! numExpr1 RPAREN!
   {
-  	expr = $numExpr1.expr;
+  	$expr = $numExpr1.expr;
   }
   ;
   
@@ -335,44 +319,35 @@ bin_op4
   ;
 	
 constval returns [String retStr]
-	@init {
-		String retStr = "";
-	}
 	:	(fixedptlit) => fixedptlit
 	{
-		retStr = $fixedptlit.fpStringVal;
+		$retStr = $fixedptlit.fpStringVal;
 	}
 	|	intlit
 	{
-		retStr = $intlit.intStringVal;
+		$retStr = $intlit.intStringVal;
 	}
 	;
 
 intlit returns [String intStringVal]
-	@init {
-		String intStringVal = "";
-	}
 	:	(MINUS) => MINUS UNSIGNED_INTLIT
 	{
-		intStringVal = $MINUS.text + $UNSIGNED_INTLIT.text;
+		$intStringVal = $MINUS.text + $UNSIGNED_INTLIT.text;
 	}
 	|	UNSIGNED_INTLIT
 	{
-		intStringVal = $UNSIGNED_INTLIT.text;
+		$intStringVal = $UNSIGNED_INTLIT.text;
 	}
 	;
 
 fixedptlit returns [String fpStringVal]
-	@init {
-		String fpStringVal = "";
-	}
 	:	(MINUS) => MINUS UNSIGNED_FIXEDPTLIT
 	{
-		fpStringVal = $MINUS.text + $UNSIGNED_FIXEDPTLIT.text;
+		$fpStringVal = $MINUS.text + $UNSIGNED_FIXEDPTLIT.text;
 	}
 	|	UNSIGNED_FIXEDPTLIT
 	{
-		fpStringVal = $UNSIGNED_FIXEDPTLIT.text;
+		$fpStringVal = $UNSIGNED_FIXEDPTLIT.text;
 	}
 	;
 	
@@ -391,24 +366,21 @@ value
 	;
 
 index_expr returns [String expr]
-	@init {
-		String expr = "";
-	}
 	:	^(index_oper intlit expr2=index_expr)
 	{
-		expr += $intlit.text + $index_oper.text + $expr2.expr;
+		$expr += $intlit.text + $index_oper.text + $expr2.expr;
 	}
 	|	intlit
 	{
-		expr += $intlit.text;
+		$expr += $intlit.text;
 	}
 	|	^(index_oper ID index_expr)
 	{
-		expr += $ID.text + $index_oper.text + $expr2.expr;
+		$expr += $ID.text + $index_oper.text + $expr2.expr;
 	}
 	|	ID
 	{
-		expr += $ID.text;
+		$expr += $ID.text;
 	}
 	;
 
@@ -418,7 +390,7 @@ index_oper
   
 func_param_list returns [List<String> paramList]
 	@init {
-		List<String> params = new ArrayList<String>();
+		List<String> paramList = new ArrayList<String>();
 	}
-	: ^(AST_PARAM_LIST ((numExpr1 {params.add($numExpr1.expr);})+)?)
+	: ^(AST_PARAM_LIST ((numExpr1 {paramList.add($numExpr1.expr);})+)?)
 	;
