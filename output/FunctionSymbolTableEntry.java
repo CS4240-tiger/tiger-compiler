@@ -12,7 +12,7 @@ public class FunctionSymbolTableEntry extends SymbolTableEntry {
 	/**
 	 * The list of parameter types for checking during function calls
 	 */
-	private List<String> paramTypeList;
+	private List<TypeSymbolTableEntry> paramTypeList;
 	
 	/**
 	 * Constructs a new FunctionSymbolTableEntry with specified return type.
@@ -21,7 +21,7 @@ public class FunctionSymbolTableEntry extends SymbolTableEntry {
 	 * @param id The String identifier of this FunctionSymbolTableEntry.
 	 * @param returnType The return type of this FunctionSymbolTableEntry.
 	 */
-	protected FunctionSymbolTableEntry(Scope scope, String id, String returnType, List<String> paramList) {
+	protected FunctionSymbolTableEntry(Scope scope, String id, String returnType, List<TypeSymbolTableEntry> paramList) {
 		super(scope, id);
 		this.paramTypeList = paramList;
 		this.returnType = returnType;
@@ -41,7 +41,7 @@ public class FunctionSymbolTableEntry extends SymbolTableEntry {
 	 * 
 	 * @return The ArrayList of parameter types
 	 */
-	protected List<String> getParamTypeList() {
+	protected List<TypeSymbolTableEntry> getParamTypeList() {
 		return this.paramTypeList;
 	}
 }

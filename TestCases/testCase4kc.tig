@@ -12,3 +12,12 @@ begin
     t(3);
    end;
 end;
+
+int function fact(input : int)
+begin
+	begin
+		if (input = 0 | input = 1) then
+			return 1;
+		endif;
+	end;
+end;

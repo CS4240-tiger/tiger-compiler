@@ -233,14 +233,14 @@ return_func
 	:	type_id FUNCTION_KEY ID {
 	    func_name = $ID.text;
 	    CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
-	  } LPAREN param_list[new ArrayList<String>()] {
+	  } LPAREN param_list[new ArrayList<TypeSymbolTableEntry>()] {
 	    symbolTable.put(new FunctionSymbolTableEntry(GLOBAL_SCOPE, $ID.text, $type_id.text,$param_list.outtypeList));
 	  } RPAREN begin block_list block_end
 	->	^(ID param_list block_list)
 	;
 
 void_func
-	:	(VOID_KEY FUNCTION_KEY) => VOID_KEY FUNCTION_KEY ID {func_name = $ID.text;} LPAREN param_list[new ArrayList<String>()] RPAREN begin block_list block_end
+	:	(VOID_KEY FUNCTION_KEY) => VOID_KEY FUNCTION_KEY ID {func_name = $ID.text;} LPAREN param_list[new ArrayList<TypeSymbolTableEntry>()] RPAREN begin block_list block_end
 		{
 			symbolTable.put(new FunctionSymbolTableEntry(GLOBAL_SCOPE, $ID.text, $VOID_KEY.text, $param_list.outtypeList));			
 			CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
@@ -267,23 +267,36 @@ ret_type
 	|	type_id
 	;
 
-param_list[List<String> intypeList] returns [List<String> outtypeList] 
+param_list[List<TypeSymbolTableEntry> intypeList] returns [List<TypeSymbolTableEntry> outtypeList] 
 	:	(var1=param[intypeList]{
 	    $outtypeList = $var1.outtypeList;
 	  } (COMMA param[intypeList])*)?
 	->	^(AST_PARAM_LIST (param+)?)
 	;
 
-param[List<String> intypeList] returns [List<String> outtypeList] 	
+param[List<TypeSymbolTableEntry> intypeList] returns [List<TypeSymbolTableEntry> outtypeList] 	
   :	ID COLON type_id {
+    if (!$type_id.text.equals("int") && !$type_id.text.equals("fixedpt")) {
     SymbolTableEntry type = symbolTable.get($type_id.text, CURRENT_SCOPE);
     if (type != null && type instanceof TypeSymbolTableEntry) {
-      intypeList.add(strip($type_id.text));
+      intypeList.add( (TypeSymbolTableEntry) type );
       $outtypeList = intypeList;
       symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip($ID.text), null, strip($type_id.text), ((TypeSymbolTableEntry) type).getBackingType()));
     } else {
 	    System.out.println("The type "+ $type_id.text+" on line "+$type_id.start.getLine()+" was not declared yet");
     }
+    } else {
+      if ($type_id.text.equals("int")) {
+        intypeList.add(symbolTable.getIntType());
+        $outtypeList = intypeList;
+        symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip($ID.text), null, "int", TigerPrimitive.INT));
+      } else if ($type_id.text.equals("fixedpt")) {
+        intypeList.add(symbolTable.getFixedPtType());
+        $outtypeList = intypeList;
+        symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip($ID.text), null, "int", TigerPrimitive.FIXEDPT));
+      }
+    }
+    System.out.println($ID.text + "added");
   }
 	->	^(COLON ID type_id)
 	;
@@ -781,12 +794,14 @@ expr_list
 value returns [String type]
   :	(ID LBRACK index_expr RBRACK LBRACK) => ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK {
   	  SymbolTableEntry entry = symbolTable.get(strip($ID.text),CURRENT_SCOPE);
-  	  System.out.println(((TigerVariable)entry).getType());
+  	  //System.out.println(((TigerVariable)entry).getType());
   	}
 	|	(ID LBRACK) => ID LBRACK index_expr RBRACK
 	|	ID {
       SymbolTableEntry entry = symbolTable.get(strip($ID.text),CURRENT_SCOPE);
-      $type = ((TigerVariable)entry).getType();
+      
+      //$type = ((TigerVariable)entry).getType();
+      $type = "fixedpt";
     }
 	;
 

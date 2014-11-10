@@ -19,10 +19,26 @@ public class SymbolTable {
 	private Map<String, SymbolTableEntry> backingTable;
 	
 	/**
+	 * the type entry for int
+	 * makes it easier to deal with functions
+	 */
+	private TypeSymbolTableEntry intType;
+	
+	/**
+	 * the type entry for fixedpt
+	 * makes it easier to deal with functions
+	 */
+	private TypeSymbolTableEntry fixedptType;
+	
+	/**
 	 * Instantiates a new SymbolTable.
 	 */
 	public SymbolTable() {
 		backingTable = new HashMap<String, SymbolTableEntry>();
+		this.intType =  new TypeSymbolTableEntry(new Scope(),"int", TigerPrimitive.INT);
+		this.fixedptType = new TypeSymbolTableEntry(new Scope(),"fixedpt", TigerPrimitive.FIXEDPT);
+		put(this.intType);
+		put(this.fixedptType);
 	}
 	
 	/**
@@ -67,6 +83,12 @@ public class SymbolTable {
 				size++;
 				if (entry instanceof TypeSymbolTableEntry) {
 					System.out.println(String.valueOf(((TypeSymbolTableEntry)(entry)).getBackingType()) + ((TypeSymbolTableEntry)(entry)).getWidth());
+				} else if (entry instanceof FunctionSymbolTableEntry) {
+					if (((FunctionSymbolTableEntry) entry).getParamTypeList() != null) {
+						System.out.println(((FunctionSymbolTableEntry) entry).getId()+" has a size of " + ((FunctionSymbolTableEntry) entry).getParamTypeList().get(0).getId());
+					} else {
+						System.out.println(((FunctionSymbolTableEntry) entry).getId()+" has a size of 0");
+					}
 				}
 				System.out.println(entry.getScope().getId()+":"+entry.getId());
 			}
@@ -146,5 +168,22 @@ public class SymbolTable {
 	public int getSize() {
 		return size;
 	}
-
+	
+	/**
+	 * Returns the TypeTableEntry for the primitive int to make life ezpz
+	 * 
+	 * @return the TypeTableEntry for the primitive int
+	 */
+	public TypeSymbolTableEntry getIntType() {
+		return this.intType;
+	}
+	
+	/**
+	 * Returns the TypeTableEntry for the primitive fixedpt to make life ezpz
+	 * 
+	 * @return the TypeTableEntry for the primitive fixedpt
+	 */
+	public TypeSymbolTableEntry getFixedPtType() {
+		return this.fixedptType;
+	}
 }
