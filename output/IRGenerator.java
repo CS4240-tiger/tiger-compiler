@@ -222,7 +222,7 @@ public class IRGenerator {
 	public static String func_call(FunctionSymbolTableEntry function, String[] args, String target) {
 		String result = "";
 		
-		if (function.getReturnType().toLowerCase().equals("void")) {
+		if (function.getReturnType().getId().toLowerCase().equals("void")) {
 			// It's a void function, no return value
 			result += IRMap.call(function.getId(), args);
 		} else {

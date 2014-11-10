@@ -108,11 +108,17 @@ type
 	;
 
 type_id returns [String typeString]
+	@init {
+		String typeString = "";
+	}
   	:	base_type {typeString = $base_type.retString;}
 	|	ID {typeString = $ID.text;}
 	;
 
 base_type returns [String retString]
+	@init {
+		String retString = "";
+	}
 	:	INT_KEY {retString = $INT_KEY.text;}
 	|	FIXEDPT_KEY {retString = $FIXEDPT_KEY.text;}
 	;
@@ -134,6 +140,9 @@ var_declaration
 	;
 	
 unsigned_tail returns [String stringVal]
+	@init {
+		String stringVal;
+	}
 	:	UNSIGNED_INTLIT
 	{
 		stringVal = $UNSIGNED_INTLIT.text;
@@ -205,6 +214,7 @@ return_stat
 boolExpr1 returns [String expr]
   @init {
   	List<String> boolExpr2list = new ArrayList<String>();
+  	String expr = "";
   }
   : ^(bin_op1 (boolExpr2 {boolExpr2list.add($boolExpr2.expr);})+)
   {
@@ -225,6 +235,7 @@ boolExpr1 returns [String expr]
 boolExpr2 returns [String expr]
   @init {
   	List<String> numExpr1list = new ArrayList<String>();
+  	String expr = "";
   }
   : ^(bin_op2 (numExpr1 {numExpr1list.add($numExpr1.expr);})+)
   {
@@ -244,11 +255,12 @@ boolExpr2 returns [String expr]
 numExpr1 returns [String expr]
   @init {
   	List<String> numExpr2list = new ArrayList<String>();
+  	String expr = "";
   }
   : ^(bin_op3 (numExpr2 {numExpr2list.add($numExpr2.expr);})+)
   {
   	for (String numExpr2 : numExpr2list) {
-  		expr += numExpr3 + $bin_op3.text;
+  		expr += numExpr2 + $bin_op3.text;
   	}
   	
   	// Remove the last extra binop
@@ -263,6 +275,7 @@ numExpr1 returns [String expr]
 numExpr2 returns [String expr]
   @init {
   	List<String> numExpr3list = new ArrayList<String>();
+  	String expr = "";
   }
   : ^(bin_op4 (numExpr3 {numExpr3list.add($numExpr3.expr);})+)
   {
@@ -280,13 +293,16 @@ numExpr2 returns [String expr]
   ;
          
 numExpr3 returns [String expr]
+  @init {
+  	String expr;
+  }
   : value
   {
   	expr = $value.text;
   }
   | constval
   {
-  	expr = $const.retStr;
+  	expr = $constval.retStr;
   }
   | LPAREN! numExpr1 RPAREN!
   {
@@ -319,6 +335,9 @@ bin_op4
   ;
 	
 constval returns [String retStr]
+	@init {
+		String retStr = "";
+	}
 	:	(fixedptlit) => fixedptlit
 	{
 		retStr = $fixedptlit.fpStringVal;
@@ -330,6 +349,9 @@ constval returns [String retStr]
 	;
 
 intlit returns [String intStringVal]
+	@init {
+		String intStringVal = "";
+	}
 	:	(MINUS) => MINUS UNSIGNED_INTLIT
 	{
 		intStringVal = $MINUS.text + $UNSIGNED_INTLIT.text;
@@ -341,6 +363,9 @@ intlit returns [String intStringVal]
 	;
 
 fixedptlit returns [String fpStringVal]
+	@init {
+		String fpStringVal = "";
+	}
 	:	(MINUS) => MINUS UNSIGNED_FIXEDPTLIT
 	{
 		fpStringVal = $MINUS.text + $UNSIGNED_FIXEDPTLIT.text;
@@ -366,6 +391,9 @@ value
 	;
 
 index_expr returns [String expr]
+	@init {
+		String expr = "";
+	}
 	:	^(index_oper intlit expr2=index_expr)
 	{
 		expr += $intlit.text + $index_oper.text + $expr2.expr;
