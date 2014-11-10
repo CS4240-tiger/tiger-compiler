@@ -741,7 +741,7 @@ numExpr3 returns [TypeSymbolTableEntry type]
   | constval {
     $type = $constval.type;
   }
-  | LPAREN numExpr1 RPAREN
+  | LPAREN! numExpr1 RPAREN!
   ;
 
   
