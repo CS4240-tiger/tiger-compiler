@@ -202,13 +202,13 @@ return_stat
 	;
 
 boolExpr1 
-  : ^(bin_op2 boolExpr2+)
+  : ^(bin_op1 boolExpr2+)
   | boolExpr2
   ;	
 
           
 boolExpr2 
-  : ^(bin_op1 numExpr1+)
+  : ^(bin_op2 numExpr1+)
   | numExpr1
   ;
 

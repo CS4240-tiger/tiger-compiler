@@ -16,8 +16,7 @@ public class TestTreeWalk {
             CommonTreeNodeStream treeNodes = new CommonTreeNodeStream(parseTree);
             tigerTreeWalker treeWalker = new tigerTreeWalker(treeNodes);
             
-            //treeWalker.tiger_program();
-            //System.out.println(result == null ? "Null." : result.eval());
+            treeWalker.tiger_program(); // Walk tree and output IR
         } catch (RecognitionException e) {
             e.printStackTrace();
         }

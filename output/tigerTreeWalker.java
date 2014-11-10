@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g 2014-11-09 18:26:35
+// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g 2014-11-10 10:20:26
 
 	import java.util.Map;
 	import java.util.HashMap;
@@ -1689,16 +1689,16 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "boolExpr1"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:204:1: boolExpr1 : ( ^( bin_op2 ( boolExpr2 )+ ) | boolExpr2 );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:204:1: boolExpr1 : ( ^( bin_op1 ( boolExpr2 )+ ) | boolExpr2 );
 	public final void boolExpr1() throws RecognitionException {
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:205:3: ( ^( bin_op2 ( boolExpr2 )+ ) | boolExpr2 )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:205:3: ( ^( bin_op1 ( boolExpr2 )+ ) | boolExpr2 )
 			int alt20=2;
 			int LA20_0 = input.LA(1);
-			if ( (LA20_0==EQ||(LA20_0 >= GREATER && LA20_0 <= GREATEREQ)||(LA20_0 >= LESSER && LA20_0 <= LESSEREQ)||LA20_0==NEQ) ) {
+			if ( (LA20_0==AND||LA20_0==OR) ) {
 				alt20=1;
 			}
-			else if ( (LA20_0==AND||LA20_0==DIV||LA20_0==ID||LA20_0==LPAREN||(LA20_0 >= MINUS && LA20_0 <= MULT)||(LA20_0 >= OR && LA20_0 <= PLUS)||(LA20_0 >= UNSIGNED_FIXEDPTLIT && LA20_0 <= UNSIGNED_INTLIT)) ) {
+			else if ( (LA20_0==DIV||LA20_0==EQ||(LA20_0 >= GREATER && LA20_0 <= ID)||(LA20_0 >= LESSER && LA20_0 <= LPAREN)||(LA20_0 >= MINUS && LA20_0 <= NEQ)||LA20_0==PLUS||(LA20_0 >= UNSIGNED_FIXEDPTLIT && LA20_0 <= UNSIGNED_INTLIT)) ) {
 				alt20=2;
 			}
 
@@ -1711,10 +1711,10 @@ public class tigerTreeWalker extends TreeParser {
 
 			switch (alt20) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:205:5: ^( bin_op2 ( boolExpr2 )+ )
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:205:5: ^( bin_op1 ( boolExpr2 )+ )
 					{
-					pushFollow(FOLLOW_bin_op2_in_boolExpr1713);
-					bin_op2();
+					pushFollow(FOLLOW_bin_op1_in_boolExpr1713);
+					bin_op1();
 					state._fsp--;
 					if (state.failed) return;
 					match(input, Token.DOWN, null); if (state.failed) return;
@@ -1724,7 +1724,7 @@ public class tigerTreeWalker extends TreeParser {
 					while (true) {
 						int alt19=2;
 						int LA19_0 = input.LA(1);
-						if ( (LA19_0==AND||LA19_0==DIV||LA19_0==ID||LA19_0==LPAREN||(LA19_0 >= MINUS && LA19_0 <= MULT)||(LA19_0 >= OR && LA19_0 <= PLUS)||(LA19_0 >= UNSIGNED_FIXEDPTLIT && LA19_0 <= UNSIGNED_INTLIT)) ) {
+						if ( (LA19_0==DIV||LA19_0==EQ||(LA19_0 >= GREATER && LA19_0 <= ID)||(LA19_0 >= LESSER && LA19_0 <= LPAREN)||(LA19_0 >= MINUS && LA19_0 <= NEQ)||LA19_0==PLUS||(LA19_0 >= UNSIGNED_FIXEDPTLIT && LA19_0 <= UNSIGNED_INTLIT)) ) {
 							alt19=1;
 						}
 
@@ -1777,13 +1777,13 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "boolExpr2"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:210:1: boolExpr2 : ( ^( bin_op1 ( numExpr1 )+ ) | numExpr1 );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:210:1: boolExpr2 : ( ^( bin_op2 ( numExpr1 )+ ) | numExpr1 );
 	public final void boolExpr2() throws RecognitionException {
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:211:3: ( ^( bin_op1 ( numExpr1 )+ ) | numExpr1 )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:211:3: ( ^( bin_op2 ( numExpr1 )+ ) | numExpr1 )
 			int alt22=2;
 			int LA22_0 = input.LA(1);
-			if ( (LA22_0==AND||LA22_0==OR) ) {
+			if ( (LA22_0==EQ||(LA22_0 >= GREATER && LA22_0 <= GREATEREQ)||(LA22_0 >= LESSER && LA22_0 <= LESSEREQ)||LA22_0==NEQ) ) {
 				alt22=1;
 			}
 			else if ( (LA22_0==DIV||LA22_0==ID||LA22_0==LPAREN||(LA22_0 >= MINUS && LA22_0 <= MULT)||LA22_0==PLUS||(LA22_0 >= UNSIGNED_FIXEDPTLIT && LA22_0 <= UNSIGNED_INTLIT)) ) {
@@ -1799,10 +1799,10 @@ public class tigerTreeWalker extends TreeParser {
 
 			switch (alt22) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:211:5: ^( bin_op1 ( numExpr1 )+ )
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:211:5: ^( bin_op2 ( numExpr1 )+ )
 					{
-					pushFollow(FOLLOW_bin_op1_in_boolExpr2750);
-					bin_op1();
+					pushFollow(FOLLOW_bin_op2_in_boolExpr2750);
+					bin_op2();
 					state._fsp--;
 					if (state.failed) return;
 					match(input, Token.DOWN, null); if (state.failed) return;
@@ -3120,10 +3120,10 @@ public class tigerTreeWalker extends TreeParser {
 	public static final BitSet FOLLOW_AST_RETURN_STAT_in_return_stat694 = new BitSet(new long[]{0x0000000000000004L});
 	public static final BitSet FOLLOW_RETURN_KEY_in_return_stat696 = new BitSet(new long[]{0x06019DC388200010L});
 	public static final BitSet FOLLOW_boolExpr1_in_return_stat698 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_bin_op2_in_boolExpr1713 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_boolExpr2_in_boolExpr1715 = new BitSet(new long[]{0x06018D0200200018L});
+	public static final BitSet FOLLOW_bin_op1_in_boolExpr1713 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_boolExpr2_in_boolExpr1715 = new BitSet(new long[]{0x06011DC388200008L});
 	public static final BitSet FOLLOW_boolExpr2_in_boolExpr1723 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_bin_op1_in_boolExpr2750 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_bin_op2_in_boolExpr2750 = new BitSet(new long[]{0x0000000000000004L});
 	public static final BitSet FOLLOW_numExpr1_in_boolExpr2752 = new BitSet(new long[]{0x06010D0200200008L});
 	public static final BitSet FOLLOW_numExpr1_in_boolExpr2760 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_bin_op3_in_numExpr1778 = new BitSet(new long[]{0x0000000000000004L});
