@@ -206,7 +206,7 @@ boolExpr1 returns [String expr]
   @init {
   	List<String> boolExpr2list = new ArrayList<String>();
   }
-  : ^(bin_op1 ({boolExpr2list.add($boolExpr2.expr);} boolExpr2)+)
+  : ^(bin_op1 (boolExpr2 {boolExpr2list.add($boolExpr2.expr);})+)
   {
     	for (String boolExpr2 : boolExpr2list) {
   		expr += boolExpr2 + $bin_op1.text;
@@ -226,7 +226,7 @@ boolExpr2 returns [String expr]
   @init {
   	List<String> numExpr1list = new ArrayList<String>();
   }
-  : ^(bin_op2 ({numExpr1list.add($numExpr1.expr);} numExpr1)+)
+  : ^(bin_op2 (numExpr1 {numExpr1list.add($numExpr1.expr);})+)
   {
     	for (String numExpr1 : numExpr1list) {
   		expr += numExpr1 + $bin_op2.text;
@@ -245,7 +245,7 @@ numExpr1 returns [String expr]
   @init {
   	List<String> numExpr2list = new ArrayList<String>();
   }
-  : ^(bin_op3 ({numExpr2list.add($numExpr2.expr);} numExpr2)+)
+  : ^(bin_op3 (numExpr2 {numExpr2list.add($numExpr2.expr);})+)
   {
   	for (String numExpr2 : numExpr2list) {
   		expr += numExpr3 + $bin_op3.text;
@@ -264,7 +264,7 @@ numExpr2 returns [String expr]
   @init {
   	List<String> numExpr3list = new ArrayList<String>();
   }
-  : ^(bin_op4 ({numExpr3list.add($numExpr3.expr);} numExpr3)+)
+  : ^(bin_op4 (numExpr3 {numExpr3list.add($numExpr3.expr);})+)
   {
   	for (String numExpr3 : numExpr3list) {
   		expr += numExpr3 + $bin_op4.text;
@@ -282,7 +282,7 @@ numExpr2 returns [String expr]
 numExpr3 returns [String expr]
   : value
   {
-  	expr = $value.retStr;
+  	expr = $value.text;
   }
   | constval
   {
