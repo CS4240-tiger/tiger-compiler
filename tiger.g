@@ -234,22 +234,29 @@ return_func
 	    func_name = $ID.text;
 	    CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
 	  } LPAREN param_list[new ArrayList<TypeSymbolTableEntry>()] {
-	    symbolTable.put(new FunctionSymbolTableEntry(GLOBAL_SCOPE, $ID.text, $type_id.text,$param_list.outtypeList));
+	    SymbolTableEntry type = symbolTable.get($type_id.text, CURRENT_SCOPE);
+	    if (type != null && type instanceof TypeSymbolTableEntry) {
+	      symbolTable.put(new FunctionSymbolTableEntry(GLOBAL_SCOPE, $ID.text, ((TypeSymbolTableEntry) type),$param_list.outtypeList));
+	    } else {
+	       System.out.println("The type " + $type_id.text + "on line " + $type_id.start.getLine()+ " does not exist or is not in an accessible scope");
+	    }
 	  } RPAREN begin block_list block_end
 	->	^(ID param_list block_list)
 	;
 
 void_func
-	:	(VOID_KEY FUNCTION_KEY) => VOID_KEY FUNCTION_KEY ID {func_name = $ID.text;} LPAREN param_list[new ArrayList<TypeSymbolTableEntry>()] RPAREN begin block_list block_end
-		{
-			symbolTable.put(new FunctionSymbolTableEntry(GLOBAL_SCOPE, $ID.text, $VOID_KEY.text, $param_list.outtypeList));			
-			CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
-		}
+	:	(VOID_KEY FUNCTION_KEY) => VOID_KEY FUNCTION_KEY ID {
+	    func_name = $ID.text;
+	    CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
+	  } LPAREN param_list[new ArrayList<TypeSymbolTableEntry>()] {
+      symbolTable.put(new FunctionSymbolTableEntry(GLOBAL_SCOPE, $ID.text, null, $param_list.outtypeList));     
+    }
+	  RPAREN begin block_list block_end
 	->	^(ID param_list block_list) 
 		
 	|	VOID_KEY MAIN_KEY {
 	    func_name = $MAIN_KEY.text;
-	    symbolTable.put(new FunctionSymbolTableEntry(GLOBAL_SCOPE, $MAIN_KEY.text, $VOID_KEY.text, null));
+	    symbolTable.put(new FunctionSymbolTableEntry(GLOBAL_SCOPE, $MAIN_KEY.text, null, null));
       CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text); 
 	  } LPAREN RPAREN begin block_list block_end
 	->	^(MAIN_KEY block_list) 
@@ -598,11 +605,11 @@ var_declaration
     		//initialiazes for both int and fixedpt.. to null
     	  if (strip($type_id.text).equals("int")) {
 		   		for (String id: ids) {
-	     			symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), null, TigerPrimitive.INT));
+	     			symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), null, "int", TigerPrimitive.INT));
 		   		}
 	   		} else if (strip($type_id.text).equals("fixedpt")) {
 	   		   for (String id: ids) {
-            symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), null, TigerPrimitive.FIXEDPT));
+            symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), null, "fixedpt", TigerPrimitive.FIXEDPT));
           }
 	   		}
    		}
@@ -678,8 +685,6 @@ break_stat
 return_stat
 	: (RETURN_KEY numExpr1) => RETURN_KEY numExpr1 SEMI
 	-> ^(AST_RETURN_STAT RETURN_KEY numExpr1)
-	| RETURN_KEY boolExpr1 SEMI
-  ->  ^(AST_RETURN_STAT RETURN_KEY boolExpr1)
 	;
 
 numExpr1 returns [String type]
