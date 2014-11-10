@@ -282,7 +282,7 @@ numExpr2 returns [String expr]
 numExpr3 returns [String expr]
   : value
   {
-  	$expr = $value.text;
+  	$expr = $value.strVal;
   }
   | constval
   {
@@ -294,28 +294,64 @@ numExpr3 returns [String expr]
   }
   ;
   
-bin_op1
+bin_op1 returns [String text]
   : AND
+  {
+  	$text = $AND.text;
+  }
   | OR
+  {
+  	$text = $OR.text;
+  }
   ;
  
-bin_op2
+bin_op2 returns [String text]
   : LESSER
+  {
+  	$text = $LESSER.text;
+  }
   | GREATER
+  {
+  	$text = $GREATER.text;
+  }
   | EQ
+  {
+  	$text = $EQ.text;
+  }
   | NEQ
+  {
+  	$text = $NEQ.text;
+  }
   | LESSEREQ
+  {
+  	$text = $LESSEREQ.text;
+  }
   | GREATEREQ
+  {
+  	$text = $GREATEREQ.text;
+  }
   ;
  
-bin_op3
+bin_op3 returns [String text]
   : PLUS
+  {
+  	$text = $PLUS.text;
+  }
   | MINUS
+  {
+  	$text = $MINUS.text;
+  }
   ;
 
-bin_op4
+bin_op4 returns [String text]
   : MULT
+  {
+  	$text = $MULT.text;
+  }
   | DIV
+  {
+  	$text = $DIV.text;
+  }
   ;
 	
 constval returns [String retStr]
@@ -359,10 +395,13 @@ expr_list
 	:	^(AST_EXPR_LIST boolExpr1+)
 	;
 
-value
+value returns [String strVal]
 	:	(ID LBRACK index_expr RBRACK LBRACK) => ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK
 	|	(ID LBRACK) => ID LBRACK index_expr RBRACK
 	|	ID
+	{
+		$strVal = $ID.text;
+	}
 	;
 
 index_expr returns [String expr]
