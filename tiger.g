@@ -678,7 +678,9 @@ assign_stat
 	;
 
 func_call
-	:	ID LPAREN func_param_list RPAREN
+	:	ID LPAREN func_param_list RPAREN {
+	  
+	}
 	->	^(AST_FUNC_CALL ID func_param_list)
 	;
 	
@@ -738,9 +740,6 @@ numExpr3 returns [TypeSymbolTableEntry type]
   }
   | constval {
     $type = $constval.type;
-  }
-  | func_call {
-    
   }
   | LPAREN numExpr1 RPAREN
   ;

@@ -40,4 +40,17 @@ public class SymbolTableEntry {
 	public String getId() {
 		return id;
 	}
+	
+	/**
+	 * Checks if the types are equal
+	 * 
+	 * @param the TypeSymbolTable that they are checking equality for
+	 * 
+	 * @return true if they are equal
+	 * @return false if they are not equal
+	 */
+	
+	public Boolean equals(SymbolTableEntry entry) {
+		return this.id.equals(entry.getId());
+	}
 }
