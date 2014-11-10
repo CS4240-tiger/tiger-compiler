@@ -201,25 +201,53 @@ return_stat
 	:	^(AST_RETURN_STAT RETURN_KEY boolExpr1)
 	;
 
-boolExpr1 
+boolExpr1 returns [String expr]
   : ^(bin_op1 boolExpr2+)
   | boolExpr2
   ;	
 
           
-boolExpr2 
+boolExpr2 returns [String expr]
   : ^(bin_op2 numExpr1+)
   | numExpr1
   ;
 
 numExpr1 returns [String expr]
-  : ^(bin_op3 numExpr2+)
+  @init {
+  	List<String> numExpr2list = new ArrayList<String>();
+  }
+  : ^(bin_op3 ({numExpr2list.add($numExpr2.expr);} numExpr2)+)
+  {
+  	for (String numExpr2 : numExpr2list) {
+  		expr += numExpr3 + $bin_op3.text;
+  	}
+  	
+  	// Remove the last extra binop
+  	expr = expr.substring(0, expr.length() - 1);
+  }
   | numExpr2
+  {
+  	expr = $numExpr2.expr;
+  }
   ;
 
 numExpr2 returns [String expr]
-  : ^(bin_op4 numExpr3+)
+  @init {
+  	List<String> numExpr3list = new ArrayList<String>();
+  }
+  : ^(bin_op4 ({numExpr3list.add($numExpr3.expr);} numExpr3)+)
+  {
+  	for (String numExpr3 : numExpr3list) {
+  		expr += numExpr3 + $bin_op4.text;
+  	}
+  	
+  	// Remove the last extra binop
+  	expr = expr.substring(0, expr.length() - 1);
+  }
   | numExpr3
+  {
+  	expr = $numExpr3.expr;
+  }
   ;
          
 numExpr3 returns [String expr]
