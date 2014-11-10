@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\Users\\scollins36\\Desktop\\GitPortable\\App\\Git\\tiger-compiler\\tigerTreeWalker.g 2014-11-10 14:56:23
+// $ANTLR 3.5.1 C:\\Users\\scollins36\\Desktop\\GitPortable\\App\\Git\\tiger-compiler\\tigerTreeWalker.g 2014-11-10 15:00:15
 
 	import java.util.Map;
 	import java.util.HashMap;
@@ -4244,7 +4244,7 @@ public class tigerTreeWalker extends TreeParser {
 					adaptor.addChild(root_0, constval102.getTree());
 
 					if ( state.backtracking==0 ) {
-					  	expr = $const.retStr
+					  	expr = $const.retStr;
 					  }
 					if ( state.backtracking==0 ) {
 					}

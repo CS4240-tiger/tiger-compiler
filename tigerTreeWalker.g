@@ -286,7 +286,7 @@ numExpr3 returns [String expr]
   }
   | constval
   {
-  	expr = $const.retStr
+  	expr = $const.retStr;
   }
   | LPAREN! numExpr1 RPAREN!
   {
