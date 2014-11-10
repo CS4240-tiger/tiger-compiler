@@ -303,7 +303,7 @@ param[List<TypeSymbolTableEntry> intypeList] returns [List<TypeSymbolTableEntry>
         symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip($ID.text), null, "int", TigerPrimitive.FIXEDPT));
       }
     }
-    System.out.println($ID.text + "added");
+    //System.out.println($ID.text + "added");
   }
 	->	^(COLON ID type_id)
 	;
@@ -672,7 +672,7 @@ assign_stat
     if (variable == null || !(variable instanceof TigerVariable)) {
       System.out.println("The variable "+$value.id+" on line "+$assign_stat.start.getLine()+" was never declared");
     } 
-    System.out.println($numExpr1.type);
+    //System.out.println($numExpr1.type);
   }
   -> ^(ASSIGN value numExpr1)
 	;
