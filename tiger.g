@@ -742,7 +742,7 @@ numExpr3 returns [TypeSymbolTableEntry type]
   | func_call {
     
   }
-  | LPAREN numExpr1 RPAREN
+  | LPAREN! numExpr1 RPAREN!
   ;
 
   

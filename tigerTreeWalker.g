@@ -212,20 +212,26 @@ boolExpr2
   | numExpr1
   ;
 
-numExpr1 returns [String type]
+numExpr1 returns [String expr]
   : ^(bin_op3 numExpr2+)
   | numExpr2
   ;
 
-numExpr2 returns [String type]
+numExpr2 returns [String expr]
   : ^(bin_op4 numExpr3+)
   | numExpr3
   ;
          
-numExpr3 returns [String type]
+numExpr3 returns [String expr]
   : value
+  {
+  	expr = $value.retStr;
+  }
   | constval
-  | LPAREN numExpr1 RPAREN
+  {
+  	expr = $const.retStr
+  }
+  | LPAREN! numExpr1 RPAREN!
   ;
   
 bin_op1
@@ -252,9 +258,15 @@ bin_op4
   | DIV
   ;
 	
-constval
+constval returns [String retStr]
 	:	(fixedptlit) => fixedptlit
+	{
+		retStr = $fixedptlit.fpStringVal;
+	}
 	|	intlit
+	{
+		retStr = $intlit.intStringVal;
+	}
 	;
 
 intlit returns [String intStringVal]
@@ -268,8 +280,15 @@ intlit returns [String intStringVal]
 	}
 	;
 
-fixedptlit
-	:   MINUS? UNSIGNED_FIXEDPTLIT
+fixedptlit returns [String fpStringVal]
+	:	(MINUS) => MINUS UNSIGNED_FIXEDPTLIT
+	{
+		fpStringVal = $MINUS.text + $UNSIGNED_FIXEDPTLIT.text;
+	}
+	|	UNSIGNED_FIXEDPTLIT
+	{
+		fpStringVal = $UNSIGNED_FIXEDPTLIT.text;
+	}
 	;
 	
 binary_operator
