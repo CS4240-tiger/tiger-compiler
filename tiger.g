@@ -230,36 +230,35 @@ funct_declaration
 	;
 	
 return_func
-	:	type_id FUNCTION_KEY ID {func_name = $ID.text;} LPAREN param_list RPAREN begin block_list block_end
-		{
-      	    		symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $type_id.text));
-      	    		CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
-      		}
+	:	type_id FUNCTION_KEY ID {
+	    func_name = $ID.text;
+	    CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
+	  } LPAREN param_list[new ArrayList<String>()] {
+	    symbolTable.put(new FunctionSymbolTableEntry(GLOBAL_SCOPE, $ID.text, $type_id.text,$param_list.outtypeList));
+	  } RPAREN begin block_list block_end
 	->	^(ID param_list block_list)
 	;
 
 void_func
-	:	(VOID_KEY FUNCTION_KEY) => VOID_KEY FUNCTION_KEY ID {func_name = $ID.text;} LPAREN param_list RPAREN begin block_list block_end
+	:	(VOID_KEY FUNCTION_KEY) => VOID_KEY FUNCTION_KEY ID {func_name = $ID.text;} LPAREN param_list[new ArrayList<String>()] RPAREN begin block_list block_end
 		{
-			symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $ID.text, $VOID_KEY.text));			
+			symbolTable.put(new FunctionSymbolTableEntry(GLOBAL_SCOPE, $ID.text, $VOID_KEY.text, $param_list.outtypeList));			
 			CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
 		}
 	->	^(ID param_list block_list) 
 		
-	|	VOID_KEY MAIN_KEY {func_name = $MAIN_KEY.text;} LPAREN RPAREN begin block_list block_end
-		{
-     			symbolTable.put(new FunctionSymbolTableEntry(CURRENT_SCOPE, $MAIN_KEY.text, $VOID_KEY.text));
-			CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text); 
-            	}
+	|	VOID_KEY MAIN_KEY {
+	    func_name = $MAIN_KEY.text;
+	    symbolTable.put(new FunctionSymbolTableEntry(GLOBAL_SCOPE, $MAIN_KEY.text, $VOID_KEY.text, null));
+      CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text); 
+	  } LPAREN RPAREN begin block_list block_end
 	->	^(MAIN_KEY block_list) 
 	;
 
 block_end
 	:	END_KEY SEMI
 		{
-			if (CURRENT_SCOPE != GLOBAL_SCOPE) {
-				CURRENT_SCOPE = CURRENT_SCOPE.getParent();
-			}
+			CURRENT_SCOPE = CURRENT_SCOPE.getParent();
 		}
 	;
 
@@ -268,13 +267,24 @@ ret_type
 	|	type_id
 	;
 
-param_list 
-	:	(param (COMMA param)*)?
+param_list[List<String> intypeList] returns [List<String> outtypeList] 
+	:	(var1=param[intypeList]{
+	    $outtypeList = $var1.outtypeList;
+	  } (COMMA param[intypeList])*)?
 	->	^(AST_PARAM_LIST (param+)?)
 	;
 
-param 	
-  :	ID COLON type_id
+param[List<String> intypeList] returns [List<String> outtypeList] 	
+  :	ID COLON type_id {
+    SymbolTableEntry type = symbolTable.get($type_id.text, CURRENT_SCOPE);
+    if (type != null && type instanceof TypeSymbolTableEntry) {
+      intypeList.add(strip($type_id.text));
+      $outtypeList = intypeList;
+      symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip($ID.text), null, strip($type_id.text), ((TypeSymbolTableEntry) type).getBackingType()));
+    } else {
+	    System.out.println("The type "+ $type_id.text+" on line "+$type_id.start.getLine()+" was not declared yet");
+    }
+  }
 	->	^(COLON ID type_id)
 	;
 
@@ -357,7 +367,7 @@ var_declaration
     		  SymbolTableEntry type = symbolTable.get($type_id.text, CURRENT_SCOPE);
     		  
     		  if (type != null && type instanceof TypeSymbolTableEntry) {
-    		  
+    		    
     		    switch (((TypeSymbolTableEntry) type).getBackingType()) {
     		    
     		    case FIXEDPT_ARRAY:
@@ -369,7 +379,7 @@ var_declaration
     		        // Gets rid of white space and adds to symbol table
     		        symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
     		          strip(id), 
-    		          fpArray, $type_id.text));
+    		          fpArray, $type_id.text, ((TypeSymbolTableEntry) type).getBackingType()));
     			 
     		      }
           
@@ -384,7 +394,7 @@ var_declaration
                 // Gets rid of white space and adds to symbol table
                 symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
                   strip(id), 
-                  fp2DArray, $type_id.text));
+                  fp2DArray, $type_id.text, ((TypeSymbolTableEntry) type).getBackingType()));
              }
           
             break;
@@ -394,7 +404,7 @@ var_declaration
               // Gets rid of white space and adds to symbol table
               symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
                 strip(id), 
-                toDouble($fixedptlit.text), $type_id.text));
+                toDouble($fixedptlit.text), $type_id.text, ((TypeSymbolTableEntry) type).getBackingType()));
                
               }
           
@@ -443,7 +453,7 @@ var_declaration
 						// Gets rid of white space and adds to symbol table
 						  symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
 						    strip(id), 
-						    intArray, $type_id.text));
+						    intArray, $type_id.text, ((TypeSymbolTableEntry) type).getBackingType()));
 						    
 					}
 					
@@ -458,7 +468,7 @@ var_declaration
 						// Gets rid of white space and adds to symbol table
 					              symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
 					                strip(id), 
-					                int2DArray, $type_id.text));
+					                int2DArray, $type_id.text, ((TypeSymbolTableEntry) type).getBackingType()));
 					}
 					
 					break;
@@ -468,7 +478,7 @@ var_declaration
 						// Gets rid of white space and adds to symbol table
 							symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
 								strip(id), 
-								toInteger($UNSIGNED_INTLIT.text), $type_id.text));
+								toInteger($UNSIGNED_INTLIT.text), $type_id.text, ((TypeSymbolTableEntry) type).getBackingType()));
 					}
 					
 					break;
@@ -517,7 +527,7 @@ var_declaration
     		          // Gets rid of white space and adds to symbol table
     		          symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
     		            strip(id), 
-    		            intArray, $type_id.text));
+    		            intArray, $type_id.text, ((TypeSymbolTableEntry) type).getBackingType()));
                 }
               break;
               case INT_2D_ARRAY:
@@ -529,7 +539,7 @@ var_declaration
 			            // Gets rid of white space and adds to symbol table
 				           symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
 				             strip(id), 
-				             int2DArray, $type_id.text));
+				             int2DArray, $type_id.text, ((TypeSymbolTableEntry) type).getBackingType()));
 			          }
 			        break;
 			        case FIXEDPT_ARRAY:
@@ -541,7 +551,7 @@ var_declaration
 	                // Gets rid of white space and adds to symbol table
 	                symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
 	                  strip(id), 
-	                  fpArray, $type_id.text));
+	                  fpArray, $type_id.text, ((TypeSymbolTableEntry) type).getBackingType()));
 	              }
 	            break;
 	            case FIXEDPT_2D_ARRAY:
@@ -553,7 +563,7 @@ var_declaration
 	                // Gets rid of white space and adds to symbol table
 	                symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
 	                  strip(id), 
-	                  fp2DArray, $type_id.text));
+	                  fp2DArray, $type_id.text, ((TypeSymbolTableEntry) type).getBackingType()));
 	             }
              break;
     		    }
@@ -561,7 +571,7 @@ var_declaration
     		    //apparently gets set to null if not array according to piazza
     		    System.out.println("WARNING:"+$id_list.text +" are are not initialized on line "+ $type_id.start.getLine()+ " and will be set to null");
 	    		  for (String id: ids) {
-	    		    symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), null, strip($type_id.text)));
+	    		    symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), null, strip($type_id.text), ((TypeSymbolTableEntry) type).getBackingType()));
 	    		  }
     		  }
     		} else {
