@@ -3,6 +3,7 @@ tree grammar tigerTreeWalker;
 options {
 	tokenVocab=tiger;
 	ASTLabelType=CommonTree;
+	output=AST;
 }
 
 tokens {
@@ -206,6 +207,14 @@ boolExpr1 returns [String expr]
   	List<String> boolExpr2list = new ArrayList<String>();
   }
   : ^(bin_op1 ({boolExpr2list.add($boolExpr2.expr);} boolExpr2)+)
+  {
+    	for (String boolExpr2 : boolExpr2list) {
+  		expr += boolExpr2 + $bin_op1.text;
+  	}
+  	
+  	// Remove the last extra binop
+  	expr = expr.substring(0, expr.length() - 1);
+  }
   | boolExpr2
   {
   	expr = $boolExpr2.expr;
@@ -218,6 +227,14 @@ boolExpr2 returns [String expr]
   	List<String> numExpr1list = new ArrayList<String>();
   }
   : ^(bin_op2 ({numExpr1list.add($numExpr1.expr);} numExpr1)+)
+  {
+    	for (String numExpr1 : numExpr1list) {
+  		expr += numExpr1 + $bin_op2.text;
+  	}
+  	
+  	// Remove the last extra binop
+  	expr = expr.substring(0, expr.length() - 1);
+  }
   | numExpr1
   {
   	expr = $numExpr1.expr;
