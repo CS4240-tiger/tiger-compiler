@@ -1,0 +1,5 @@
+assign, t, 2, 
+assign, p, 3, 
+assign, decimal, 123, 
+main: 
+fact: 

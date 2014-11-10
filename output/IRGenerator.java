@@ -414,7 +414,7 @@ public class IRGenerator {
 	 * @param input An input IRMap String.
 	 * @return An IR output line.
 	 */
-	private static String emit(String input) {
+	public static String emit(String input) {
 		return input + "\n";
 	}
 }
