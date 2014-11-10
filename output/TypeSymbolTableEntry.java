@@ -2,6 +2,7 @@
  * A TypeSymbolTableEntry is an SymbolTableEntry for type declarations.
  */
 class TypeSymbolTableEntry extends SymbolTableEntry {
+	
 	/**
 	 * The return type of this SymbolTableEntry.
 	 */
