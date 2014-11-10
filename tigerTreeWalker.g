@@ -289,6 +289,9 @@ numExpr3 returns [String expr]
   	expr = $const.retStr
   }
   | LPAREN! numExpr1 RPAREN!
+  {
+  	expr = $numExpr1.expr;
+  }
   ;
   
 bin_op1
@@ -362,17 +365,32 @@ value
 	|	ID
 	;
 
-index_expr
-	:	^(index_oper intlit index_expr)
+index_expr returns [String expr]
+	:	^(index_oper intlit expr2=index_expr)
+	{
+		expr += $intlit.text + $index_oper.text + $expr2.expr;
+	}
 	|	intlit
+	{
+		expr += $intlit.text;
+	}
 	|	^(index_oper ID index_expr)
+	{
+		expr += $ID.text + $index_oper.text + $expr2.expr;
+	}
 	|	ID
+	{
+		expr += $ID.text;
+	}
 	;
 
 index_oper
 	:	(PLUS|MINUS|MULT)
 	;
   
-func_param_list
-	: ^(AST_PARAM_LIST (numExpr1+)?)
+func_param_list returns [List<String> paramList]
+	@init {
+		List<String> params = new ArrayList<String>();
+	}
+	: ^(AST_PARAM_LIST ((numExpr1 {params.add($numExpr1.expr);})+)?)
 	;
