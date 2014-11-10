@@ -6,6 +6,7 @@ begin
    	var t: Integer := 2;
    	var p:int:= 3;
    	p := t + 3.2;
+   	break;
    end;
    begin
     var decimal:decimal := 123;

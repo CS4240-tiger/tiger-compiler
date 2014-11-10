@@ -32,6 +32,7 @@ tokens {
   private SymbolTable symbolTable = new SymbolTable(); 
   private Scope GLOBAL_SCOPE = new Scope();
   private Scope CURRENT_SCOPE = GLOBAL_SCOPE;
+  private int numLoops;
   
   private static void outln(Object obj) {
     System.out.println(obj);
@@ -615,12 +616,16 @@ if_stat
 	;
 
 while_stat
-	:	WHILE_KEY LPAREN boolExpr1 RPAREN DO_KEY stat_seq ENDDO_KEY SEMI
+	:	WHILE_KEY LPAREN boolExpr1 RPAREN DO_KEY {numLoops++;} stat_seq ENDDO_KEY SEMI {
+	  numLoops--;
+	}
 	->	^(WHILE_KEY boolExpr1 stat_seq)
 	;
 
 for_stat
-  :	FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY stat_seq ENDDO_KEY SEMI
+  :	FOR_KEY ID ASSIGN index_expr TO_KEY index_expr DO_KEY {numLoops++;} stat_seq ENDDO_KEY SEMI {
+    numLoops--;
+  }
 	->	^(FOR_KEY ^(TO_KEY ^(ASSIGN ID index_expr) index_expr) stat_seq)
 	;
 
@@ -639,7 +644,11 @@ func_call
 	;
 	
 break_stat
-	:	BREAK_KEY SEMI
+	:	BREAK_KEY SEMI {
+	  if (numLoops == 0) {
+	    System.out.println("Break at line " +$break_stat.start.getLine() +" cannot occur outside of a loop");
+	  }
+	}
 	->	BREAK_KEY
 	;
 	
