@@ -202,14 +202,26 @@ return_stat
 	;
 
 boolExpr1 returns [String expr]
-  : ^(bin_op1 boolExpr2+)
+  @init {
+  	List<String> boolExpr2list = new ArrayList<String>();
+  }
+  : ^(bin_op1 ({boolExpr2list.add($boolExpr2.expr);} boolExpr2)+)
   | boolExpr2
+  {
+  	expr = $boolExpr2.expr;
+  }
   ;	
 
           
 boolExpr2 returns [String expr]
-  : ^(bin_op2 numExpr1+)
+  @init {
+  	List<String> numExpr1list = new ArrayList<String>();
+  }
+  : ^(bin_op2 ({numExpr1list.add($numExpr1.expr);} numExpr1)+)
   | numExpr1
+  {
+  	expr = $numExpr1.expr;
+  }
   ;
 
 numExpr1 returns [String expr]
