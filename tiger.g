@@ -660,9 +660,18 @@ for_stat
 	;
 
 assign_stat
-	:	(value ASSIGN func_call) => value ASSIGN func_call SEMI
+	:	(value ASSIGN func_call) => value ASSIGN func_call SEMI {
+	  SymbolTableEntry variable = symbolTable.get($value.id,CURRENT_SCOPE);
+	  if (variable == null || !(variable instanceof TigerVariable)) {
+	    System.out.println("The variable "+$value.id+" on line "+$assign_stat.start.getLine()+" was never declared");
+	  } 
+	}
   ->  ^(ASSIGN value func_call)
   | (value ASSIGN numExpr1) => value ASSIGN numExpr1 SEMI {
+    SymbolTableEntry variable = symbolTable.get($value.id,CURRENT_SCOPE);
+    if (variable == null || !(variable instanceof TigerVariable)) {
+      System.out.println("The variable "+$value.id+" on line "+$assign_stat.start.getLine()+" was never declared");
+    } 
     System.out.println($numExpr1.type);
   }
   -> ^(ASSIGN value numExpr1)
@@ -687,9 +696,9 @@ return_stat
 	-> ^(AST_RETURN_STAT RETURN_KEY numExpr1)
 	;
 
-numExpr1 returns [String type]
+numExpr1 returns [TypeSymbolTableEntry type]
   : (numExpr2 bin_op3) => val1=numExpr2 (bin_op3 val2=numExpr2)+ {
-    $type = getTyping($val1.type, $val2.type);
+    //$type = getTyping($val1.type, $val2.type);
     if ($type == null) {
       System.out.println("Typing mismatch at line " + $val1.start.getLine() + " between values " + $val1.text + " and " + $val2.text);
     }
@@ -705,9 +714,9 @@ bin_op3
   | MINUS
   ;
   
-numExpr2 returns [String type]
+numExpr2 returns [TypeSymbolTableEntry type]
   : (numExpr3 bin_op4) => val1=numExpr3 (bin_op4 val2=numExpr3)+ {
-    $type = getTyping($val1.type, $val2.type);
+    //$type = getTyping($val1.type, $val2.type);
     if ($type == null) {
       System.out.println("Typing mismatch at line " + $val1.start.getLine() + " between values " + $val1.text + " and " + $val2.text);
     }
@@ -723,7 +732,7 @@ bin_op4
   | DIV
   ;
          
-numExpr3 returns [String type]
+numExpr3 returns [TypeSymbolTableEntry type]
   : (value) => value {
     $type = $value.type;
   }
@@ -763,12 +772,12 @@ bin_op2
   | GREATEREQ
   ;
 	
-constval returns [String type]
+constval returns [TypeSymbolTableEntry type, Boolean isConst]
   :	(fixedptlit) => fixedptlit {
-    $type = "fixedpt";
+    $type = symbolTable.getFixedPtType();
   }
 	|	intlit {
-	  $type = "int";
+	  $type = symbolTable.getIntType();
 	}
 	;
 
@@ -796,17 +805,23 @@ expr_list
   ->  ^(AST_EXPR_LIST numExpr1+)
 	;
 
-value returns [String type]
+value returns [TypeSymbolTableEntry type, Boolean isConst, String id]
   :	(ID LBRACK index_expr RBRACK LBRACK) => ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK {
   	  SymbolTableEntry entry = symbolTable.get(strip($ID.text),CURRENT_SCOPE);
   	  //System.out.println(((TigerVariable)entry).getType());
+  	  
+  	  $id = $ID.text;
   	}
-	|	(ID LBRACK) => ID LBRACK index_expr RBRACK
+	|	(ID LBRACK) => ID LBRACK index_expr RBRACK {
+	
+	  $id = $ID.text;
+	}
 	|	ID {
       SymbolTableEntry entry = symbolTable.get(strip($ID.text),CURRENT_SCOPE);
       
       //$type = ((TigerVariable)entry).getType();
-      $type = "fixedpt";
+      //$type = "fixedpt";
+      $id = $ID.text;
     }
 	;
 
