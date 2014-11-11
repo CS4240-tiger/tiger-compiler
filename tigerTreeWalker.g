@@ -205,15 +205,15 @@ return_stat
 expr returns [BinaryExpression binExpr]
   : (boolExpr) => boolExpr
   {
-  	$binExp = $boolExpr.binExpr;
+  	$binExpr = $boolExpr.binExpr;
   }
   | (numExpr) => numExpr
   {
-  	$binExp = $numExpr.binExpr;
+  	$binExpr = $numExpr.binExpr;
   }
   | LPAREN! expr RPAREN!
   {
-  	$binExp = $expr.binExpr;
+  	$binExpr = $expr.binExpr;
   }
   ;
  
@@ -222,47 +222,70 @@ boolExpr returns [BinaryExpression binExpr]
   {
   	$binExpr = new BinaryExpression(
   		new BinaryExpression($constval.retstr), 
-  		$expr.binExpr);
+  		$expr.binExpr, $binop_p0.op);
   }
   | ^(binop_p0 value expr)
   {
     	$binExpr = new BinaryExpression(
   		new BinaryExpression($value.strVal), 
-  		$expr.binExpr);
+  		$expr.binExpr, $binop_p0.op);
   }
-  | ^(binop_p0 (expr {
-  		//binExprList.add($expr.binExpr);
-  		if ($binExpr = null) {
-  			$binExpr = $expr.binExpr;
-  		} else {
-  			// Need to shift onto current tree
-  			BinaryExpression current = $binExpr;
-  			while (!current.isTerminal()) {
-  				current = current.right;
-  			}
-  			
-  			// Now transform terminal into non-terminal
-  			
-  		}
+  | LPAREN! expr1=expr {
+  		$binExpr = $expr1.binExpr;
+  	} 
+  	
+  	RPAREN! binop_p0^ expr2=expr {
+    		// Need to shift onto current tree
+		BinaryExpression current = $binExpr;
+		while (!current.isTerminal()) {
+			current = current.right;
+		}
+		
+		// Now transform this terminal into non-terminal, 
+		// with terminal value at left and new expression at right
+		current.parent.right = new BinaryExpression(
+			current.value,
+			$expr2.binExpr, 
+			$binop_p0.op);
   	}
-  	)+)
   ;
  
 numExpr returns [BinaryExpression binExpr]
   : ^(binop_p2 constval expr)
   {
-  	
+  	$binExpr = new BinaryExpression(
+  		new BinaryExpression($constval.retstr), 
+  		$expr.binExpr, $binop_p2.op);
   }
   | constval
   | ^(binop_p2 value expr)
   {
-  	
+    	$binExpr = new BinaryExpression(
+  		new BinaryExpression($value.strVal), 
+  		$expr.binExpr, $binop_p2.op);
   }
   | value
   {
-  	
+  	$binExpr = new BinaryExpression($value.strVal);
   }
-  | ^(binop_p2 expr+)
+  | LPAREN! expr1=expr {
+  		$binExpr = $expr1.binExpr;
+  	} 
+  	
+  	RPAREN! binop_p2^ expr2=expr {
+    		// Need to shift onto current tree
+		BinaryExpression current = $binExpr;
+		while (!current.isTerminal()) {
+			current = current.right;
+		}
+		
+		// Now transform this terminal into non-terminal, 
+		// with terminal value at left and new expression at right
+		current.parent.right = new BinaryExpression(
+			current.value,
+			$expr2.binExpr, 
+			$binop_p2.op);
+  	}
   ;
 
 // Conditional ops
@@ -411,5 +434,5 @@ func_param_list returns [List<String> paramList]
 	@init {
 		List<String> paramList = new ArrayList<String>();
 	}
-	: ^(AST_PARAM_LIST ((expr {paramList.add($expr.expr);})+)?)
+	: ^(AST_PARAM_LIST ((expr {paramList.add($expr.binExpr);})+)?)
 	;

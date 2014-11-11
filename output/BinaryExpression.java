@@ -12,7 +12,7 @@ public class BinaryExpression {
 	/**
 	 * A static value - used only if this is a terminal expression.
 	 */
-	private String value;
+	protected String value;
 	/**
 	 * The operator to apply between the left and right expressions.
 	 */
