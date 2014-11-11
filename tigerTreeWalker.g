@@ -404,7 +404,7 @@ constval returns [String retStr]
 	;
 
 intlit returns [String intStringVal]
-	:	(MINUS) => MINUS UNSIGNED_INTLIT
+	:	MINUS UNSIGNED_INTLIT
 	{
 		$intStringVal = $MINUS.text + $UNSIGNED_INTLIT.text;
 	}
@@ -415,7 +415,7 @@ intlit returns [String intStringVal]
 	;
 
 fixedptlit returns [String fpStringVal]
-	:	(MINUS) => MINUS UNSIGNED_FIXEDPTLIT
+	:	MINUS UNSIGNED_FIXEDPTLIT
 	{
 		$fpStringVal = $MINUS.text + $UNSIGNED_FIXEDPTLIT.text;
 	}
@@ -448,11 +448,27 @@ expr_list returns [List<BinaryExpression> binExprList]
 	;
 
 value returns [String strVal]
-	:	(ID LBRACK index_expr RBRACK LBRACK) => ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK
-	|	(ID LBRACK) => ID LBRACK index_expr RBRACK
+	:	(ID value_array_index value_array_index) => ID arr1=value_array_index arr2=value_array_index
+	{
+		$strVal = $ID.text + $arr1.tempVarIndex + $arr2.tempVarIndex;
+	}
+	|	(ID value_array_index) => ID value_array_index
+	{
+		$strVal = $ID.text + $arr1.tempVarIndex;
+	}
 	|	ID
 	{
 		$strVal = $ID.text;
+	}
+	;
+
+value_array_index returns [String tempVarIndex]
+	: LBRACK index_expr RBRACK
+	{
+		BinaryExpression.EvalReturn exprReturn = $index_expr.binExpr.eval(currentTemporary);
+		currentTemporary = exprReturn.nextUnusedTemp;
+		irOutput.add(exprReturn.irGen);
+		$tempVarIndex = $LBRACK.text + String.valueOf((currentTemporary - 1)) + $RBRACK.text;
 	}
 	;
 
