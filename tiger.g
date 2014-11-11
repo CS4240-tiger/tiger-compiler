@@ -707,19 +707,27 @@ return_stat
 expr
   : (boolExpr) => boolExpr
   | (numExpr) => numExpr
-  | LPAREN expr RPAREN
+  | LPAREN! expr RPAREN!
   ;
  
 boolExpr
   : (constval binop_p0) => constval binop_p0 expr
+  -> ^(binop_p0 constval expr)
   | (value binop_p0) => value binop_p0 expr
+  -> ^(binop_p0 value expr)
   | (LPAREN expr RPAREN binop_p0) => LPAREN expr RPAREN binop_p0 expr
+  -> ^(binop_p0 expr+)
   ;
  
 numExpr
   : (constval binop_p2) => constval binop_p2 expr
+  -> ^(binop_p2 constval expr)
+  | constval
   | (value binop_p2) => value binop_p2 expr
+  -> ^(binop_p2 value expr)
+  | value
   | (LPAREN expr RPAREN binop_p2) => LPAREN expr RPAREN binop_p2 expr
+  -> ^(binop_p2 expr+)
   ;
   
 // Conditional ops

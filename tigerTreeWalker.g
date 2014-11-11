@@ -167,7 +167,7 @@ stat
 	;
 
 if_stat
-	:	^(IF_KEY boolExpr1 stat_seq else_tail?)
+	:	^(IF_KEY expr stat_seq else_tail?)
 	;
 
 else_tail
@@ -175,7 +175,7 @@ else_tail
 	;
 
 while_stat
-	:	^(WHILE_KEY boolExpr1 stat_seq)
+	:	^(WHILE_KEY expr stat_seq)
 	;
 
 for_stat
@@ -187,7 +187,7 @@ assign_stat
 	;
 
 assign_tail
-	:	numExpr1 | func_call
+	:	expr | func_call
 	;
 
 func_call
@@ -199,160 +199,34 @@ break_stat
 	;
 	
 return_stat
-	:	^(AST_RETURN_STAT RETURN_KEY boolExpr1)
+	:	^(AST_RETURN_STAT RETURN_KEY expr)
 	;
 
-boolExpr1 returns [String expr]
-  @init {
-  	List<String> boolExpr2list = new ArrayList<String>();
-  }
-  : ^(bin_op1 (boolExpr2 {boolExpr2list.add($boolExpr2.expr);})+)
-  {
-    	for (String boolExpr2 : boolExpr2list) {
-  		$expr += boolExpr2 + $bin_op1.text;
-  	}
-  	
-  	// Remove the last extra binop
-  	$expr = $expr.substring(0, $expr.length() - 1);
-  }
-  | boolExpr2
-  {
-  	$expr = $boolExpr2.expr;
-  }
-  ;	
-
-          
-boolExpr2 returns [String expr]
-  @init {
-  	List<String> numExpr1list = new ArrayList<String>();
-  }
-  : ^(bin_op2 (numExpr1 {numExpr1list.add($numExpr1.expr);})+)
-  {
-    	for (String numExpr1 : numExpr1list) {
-  		$expr += numExpr1 + $bin_op2.text;
-  	}
-  	
-  	// Remove the last extra binop
-  	$expr = $expr.substring(0, $expr.length() - 1);
-  }
-  | numExpr1
-  {
-  	$expr = $numExpr1.expr;
-  }
-  ;
-
-numExpr1 returns [String expr]
-  @init {
-  	List<String> numExpr2list = new ArrayList<String>();
-  }
-  : ^(bin_op3 (numExpr2 {numExpr2list.add($numExpr2.expr);})+)
-  {
-  	for (String numExpr2 : numExpr2list) {
-  		$expr += numExpr2 + $bin_op3.text;
-  	}
-  	
-  	// Remove the last extra binop
-  	$expr = $expr.substring(0, $expr.length() - 1);
-  }
-  | numExpr2
-  {
-  	$expr = $numExpr2.expr;
-  }
-  ;
-
-numExpr2 returns [String expr]
-  @init {
-  	List<String> numExpr3list = new ArrayList<String>();
-  }
-  : ^(bin_op4 (numExpr3 {numExpr3list.add($numExpr3.expr);})+)
-  {
-  	for (String numExpr3 : numExpr3list) {
-  		$expr += numExpr3 + $bin_op4.text;
-  	}
-  	
-  	// Remove the last extra binop
-  	$expr = $expr.substring(0, $expr.length() - 1);
-  }
-  | numExpr3
-  {
-  	$expr = $numExpr3.expr;
-  }
-  ;
-         
-numExpr3 returns [String expr]
-  : value
-  {
-  	$expr = $value.strVal;
-  }
-  | constval
-  {
-  	$expr = $constval.retStr;
-  }
-  | LPAREN! numExpr1 RPAREN!
-  {
-  	$expr = $numExpr1.expr;
-  }
-  ;
-  
-bin_op1 returns [String text]
-  : AND
-  {
-  	$text = $AND.text;
-  }
-  | OR
-  {
-  	$text = $OR.text;
-  }
+expr
+  : (boolExpr) => boolExpr
+  | (numExpr) => numExpr
+  | LPAREN expr RPAREN
   ;
  
-bin_op2 returns [String text]
-  : LESSER
-  {
-  	$text = $LESSER.text;
-  }
-  | GREATER
-  {
-  	$text = $GREATER.text;
-  }
-  | EQ
-  {
-  	$text = $EQ.text;
-  }
-  | NEQ
-  {
-  	$text = $NEQ.text;
-  }
-  | LESSEREQ
-  {
-  	$text = $LESSEREQ.text;
-  }
-  | GREATEREQ
-  {
-  	$text = $GREATEREQ.text;
-  }
+boolExpr
+  : ^(binop_p0 constval expr)
+  | ^(binop_p0 value expr)
+  | ^(binop_p0 expr+)
   ;
  
-bin_op3 returns [String text]
-  : PLUS
-  {
-  	$text = $PLUS.text;
-  }
-  | MINUS
-  {
-  	$text = $MINUS.text;
-  }
+numExpr
+  : ^(binop_p2 constval expr)
+  | ^(binop_p2 value expr)
+  | ^(binop_p2 expr+)
   ;
 
-bin_op4 returns [String text]
-  : MULT
-  {
-  	$text = $MULT.text;
-  }
-  | DIV
-  {
-  	$text = $DIV.text;
-  }
-  ;
+// Conditional ops
+binop_p0:	(AND | OR | binop_p1);
+binop_p1:	(EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ);   
+ 
+// Numerical ops
+binop_p2:	(MINUS | PLUS | binop_p3);
+binop_p3:	(MULT | DIV);
 	
 constval returns [String retStr]
 	:	(fixedptlit) => fixedptlit
@@ -392,7 +266,7 @@ binary_operator
 	;
 
 expr_list
-	:	^(AST_EXPR_LIST boolExpr1+)
+	:	^(AST_EXPR_LIST expr+)
 	;
 
 value returns [String strVal]
@@ -431,5 +305,5 @@ func_param_list returns [List<String> paramList]
 	@init {
 		List<String> paramList = new ArrayList<String>();
 	}
-	: ^(AST_PARAM_LIST ((numExpr1 {paramList.add($numExpr1.expr);})+)?)
+	: ^(AST_PARAM_LIST ((expr {paramList.add($expr.expr);})+)?)
 	;
