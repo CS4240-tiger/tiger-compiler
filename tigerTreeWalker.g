@@ -390,12 +390,26 @@ fixedptlit returns [String fpStringVal]
 	}
 	;
 	
-binary_operator
-	:	(PLUS|MINUS|MULT|DIV|EQ|NEQ|LESSER|GREATER|LESSEREQ|GREATEREQ|AND|OR)
+binary_operator returns [Binop op]
+	:	PLUS {$op = Binop.PLUS;}
+	|	MINUS {$op = Binop.MINUS;}
+	|	MULT {$op = Binop.MULT;}
+	|	DIV {$op = Binop.DIV;}
+	|	EQ {$op = Binop.EQUAL;}
+	|	NEQ {$op = Binop.NOT_EQUAL;}
+	|	LESSER {$op = Binop.LESS_THAN;}
+	|	GREATER {$op = Binop.GREATER_THAN;}
+	|	LESSEREQ {$op = Binop.LESS_THAN_OR_EQUAL;}
+	|	GREATEREQ {$op = Binop.GREATER_THAN_OR_EQUAL;}
+	|	AND {$op = Binop.AND;}
+	|	OR {$op = Binop.OR;}
 	;
 
-expr_list
-	:	^(AST_EXPR_LIST expr+)
+expr_list returns [List<BinaryExpression> binExprList]
+	@init {
+		List<BinaryExpression> binExprList = new ArrayList<BinaryExpression>();
+	}
+	:	^(AST_EXPR_LIST (expr {$binExprList.add($expr.binExpr);})+)
 	;
 
 value returns [String strVal]
@@ -426,8 +440,10 @@ index_expr returns [String expr]
 	}
 	;
 
-index_oper
-	:	(PLUS|MINUS|MULT)
+index_oper returns [Binop op]
+	: PLUS {$op = Binop.PLUS;}
+	| MINUS {$op = Binop.MINUS;}
+	| MULT {$op = Binop.MULT;}
 	;
   
 func_param_list returns [List<BinaryExpression> paramList]
