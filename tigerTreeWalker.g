@@ -244,7 +244,7 @@ boolExpr returns [BinaryExpression binExpr]
 		// Now transform this terminal into non-terminal, 
 		// with terminal value at left and new expression at right
 		current.parent.right = new BinaryExpression(
-			current.value,
+			current,
 			$expr2.binExpr, 
 			$binop_p0.op);
   	}
@@ -282,7 +282,7 @@ numExpr returns [BinaryExpression binExpr]
 		// Now transform this terminal into non-terminal, 
 		// with terminal value at left and new expression at right
 		current.parent.right = new BinaryExpression(
-			current.value,
+			current,
 			$expr2.binExpr, 
 			$binop_p2.op);
   	}
@@ -430,9 +430,9 @@ index_oper
 	:	(PLUS|MINUS|MULT)
 	;
   
-func_param_list returns [List<String> paramList]
+func_param_list returns [List<BinaryExpression> paramList]
 	@init {
-		List<String> paramList = new ArrayList<String>();
+		List<BinaryExpression> paramList = new ArrayList<BinaryExpression>();
 	}
 	: ^(AST_PARAM_LIST ((expr {paramList.add($expr.binExpr);})+)?)
 	;

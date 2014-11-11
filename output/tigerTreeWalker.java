@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g 2014-11-10 22:50:45
+// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g 2014-11-10 22:53:42
 
 	import java.util.Map;
 	import java.util.HashMap;
@@ -4196,7 +4196,7 @@ public class tigerTreeWalker extends TreeParser {
 							// Now transform this terminal into non-terminal, 
 							// with terminal value at left and new expression at right
 							current.parent.right = new BinaryExpression(
-								current.value,
+								current,
 								(expr2!=null?((tigerTreeWalker.expr_return)expr2).binExpr:null), 
 								(binop_p0101!=null?((tigerTreeWalker.binop_p0_return)binop_p0101).op:null));
 					  	}
@@ -4659,7 +4659,7 @@ public class tigerTreeWalker extends TreeParser {
 							// Now transform this terminal into non-terminal, 
 							// with terminal value at left and new expression at right
 							current.parent.right = new BinaryExpression(
-								current.value,
+								current,
 								(expr2!=null?((tigerTreeWalker.expr_return)expr2).binExpr:null), 
 								(binop_p2112!=null?((tigerTreeWalker.binop_p2_return)binop_p2112).op:null));
 					  	}
@@ -6494,7 +6494,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	public static class func_param_list_return extends TreeRuleReturnScope {
-		public List<String> paramList;
+		public List<BinaryExpression> paramList;
 		CommonTree tree;
 		@Override
 		public CommonTree getTree() { return tree; }
@@ -6502,7 +6502,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "func_param_list"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:433:1: func_param_list returns [List<String> paramList] : ^( AST_PARAM_LIST ( ( expr )+ )? ) ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:433:1: func_param_list returns [List<BinaryExpression> paramList] : ^( AST_PARAM_LIST ( ( expr )+ )? ) ;
 	public final tigerTreeWalker.func_param_list_return func_param_list() throws RecognitionException {
 		tigerTreeWalker.func_param_list_return retval = new tigerTreeWalker.func_param_list_return();
 		retval.start = input.LT(1);
@@ -6519,7 +6519,7 @@ public class tigerTreeWalker extends TreeParser {
 		CommonTree AST_PARAM_LIST158_tree=null;
 
 
-				List<String> paramList = new ArrayList<String>();
+				List<BinaryExpression> paramList = new ArrayList<BinaryExpression>();
 			
 		try {
 			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:437:2: ( ^( AST_PARAM_LIST ( ( expr )+ )? ) )
