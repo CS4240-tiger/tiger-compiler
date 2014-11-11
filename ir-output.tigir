@@ -1,5 +1,29 @@
 assign, t, 2, 
 assign, p, 3, 
+assign, t0, t, 
+assign, t1, 3.2, 
+add, t0, t1, t2
+
+
+
 assign, decimal, 123, 
 main: 
+assign, t0, 1, 
+
+
+
+assign, t0, input, 
+assign, t1, 1, 
+breq, t0, t1, 50202-expr-eval:
+
+assign, t0, 0, 
+assign, t1, -1, 
+breq, t0, t1, 50202-expr-eval:
+
+assign, t0, input, 
+assign, t1, -1, 
+breq, t0, t1, 50202-expr-eval:
+
+
+50202-expr-eval:
 fact: 

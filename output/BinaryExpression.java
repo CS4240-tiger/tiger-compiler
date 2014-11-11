@@ -62,7 +62,7 @@ public class BinaryExpression {
 	 * @return True if this BinaryExpression is terminal; false otherwise.
 	 */
 	public boolean isTerminal() {
-		return (op == null) ? true : false;
+		return (value != null) ? true : false;
 	}
 	
 	/**
@@ -95,26 +95,32 @@ public class BinaryExpression {
 	private EvalReturn evalHelper(BinaryExpression startNode, int tempNum) {
 		EvalReturn returnBlock = new EvalReturn(tempNum);
 		
-		while (!right.isTerminal()) {
-			EvalReturn rightEval = evalHelper(right, returnBlock.nextUnusedTemp);
+		while (!startNode.right.isTerminal()) {
+			EvalReturn rightEval = evalHelper(startNode.right, returnBlock.nextUnusedTemp);
 			returnBlock.irGen += IRGenerator.emit(rightEval.irGen);
 			returnBlock.nextUnusedTemp = rightEval.nextUnusedTemp;
 			returnBlock.condLabel = rightEval.condLabel;
+			
+			// Make it terminal
+			startNode.right.value = String.valueOf((rightEval.nextUnusedTemp - 1));
 		}
 			
-		while (!left.isTerminal()) {
-			EvalReturn leftEval = evalHelper(left, returnBlock.nextUnusedTemp);
+		while (!startNode.left.isTerminal()) {
+			EvalReturn leftEval = evalHelper(startNode.left, returnBlock.nextUnusedTemp);
 			returnBlock.irGen += IRGenerator.emit(leftEval.irGen);
 			returnBlock.nextUnusedTemp = leftEval.nextUnusedTemp;
 			returnBlock.condLabel = leftEval.condLabel;
+			
+			// Make it terminal
+			startNode.left.value = String.valueOf((leftEval.nextUnusedTemp - 1));
 		}
 		
-		assert right.isTerminal() && left.isTerminal(); // Make sure this is direct expression
+		assert startNode.right.isTerminal() && startNode.left.isTerminal(); // Make sure this is direct expression
 		
 		String tempLeft = emitTemp(tempNum++);
 		String tempRight = emitTemp(tempNum++);
-		returnBlock.irGen += IRGenerator.emit(IRMap.assign(tempLeft, left.value));
-		returnBlock.irGen += IRGenerator.emit(IRMap.assign(tempRight, right.value));
+		returnBlock.irGen += IRGenerator.emit(IRMap.assign(tempLeft, startNode.left.value));
+		returnBlock.irGen += IRGenerator.emit(IRMap.assign(tempRight, startNode.right.value));
 		
 		switch (op) {
 		case AND:
