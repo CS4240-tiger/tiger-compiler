@@ -30,6 +30,7 @@ tokens {
 	private List<String> irOutput = new ArrayList<String>();
 	private int currentTemporary = 0;
   	private SymbolTable symTable;
+  	private String passthrough;
   	
 	public tigerTreeWalker(CommonTreeNodeStream nodes, SymbolTable symTable) {
 		super(nodes);
@@ -223,8 +224,17 @@ assign_tail
 func_call
 	:	^(AST_FUNC_CALL ID func_param_list)
 	{
-		// TODO: complete implementation. Padded with empty values so it'll compile for now
-		irOutput.add(IRGenerator.func_call((FunctionSymbolTableEntry) symTable.get($ID.text, new Scope()), null /* func_param_list args here */, /* value here */ ""));
+		String tempTarget = null;
+		if (func.getReturnType() != null) {
+			tempTarget = IRGenerator.emitCurrentTemporary();
+			curentTemporary++;
+		}
+		
+		String[] paramList = new String[$func_param_list.paramList.size()];
+		// Assuming this cast is safe because it should check in tiger.g
+		irOutput.add(IRGenerator.func_call((FunctionSymbolTableEntry) symTable.get($ID.text, new Scope()), 
+			paramList, tempTarget);
+		
 	}
 	;
 	
