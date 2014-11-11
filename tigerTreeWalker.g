@@ -211,9 +211,9 @@ expr returns [BinaryExpression binExpr]
   {
   	$binExpr = $numExpr.binExpr;
   }
-  | LPAREN! expr RPAREN!
+  | LPAREN! expr2=expr RPAREN!
   {
-  	$binExpr = $expr.binExpr;
+  	$binExpr = $expr2.binExpr;
   }
   ;
  
@@ -221,7 +221,7 @@ boolExpr returns [BinaryExpression binExpr]
   : ^(binop_p0 constval expr)
   {
   	$binExpr = new BinaryExpression(
-  		new BinaryExpression($constval.retstr), 
+  		new BinaryExpression($constval.retStr), 
   		$expr.binExpr, $binop_p0.op);
   }
   | ^(binop_p0 value expr)
@@ -254,7 +254,7 @@ numExpr returns [BinaryExpression binExpr]
   : ^(binop_p2 constval expr)
   {
   	$binExpr = new BinaryExpression(
-  		new BinaryExpression($constval.retstr), 
+  		new BinaryExpression($constval.retStr), 
   		$expr.binExpr, $binop_p2.op);
   }
   | constval
