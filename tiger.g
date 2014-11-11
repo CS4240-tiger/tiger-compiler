@@ -38,8 +38,28 @@ tokens {
     System.out.println(obj);
   }
   
-  public String getTyping(OperationObject var1, OperationObject var2) {
-    
+  public OperationObject getTyping(OperationObject var1, OperationObject var2, int lineNum, String bin_op) {
+    boolean newisConst;
+    TypeSymbolTableEntry newType;
+    String newId = var1.getId()+bin_op+var2.getId();
+    if (var1.isConstant() && var2.isConstant()) {
+      newisConst = true;
+      if (!(var1.getType().equals(var2.getType()))) {
+        newType = symbolTable.getFixedPtType();
+      } else {
+        newType = var1.getType();
+      }
+      return new OperationObject(newisConst,newType,newId);
+    } else {
+      newisConst = false;
+      if (!(var1.getType().equals(var2.getType()))) {
+        System.out.println("Typing error between "+ var1.getId() + " and " + var2.getId() + " on line " + String.valueOf(lineNum));
+        return null;
+      } else {
+        newType = var1.getType();
+        return new OperationObject(newisConst,newType, newId);
+      }
+    }
   }
   
   public String strip(String id) {
@@ -689,31 +709,49 @@ return_stat
 	-> ^(AST_RETURN_STAT RETURN_KEY expr)
 	;
 
-expr
-  : (boolExpr) => boolExpr
-  | (numExpr) => numExpr
+expr returns [OperationObject typing]
+  : (boolExpr) => boolExpr {
+    $typing = $boolExpr.typing;
+  }
+  | (numExpr) => numExpr {
+    $typing = $numExpr.typing;
+  }
   | LPAREN! expr RPAREN!
   ;
  
-boolExpr
-  : (constval binop_p0) => constval binop_p0 expr
-  -> ^(binop_p0 constval expr)
-  | (value binop_p0) => value binop_p0 expr
+boolExpr returns [OperationObject typing]
+  : (constval binop_p0) => constval binop_p0 expr {
+    $typing = getTyping($constval.typing, $expr.typing, $boolExpr.start.getLine(), $binop_p0.text);
+  }
+  -> ^(binop_p0 constval expr) 
+  | (value binop_p0) => value binop_p0 expr {
+    $typing = getTyping($value.typing, $expr.typing, $boolExpr.start.getLine(), $binop_p0.text);
+  }
   -> ^(binop_p0 value expr)
-  | (LPAREN expr RPAREN binop_p0) => LPAREN expr RPAREN binop_p0 expr
+  | (LPAREN expr RPAREN binop_p0) => LPAREN var1=expr RPAREN binop_p0 var2=expr {
+    $typing = getTyping($var1.typing, $var2.typing, $boolExpr.start.getLine(), $binop_p0.text);
+  }
   -> ^(binop_p0 expr+)
   ;
  
-numExpr
-  : (constval binop_p2) => constval binop_p2 expr
+numExpr returns [OperationObject typing]
+  : (constval binop_p2) => constval binop_p2 expr {
+    $typing = getTyping($constval.typing, $expr.typing, $numExpr.start.getLine(), $binop_p2.text);
+  }
   -> ^(binop_p2 constval expr)
-  | constval
-  | (value binop_p2) => value binop_p2 expr
+  | constval {
+    $typing = $constval.typing;
+  }
+  | value {
+    $typing = $value.typing;
+  }
+  | (value binop_p2) => value binop_p2 expr {
+    $typing = getTyping($value.typing, $expr.typing, $numExpr.start.getLine(), $binop_p2.text);
+  }
   -> ^(binop_p2 value expr)
-  | value
-  | (value binop_p2) => value binop_p2 expr
-  -> ^(binop_p2 value expr)
-  | (LPAREN expr RPAREN binop_p2) => LPAREN expr RPAREN binop_p2 expr
+  | (LPAREN expr RPAREN binop_p2) => LPAREN var1=expr RPAREN binop_p2 var2=expr {
+    $typing = getTyping($var1.typing, $var2.typing, $numExpr.start.getLine(), $binop_p2.text);
+  }
   -> ^(binop_p2 expr+)
   ;
   
@@ -727,10 +765,10 @@ binop_p3:	(MULT | DIV);
 	
 constval returns [OperationObject typing]
   :	(fixedptlit) => fixedptlit {
-    $typing = new OperationObject(true, symbolTable.getFixedPtType());
+    $typing = new OperationObject(true, symbolTable.getFixedPtType(), $fixedptlit.text);
   }
 	|	intlit {
-	  $typing = new OperationObject(true, symbolTable.getIntType());
+	  $typing = new OperationObject(true, symbolTable.getIntType(), $intlit.text);
 	}
 	;
 
@@ -763,7 +801,7 @@ value returns [OperationObject typing, String id]
   	  SymbolTableEntry entry = symbolTable.get(strip($ID.text),CURRENT_SCOPE);
   	  if (entry != null && entry instanceof TigerVariable) {
   	    if (((TigerVariable)entry).getBackingType() == TigerPrimitive.INT_2D_ARRAY || ((TigerVariable)entry).getBackingType() == TigerPrimitive.FIXEDPT_2D_ARRAY) {
-  	      $typing = new OperationObject(false, ((TigerVariable)entry).getType());
+  	      $typing = new OperationObject(false, ((TigerVariable)entry).getType(), $value.text);
   	    } else {
   	      System.out.println("The variable "+$ID.text+ " on line "+$value.start.getLine() +" is not a 2D array");
   	    }
@@ -776,7 +814,7 @@ value returns [OperationObject typing, String id]
 		    SymbolTableEntry entry = symbolTable.get(strip($ID.text),CURRENT_SCOPE);
 	      if (entry != null && entry instanceof TigerVariable) {
 	        if (((TigerVariable)entry).getBackingType() == TigerPrimitive.INT_ARRAY || ((TigerVariable)entry).getBackingType() == TigerPrimitive.FIXEDPT_ARRAY) {
-	          $typing = new OperationObject(false, ((TigerVariable)entry).getType());
+	          $typing = new OperationObject(false, ((TigerVariable)entry).getType(), $value.text);
 	        } else {
 	          System.out.println("The variable "+$ID.text+ " on line "+$value.start.getLine() +" is not a 1D array");
 	        }
@@ -788,7 +826,7 @@ value returns [OperationObject typing, String id]
 	|	ID {
       SymbolTableEntry entry = symbolTable.get(strip($ID.text),CURRENT_SCOPE);
       if (entry != null && entry instanceof TigerVariable) {
-            $typing = new OperationObject(false, ((TigerVariable)entry).getType());
+            $typing = new OperationObject(false, ((TigerVariable)entry).getType(), $value.text);
         } else {
           System.out.println("The variable "+$ID.text+ " on line "+$value.start.getLine() +" is not a variable");
         }
@@ -826,8 +864,8 @@ WHITESPACE
 	;
   
 func_param_list
-	: (expr (COMMA expr)*)?
-	-> ^(AST_PARAM_LIST (expr+)?)
+	: (numExpr (COMMA numExpr)*)?
+	-> ^(AST_PARAM_LIST (numExpr+)?)
 	;
 
 keywords
