@@ -223,7 +223,8 @@ assign_tail
 func_call
 	:	^(AST_FUNC_CALL ID func_param_list)
 	{
-		irOutput.add(IRGenerator.func_call(
+		// TODO: complete implementation. Padded with empty values so it'll compile for now
+		irOutput.add(IRGenerator.func_call((FunctionSymbolTableEntry) symTable.get($ID.text, new Scope()), null /* func_param_list args here */, /* value here */ ""));
 	}
 	;
 	
