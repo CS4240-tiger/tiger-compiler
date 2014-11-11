@@ -1,35 +1,37 @@
 fact: 
 assign, t0, 1, 
-assign, t0, input, 
-assign, t1, 1, 
-breq, t0, t1, 47026-expr-eval
-assign, t0, 0, 
-assign, t1, 1, 
-breq, t0, t1, 47026-expr-eval
-assign, t0, input, 
-assign, t1, 1, 
-breq, t0, t1, 47026-expr-eval
-47026-expr-eval: 
+assign, t1, input, 
+assign, t2, 1, 
+breq, t1, t2, 61209-expr-eval
+assign, t1, 0, 
+assign, t2, 2, 
+breq, t1, t2, 61209-expr-eval
+assign, t1, input, 
+assign, t2, 2, 
+breq, t1, t2, 61209-expr-eval
+61209-expr-eval: 
 main: 
 assign, t, 2, 
 assign, p, 3, 
-assign, t2, 5, 
-assign, t3, 3, 
-add, t2, t3, t4
-assign, t2, 4, 
+assign, t3, 5, 
+assign, t4, 3, 
+add, t3, t4, t5
 assign, t3, 4, 
-add, t2, t3, t4
-assign, t2, p, 
-assign, t3, 4, 
-add, t2, t3, t4
-assign, t5, t, 
-assign, t6, 3.2, 
-add, t5, t6, t7
-assign, t8, t, 
-assign, t9, 3, 
-breq, t8, t9, 43638-expr-eval
-assign, t8, p, 
-assign, t9, 9, 
-breq, t8, t9, 43638-expr-eval
-43638-expr-eval: 
+assign, t4, 5, 
+add, t3, t4, t5
+assign, t3, p, 
+assign, t4, 5, 
+add, t3, t4, t5
+assign, p, t5, 
+assign, t6, t, 
+assign, t7, 3.2, 
+add, t6, t7, t8
+assign, k, t8, 
+assign, t9, t, 
+assign, t10, 3, 
+breq, t9, t10, 72858-expr-eval
+assign, t9, p, 
+assign, t10, 10, 
+breq, t9, t10, 72858-expr-eval
+72858-expr-eval: 
 assign, decimal, 123, 

@@ -209,22 +209,28 @@ for_stat
 
 assign_stat
 	:	^(ASSIGN value assign_tail)
+	{
+		irOutput.add(IRGenerator.assign_stat($value.strVal, $assign_tail.temp));
+	}
 	;
 
-assign_tail
+assign_tail returns [String temp]
 	:	expr
 	{
 		BinaryExpression.EvalReturn exprReturn = $expr.binExpr.eval(currentTemporary);
 		currentTemporary = exprReturn.nextUnusedTemp;
 		irOutput.add(exprReturn.irGen);
+		$temp = "t" + (currentTemporary - 1);
 	}
 	|	func_call
+	{
+		$temp = $func_call.tempTarget;
+	}
 	;
 
-func_call
+func_call returns [String tempTarget]
 	:	^(AST_FUNC_CALL ID func_param_list)
 	{
-		String tempTarget = null;
 		// *NOT* assuming this function is safe in case Tiger programmer does something strange
 		FunctionSymbolTableEntry func = null;
 		if (symTable.get($ID.text, new Scope()) != null 
@@ -236,7 +242,7 @@ func_call
 		
 		if (func != null) {
 			if (func.getReturnType() != null) {
-				tempTarget = emitCurrentTemporary();
+				$tempTarget = emitCurrentTemporary();
 				currentTemporary++;
 			}
 			
@@ -256,7 +262,7 @@ func_call
 				}
 			}
 			
-			irOutput.add(IRGenerator.func_call(func, paramList, tempTarget));
+			irOutput.add(IRGenerator.func_call(func, paramList, $tempTarget));
 		}
 	}
 	;
