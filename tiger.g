@@ -234,6 +234,9 @@ tiger_program returns [SymbolTable symTable]
 	:	type_declaration_list funct_declaration_list
 	{
 		$symTable = symbolTable;
+		// We need to report an error if main() is not the last
+		// function declared in our program
+		mainCheck((CommonTree)adaptor.rulePostProcessing(root_0));
 	}
 	;
 	
