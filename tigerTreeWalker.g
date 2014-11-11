@@ -29,9 +29,11 @@ tokens {
 	private static final String OUTPUT_IR_FILENAME = "ir-output.tigir";
 	private List<String> irOutput = new ArrayList<String>();
 	private int currentTemporary = 0;
-  
-	public tigerTreeWalker(CommonTreeNodeStream nodes) {
+  	private SymbolTable symTable;
+  	
+	public tigerTreeWalker(CommonTreeNodeStream nodes, SymbolTable symTable) {
 		super(nodes);
+		this.symTable = symTable;
 	}
   
   	private String emitCurrentTemporary() {
@@ -220,6 +222,9 @@ assign_tail
 
 func_call
 	:	^(AST_FUNC_CALL ID func_param_list)
+	{
+		irOutput.add(IRGenerator.func_call(
+	}
 	;
 	
 break_stat
