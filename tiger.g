@@ -230,8 +230,11 @@ tokens {
 	
 }
 
-tiger_program
+tiger_program returns [SymbolTable symTable]
 	:	type_declaration_list funct_declaration_list
+	{
+		$symTable = symbolTable;
+	}
 	;
 	
 funct_declaration_list

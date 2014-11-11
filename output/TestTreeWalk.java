@@ -12,7 +12,9 @@ public class TestTreeWalk {
 
         tigerParser g = new tigerParser(tokens);
         try {
-            CommonTree parseTree = g.tiger_program().getTree();
+        	tigerParser.tiger_program_return postParse = g.tiger_program();
+            CommonTree parseTree = postParse.getTree();
+            SymbolTable symbolTable = postParse.symTable;
             CommonTreeNodeStream treeNodes = new CommonTreeNodeStream(parseTree);
             tigerTreeWalker treeWalker = new tigerTreeWalker(treeNodes);
             
