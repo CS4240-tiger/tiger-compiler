@@ -129,10 +129,6 @@ public class tigerParser extends Parser {
 	    System.out.println(obj);
 	  }
 	  
-	  public String getTyping(OperationObject var1, OperationObject var2) {
-	    
-	  }
-	  
 	  public String strip(String id) {
 	    return id.replaceAll("\\s","");
 	  }
