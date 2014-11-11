@@ -225,16 +225,30 @@ func_call
 	:	^(AST_FUNC_CALL ID func_param_list)
 	{
 		String tempTarget = null;
+		// Assuming this cast is safe because it should check in tiger.g
+		FunctionSymbolTableEntry func = (FunctionSymbolTableEntry) symTable.get($ID.text, new Scope());
 		if (func.getReturnType() != null) {
-			tempTarget = IRGenerator.emitCurrentTemporary();
-			curentTemporary++;
+			tempTarget = emitCurrentTemporary();
+			currentTemporary++;
 		}
 		
 		String[] paramList = new String[$func_param_list.paramList.size()];
-		// Assuming this cast is safe because it should check in tiger.g
-		irOutput.add(IRGenerator.func_call((FunctionSymbolTableEntry) symTable.get($ID.text, new Scope()), 
-			paramList, tempTarget);
+		// Convert binExpr list to String list
+		for (int i = 0; i < $func_param_list.paramList.size(); i++) {
+			if ($func_param_list.paramList.get(i).isTerminal()) {
+				// If it's a variable or value, just add it
+				// Hopefully this is the case most of the time
+				paramList[i] = $func_param_list.paramList.get(i).value;
+			} else {
+				// Otherwise, we need to evaluate it and return the temporary
+				BinaryExpression.EvalReturn returnPkg = $func_param_list.paramList.get(i).eval(currentTemporary);
+				currentTemporary = returnPkg.nextUnusedTemp;
+				irOutput.add(returnPkg.irGen);
+				paramList[i] = "t" + (currentTemporary - 1);
+			}
+		}
 		
+		irOutput.add(IRGenerator.func_call(func, paramList, tempTarget));
 	}
 	;
 	
