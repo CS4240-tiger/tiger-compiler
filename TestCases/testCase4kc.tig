@@ -1,3 +1,11 @@
+int function fact(input : int)
+begin
+	begin
+		if (input = 0 | input = 1) then
+			return 1;
+		endif;
+	end;
+end;
 
 void main() 
 begin
@@ -14,13 +22,4 @@ begin
     var decimal:decimal := 123;
     t(3);
    end;
-end;
-
-int function fact(input : int)
-begin
-	begin
-		if (input = 0 | input = 1) then
-			return 1;
-		endif;
-	end;
 end;
