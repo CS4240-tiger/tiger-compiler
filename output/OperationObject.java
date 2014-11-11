@@ -16,9 +16,15 @@ public class OperationObject {
 	 */
 	private TypeSymbolTableEntry type;
 	
-	public OperationObject(Boolean isConst, TypeSymbolTableEntry type) {
+	/**
+	 * The id for this object
+	 */
+	private String id;
+	
+	public OperationObject(Boolean isConst, TypeSymbolTableEntry type, String id) {
 		this.isConst = isConst;
 		this.type = type;
+		this.id = id;
 	}
 
 	/**
@@ -37,5 +43,14 @@ public class OperationObject {
 	 */
 	public TypeSymbolTableEntry getType() {
 		return this.type;
+	}
+	
+	/**
+	 * the getter for the id
+	 * 
+	 * @return the id for this object
+	 */
+	public String getId() {
+		return this.id;
 	}
 }
