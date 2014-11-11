@@ -728,10 +728,9 @@ boolExpr returns [OperationObject typing]
     $typing = getTyping($value.typing, $expr.typing, $boolExpr.start.getLine(), $binop_p0.text);
   }
   -> ^(binop_p0 value expr)
-  | (LPAREN expr RPAREN binop_p0) => LPAREN var1=expr RPAREN binop_p0 var2=expr {
+  | (LPAREN expr RPAREN binop_p0) => LPAREN! var1=expr RPAREN! binop_p0^ var2=expr {
     $typing = getTyping($var1.typing, $var2.typing, $boolExpr.start.getLine(), $binop_p0.text);
   }
-  -> ^(binop_p0 expr+)
   ;
  
 numExpr returns [OperationObject typing]
@@ -749,10 +748,9 @@ numExpr returns [OperationObject typing]
   | value {
     $typing = $value.typing;
   }
-  | (LPAREN expr RPAREN binop_p2) => LPAREN var1=expr RPAREN binop_p2 var2=expr {
+  | (LPAREN expr RPAREN binop_p2) => LPAREN! var1=expr RPAREN! binop_p2^ var2=expr {
     $typing = getTyping($var1.typing, $var2.typing, $numExpr.start.getLine(), $binop_p2.text);
   }
-  -> ^(binop_p2 expr+)
   ;
   
 // Conditional ops
