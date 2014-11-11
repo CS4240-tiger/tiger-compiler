@@ -39,26 +39,35 @@ tokens {
   }
   
   public OperationObject getTyping(OperationObject var1, OperationObject var2, int lineNum, String bin_op) {
-    boolean newisConst;
-    TypeSymbolTableEntry newType;
-    String newId = var1.getId()+bin_op+var2.getId();
-    if (var1.isConstant() && var2.isConstant()) {
-      newisConst = true;
-      if (!(var1.getType().equals(var2.getType()))) {
-        newType = symbolTable.getFixedPtType();
-      } else {
-        newType = var1.getType();
-      }
-      return new OperationObject(newisConst,newType,newId);
+    if (var1 != null && var2 != null) {
+	    boolean newisConst;
+	    TypeSymbolTableEntry newType;
+	    String newId = var1.getId()+bin_op+var2.getId();
+	    if (var1.isConstant() && var2.isConstant()) {
+	      newisConst = true;
+	      if (!(var1.getType().equals(var2.getType()))) {
+	        newType = symbolTable.getFixedPtType();
+	      } else {
+	        newType = var1.getType();
+	      }
+	      return new OperationObject(newisConst,newType,newId);
+	    } else {
+	      newisConst = false;
+	      if ((var1.getType().getId().equals("int") && var2.getType().getId().equals("fixedpt"))||(var1.getType().getId().equals("fixedpt") && var2.getType().getId().equals("int"))) {
+	        newType = symbolTable.getFixedPtType();
+	        return new OperationObject(newisConst,newType, newId);
+	      } else {
+		      if (!(var1.getType().equals(var2.getType()))) {
+		        System.out.println("Typing error between "+ var1.getId() + " and " + var2.getId() + " on line " + String.valueOf(lineNum));
+		        return null;
+		      } else {
+		        newType = var1.getType();
+		        return new OperationObject(newisConst,newType, newId);
+		      }
+	      }
+	    }
     } else {
-      newisConst = false;
-      if (!(var1.getType().equals(var2.getType()))) {
-        System.out.println("Typing error between "+ var1.getId() + " and " + var2.getId() + " on line " + String.valueOf(lineNum));
-        return null;
-      } else {
-        newType = var1.getType();
-        return new OperationObject(newisConst,newType, newId);
-      }
+      return null;
     }
   }
   
@@ -675,16 +684,28 @@ assign_stat
 	:	(value ASSIGN func_call) => value ASSIGN func_call SEMI {
 	  SymbolTableEntry variable = symbolTable.get($value.id,CURRENT_SCOPE);
 	  if (variable == null || !(variable instanceof TigerVariable)) {
-	    System.out.println("The variable "+$value.id+" on line "+$assign_stat.start.getLine()+" was never declared");
+	    System.out.println("The variable "+$value.id+" on line "+$value.start.getLine()+" was never declared");
 	  } 
 	}
   ->  ^(ASSIGN value func_call)
   | (value ASSIGN expr) => value ASSIGN expr SEMI {
     SymbolTableEntry variable = symbolTable.get($value.id,CURRENT_SCOPE);
-    if (variable == null || !(variable instanceof TigerVariable)) {
-      System.out.println("The variable "+$value.id+" on line "+$assign_stat.start.getLine()+" was never declared");
-    } 
-  }
+    if ($expr.isBool) {
+      System.out.println("Cannot assign boolean to variable");
+    } else {
+	    if (variable != null && variable instanceof TigerVariable) {
+	      // if right expression type is not null or if they are not equal and right is not int and left is not fixedpt (for promotion)
+	      // Dem parentheses doe
+	     if ($expr.typing == null || (!((TigerVariable)variable).getType().equals($expr.typing.getType()) && !(((TigerVariable)variable).getType().equals(symbolTable.getFixedPtType()) &&($expr.typing.getType().equals(symbolTable.getIntType()))))) {
+	      System.out.println("The variable "+$value.id+" on line "+$value.start.getLine()+" cannot be assigned to "+$expr.text+" because it has conflicting types");
+	     } else {
+	      System.out.println("Success");
+	     }
+	    } else {
+	      System.out.println("The variable "+$value.id+" on line "+$value.start.getLine()+" was never declared");
+	    }
+	   }
+    }
   -> ^(ASSIGN value expr)
 	;
 
@@ -709,12 +730,14 @@ return_stat
 	-> ^(AST_RETURN_STAT RETURN_KEY expr)
 	;
 
-expr returns [OperationObject typing]
+expr returns [OperationObject typing, Boolean isBool]
   : (boolExpr) => boolExpr {
     $typing = $boolExpr.typing;
+    $isBool = true;
   }
   | (numExpr) => numExpr {
     $typing = $numExpr.typing;
+    $isBool = false;
   }
   | LPAREN! expr RPAREN!
   ;
