@@ -1,67 +1,55 @@
 /**
  * An BinaryExpression is a wrapper which groups an expression 
- * in the form of (val1 OP val2) together.
+ * in the form of (val1 OP val2) together. 
+ * 
+ * It is a binary tree implementation of expression evaluation.
  */
 public class BinaryExpression {
-	private String value1, value2;
+	/**
+	 * The left and right expressions to evaluate.
+	 */
+	private BinaryExpression left, right;
+	/**
+	 * A static value - used only if this is a terminal expression.
+	 */
+	private String value;
+	/**
+	 * The operator to apply between the left and right expressions.
+	 */
 	private Binop op;
 	
 	/**
-	 * Constructs a new BinaryExpression from an expression in the
-	 * form of (val1 OP val2).
+	 * Constructs a new non-terminal BinaryExpression from an expression in the
+	 * form of (BinaryExpression1 OP BinaryExpression2).
 	 * 
-	 * @param value1 The first value to perform the operation on.
-	 * @param value2 The second value to perform the operation on.
-	 * @param op A target temporary variable.
+	 * @param left The first expression to perform the operation on.
+	 * @param right The second expression to perform the operation on.
+	 * @param op A the operation to perform.
 	 */
-	public BinaryExpression(String value1, String value2, Binop op) {
-		this.value1 = value1;
-		this.value2 = value2;
+	public BinaryExpression(BinaryExpression left, BinaryExpression right, Binop op) {
+		this.left = left;
+		this.right = right;
 		this.op = op;
 	}
 	
 	/**
-	 * Evaluates this expression and stores the result in a target temporary.
+	 * Constructs a new terminal BinaryExpression from a value or variable.
 	 * 
-	 * @param target The target temporary variable to store the result.
-	 * @return An IR representation of the evaluation.
+	 * @param value The value held by this BinaryExpression.
 	 */
-	public String eval(String target) {
-		switch (op) {
-		
-		// Math operations
-		case PLUS:
-			return IRGenerator.emit(IRMap.add(value1, value2, target));
-		case MINUS:
-			return IRGenerator.emit(IRMap.sub(value1, value2, target));
-		case MULT:
-			return IRGenerator.emit(IRMap.mult(value1, value2, target));
-		case DIV:
-			return IRGenerator.emit(IRMap.div(value1, value2, target));
-		
-		// Logical operations
-		case AND:
-			return IRGenerator.emit(IRMap.and(value1, value2, target));
-		case OR:
-			return IRGenerator.emit(IRMap.or(value1, value2, target));
-			
-		// Comparator operations
-		// TODO: Not quite sure how to handle these yet - Sean
-		case EQUAL:
-			break;
-		case NOT_EQUAL:
-			break;
-		case GREATER_THAN:
-			break;
-		case GREATER_THAN_OR_EQUAL:
-			break;
-		case LESS_THAN:
-			break;
-		case LESS_THAN_OR_EQUAL:
-			break;
-		
-		}
-		
-		return "";
+	public BinaryExpression(String value) {
+		this(null, null, null);
+		this.value = value;
 	}
+	
+	/**
+	 * Returns if this BinaryExpression is a terminal expression or not.
+	 * 
+	 * @return True if this BinaryExpression is terminal; false otherwise.
+	 */
+	public boolean isTerminal() {
+		return (op == null) ? true : false;
+	}
+	
+	// TODO: implement eval() tree traversal and IR generation
 }
