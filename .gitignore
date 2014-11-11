@@ -3,3 +3,5 @@ output/tigerLexer.java
 output/tigerParser.java
 output/tigerTreeWalker.java
 output/__Test*
+output/tiger.tokens
+output/tigerTreeWalker.tokens
