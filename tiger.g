@@ -742,13 +742,13 @@ numExpr returns [OperationObject typing]
   | constval {
     $typing = $constval.typing;
   }
-  | value {
-    $typing = $value.typing;
-  }
   | (value binop_p2) => value binop_p2 expr {
     $typing = getTyping($value.typing, $expr.typing, $numExpr.start.getLine(), $binop_p2.text);
   }
   -> ^(binop_p2 value expr)
+  | value {
+    $typing = $value.typing;
+  }
   | (LPAREN expr RPAREN binop_p2) => LPAREN var1=expr RPAREN binop_p2 var2=expr {
     $typing = getTyping($var1.typing, $var2.typing, $numExpr.start.getLine(), $binop_p2.text);
   }
