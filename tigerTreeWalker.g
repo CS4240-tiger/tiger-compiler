@@ -55,14 +55,14 @@ funct_declaration_list
 	;
 
 funct_declaration
-	:	^(ID param_list block_list)
-	{
-		irOutput.add(IRGenerator.funct_declaration($ID.text));
-	}
-	|	^(MAIN_KEY block_list)
-	{
-		irOutput.add(IRGenerator.funct_declaration($MAIN_KEY.text));
-	}
+	:	^(ID {
+			irOutput.add(IRGenerator.funct_declaration($ID.text));
+		} param_list block_list)
+	
+		
+	|	^(MAIN_KEY {
+			irOutput.add(IRGenerator.funct_declaration($MAIN_KEY.text));
+		} block_list)
 	;
 	
 ret_type 

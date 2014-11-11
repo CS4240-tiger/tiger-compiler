@@ -193,6 +193,7 @@ public class BinaryExpression {
 			throw new RuntimeException("ERROR: Unknown Binop on BinaryExpression.eval()!");
 		}
 		
+		returnBlock.nextUnusedTemp = tempNum;
 		return returnBlock;
 	}
 	
