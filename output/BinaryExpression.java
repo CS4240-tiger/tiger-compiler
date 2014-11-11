@@ -8,7 +8,7 @@ public class BinaryExpression {
 	/**
 	 * The left and right expressions to evaluate.
 	 */
-	private BinaryExpression left, right;
+	protected BinaryExpression left, right;
 	/**
 	 * A static value - used only if this is a terminal expression.
 	 */
@@ -17,7 +17,10 @@ public class BinaryExpression {
 	 * The operator to apply between the left and right expressions.
 	 */
 	private Binop op;
-	
+	/**
+	 * The parent BinaryExpression of this one.
+	 */
+	protected BinaryExpression parent;
 	/**
 	 * Constructs a new non-terminal BinaryExpression from an expression in the
 	 * form of (BinaryExpression1 OP BinaryExpression2).
@@ -29,6 +32,17 @@ public class BinaryExpression {
 	public BinaryExpression(BinaryExpression left, BinaryExpression right, Binop op) {
 		this.left = left;
 		this.right = right;
+		
+		if (left != null) {
+			left.parent = this;
+		}
+		
+		if (right != null) {
+			right.parent = this;
+		}
+		
+		parent = null;
+		
 		this.op = op;
 	}
 	
@@ -65,7 +79,7 @@ public class BinaryExpression {
 	 */
 	public BinaryExpression_EvalReturn eval(int startTemp) {
 		if (isTerminal()) {
-			return new BinaryExpression_EvalReturn(IRGenerator.emit(IRMap.assign(emitTemp(startTemp), value)));
+			return new BinaryExpression_EvalReturn(IRGenerator.emit(IRMap.assign(emitTemp(startTemp), value)), ++startTemp);
 		}
 		
 		return evalHelper(this, startTemp);
@@ -219,14 +233,15 @@ public class BinaryExpression {
 		}
 		
 		/**
-		 * Constructs a new BinaryExpression_EvalReturn object with given irGen.
+		 * Constructs a new BinaryExpression_EvalReturn object with given irGen and target temp.
 		 * This is useful when evaluating directly on a terminal.
 		 * 
 		 * All other fields are blank.
 		 * 
 		 * @param irGen Input IR translated code.
+		 * @param nextUnusedTemp The next unused temporary variable.
 		 */
-		public BinaryExpression_EvalReturn(String irGen) {
+		public BinaryExpression_EvalReturn(String irGen, int nextUnusedTemp) {
 			this.irGen = irGen;
 			condLabel = "";
 			nextUnusedTemp = 0;

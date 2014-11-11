@@ -202,31 +202,137 @@ return_stat
 	:	^(AST_RETURN_STAT RETURN_KEY expr)
 	;
 
-expr
+expr returns [BinaryExpression binExpr]
   : (boolExpr) => boolExpr
+  {
+  	$binExp = $boolExpr.binExpr;
+  }
   | (numExpr) => numExpr
-  | LPAREN expr RPAREN
+  {
+  	$binExp = $numExpr.binExpr;
+  }
+  | LPAREN! expr RPAREN!
+  {
+  	$binExp = $expr.binExpr;
+  }
   ;
  
-boolExpr
+boolExpr returns [BinaryExpression binExpr]
   : ^(binop_p0 constval expr)
+  {
+  	$binExpr = new BinaryExpression(
+  		new BinaryExpression($constval.retstr), 
+  		$expr.binExpr);
+  }
   | ^(binop_p0 value expr)
-  | ^(binop_p0 expr+)
+  {
+    	$binExpr = new BinaryExpression(
+  		new BinaryExpression($value.strVal), 
+  		$expr.binExpr);
+  }
+  | ^(binop_p0 (expr {
+  		//binExprList.add($expr.binExpr);
+  		if ($binExpr = null) {
+  			$binExpr = $expr.binExpr;
+  		} else {
+  			// Need to shift onto current tree
+  			BinaryExpression current = $binExpr;
+  			while (!current.isTerminal()) {
+  				current = current.right;
+  			}
+  			
+  			// Now transform terminal into non-terminal
+  			
+  		}
+  	}
+  	)+)
   ;
  
-numExpr
+numExpr returns [BinaryExpression binExpr]
   : ^(binop_p2 constval expr)
+  {
+  	
+  }
+  | constval
   | ^(binop_p2 value expr)
+  {
+  	
+  }
+  | value
+  {
+  	
+  }
   | ^(binop_p2 expr+)
   ;
 
 // Conditional ops
-binop_p0:	(AND | OR | binop_p1);
-binop_p1:	(EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ);   
+binop_p0 returns [Binop op]
+	: AND
+	{
+		$op = Binop.AND;
+	} 
+	| OR 
+	{
+		$op = Binop.OR;
+	}
+	| binop_p1
+	{
+		$op = $binop_p1.op;
+	}
+	;
+binop_p1 returns [Binop op]
+	: EQ 
+	{
+		$op = Binop.EQUAL;
+	}
+	| NEQ
+	{
+		$op = Binop.NOT_EQUAL;
+	}
+	| LESSER
+	{
+		$op = Binop.LESS_THAN;
+	}
+	| GREATER
+	{
+		$op = Binop.GREATER_THAN;
+	}
+	| LESSEREQ
+	{
+		$op = Binop.LESS_THAN_OR_EQUAL;
+	}
+	| GREATEREQ
+	{
+		$op = Binop.GREATER_THAN_OR_EQUAL;
+	}
+	;   
  
 // Numerical ops
-binop_p2:	(MINUS | PLUS | binop_p3);
-binop_p3:	(MULT | DIV);
+binop_p2 returns [Binop op]
+	: MINUS 
+	{
+		$op = Binop.MINUS;
+	}
+	| PLUS 
+	{
+		$op = Binop.PLUS;
+	}
+	| binop_p3
+	{
+		$op = $binop_p3.op;
+	}
+	;
+	
+binop_p3 returns [Binop op]
+	: MULT
+	{
+		$op = Binop.MULT;
+	}
+	| DIV
+	{
+		$op = Binop.DIV;
+	}
+	;
 	
 constval returns [String retStr]
 	:	(fixedptlit) => fixedptlit
