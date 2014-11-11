@@ -1,5 +1,0 @@
-bin
-output/tigerLexer.java
-output/tigerParser.java
-output/tigerTreeWalker.java
-output/__Test*
