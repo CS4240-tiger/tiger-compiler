@@ -70,16 +70,16 @@ public class BinaryExpression {
 	 * and generates a packaged result.
 	 * 
 	 * This result can be accessed as follows:<br />
-	 * <b>BinaryExpression_EvalReturn.irGen</b>: The resultant IR translation of the evaluation.<br />
-	 * <b>BinaryExpression_EvalReturn.nextUnusedTemp</b>: The next unused temporary variable available for assignment.<br />
-	 * <b>BinaryExpression_EvalReturn.condLabel</b>: If a conditional expression, the label generated if condition is false.
+	 * <b>EvalReturn.irGen</b>: The resultant IR translation of the evaluation.<br />
+	 * <b>EvalReturn.nextUnusedTemp</b>: The next unused temporary variable available for assignment.<br />
+	 * <b>EvalReturn.condLabel</b>: If a conditional expression, the label generated if condition is false.
 	 * 
 	 * @param startTemp The number of the temporary variable to store intermediary values in.
-	 * @return A result packaged as a BinaryExpression_EvalReturn object.
+	 * @return A result packaged as a EvalReturn object.
 	 */
-	public BinaryExpression_EvalReturn eval(int startTemp) {
+	public EvalReturn eval(int startTemp) {
 		if (isTerminal()) {
-			return new BinaryExpression_EvalReturn(IRGenerator.emit(IRMap.assign(emitTemp(startTemp), value)), ++startTemp);
+			return new EvalReturn(IRGenerator.emit(IRMap.assign(emitTemp(startTemp), value)), ++startTemp);
 		}
 		
 		return evalHelper(this, startTemp);
@@ -90,20 +90,20 @@ public class BinaryExpression {
 	 * 
 	 * @param startNode The node to start traversing from.
 	 * @param tempNum The current free temporary variable.
-	 * @return A result packaged as a BinaryExpression_EvalReturn object.
+	 * @return A result packaged as a EvalReturn object.
 	 */
-	private BinaryExpression_EvalReturn evalHelper(BinaryExpression startNode, int tempNum) {
-		BinaryExpression_EvalReturn returnBlock = new BinaryExpression_EvalReturn(tempNum);
+	private EvalReturn evalHelper(BinaryExpression startNode, int tempNum) {
+		EvalReturn returnBlock = new EvalReturn(tempNum);
 		
 		while (!right.isTerminal()) {
-			BinaryExpression_EvalReturn rightEval = evalHelper(right, returnBlock.nextUnusedTemp);
+			EvalReturn rightEval = evalHelper(right, returnBlock.nextUnusedTemp);
 			returnBlock.irGen += IRGenerator.emit(rightEval.irGen);
 			returnBlock.nextUnusedTemp = rightEval.nextUnusedTemp;
 			returnBlock.condLabel = rightEval.condLabel;
 		}
 			
 		while (!left.isTerminal()) {
-			BinaryExpression_EvalReturn leftEval = evalHelper(left, returnBlock.nextUnusedTemp);
+			EvalReturn leftEval = evalHelper(left, returnBlock.nextUnusedTemp);
 			returnBlock.irGen += IRGenerator.emit(leftEval.irGen);
 			returnBlock.nextUnusedTemp = leftEval.nextUnusedTemp;
 			returnBlock.condLabel = leftEval.condLabel;
@@ -213,27 +213,27 @@ public class BinaryExpression {
 	}
 	
 	/**
-	 * A BinaryExpression_EvalReturn object contains a collection of objects 
+	 * A EvalReturn object contains a collection of objects 
 	 * produced as a result of recursive evaluation.
 	 */
-	class BinaryExpression_EvalReturn {
+	class EvalReturn {
 		protected String irGen, condLabel;
 		protected int nextUnusedTemp;
 		
 		/**
-		 * Constructs a new BinaryExpression_EvalReturn object with given temporary variable.
+		 * Constructs a new EvalReturn object with given temporary variable.
 		 * All other fields are blank.
 		 * 
 		 * @param nextUnusedTemp The next unused temporary variable able to be assigned.
 		 */
-		public BinaryExpression_EvalReturn(int nextUnusedTemp) {
+		public EvalReturn(int nextUnusedTemp) {
 			irGen = "";
 			condLabel = "";
 			this.nextUnusedTemp = nextUnusedTemp;
 		}
 		
 		/**
-		 * Constructs a new BinaryExpression_EvalReturn object with given irGen and target temp.
+		 * Constructs a new EvalReturn object with given irGen and target temp.
 		 * This is useful when evaluating directly on a terminal.
 		 * 
 		 * All other fields are blank.
@@ -241,7 +241,7 @@ public class BinaryExpression {
 		 * @param irGen Input IR translated code.
 		 * @param nextUnusedTemp The next unused temporary variable.
 		 */
-		public BinaryExpression_EvalReturn(String irGen, int nextUnusedTemp) {
+		public EvalReturn(String irGen, int nextUnusedTemp) {
 			this.irGen = irGen;
 			condLabel = "";
 			nextUnusedTemp = 0;

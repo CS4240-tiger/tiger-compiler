@@ -168,6 +168,12 @@ stat
 
 if_stat
 	:	^(IF_KEY expr stat_seq else_tail?)
+	{
+		BinaryExpression.EvalReturn exprReturn = $expr.binExpr.eval(currentTemporary);
+		currentTemporary = exprReturn.nextUnusedTemp;
+		irOutput.add(exprReturn.irGen);
+		irOutput.add("\n" + exprReturn.condLabel);
+	}
 	;
 
 else_tail
@@ -176,6 +182,12 @@ else_tail
 
 while_stat
 	:	^(WHILE_KEY expr stat_seq)
+	{
+		BinaryExpression.EvalReturn exprReturn = $expr.binExpr.eval(currentTemporary);
+		currentTemporary = exprReturn.nextUnusedTemp;
+		irOutput.add(exprReturn.irGen);
+		irOutput.add("\n" + exprReturn.condLabel);
+	}
 	;
 
 for_stat
@@ -187,7 +199,8 @@ assign_stat
 	;
 
 assign_tail
-	:	expr | func_call
+	:	expr
+	|	func_call
 	;
 
 func_call

@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g 2014-11-10 23:13:52
+// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g 2014-11-10 23:25:45
 
 	import java.util.Map;
 	import java.util.HashMap;
@@ -2661,6 +2661,12 @@ public class tigerTreeWalker extends TreeParser {
 
 
 			if ( state.backtracking==0 ) {
+					BinaryExpression.EvalReturn exprReturn = (expr62!=null?((tigerTreeWalker.expr_return)expr62).binExpr:null).eval(currentTemporary);
+					currentTemporary = exprReturn.nextUnusedTemp;
+					irOutput.add(exprReturn.irGen);
+					irOutput.add("\n" + exprReturn.condLabel);
+				}
+			if ( state.backtracking==0 ) {
 			}
 
 			}
@@ -2691,7 +2697,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "else_tail"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:173:1: else_tail : ^( ELSE_KEY stat_seq ) ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:179:1: else_tail : ^( ELSE_KEY stat_seq ) ;
 	public final tigerTreeWalker.else_tail_return else_tail() throws RecognitionException {
 		tigerTreeWalker.else_tail_return retval = new tigerTreeWalker.else_tail_return();
 		retval.start = input.LT(1);
@@ -2708,8 +2714,8 @@ public class tigerTreeWalker extends TreeParser {
 		CommonTree ELSE_KEY65_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:174:2: ( ^( ELSE_KEY stat_seq ) )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:174:4: ^( ELSE_KEY stat_seq )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:180:2: ( ^( ELSE_KEY stat_seq ) )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:180:4: ^( ELSE_KEY stat_seq )
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
@@ -2720,7 +2726,7 @@ public class tigerTreeWalker extends TreeParser {
 			CommonTree _first_1 = null;
 			CommonTree root_1 = (CommonTree)adaptor.nil();
 			_last = (CommonTree)input.LT(1);
-			ELSE_KEY65=(CommonTree)match(input,ELSE_KEY,FOLLOW_ELSE_KEY_in_else_tail577); if (state.failed) return retval;
+			ELSE_KEY65=(CommonTree)match(input,ELSE_KEY,FOLLOW_ELSE_KEY_in_else_tail580); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
 			ELSE_KEY65_tree = (CommonTree)adaptor.dupNode(ELSE_KEY65);
 
@@ -2730,7 +2736,7 @@ public class tigerTreeWalker extends TreeParser {
 
 			match(input, Token.DOWN, null); if (state.failed) return retval;
 			_last = (CommonTree)input.LT(1);
-			pushFollow(FOLLOW_stat_seq_in_else_tail579);
+			pushFollow(FOLLOW_stat_seq_in_else_tail582);
 			stat_seq66=stat_seq();
 			state._fsp--;
 			if (state.failed) return retval;
@@ -2774,7 +2780,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "while_stat"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:177:1: while_stat : ^( WHILE_KEY expr stat_seq ) ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:183:1: while_stat : ^( WHILE_KEY expr stat_seq ) ;
 	public final tigerTreeWalker.while_stat_return while_stat() throws RecognitionException {
 		tigerTreeWalker.while_stat_return retval = new tigerTreeWalker.while_stat_return();
 		retval.start = input.LT(1);
@@ -2792,8 +2798,8 @@ public class tigerTreeWalker extends TreeParser {
 		CommonTree WHILE_KEY67_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:178:2: ( ^( WHILE_KEY expr stat_seq ) )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:178:4: ^( WHILE_KEY expr stat_seq )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:184:2: ( ^( WHILE_KEY expr stat_seq ) )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:184:4: ^( WHILE_KEY expr stat_seq )
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
@@ -2804,7 +2810,7 @@ public class tigerTreeWalker extends TreeParser {
 			CommonTree _first_1 = null;
 			CommonTree root_1 = (CommonTree)adaptor.nil();
 			_last = (CommonTree)input.LT(1);
-			WHILE_KEY67=(CommonTree)match(input,WHILE_KEY,FOLLOW_WHILE_KEY_in_while_stat592); if (state.failed) return retval;
+			WHILE_KEY67=(CommonTree)match(input,WHILE_KEY,FOLLOW_WHILE_KEY_in_while_stat595); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
 			WHILE_KEY67_tree = (CommonTree)adaptor.dupNode(WHILE_KEY67);
 
@@ -2814,7 +2820,7 @@ public class tigerTreeWalker extends TreeParser {
 
 			match(input, Token.DOWN, null); if (state.failed) return retval;
 			_last = (CommonTree)input.LT(1);
-			pushFollow(FOLLOW_expr_in_while_stat594);
+			pushFollow(FOLLOW_expr_in_while_stat597);
 			expr68=expr();
 			state._fsp--;
 			if (state.failed) return retval;
@@ -2822,7 +2828,7 @@ public class tigerTreeWalker extends TreeParser {
 			adaptor.addChild(root_1, expr68.getTree());
 
 			_last = (CommonTree)input.LT(1);
-			pushFollow(FOLLOW_stat_seq_in_while_stat596);
+			pushFollow(FOLLOW_stat_seq_in_while_stat599);
 			stat_seq69=stat_seq();
 			state._fsp--;
 			if (state.failed) return retval;
@@ -2835,6 +2841,12 @@ public class tigerTreeWalker extends TreeParser {
 			}
 
 
+			if ( state.backtracking==0 ) {
+					BinaryExpression.EvalReturn exprReturn = (expr68!=null?((tigerTreeWalker.expr_return)expr68).binExpr:null).eval(currentTemporary);
+					currentTemporary = exprReturn.nextUnusedTemp;
+					irOutput.add(exprReturn.irGen);
+					irOutput.add("\n" + exprReturn.condLabel);
+				}
 			if ( state.backtracking==0 ) {
 			}
 
@@ -2866,7 +2878,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "for_stat"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:181:1: for_stat : ^( FOR_KEY ^( TO_KEY ^( ASSIGN ID index_expr ) index_expr ) stat_seq ) ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:193:1: for_stat : ^( FOR_KEY ^( TO_KEY ^( ASSIGN ID index_expr ) index_expr ) stat_seq ) ;
 	public final tigerTreeWalker.for_stat_return for_stat() throws RecognitionException {
 		tigerTreeWalker.for_stat_return retval = new tigerTreeWalker.for_stat_return();
 		retval.start = input.LT(1);
@@ -2891,8 +2903,8 @@ public class tigerTreeWalker extends TreeParser {
 		CommonTree ID73_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:182:2: ( ^( FOR_KEY ^( TO_KEY ^( ASSIGN ID index_expr ) index_expr ) stat_seq ) )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:182:4: ^( FOR_KEY ^( TO_KEY ^( ASSIGN ID index_expr ) index_expr ) stat_seq )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:194:2: ( ^( FOR_KEY ^( TO_KEY ^( ASSIGN ID index_expr ) index_expr ) stat_seq ) )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:194:4: ^( FOR_KEY ^( TO_KEY ^( ASSIGN ID index_expr ) index_expr ) stat_seq )
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
@@ -2903,7 +2915,7 @@ public class tigerTreeWalker extends TreeParser {
 			CommonTree _first_1 = null;
 			CommonTree root_1 = (CommonTree)adaptor.nil();
 			_last = (CommonTree)input.LT(1);
-			FOR_KEY70=(CommonTree)match(input,FOR_KEY,FOLLOW_FOR_KEY_in_for_stat609); if (state.failed) return retval;
+			FOR_KEY70=(CommonTree)match(input,FOR_KEY,FOLLOW_FOR_KEY_in_for_stat615); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
 			FOR_KEY70_tree = (CommonTree)adaptor.dupNode(FOR_KEY70);
 
@@ -2918,7 +2930,7 @@ public class tigerTreeWalker extends TreeParser {
 			CommonTree _first_2 = null;
 			CommonTree root_2 = (CommonTree)adaptor.nil();
 			_last = (CommonTree)input.LT(1);
-			TO_KEY71=(CommonTree)match(input,TO_KEY,FOLLOW_TO_KEY_in_for_stat612); if (state.failed) return retval;
+			TO_KEY71=(CommonTree)match(input,TO_KEY,FOLLOW_TO_KEY_in_for_stat618); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
 			TO_KEY71_tree = (CommonTree)adaptor.dupNode(TO_KEY71);
 
@@ -2933,7 +2945,7 @@ public class tigerTreeWalker extends TreeParser {
 			CommonTree _first_3 = null;
 			CommonTree root_3 = (CommonTree)adaptor.nil();
 			_last = (CommonTree)input.LT(1);
-			ASSIGN72=(CommonTree)match(input,ASSIGN,FOLLOW_ASSIGN_in_for_stat615); if (state.failed) return retval;
+			ASSIGN72=(CommonTree)match(input,ASSIGN,FOLLOW_ASSIGN_in_for_stat621); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
 			ASSIGN72_tree = (CommonTree)adaptor.dupNode(ASSIGN72);
 
@@ -2943,7 +2955,7 @@ public class tigerTreeWalker extends TreeParser {
 
 			match(input, Token.DOWN, null); if (state.failed) return retval;
 			_last = (CommonTree)input.LT(1);
-			ID73=(CommonTree)match(input,ID,FOLLOW_ID_in_for_stat617); if (state.failed) return retval;
+			ID73=(CommonTree)match(input,ID,FOLLOW_ID_in_for_stat623); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
 			ID73_tree = (CommonTree)adaptor.dupNode(ID73);
 
@@ -2952,7 +2964,7 @@ public class tigerTreeWalker extends TreeParser {
 			}
 
 			_last = (CommonTree)input.LT(1);
-			pushFollow(FOLLOW_index_expr_in_for_stat619);
+			pushFollow(FOLLOW_index_expr_in_for_stat625);
 			index_expr74=index_expr();
 			state._fsp--;
 			if (state.failed) return retval;
@@ -2966,7 +2978,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 			_last = (CommonTree)input.LT(1);
-			pushFollow(FOLLOW_index_expr_in_for_stat622);
+			pushFollow(FOLLOW_index_expr_in_for_stat628);
 			index_expr75=index_expr();
 			state._fsp--;
 			if (state.failed) return retval;
@@ -2980,7 +2992,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 			_last = (CommonTree)input.LT(1);
-			pushFollow(FOLLOW_stat_seq_in_for_stat625);
+			pushFollow(FOLLOW_stat_seq_in_for_stat631);
 			stat_seq76=stat_seq();
 			state._fsp--;
 			if (state.failed) return retval;
@@ -3024,7 +3036,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "assign_stat"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:185:1: assign_stat : ^( ASSIGN value assign_tail ) ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:197:1: assign_stat : ^( ASSIGN value assign_tail ) ;
 	public final tigerTreeWalker.assign_stat_return assign_stat() throws RecognitionException {
 		tigerTreeWalker.assign_stat_return retval = new tigerTreeWalker.assign_stat_return();
 		retval.start = input.LT(1);
@@ -3042,8 +3054,8 @@ public class tigerTreeWalker extends TreeParser {
 		CommonTree ASSIGN77_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:186:2: ( ^( ASSIGN value assign_tail ) )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:186:4: ^( ASSIGN value assign_tail )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:198:2: ( ^( ASSIGN value assign_tail ) )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:198:4: ^( ASSIGN value assign_tail )
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
@@ -3054,7 +3066,7 @@ public class tigerTreeWalker extends TreeParser {
 			CommonTree _first_1 = null;
 			CommonTree root_1 = (CommonTree)adaptor.nil();
 			_last = (CommonTree)input.LT(1);
-			ASSIGN77=(CommonTree)match(input,ASSIGN,FOLLOW_ASSIGN_in_assign_stat638); if (state.failed) return retval;
+			ASSIGN77=(CommonTree)match(input,ASSIGN,FOLLOW_ASSIGN_in_assign_stat644); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
 			ASSIGN77_tree = (CommonTree)adaptor.dupNode(ASSIGN77);
 
@@ -3064,7 +3076,7 @@ public class tigerTreeWalker extends TreeParser {
 
 			match(input, Token.DOWN, null); if (state.failed) return retval;
 			_last = (CommonTree)input.LT(1);
-			pushFollow(FOLLOW_value_in_assign_stat640);
+			pushFollow(FOLLOW_value_in_assign_stat646);
 			value78=value();
 			state._fsp--;
 			if (state.failed) return retval;
@@ -3072,7 +3084,7 @@ public class tigerTreeWalker extends TreeParser {
 			adaptor.addChild(root_1, value78.getTree());
 
 			_last = (CommonTree)input.LT(1);
-			pushFollow(FOLLOW_assign_tail_in_assign_stat642);
+			pushFollow(FOLLOW_assign_tail_in_assign_stat648);
 			assign_tail79=assign_tail();
 			state._fsp--;
 			if (state.failed) return retval;
@@ -3116,7 +3128,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "assign_tail"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:189:1: assign_tail : ( expr | func_call );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:201:1: assign_tail : ( expr | func_call );
 	public final tigerTreeWalker.assign_tail_return assign_tail() throws RecognitionException {
 		tigerTreeWalker.assign_tail_return retval = new tigerTreeWalker.assign_tail_return();
 		retval.start = input.LT(1);
@@ -3132,7 +3144,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:190:2: ( expr | func_call )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:202:2: ( expr | func_call )
 			int alt18=2;
 			int LA18_0 = input.LA(1);
 			if ( (LA18_0==AND||LA18_0==DIV||LA18_0==EQ||(LA18_0 >= GREATER && LA18_0 <= ID)||(LA18_0 >= LESSER && LA18_0 <= LPAREN)||(LA18_0 >= MINUS && LA18_0 <= NEQ)||(LA18_0 >= OR && LA18_0 <= PLUS)||(LA18_0 >= UNSIGNED_FIXEDPTLIT && LA18_0 <= UNSIGNED_INTLIT)) ) {
@@ -3151,13 +3163,13 @@ public class tigerTreeWalker extends TreeParser {
 
 			switch (alt18) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:190:4: expr
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:202:4: expr
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_expr_in_assign_tail654);
+					pushFollow(FOLLOW_expr_in_assign_tail660);
 					expr80=expr();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -3170,13 +3182,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:190:11: func_call
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:203:4: func_call
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_func_call_in_assign_tail658);
+					pushFollow(FOLLOW_func_call_in_assign_tail665);
 					func_call81=func_call();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -3216,7 +3228,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "func_call"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:193:1: func_call : ^( AST_FUNC_CALL ID func_param_list ) ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:206:1: func_call : ^( AST_FUNC_CALL ID func_param_list ) ;
 	public final tigerTreeWalker.func_call_return func_call() throws RecognitionException {
 		tigerTreeWalker.func_call_return retval = new tigerTreeWalker.func_call_return();
 		retval.start = input.LT(1);
@@ -3235,8 +3247,8 @@ public class tigerTreeWalker extends TreeParser {
 		CommonTree ID83_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:194:2: ( ^( AST_FUNC_CALL ID func_param_list ) )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:194:4: ^( AST_FUNC_CALL ID func_param_list )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:207:2: ( ^( AST_FUNC_CALL ID func_param_list ) )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:207:4: ^( AST_FUNC_CALL ID func_param_list )
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
@@ -3247,7 +3259,7 @@ public class tigerTreeWalker extends TreeParser {
 			CommonTree _first_1 = null;
 			CommonTree root_1 = (CommonTree)adaptor.nil();
 			_last = (CommonTree)input.LT(1);
-			AST_FUNC_CALL82=(CommonTree)match(input,AST_FUNC_CALL,FOLLOW_AST_FUNC_CALL_in_func_call670); if (state.failed) return retval;
+			AST_FUNC_CALL82=(CommonTree)match(input,AST_FUNC_CALL,FOLLOW_AST_FUNC_CALL_in_func_call677); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
 			AST_FUNC_CALL82_tree = (CommonTree)adaptor.dupNode(AST_FUNC_CALL82);
 
@@ -3257,7 +3269,7 @@ public class tigerTreeWalker extends TreeParser {
 
 			match(input, Token.DOWN, null); if (state.failed) return retval;
 			_last = (CommonTree)input.LT(1);
-			ID83=(CommonTree)match(input,ID,FOLLOW_ID_in_func_call672); if (state.failed) return retval;
+			ID83=(CommonTree)match(input,ID,FOLLOW_ID_in_func_call679); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
 			ID83_tree = (CommonTree)adaptor.dupNode(ID83);
 
@@ -3266,7 +3278,7 @@ public class tigerTreeWalker extends TreeParser {
 			}
 
 			_last = (CommonTree)input.LT(1);
-			pushFollow(FOLLOW_func_param_list_in_func_call674);
+			pushFollow(FOLLOW_func_param_list_in_func_call681);
 			func_param_list84=func_param_list();
 			state._fsp--;
 			if (state.failed) return retval;
@@ -3310,7 +3322,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "break_stat"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:197:1: break_stat : BREAK_KEY ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:210:1: break_stat : BREAK_KEY ;
 	public final tigerTreeWalker.break_stat_return break_stat() throws RecognitionException {
 		tigerTreeWalker.break_stat_return retval = new tigerTreeWalker.break_stat_return();
 		retval.start = input.LT(1);
@@ -3326,14 +3338,14 @@ public class tigerTreeWalker extends TreeParser {
 		CommonTree BREAK_KEY85_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:198:2: ( BREAK_KEY )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:198:4: BREAK_KEY
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:211:2: ( BREAK_KEY )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:211:4: BREAK_KEY
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
 
 			_last = (CommonTree)input.LT(1);
-			BREAK_KEY85=(CommonTree)match(input,BREAK_KEY,FOLLOW_BREAK_KEY_in_break_stat687); if (state.failed) return retval;
+			BREAK_KEY85=(CommonTree)match(input,BREAK_KEY,FOLLOW_BREAK_KEY_in_break_stat694); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
 			BREAK_KEY85_tree = (CommonTree)adaptor.dupNode(BREAK_KEY85);
 
@@ -3372,7 +3384,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "return_stat"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:201:1: return_stat : ^( AST_RETURN_STAT RETURN_KEY expr ) ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:214:1: return_stat : ^( AST_RETURN_STAT RETURN_KEY expr ) ;
 	public final tigerTreeWalker.return_stat_return return_stat() throws RecognitionException {
 		tigerTreeWalker.return_stat_return retval = new tigerTreeWalker.return_stat_return();
 		retval.start = input.LT(1);
@@ -3391,8 +3403,8 @@ public class tigerTreeWalker extends TreeParser {
 		CommonTree RETURN_KEY87_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:202:2: ( ^( AST_RETURN_STAT RETURN_KEY expr ) )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:202:4: ^( AST_RETURN_STAT RETURN_KEY expr )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:215:2: ( ^( AST_RETURN_STAT RETURN_KEY expr ) )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:215:4: ^( AST_RETURN_STAT RETURN_KEY expr )
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
@@ -3403,7 +3415,7 @@ public class tigerTreeWalker extends TreeParser {
 			CommonTree _first_1 = null;
 			CommonTree root_1 = (CommonTree)adaptor.nil();
 			_last = (CommonTree)input.LT(1);
-			AST_RETURN_STAT86=(CommonTree)match(input,AST_RETURN_STAT,FOLLOW_AST_RETURN_STAT_in_return_stat700); if (state.failed) return retval;
+			AST_RETURN_STAT86=(CommonTree)match(input,AST_RETURN_STAT,FOLLOW_AST_RETURN_STAT_in_return_stat707); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
 			AST_RETURN_STAT86_tree = (CommonTree)adaptor.dupNode(AST_RETURN_STAT86);
 
@@ -3413,7 +3425,7 @@ public class tigerTreeWalker extends TreeParser {
 
 			match(input, Token.DOWN, null); if (state.failed) return retval;
 			_last = (CommonTree)input.LT(1);
-			RETURN_KEY87=(CommonTree)match(input,RETURN_KEY,FOLLOW_RETURN_KEY_in_return_stat702); if (state.failed) return retval;
+			RETURN_KEY87=(CommonTree)match(input,RETURN_KEY,FOLLOW_RETURN_KEY_in_return_stat709); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
 			RETURN_KEY87_tree = (CommonTree)adaptor.dupNode(RETURN_KEY87);
 
@@ -3422,7 +3434,7 @@ public class tigerTreeWalker extends TreeParser {
 			}
 
 			_last = (CommonTree)input.LT(1);
-			pushFollow(FOLLOW_expr_in_return_stat704);
+			pushFollow(FOLLOW_expr_in_return_stat711);
 			expr88=expr();
 			state._fsp--;
 			if (state.failed) return retval;
@@ -3467,7 +3479,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "expr"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:205:1: expr returns [BinaryExpression binExpr] : ( ( boolExpr )=> boolExpr | ( numExpr )=> numExpr | LPAREN !expr2= expr RPAREN !);
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:218:1: expr returns [BinaryExpression binExpr] : ( ( boolExpr )=> boolExpr | ( numExpr )=> numExpr | LPAREN !expr2= expr RPAREN !);
 	public final tigerTreeWalker.expr_return expr() throws RecognitionException {
 		tigerTreeWalker.expr_return retval = new tigerTreeWalker.expr_return();
 		retval.start = input.LT(1);
@@ -3488,7 +3500,7 @@ public class tigerTreeWalker extends TreeParser {
 		CommonTree RPAREN92_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:206:3: ( ( boolExpr )=> boolExpr | ( numExpr )=> numExpr | LPAREN !expr2= expr RPAREN !)
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:219:3: ( ( boolExpr )=> boolExpr | ( numExpr )=> numExpr | LPAREN !expr2= expr RPAREN !)
 			int alt19=3;
 			int LA19_0 = input.LA(1);
 			if ( (LA19_0==AND) && (synpred1_tigerTreeWalker())) {
@@ -3552,13 +3564,13 @@ public class tigerTreeWalker extends TreeParser {
 
 			switch (alt19) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:206:5: ( boolExpr )=> boolExpr
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:219:5: ( boolExpr )=> boolExpr
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_boolExpr_in_expr727);
+					pushFollow(FOLLOW_boolExpr_in_expr734);
 					boolExpr89=boolExpr();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -3574,13 +3586,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:210:5: ( numExpr )=> numExpr
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:223:5: ( numExpr )=> numExpr
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_numExpr_in_expr743);
+					pushFollow(FOLLOW_numExpr_in_expr750);
 					numExpr90=numExpr();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -3596,16 +3608,16 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 3 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:214:5: LPAREN !expr2= expr RPAREN !
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:227:5: LPAREN !expr2= expr RPAREN !
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					LPAREN91=(CommonTree)match(input,LPAREN,FOLLOW_LPAREN_in_expr753); if (state.failed) return retval;
+					LPAREN91=(CommonTree)match(input,LPAREN,FOLLOW_LPAREN_in_expr760); if (state.failed) return retval;
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_expr_in_expr758);
+					pushFollow(FOLLOW_expr_in_expr765);
 					expr2=expr();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -3613,7 +3625,7 @@ public class tigerTreeWalker extends TreeParser {
 					adaptor.addChild(root_0, expr2.getTree());
 
 					_last = (CommonTree)input.LT(1);
-					RPAREN92=(CommonTree)match(input,RPAREN,FOLLOW_RPAREN_in_expr760); if (state.failed) return retval;
+					RPAREN92=(CommonTree)match(input,RPAREN,FOLLOW_RPAREN_in_expr767); if (state.failed) return retval;
 
 					if ( state.backtracking==0 ) {
 					  	retval.binExpr = (expr2!=null?((tigerTreeWalker.expr_return)expr2).binExpr:null);
@@ -3652,7 +3664,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "boolExpr"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:220:1: boolExpr returns [BinaryExpression binExpr] : ( ^( binop_p0 constval expr ) | ^( binop_p0 value expr ) | LPAREN !expr1= expr RPAREN ! binop_p0 ^expr2= expr );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:233:1: boolExpr returns [BinaryExpression binExpr] : ( ^( binop_p0 constval expr ) | ^( binop_p0 value expr ) | LPAREN !expr1= expr RPAREN ! binop_p0 ^expr2= expr );
 	public final tigerTreeWalker.boolExpr_return boolExpr() throws RecognitionException {
 		tigerTreeWalker.boolExpr_return retval = new tigerTreeWalker.boolExpr_return();
 		retval.start = input.LT(1);
@@ -3679,7 +3691,7 @@ public class tigerTreeWalker extends TreeParser {
 		CommonTree RPAREN100_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:221:3: ( ^( binop_p0 constval expr ) | ^( binop_p0 value expr ) | LPAREN !expr1= expr RPAREN ! binop_p0 ^expr2= expr )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:234:3: ( ^( binop_p0 constval expr ) | ^( binop_p0 value expr ) | LPAREN !expr1= expr RPAREN ! binop_p0 ^expr2= expr )
 			int alt20=3;
 			switch ( input.LA(1) ) {
 			case AND:
@@ -4047,7 +4059,7 @@ public class tigerTreeWalker extends TreeParser {
 			}
 			switch (alt20) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:221:5: ^( binop_p0 constval expr )
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:234:5: ^( binop_p0 constval expr )
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
@@ -4058,7 +4070,7 @@ public class tigerTreeWalker extends TreeParser {
 					CommonTree _first_1 = null;
 					CommonTree root_1 = (CommonTree)adaptor.nil();
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_binop_p0_in_boolExpr784);
+					pushFollow(FOLLOW_binop_p0_in_boolExpr791);
 					binop_p093=binop_p0();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -4066,7 +4078,7 @@ public class tigerTreeWalker extends TreeParser {
 
 					match(input, Token.DOWN, null); if (state.failed) return retval;
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_constval_in_boolExpr786);
+					pushFollow(FOLLOW_constval_in_boolExpr793);
 					constval94=constval();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -4074,7 +4086,7 @@ public class tigerTreeWalker extends TreeParser {
 					adaptor.addChild(root_1, constval94.getTree());
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_expr_in_boolExpr788);
+					pushFollow(FOLLOW_expr_in_boolExpr795);
 					expr95=expr();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -4098,7 +4110,7 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:227:5: ^( binop_p0 value expr )
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:240:5: ^( binop_p0 value expr )
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
@@ -4109,7 +4121,7 @@ public class tigerTreeWalker extends TreeParser {
 					CommonTree _first_1 = null;
 					CommonTree root_1 = (CommonTree)adaptor.nil();
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_binop_p0_in_boolExpr800);
+					pushFollow(FOLLOW_binop_p0_in_boolExpr807);
 					binop_p096=binop_p0();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -4117,7 +4129,7 @@ public class tigerTreeWalker extends TreeParser {
 
 					match(input, Token.DOWN, null); if (state.failed) return retval;
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_value_in_boolExpr802);
+					pushFollow(FOLLOW_value_in_boolExpr809);
 					value97=value();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -4125,7 +4137,7 @@ public class tigerTreeWalker extends TreeParser {
 					adaptor.addChild(root_1, value97.getTree());
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_expr_in_boolExpr804);
+					pushFollow(FOLLOW_expr_in_boolExpr811);
 					expr98=expr();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -4149,16 +4161,16 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 3 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:233:5: LPAREN !expr1= expr RPAREN ! binop_p0 ^expr2= expr
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:246:5: LPAREN !expr1= expr RPAREN ! binop_p0 ^expr2= expr
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					LPAREN99=(CommonTree)match(input,LPAREN,FOLLOW_LPAREN_in_boolExpr815); if (state.failed) return retval;
+					LPAREN99=(CommonTree)match(input,LPAREN,FOLLOW_LPAREN_in_boolExpr822); if (state.failed) return retval;
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_expr_in_boolExpr820);
+					pushFollow(FOLLOW_expr_in_boolExpr827);
 					expr1=expr();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -4169,17 +4181,17 @@ public class tigerTreeWalker extends TreeParser {
 					  		retval.binExpr = (expr1!=null?((tigerTreeWalker.expr_return)expr1).binExpr:null);
 					  	}
 					_last = (CommonTree)input.LT(1);
-					RPAREN100=(CommonTree)match(input,RPAREN,FOLLOW_RPAREN_in_boolExpr832); if (state.failed) return retval;
+					RPAREN100=(CommonTree)match(input,RPAREN,FOLLOW_RPAREN_in_boolExpr839); if (state.failed) return retval;
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_binop_p0_in_boolExpr835);
+					pushFollow(FOLLOW_binop_p0_in_boolExpr842);
 					binop_p0101=binop_p0();
 					state._fsp--;
 					if (state.failed) return retval;
 					if ( state.backtracking==0 ) root_0 = (CommonTree)adaptor.becomeRoot(binop_p0101.getTree(), root_0);
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_expr_in_boolExpr840);
+					pushFollow(FOLLOW_expr_in_boolExpr847);
 					expr2=expr();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -4234,7 +4246,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "numExpr"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:253:1: numExpr returns [BinaryExpression binExpr] : ( ^( binop_p2 constval expr ) | constval | ^( binop_p2 value expr ) | value | LPAREN !expr1= expr RPAREN ! binop_p2 ^expr2= expr );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:266:1: numExpr returns [BinaryExpression binExpr] : ( ^( binop_p2 constval expr ) | constval | ^( binop_p2 value expr ) | value | LPAREN !expr1= expr RPAREN ! binop_p2 ^expr2= expr );
 	public final tigerTreeWalker.numExpr_return numExpr() throws RecognitionException {
 		tigerTreeWalker.numExpr_return retval = new tigerTreeWalker.numExpr_return();
 		retval.start = input.LT(1);
@@ -4263,7 +4275,7 @@ public class tigerTreeWalker extends TreeParser {
 		CommonTree RPAREN111_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:254:3: ( ^( binop_p2 constval expr ) | constval | ^( binop_p2 value expr ) | value | LPAREN !expr1= expr RPAREN ! binop_p2 ^expr2= expr )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:267:3: ( ^( binop_p2 constval expr ) | constval | ^( binop_p2 value expr ) | value | LPAREN !expr1= expr RPAREN ! binop_p2 ^expr2= expr )
 			int alt21=5;
 			switch ( input.LA(1) ) {
 			case MINUS:
@@ -4469,7 +4481,7 @@ public class tigerTreeWalker extends TreeParser {
 			}
 			switch (alt21) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:254:5: ^( binop_p2 constval expr )
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:267:5: ^( binop_p2 constval expr )
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
@@ -4480,7 +4492,7 @@ public class tigerTreeWalker extends TreeParser {
 					CommonTree _first_1 = null;
 					CommonTree root_1 = (CommonTree)adaptor.nil();
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_binop_p2_in_numExpr861);
+					pushFollow(FOLLOW_binop_p2_in_numExpr868);
 					binop_p2102=binop_p2();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -4488,7 +4500,7 @@ public class tigerTreeWalker extends TreeParser {
 
 					match(input, Token.DOWN, null); if (state.failed) return retval;
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_constval_in_numExpr863);
+					pushFollow(FOLLOW_constval_in_numExpr870);
 					constval103=constval();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -4496,7 +4508,7 @@ public class tigerTreeWalker extends TreeParser {
 					adaptor.addChild(root_1, constval103.getTree());
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_expr_in_numExpr865);
+					pushFollow(FOLLOW_expr_in_numExpr872);
 					expr104=expr();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -4520,13 +4532,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:260:5: constval
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:273:5: constval
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_constval_in_numExpr876);
+					pushFollow(FOLLOW_constval_in_numExpr883);
 					constval105=constval();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -4539,7 +4551,7 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 3 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:261:5: ^( binop_p2 value expr )
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:274:5: ^( binop_p2 value expr )
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
@@ -4550,7 +4562,7 @@ public class tigerTreeWalker extends TreeParser {
 					CommonTree _first_1 = null;
 					CommonTree root_1 = (CommonTree)adaptor.nil();
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_binop_p2_in_numExpr883);
+					pushFollow(FOLLOW_binop_p2_in_numExpr890);
 					binop_p2106=binop_p2();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -4558,7 +4570,7 @@ public class tigerTreeWalker extends TreeParser {
 
 					match(input, Token.DOWN, null); if (state.failed) return retval;
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_value_in_numExpr885);
+					pushFollow(FOLLOW_value_in_numExpr892);
 					value107=value();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -4566,7 +4578,7 @@ public class tigerTreeWalker extends TreeParser {
 					adaptor.addChild(root_1, value107.getTree());
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_expr_in_numExpr887);
+					pushFollow(FOLLOW_expr_in_numExpr894);
 					expr108=expr();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -4590,13 +4602,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 4 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:267:5: value
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:280:5: value
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_value_in_numExpr898);
+					pushFollow(FOLLOW_value_in_numExpr905);
 					value109=value();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -4612,16 +4624,16 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 5 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:271:5: LPAREN !expr1= expr RPAREN ! binop_p2 ^expr2= expr
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:284:5: LPAREN !expr1= expr RPAREN ! binop_p2 ^expr2= expr
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					LPAREN110=(CommonTree)match(input,LPAREN,FOLLOW_LPAREN_in_numExpr908); if (state.failed) return retval;
+					LPAREN110=(CommonTree)match(input,LPAREN,FOLLOW_LPAREN_in_numExpr915); if (state.failed) return retval;
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_expr_in_numExpr913);
+					pushFollow(FOLLOW_expr_in_numExpr920);
 					expr1=expr();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -4632,17 +4644,17 @@ public class tigerTreeWalker extends TreeParser {
 					  		retval.binExpr = (expr1!=null?((tigerTreeWalker.expr_return)expr1).binExpr:null);
 					  	}
 					_last = (CommonTree)input.LT(1);
-					RPAREN111=(CommonTree)match(input,RPAREN,FOLLOW_RPAREN_in_numExpr925); if (state.failed) return retval;
+					RPAREN111=(CommonTree)match(input,RPAREN,FOLLOW_RPAREN_in_numExpr932); if (state.failed) return retval;
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_binop_p2_in_numExpr928);
+					pushFollow(FOLLOW_binop_p2_in_numExpr935);
 					binop_p2112=binop_p2();
 					state._fsp--;
 					if (state.failed) return retval;
 					if ( state.backtracking==0 ) root_0 = (CommonTree)adaptor.becomeRoot(binop_p2112.getTree(), root_0);
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_expr_in_numExpr933);
+					pushFollow(FOLLOW_expr_in_numExpr940);
 					expr2=expr();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -4697,7 +4709,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "binop_p0"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:292:1: binop_p0 returns [Binop op] : ( AND | OR | binop_p1 );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:305:1: binop_p0 returns [Binop op] : ( AND | OR | binop_p1 );
 	public final tigerTreeWalker.binop_p0_return binop_p0() throws RecognitionException {
 		tigerTreeWalker.binop_p0_return retval = new tigerTreeWalker.binop_p0_return();
 		retval.start = input.LT(1);
@@ -4716,7 +4728,7 @@ public class tigerTreeWalker extends TreeParser {
 		CommonTree OR114_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:293:2: ( AND | OR | binop_p1 )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:306:2: ( AND | OR | binop_p1 )
 			int alt22=3;
 			switch ( input.LA(1) ) {
 			case AND:
@@ -4747,13 +4759,13 @@ public class tigerTreeWalker extends TreeParser {
 			}
 			switch (alt22) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:293:4: AND
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:306:4: AND
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					AND113=(CommonTree)match(input,AND,FOLLOW_AND_in_binop_p0952); if (state.failed) return retval;
+					AND113=(CommonTree)match(input,AND,FOLLOW_AND_in_binop_p0959); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					AND113_tree = (CommonTree)adaptor.dupNode(AND113);
 
@@ -4770,13 +4782,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:297:4: OR
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:310:4: OR
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					OR114=(CommonTree)match(input,OR,FOLLOW_OR_in_binop_p0961); if (state.failed) return retval;
+					OR114=(CommonTree)match(input,OR,FOLLOW_OR_in_binop_p0968); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					OR114_tree = (CommonTree)adaptor.dupNode(OR114);
 
@@ -4793,13 +4805,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 3 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:301:4: binop_p1
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:314:4: binop_p1
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_binop_p1_in_binop_p0970);
+					pushFollow(FOLLOW_binop_p1_in_binop_p0977);
 					binop_p1115=binop_p1();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -4843,7 +4855,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "binop_p1"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:306:1: binop_p1 returns [Binop op] : ( EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:319:1: binop_p1 returns [Binop op] : ( EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ );
 	public final tigerTreeWalker.binop_p1_return binop_p1() throws RecognitionException {
 		tigerTreeWalker.binop_p1_return retval = new tigerTreeWalker.binop_p1_return();
 		retval.start = input.LT(1);
@@ -4869,7 +4881,7 @@ public class tigerTreeWalker extends TreeParser {
 		CommonTree GREATEREQ121_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:307:2: ( EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:320:2: ( EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ )
 			int alt23=6;
 			switch ( input.LA(1) ) {
 			case EQ:
@@ -4910,13 +4922,13 @@ public class tigerTreeWalker extends TreeParser {
 			}
 			switch (alt23) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:307:4: EQ
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:320:4: EQ
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					EQ116=(CommonTree)match(input,EQ,FOLLOW_EQ_in_binop_p1987); if (state.failed) return retval;
+					EQ116=(CommonTree)match(input,EQ,FOLLOW_EQ_in_binop_p1994); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					EQ116_tree = (CommonTree)adaptor.dupNode(EQ116);
 
@@ -4933,13 +4945,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:311:4: NEQ
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:324:4: NEQ
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					NEQ117=(CommonTree)match(input,NEQ,FOLLOW_NEQ_in_binop_p1996); if (state.failed) return retval;
+					NEQ117=(CommonTree)match(input,NEQ,FOLLOW_NEQ_in_binop_p11003); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					NEQ117_tree = (CommonTree)adaptor.dupNode(NEQ117);
 
@@ -4956,13 +4968,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 3 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:315:4: LESSER
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:328:4: LESSER
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					LESSER118=(CommonTree)match(input,LESSER,FOLLOW_LESSER_in_binop_p11004); if (state.failed) return retval;
+					LESSER118=(CommonTree)match(input,LESSER,FOLLOW_LESSER_in_binop_p11011); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					LESSER118_tree = (CommonTree)adaptor.dupNode(LESSER118);
 
@@ -4979,13 +4991,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 4 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:319:4: GREATER
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:332:4: GREATER
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					GREATER119=(CommonTree)match(input,GREATER,FOLLOW_GREATER_in_binop_p11012); if (state.failed) return retval;
+					GREATER119=(CommonTree)match(input,GREATER,FOLLOW_GREATER_in_binop_p11019); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					GREATER119_tree = (CommonTree)adaptor.dupNode(GREATER119);
 
@@ -5002,13 +5014,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 5 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:323:4: LESSEREQ
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:336:4: LESSEREQ
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					LESSEREQ120=(CommonTree)match(input,LESSEREQ,FOLLOW_LESSEREQ_in_binop_p11020); if (state.failed) return retval;
+					LESSEREQ120=(CommonTree)match(input,LESSEREQ,FOLLOW_LESSEREQ_in_binop_p11027); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					LESSEREQ120_tree = (CommonTree)adaptor.dupNode(LESSEREQ120);
 
@@ -5025,13 +5037,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 6 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:327:4: GREATEREQ
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:340:4: GREATEREQ
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					GREATEREQ121=(CommonTree)match(input,GREATEREQ,FOLLOW_GREATEREQ_in_binop_p11028); if (state.failed) return retval;
+					GREATEREQ121=(CommonTree)match(input,GREATEREQ,FOLLOW_GREATEREQ_in_binop_p11035); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					GREATEREQ121_tree = (CommonTree)adaptor.dupNode(GREATEREQ121);
 
@@ -5076,7 +5088,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "binop_p2"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:334:1: binop_p2 returns [Binop op] : ( MINUS | PLUS | binop_p3 );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:347:1: binop_p2 returns [Binop op] : ( MINUS | PLUS | binop_p3 );
 	public final tigerTreeWalker.binop_p2_return binop_p2() throws RecognitionException {
 		tigerTreeWalker.binop_p2_return retval = new tigerTreeWalker.binop_p2_return();
 		retval.start = input.LT(1);
@@ -5095,7 +5107,7 @@ public class tigerTreeWalker extends TreeParser {
 		CommonTree PLUS123_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:335:2: ( MINUS | PLUS | binop_p3 )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:348:2: ( MINUS | PLUS | binop_p3 )
 			int alt24=3;
 			switch ( input.LA(1) ) {
 			case MINUS:
@@ -5122,13 +5134,13 @@ public class tigerTreeWalker extends TreeParser {
 			}
 			switch (alt24) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:335:4: MINUS
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:348:4: MINUS
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					MINUS122=(CommonTree)match(input,MINUS,FOLLOW_MINUS_in_binop_p21051); if (state.failed) return retval;
+					MINUS122=(CommonTree)match(input,MINUS,FOLLOW_MINUS_in_binop_p21058); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					MINUS122_tree = (CommonTree)adaptor.dupNode(MINUS122);
 
@@ -5145,13 +5157,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:339:4: PLUS
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:352:4: PLUS
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					PLUS123=(CommonTree)match(input,PLUS,FOLLOW_PLUS_in_binop_p21060); if (state.failed) return retval;
+					PLUS123=(CommonTree)match(input,PLUS,FOLLOW_PLUS_in_binop_p21067); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					PLUS123_tree = (CommonTree)adaptor.dupNode(PLUS123);
 
@@ -5168,13 +5180,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 3 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:343:4: binop_p3
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:356:4: binop_p3
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_binop_p3_in_binop_p21069);
+					pushFollow(FOLLOW_binop_p3_in_binop_p21076);
 					binop_p3124=binop_p3();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -5218,7 +5230,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "binop_p3"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:349:1: binop_p3 returns [Binop op] : ( MULT | DIV );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:362:1: binop_p3 returns [Binop op] : ( MULT | DIV );
 	public final tigerTreeWalker.binop_p3_return binop_p3() throws RecognitionException {
 		tigerTreeWalker.binop_p3_return retval = new tigerTreeWalker.binop_p3_return();
 		retval.start = input.LT(1);
@@ -5236,7 +5248,7 @@ public class tigerTreeWalker extends TreeParser {
 		CommonTree DIV126_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:350:2: ( MULT | DIV )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:363:2: ( MULT | DIV )
 			int alt25=2;
 			int LA25_0 = input.LA(1);
 			if ( (LA25_0==MULT) ) {
@@ -5255,13 +5267,13 @@ public class tigerTreeWalker extends TreeParser {
 
 			switch (alt25) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:350:4: MULT
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:363:4: MULT
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					MULT125=(CommonTree)match(input,MULT,FOLLOW_MULT_in_binop_p31088); if (state.failed) return retval;
+					MULT125=(CommonTree)match(input,MULT,FOLLOW_MULT_in_binop_p31095); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					MULT125_tree = (CommonTree)adaptor.dupNode(MULT125);
 
@@ -5278,13 +5290,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:354:4: DIV
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:367:4: DIV
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					DIV126=(CommonTree)match(input,DIV,FOLLOW_DIV_in_binop_p31096); if (state.failed) return retval;
+					DIV126=(CommonTree)match(input,DIV,FOLLOW_DIV_in_binop_p31103); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					DIV126_tree = (CommonTree)adaptor.dupNode(DIV126);
 
@@ -5329,7 +5341,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "constval"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:360:1: constval returns [String retStr] : ( ( fixedptlit )=> fixedptlit | intlit );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:373:1: constval returns [String retStr] : ( ( fixedptlit )=> fixedptlit | intlit );
 	public final tigerTreeWalker.constval_return constval() throws RecognitionException {
 		tigerTreeWalker.constval_return retval = new tigerTreeWalker.constval_return();
 		retval.start = input.LT(1);
@@ -5345,7 +5357,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:361:2: ( ( fixedptlit )=> fixedptlit | intlit )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:374:2: ( ( fixedptlit )=> fixedptlit | intlit )
 			int alt26=2;
 			int LA26_0 = input.LA(1);
 			if ( (LA26_0==MINUS) ) {
@@ -5387,13 +5399,13 @@ public class tigerTreeWalker extends TreeParser {
 
 			switch (alt26) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:361:4: ( fixedptlit )=> fixedptlit
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:374:4: ( fixedptlit )=> fixedptlit
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_fixedptlit_in_constval1121);
+					pushFollow(FOLLOW_fixedptlit_in_constval1128);
 					fixedptlit127=fixedptlit();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -5409,13 +5421,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:365:4: intlit
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:378:4: intlit
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_intlit_in_constval1129);
+					pushFollow(FOLLOW_intlit_in_constval1136);
 					intlit128=intlit();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -5459,7 +5471,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "intlit"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:371:1: intlit returns [String intStringVal] : ( ( MINUS )=> MINUS UNSIGNED_INTLIT | UNSIGNED_INTLIT );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:384:1: intlit returns [String intStringVal] : ( ( MINUS )=> MINUS UNSIGNED_INTLIT | UNSIGNED_INTLIT );
 	public final tigerTreeWalker.intlit_return intlit() throws RecognitionException {
 		tigerTreeWalker.intlit_return retval = new tigerTreeWalker.intlit_return();
 		retval.start = input.LT(1);
@@ -5479,7 +5491,7 @@ public class tigerTreeWalker extends TreeParser {
 		CommonTree UNSIGNED_INTLIT131_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:372:2: ( ( MINUS )=> MINUS UNSIGNED_INTLIT | UNSIGNED_INTLIT )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:385:2: ( ( MINUS )=> MINUS UNSIGNED_INTLIT | UNSIGNED_INTLIT )
 			int alt27=2;
 			int LA27_0 = input.LA(1);
 			if ( (LA27_0==MINUS) && (synpred4_tigerTreeWalker())) {
@@ -5498,13 +5510,13 @@ public class tigerTreeWalker extends TreeParser {
 
 			switch (alt27) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:372:4: ( MINUS )=> MINUS UNSIGNED_INTLIT
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:385:4: ( MINUS )=> MINUS UNSIGNED_INTLIT
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					MINUS129=(CommonTree)match(input,MINUS,FOLLOW_MINUS_in_intlit1153); if (state.failed) return retval;
+					MINUS129=(CommonTree)match(input,MINUS,FOLLOW_MINUS_in_intlit1160); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					MINUS129_tree = (CommonTree)adaptor.dupNode(MINUS129);
 
@@ -5513,7 +5525,7 @@ public class tigerTreeWalker extends TreeParser {
 					}
 
 					_last = (CommonTree)input.LT(1);
-					UNSIGNED_INTLIT130=(CommonTree)match(input,UNSIGNED_INTLIT,FOLLOW_UNSIGNED_INTLIT_in_intlit1155); if (state.failed) return retval;
+					UNSIGNED_INTLIT130=(CommonTree)match(input,UNSIGNED_INTLIT,FOLLOW_UNSIGNED_INTLIT_in_intlit1162); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					UNSIGNED_INTLIT130_tree = (CommonTree)adaptor.dupNode(UNSIGNED_INTLIT130);
 
@@ -5530,13 +5542,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:376:4: UNSIGNED_INTLIT
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:389:4: UNSIGNED_INTLIT
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					UNSIGNED_INTLIT131=(CommonTree)match(input,UNSIGNED_INTLIT,FOLLOW_UNSIGNED_INTLIT_in_intlit1163); if (state.failed) return retval;
+					UNSIGNED_INTLIT131=(CommonTree)match(input,UNSIGNED_INTLIT,FOLLOW_UNSIGNED_INTLIT_in_intlit1170); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					UNSIGNED_INTLIT131_tree = (CommonTree)adaptor.dupNode(UNSIGNED_INTLIT131);
 
@@ -5581,7 +5593,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "fixedptlit"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:382:1: fixedptlit returns [String fpStringVal] : ( ( MINUS )=> MINUS UNSIGNED_FIXEDPTLIT | UNSIGNED_FIXEDPTLIT );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:395:1: fixedptlit returns [String fpStringVal] : ( ( MINUS )=> MINUS UNSIGNED_FIXEDPTLIT | UNSIGNED_FIXEDPTLIT );
 	public final tigerTreeWalker.fixedptlit_return fixedptlit() throws RecognitionException {
 		tigerTreeWalker.fixedptlit_return retval = new tigerTreeWalker.fixedptlit_return();
 		retval.start = input.LT(1);
@@ -5601,7 +5613,7 @@ public class tigerTreeWalker extends TreeParser {
 		CommonTree UNSIGNED_FIXEDPTLIT134_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:383:2: ( ( MINUS )=> MINUS UNSIGNED_FIXEDPTLIT | UNSIGNED_FIXEDPTLIT )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:396:2: ( ( MINUS )=> MINUS UNSIGNED_FIXEDPTLIT | UNSIGNED_FIXEDPTLIT )
 			int alt28=2;
 			int LA28_0 = input.LA(1);
 			if ( (LA28_0==MINUS) && (synpred5_tigerTreeWalker())) {
@@ -5620,13 +5632,13 @@ public class tigerTreeWalker extends TreeParser {
 
 			switch (alt28) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:383:4: ( MINUS )=> MINUS UNSIGNED_FIXEDPTLIT
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:396:4: ( MINUS )=> MINUS UNSIGNED_FIXEDPTLIT
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					MINUS132=(CommonTree)match(input,MINUS,FOLLOW_MINUS_in_fixedptlit1187); if (state.failed) return retval;
+					MINUS132=(CommonTree)match(input,MINUS,FOLLOW_MINUS_in_fixedptlit1194); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					MINUS132_tree = (CommonTree)adaptor.dupNode(MINUS132);
 
@@ -5635,7 +5647,7 @@ public class tigerTreeWalker extends TreeParser {
 					}
 
 					_last = (CommonTree)input.LT(1);
-					UNSIGNED_FIXEDPTLIT133=(CommonTree)match(input,UNSIGNED_FIXEDPTLIT,FOLLOW_UNSIGNED_FIXEDPTLIT_in_fixedptlit1189); if (state.failed) return retval;
+					UNSIGNED_FIXEDPTLIT133=(CommonTree)match(input,UNSIGNED_FIXEDPTLIT,FOLLOW_UNSIGNED_FIXEDPTLIT_in_fixedptlit1196); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					UNSIGNED_FIXEDPTLIT133_tree = (CommonTree)adaptor.dupNode(UNSIGNED_FIXEDPTLIT133);
 
@@ -5652,13 +5664,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:387:4: UNSIGNED_FIXEDPTLIT
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:400:4: UNSIGNED_FIXEDPTLIT
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					UNSIGNED_FIXEDPTLIT134=(CommonTree)match(input,UNSIGNED_FIXEDPTLIT,FOLLOW_UNSIGNED_FIXEDPTLIT_in_fixedptlit1197); if (state.failed) return retval;
+					UNSIGNED_FIXEDPTLIT134=(CommonTree)match(input,UNSIGNED_FIXEDPTLIT,FOLLOW_UNSIGNED_FIXEDPTLIT_in_fixedptlit1204); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					UNSIGNED_FIXEDPTLIT134_tree = (CommonTree)adaptor.dupNode(UNSIGNED_FIXEDPTLIT134);
 
@@ -5703,7 +5715,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "binary_operator"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:393:1: binary_operator returns [Binop op] : ( PLUS | MINUS | MULT | DIV | EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | AND | OR );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:406:1: binary_operator returns [Binop op] : ( PLUS | MINUS | MULT | DIV | EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | AND | OR );
 	public final tigerTreeWalker.binary_operator_return binary_operator() throws RecognitionException {
 		tigerTreeWalker.binary_operator_return retval = new tigerTreeWalker.binary_operator_return();
 		retval.start = input.LT(1);
@@ -5741,7 +5753,7 @@ public class tigerTreeWalker extends TreeParser {
 		CommonTree OR146_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:394:2: ( PLUS | MINUS | MULT | DIV | EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | AND | OR )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:407:2: ( PLUS | MINUS | MULT | DIV | EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ | AND | OR )
 			int alt29=12;
 			switch ( input.LA(1) ) {
 			case PLUS:
@@ -5812,13 +5824,13 @@ public class tigerTreeWalker extends TreeParser {
 			}
 			switch (alt29) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:394:4: PLUS
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:407:4: PLUS
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					PLUS135=(CommonTree)match(input,PLUS,FOLLOW_PLUS_in_binary_operator1216); if (state.failed) return retval;
+					PLUS135=(CommonTree)match(input,PLUS,FOLLOW_PLUS_in_binary_operator1223); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					PLUS135_tree = (CommonTree)adaptor.dupNode(PLUS135);
 
@@ -5833,13 +5845,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:395:4: MINUS
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:408:4: MINUS
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					MINUS136=(CommonTree)match(input,MINUS,FOLLOW_MINUS_in_binary_operator1223); if (state.failed) return retval;
+					MINUS136=(CommonTree)match(input,MINUS,FOLLOW_MINUS_in_binary_operator1230); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					MINUS136_tree = (CommonTree)adaptor.dupNode(MINUS136);
 
@@ -5854,13 +5866,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 3 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:396:4: MULT
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:409:4: MULT
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					MULT137=(CommonTree)match(input,MULT,FOLLOW_MULT_in_binary_operator1230); if (state.failed) return retval;
+					MULT137=(CommonTree)match(input,MULT,FOLLOW_MULT_in_binary_operator1237); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					MULT137_tree = (CommonTree)adaptor.dupNode(MULT137);
 
@@ -5875,13 +5887,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 4 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:397:4: DIV
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:410:4: DIV
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					DIV138=(CommonTree)match(input,DIV,FOLLOW_DIV_in_binary_operator1237); if (state.failed) return retval;
+					DIV138=(CommonTree)match(input,DIV,FOLLOW_DIV_in_binary_operator1244); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					DIV138_tree = (CommonTree)adaptor.dupNode(DIV138);
 
@@ -5896,13 +5908,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 5 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:398:4: EQ
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:411:4: EQ
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					EQ139=(CommonTree)match(input,EQ,FOLLOW_EQ_in_binary_operator1244); if (state.failed) return retval;
+					EQ139=(CommonTree)match(input,EQ,FOLLOW_EQ_in_binary_operator1251); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					EQ139_tree = (CommonTree)adaptor.dupNode(EQ139);
 
@@ -5917,13 +5929,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 6 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:399:4: NEQ
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:412:4: NEQ
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					NEQ140=(CommonTree)match(input,NEQ,FOLLOW_NEQ_in_binary_operator1251); if (state.failed) return retval;
+					NEQ140=(CommonTree)match(input,NEQ,FOLLOW_NEQ_in_binary_operator1258); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					NEQ140_tree = (CommonTree)adaptor.dupNode(NEQ140);
 
@@ -5938,13 +5950,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 7 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:400:4: LESSER
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:413:4: LESSER
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					LESSER141=(CommonTree)match(input,LESSER,FOLLOW_LESSER_in_binary_operator1258); if (state.failed) return retval;
+					LESSER141=(CommonTree)match(input,LESSER,FOLLOW_LESSER_in_binary_operator1265); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					LESSER141_tree = (CommonTree)adaptor.dupNode(LESSER141);
 
@@ -5959,13 +5971,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 8 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:401:4: GREATER
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:414:4: GREATER
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					GREATER142=(CommonTree)match(input,GREATER,FOLLOW_GREATER_in_binary_operator1265); if (state.failed) return retval;
+					GREATER142=(CommonTree)match(input,GREATER,FOLLOW_GREATER_in_binary_operator1272); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					GREATER142_tree = (CommonTree)adaptor.dupNode(GREATER142);
 
@@ -5980,13 +5992,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 9 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:402:4: LESSEREQ
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:415:4: LESSEREQ
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					LESSEREQ143=(CommonTree)match(input,LESSEREQ,FOLLOW_LESSEREQ_in_binary_operator1272); if (state.failed) return retval;
+					LESSEREQ143=(CommonTree)match(input,LESSEREQ,FOLLOW_LESSEREQ_in_binary_operator1279); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					LESSEREQ143_tree = (CommonTree)adaptor.dupNode(LESSEREQ143);
 
@@ -6001,13 +6013,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 10 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:403:4: GREATEREQ
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:416:4: GREATEREQ
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					GREATEREQ144=(CommonTree)match(input,GREATEREQ,FOLLOW_GREATEREQ_in_binary_operator1279); if (state.failed) return retval;
+					GREATEREQ144=(CommonTree)match(input,GREATEREQ,FOLLOW_GREATEREQ_in_binary_operator1286); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					GREATEREQ144_tree = (CommonTree)adaptor.dupNode(GREATEREQ144);
 
@@ -6022,13 +6034,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 11 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:404:4: AND
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:417:4: AND
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					AND145=(CommonTree)match(input,AND,FOLLOW_AND_in_binary_operator1286); if (state.failed) return retval;
+					AND145=(CommonTree)match(input,AND,FOLLOW_AND_in_binary_operator1293); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					AND145_tree = (CommonTree)adaptor.dupNode(AND145);
 
@@ -6043,13 +6055,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 12 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:405:4: OR
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:418:4: OR
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					OR146=(CommonTree)match(input,OR,FOLLOW_OR_in_binary_operator1293); if (state.failed) return retval;
+					OR146=(CommonTree)match(input,OR,FOLLOW_OR_in_binary_operator1300); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					OR146_tree = (CommonTree)adaptor.dupNode(OR146);
 
@@ -6092,7 +6104,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "expr_list"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:408:1: expr_list returns [List<BinaryExpression> binExprList] : ^( AST_EXPR_LIST ( expr )+ ) ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:421:1: expr_list returns [List<BinaryExpression> binExprList] : ^( AST_EXPR_LIST ( expr )+ ) ;
 	public final tigerTreeWalker.expr_list_return expr_list() throws RecognitionException {
 		tigerTreeWalker.expr_list_return retval = new tigerTreeWalker.expr_list_return();
 		retval.start = input.LT(1);
@@ -6112,8 +6124,8 @@ public class tigerTreeWalker extends TreeParser {
 				List<BinaryExpression> binExprList = new ArrayList<BinaryExpression>();
 			
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:412:2: ( ^( AST_EXPR_LIST ( expr )+ ) )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:412:4: ^( AST_EXPR_LIST ( expr )+ )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:425:2: ( ^( AST_EXPR_LIST ( expr )+ ) )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:425:4: ^( AST_EXPR_LIST ( expr )+ )
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
@@ -6124,7 +6136,7 @@ public class tigerTreeWalker extends TreeParser {
 			CommonTree _first_1 = null;
 			CommonTree root_1 = (CommonTree)adaptor.nil();
 			_last = (CommonTree)input.LT(1);
-			AST_EXPR_LIST147=(CommonTree)match(input,AST_EXPR_LIST,FOLLOW_AST_EXPR_LIST_in_expr_list1317); if (state.failed) return retval;
+			AST_EXPR_LIST147=(CommonTree)match(input,AST_EXPR_LIST,FOLLOW_AST_EXPR_LIST_in_expr_list1324); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
 			AST_EXPR_LIST147_tree = (CommonTree)adaptor.dupNode(AST_EXPR_LIST147);
 
@@ -6133,7 +6145,7 @@ public class tigerTreeWalker extends TreeParser {
 			}
 
 			match(input, Token.DOWN, null); if (state.failed) return retval;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:412:20: ( expr )+
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:425:20: ( expr )+
 			int cnt30=0;
 			loop30:
 			while (true) {
@@ -6145,10 +6157,10 @@ public class tigerTreeWalker extends TreeParser {
 
 				switch (alt30) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:412:21: expr
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:425:21: expr
 					{
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_expr_in_expr_list1320);
+					pushFollow(FOLLOW_expr_in_expr_list1327);
 					expr148=expr();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -6209,7 +6221,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "value"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:415:1: value returns [String strVal] : ( ( ID LBRACK index_expr RBRACK LBRACK )=> ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK | ( ID LBRACK )=> ID LBRACK index_expr RBRACK | ID );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:428:1: value returns [String strVal] : ( ( ID LBRACK index_expr RBRACK LBRACK )=> ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK | ( ID LBRACK )=> ID LBRACK index_expr RBRACK | ID );
 	public final tigerTreeWalker.value_return value() throws RecognitionException {
 		tigerTreeWalker.value_return retval = new tigerTreeWalker.value_return();
 		retval.start = input.LT(1);
@@ -6244,7 +6256,7 @@ public class tigerTreeWalker extends TreeParser {
 		CommonTree ID160_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:416:2: ( ( ID LBRACK index_expr RBRACK LBRACK )=> ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK | ( ID LBRACK )=> ID LBRACK index_expr RBRACK | ID )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:429:2: ( ( ID LBRACK index_expr RBRACK LBRACK )=> ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK | ( ID LBRACK )=> ID LBRACK index_expr RBRACK | ID )
 			int alt31=3;
 			int LA31_0 = input.LA(1);
 			if ( (LA31_0==ID) ) {
@@ -6270,13 +6282,13 @@ public class tigerTreeWalker extends TreeParser {
 
 			switch (alt31) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:416:4: ( ID LBRACK index_expr RBRACK LBRACK )=> ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:429:4: ( ID LBRACK index_expr RBRACK LBRACK )=> ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					ID149=(CommonTree)match(input,ID,FOLLOW_ID_in_value1354); if (state.failed) return retval;
+					ID149=(CommonTree)match(input,ID,FOLLOW_ID_in_value1361); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					ID149_tree = (CommonTree)adaptor.dupNode(ID149);
 
@@ -6285,7 +6297,7 @@ public class tigerTreeWalker extends TreeParser {
 					}
 
 					_last = (CommonTree)input.LT(1);
-					LBRACK150=(CommonTree)match(input,LBRACK,FOLLOW_LBRACK_in_value1356); if (state.failed) return retval;
+					LBRACK150=(CommonTree)match(input,LBRACK,FOLLOW_LBRACK_in_value1363); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					LBRACK150_tree = (CommonTree)adaptor.dupNode(LBRACK150);
 
@@ -6294,7 +6306,7 @@ public class tigerTreeWalker extends TreeParser {
 					}
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_index_expr_in_value1358);
+					pushFollow(FOLLOW_index_expr_in_value1365);
 					index_expr151=index_expr();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -6302,7 +6314,7 @@ public class tigerTreeWalker extends TreeParser {
 					adaptor.addChild(root_0, index_expr151.getTree());
 
 					_last = (CommonTree)input.LT(1);
-					RBRACK152=(CommonTree)match(input,RBRACK,FOLLOW_RBRACK_in_value1360); if (state.failed) return retval;
+					RBRACK152=(CommonTree)match(input,RBRACK,FOLLOW_RBRACK_in_value1367); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					RBRACK152_tree = (CommonTree)adaptor.dupNode(RBRACK152);
 
@@ -6311,7 +6323,7 @@ public class tigerTreeWalker extends TreeParser {
 					}
 
 					_last = (CommonTree)input.LT(1);
-					LBRACK153=(CommonTree)match(input,LBRACK,FOLLOW_LBRACK_in_value1362); if (state.failed) return retval;
+					LBRACK153=(CommonTree)match(input,LBRACK,FOLLOW_LBRACK_in_value1369); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					LBRACK153_tree = (CommonTree)adaptor.dupNode(LBRACK153);
 
@@ -6320,7 +6332,7 @@ public class tigerTreeWalker extends TreeParser {
 					}
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_index_expr_in_value1364);
+					pushFollow(FOLLOW_index_expr_in_value1371);
 					index_expr154=index_expr();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -6328,7 +6340,7 @@ public class tigerTreeWalker extends TreeParser {
 					adaptor.addChild(root_0, index_expr154.getTree());
 
 					_last = (CommonTree)input.LT(1);
-					RBRACK155=(CommonTree)match(input,RBRACK,FOLLOW_RBRACK_in_value1366); if (state.failed) return retval;
+					RBRACK155=(CommonTree)match(input,RBRACK,FOLLOW_RBRACK_in_value1373); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					RBRACK155_tree = (CommonTree)adaptor.dupNode(RBRACK155);
 
@@ -6342,13 +6354,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:417:4: ( ID LBRACK )=> ID LBRACK index_expr RBRACK
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:430:4: ( ID LBRACK )=> ID LBRACK index_expr RBRACK
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					ID156=(CommonTree)match(input,ID,FOLLOW_ID_in_value1379); if (state.failed) return retval;
+					ID156=(CommonTree)match(input,ID,FOLLOW_ID_in_value1386); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					ID156_tree = (CommonTree)adaptor.dupNode(ID156);
 
@@ -6357,7 +6369,7 @@ public class tigerTreeWalker extends TreeParser {
 					}
 
 					_last = (CommonTree)input.LT(1);
-					LBRACK157=(CommonTree)match(input,LBRACK,FOLLOW_LBRACK_in_value1381); if (state.failed) return retval;
+					LBRACK157=(CommonTree)match(input,LBRACK,FOLLOW_LBRACK_in_value1388); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					LBRACK157_tree = (CommonTree)adaptor.dupNode(LBRACK157);
 
@@ -6366,7 +6378,7 @@ public class tigerTreeWalker extends TreeParser {
 					}
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_index_expr_in_value1383);
+					pushFollow(FOLLOW_index_expr_in_value1390);
 					index_expr158=index_expr();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -6374,7 +6386,7 @@ public class tigerTreeWalker extends TreeParser {
 					adaptor.addChild(root_0, index_expr158.getTree());
 
 					_last = (CommonTree)input.LT(1);
-					RBRACK159=(CommonTree)match(input,RBRACK,FOLLOW_RBRACK_in_value1385); if (state.failed) return retval;
+					RBRACK159=(CommonTree)match(input,RBRACK,FOLLOW_RBRACK_in_value1392); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					RBRACK159_tree = (CommonTree)adaptor.dupNode(RBRACK159);
 
@@ -6388,13 +6400,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 3 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:418:4: ID
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:431:4: ID
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					ID160=(CommonTree)match(input,ID,FOLLOW_ID_in_value1390); if (state.failed) return retval;
+					ID160=(CommonTree)match(input,ID,FOLLOW_ID_in_value1397); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					ID160_tree = (CommonTree)adaptor.dupNode(ID160);
 
@@ -6439,7 +6451,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "index_expr"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:424:1: index_expr returns [String expr] : ( ^( index_oper intlit expr2= index_expr ) | intlit | ^( index_oper ID index_expr ) | ID );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:437:1: index_expr returns [String expr] : ( ^( index_oper intlit expr2= index_expr ) | intlit | ^( index_oper ID index_expr ) | ID );
 	public final tigerTreeWalker.index_expr_return index_expr() throws RecognitionException {
 		tigerTreeWalker.index_expr_return retval = new tigerTreeWalker.index_expr_return();
 		retval.start = input.LT(1);
@@ -6463,7 +6475,7 @@ public class tigerTreeWalker extends TreeParser {
 		CommonTree ID167_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:425:2: ( ^( index_oper intlit expr2= index_expr ) | intlit | ^( index_oper ID index_expr ) | ID )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:438:2: ( ^( index_oper intlit expr2= index_expr ) | intlit | ^( index_oper ID index_expr ) | ID )
 			int alt32=4;
 			switch ( input.LA(1) ) {
 			case PLUS:
@@ -6619,7 +6631,7 @@ public class tigerTreeWalker extends TreeParser {
 			}
 			switch (alt32) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:425:4: ^( index_oper intlit expr2= index_expr )
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:438:4: ^( index_oper intlit expr2= index_expr )
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
@@ -6630,7 +6642,7 @@ public class tigerTreeWalker extends TreeParser {
 					CommonTree _first_1 = null;
 					CommonTree root_1 = (CommonTree)adaptor.nil();
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_index_oper_in_index_expr1409);
+					pushFollow(FOLLOW_index_oper_in_index_expr1416);
 					index_oper161=index_oper();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -6638,7 +6650,7 @@ public class tigerTreeWalker extends TreeParser {
 
 					match(input, Token.DOWN, null); if (state.failed) return retval;
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_intlit_in_index_expr1411);
+					pushFollow(FOLLOW_intlit_in_index_expr1418);
 					intlit162=intlit();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -6646,7 +6658,7 @@ public class tigerTreeWalker extends TreeParser {
 					adaptor.addChild(root_1, intlit162.getTree());
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_index_expr_in_index_expr1415);
+					pushFollow(FOLLOW_index_expr_in_index_expr1422);
 					expr2=index_expr();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -6668,13 +6680,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:429:4: intlit
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:442:4: intlit
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_intlit_in_index_expr1424);
+					pushFollow(FOLLOW_intlit_in_index_expr1431);
 					intlit163=intlit();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -6690,7 +6702,7 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 3 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:433:4: ^( index_oper ID index_expr )
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:446:4: ^( index_oper ID index_expr )
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
@@ -6701,7 +6713,7 @@ public class tigerTreeWalker extends TreeParser {
 					CommonTree _first_1 = null;
 					CommonTree root_1 = (CommonTree)adaptor.nil();
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_index_oper_in_index_expr1433);
+					pushFollow(FOLLOW_index_oper_in_index_expr1440);
 					index_oper164=index_oper();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -6709,7 +6721,7 @@ public class tigerTreeWalker extends TreeParser {
 
 					match(input, Token.DOWN, null); if (state.failed) return retval;
 					_last = (CommonTree)input.LT(1);
-					ID165=(CommonTree)match(input,ID,FOLLOW_ID_in_index_expr1435); if (state.failed) return retval;
+					ID165=(CommonTree)match(input,ID,FOLLOW_ID_in_index_expr1442); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					ID165_tree = (CommonTree)adaptor.dupNode(ID165);
 
@@ -6718,7 +6730,7 @@ public class tigerTreeWalker extends TreeParser {
 					}
 
 					_last = (CommonTree)input.LT(1);
-					pushFollow(FOLLOW_index_expr_in_index_expr1437);
+					pushFollow(FOLLOW_index_expr_in_index_expr1444);
 					index_expr166=index_expr();
 					state._fsp--;
 					if (state.failed) return retval;
@@ -6740,13 +6752,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 4 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:437:4: ID
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:450:4: ID
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					ID167=(CommonTree)match(input,ID,FOLLOW_ID_in_index_expr1446); if (state.failed) return retval;
+					ID167=(CommonTree)match(input,ID,FOLLOW_ID_in_index_expr1453); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					ID167_tree = (CommonTree)adaptor.dupNode(ID167);
 
@@ -6791,7 +6803,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "index_oper"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:443:1: index_oper returns [Binop op] : ( PLUS | MINUS | MULT );
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:456:1: index_oper returns [Binop op] : ( PLUS | MINUS | MULT );
 	public final tigerTreeWalker.index_oper_return index_oper() throws RecognitionException {
 		tigerTreeWalker.index_oper_return retval = new tigerTreeWalker.index_oper_return();
 		retval.start = input.LT(1);
@@ -6811,7 +6823,7 @@ public class tigerTreeWalker extends TreeParser {
 		CommonTree MULT170_tree=null;
 
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:444:2: ( PLUS | MINUS | MULT )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:457:2: ( PLUS | MINUS | MULT )
 			int alt33=3;
 			switch ( input.LA(1) ) {
 			case PLUS:
@@ -6837,13 +6849,13 @@ public class tigerTreeWalker extends TreeParser {
 			}
 			switch (alt33) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:444:4: PLUS
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:457:4: PLUS
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					PLUS168=(CommonTree)match(input,PLUS,FOLLOW_PLUS_in_index_oper1464); if (state.failed) return retval;
+					PLUS168=(CommonTree)match(input,PLUS,FOLLOW_PLUS_in_index_oper1471); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					PLUS168_tree = (CommonTree)adaptor.dupNode(PLUS168);
 
@@ -6858,13 +6870,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:445:4: MINUS
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:458:4: MINUS
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					MINUS169=(CommonTree)match(input,MINUS,FOLLOW_MINUS_in_index_oper1471); if (state.failed) return retval;
+					MINUS169=(CommonTree)match(input,MINUS,FOLLOW_MINUS_in_index_oper1478); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					MINUS169_tree = (CommonTree)adaptor.dupNode(MINUS169);
 
@@ -6879,13 +6891,13 @@ public class tigerTreeWalker extends TreeParser {
 					}
 					break;
 				case 3 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:446:4: MULT
+					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:459:4: MULT
 					{
 					root_0 = (CommonTree)adaptor.nil();
 
 
 					_last = (CommonTree)input.LT(1);
-					MULT170=(CommonTree)match(input,MULT,FOLLOW_MULT_in_index_oper1478); if (state.failed) return retval;
+					MULT170=(CommonTree)match(input,MULT,FOLLOW_MULT_in_index_oper1485); if (state.failed) return retval;
 					if ( state.backtracking==0 ) {
 					MULT170_tree = (CommonTree)adaptor.dupNode(MULT170);
 
@@ -6928,7 +6940,7 @@ public class tigerTreeWalker extends TreeParser {
 
 
 	// $ANTLR start "func_param_list"
-	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:449:1: func_param_list returns [List<BinaryExpression> paramList] : ^( AST_PARAM_LIST ( ( expr )+ )? ) ;
+	// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:462:1: func_param_list returns [List<BinaryExpression> paramList] : ^( AST_PARAM_LIST ( ( expr )+ )? ) ;
 	public final tigerTreeWalker.func_param_list_return func_param_list() throws RecognitionException {
 		tigerTreeWalker.func_param_list_return retval = new tigerTreeWalker.func_param_list_return();
 		retval.start = input.LT(1);
@@ -6948,8 +6960,8 @@ public class tigerTreeWalker extends TreeParser {
 				List<BinaryExpression> paramList = new ArrayList<BinaryExpression>();
 			
 		try {
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:453:2: ( ^( AST_PARAM_LIST ( ( expr )+ )? ) )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:453:4: ^( AST_PARAM_LIST ( ( expr )+ )? )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:466:2: ( ^( AST_PARAM_LIST ( ( expr )+ )? ) )
+			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:466:4: ^( AST_PARAM_LIST ( ( expr )+ )? )
 			{
 			root_0 = (CommonTree)adaptor.nil();
 
@@ -6960,7 +6972,7 @@ public class tigerTreeWalker extends TreeParser {
 			CommonTree _first_1 = null;
 			CommonTree root_1 = (CommonTree)adaptor.nil();
 			_last = (CommonTree)input.LT(1);
-			AST_PARAM_LIST171=(CommonTree)match(input,AST_PARAM_LIST,FOLLOW_AST_PARAM_LIST_in_func_param_list1504); if (state.failed) return retval;
+			AST_PARAM_LIST171=(CommonTree)match(input,AST_PARAM_LIST,FOLLOW_AST_PARAM_LIST_in_func_param_list1511); if (state.failed) return retval;
 			if ( state.backtracking==0 ) {
 			AST_PARAM_LIST171_tree = (CommonTree)adaptor.dupNode(AST_PARAM_LIST171);
 
@@ -6970,7 +6982,7 @@ public class tigerTreeWalker extends TreeParser {
 
 			if ( input.LA(1)==Token.DOWN ) {
 				match(input, Token.DOWN, null); if (state.failed) return retval;
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:453:21: ( ( expr )+ )?
+				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:466:21: ( ( expr )+ )?
 				int alt35=2;
 				int LA35_0 = input.LA(1);
 				if ( (LA35_0==AND||LA35_0==DIV||LA35_0==EQ||(LA35_0 >= GREATER && LA35_0 <= ID)||(LA35_0 >= LESSER && LA35_0 <= LPAREN)||(LA35_0 >= MINUS && LA35_0 <= NEQ)||(LA35_0 >= OR && LA35_0 <= PLUS)||(LA35_0 >= UNSIGNED_FIXEDPTLIT && LA35_0 <= UNSIGNED_INTLIT)) ) {
@@ -6978,9 +6990,9 @@ public class tigerTreeWalker extends TreeParser {
 				}
 				switch (alt35) {
 					case 1 :
-						// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:453:22: ( expr )+
+						// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:466:22: ( expr )+
 						{
-						// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:453:22: ( expr )+
+						// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:466:22: ( expr )+
 						int cnt34=0;
 						loop34:
 						while (true) {
@@ -6992,10 +7004,10 @@ public class tigerTreeWalker extends TreeParser {
 
 							switch (alt34) {
 							case 1 :
-								// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:453:23: expr
+								// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:466:23: expr
 								{
 								_last = (CommonTree)input.LT(1);
-								pushFollow(FOLLOW_expr_in_func_param_list1508);
+								pushFollow(FOLLOW_expr_in_func_param_list1515);
 								expr172=expr();
 								state._fsp--;
 								if (state.failed) return retval;
@@ -7057,10 +7069,10 @@ public class tigerTreeWalker extends TreeParser {
 
 	// $ANTLR start synpred1_tigerTreeWalker
 	public final void synpred1_tigerTreeWalker_fragment() throws RecognitionException {
-		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:206:5: ( boolExpr )
-		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:206:6: boolExpr
+		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:219:5: ( boolExpr )
+		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:219:6: boolExpr
 		{
-		pushFollow(FOLLOW_boolExpr_in_synpred1_tigerTreeWalker722);
+		pushFollow(FOLLOW_boolExpr_in_synpred1_tigerTreeWalker729);
 		boolExpr();
 		state._fsp--;
 		if (state.failed) return;
@@ -7072,10 +7084,10 @@ public class tigerTreeWalker extends TreeParser {
 
 	// $ANTLR start synpred2_tigerTreeWalker
 	public final void synpred2_tigerTreeWalker_fragment() throws RecognitionException {
-		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:210:5: ( numExpr )
-		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:210:6: numExpr
+		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:223:5: ( numExpr )
+		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:223:6: numExpr
 		{
-		pushFollow(FOLLOW_numExpr_in_synpred2_tigerTreeWalker738);
+		pushFollow(FOLLOW_numExpr_in_synpred2_tigerTreeWalker745);
 		numExpr();
 		state._fsp--;
 		if (state.failed) return;
@@ -7087,10 +7099,10 @@ public class tigerTreeWalker extends TreeParser {
 
 	// $ANTLR start synpred3_tigerTreeWalker
 	public final void synpred3_tigerTreeWalker_fragment() throws RecognitionException {
-		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:361:4: ( fixedptlit )
-		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:361:5: fixedptlit
+		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:374:4: ( fixedptlit )
+		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:374:5: fixedptlit
 		{
-		pushFollow(FOLLOW_fixedptlit_in_synpred3_tigerTreeWalker1116);
+		pushFollow(FOLLOW_fixedptlit_in_synpred3_tigerTreeWalker1123);
 		fixedptlit();
 		state._fsp--;
 		if (state.failed) return;
@@ -7102,10 +7114,10 @@ public class tigerTreeWalker extends TreeParser {
 
 	// $ANTLR start synpred4_tigerTreeWalker
 	public final void synpred4_tigerTreeWalker_fragment() throws RecognitionException {
-		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:372:4: ( MINUS )
-		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:372:5: MINUS
+		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:385:4: ( MINUS )
+		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:385:5: MINUS
 		{
-		match(input,MINUS,FOLLOW_MINUS_in_synpred4_tigerTreeWalker1148); if (state.failed) return;
+		match(input,MINUS,FOLLOW_MINUS_in_synpred4_tigerTreeWalker1155); if (state.failed) return;
 
 		}
 
@@ -7114,10 +7126,10 @@ public class tigerTreeWalker extends TreeParser {
 
 	// $ANTLR start synpred5_tigerTreeWalker
 	public final void synpred5_tigerTreeWalker_fragment() throws RecognitionException {
-		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:383:4: ( MINUS )
-		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:383:5: MINUS
+		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:396:4: ( MINUS )
+		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:396:5: MINUS
 		{
-		match(input,MINUS,FOLLOW_MINUS_in_synpred5_tigerTreeWalker1182); if (state.failed) return;
+		match(input,MINUS,FOLLOW_MINUS_in_synpred5_tigerTreeWalker1189); if (state.failed) return;
 
 		}
 
@@ -7126,21 +7138,21 @@ public class tigerTreeWalker extends TreeParser {
 
 	// $ANTLR start synpred6_tigerTreeWalker
 	public final void synpred6_tigerTreeWalker_fragment() throws RecognitionException {
-		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:416:4: ( ID LBRACK index_expr RBRACK LBRACK )
-		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:416:5: ID LBRACK index_expr RBRACK LBRACK
+		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:429:4: ( ID LBRACK index_expr RBRACK LBRACK )
+		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:429:5: ID LBRACK index_expr RBRACK LBRACK
 		{
-		match(input,ID,FOLLOW_ID_in_synpred6_tigerTreeWalker1341); if (state.failed) return;
+		match(input,ID,FOLLOW_ID_in_synpred6_tigerTreeWalker1348); if (state.failed) return;
 
-		match(input,LBRACK,FOLLOW_LBRACK_in_synpred6_tigerTreeWalker1343); if (state.failed) return;
+		match(input,LBRACK,FOLLOW_LBRACK_in_synpred6_tigerTreeWalker1350); if (state.failed) return;
 
-		pushFollow(FOLLOW_index_expr_in_synpred6_tigerTreeWalker1345);
+		pushFollow(FOLLOW_index_expr_in_synpred6_tigerTreeWalker1352);
 		index_expr();
 		state._fsp--;
 		if (state.failed) return;
 
-		match(input,RBRACK,FOLLOW_RBRACK_in_synpred6_tigerTreeWalker1347); if (state.failed) return;
+		match(input,RBRACK,FOLLOW_RBRACK_in_synpred6_tigerTreeWalker1354); if (state.failed) return;
 
-		match(input,LBRACK,FOLLOW_LBRACK_in_synpred6_tigerTreeWalker1349); if (state.failed) return;
+		match(input,LBRACK,FOLLOW_LBRACK_in_synpred6_tigerTreeWalker1356); if (state.failed) return;
 
 		}
 
@@ -7149,12 +7161,12 @@ public class tigerTreeWalker extends TreeParser {
 
 	// $ANTLR start synpred7_tigerTreeWalker
 	public final void synpred7_tigerTreeWalker_fragment() throws RecognitionException {
-		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:417:4: ( ID LBRACK )
-		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:417:5: ID LBRACK
+		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:430:4: ( ID LBRACK )
+		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tigerTreeWalker.g:430:5: ID LBRACK
 		{
-		match(input,ID,FOLLOW_ID_in_synpred7_tigerTreeWalker1372); if (state.failed) return;
+		match(input,ID,FOLLOW_ID_in_synpred7_tigerTreeWalker1379); if (state.failed) return;
 
-		match(input,LBRACK,FOLLOW_LBRACK_in_synpred7_tigerTreeWalker1374); if (state.failed) return;
+		match(input,LBRACK,FOLLOW_LBRACK_in_synpred7_tigerTreeWalker1381); if (state.failed) return;
 
 		}
 
@@ -7328,130 +7340,130 @@ public class tigerTreeWalker extends TreeParser {
 	public static final BitSet FOLLOW_expr_in_if_stat559 = new BitSet(new long[]{0x2000000820014940L});
 	public static final BitSet FOLLOW_stat_seq_in_if_stat561 = new BitSet(new long[]{0x0000000000800008L});
 	public static final BitSet FOLLOW_else_tail_in_if_stat563 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_ELSE_KEY_in_else_tail577 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_stat_seq_in_else_tail579 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_WHILE_KEY_in_while_stat592 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_while_stat594 = new BitSet(new long[]{0x2000000820014940L});
-	public static final BitSet FOLLOW_stat_seq_in_while_stat596 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_FOR_KEY_in_for_stat609 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_TO_KEY_in_for_stat612 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_ASSIGN_in_for_stat615 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_ID_in_for_stat617 = new BitSet(new long[]{0x04010C0200000000L});
-	public static final BitSet FOLLOW_index_expr_in_for_stat619 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_index_expr_in_for_stat622 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_stat_seq_in_for_stat625 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_ASSIGN_in_assign_stat638 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_value_in_assign_stat640 = new BitSet(new long[]{0x06019DC388200810L});
-	public static final BitSet FOLLOW_assign_tail_in_assign_stat642 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_expr_in_assign_tail654 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_func_call_in_assign_tail658 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_AST_FUNC_CALL_in_func_call670 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_ID_in_func_call672 = new BitSet(new long[]{0x0000000000002000L});
-	public static final BitSet FOLLOW_func_param_list_in_func_call674 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_BREAK_KEY_in_break_stat687 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_AST_RETURN_STAT_in_return_stat700 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_RETURN_KEY_in_return_stat702 = new BitSet(new long[]{0x06019DC388200010L});
-	public static final BitSet FOLLOW_expr_in_return_stat704 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_boolExpr_in_expr727 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_numExpr_in_expr743 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LPAREN_in_expr753 = new BitSet(new long[]{0x06019DC388200010L});
-	public static final BitSet FOLLOW_expr_in_expr758 = new BitSet(new long[]{0x0008000000000000L});
-	public static final BitSet FOLLOW_RPAREN_in_expr760 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_binop_p0_in_boolExpr784 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_constval_in_boolExpr786 = new BitSet(new long[]{0x06019DC388200010L});
-	public static final BitSet FOLLOW_expr_in_boolExpr788 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_binop_p0_in_boolExpr800 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_value_in_boolExpr802 = new BitSet(new long[]{0x06019DC388200010L});
-	public static final BitSet FOLLOW_expr_in_boolExpr804 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_LPAREN_in_boolExpr815 = new BitSet(new long[]{0x06019DC388200010L});
-	public static final BitSet FOLLOW_expr_in_boolExpr820 = new BitSet(new long[]{0x0008000000000000L});
-	public static final BitSet FOLLOW_RPAREN_in_boolExpr832 = new BitSet(new long[]{0x000090C188000010L});
-	public static final BitSet FOLLOW_binop_p0_in_boolExpr835 = new BitSet(new long[]{0x06019DC388200010L});
-	public static final BitSet FOLLOW_expr_in_boolExpr840 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_binop_p2_in_numExpr861 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_constval_in_numExpr863 = new BitSet(new long[]{0x06019DC388200010L});
-	public static final BitSet FOLLOW_expr_in_numExpr865 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_constval_in_numExpr876 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_binop_p2_in_numExpr883 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_value_in_numExpr885 = new BitSet(new long[]{0x06019DC388200010L});
-	public static final BitSet FOLLOW_expr_in_numExpr887 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_value_in_numExpr898 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LPAREN_in_numExpr908 = new BitSet(new long[]{0x06019DC388200010L});
-	public static final BitSet FOLLOW_expr_in_numExpr913 = new BitSet(new long[]{0x0008000000000000L});
-	public static final BitSet FOLLOW_RPAREN_in_numExpr925 = new BitSet(new long[]{0x00010C0000200000L});
-	public static final BitSet FOLLOW_binop_p2_in_numExpr928 = new BitSet(new long[]{0x06019DC388200010L});
-	public static final BitSet FOLLOW_expr_in_numExpr933 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_AND_in_binop_p0952 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_OR_in_binop_p0961 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_binop_p1_in_binop_p0970 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_EQ_in_binop_p1987 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_NEQ_in_binop_p1996 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LESSER_in_binop_p11004 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_GREATER_in_binop_p11012 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LESSEREQ_in_binop_p11020 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_GREATEREQ_in_binop_p11028 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_MINUS_in_binop_p21051 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_PLUS_in_binop_p21060 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_binop_p3_in_binop_p21069 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_MULT_in_binop_p31088 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_DIV_in_binop_p31096 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_fixedptlit_in_constval1121 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_intlit_in_constval1129 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_MINUS_in_intlit1153 = new BitSet(new long[]{0x0400000000000000L});
-	public static final BitSet FOLLOW_UNSIGNED_INTLIT_in_intlit1155 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_UNSIGNED_INTLIT_in_intlit1163 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_MINUS_in_fixedptlit1187 = new BitSet(new long[]{0x0200000000000000L});
-	public static final BitSet FOLLOW_UNSIGNED_FIXEDPTLIT_in_fixedptlit1189 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_UNSIGNED_FIXEDPTLIT_in_fixedptlit1197 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_PLUS_in_binary_operator1216 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_MINUS_in_binary_operator1223 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_MULT_in_binary_operator1230 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_DIV_in_binary_operator1237 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_EQ_in_binary_operator1244 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_NEQ_in_binary_operator1251 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LESSER_in_binary_operator1258 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_GREATER_in_binary_operator1265 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_LESSEREQ_in_binary_operator1272 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_GREATEREQ_in_binary_operator1279 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_AND_in_binary_operator1286 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_OR_in_binary_operator1293 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_AST_EXPR_LIST_in_expr_list1317 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_expr_list1320 = new BitSet(new long[]{0x06019DC388200018L});
-	public static final BitSet FOLLOW_ID_in_value1354 = new BitSet(new long[]{0x0000002000000000L});
-	public static final BitSet FOLLOW_LBRACK_in_value1356 = new BitSet(new long[]{0x04010C0200000000L});
-	public static final BitSet FOLLOW_index_expr_in_value1358 = new BitSet(new long[]{0x0002000000000000L});
-	public static final BitSet FOLLOW_RBRACK_in_value1360 = new BitSet(new long[]{0x0000002000000000L});
-	public static final BitSet FOLLOW_LBRACK_in_value1362 = new BitSet(new long[]{0x04010C0200000000L});
-	public static final BitSet FOLLOW_index_expr_in_value1364 = new BitSet(new long[]{0x0002000000000000L});
-	public static final BitSet FOLLOW_RBRACK_in_value1366 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_value1379 = new BitSet(new long[]{0x0000002000000000L});
-	public static final BitSet FOLLOW_LBRACK_in_value1381 = new BitSet(new long[]{0x04010C0200000000L});
-	public static final BitSet FOLLOW_index_expr_in_value1383 = new BitSet(new long[]{0x0002000000000000L});
-	public static final BitSet FOLLOW_RBRACK_in_value1385 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_value1390 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_index_oper_in_index_expr1409 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_intlit_in_index_expr1411 = new BitSet(new long[]{0x04010C0200000000L});
-	public static final BitSet FOLLOW_index_expr_in_index_expr1415 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_intlit_in_index_expr1424 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_index_oper_in_index_expr1433 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_ID_in_index_expr1435 = new BitSet(new long[]{0x04010C0200000000L});
-	public static final BitSet FOLLOW_index_expr_in_index_expr1437 = new BitSet(new long[]{0x0000000000000008L});
-	public static final BitSet FOLLOW_ID_in_index_expr1446 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_PLUS_in_index_oper1464 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_MINUS_in_index_oper1471 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_MULT_in_index_oper1478 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_AST_PARAM_LIST_in_func_param_list1504 = new BitSet(new long[]{0x0000000000000004L});
-	public static final BitSet FOLLOW_expr_in_func_param_list1508 = new BitSet(new long[]{0x06019DC388200018L});
-	public static final BitSet FOLLOW_boolExpr_in_synpred1_tigerTreeWalker722 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_numExpr_in_synpred2_tigerTreeWalker738 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_fixedptlit_in_synpred3_tigerTreeWalker1116 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_MINUS_in_synpred4_tigerTreeWalker1148 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_MINUS_in_synpred5_tigerTreeWalker1182 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_synpred6_tigerTreeWalker1341 = new BitSet(new long[]{0x0000002000000000L});
-	public static final BitSet FOLLOW_LBRACK_in_synpred6_tigerTreeWalker1343 = new BitSet(new long[]{0x04010C0200000000L});
-	public static final BitSet FOLLOW_index_expr_in_synpred6_tigerTreeWalker1345 = new BitSet(new long[]{0x0002000000000000L});
-	public static final BitSet FOLLOW_RBRACK_in_synpred6_tigerTreeWalker1347 = new BitSet(new long[]{0x0000002000000000L});
-	public static final BitSet FOLLOW_LBRACK_in_synpred6_tigerTreeWalker1349 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_ID_in_synpred7_tigerTreeWalker1372 = new BitSet(new long[]{0x0000002000000000L});
-	public static final BitSet FOLLOW_LBRACK_in_synpred7_tigerTreeWalker1374 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ELSE_KEY_in_else_tail580 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_stat_seq_in_else_tail582 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_WHILE_KEY_in_while_stat595 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_while_stat597 = new BitSet(new long[]{0x2000000820014940L});
+	public static final BitSet FOLLOW_stat_seq_in_while_stat599 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_FOR_KEY_in_for_stat615 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_TO_KEY_in_for_stat618 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_ASSIGN_in_for_stat621 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_ID_in_for_stat623 = new BitSet(new long[]{0x04010C0200000000L});
+	public static final BitSet FOLLOW_index_expr_in_for_stat625 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_index_expr_in_for_stat628 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_stat_seq_in_for_stat631 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_ASSIGN_in_assign_stat644 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_value_in_assign_stat646 = new BitSet(new long[]{0x06019DC388200810L});
+	public static final BitSet FOLLOW_assign_tail_in_assign_stat648 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_expr_in_assign_tail660 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_func_call_in_assign_tail665 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_AST_FUNC_CALL_in_func_call677 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_ID_in_func_call679 = new BitSet(new long[]{0x0000000000002000L});
+	public static final BitSet FOLLOW_func_param_list_in_func_call681 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_BREAK_KEY_in_break_stat694 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_AST_RETURN_STAT_in_return_stat707 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_RETURN_KEY_in_return_stat709 = new BitSet(new long[]{0x06019DC388200010L});
+	public static final BitSet FOLLOW_expr_in_return_stat711 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_boolExpr_in_expr734 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_numExpr_in_expr750 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LPAREN_in_expr760 = new BitSet(new long[]{0x06019DC388200010L});
+	public static final BitSet FOLLOW_expr_in_expr765 = new BitSet(new long[]{0x0008000000000000L});
+	public static final BitSet FOLLOW_RPAREN_in_expr767 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_binop_p0_in_boolExpr791 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_constval_in_boolExpr793 = new BitSet(new long[]{0x06019DC388200010L});
+	public static final BitSet FOLLOW_expr_in_boolExpr795 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_binop_p0_in_boolExpr807 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_value_in_boolExpr809 = new BitSet(new long[]{0x06019DC388200010L});
+	public static final BitSet FOLLOW_expr_in_boolExpr811 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_LPAREN_in_boolExpr822 = new BitSet(new long[]{0x06019DC388200010L});
+	public static final BitSet FOLLOW_expr_in_boolExpr827 = new BitSet(new long[]{0x0008000000000000L});
+	public static final BitSet FOLLOW_RPAREN_in_boolExpr839 = new BitSet(new long[]{0x000090C188000010L});
+	public static final BitSet FOLLOW_binop_p0_in_boolExpr842 = new BitSet(new long[]{0x06019DC388200010L});
+	public static final BitSet FOLLOW_expr_in_boolExpr847 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_binop_p2_in_numExpr868 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_constval_in_numExpr870 = new BitSet(new long[]{0x06019DC388200010L});
+	public static final BitSet FOLLOW_expr_in_numExpr872 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_constval_in_numExpr883 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_binop_p2_in_numExpr890 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_value_in_numExpr892 = new BitSet(new long[]{0x06019DC388200010L});
+	public static final BitSet FOLLOW_expr_in_numExpr894 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_value_in_numExpr905 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LPAREN_in_numExpr915 = new BitSet(new long[]{0x06019DC388200010L});
+	public static final BitSet FOLLOW_expr_in_numExpr920 = new BitSet(new long[]{0x0008000000000000L});
+	public static final BitSet FOLLOW_RPAREN_in_numExpr932 = new BitSet(new long[]{0x00010C0000200000L});
+	public static final BitSet FOLLOW_binop_p2_in_numExpr935 = new BitSet(new long[]{0x06019DC388200010L});
+	public static final BitSet FOLLOW_expr_in_numExpr940 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_AND_in_binop_p0959 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_OR_in_binop_p0968 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_binop_p1_in_binop_p0977 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_EQ_in_binop_p1994 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NEQ_in_binop_p11003 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LESSER_in_binop_p11011 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_GREATER_in_binop_p11019 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LESSEREQ_in_binop_p11027 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_GREATEREQ_in_binop_p11035 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_MINUS_in_binop_p21058 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_PLUS_in_binop_p21067 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_binop_p3_in_binop_p21076 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_MULT_in_binop_p31095 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_DIV_in_binop_p31103 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_fixedptlit_in_constval1128 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_intlit_in_constval1136 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_MINUS_in_intlit1160 = new BitSet(new long[]{0x0400000000000000L});
+	public static final BitSet FOLLOW_UNSIGNED_INTLIT_in_intlit1162 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_UNSIGNED_INTLIT_in_intlit1170 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_MINUS_in_fixedptlit1194 = new BitSet(new long[]{0x0200000000000000L});
+	public static final BitSet FOLLOW_UNSIGNED_FIXEDPTLIT_in_fixedptlit1196 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_UNSIGNED_FIXEDPTLIT_in_fixedptlit1204 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_PLUS_in_binary_operator1223 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_MINUS_in_binary_operator1230 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_MULT_in_binary_operator1237 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_DIV_in_binary_operator1244 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_EQ_in_binary_operator1251 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NEQ_in_binary_operator1258 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LESSER_in_binary_operator1265 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_GREATER_in_binary_operator1272 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_LESSEREQ_in_binary_operator1279 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_GREATEREQ_in_binary_operator1286 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_AND_in_binary_operator1293 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_OR_in_binary_operator1300 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_AST_EXPR_LIST_in_expr_list1324 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_expr_list1327 = new BitSet(new long[]{0x06019DC388200018L});
+	public static final BitSet FOLLOW_ID_in_value1361 = new BitSet(new long[]{0x0000002000000000L});
+	public static final BitSet FOLLOW_LBRACK_in_value1363 = new BitSet(new long[]{0x04010C0200000000L});
+	public static final BitSet FOLLOW_index_expr_in_value1365 = new BitSet(new long[]{0x0002000000000000L});
+	public static final BitSet FOLLOW_RBRACK_in_value1367 = new BitSet(new long[]{0x0000002000000000L});
+	public static final BitSet FOLLOW_LBRACK_in_value1369 = new BitSet(new long[]{0x04010C0200000000L});
+	public static final BitSet FOLLOW_index_expr_in_value1371 = new BitSet(new long[]{0x0002000000000000L});
+	public static final BitSet FOLLOW_RBRACK_in_value1373 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_value1386 = new BitSet(new long[]{0x0000002000000000L});
+	public static final BitSet FOLLOW_LBRACK_in_value1388 = new BitSet(new long[]{0x04010C0200000000L});
+	public static final BitSet FOLLOW_index_expr_in_value1390 = new BitSet(new long[]{0x0002000000000000L});
+	public static final BitSet FOLLOW_RBRACK_in_value1392 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_value1397 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_index_oper_in_index_expr1416 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_intlit_in_index_expr1418 = new BitSet(new long[]{0x04010C0200000000L});
+	public static final BitSet FOLLOW_index_expr_in_index_expr1422 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_intlit_in_index_expr1431 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_index_oper_in_index_expr1440 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_ID_in_index_expr1442 = new BitSet(new long[]{0x04010C0200000000L});
+	public static final BitSet FOLLOW_index_expr_in_index_expr1444 = new BitSet(new long[]{0x0000000000000008L});
+	public static final BitSet FOLLOW_ID_in_index_expr1453 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_PLUS_in_index_oper1471 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_MINUS_in_index_oper1478 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_MULT_in_index_oper1485 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_AST_PARAM_LIST_in_func_param_list1511 = new BitSet(new long[]{0x0000000000000004L});
+	public static final BitSet FOLLOW_expr_in_func_param_list1515 = new BitSet(new long[]{0x06019DC388200018L});
+	public static final BitSet FOLLOW_boolExpr_in_synpred1_tigerTreeWalker729 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_numExpr_in_synpred2_tigerTreeWalker745 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_fixedptlit_in_synpred3_tigerTreeWalker1123 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_MINUS_in_synpred4_tigerTreeWalker1155 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_MINUS_in_synpred5_tigerTreeWalker1189 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_synpred6_tigerTreeWalker1348 = new BitSet(new long[]{0x0000002000000000L});
+	public static final BitSet FOLLOW_LBRACK_in_synpred6_tigerTreeWalker1350 = new BitSet(new long[]{0x04010C0200000000L});
+	public static final BitSet FOLLOW_index_expr_in_synpred6_tigerTreeWalker1352 = new BitSet(new long[]{0x0002000000000000L});
+	public static final BitSet FOLLOW_RBRACK_in_synpred6_tigerTreeWalker1354 = new BitSet(new long[]{0x0000002000000000L});
+	public static final BitSet FOLLOW_LBRACK_in_synpred6_tigerTreeWalker1356 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_ID_in_synpred7_tigerTreeWalker1379 = new BitSet(new long[]{0x0000002000000000L});
+	public static final BitSet FOLLOW_LBRACK_in_synpred7_tigerTreeWalker1381 = new BitSet(new long[]{0x0000000000000002L});
 }
