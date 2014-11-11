@@ -646,17 +646,17 @@ stat
 	;
 
 if_stat	
-  :	(IF_KEY LPAREN boolExpr1 RPAREN THEN_KEY stat_seq ELSE_KEY) => 	IF_KEY LPAREN boolExpr1 RPAREN THEN_KEY stat_seq ELSE_KEY stat_seq ENDIF_KEY SEMI
-	-> 	^(IF_KEY boolExpr1 stat_seq ^(ELSE_KEY stat_seq))
-	|	IF_KEY LPAREN boolExpr1 RPAREN THEN_KEY stat_seq ENDIF_KEY SEMI
-	->	^(IF_KEY boolExpr1 stat_seq)
+  :	(IF_KEY LPAREN expr RPAREN THEN_KEY stat_seq ELSE_KEY) => 	IF_KEY LPAREN expr RPAREN THEN_KEY stat_seq ELSE_KEY stat_seq ENDIF_KEY SEMI
+	-> 	^(IF_KEY expr stat_seq ^(ELSE_KEY stat_seq))
+	|	IF_KEY LPAREN expr RPAREN THEN_KEY stat_seq ENDIF_KEY SEMI
+	->	^(IF_KEY expr stat_seq)
 	;
 
 while_stat
-	:	WHILE_KEY LPAREN boolExpr1 RPAREN DO_KEY {numLoops++;} stat_seq ENDDO_KEY SEMI {
+	:	WHILE_KEY LPAREN expr RPAREN DO_KEY {numLoops++;} stat_seq ENDDO_KEY SEMI {
 	  numLoops--;
 	}
-	->	^(WHILE_KEY boolExpr1 stat_seq)
+	->	^(WHILE_KEY expr stat_seq)
 	;
 
 for_stat
@@ -674,14 +674,13 @@ assign_stat
 	  } 
 	}
   ->  ^(ASSIGN value func_call)
-  | (value ASSIGN numExpr1) => value ASSIGN numExpr1 SEMI {
+  | (value ASSIGN expr) => value ASSIGN expr SEMI {
     SymbolTableEntry variable = symbolTable.get($value.id,CURRENT_SCOPE);
     if (variable == null || !(variable instanceof TigerVariable)) {
       System.out.println("The variable "+$value.id+" on line "+$assign_stat.start.getLine()+" was never declared");
     } 
-    //System.out.println($numExpr1.type);
   }
-  -> ^(ASSIGN value numExpr1)
+  -> ^(ASSIGN value expr)
 	;
 
 func_call
@@ -701,82 +700,35 @@ break_stat
 	;
 	
 return_stat
-	: (RETURN_KEY numExpr1) => RETURN_KEY numExpr1 SEMI
-	-> ^(AST_RETURN_STAT RETURN_KEY numExpr1)
+	: (RETURN_KEY expr) => RETURN_KEY expr SEMI
+	-> ^(AST_RETURN_STAT RETURN_KEY expr)
 	;
 
-numExpr1 returns [TypeSymbolTableEntry type]
-  : (numExpr2 bin_op3) => val1=numExpr2 (bin_op3 val2=numExpr2)+ {
-    //$type = getTyping($val1.type, $val2.type);
-    if ($type == null) {
-      System.out.println("Typing mismatch at line " + $val1.start.getLine() + " between values " + $val1.text + " and " + $val2.text);
-    }
-  }
-  -> ^(bin_op3 numExpr2+)
-  | numExpr2 {
-    $type = $numExpr2.type;
-  }
+expr
+  : (boolExpr) => boolExpr
+  | (numExpr) => numExpr
+  | LPAREN expr RPAREN
   ;
-
-bin_op3
-  : PLUS
-  | MINUS
+ 
+boolExpr
+  : (constval binop_p0) => constval binop_p0 expr
+  | (value binop_p0) => value binop_p0 expr
+  | (LPAREN expr RPAREN binop_p0) => LPAREN expr RPAREN binop_p0 expr
   ;
-  
-numExpr2 returns [TypeSymbolTableEntry type]
-  : (numExpr3 bin_op4) => val1=numExpr3 (bin_op4 val2=numExpr3)+ {
-    //$type = getTyping($val1.type, $val2.type);
-    if ($type == null) {
-      System.out.println("Typing mismatch at line " + $val1.start.getLine() + " between values " + $val1.text + " and " + $val2.text);
-    }
-  }
-  -> ^(bin_op4 numExpr3+)
-  | numExpr3 {
-    $type = $numExpr3.type;
-  }
-  ;
-
-bin_op4
-  : MULT
-  | DIV
-  ;
-         
-numExpr3 returns [TypeSymbolTableEntry type]
-  : (value) => value {
-    $type = $value.type;
-  }
-  | constval {
-    $type = $constval.type;
-  }
-  | LPAREN! numExpr1 RPAREN!
-  ;
-
-  
-boolExpr1 
-  : (boolExpr2 bin_op1) => boolExpr2 (bin_op1 boolExpr2)+ 
-  -> ^(bin_op1 boolExpr2+)
-  | boolExpr2
+ 
+numExpr
+  : (constval binop_p2) => constval binop_p2 expr
+  | (value binop_p2) => value binop_p2 expr
+  | (LPAREN expr RPAREN binop_p2) => LPAREN expr RPAREN binop_p2 expr
   ;
   
-bin_op1
-  : AND
-  | OR
-  ;
-          
-boolExpr2 
-  : (numExpr1 bin_op2) => numExpr1 (bin_op2 numExpr1)+
-  -> ^(bin_op2 numExpr1+)
-  | numExpr1
-  ;
-  
-bin_op2
-  : LESSER
-  | GREATER
-  | EQ
-  | NEQ
-  | LESSEREQ
-  | GREATEREQ
-  ;
+// Conditional ops
+binop_p0:	(AND | OR | binop_p1);
+binop_p1:	(EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ);   
+ 
+// Numerical ops
+binop_p2:	(MINUS | PLUS | binop_p3);
+binop_p3:	(MULT | DIV);
 	
 constval returns [OperationObject typing]
   :	(fixedptlit) => fixedptlit {
@@ -805,10 +757,10 @@ binary_operator
 	;
 
 expr_list
-	: (boolExpr1) => boolExpr1 (COMMA boolExpr1)*
-	-> ^(AST_EXPR_LIST boolExpr1+)
-	|  numExpr1 (COMMA numExpr1)*
-  ->  ^(AST_EXPR_LIST numExpr1+)
+	: (expr) => expr (COMMA expr)*
+	-> ^(AST_EXPR_LIST expr+)
+	|  expr (COMMA expr)*
+  ->  ^(AST_EXPR_LIST expr+)
 	;
 
 value returns [OperationObject typing, String id]
@@ -879,8 +831,8 @@ WHITESPACE
 	;
   
 func_param_list
-	: (numExpr1 (COMMA numExpr1)*)?
-	-> ^(AST_PARAM_LIST (numExpr1+)?)
+	: (expr (COMMA expr)*)?
+	-> ^(AST_PARAM_LIST (expr+)?)
 	;
 
 keywords
