@@ -364,7 +364,9 @@ public class IRGenerator {
 		try {
 			FileWriter writer = new FileWriter(filename);
 			for (String irLine : inputIR) {
-				writer.write(emit(irLine));
+				if (!irLine.equals("\n")) {
+					writer.write(cleanUp(emit(irLine)));
+				}
 			}
 			
 			writer.close();
@@ -374,6 +376,10 @@ public class IRGenerator {
 		} 
 		
 		return true;
+	}
+	
+	private static String cleanUp(String input) {
+		return input.replaceAll("\n\n+", "\n");
 	}
 	
 	/**
