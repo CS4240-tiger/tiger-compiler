@@ -38,23 +38,8 @@ tokens {
     System.out.println(obj);
   }
   
-  public String getTyping(String var1, String var2) {
-    if ((strip(var1).equals("int") && strip(var2).equals("fixedpt")) || (strip(var1).equals("fixedpt") && strip(var2).equals("int"))) {
-      return "fixedpt";
-    } else if (strip(var1).equals("int") && strip(var2).equals("int")) {
-      return "int";
-    } else if (strip(var1).equals("fixedpt") && strip(var2).equals("fixedpt")) {
-      return "fixedpt";
-    } else {
-      if (strip(var1).equals("int") && strip(var2).equals("fixedpt") && strip(var1).equals("fixedpt") && strip(var2).equals("int")) {
-        if (strip(var1).equals(strip(var2))) {
-          return strip(var1);
-        } else {
-          return null;
-        }
-      }
-      return null;
-    }
+  public String getTyping(OperationObject var1, OperationObject var2) {
+    
   }
   
   public String strip(String id) {
@@ -712,14 +697,20 @@ expr
  
 boolExpr
   : (constval binop_p0) => constval binop_p0 expr
+  -> ^(binop_p0 constval expr)
   | (value binop_p0) => value binop_p0 expr
+  -> ^(binop_p0 value expr)
   | (LPAREN expr RPAREN binop_p0) => LPAREN expr RPAREN binop_p0 expr
+  -> ^(binop_p0 expr+)
   ;
  
 numExpr
   : (constval binop_p2) => constval binop_p2 expr
+  -> ^(binop_p2 constval expr)
   | (value binop_p2) => value binop_p2 expr
+  -> ^(binop_p2 value expr)
   | (LPAREN expr RPAREN binop_p2) => LPAREN expr RPAREN binop_p2 expr
+  -> ^(binop_p2 expr+)
   ;
   
 // Conditional ops
