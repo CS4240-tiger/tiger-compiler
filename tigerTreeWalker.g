@@ -1,9 +1,10 @@
 tree grammar tigerTreeWalker;
 
 options {
-	tokenVocab=tiger;
-	ASTLabelType=CommonTree;
-	output=AST;
+	backtrack = no;
+	tokenVocab = tiger;
+	ASTLabelType = CommonTree;
+	output = AST;
 }
 
 tokens {
@@ -191,7 +192,16 @@ while_stat
 	;
 
 for_stat
-	:	^(FOR_KEY ^(TO_KEY ^(ASSIGN ID index_expr) index_expr) stat_seq)
+	:	^(FOR_KEY ^(TO_KEY ^(ASSIGN ID indexExpr1=index_expr) indexExpr2=index_expr) stat_seq)
+	{
+		BinaryExpression.EvalReturn exprReturn1 = $indexExpr1.binExpr.eval(currentTemporary);
+		BinaryExpression.EvalReturn exprReturn2 = $indexExpr2.binExpr.eval(currentTemporary);
+		currentTemporary = exprReturn1.nextUnusedTemp;
+		irOutput.add(exprReturn1.irGen);
+		// Condlabel is expected to be null because no conditional statement is expected here
+		currentTemporary = exprReturn2.nextUnusedTemp;
+		irOutput.add(exprReturn2.irGen);
+	}
 	;
 
 assign_stat
@@ -200,6 +210,12 @@ assign_stat
 
 assign_tail
 	:	expr
+	{
+		BinaryExpression.EvalReturn exprReturn = $expr.binExpr.eval(currentTemporary);
+		currentTemporary = exprReturn.nextUnusedTemp;
+		irOutput.add(exprReturn.irGen);
+		irOutput.add("\n" + exprReturn.condLabel);
+	}
 	|	func_call
 	;
 
@@ -213,6 +229,12 @@ break_stat
 	
 return_stat
 	:	^(AST_RETURN_STAT RETURN_KEY expr)
+	{
+		BinaryExpression.EvalReturn exprReturn = $expr.binExpr.eval(currentTemporary);
+		currentTemporary = exprReturn.nextUnusedTemp;
+		irOutput.add(exprReturn.irGen);
+		irOutput.add("\n" + exprReturn.condLabel);
+	}
 	;
 
 expr returns [BinaryExpression binExpr]
@@ -434,22 +456,28 @@ value returns [String strVal]
 	}
 	;
 
-index_expr returns [String expr]
+index_expr returns [BinaryExpression binExpr]
 	:	^(index_oper intlit expr2=index_expr)
 	{
-		$expr += $intlit.text + $index_oper.text + $expr2.expr;
+		$binExpr = new BinaryExpression(
+			new BinaryExpression($intlit.intStringVal), 
+			$expr2.binExpr,
+			$index_oper.op);
 	}
 	|	intlit
 	{
-		$expr += $intlit.text;
+		$binExpr = new BinaryExpression($intlit.intStringVal);
 	}
 	|	^(index_oper ID index_expr)
 	{
-		$expr += $ID.text + $index_oper.text + $expr2.expr;
+		$binExpr = new BinaryExpression(
+			new BinaryExpression($ID.text), 
+			$expr2.binExpr,
+			$index_oper.op);
 	}
 	|	ID
 	{
-		$expr += $ID.text;
+		$binExpr = new BinaryExpression($ID.text);
 	}
 	;
 
