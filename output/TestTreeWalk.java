@@ -16,7 +16,7 @@ public class TestTreeWalk {
             CommonTree parseTree = postParse.getTree();
             SymbolTable symbolTable = postParse.symTable;
             CommonTreeNodeStream treeNodes = new CommonTreeNodeStream(parseTree);
-            tigerTreeWalker treeWalker = new tigerTreeWalker(treeNodes);
+            tigerTreeWalker treeWalker = new tigerTreeWalker(treeNodes, symbolTable);
             
             treeWalker.tiger_program(); // Walk tree and output IR
         } catch (RecognitionException e) {

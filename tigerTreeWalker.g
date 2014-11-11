@@ -32,8 +32,8 @@ tokens {
   	private SymbolTable symTable;
   	private String passthrough;
   	
-	public tigerTreeWalker(CommonTreeNodeStream nodes, SymbolTable symTable) {
-		super(nodes);
+	public tigerTreeWalker(TreeNodeStream input, SymbolTable symTable) {
+		this(input);
 		this.symTable = symTable;
 	}
   
@@ -225,30 +225,39 @@ func_call
 	:	^(AST_FUNC_CALL ID func_param_list)
 	{
 		String tempTarget = null;
-		// Assuming this cast is safe because it should check in tiger.g
-		FunctionSymbolTableEntry func = (FunctionSymbolTableEntry) symTable.get($ID.text, new Scope());
-		if (func.getReturnType() != null) {
-			tempTarget = emitCurrentTemporary();
-			currentTemporary++;
+		// *NOT* assuming this function is safe in case Tiger programmer does something strange
+		FunctionSymbolTableEntry func = null;
+		if (symTable.get($ID.text, new Scope()) != null 
+			&& symTable.get($ID.text, new Scope()) instanceof FunctionSymbolTableEntry) {
+			func = (FunctionSymbolTableEntry) symTable.get($ID.text, new Scope());
+		} else {
+			System.out.println("ERROR: Reference to a function not found in symbol table!");
 		}
 		
-		String[] paramList = new String[$func_param_list.paramList.size()];
-		// Convert binExpr list to String list
-		for (int i = 0; i < $func_param_list.paramList.size(); i++) {
-			if ($func_param_list.paramList.get(i).isTerminal()) {
-				// If it's a variable or value, just add it
-				// Hopefully this is the case most of the time
-				paramList[i] = $func_param_list.paramList.get(i).value;
-			} else {
-				// Otherwise, we need to evaluate it and return the temporary
-				BinaryExpression.EvalReturn returnPkg = $func_param_list.paramList.get(i).eval(currentTemporary);
-				currentTemporary = returnPkg.nextUnusedTemp;
-				irOutput.add(returnPkg.irGen);
-				paramList[i] = "t" + (currentTemporary - 1);
+		if (func != null) {
+			if (func.getReturnType() != null) {
+				tempTarget = emitCurrentTemporary();
+				currentTemporary++;
 			}
+			
+			String[] paramList = new String[$func_param_list.paramList.size()];
+			// Convert binExpr list to String list
+			for (int i = 0; i < $func_param_list.paramList.size(); i++) {
+				if ($func_param_list.paramList.get(i).isTerminal()) {
+					// If it's a variable or value, just add it
+					// Hopefully this is the case most of the time
+					paramList[i] = $func_param_list.paramList.get(i).value;
+				} else {
+					// Otherwise, we need to evaluate it and return the temporary
+					BinaryExpression.EvalReturn returnPkg = $func_param_list.paramList.get(i).eval(currentTemporary);
+					currentTemporary = returnPkg.nextUnusedTemp;
+					irOutput.add(returnPkg.irGen);
+					paramList[i] = "t" + (currentTemporary - 1);
+				}
+			}
+			
+			irOutput.add(IRGenerator.func_call(func, paramList, tempTarget));
 		}
-		
-		irOutput.add(IRGenerator.func_call(func, paramList, tempTarget));
 	}
 	;
 	

@@ -1,19 +1,35 @@
+fact: 
+assign, t0, 1, 
+assign, t0, input, 
+assign, t1, 1, 
+breq, t0, t1, 47026-expr-eval
+assign, t0, 0, 
+assign, t1, 1, 
+breq, t0, t1, 47026-expr-eval
+assign, t0, input, 
+assign, t1, 1, 
+breq, t0, t1, 47026-expr-eval
+47026-expr-eval: 
 main: 
 assign, t, 2, 
 assign, p, 3, 
-assign, t0, t, 
-assign, t1, 3.2, 
-add, t0, t1, t2
+assign, t2, 5, 
+assign, t3, 3, 
+add, t2, t3, t4
+assign, t2, 4, 
+assign, t3, 4, 
+add, t2, t3, t4
+assign, t2, p, 
+assign, t3, 4, 
+add, t2, t3, t4
+assign, t5, t, 
+assign, t6, 3.2, 
+add, t5, t6, t7
+assign, t8, t, 
+assign, t9, 3, 
+breq, t8, t9, 43638-expr-eval
+assign, t8, p, 
+assign, t9, 9, 
+breq, t8, t9, 43638-expr-eval
+43638-expr-eval: 
 assign, decimal, 123, 
-fact: 
-assign, t3, 1, 
-assign, t0, input, 
-assign, t1, 1, 
-breq, t0, t1, 50202-expr-eval
-assign, t0, 0, 
-assign, t1, 1, 
-breq, t0, t1, 50202-expr-eval
-assign, t0, input, 
-assign, t1, 1, 
-breq, t0, t1, 50202-expr-eval
-50202-expr-eval: 
