@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g 2014-11-10 10:20:32
+// $ANTLR 3.5.1 /Users/cevanish12/git/tiger-compiler/tiger.g 2014-11-10 16:43:39
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -119,17 +119,17 @@ public class tigerLexer extends Lexer {
 	public tigerLexer(CharStream input, RecognizerSharedState state) {
 		super(input,state);
 	}
-	@Override public String getGrammarFileName() { return "C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g"; }
+	@Override public String getGrammarFileName() { return "/Users/cevanish12/git/tiger-compiler/tiger.g"; }
 
 	// $ANTLR start "UNSIGNED_INTLIT"
 	public final void mUNSIGNED_INTLIT() throws RecognitionException {
 		try {
 			int _type = UNSIGNED_INTLIT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:787:2: ( ( '0' .. '9' )+ )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:787:4: ( '0' .. '9' )+
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:793:2: ( ( '0' .. '9' )+ )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:793:4: ( '0' .. '9' )+
 			{
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:787:4: ( '0' .. '9' )+
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:793:4: ( '0' .. '9' )+
 			int cnt1=0;
 			loop1:
 			while (true) {
@@ -141,7 +141,7 @@ public class tigerLexer extends Lexer {
 
 				switch (alt1) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:
+					// /Users/cevanish12/git/tiger-compiler/tiger.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 						input.consume();
@@ -178,10 +178,10 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = UNSIGNED_FIXEDPTLIT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:794:2: ( ( '0' .. '9' )* '.' ( '0' .. '9' )* )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:794:5: ( '0' .. '9' )* '.' ( '0' .. '9' )*
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:800:2: ( ( '0' .. '9' )* '.' ( '0' .. '9' )* )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:800:5: ( '0' .. '9' )* '.' ( '0' .. '9' )*
 			{
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:794:5: ( '0' .. '9' )*
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:800:5: ( '0' .. '9' )*
 			loop2:
 			while (true) {
 				int alt2=2;
@@ -192,7 +192,7 @@ public class tigerLexer extends Lexer {
 
 				switch (alt2) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:
+					// /Users/cevanish12/git/tiger-compiler/tiger.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 						input.consume();
@@ -211,7 +211,7 @@ public class tigerLexer extends Lexer {
 			}
 
 			match('.'); 
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:794:21: ( '0' .. '9' )*
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:800:21: ( '0' .. '9' )*
 			loop3:
 			while (true) {
 				int alt3=2;
@@ -222,7 +222,7 @@ public class tigerLexer extends Lexer {
 
 				switch (alt3) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:
+					// /Users/cevanish12/git/tiger-compiler/tiger.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
 						input.consume();
@@ -256,12 +256,12 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = COMMENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:842:2: ( '/*' ( options {greedy=false; } : . )* '*/' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:842:7: '/*' ( options {greedy=false; } : . )* '*/'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:848:2: ( '/*' ( options {greedy=false; } : . )* '*/' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:848:7: '/*' ( options {greedy=false; } : . )* '*/'
 			{
 			match("/*"); 
 
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:842:12: ( options {greedy=false; } : . )*
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:848:12: ( options {greedy=false; } : . )*
 			loop4:
 			while (true) {
 				int alt4=2;
@@ -282,7 +282,7 @@ public class tigerLexer extends Lexer {
 
 				switch (alt4) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:842:40: .
+					// /Users/cevanish12/git/tiger-compiler/tiger.g:848:40: .
 					{
 					matchAny(); 
 					}
@@ -312,8 +312,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = TAB;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:845:5: ( '\\t' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:845:7: '\\t'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:851:5: ( '\\t' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:851:7: '\\t'
 			{
 			match('\t'); 
 			_channel=HIDDEN;
@@ -333,8 +333,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = NEWLINE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:847:2: ( '\\n' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:847:4: '\\n'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:853:2: ( '\\n' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:853:4: '\\n'
 			{
 			match('\n'); 
 			_channel=HIDDEN;
@@ -354,8 +354,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = CARRAGE_RET;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:850:2: ( '\\r' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:850:4: '\\r'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:856:2: ( '\\r' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:856:4: '\\r'
 			{
 			match('\r'); 
 			_channel=HIDDEN;
@@ -375,8 +375,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = WHITESPACE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:854:2: ( ' ' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:854:4: ' '
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:860:2: ( ' ' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:860:4: ' '
 			{
 			match(' '); 
 			_channel=HIDDEN;
@@ -396,8 +396,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = FUNCTION_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:889:2: ( 'function' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:889:4: 'function'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:895:2: ( 'function' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:895:4: 'function'
 			{
 			match("function"); 
 
@@ -417,8 +417,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = BEGIN_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:893:2: ( 'begin' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:893:4: 'begin'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:899:2: ( 'begin' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:899:4: 'begin'
 			{
 			match("begin"); 
 
@@ -438,8 +438,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = END_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:897:2: ( 'end' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:897:4: 'end'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:903:2: ( 'end' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:903:4: 'end'
 			{
 			match("end"); 
 
@@ -459,8 +459,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = VOID_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:901:2: ( 'void' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:901:4: 'void'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:907:2: ( 'void' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:907:4: 'void'
 			{
 			match("void"); 
 
@@ -480,8 +480,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = MAIN_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:905:2: ( 'main' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:905:4: 'main'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:911:2: ( 'main' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:911:4: 'main'
 			{
 			match("main"); 
 
@@ -501,8 +501,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = TYPE_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:909:2: ( 'type' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:909:4: 'type'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:915:2: ( 'type' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:915:4: 'type'
 			{
 			match("type"); 
 
@@ -522,8 +522,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ARRAY_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:913:2: ( 'array' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:913:4: 'array'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:919:2: ( 'array' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:919:4: 'array'
 			{
 			match("array"); 
 
@@ -543,8 +543,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = OF_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:917:2: ( 'of' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:917:4: 'of'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:923:2: ( 'of' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:923:4: 'of'
 			{
 			match("of"); 
 
@@ -564,8 +564,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = INT_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:921:2: ( 'int' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:921:4: 'int'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:927:2: ( 'int' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:927:4: 'int'
 			{
 			match("int"); 
 
@@ -585,8 +585,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = FIXEDPT_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:925:2: ( 'fixedpt' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:925:4: 'fixedpt'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:931:2: ( 'fixedpt' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:931:4: 'fixedpt'
 			{
 			match("fixedpt"); 
 
@@ -606,8 +606,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = VAR_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:929:2: ( 'var' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:929:4: 'var'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:935:2: ( 'var' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:935:4: 'var'
 			{
 			match("var"); 
 
@@ -627,8 +627,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = IF_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:933:2: ( 'if' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:933:4: 'if'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:939:2: ( 'if' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:939:4: 'if'
 			{
 			match("if"); 
 
@@ -648,8 +648,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = THEN_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:937:2: ( 'then' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:937:4: 'then'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:943:2: ( 'then' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:943:4: 'then'
 			{
 			match("then"); 
 
@@ -669,8 +669,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ENDIF_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:941:2: ( 'endif' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:941:4: 'endif'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:947:2: ( 'endif' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:947:4: 'endif'
 			{
 			match("endif"); 
 
@@ -690,8 +690,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ELSE_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:945:2: ( 'else' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:945:4: 'else'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:951:2: ( 'else' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:951:4: 'else'
 			{
 			match("else"); 
 
@@ -711,8 +711,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = WHILE_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:949:2: ( 'while' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:949:4: 'while'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:955:2: ( 'while' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:955:4: 'while'
 			{
 			match("while"); 
 
@@ -732,8 +732,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ENDDO_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:953:2: ( 'enddo' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:953:4: 'enddo'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:959:2: ( 'enddo' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:959:4: 'enddo'
 			{
 			match("enddo"); 
 
@@ -753,8 +753,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = FOR_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:957:2: ( 'for' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:957:4: 'for'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:963:2: ( 'for' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:963:4: 'for'
 			{
 			match("for"); 
 
@@ -774,8 +774,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ID_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:961:2: ( 'id' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:961:4: 'id'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:967:2: ( 'id' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:967:4: 'id'
 			{
 			match("id"); 
 
@@ -795,8 +795,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = TO_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:965:2: ( 'to' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:965:4: 'to'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:971:2: ( 'to' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:971:4: 'to'
 			{
 			match("to"); 
 
@@ -816,8 +816,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = DO_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:969:2: ( 'do' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:969:4: 'do'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:975:2: ( 'do' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:975:4: 'do'
 			{
 			match("do"); 
 
@@ -837,8 +837,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = BREAK_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:973:2: ( 'break' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:973:4: 'break'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:979:2: ( 'break' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:979:4: 'break'
 			{
 			match("break"); 
 
@@ -858,8 +858,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = RETURN_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:977:2: ( 'return' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:977:4: 'return'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:983:2: ( 'return' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:983:4: 'return'
 			{
 			match("return"); 
 
@@ -879,8 +879,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = COMMA;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:981:8: ( ',' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:981:10: ','
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:987:8: ( ',' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:987:10: ','
 			{
 			match(','); 
 			}
@@ -899,8 +899,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = COLON;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:982:8: ( ':' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:982:10: ':'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:988:8: ( ':' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:988:10: ':'
 			{
 			match(':'); 
 			}
@@ -919,8 +919,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = SEMI;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:983:6: ( ';' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:983:8: ';'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:989:6: ( ';' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:989:8: ';'
 			{
 			match(';'); 
 			}
@@ -939,8 +939,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = LPAREN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:984:8: ( '(' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:984:10: '('
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:990:8: ( '(' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:990:10: '('
 			{
 			match('('); 
 			}
@@ -959,8 +959,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = RPAREN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:985:8: ( ')' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:985:10: ')'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:991:8: ( ')' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:991:10: ')'
 			{
 			match(')'); 
 			}
@@ -979,8 +979,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = LBRACK;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:986:8: ( '[' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:986:10: '['
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:992:8: ( '[' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:992:10: '['
 			{
 			match('['); 
 			}
@@ -999,8 +999,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = RBRACK;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:987:8: ( ']' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:987:10: ']'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:993:8: ( ']' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:993:10: ']'
 			{
 			match(']'); 
 			}
@@ -1019,8 +1019,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = PLUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:988:6: ( '+' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:988:8: '+'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:994:6: ( '+' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:994:8: '+'
 			{
 			match('+'); 
 			}
@@ -1039,8 +1039,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = MINUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:989:7: ( '-' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:989:9: '-'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:995:7: ( '-' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:995:9: '-'
 			{
 			match('-'); 
 			}
@@ -1059,8 +1059,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = MULT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:990:6: ( '*' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:990:8: '*'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:996:6: ( '*' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:996:8: '*'
 			{
 			match('*'); 
 			}
@@ -1079,8 +1079,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = DIV;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:991:5: ( '/' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:991:7: '/'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:997:5: ( '/' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:997:7: '/'
 			{
 			match('/'); 
 			}
@@ -1099,8 +1099,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = EQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:992:4: ( '=' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:992:6: '='
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:998:4: ( '=' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:998:6: '='
 			{
 			match('='); 
 			}
@@ -1119,8 +1119,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = NEQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:993:5: ( '<>' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:993:7: '<>'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:999:5: ( '<>' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:999:7: '<>'
 			{
 			match("<>"); 
 
@@ -1140,8 +1140,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = LESSER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:994:8: ( '<' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:994:10: '<'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1000:8: ( '<' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1000:10: '<'
 			{
 			match('<'); 
 			}
@@ -1160,8 +1160,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = LESSEREQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:995:9: ( '<=' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:995:11: '<='
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1001:9: ( '<=' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1001:11: '<='
 			{
 			match("<="); 
 
@@ -1181,8 +1181,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = GREATER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:996:9: ( '>' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:996:11: '>'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1002:9: ( '>' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1002:11: '>'
 			{
 			match('>'); 
 			}
@@ -1201,8 +1201,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = GREATEREQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:998:2: ( '>=' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:998:4: '>='
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1004:2: ( '>=' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1004:4: '>='
 			{
 			match(">="); 
 
@@ -1222,8 +1222,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = AND;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:999:5: ( '&' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:999:7: '&'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1005:5: ( '&' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1005:7: '&'
 			{
 			match('&'); 
 			}
@@ -1242,8 +1242,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = OR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1000:4: ( '|' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1000:6: '|'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1006:4: ( '|' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1006:6: '|'
 			{
 			match('|'); 
 			}
@@ -1262,8 +1262,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ASSIGN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1001:8: ( ':=' )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1001:10: ':='
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1007:8: ( ':=' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1007:10: ':='
 			{
 			match(":="); 
 
@@ -1283,8 +1283,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ID;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1003:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1003:7: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1009:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1009:7: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 				input.consume();
@@ -1294,7 +1294,7 @@ public class tigerLexer extends Lexer {
 				recover(mse);
 				throw mse;
 			}
-			// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1003:30: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1009:30: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
 			loop5:
 			while (true) {
 				int alt5=2;
@@ -1305,7 +1305,7 @@ public class tigerLexer extends Lexer {
 
 				switch (alt5) {
 				case 1 :
-					// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:
+					// /Users/cevanish12/git/tiger-compiler/tiger.g:
 					{
 					if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 						input.consume();
@@ -1336,362 +1336,362 @@ public class tigerLexer extends Lexer {
 
 	@Override
 	public void mTokens() throws RecognitionException {
-		// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:8: ( UNSIGNED_INTLIT | UNSIGNED_FIXEDPTLIT | COMMENT | TAB | NEWLINE | CARRAGE_RET | WHITESPACE | FUNCTION_KEY | BEGIN_KEY | END_KEY | VOID_KEY | MAIN_KEY | TYPE_KEY | ARRAY_KEY | OF_KEY | INT_KEY | FIXEDPT_KEY | VAR_KEY | IF_KEY | THEN_KEY | ENDIF_KEY | ELSE_KEY | WHILE_KEY | ENDDO_KEY | FOR_KEY | ID_KEY | TO_KEY | DO_KEY | BREAK_KEY | RETURN_KEY | COMMA | COLON | SEMI | LPAREN | RPAREN | LBRACK | RBRACK | PLUS | MINUS | MULT | DIV | EQ | NEQ | LESSER | LESSEREQ | GREATER | GREATEREQ | AND | OR | ASSIGN | ID )
+		// /Users/cevanish12/git/tiger-compiler/tiger.g:1:8: ( UNSIGNED_INTLIT | UNSIGNED_FIXEDPTLIT | COMMENT | TAB | NEWLINE | CARRAGE_RET | WHITESPACE | FUNCTION_KEY | BEGIN_KEY | END_KEY | VOID_KEY | MAIN_KEY | TYPE_KEY | ARRAY_KEY | OF_KEY | INT_KEY | FIXEDPT_KEY | VAR_KEY | IF_KEY | THEN_KEY | ENDIF_KEY | ELSE_KEY | WHILE_KEY | ENDDO_KEY | FOR_KEY | ID_KEY | TO_KEY | DO_KEY | BREAK_KEY | RETURN_KEY | COMMA | COLON | SEMI | LPAREN | RPAREN | LBRACK | RBRACK | PLUS | MINUS | MULT | DIV | EQ | NEQ | LESSER | LESSEREQ | GREATER | GREATEREQ | AND | OR | ASSIGN | ID )
 		int alt6=51;
 		alt6 = dfa6.predict(input);
 		switch (alt6) {
 			case 1 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:10: UNSIGNED_INTLIT
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:10: UNSIGNED_INTLIT
 				{
 				mUNSIGNED_INTLIT(); 
 
 				}
 				break;
 			case 2 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:26: UNSIGNED_FIXEDPTLIT
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:26: UNSIGNED_FIXEDPTLIT
 				{
 				mUNSIGNED_FIXEDPTLIT(); 
 
 				}
 				break;
 			case 3 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:46: COMMENT
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:46: COMMENT
 				{
 				mCOMMENT(); 
 
 				}
 				break;
 			case 4 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:54: TAB
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:54: TAB
 				{
 				mTAB(); 
 
 				}
 				break;
 			case 5 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:58: NEWLINE
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:58: NEWLINE
 				{
 				mNEWLINE(); 
 
 				}
 				break;
 			case 6 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:66: CARRAGE_RET
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:66: CARRAGE_RET
 				{
 				mCARRAGE_RET(); 
 
 				}
 				break;
 			case 7 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:78: WHITESPACE
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:78: WHITESPACE
 				{
 				mWHITESPACE(); 
 
 				}
 				break;
 			case 8 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:89: FUNCTION_KEY
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:89: FUNCTION_KEY
 				{
 				mFUNCTION_KEY(); 
 
 				}
 				break;
 			case 9 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:102: BEGIN_KEY
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:102: BEGIN_KEY
 				{
 				mBEGIN_KEY(); 
 
 				}
 				break;
 			case 10 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:112: END_KEY
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:112: END_KEY
 				{
 				mEND_KEY(); 
 
 				}
 				break;
 			case 11 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:120: VOID_KEY
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:120: VOID_KEY
 				{
 				mVOID_KEY(); 
 
 				}
 				break;
 			case 12 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:129: MAIN_KEY
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:129: MAIN_KEY
 				{
 				mMAIN_KEY(); 
 
 				}
 				break;
 			case 13 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:138: TYPE_KEY
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:138: TYPE_KEY
 				{
 				mTYPE_KEY(); 
 
 				}
 				break;
 			case 14 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:147: ARRAY_KEY
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:147: ARRAY_KEY
 				{
 				mARRAY_KEY(); 
 
 				}
 				break;
 			case 15 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:157: OF_KEY
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:157: OF_KEY
 				{
 				mOF_KEY(); 
 
 				}
 				break;
 			case 16 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:164: INT_KEY
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:164: INT_KEY
 				{
 				mINT_KEY(); 
 
 				}
 				break;
 			case 17 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:172: FIXEDPT_KEY
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:172: FIXEDPT_KEY
 				{
 				mFIXEDPT_KEY(); 
 
 				}
 				break;
 			case 18 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:184: VAR_KEY
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:184: VAR_KEY
 				{
 				mVAR_KEY(); 
 
 				}
 				break;
 			case 19 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:192: IF_KEY
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:192: IF_KEY
 				{
 				mIF_KEY(); 
 
 				}
 				break;
 			case 20 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:199: THEN_KEY
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:199: THEN_KEY
 				{
 				mTHEN_KEY(); 
 
 				}
 				break;
 			case 21 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:208: ENDIF_KEY
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:208: ENDIF_KEY
 				{
 				mENDIF_KEY(); 
 
 				}
 				break;
 			case 22 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:218: ELSE_KEY
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:218: ELSE_KEY
 				{
 				mELSE_KEY(); 
 
 				}
 				break;
 			case 23 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:227: WHILE_KEY
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:227: WHILE_KEY
 				{
 				mWHILE_KEY(); 
 
 				}
 				break;
 			case 24 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:237: ENDDO_KEY
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:237: ENDDO_KEY
 				{
 				mENDDO_KEY(); 
 
 				}
 				break;
 			case 25 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:247: FOR_KEY
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:247: FOR_KEY
 				{
 				mFOR_KEY(); 
 
 				}
 				break;
 			case 26 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:255: ID_KEY
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:255: ID_KEY
 				{
 				mID_KEY(); 
 
 				}
 				break;
 			case 27 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:262: TO_KEY
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:262: TO_KEY
 				{
 				mTO_KEY(); 
 
 				}
 				break;
 			case 28 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:269: DO_KEY
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:269: DO_KEY
 				{
 				mDO_KEY(); 
 
 				}
 				break;
 			case 29 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:276: BREAK_KEY
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:276: BREAK_KEY
 				{
 				mBREAK_KEY(); 
 
 				}
 				break;
 			case 30 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:286: RETURN_KEY
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:286: RETURN_KEY
 				{
 				mRETURN_KEY(); 
 
 				}
 				break;
 			case 31 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:297: COMMA
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:297: COMMA
 				{
 				mCOMMA(); 
 
 				}
 				break;
 			case 32 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:303: COLON
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:303: COLON
 				{
 				mCOLON(); 
 
 				}
 				break;
 			case 33 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:309: SEMI
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:309: SEMI
 				{
 				mSEMI(); 
 
 				}
 				break;
 			case 34 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:314: LPAREN
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:314: LPAREN
 				{
 				mLPAREN(); 
 
 				}
 				break;
 			case 35 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:321: RPAREN
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:321: RPAREN
 				{
 				mRPAREN(); 
 
 				}
 				break;
 			case 36 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:328: LBRACK
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:328: LBRACK
 				{
 				mLBRACK(); 
 
 				}
 				break;
 			case 37 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:335: RBRACK
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:335: RBRACK
 				{
 				mRBRACK(); 
 
 				}
 				break;
 			case 38 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:342: PLUS
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:342: PLUS
 				{
 				mPLUS(); 
 
 				}
 				break;
 			case 39 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:347: MINUS
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:347: MINUS
 				{
 				mMINUS(); 
 
 				}
 				break;
 			case 40 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:353: MULT
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:353: MULT
 				{
 				mMULT(); 
 
 				}
 				break;
 			case 41 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:358: DIV
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:358: DIV
 				{
 				mDIV(); 
 
 				}
 				break;
 			case 42 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:362: EQ
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:362: EQ
 				{
 				mEQ(); 
 
 				}
 				break;
 			case 43 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:365: NEQ
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:365: NEQ
 				{
 				mNEQ(); 
 
 				}
 				break;
 			case 44 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:369: LESSER
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:369: LESSER
 				{
 				mLESSER(); 
 
 				}
 				break;
 			case 45 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:376: LESSEREQ
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:376: LESSEREQ
 				{
 				mLESSEREQ(); 
 
 				}
 				break;
 			case 46 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:385: GREATER
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:385: GREATER
 				{
 				mGREATER(); 
 
 				}
 				break;
 			case 47 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:393: GREATEREQ
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:393: GREATEREQ
 				{
 				mGREATEREQ(); 
 
 				}
 				break;
 			case 48 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:403: AND
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:403: AND
 				{
 				mAND(); 
 
 				}
 				break;
 			case 49 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:407: OR
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:407: OR
 				{
 				mOR(); 
 
 				}
 				break;
 			case 50 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:410: ASSIGN
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:410: ASSIGN
 				{
 				mASSIGN(); 
 
 				}
 				break;
 			case 51 :
-				// C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\tiger.g:1:417: ID
+				// /Users/cevanish12/git/tiger-compiler/tiger.g:1:417: ID
 				{
 				mID(); 
 

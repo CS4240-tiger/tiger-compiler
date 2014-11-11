@@ -286,9 +286,9 @@ param[List<TypeSymbolTableEntry> intypeList] returns [List<TypeSymbolTableEntry>
     if (!$type_id.text.equals("int") && !$type_id.text.equals("fixedpt")) {
     SymbolTableEntry type = symbolTable.get($type_id.text, CURRENT_SCOPE);
     if (type != null && type instanceof TypeSymbolTableEntry) {
-      intypeList.add( (TypeSymbolTableEntry) type );
+      intypeList.add((TypeSymbolTableEntry) type);
       $outtypeList = intypeList;
-      symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip($ID.text), null, strip($type_id.text), ((TypeSymbolTableEntry) type).getBackingType()));
+      symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip($ID.text), null, ((TypeSymbolTableEntry) type), ((TypeSymbolTableEntry) type).getBackingType()));
     } else {
 	    System.out.println("The type "+ $type_id.text+" on line "+$type_id.start.getLine()+" was not declared yet");
     }
@@ -296,11 +296,11 @@ param[List<TypeSymbolTableEntry> intypeList] returns [List<TypeSymbolTableEntry>
       if ($type_id.text.equals("int")) {
         intypeList.add(symbolTable.getIntType());
         $outtypeList = intypeList;
-        symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip($ID.text), null, "int", TigerPrimitive.INT));
+        symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip($ID.text), null, symbolTable.getIntType(), TigerPrimitive.INT));
       } else if ($type_id.text.equals("fixedpt")) {
         intypeList.add(symbolTable.getFixedPtType());
         $outtypeList = intypeList;
-        symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip($ID.text), null, "int", TigerPrimitive.FIXEDPT));
+        symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip($ID.text), null, symbolTable.getFixedPtType(), TigerPrimitive.FIXEDPT));
       }
     }
     //System.out.println($ID.text + "added");
@@ -399,7 +399,7 @@ var_declaration
     		        // Gets rid of white space and adds to symbol table
     		        symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
     		          strip(id), 
-    		          fpArray, $type_id.text, ((TypeSymbolTableEntry) type).getBackingType()));
+    		          fpArray, ((TypeSymbolTableEntry) type), ((TypeSymbolTableEntry) type).getBackingType()));
     			 
     		      }
           
@@ -414,7 +414,7 @@ var_declaration
                 // Gets rid of white space and adds to symbol table
                 symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
                   strip(id), 
-                  fp2DArray, $type_id.text, ((TypeSymbolTableEntry) type).getBackingType()));
+                  fp2DArray, ((TypeSymbolTableEntry) type), ((TypeSymbolTableEntry) type).getBackingType()));
              }
           
             break;
@@ -424,7 +424,7 @@ var_declaration
               // Gets rid of white space and adds to symbol table
               symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
                 strip(id), 
-                toDouble($fixedptlit.text), $type_id.text, ((TypeSymbolTableEntry) type).getBackingType()));
+                toDouble($fixedptlit.text), ((TypeSymbolTableEntry) type), ((TypeSymbolTableEntry) type).getBackingType()));
                
               }
           
@@ -443,9 +443,13 @@ var_declaration
     		      + $id_list.text + " on line " + $type_id.start.getLine());
     		  }
     		} else {
-    		  for (String id: ids) {
-      			symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), toDouble($fixedptlit.text)));
-      			
+    		  if ($type_id.text.equals("fixedpt")) {
+	    		  for (String id: ids) {
+	      			symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), toDouble($fixedptlit.text), symbolTable.getFixedPtType(), TigerPrimitive.FIXEDPT));
+	      			
+	      		}
+      		} else if ($type_id.text.equals("int")) {
+      		  System.out.println("A fixedpt constant cannot be declared to a variable of type int on line "+$type_id.start.getLine());
       		}
       	}
       	
@@ -473,7 +477,7 @@ var_declaration
 						// Gets rid of white space and adds to symbol table
 						  symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
 						    strip(id), 
-						    intArray, $type_id.text, ((TypeSymbolTableEntry) type).getBackingType()));
+						    intArray, ((TypeSymbolTableEntry) type), ((TypeSymbolTableEntry) type).getBackingType()));
 						    
 					}
 					
@@ -488,7 +492,7 @@ var_declaration
 						// Gets rid of white space and adds to symbol table
 					              symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
 					                strip(id), 
-					                int2DArray, $type_id.text, ((TypeSymbolTableEntry) type).getBackingType()));
+					                int2DArray, ((TypeSymbolTableEntry) type), ((TypeSymbolTableEntry) type).getBackingType()));
 					}
 					
 					break;
@@ -498,7 +502,7 @@ var_declaration
 						// Gets rid of white space and adds to symbol table
 							symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
 								strip(id), 
-								toInteger($UNSIGNED_INTLIT.text), $type_id.text, ((TypeSymbolTableEntry) type).getBackingType()));
+								toInteger($UNSIGNED_INTLIT.text), ((TypeSymbolTableEntry) type), ((TypeSymbolTableEntry) type).getBackingType()));
 					}
 					
 					break;
@@ -516,11 +520,14 @@ var_declaration
 			}
 		} else {
 			// Else, it's a primitive already
-			for (String id: ids) {
-				// Gets rid of white space and adds to symbol table
-				symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
-				strip(id), toInteger($UNSIGNED_INTLIT.text)));
-				
+			if ($type_id.text.equals("int")) {
+				for (String id: ids) {
+					// Gets rid of white space and adds to symbol table
+					symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), toInteger($UNSIGNED_INTLIT.text), symbolTable.getIntType(), TigerPrimitive.INT));
+					
+				}
+			} else if ($type_id.text.equals("fixedpt")) {
+			  System.out.println("An int constant cannot be declared to a variable of type fixedpt on line "+$type_id.start.getLine());
 			}
         }
         	}
@@ -547,7 +554,7 @@ var_declaration
     		          // Gets rid of white space and adds to symbol table
     		          symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
     		            strip(id), 
-    		            intArray, $type_id.text, ((TypeSymbolTableEntry) type).getBackingType()));
+    		            intArray, ((TypeSymbolTableEntry) type), ((TypeSymbolTableEntry) type).getBackingType()));
                 }
               break;
               case INT_2D_ARRAY:
@@ -559,7 +566,7 @@ var_declaration
 			            // Gets rid of white space and adds to symbol table
 				           symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
 				             strip(id), 
-				             int2DArray, $type_id.text, ((TypeSymbolTableEntry) type).getBackingType()));
+				             int2DArray, ((TypeSymbolTableEntry) type), ((TypeSymbolTableEntry) type).getBackingType()));
 			          }
 			        break;
 			        case FIXEDPT_ARRAY:
@@ -571,7 +578,7 @@ var_declaration
 	                // Gets rid of white space and adds to symbol table
 	                symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
 	                  strip(id), 
-	                  fpArray, $type_id.text, ((TypeSymbolTableEntry) type).getBackingType()));
+	                  fpArray, ((TypeSymbolTableEntry) type), ((TypeSymbolTableEntry) type).getBackingType()));
 	              }
 	            break;
 	            case FIXEDPT_2D_ARRAY:
@@ -583,7 +590,7 @@ var_declaration
 	                // Gets rid of white space and adds to symbol table
 	                symbolTable.put(new TigerVariable(CURRENT_SCOPE, 
 	                  strip(id), 
-	                  fp2DArray, $type_id.text, ((TypeSymbolTableEntry) type).getBackingType()));
+	                  fp2DArray, ((TypeSymbolTableEntry) type), ((TypeSymbolTableEntry) type).getBackingType()));
 	             }
              break;
     		    }
@@ -591,7 +598,7 @@ var_declaration
     		    //apparently gets set to null if not array according to piazza
     		    System.out.println("WARNING:"+$id_list.text +" are are not initialized on line "+ $type_id.start.getLine()+ " and will be set to null");
 	    		  for (String id: ids) {
-	    		    symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), null, strip($type_id.text), ((TypeSymbolTableEntry) type).getBackingType()));
+	    		    symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), null, ((TypeSymbolTableEntry) type), ((TypeSymbolTableEntry) type).getBackingType()));
 	    		  }
     		  }
     		} else {
@@ -605,11 +612,11 @@ var_declaration
     		//initialiazes for both int and fixedpt.. to null
     	  if (strip($type_id.text).equals("int")) {
 		   		for (String id: ids) {
-	     			symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), null, "int", TigerPrimitive.INT));
+	     			symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), null, symbolTable.getIntType(), TigerPrimitive.INT));
 		   		}
 	   		} else if (strip($type_id.text).equals("fixedpt")) {
 	   		   for (String id: ids) {
-            symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), null, "fixedpt", TigerPrimitive.FIXEDPT));
+            symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), null, symbolTable.getFixedPtType(), TigerPrimitive.FIXEDPT));
           }
 	   		}
    		}
@@ -771,12 +778,12 @@ bin_op2
   | GREATEREQ
   ;
 	
-constval returns [TypeSymbolTableEntry type, Boolean isConst]
+constval returns [OperationObject typing]
   :	(fixedptlit) => fixedptlit {
-    $type = symbolTable.getFixedPtType();
+    $typing = new OperationObject(true, symbolTable.getFixedPtType());
   }
 	|	intlit {
-	  $type = symbolTable.getIntType();
+	  $typing = new OperationObject(true, symbolTable.getIntType());
 	}
 	;
 
@@ -804,22 +811,40 @@ expr_list
   ->  ^(AST_EXPR_LIST numExpr1+)
 	;
 
-value returns [TypeSymbolTableEntry type, Boolean isConst, String id]
+value returns [OperationObject typing, String id]
   :	(ID LBRACK index_expr RBRACK LBRACK) => ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK {
   	  SymbolTableEntry entry = symbolTable.get(strip($ID.text),CURRENT_SCOPE);
-  	  //System.out.println(((TigerVariable)entry).getType());
-  	  
+  	  if (entry != null && entry instanceof TigerVariable) {
+  	    if (((TigerVariable)entry).getBackingType() == TigerPrimitive.INT_2D_ARRAY || ((TigerVariable)entry).getBackingType() == TigerPrimitive.FIXEDPT_2D_ARRAY) {
+  	      $typing = new OperationObject(false, ((TigerVariable)entry).getType());
+  	    } else {
+  	      System.out.println("The variable "+$ID.text+ " on line "+$value.start.getLine() +" is not a 2D array");
+  	    }
+  	  } else {
+  	    System.out.println("The variable "+$ID.text+ " on line "+$value.start.getLine() +" is not a variable");
+  	  }
   	  $id = $ID.text;
   	}
 	|	(ID LBRACK) => ID LBRACK index_expr RBRACK {
-	
+		    SymbolTableEntry entry = symbolTable.get(strip($ID.text),CURRENT_SCOPE);
+	      if (entry != null && entry instanceof TigerVariable) {
+	        if (((TigerVariable)entry).getBackingType() == TigerPrimitive.INT_ARRAY || ((TigerVariable)entry).getBackingType() == TigerPrimitive.FIXEDPT_ARRAY) {
+	          $typing = new OperationObject(false, ((TigerVariable)entry).getType());
+	        } else {
+	          System.out.println("The variable "+$ID.text+ " on line "+$value.start.getLine() +" is not a 1D array");
+	        }
+	      } else {
+	        System.out.println("The variable "+$ID.text+ " on line "+$value.start.getLine() +" is not a variable");
+	      }
 	  $id = $ID.text;
 	}
 	|	ID {
       SymbolTableEntry entry = symbolTable.get(strip($ID.text),CURRENT_SCOPE);
-      
-      //$type = ((TigerVariable)entry).getType();
-      //$type = "fixedpt";
+      if (entry != null && entry instanceof TigerVariable) {
+            $typing = new OperationObject(false, ((TigerVariable)entry).getType());
+        } else {
+          System.out.println("The variable "+$ID.text+ " on line "+$value.start.getLine() +" is not a variable");
+        }
       $id = $ID.text;
     }
 	;
