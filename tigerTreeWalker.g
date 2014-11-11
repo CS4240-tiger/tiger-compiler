@@ -173,7 +173,7 @@ if_stat
 		BinaryExpression.EvalReturn exprReturn = $expr.binExpr.eval(currentTemporary);
 		currentTemporary = exprReturn.nextUnusedTemp;
 		irOutput.add(exprReturn.irGen);
-		irOutput.add("\n" + exprReturn.condLabel);
+		irOutput.add(IRGenerator.emitLabel(exprReturn.condLabel));
 	}
 	;
 
@@ -187,7 +187,7 @@ while_stat
 		BinaryExpression.EvalReturn exprReturn = $expr.binExpr.eval(currentTemporary);
 		currentTemporary = exprReturn.nextUnusedTemp;
 		irOutput.add(exprReturn.irGen);
-		irOutput.add("\n" + exprReturn.condLabel);
+		irOutput.add(IRGenerator.emitLabel(exprReturn.condLabel));
 	}
 	;
 
@@ -214,7 +214,6 @@ assign_tail
 		BinaryExpression.EvalReturn exprReturn = $expr.binExpr.eval(currentTemporary);
 		currentTemporary = exprReturn.nextUnusedTemp;
 		irOutput.add(exprReturn.irGen);
-		irOutput.add("\n" + exprReturn.condLabel);
 	}
 	|	func_call
 	;
@@ -233,7 +232,6 @@ return_stat
 		BinaryExpression.EvalReturn exprReturn = $expr.binExpr.eval(currentTemporary);
 		currentTemporary = exprReturn.nextUnusedTemp;
 		irOutput.add(exprReturn.irGen);
-		irOutput.add("\n" + exprReturn.condLabel);
 	}
 	;
 
