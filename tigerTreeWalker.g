@@ -293,6 +293,9 @@ numExpr returns [BinaryExpression binExpr]
   		$expr.binExpr, $binop_p2.op);
   }
   | constval
+  {
+  	$binExpr = new BinaryExpression($constval.retStr);
+  }
   | ^(binop_p2 value expr)
   {
     	$binExpr = new BinaryExpression(
