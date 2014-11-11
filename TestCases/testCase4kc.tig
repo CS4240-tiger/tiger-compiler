@@ -3,9 +3,12 @@ void main()
 begin
    begin
    	type Integer = int;
-   	var t: Integer := 2;
+   	var t: int := 2;
    	var p:int:= 3;
-   	k := t + 3.2;
+   	p := p + 4 < 5 + 3;
+   	if (p=t < 3) then
+   		k := t + 3.2;
+   	endif;
    end;
    begin
     var decimal:decimal := 123;

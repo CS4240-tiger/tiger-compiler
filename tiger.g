@@ -704,8 +704,6 @@ assign_stat
 	     } else {
 	      System.out.println("Success");
 	     }
-	    } else {
-	      System.out.println("The variable "+$value.id+" on line "+$value.start.getLine()+" was never declared");
 	    }
 	   }
     }
@@ -736,63 +734,92 @@ return_stat
 expr returns [OperationObject typing, Boolean isBool]
   : (boolExpr) => boolExpr {
     $typing = $boolExpr.typing;
-    $isBool = true;
+    $isBool = $boolExpr.isBool;
   }
   | (numExpr) => numExpr {
     $typing = $numExpr.typing;
-    $isBool = false;
+    $isBool = $numExpr.isBool;
   }
-  | LPAREN! expr RPAREN!
+  | LPAREN! var1=expr RPAREN! {
+    $typing = $var1.typing;
+    $isBool = $var1.isBool;
+  }
   ;
  
-boolExpr returns [OperationObject typing]
+boolExpr returns [OperationObject typing, Boolean isBool]
   : (constval binop_p0) => constval binop_p0 expr {
     $typing = getTyping($constval.typing, $expr.typing, $boolExpr.start.getLine(), $binop_p0.text);
+    $isBool = $constval.isBool || $binop_p0.isBool || $expr.isBool;
   }
   -> ^(binop_p0 constval expr) 
   | (value binop_p0) => value binop_p0 expr {
     $typing = getTyping($value.typing, $expr.typing, $boolExpr.start.getLine(), $binop_p0.text);
+    $isBool = $value.isBool || $binop_p0.isBool || $expr.isBool;
   }
   -> ^(binop_p0 value expr)
   | (LPAREN expr RPAREN binop_p0) => LPAREN! var1=expr RPAREN! binop_p0^ var2=expr {
     $typing = getTyping($var1.typing, $var2.typing, $boolExpr.start.getLine(), $binop_p0.text);
+    $isBool = $var1.isBool || $binop_p0.isBool || $var2.isBool;
   }
   ;
  
-numExpr returns [OperationObject typing]
+numExpr returns [OperationObject typing, Boolean isBool]
   : (constval binop_p2) => constval binop_p2 expr {
     $typing = getTyping($constval.typing, $expr.typing, $numExpr.start.getLine(), $binop_p2.text);
+    $isBool = $constval.isBool || $binop_p2.isBool || $expr.isBool;
   }
   -> ^(binop_p2 constval expr)
   | constval {
     $typing = $constval.typing;
+    $isBool = $constval.isBool;
   }
   | (value binop_p2) => value binop_p2 expr {
     $typing = getTyping($value.typing, $expr.typing, $numExpr.start.getLine(), $binop_p2.text);
+    $isBool = $value.isBool || $binop_p2.isBool || $expr.isBool;
   }
   -> ^(binop_p2 value expr)
   | value {
     $typing = $value.typing;
+    $isBool = $value.isBool;
   }
   | (LPAREN expr RPAREN binop_p2) => LPAREN! var1=expr RPAREN! binop_p2^ var2=expr {
     $typing = getTyping($var1.typing, $var2.typing, $numExpr.start.getLine(), $binop_p2.text);
+    $isBool = $var1.isBool || $binop_p2.isBool || $var2.isBool;
   }
   ;
   
 // Conditional ops
-binop_p0:	(AND | OR | binop_p1);
-binop_p1:	(EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ);   
+binop_p0 returns [Boolean isBool]
+  :	(AND | OR | binop_p1) {
+    $isBool = true;
+  }
+  ;
+binop_p1 returns [Boolean isBool]
+  :	(EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ) {
+    $isBool = true;
+  }
+  ;   
  
 // Numerical ops
-binop_p2:	(MINUS | PLUS | binop_p3);
-binop_p3:	(MULT | DIV);
+binop_p2 returns [Boolean isBool]
+  :	(MINUS | PLUS | binop_p3) {
+    $isBool = false;
+  }
+  ;
+binop_p3 returns [Boolean isBool]
+  :	(MULT | DIV) {
+    $isBool = false;
+  }
+  ;
 	
-constval returns [OperationObject typing]
+constval returns [OperationObject typing, Boolean isBool]
   :	(fixedptlit) => fixedptlit {
     $typing = new OperationObject(true, symbolTable.getFixedPtType(), $fixedptlit.text);
+    $isBool = false;
   }
 	|	intlit {
 	  $typing = new OperationObject(true, symbolTable.getIntType(), $intlit.text);
+	  $isBool = false;
 	}
 	;
 
@@ -820,7 +847,7 @@ expr_list
   ->  ^(AST_EXPR_LIST expr+)
 	;
 
-value returns [OperationObject typing, String id]
+value returns [OperationObject typing, String id, Boolean isBool]
   :	(ID LBRACK index_expr RBRACK LBRACK) => ID LBRACK index_expr RBRACK LBRACK index_expr RBRACK {
   	  SymbolTableEntry entry = symbolTable.get(strip($ID.text),CURRENT_SCOPE);
   	  if (entry != null && entry instanceof TigerVariable) {
@@ -833,6 +860,7 @@ value returns [OperationObject typing, String id]
   	    System.out.println("The variable "+$ID.text+ " on line "+$value.start.getLine() +" is not a variable");
   	  }
   	  $id = $ID.text;
+  	  $isBool = false;
   	}
 	|	(ID LBRACK) => ID LBRACK index_expr RBRACK {
 		    SymbolTableEntry entry = symbolTable.get(strip($ID.text),CURRENT_SCOPE);
@@ -846,15 +874,17 @@ value returns [OperationObject typing, String id]
 	        System.out.println("The variable "+$ID.text+ " on line "+$value.start.getLine() +" is not a variable");
 	      }
 	  $id = $ID.text;
+	  $isBool = false;
 	}
 	|	ID {
       SymbolTableEntry entry = symbolTable.get(strip($ID.text),CURRENT_SCOPE);
       if (entry != null && entry instanceof TigerVariable) {
             $typing = new OperationObject(false, ((TigerVariable)entry).getType(), $value.text);
         } else {
-          System.out.println("The variable "+$ID.text+ " on line "+$value.start.getLine() +" is not a variable");
+          System.out.println("The variable "+$ID.text+ " on line "+$value.start.getLine() +" is not a variable or was never declared");
         }
       $id = $ID.text;
+      $isBool = false;
     }
 	;
 
