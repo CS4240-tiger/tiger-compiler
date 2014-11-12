@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -37,10 +38,7 @@ public class SymbolTable {
 	 */
 	public SymbolTable() {
 		backingTable = new HashMap<String, SymbolTableEntry>();
-		this.intType =  new TypeSymbolTableEntry(new Scope(),"int", TigerPrimitive.INT);
-		this.fixedptType = new TypeSymbolTableEntry(new Scope(),"fixedpt", TigerPrimitive.FIXEDPT);
-		put(this.intType);
-		put(this.fixedptType);
+		prePopulate();
 	}
 	
 	/**
@@ -223,5 +221,101 @@ public class SymbolTable {
 				
 			}
 		}
+	}
+	
+	/**
+	 * Pre-populates the SymbolTable with primitive types and library functions.
+	 */
+	private void prePopulate() {
+		List<TypeSymbolTableEntry> args = new ArrayList<TypeSymbolTableEntry>();
+		
+		this.intType =  new TypeSymbolTableEntry(new Scope(), "int", TigerPrimitive.INT);
+		this.fixedptType = new TypeSymbolTableEntry(new Scope(), "fixedpt", TigerPrimitive.FIXEDPT);
+		
+		put(this.intType);
+		put(this.fixedptType);
+		
+		// Use this only for string library functions (is it safe to remove later?)
+		TypeSymbolTableEntry string = new TypeSymbolTableEntry(new Scope(), "string", TigerPrimitive.STRING);
+		args.add(string);
+		
+		/* String parameter functions */
+		
+		/**
+		 * function print(s : string)
+		 * Print the string on the standard output. 
+		 */
+		put(new FunctionSymbolTableEntry(new Scope(), "print", null, args));
+		
+		/**
+		 * function getchar() : string 
+		 * Read and return a character from standard input; return an empty string at end-of-file.
+		 */
+		put(new FunctionSymbolTableEntry(new Scope(), "getchar", string, null));
+		
+		/**
+		 * function ord(s : string) : int
+		 * Return the ASCII value of the first character of s, or −1 if s is empty. 
+		 */
+		put(new FunctionSymbolTableEntry(new Scope(), "ord", intType, args));
+		
+		/**
+		 * function size(s : string) : int 
+		 * Return the number of characters in s. 
+		 */
+		put(new FunctionSymbolTableEntry(new Scope(), "size", intType, args));
+		
+		args.add(intType);
+		args.add(intType);
+		
+		/**
+		 * function substring(s:string,f:int,n:int) : string 
+		 * Return the substring of s starting at the character f 
+		 * (first character is numbered zero) and going for n characters.
+		 */
+		put(new FunctionSymbolTableEntry(new Scope(), "substring", string, args));
+		
+		args.remove(intType);
+		args.remove(intType);
+		args.add(string);
+		
+		/**
+		 * function concat (s1:string, s2:string) : string 
+		 * Return a new string consisting of s1 followed by s2.
+		 */
+		put(new FunctionSymbolTableEntry(new Scope(), "concat", string, args));
+		
+		args.remove(string);
+		args.remove(string);
+		args.add(intType);
+		
+		/**
+		 * function chr(i : int) : string 
+		 * Return a single-character string for ASCII value i. 
+		 * Terminate program if i is out of range.
+		 */
+		put(new FunctionSymbolTableEntry(new Scope(), "chr", string, args));
+		
+		/* Non-string functions */
+		
+		/**
+		 * function printi(i : int) 
+		 * Print the integer on the standard output.
+		 */
+		
+		/**
+		 * function flush() 
+		 * Flush the standard output buffer.
+		 */
+		
+		/**
+		 * function not(i : int) : int 
+		 * Return 1 if i is zero, 0 otherwise. 
+		 */
+		
+		/**
+		 * function exit(i : int) 
+		 * Terminate execution of the program with code i.
+		 */
 	}
 }

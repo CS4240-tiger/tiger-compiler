@@ -26,5 +26,9 @@ public enum TigerPrimitive {
 	/**
 	 * A two-dimensional array of fixedpt values.
 	 */
-	FIXEDPT_2D_ARRAY;
+	FIXEDPT_2D_ARRAY,
+	/**
+	 * A string value. <b>This should only be used for string library functions!</b>
+	 */
+	STRING
 }

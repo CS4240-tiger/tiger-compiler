@@ -20,8 +20,10 @@ public class FunctionSymbolTableEntry extends SymbolTableEntry {
 	 * @param scope The parent scope of this FunctionSymbolTableEntry.
 	 * @param id The String identifier of this FunctionSymbolTableEntry.
 	 * @param returnType The return type of this FunctionSymbolTableEntry.
+	 * @param paramList A list of parameter types this function accepts.
 	 */
-	protected FunctionSymbolTableEntry(Scope scope, String id, TypeSymbolTableEntry returnType, List<TypeSymbolTableEntry> paramList) {
+	protected FunctionSymbolTableEntry(Scope scope, String id, TypeSymbolTableEntry returnType, 
+			List<TypeSymbolTableEntry> paramList) {
 		super(scope, id);
 		this.paramTypeList = paramList;
 		this.returnType = returnType;
