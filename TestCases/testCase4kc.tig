@@ -67,6 +67,9 @@ begin
 	
 	func4(fixedpt_type_var); 
 	func4(fixedpt_type_var2);
+	while (1 <> 2) do
+		break; /* Test break statements */
+	enddo;
 	/*
 	FAILURES
 	func1(5.0);

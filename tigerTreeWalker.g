@@ -190,7 +190,7 @@ while_stat returns [String breakLabel]
 		// Now check for break statements
 		for (int line = 0; line < irOutput.size(); line++) {
 			if (irOutput.get(line).contains("BREAK_LABEL_" + loopNestNum)) {
-				irOutput.add(line, irOutput.get(line).replace("BREAK_LABEL_" + loopNestNum, 
+				irOutput.set(line, irOutput.get(line).replace("BREAK_LABEL_" + loopNestNum, 
 					((BinaryExpression.EvalReturn) passThrough).condLabel));
 				loopNestNum--;
 				break;
@@ -212,7 +212,7 @@ for_stat returns [String breakLabel]
 		// Now check for break statements
 		for (int line = 0; line < irOutput.size(); line++) {
 			if (irOutput.get(line).contains("BREAK_LABEL_" + loopNestNum)) {
-				irOutput.add(line, irOutput.get(line).replace("BREAK_LABEL_" + loopNestNum, 
+				irOutput.set(line, irOutput.get(line).replace("BREAK_LABEL_" + loopNestNum, 
 					((BinaryExpression.EvalReturn) passThrough).condLabel));
 				loopNestNum--;
 				break;

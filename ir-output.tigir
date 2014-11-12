@@ -49,3 +49,8 @@ callr, t31, func3, int_type_var
 callr, t32, func3, int_type_var2
 callr, t33, func4, fixedpt_type_var
 callr, t34, func4, fixedpt_type_var2
+goto, 50290-expr-eval, , 
+assign, t35, 1, 
+assign, t36, 2, 
+brneq, t35, t36, 50290-expr-eval
+50290-expr-eval: 
