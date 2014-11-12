@@ -47,7 +47,7 @@ public class SymbolTable {
 	 * @param entry The Entry to add.
 	 */
 	public void put(SymbolTableEntry entry) {
-		if (!idExists(entry.getId(),entry.getScope())) {
+		//if (!idExists(entry.getId(),entry.getScope())) {
 			if (entry instanceof TigerVariable) {
 				if (backingTable.get(entry.getId()) == null) {
 					backingTable.put(entry.getId(), 
@@ -92,7 +92,7 @@ public class SymbolTable {
 				}**/
 				//System.out.println(entry.getScope().getId()+":"+entry.getId());
 			}
-		}
+		//}
 	}
 	
 	/**
@@ -134,6 +134,7 @@ public class SymbolTable {
 						return result;
 					} else {
 						// Check any parent scopes
+						//System.out.println(scope.getId()+"<-"+ scope.getParent().getId());
 						scope = scope.getParent();
 					}
 				}

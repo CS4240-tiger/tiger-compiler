@@ -265,7 +265,9 @@ return_func
 	    }
 	  } RPAREN begin {
 	    CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
-	  } block_list block_end
+	  } block_list block_end {
+	    CURRENT_SCOPE = CURRENT_SCOPE.getParent().getParent();
+	  }
 	->	^(ID param_list block_list)
 	;
 
@@ -278,7 +280,9 @@ void_func
     }
 	  RPAREN begin {
 	    CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
-	  }block_list block_end
+	  }block_list block_end {
+	    CURRENT_SCOPE = CURRENT_SCOPE.getParent();
+	  }
 	->	^(ID param_list block_list) 
 		
 	|	VOID_KEY MAIN_KEY {
@@ -287,7 +291,9 @@ void_func
       CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text); 
 	  } LPAREN RPAREN begin {
 	    CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text);
-	  } block_list block_end
+	  } block_list block_end {
+	    CURRENT_SCOPE = CURRENT_SCOPE.getParent();
+	  }
 	->	^(MAIN_KEY block_list) 
 	;
 
@@ -976,12 +982,13 @@ value returns [OperationObject typing, String id, Boolean isBool]
 	}
 	|	ID {
       SymbolTableEntry entry = symbolTable.get(strip($ID.text),CURRENT_SCOPE);
+      System.out.println(entry);
       if (entry != null && entry instanceof TigerVariable) {
             //System.out.println($ID.text+ ((TigerVariable)entry).getType().getId() );
             $typing = new OperationObject(false, ((TigerVariable)entry).getType(), $value.text);
-        } else {
+      } else {
           System.out.println("The variable "+$ID.text+ " on line "+$value.start.getLine() +" is not a variable or was never declared");
-        }
+      }
       $id = $ID.text;
       $isBool = false;
     }

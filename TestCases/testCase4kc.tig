@@ -7,6 +7,10 @@ begin
           var a: int :=0;
           return a;
      end;
+     begin
+          var p: int :=0;
+          return p;
+     end;
 end;
  
 fixedpt function func2(x:fixedpt) 
