@@ -50,7 +50,7 @@ begin
 	/*
 	BELOW SHOULD PASS (WHICH IT DOES FOR NOW)*/
 	func1(p);
-	/*func1(int_var);
+	func1(int_var);
 	func1(5 + int_var);
 
 	func2(5.0);
@@ -66,7 +66,7 @@ begin
 	func3(int_type_var2);
 	
 	func4(fixedpt_type_var); 
-	func4(fixedpt_type_var2);*/
+	func4(fixedpt_type_var2);
 	/*
 	FAILURES
 	func1(5.0);
@@ -101,16 +101,16 @@ begin
 	int_type_var := func3(int_type_var); 
 	int_type_var2 := func3(int_type_var);
 	fixedpt_type_var := func4(fixedpt_type_var);
-	fixedpt_type_var2 := func4(fixedpt_type_var);*/
+	fixedpt_type_var2 := func4(fixedpt_type_var);
 	
-	/*
+	
 	FAILURES
 	fixedpt_type_var := func1(5);
 	int_type_var := func1(5);
 	int_var := func2(5.0);
 	int_type_var := func2(5.0);
-	fixedpt_type_var := func2(5.0);*/
-	/*
+	fixedpt_type_var := func2(5.0);
+	
 	fixedpt_var := func3(5);
 	fixedpt_type_var := func3(5); 
 	int_type_var2 := func3(5); 

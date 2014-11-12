@@ -208,13 +208,12 @@ public class SymbolTable {
 			if (currentEntry instanceof VariableSymbolTableEntry) {
 				for (int index = 0; index < ((VariableSymbolTableEntry) currentEntry).backingList.size(); index++) {
 					var = ((VariableSymbolTableEntry) currentEntry).backingList.get(index);
-					if (var.getScope().equals(scope));
-					
-					// DEBUG
-					System.out.println("Removing " + id + " from symbol table. (Exiting scope " + scope.getId() + ")");
-					// DEBUG
-					
-					((VariableSymbolTableEntry) currentEntry).backingList.remove(index);
+					if (var.getScope().equals(scope)) {
+						// DEBUG
+						System.out.println("Removing " + id + " from symbol table. (Exiting scope " + scope.getId() + ")");
+						// DEBUG
+						((VariableSymbolTableEntry) currentEntry).backingList.remove(index);
+					}
 				}
 				
 				// If VariableSymbolTableEntry now has 0 members in list, remove id mapping
