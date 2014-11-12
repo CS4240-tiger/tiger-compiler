@@ -295,27 +295,34 @@ public class SymbolTable {
 		 * Terminate program if i is out of range.
 		 */
 		put(new FunctionSymbolTableEntry(new Scope(), "chr", string, args));
+		args.clear();
 		
 		/* Non-string functions */
+		
+		args.add(intType);
 		
 		/**
 		 * function printi(i : int) 
 		 * Print the integer on the standard output.
 		 */
+		put(new FunctionSymbolTableEntry(new Scope(), "printi", null, args));
 		
 		/**
 		 * function flush() 
 		 * Flush the standard output buffer.
 		 */
+		put(new FunctionSymbolTableEntry(new Scope(), "flush", null, null));
 		
 		/**
 		 * function not(i : int) : int 
 		 * Return 1 if i is zero, 0 otherwise. 
 		 */
+		put(new FunctionSymbolTableEntry(new Scope(), "not", intType, args));
 		
 		/**
 		 * function exit(i : int) 
 		 * Terminate execution of the program with code i.
 		 */
+		put(new FunctionSymbolTableEntry(new Scope(), "exit", null, args));
 	}
 }
