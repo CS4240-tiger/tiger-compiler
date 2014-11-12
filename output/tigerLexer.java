@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 /Users/cevanish12/git/tiger-compiler/tiger.g 2014-11-11 10:48:22
+// $ANTLR 3.5.1 /Users/cevanish12/git/tiger-compiler/tiger.g 2014-11-11 21:04:30
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -126,10 +126,10 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = UNSIGNED_INTLIT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:826:2: ( ( '0' .. '9' )+ )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:826:4: ( '0' .. '9' )+
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:868:2: ( ( '0' .. '9' )+ )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:868:4: ( '0' .. '9' )+
 			{
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:826:4: ( '0' .. '9' )+
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:868:4: ( '0' .. '9' )+
 			int cnt1=0;
 			loop1:
 			while (true) {
@@ -178,10 +178,10 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = UNSIGNED_FIXEDPTLIT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:833:2: ( ( '0' .. '9' )* '.' ( '0' .. '9' )* )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:833:5: ( '0' .. '9' )* '.' ( '0' .. '9' )*
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:875:2: ( ( '0' .. '9' )* '.' ( '0' .. '9' )* )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:875:5: ( '0' .. '9' )* '.' ( '0' .. '9' )*
 			{
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:833:5: ( '0' .. '9' )*
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:875:5: ( '0' .. '9' )*
 			loop2:
 			while (true) {
 				int alt2=2;
@@ -211,7 +211,7 @@ public class tigerLexer extends Lexer {
 			}
 
 			match('.'); 
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:833:21: ( '0' .. '9' )*
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:875:21: ( '0' .. '9' )*
 			loop3:
 			while (true) {
 				int alt3=2;
@@ -256,12 +256,12 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = COMMENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:902:2: ( '/*' ( options {greedy=false; } : . )* '*/' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:902:7: '/*' ( options {greedy=false; } : . )* '*/'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:944:2: ( '/*' ( options {greedy=false; } : . )* '*/' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:944:7: '/*' ( options {greedy=false; } : . )* '*/'
 			{
 			match("/*"); 
 
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:902:12: ( options {greedy=false; } : . )*
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:944:12: ( options {greedy=false; } : . )*
 			loop4:
 			while (true) {
 				int alt4=2;
@@ -282,7 +282,7 @@ public class tigerLexer extends Lexer {
 
 				switch (alt4) {
 				case 1 :
-					// /Users/cevanish12/git/tiger-compiler/tiger.g:902:40: .
+					// /Users/cevanish12/git/tiger-compiler/tiger.g:944:40: .
 					{
 					matchAny(); 
 					}
@@ -312,8 +312,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = TAB;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:905:5: ( '\\t' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:905:7: '\\t'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:947:5: ( '\\t' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:947:7: '\\t'
 			{
 			match('\t'); 
 			_channel=HIDDEN;
@@ -333,8 +333,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = NEWLINE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:907:2: ( '\\n' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:907:4: '\\n'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:949:2: ( '\\n' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:949:4: '\\n'
 			{
 			match('\n'); 
 			_channel=HIDDEN;
@@ -354,8 +354,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = CARRAGE_RET;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:910:2: ( '\\r' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:910:4: '\\r'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:952:2: ( '\\r' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:952:4: '\\r'
 			{
 			match('\r'); 
 			_channel=HIDDEN;
@@ -375,8 +375,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = WHITESPACE;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:914:2: ( ' ' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:914:4: ' '
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:956:2: ( ' ' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:956:4: ' '
 			{
 			match(' '); 
 			_channel=HIDDEN;
@@ -396,8 +396,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = FUNCTION_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:949:2: ( 'function' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:949:4: 'function'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:991:2: ( 'function' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:991:4: 'function'
 			{
 			match("function"); 
 
@@ -417,8 +417,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = BEGIN_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:953:2: ( 'begin' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:953:4: 'begin'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:995:2: ( 'begin' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:995:4: 'begin'
 			{
 			match("begin"); 
 
@@ -438,8 +438,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = END_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:957:2: ( 'end' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:957:4: 'end'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:999:2: ( 'end' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:999:4: 'end'
 			{
 			match("end"); 
 
@@ -459,8 +459,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = VOID_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:961:2: ( 'void' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:961:4: 'void'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1003:2: ( 'void' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1003:4: 'void'
 			{
 			match("void"); 
 
@@ -480,8 +480,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = MAIN_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:965:2: ( 'main' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:965:4: 'main'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1007:2: ( 'main' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1007:4: 'main'
 			{
 			match("main"); 
 
@@ -501,8 +501,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = TYPE_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:969:2: ( 'type' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:969:4: 'type'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1011:2: ( 'type' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1011:4: 'type'
 			{
 			match("type"); 
 
@@ -522,8 +522,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ARRAY_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:973:2: ( 'array' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:973:4: 'array'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1015:2: ( 'array' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1015:4: 'array'
 			{
 			match("array"); 
 
@@ -543,8 +543,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = OF_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:977:2: ( 'of' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:977:4: 'of'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1019:2: ( 'of' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1019:4: 'of'
 			{
 			match("of"); 
 
@@ -564,8 +564,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = INT_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:981:2: ( 'int' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:981:4: 'int'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1023:2: ( 'int' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1023:4: 'int'
 			{
 			match("int"); 
 
@@ -585,8 +585,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = FIXEDPT_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:985:2: ( 'fixedpt' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:985:4: 'fixedpt'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1027:2: ( 'fixedpt' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1027:4: 'fixedpt'
 			{
 			match("fixedpt"); 
 
@@ -606,8 +606,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = VAR_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:989:2: ( 'var' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:989:4: 'var'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1031:2: ( 'var' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1031:4: 'var'
 			{
 			match("var"); 
 
@@ -627,8 +627,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = IF_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:993:2: ( 'if' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:993:4: 'if'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1035:2: ( 'if' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1035:4: 'if'
 			{
 			match("if"); 
 
@@ -648,8 +648,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = THEN_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:997:2: ( 'then' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:997:4: 'then'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1039:2: ( 'then' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1039:4: 'then'
 			{
 			match("then"); 
 
@@ -669,8 +669,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ENDIF_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1001:2: ( 'endif' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1001:4: 'endif'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1043:2: ( 'endif' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1043:4: 'endif'
 			{
 			match("endif"); 
 
@@ -690,8 +690,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ELSE_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1005:2: ( 'else' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1005:4: 'else'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1047:2: ( 'else' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1047:4: 'else'
 			{
 			match("else"); 
 
@@ -711,8 +711,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = WHILE_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1009:2: ( 'while' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1009:4: 'while'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1051:2: ( 'while' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1051:4: 'while'
 			{
 			match("while"); 
 
@@ -732,8 +732,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ENDDO_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1013:2: ( 'enddo' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1013:4: 'enddo'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1055:2: ( 'enddo' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1055:4: 'enddo'
 			{
 			match("enddo"); 
 
@@ -753,8 +753,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = FOR_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1017:2: ( 'for' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1017:4: 'for'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1059:2: ( 'for' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1059:4: 'for'
 			{
 			match("for"); 
 
@@ -774,8 +774,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ID_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1021:2: ( 'id' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1021:4: 'id'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1063:2: ( 'id' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1063:4: 'id'
 			{
 			match("id"); 
 
@@ -795,8 +795,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = TO_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1025:2: ( 'to' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1025:4: 'to'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1067:2: ( 'to' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1067:4: 'to'
 			{
 			match("to"); 
 
@@ -816,8 +816,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = DO_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1029:2: ( 'do' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1029:4: 'do'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1071:2: ( 'do' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1071:4: 'do'
 			{
 			match("do"); 
 
@@ -837,8 +837,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = BREAK_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1033:2: ( 'break' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1033:4: 'break'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1075:2: ( 'break' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1075:4: 'break'
 			{
 			match("break"); 
 
@@ -858,8 +858,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = RETURN_KEY;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1037:2: ( 'return' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1037:4: 'return'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1079:2: ( 'return' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1079:4: 'return'
 			{
 			match("return"); 
 
@@ -879,8 +879,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = COMMA;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1041:8: ( ',' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1041:10: ','
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1083:8: ( ',' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1083:10: ','
 			{
 			match(','); 
 			}
@@ -899,8 +899,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = COLON;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1042:8: ( ':' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1042:10: ':'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1084:8: ( ':' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1084:10: ':'
 			{
 			match(':'); 
 			}
@@ -919,8 +919,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = SEMI;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1043:6: ( ';' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1043:8: ';'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1085:6: ( ';' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1085:8: ';'
 			{
 			match(';'); 
 			}
@@ -939,8 +939,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = LPAREN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1044:8: ( '(' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1044:10: '('
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1086:8: ( '(' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1086:10: '('
 			{
 			match('('); 
 			}
@@ -959,8 +959,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = RPAREN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1045:8: ( ')' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1045:10: ')'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1087:8: ( ')' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1087:10: ')'
 			{
 			match(')'); 
 			}
@@ -979,8 +979,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = LBRACK;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1046:8: ( '[' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1046:10: '['
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1088:8: ( '[' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1088:10: '['
 			{
 			match('['); 
 			}
@@ -999,8 +999,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = RBRACK;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1047:8: ( ']' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1047:10: ']'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1089:8: ( ']' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1089:10: ']'
 			{
 			match(']'); 
 			}
@@ -1019,8 +1019,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = PLUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1048:6: ( '+' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1048:8: '+'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1090:6: ( '+' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1090:8: '+'
 			{
 			match('+'); 
 			}
@@ -1039,8 +1039,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = MINUS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1049:7: ( '-' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1049:9: '-'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1091:7: ( '-' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1091:9: '-'
 			{
 			match('-'); 
 			}
@@ -1059,8 +1059,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = MULT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1050:6: ( '*' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1050:8: '*'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1092:6: ( '*' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1092:8: '*'
 			{
 			match('*'); 
 			}
@@ -1079,8 +1079,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = DIV;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1051:5: ( '/' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1051:7: '/'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1093:5: ( '/' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1093:7: '/'
 			{
 			match('/'); 
 			}
@@ -1099,8 +1099,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = EQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1052:4: ( '=' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1052:6: '='
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1094:4: ( '=' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1094:6: '='
 			{
 			match('='); 
 			}
@@ -1119,8 +1119,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = NEQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1053:5: ( '<>' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1053:7: '<>'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1095:5: ( '<>' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1095:7: '<>'
 			{
 			match("<>"); 
 
@@ -1140,8 +1140,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = LESSER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1054:8: ( '<' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1054:10: '<'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1096:8: ( '<' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1096:10: '<'
 			{
 			match('<'); 
 			}
@@ -1160,8 +1160,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = LESSEREQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1055:9: ( '<=' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1055:11: '<='
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1097:9: ( '<=' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1097:11: '<='
 			{
 			match("<="); 
 
@@ -1181,8 +1181,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = GREATER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1056:9: ( '>' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1056:11: '>'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1098:9: ( '>' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1098:11: '>'
 			{
 			match('>'); 
 			}
@@ -1201,8 +1201,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = GREATEREQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1058:2: ( '>=' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1058:4: '>='
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1100:2: ( '>=' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1100:4: '>='
 			{
 			match(">="); 
 
@@ -1222,8 +1222,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = AND;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1059:5: ( '&' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1059:7: '&'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1101:5: ( '&' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1101:7: '&'
 			{
 			match('&'); 
 			}
@@ -1242,8 +1242,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = OR;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1060:4: ( '|' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1060:6: '|'
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1102:4: ( '|' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1102:6: '|'
 			{
 			match('|'); 
 			}
@@ -1262,8 +1262,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ASSIGN;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1061:8: ( ':=' )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1061:10: ':='
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1103:8: ( ':=' )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1103:10: ':='
 			{
 			match(":="); 
 
@@ -1283,8 +1283,8 @@ public class tigerLexer extends Lexer {
 		try {
 			int _type = ID;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1063:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1063:7: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1105:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1105:7: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 				input.consume();
@@ -1294,7 +1294,7 @@ public class tigerLexer extends Lexer {
 				recover(mse);
 				throw mse;
 			}
-			// /Users/cevanish12/git/tiger-compiler/tiger.g:1063:30: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+			// /Users/cevanish12/git/tiger-compiler/tiger.g:1105:30: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
 			loop5:
 			while (true) {
 				int alt5=2;

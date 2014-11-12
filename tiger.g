@@ -32,6 +32,8 @@ tokens {
   private SymbolTable symbolTable = new SymbolTable(); 
   private Scope GLOBAL_SCOPE = new Scope();
   private Scope CURRENT_SCOPE = GLOBAL_SCOPE;
+  private Boolean boolIsValid = true;
+  private Boolean boolExprIsValid = true;
   private int numLoops;
   
   private static void outln(Object obj) {
@@ -233,6 +235,7 @@ tokens {
 tiger_program
 	:	type_declaration_list funct_declaration_list
 	;
+	
 	
 funct_declaration_list
 	:	funct_declaration+
@@ -660,14 +663,44 @@ stat
 	;
 
 if_stat	
-  :	(IF_KEY LPAREN expr RPAREN THEN_KEY stat_seq ELSE_KEY) => 	IF_KEY LPAREN expr RPAREN THEN_KEY stat_seq ELSE_KEY stat_seq ENDIF_KEY SEMI
+  :	(IF_KEY LPAREN expr RPAREN THEN_KEY stat_seq ELSE_KEY) => IF_KEY LPAREN expr {
+    if (!($expr.isBool)) {
+      System.out.println("The if statement on line "+$expr.start.getLine()+" requires a boolean expression");
+    } else {
+      if (!boolExprIsValid) {
+        System.out.println("The boolean expression on line "+$expr.start.getLine()+" cannot be evaluated");
+      }
+    }
+    boolIsValid = true;
+    boolExprIsValid = true;
+  } RPAREN THEN_KEY stat_seq ELSE_KEY stat_seq ENDIF_KEY SEMI 
 	-> 	^(IF_KEY expr stat_seq ^(ELSE_KEY stat_seq))
-	|	IF_KEY LPAREN expr RPAREN THEN_KEY stat_seq ENDIF_KEY SEMI
+	|	IF_KEY LPAREN expr {
+	  if (!($expr.isBool)) {
+      System.out.println("The if statement on line "+$expr.start.getLine()+" requires a boolean expression");
+    } else {
+      if (!boolExprIsValid) {
+        System.out.println("The boolean expression on line "+$expr.start.getLine()+" cannot be evaluated");
+      }
+    }
+    boolIsValid = true;
+    boolExprIsValid = true;
+  } RPAREN THEN_KEY stat_seq ENDIF_KEY SEMI 
 	->	^(IF_KEY expr stat_seq)
 	;
 
 while_stat
-	:	WHILE_KEY LPAREN expr RPAREN DO_KEY {numLoops++;} stat_seq ENDDO_KEY SEMI {
+	:	WHILE_KEY LPAREN expr {
+	  if (!($expr.isBool)) {
+	    System.out.println("The while loop on line "+$expr.start.getLine()+" requires a boolean expression");
+	  } else {
+      if (!boolExprIsValid) {
+        System.out.println("The boolean expression on line "+$expr.start.getLine()+" cannot be evaluated");
+      }
+    }
+    boolIsValid = true;
+    boolExprIsValid = true;
+	} RPAREN DO_KEY {numLoops++;} stat_seq ENDDO_KEY SEMI {
 	  numLoops--;
 	}
 	->	^(WHILE_KEY expr stat_seq)
@@ -698,11 +731,11 @@ assign_stat
 	      // Dem parentheses doe
 	     if ($expr.typing == null || (!((TigerVariable)variable).getType().equals($expr.typing.getType()) && !(((TigerVariable)variable).getType().equals(symbolTable.getFixedPtType()) &&($expr.typing.getType().equals(symbolTable.getIntType()))))) {
 	      System.out.println("The variable "+$value.id+" on line "+$value.start.getLine()+" cannot be assigned to "+$expr.text+" because it has conflicting types");
-	     } else {
-	      System.out.println("Success");
-	     }
+	     } 
 	    }
 	   }
+	  boolIsValid = true;
+    boolExprIsValid = true;
     }
   -> ^(ASSIGN value expr)
 	;
@@ -787,15 +820,24 @@ numExpr returns [OperationObject typing, Boolean isBool]
   
 // Conditional ops
 binop_p0 returns [Boolean isBool]
-  :	(AND | OR | binop_p1) {
+  :	AND {
+    $isBool = true;
+    boolIsValid = true;
+  }
+  | OR {
+    $isBool = true;
+    boolIsValid = true;
+  }
+  | binop_p1 {
+    if (!boolIsValid) {
+     boolExprIsValid = false; 
+    } 
+    boolIsValid=false;
     $isBool = true;
   }
   ;
-binop_p1 returns [Boolean isBool]
-  :	(EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ) {
-    $isBool = true;
-  }
-  ;   
+binop_p1
+  :	(EQ | NEQ | LESSER | GREATER | LESSEREQ | GREATEREQ);   
  
 // Numerical ops
 binop_p2 returns [Boolean isBool]

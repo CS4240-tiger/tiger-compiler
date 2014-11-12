@@ -2,17 +2,32 @@
 void main() 
 begin
    begin
-   	type Integer = int;
-   	var t: int := 2;
-   	var p:int:= 3;
-   	p := p + 4 < 5 + 3;
-   	if (p=t < 3) then
-   		k := t + 3.2;
-   	endif;
-   end;
-   begin
-    var decimal:decimal := 123;
-    t(3);
+   	type Int_Type = int;
+	type Fixedpt_Type = fixedpt;
+	var int_var : int := 5;
+	var fixedpt_var : fixedpt := 5.0;
+	var int_type_var : Int_Type := 5;
+	var fixedpt_type_var : Fixedpt_Type := 5.0;
+	var int_type_var2 : Int_Type := 5;
+	var fixedpt_type_var2 : Fixedpt_Type := 5.0;	
+	if ( int_var < 5 &
+	fixedpt_var < 5.0 &
+	fixedpt_var < 5 &
+	int_var < int_var &
+	fixedpt_var < fixedpt_var &
+	5 < 5.0 &                                
+	int_var < 5.0 &                              
+	int_var < fixedpt_var &                               
+	int_var < int_var + 5.0 &                                
+	int_var < int_var + 5 &
+	fixedpt_var < fixedpt_var + 5.0 &
+	fixedpt_var < fixedpt_var + 5 &
+	int_type_var < int_type_var &
+	fixedpt_type_var < fixedpt_type_var &
+	int_type_var < int_type_var2 &
+	fixedpt_type_var < fixedpt_type_var2) then
+		return 1;
+	endif;
    end;
 end;
 
