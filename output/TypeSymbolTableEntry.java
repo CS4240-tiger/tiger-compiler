@@ -89,4 +89,8 @@ class TypeSymbolTableEntry extends SymbolTableEntry {
 		}
 		return 0;
 	}
+	
+	public String toString() {
+		return "Type:" + this.getId() +"| Scope:"+this.getScope().getId()+"| Backing Type: "+ this.getBackingType();
+	}
 }

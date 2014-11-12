@@ -55,11 +55,10 @@ public class SymbolTableEntry {
 	}
 	
 	/**
-	 * Returns the ID.
+	 * String representation of this entry
 	 * 
-	 * @return The String ID.
 	 */
 	public String toString() {
-		return getId();
+		return "Entry:"+id+"| Scope"+scope.getId();
 	}
 }

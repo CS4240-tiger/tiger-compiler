@@ -47,7 +47,7 @@ public class SymbolTable {
 	 * @param entry The Entry to add.
 	 */
 	public void put(SymbolTableEntry entry) {
-		//if (!idExists(entry.getId(),entry.getScope())) {
+		if (!idExists(entry.getId(),entry.getScope())) {
 			if (entry instanceof TigerVariable) {
 				if (backingTable.get(entry.getId()) == null) {
 					backingTable.put(entry.getId(), 
@@ -92,8 +92,10 @@ public class SymbolTable {
 				}**/
 				//System.out.println(entry.getScope().getId()+":"+entry.getId());
 			}
-		//}
+			System.out.println(entry.toString());
+		}
 	}
+	
 	
 	/**
 	* checks if another id exists in the symbol table
@@ -208,7 +210,7 @@ public class SymbolTable {
 					var = ((VariableSymbolTableEntry) currentEntry).backingList.get(index);
 					if (var.getScope().equals(scope)) {
 						// DEBUG
-						System.out.println("Removing " + id + " from symbol table. (Exiting scope " + scope.getId() + ")");
+						//System.out.println("Removing " + id + " from symbol table. (Exiting scope " + scope.getId() + ")");
 						// DEBUG
 						((VariableSymbolTableEntry) currentEntry).backingList.remove(index);
 					}

@@ -127,4 +127,8 @@ public class TigerVariable extends SymbolTableEntry {
 		
 		this.value = value;
 	}
+	
+	public String toString() {
+		return "Variable:" + this.getId() +"| Type:"+this.getType().getId()+"| Scope:"+this.getScope().getId()+"| Backing Type: "+ this.getBackingType();
+	}
 }

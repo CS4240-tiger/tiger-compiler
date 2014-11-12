@@ -39,7 +39,7 @@ public class Scope {
 		this.parent = parent;
 		this.numChildren = 0;
 		parent.numChildren++;
-		System.out.println(parent.getId().replaceAll("[^A-Za-z]","")+":"+id);
+		//System.out.println(parent.getId().replaceAll("[^A-Za-z]","")+":"+id);
 		//System.out.println(parent.getId().replaceAll("[^A-Za-z]","").equals(id));
 		if (parent.getId().replaceAll("[^A-Za-z]","").equals(id)) {
 			this.id = parent.getId() + String.valueOf(parent.numChildren);
