@@ -70,6 +70,11 @@ begin
 	while (1 <> 2) do
 		break; /* Test break statements */
 	enddo;
+	
+	for int_type_var := 1 to 9000 do
+		int_type_var := 9000;
+		break; /* Test break statements */
+	enddo;
 	/*
 	FAILURES
 	func1(5.0);

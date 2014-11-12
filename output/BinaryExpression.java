@@ -227,7 +227,7 @@ public class BinaryExpression {
 		 */
 		public EvalReturn(String irGen, int nextUnusedTemp) {
 			this.irGen = irGen;
-			condLabel = "";
+			condLabel = generateCondLabel();
 			this.nextUnusedTemp = nextUnusedTemp;
 		}
 	}
