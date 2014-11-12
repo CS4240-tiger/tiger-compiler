@@ -1,6 +1,8 @@
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * A symbol table contains the symbols generated from walking a parse tree.
@@ -186,5 +188,41 @@ public class SymbolTable {
 	 */
 	public TypeSymbolTableEntry getFixedPtType() {
 		return this.fixedptType;
+	}
+	
+	/**
+	 * Pops all variables from a block's scope.
+	 * Useful to clear non-accessible entries on block exit.
+	 * 
+	 * @param scope The scope to pop entries from.
+	 */
+	public void popAllVarsInScope(Scope scope) {
+		Iterator<String> keySetIter = backingTable.keySet().iterator();
+		SymbolTableEntry currentEntry = null;
+		TigerVariable var = null;
+		
+		while (keySetIter.hasNext()) {
+			String id = keySetIter.next();
+			
+			currentEntry = backingTable.get(id);
+			if (currentEntry instanceof VariableSymbolTableEntry) {
+				for (int index = 0; index < ((VariableSymbolTableEntry) currentEntry).backingList.size(); index++) {
+					var = ((VariableSymbolTableEntry) currentEntry).backingList.get(index);
+					if (var.getScope().equals(scope));
+					
+					// DEBUG
+					System.out.println("Removing " + id + " from symbol table. (Exiting scope " + scope.getId() + ")");
+					// DEBUG
+					
+					((VariableSymbolTableEntry) currentEntry).backingList.remove(index);
+				}
+				
+				// If VariableSymbolTableEntry now has 0 members in list, remove id mapping
+				if (((VariableSymbolTableEntry) currentEntry).backingList.size() == 0) {
+					keySetIter.remove();
+				}
+				
+			}
+		}
 	}
 }

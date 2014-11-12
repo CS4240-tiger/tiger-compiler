@@ -579,7 +579,7 @@ index_oper returns [Binop op]
   
 func_param_list returns [List<BinaryExpression> paramList]
 	@init {
-		List<BinaryExpression> paramList = new ArrayList<BinaryExpression>();
+		$paramList = new ArrayList<BinaryExpression>();
 	}
-	: ^(AST_PARAM_LIST ((expr {paramList.add($expr.binExpr);})+)?)
+	: ^(AST_PARAM_LIST ((expr {$paramList.add($expr.binExpr);})+)?)
 	;

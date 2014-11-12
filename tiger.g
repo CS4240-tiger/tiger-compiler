@@ -299,7 +299,8 @@ void_func
 
 block_end
 	:	END_KEY SEMI
-		{
+		{	
+			symbolTable.popAllVarsInScope(CURRENT_SCOPE);
 			CURRENT_SCOPE = CURRENT_SCOPE.getParent();
 		}
 	;
