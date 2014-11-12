@@ -122,6 +122,13 @@ public class BinaryExpression {
 		returnBlock.irGen += IRGenerator.emit(IRMap.assign(tempLeft, startNode.left.value));
 		returnBlock.irGen += IRGenerator.emit(IRMap.assign(tempRight, startNode.right.value));
 		
+		// Generate a conditional label no matter what!
+		// We need it for break statements as well
+		// Conditional statement
+		if (returnBlock.condLabel.isEmpty()) {
+			returnBlock.condLabel = generateCondLabel();
+		}
+		
 		switch (op) {
 		case AND:
 			returnBlock.irGen += IRGenerator.emit(IRMap.and(tempLeft, tempRight, emitTemp(tempNum++)));
@@ -129,43 +136,18 @@ public class BinaryExpression {
 		case DIV:
 			returnBlock.irGen += IRGenerator.emit(IRMap.div(tempLeft, tempRight, emitTemp(tempNum++)));
 		case EQUAL:
-			// Conditional statement
-			if (returnBlock.condLabel.isEmpty()) {
-				returnBlock.condLabel = generateCondLabel();
-			}
-			
 			returnBlock.irGen += IRGenerator.emit(IRMap.breq(tempLeft, tempRight, returnBlock.condLabel));
 			break;
 		case GREATER_THAN:
-			// Conditional statement
-			if (returnBlock.condLabel.isEmpty()) {
-				returnBlock.condLabel = generateCondLabel();
-			}
-			
 			returnBlock.irGen += IRGenerator.emit(IRMap.brgt(tempLeft, tempRight, returnBlock.condLabel));
 			break;
 		case GREATER_THAN_OR_EQUAL:
-			// Conditional statement
-			if (returnBlock.condLabel.isEmpty()) {
-				returnBlock.condLabel = generateCondLabel();
-			}
-			
 			returnBlock.irGen += IRGenerator.emit(IRMap.brgeq(tempLeft, tempRight, returnBlock.condLabel));
 			break;
 		case LESS_THAN:
-			// Conditional statement
-			if (returnBlock.condLabel.isEmpty()) {
-				returnBlock.condLabel = generateCondLabel();
-			}
-			
 			returnBlock.irGen += IRGenerator.emit(IRMap.brlt(tempLeft, tempRight, returnBlock.condLabel));
 			break;
 		case LESS_THAN_OR_EQUAL:
-			// Conditional statement
-			if (returnBlock.condLabel.isEmpty()) {
-				returnBlock.condLabel = generateCondLabel();
-			}
-			
 			returnBlock.irGen += IRGenerator.emit(IRMap.brleq(tempLeft, tempRight, returnBlock.condLabel));
 			break;
 		case MINUS:
@@ -175,11 +157,6 @@ public class BinaryExpression {
 			returnBlock.irGen += IRGenerator.emit(IRMap.mult(tempLeft, tempRight, emitTemp(tempNum++)));
 			break;
 		case NOT_EQUAL:
-			// Conditional statement
-			if (returnBlock.condLabel.isEmpty()) {
-				returnBlock.condLabel = generateCondLabel();
-			}
-			
 			returnBlock.irGen += IRGenerator.emit(IRMap.brneq(tempLeft, tempRight, returnBlock.condLabel));
 			break;
 		case OR:

@@ -2,14 +2,14 @@ fact:
 assign, t0, 1, 
 assign, t1, input, 
 assign, t2, 1, 
-breq, t1, t2, 61209-expr-eval
+breq, t1, t2, 50365-expr-eval
 assign, t1, 0, 
 assign, t2, 2, 
-breq, t1, t2, 61209-expr-eval
+breq, t1, t2, 50365-expr-eval
 assign, t1, input, 
 assign, t2, 2, 
-breq, t1, t2, 61209-expr-eval
-61209-expr-eval: 
+breq, t1, t2, 50365-expr-eval
+50365-expr-eval: 
 main: 
 assign, t, 2, 
 assign, p, 3, 
@@ -29,9 +29,9 @@ add, t6, t7, t8
 assign, k, t8, 
 assign, t9, t, 
 assign, t10, 3, 
-breq, t9, t10, 72858-expr-eval
+breq, t9, t10, 6508-expr-eval
 assign, t9, p, 
 assign, t10, 10, 
-breq, t9, t10, 72858-expr-eval
-72858-expr-eval: 
+breq, t9, t10, 6508-expr-eval
+6508-expr-eval: 
 assign, decimal, 123, 

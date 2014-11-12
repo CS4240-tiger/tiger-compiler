@@ -30,7 +30,8 @@ tokens {
 	private List<String> irOutput = new ArrayList<String>();
 	private int currentTemporary = 0;
   	private SymbolTable symTable;
-  	private String passthrough;
+  	private int loopNestNum = 0;
+  	private Object passThrough;
   	
 	public tigerTreeWalker(TreeNodeStream input, SymbolTable symTable) {
 		this(input);
@@ -184,26 +185,49 @@ else_tail
 	:	^(ELSE_KEY stat_seq)
 	;
 
-while_stat
+while_stat returns [String breakLabel]
+	@after {
+		// Now check for break statements
+		for (int line = 0; line < irOutput.size(); line++) {
+			if (irOutput.get(line).contains("BREAK_LABEL_" + loopNestNum)) {
+				irOutput.add(line, irOutput.get(line).replace("BREAK_LABEL_" + loopNestNum, 
+					((BinaryExpression.EvalReturn) passThrough).condLabel));
+				loopNestNum--;
+				break;
+			}
+		}
+	}
 	:	^(WHILE_KEY expr stat_seq)
 	{
 		BinaryExpression.EvalReturn exprReturn = $expr.binExpr.eval(currentTemporary);
 		currentTemporary = exprReturn.nextUnusedTemp;
 		irOutput.add(exprReturn.irGen);
 		irOutput.add(IRGenerator.emitLabel(exprReturn.condLabel));
+		passThrough = exprReturn;
 	}
 	;
 
-for_stat
+for_stat returns [String breakLabel]
+	@after {
+		// Now check for break statements
+		for (int line = 0; line < irOutput.size(); line++) {
+			if (irOutput.get(line).contains("BREAK_LABEL_" + loopNestNum)) {
+				irOutput.add(line, irOutput.get(line).replace("BREAK_LABEL_" + loopNestNum, 
+					((BinaryExpression.EvalReturn) passThrough).condLabel));
+				loopNestNum--;
+				break;
+			}
+		}
+	}
 	:	^(FOR_KEY ^(TO_KEY ^(ASSIGN ID indexExpr1=index_expr) indexExpr2=index_expr) stat_seq)
 	{
 		BinaryExpression.EvalReturn exprReturn1 = $indexExpr1.binExpr.eval(currentTemporary);
 		BinaryExpression.EvalReturn exprReturn2 = $indexExpr2.binExpr.eval(currentTemporary);
 		currentTemporary = exprReturn1.nextUnusedTemp;
 		irOutput.add(exprReturn1.irGen);
-		// Condlabel is expected to be null because no conditional statement is expected here
 		currentTemporary = exprReturn2.nextUnusedTemp;
 		irOutput.add(exprReturn2.irGen);
+		passThrough = exprReturn1;
 	}
 	;
 
@@ -269,6 +293,10 @@ func_call returns [String tempTarget]
 	
 break_stat
 	:	BREAK_KEY
+	{
+		// We'll fill this in after loop, when we get condLabel
+		irOutput.add(IRGenerator.break_stat("BREAK_LABEL_" + ++loopNestNum));
+	}
 	;
 	
 return_stat
