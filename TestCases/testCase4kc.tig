@@ -12,24 +12,24 @@ end;
 fixedpt function func2(x:fixedpt) 
 begin
      begin
-          var a: fixedpt :=0;
-          return a;
+          var b: fixedpt :=0;
+          return b;
      end;
 end;
  
 Int_Type function func3(x:Int_Type) 
 begin
      begin
-          var a: Int_Type := 0;
-          return a;
+          var c: Int_Type := 0;
+          return c;
      end;
 end;
  
 Fixedpt_Type function func4(x:Fixedpt_Type) 
 begin
      begin
-          var a: Fixedpt_Type := 0.0;
-          return a;
+          var d: Fixedpt_Type := 0.0;
+          return d;
      end;
 end;
 
@@ -42,11 +42,11 @@ begin
 	var fixedpt_type_var : Fixedpt_Type := 5.0;
 	var int_type_var2 : Int_Type := 5;
 	var fixedpt_type_var2 : Fixedpt_Type := 5.0;	
-	
+	t(d);
 	/*
-	BELOW SHOULD PASS (WHICH IT DOES FOR NOW)
-	func1(5);
-	func1(int_var);
+	BELOW SHOULD PASS (WHICH IT DOES FOR NOW)*/
+	func1(p);
+	/*func1(int_var);
 	func1(5 + int_var);
 
 	func2(5.0);
@@ -64,7 +64,7 @@ begin
 	func4(fixedpt_type_var); 
 	func4(fixedpt_type_var2);*/
 	/*
-	FAILURES*/
+	FAILURES
 	func1(5.0);
 	func1(5.0 + int_var);
 	func1(fixedpt_var); 
@@ -87,6 +87,36 @@ begin
 	func4(fixedpt_var);                                 
 	func4(5.0 + fixedpt_var);                                 
 	func4(5 + fixedpt_var);                                 
-	func4(5.0 + int_var);
+	func4(5.0 + int_var);*/
+	/*
+	SUCCESSES
+	int_var := func1(5);
+	fixedpt_var := func1(5); 
+	
+	fixedpt_var := func2(5.0);
+	int_type_var := func3(int_type_var); 
+	int_type_var2 := func3(int_type_var);
+	fixedpt_type_var := func4(fixedpt_type_var);
+	fixedpt_type_var2 := func4(fixedpt_type_var);*/
+	
+	/*
+	FAILURES
+	fixedpt_type_var := func1(5);
+	int_type_var := func1(5);
+	int_var := func2(5.0);
+	int_type_var := func2(5.0);
+	fixedpt_type_var := func2(5.0);*/
+	/*
+	fixedpt_var := func3(5);
+	fixedpt_type_var := func3(5); 
+	int_type_var2 := func3(5); 
+	int_var := func3(int_type_var); 
+	
+	int_var := func4(5.0);
+	int_type_var := func4(5.0);
+	fixedpt_type_var2 := func4(5.0);                                
+	fixedpt_var := func4(5.0);                                
+	fixedpt_type_var := func4(5.0);*/
+	
    end;
 end;

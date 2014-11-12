@@ -263,7 +263,9 @@ return_func
 	    } else {
 	       System.out.println("The type " + $type_id.text + "on line " + $type_id.start.getLine()+ " does not exist or is not in an accessible scope");
 	    }
-	  } RPAREN begin block_list block_end
+	  } RPAREN begin {
+	    CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
+	  } block_list block_end
 	->	^(ID param_list block_list)
 	;
 
@@ -274,14 +276,18 @@ void_func
 	  } LPAREN param_list[new ArrayList<TypeSymbolTableEntry>()] {
       symbolTable.put(new FunctionSymbolTableEntry(GLOBAL_SCOPE, $ID.text, null, $param_list.outtypeList));     
     }
-	  RPAREN begin block_list block_end
+	  RPAREN begin {
+	    CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $ID.text);
+	  }block_list block_end
 	->	^(ID param_list block_list) 
 		
 	|	VOID_KEY MAIN_KEY {
 	    func_name = $MAIN_KEY.text;
 	    symbolTable.put(new FunctionSymbolTableEntry(GLOBAL_SCOPE, $MAIN_KEY.text, null, null));
       CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text); 
-	  } LPAREN RPAREN begin block_list block_end
+	  } LPAREN RPAREN begin {
+	    CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text);
+	  } block_list block_end
 	->	^(MAIN_KEY block_list) 
 	;
 
@@ -342,7 +348,7 @@ block
 
 begin
   : BEGIN_KEY {
-    CURRENT_SCOPE = new Scope(CURRENT_SCOPE, func_name);
+    CURRENT_SCOPE = new Scope(CURRENT_SCOPE);
   }
   ;
 declaration_statement 
@@ -727,7 +733,17 @@ assign_stat
 	  SymbolTableEntry variable = symbolTable.get($value.id,CURRENT_SCOPE);
 	  if (variable == null || !(variable instanceof TigerVariable)) {
 	    System.out.println("The variable "+$value.id+" on line "+$value.start.getLine()+" was never declared");
-	  } 
+	  } else {
+	    OperationObject assignee = $value.typing;
+	    SymbolTableEntry function = symbolTable.get($func_call.id, CURRENT_SCOPE);
+	    if (function != null && function instanceof FunctionSymbolTableEntry) {
+		    if (!(assignee.getType().getId().equals("fixedpt") && ((FunctionSymbolTableEntry)function).getReturnType().getId().equals("int")) && !(((FunctionSymbolTableEntry)function).getReturnType().equals(assignee.getType()))) {
+		      System.out.println("The variable "+$value.id+" on line "+$value.start.getLine()+" cannot be assigned to "+$func_call.text+" because it has conflicting types");
+		    }
+	    } else {
+	      System.out.println("Function "+$func_call.id +" on line " + $func_call.start.getLine()+ " was never declared");
+	    }
+	  }
 	}
   ->  ^(ASSIGN value func_call)
   | (value ASSIGN expr) => value ASSIGN expr SEMI {
@@ -749,28 +765,27 @@ assign_stat
   -> ^(ASSIGN value expr)
 	;
 
-func_call
+func_call returns [String id]
 	:	ID LPAREN func_param_list[new ArrayList<OperationObject>()] RPAREN {
 	  SymbolTableEntry function = symbolTable.get($ID.text, CURRENT_SCOPE);
 	  if (function != null && function instanceof FunctionSymbolTableEntry) {
 	    List<TypeSymbolTableEntry> origFuncParamList = ((FunctionSymbolTableEntry)function).getParamTypeList();
 	    List<OperationObject> funcCallParamList = $func_param_list.outparamlist;
-	    if (funcCallParamList.size() != origFuncParamList.size()) {
-	      System.out.println("The number of parameters in function call on line " + $func_param_list.start.getLine() + " does not match");
-	    } else {
-		    for (int i = 0; i < ((FunctionSymbolTableEntry)function).getParamTypeList().size(); i++) {
-		      //System.out.println("function type: "+ origFuncParamList.get(i).getId());
-		      //System.out.println("calling type: "+ funcCallParamList.get(i).getType().getId());
-		      if (!(origFuncParamList.get(i).getId().equals("fixedpt") && funcCallParamList.get(i).getType().getId().equals("int")) && !(funcCallParamList.get(i).getType().equals(origFuncParamList.get(i)))) {
-		        System.out.println("The type of "+ funcCallParamList.get(i).getId()+" on line "+$func_param_list.start.getLine()+" does not match with the function");
-		      } /**else if ((funcCallParamList.get(i).getType().equals(origFuncParamList.get(i)))) {
-		      
-		      } else {
-		        System.out.println("The type of "+ funcCallParamList.get(i).getId()+" on line "+$func_param_list.start.getLine()+" does not match with the function");
-		      }**/
+	    if (funcCallParamList != null && origFuncParamList != null) {
+		    if (funcCallParamList.size() != origFuncParamList.size()) {
+		      System.out.println("The number of parameters in function call on line " + $func_param_list.start.getLine() + " does not match");
+		    } else {
+			    for (int i = 0; i < ((FunctionSymbolTableEntry)function).getParamTypeList().size(); i++) {
+			      if (!(origFuncParamList.get(i).getId().equals("fixedpt") && funcCallParamList.get(i).getType().getId().equals("int")) && !(funcCallParamList.get(i).getType().equals(origFuncParamList.get(i)))) {
+			        System.out.println("The type of "+ funcCallParamList.get(i).getId()+" on line "+$func_param_list.start.getLine()+" does not match with the function");
+			      } 
+			    }
 		    }
 	    }
+	  } else {
+	    System.out.println("Function "+$ID.text +" on line " + $func_param_list.start.getLine()+ " was never declared");
 	  }
+	  $id = $ID.text;
 	}
 	->	^(AST_FUNC_CALL ID func_param_list)
 	;
@@ -785,7 +800,23 @@ break_stat
 	;
 	
 return_stat
-	: (RETURN_KEY expr) => RETURN_KEY expr SEMI
+	: (RETURN_KEY expr) => RETURN_KEY expr SEMI {
+	  SymbolTableEntry function = symbolTable.get(func_name, CURRENT_SCOPE);
+    if (function != null && function instanceof FunctionSymbolTableEntry) {
+      OperationObject returnType = $expr.typing; 
+     if (returnType != null) {
+        System.out.println("function: "+((FunctionSymbolTableEntry)function).getReturnType().getId());
+        System.out.println("return: "+returnType.getType().getId());
+			  if (!(((FunctionSymbolTableEntry)function).getReturnType().getId().equals("fixedpt") && returnType.getType().getId().equals("int")) && !(((FunctionSymbolTableEntry)function).getReturnType().equals(returnType.getType()))) {
+			    System.out.println(func_name +": The type on line "+$expr.start.getLine()+" does not match the return type of the function");
+			  }
+			  System.out.println("RETURN: "+ func_name);
+		  }
+	  } else {
+	    //Dont know how this will ever be called
+	    System.out.println("Function "+func_name +" on line " + $expr.start.getLine()+ " was never declared");
+	  }
+	}
 	-> ^(AST_RETURN_STAT RETURN_KEY expr)
 	;
 
@@ -946,6 +977,7 @@ value returns [OperationObject typing, String id, Boolean isBool]
 	|	ID {
       SymbolTableEntry entry = symbolTable.get(strip($ID.text),CURRENT_SCOPE);
       if (entry != null && entry instanceof TigerVariable) {
+            //System.out.println($ID.text+ ((TigerVariable)entry).getType().getId() );
             $typing = new OperationObject(false, ((TigerVariable)entry).getType(), $value.text);
         } else {
           System.out.println("The variable "+$ID.text+ " on line "+$value.start.getLine() +" is not a variable or was never declared");
@@ -993,8 +1025,10 @@ func_param_list[List<OperationObject> inparamlist] returns [List<OperationObject
 
 func_param[List<OperationObject> inparamlist] returns [List<OperationObject> outparamlist]
   : expr {
-    inparamlist.add($expr.typing);
-    $outparamlist = inparamlist;
+    if ($expr.typing != null) {
+      inparamlist.add($expr.typing);
+      $outparamlist = inparamlist;
+    } 
   }
   ;
 

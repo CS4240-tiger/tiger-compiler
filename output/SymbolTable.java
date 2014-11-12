@@ -55,7 +55,7 @@ public class SymbolTable {
 									entry.getScope(), 
 									entry.getId(), 
 									(TigerVariable) entry));
-					//System.out.println(((TigerVariable)entry).getId()+":"+((TigerVariable)entry).getBackingType());
+					//System.out.println(((TigerVariable)entry).getId()+":"+((TigerVariable)entry).getScope().getId());
 				} else {
 					// Check if it exists
 					List<TigerVariable> resultVarList = ((VariableSymbolTableEntry) backingTable.get(entry.getId())).backingList;
@@ -75,7 +75,7 @@ public class SymbolTable {
 					}
 					
 					// Otherwise, not found in accessible scope; safe to declare new entry in current scope
-					//System.out.println(addVar.getId()+":"+addVar.getBackingType());
+					//System.out.println(addVar.getId()+":"+addVar.getScope().getId());
 					resultVarList.add(addVar);
 				}
 			} else {	
