@@ -248,12 +248,13 @@ public class SymbolTable {
 		 * Print the string on the standard output. 
 		 */
 		put(new FunctionSymbolTableEntry(new Scope(), "print", null, args));
-		
+		args.clear();
 		/**
 		 * function getchar() : string 
 		 * Read and return a character from standard input; return an empty string at end-of-file.
 		 */
-		put(new FunctionSymbolTableEntry(new Scope(), "getchar", string, null));
+		put(new FunctionSymbolTableEntry(new Scope(), "getchar", string, args));
+		args.add(string);
 		
 		/**
 		 * function ord(s : string) : int
@@ -266,7 +267,6 @@ public class SymbolTable {
 		 * Return the number of characters in s. 
 		 */
 		put(new FunctionSymbolTableEntry(new Scope(), "size", intType, args));
-		
 		args.add(intType);
 		args.add(intType);
 		
@@ -308,12 +308,14 @@ public class SymbolTable {
 		 * Print the integer on the standard output.
 		 */
 		put(new FunctionSymbolTableEntry(new Scope(), "printi", null, args));
+		args.clear();
 		
 		/**
 		 * function flush() 
 		 * Flush the standard output buffer.
 		 */
-		put(new FunctionSymbolTableEntry(new Scope(), "flush", null, null));
+		put(new FunctionSymbolTableEntry(new Scope(), "flush", null, args));
+		args.add(intType);
 		
 		/**
 		 * function not(i : int) : int 
@@ -326,6 +328,7 @@ public class SymbolTable {
 		 * Terminate execution of the program with code i.
 		 */
 		put(new FunctionSymbolTableEntry(new Scope(), "exit", null, args));
+		args.clear();
 		
 		// Now, reserve the "string" keyword by pushing it to table
 		put(string);

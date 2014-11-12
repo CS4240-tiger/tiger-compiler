@@ -49,9 +49,9 @@ public class FunctionSymbolTableEntry extends SymbolTableEntry {
 	
 	public String toString() {
 		if (returnType != null) {
-			return "Function:" + this.getId() +"| Return Type:"+this.returnType.getId()+"| Scope:"+this.getScope().getId()+"| # of Parameters: "+ this.paramTypeList.size();
+			return "Function:" + this.getId() +"| Return Type:"+this.returnType.getId()+"| Scope:"+this.getScope().getId()+"| # of Parameters: "+ ((this.paramTypeList != null) ? this.paramTypeList.size() : "0");
 		} else {
-			return "Function:" + this.getId() +"| Return Type: void| Scope:"+this.getScope().getId()+"| # of Parameters: "+ this.paramTypeList.size();
+			return "Function:" + this.getId() +"| Return Type: void| Scope:"+this.getScope().getId()+"| # of Parameters: "+ ((this.paramTypeList != null) ? this.paramTypeList.size() : "0");
 		}
 	}
 }
