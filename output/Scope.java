@@ -110,4 +110,13 @@ public class Scope {
 		
 		return false;
 	}
+	
+	/**
+	 * Returns the String ID.
+	 * 
+	 * @return The String ID.
+	 */
+	public String toString() {
+		return getId();
+	}
 }
