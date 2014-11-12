@@ -53,4 +53,13 @@ public class SymbolTableEntry {
 	public Boolean equals(SymbolTableEntry entry) {
 		return this.id.equals(entry.getId());
 	}
+	
+	/**
+	 * Returns the ID.
+	 * 
+	 * @return The String ID.
+	 */
+	public String toString() {
+		return getId();
+	}
 }
