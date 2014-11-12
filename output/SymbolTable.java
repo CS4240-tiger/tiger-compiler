@@ -85,12 +85,12 @@ public class SymbolTable {
 					System.out.println(String.valueOf(((TypeSymbolTableEntry)(entry)).getBackingType()) + ((TypeSymbolTableEntry)(entry)).getWidth());
 				} else if (entry instanceof FunctionSymbolTableEntry) {
 					if (((FunctionSymbolTableEntry) entry).getParamTypeList() != null) {
-						System.out.println(((FunctionSymbolTableEntry) entry).getId()+" has a size of " + ((FunctionSymbolTableEntry) entry).getParamTypeList().get(0).getId());
+						System.out.println(((FunctionSymbolTableEntry) entry).getId()+" has a size of " + ((FunctionSymbolTableEntry) entry).getParamTypeList().size());
 					} else {
 						System.out.println(((FunctionSymbolTableEntry) entry).getId()+" has a size of 0");
 					}
-				}
-				System.out.println(entry.getScope().getId()+":"+entry.getId());**/
+				}**/
+				//System.out.println(entry.getScope().getId()+":"+entry.getId());
 			}
 		}
 	}

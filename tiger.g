@@ -550,10 +550,13 @@ var_declaration
 					
 				}
 			} else if ($type_id.text.equals("fixedpt")) {
-			  System.out.println("An int constant cannot be declared to a variable of type fixedpt on line "+$type_id.start.getLine());
-			}
-        }
-        	}
+			  for (String id: ids) {
+          // Gets rid of white space and adds to symbol table
+          symbolTable.put(new TigerVariable(CURRENT_SCOPE, strip(id), toInteger($UNSIGNED_INTLIT.text), symbolTable.getIntType(), TigerPrimitive.FIXEDPT));
+          }
+			  }
+      }
+    }
 	->	^(ASSIGN ^(COLON id_list type_id) UNSIGNED_INTLIT) 
 	|	VAR_KEY id_list COLON type_id SEMI
 	{   
@@ -747,8 +750,27 @@ assign_stat
 	;
 
 func_call
-	:	ID LPAREN func_param_list RPAREN {
-	  
+	:	ID LPAREN func_param_list[new ArrayList<OperationObject>()] RPAREN {
+	  SymbolTableEntry function = symbolTable.get($ID.text, CURRENT_SCOPE);
+	  if (function != null && function instanceof FunctionSymbolTableEntry) {
+	    List<TypeSymbolTableEntry> origFuncParamList = ((FunctionSymbolTableEntry)function).getParamTypeList();
+	    List<OperationObject> funcCallParamList = $func_param_list.outparamlist;
+	    if (funcCallParamList.size() != origFuncParamList.size()) {
+	      System.out.println("The number of parameters in function call on line " + $func_param_list.start.getLine() + " does not match");
+	    } else {
+		    for (int i = 0; i < ((FunctionSymbolTableEntry)function).getParamTypeList().size(); i++) {
+		      //System.out.println("function type: "+ origFuncParamList.get(i).getId());
+		      //System.out.println("calling type: "+ funcCallParamList.get(i).getType().getId());
+		      if (!(origFuncParamList.get(i).getId().equals("fixedpt") && funcCallParamList.get(i).getType().getId().equals("int")) && !(funcCallParamList.get(i).getType().equals(origFuncParamList.get(i)))) {
+		        System.out.println("The type of "+ funcCallParamList.get(i).getId()+" on line "+$func_param_list.start.getLine()+" does not match with the function");
+		      } /**else if ((funcCallParamList.get(i).getType().equals(origFuncParamList.get(i)))) {
+		      
+		      } else {
+		        System.out.println("The type of "+ funcCallParamList.get(i).getId()+" on line "+$func_param_list.start.getLine()+" does not match with the function");
+		      }**/
+		    }
+	    }
+	  }
 	}
 	->	^(AST_FUNC_CALL ID func_param_list)
 	;
@@ -962,10 +984,19 @@ WHITESPACE
 	:	' ' {$channel=HIDDEN;}
 	;
   
-func_param_list
-	: (numExpr (COMMA numExpr)*)?
-	-> ^(AST_PARAM_LIST (numExpr+)?)
+func_param_list[List<OperationObject> inparamlist] returns [List<OperationObject> outparamlist]
+	: (var1=func_param[inparamlist]{
+    $outparamlist = $var1.outparamlist;
+  } (COMMA func_param[inparamlist])*)? 
+	-> ^(AST_PARAM_LIST (func_param+)?)
 	;
+
+func_param[List<OperationObject> inparamlist] returns [List<OperationObject> outparamlist]
+  : expr {
+    inparamlist.add($expr.typing);
+    $outparamlist = inparamlist;
+  }
+  ;
 
 keywords
 	: FUNCTION_KEY
