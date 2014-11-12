@@ -12,24 +12,24 @@ end;
 fixedpt function func2(x:fixedpt) 
 begin
      begin
-          var b: fixedpt :=0;
-          return b;
+          var a: fixedpt :=0;
+          return a;
      end;
 end;
  
 Int_Type function func3(x:Int_Type) 
 begin
      begin
-          var c: Int_Type := 0;
-          return c;
+          var a: Int_Type := 0;
+          return a;
      end;
 end;
  
 Fixedpt_Type function func4(x:Fixedpt_Type) 
 begin
      begin
-          var d: Fixedpt_Type := 0.0;
-          return d;
+          var a: Fixedpt_Type := 0.0;
+          return a;
      end;
 end;
 
