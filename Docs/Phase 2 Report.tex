@@ -5,6 +5,9 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage[colorinlistoftodos]{todonotes}
+\usepackage{indentfirst}
+
+\addto{\captionsenglish}{\renewcommand{\abstractname}{Run/Compile Instructions}}
 
 \title{CS 4240 Project Phase 2}
 
@@ -21,7 +24,38 @@ Instructions on how to run the code / compile and such will go here.
 \end{abstract}
 
 \section{Symbol Table}
+	As a group, we decided to have variables, types, and functions as symbols in our table. Variables would relate to an initialization value, types would have a backing type (obviously), and functions would have a return type. At first, we wanted functions to have their params in the symbol table as well, but we realized that since functions cannot share names, this was unecessary. 
 
+Ultimately, these three entries in the symbol table share the fact that they have a scope and an ID. We represented our Symbol Table as a Hashmap with a String key and a SymbolTableEntry(containing the parent scope and a String ID) value.
+
+An example of how we add symbols into our table is as follows [from tiger.g]:
+\begin{verbatim}
+type[String id]	
+  :	base_type {
+    if ($base_type.text.equals("int")) { 
+      symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,strip(id), 
+      				  TigerPrimitive.INT));
+    } else if ($base_type.text.equals("fixedpt")) {
+      symbolTable.put(new TypeSymbolTableEntry(CURRENT_SCOPE,strip(id), 
+      				  TigerPrimitive.FIXEDPT));
+    }
+  }
+\end{verbatim}
+
+In order to deal with scoping, we first instantiate a scope object. Whenever we encounter a new block, we create a new scope object, while setting its parent to be the previous scope. The scope objects contain their parent scope, ID, and a counter for number of children. Essentially, we can think of our scopes as an upside-down tree, with each parent scope branching down to many children scopes. The way we actually use scoping can be seen in output\textbackslash SymbolTable.java 's put() method: \\ \\ \\ \\
+\begin{verbatim}
+for (int index = 0; index < resultVarList.size(); index++) {
+     while (curScope != null) {
+        if (curScope.equals(resultVarList.get(index))) {
+        // Found value in this or parent Scope! Reassign it.
+        resultVarList.get(index).setValue(addVar.getValue());
+        return;
+        }						
+        curScope = curScope.getParent();
+     }					
+}
+\end{verbatim}
+Little bit more of scoping, explaining above quoteblock and how it applies to code goes here.
 \section{Semantic Checking}
 
 \section{Intermediate Code}
