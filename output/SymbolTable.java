@@ -324,5 +324,8 @@ public class SymbolTable {
 		 * Terminate execution of the program with code i.
 		 */
 		put(new FunctionSymbolTableEntry(new Scope(), "exit", null, args));
+		
+		// Now, reserve the "string" keyword by pushing it to table
+		put(string);
 	}
 }
