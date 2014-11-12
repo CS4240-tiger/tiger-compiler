@@ -24,4 +24,5 @@ public class VariableSymbolTableEntry extends SymbolTableEntry {
 		backingList = new LinkedList<TigerVariable>();
 		backingList.add(value);
 	}
+	
 }

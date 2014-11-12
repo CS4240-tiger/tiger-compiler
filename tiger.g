@@ -287,7 +287,7 @@ void_func
 		
 	|	VOID_KEY MAIN_KEY {
 	    func_name = $MAIN_KEY.text;
-	    symbolTable.put(new FunctionSymbolTableEntry(GLOBAL_SCOPE, $MAIN_KEY.text, null, null));
+	    symbolTable.put(new FunctionSymbolTableEntry(GLOBAL_SCOPE, $MAIN_KEY.text, null, new ArrayList<TypeSymbolTableEntry>(0)));
       CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text); 
 	  } LPAREN RPAREN begin {
 	    CURRENT_SCOPE = new Scope(CURRENT_SCOPE, $MAIN_KEY.text);
@@ -812,12 +812,12 @@ return_stat
     if (function != null && function instanceof FunctionSymbolTableEntry) {
       OperationObject returnType = $expr.typing; 
      if (returnType != null) {
-        System.out.println("function: "+((FunctionSymbolTableEntry)function).getReturnType().getId());
-        System.out.println("return: "+returnType.getType().getId());
+        //System.out.println("function: "+((FunctionSymbolTableEntry)function).getReturnType().getId());
+        //System.out.println("return: "+returnType.getType().getId());
 			  if (!(((FunctionSymbolTableEntry)function).getReturnType().getId().equals("fixedpt") && returnType.getType().getId().equals("int")) && !(((FunctionSymbolTableEntry)function).getReturnType().equals(returnType.getType()))) {
 			    System.out.println(func_name +": The type on line "+$expr.start.getLine()+" does not match the return type of the function");
 			  }
-			  System.out.println("RETURN: "+ func_name);
+			  //System.out.println("RETURN: "+ func_name);
 		  }
 	  } else {
 	    //Dont know how this will ever be called
@@ -983,7 +983,7 @@ value returns [OperationObject typing, String id, Boolean isBool]
 	}
 	|	ID {
       SymbolTableEntry entry = symbolTable.get(strip($ID.text),CURRENT_SCOPE);
-      System.out.println(entry);
+      //System.out.println(entry);
       if (entry != null && entry instanceof TigerVariable) {
             //System.out.println($ID.text+ ((TigerVariable)entry).getType().getId() );
             $typing = new OperationObject(false, ((TigerVariable)entry).getType(), $value.text);

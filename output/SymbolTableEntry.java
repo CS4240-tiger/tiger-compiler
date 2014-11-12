@@ -53,4 +53,12 @@ public class SymbolTableEntry {
 	public Boolean equals(SymbolTableEntry entry) {
 		return this.id.equals(entry.getId());
 	}
+	
+	/**
+	 * String representation of this entry
+	 * 
+	 */
+	public String toString() {
+		return "Entry:"+id+"| Scope"+scope.getId();
+	}
 }

@@ -44,4 +44,12 @@ public class FunctionSymbolTableEntry extends SymbolTableEntry {
 	protected List<TypeSymbolTableEntry> getParamTypeList() {
 		return this.paramTypeList;
 	}
+	
+	public String toString() {
+		if (returnType != null) {
+			return "Function:" + this.getId() +"| Return Type:"+this.returnType.getId()+"| Scope:"+this.getScope().getId()+"| # of Parameters: "+ this.paramTypeList.size();
+		} else {
+			return "Function:" + this.getId() +"| Return Type: void| Scope:"+this.getScope().getId()+"| # of Parameters: "+ this.paramTypeList.size();
+		}
+	}
 }
