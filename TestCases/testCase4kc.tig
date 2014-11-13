@@ -68,8 +68,8 @@ begin
 	func4(fixedpt_type_var); 
 	func4(fixedpt_type_var2);
 	while (1 <> 2) do
-		func3(3); /* Something */
-		func4(4.1); /* Something else */
+		func3(int_type_var); /* Something */
+		func4(fixedpt_type_var); /* Something else */
 		break; /* Test break statements */
 	enddo;
 	

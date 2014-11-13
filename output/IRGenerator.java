@@ -129,4 +129,17 @@ public class IRGenerator {
 	public static String emitLabel(String label) {
 		return label + ": ";
 	}
+	
+	/**
+	 * Generates a unique loop label based on a given Object's hashcode.
+	 * 
+	 * @param obj A given Object to generate a hashcode based on.
+	 * @return A unique loop label.
+	 */
+	public static String generateCondLabel(Object obj) {
+		return String.valueOf(obj.hashCode()).substring(
+				String.valueOf(obj.hashCode()).length() / 2, 
+				String.valueOf(obj.hashCode()).length()) 
+				+ "-loop";
+	}
 }

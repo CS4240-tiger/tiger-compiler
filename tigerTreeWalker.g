@@ -32,6 +32,7 @@ tokens {
   	private SymbolTable symTable;
   	private int loopNestNum = 0;
   	private Object passThrough;
+  	private String passThroughLabel, passThroughTemporary;
   	
 	public tigerTreeWalker(TreeNodeStream input, SymbolTable symTable) {
 		this(input);
@@ -187,6 +188,9 @@ else_tail
 
 while_stat returns [String breakLabel]
 	@after {
+		// Emit goto label to go back to top for checking
+		irOutput.add(IRMap.gotoLabel(passThroughLabel));
+		
 		// Emit end label
 		irOutput.add(IRGenerator.emitLabel(((BinaryExpression.EvalReturn) passThrough).condLabel));
 		
@@ -200,17 +204,28 @@ while_stat returns [String breakLabel]
 			}
 		}
 	}
-	:	^(WHILE_KEY expr stat_seq)
-	{
-		BinaryExpression.EvalReturn exprReturn = $expr.binExpr.eval(currentTemporary);
-		currentTemporary = exprReturn.nextUnusedTemp;
-		irOutput.add(exprReturn.irGen);
-		passThrough = exprReturn;
-	}
+	:	^(WHILE_KEY expr {
+			// Create an anchor to loop start
+			passThroughLabel = IRGenerator.generateCondLabel($expr.binExpr);
+			irOutput.add(IRGenerator.emitLabel(passThroughLabel));
+			
+			BinaryExpression.EvalReturn exprReturn = $expr.binExpr.eval(currentTemporary);
+			currentTemporary = exprReturn.nextUnusedTemp;
+			
+			irOutput.add(exprReturn.irGen);
+			passThrough = exprReturn;
+			
+			} stat_seq)
 	;
 
 for_stat returns [String breakLabel]
 	@after {
+		// Emit goto label to go back to top for checking
+		irOutput.add(IRMap.gotoLabel(passThroughLabel));
+		
+		// Emit end label
+		irOutput.add(IRGenerator.emitLabel(((BinaryExpression.EvalReturn) passThrough).condLabel));
+		
 		// Now check for break statements
 		for (int line = 0; line < irOutput.size(); line++) {
 			if (irOutput.get(line).contains("BREAK_LABEL_" + loopNestNum)) {
@@ -221,16 +236,35 @@ for_stat returns [String breakLabel]
 			}
 		}
 	}
-	:	^(FOR_KEY ^(TO_KEY ^(ASSIGN ID indexExpr1=index_expr) indexExpr2=index_expr) stat_seq)
-	{
-		BinaryExpression.EvalReturn exprReturn1 = $indexExpr1.binExpr.eval(currentTemporary);
-		BinaryExpression.EvalReturn exprReturn2 = $indexExpr2.binExpr.eval(currentTemporary);
-		currentTemporary = exprReturn1.nextUnusedTemp;
-		irOutput.add(exprReturn1.irGen);
-		currentTemporary = exprReturn2.nextUnusedTemp;
-		irOutput.add(exprReturn2.irGen);
-		passThrough = exprReturn1;
-	}
+	:	^(FOR_KEY ^(TO_KEY ^(ASSIGN ID indexExpr1=index_expr) indexExpr2=index_expr) {
+			BinaryExpression.EvalReturn exprReturn1 = $indexExpr1.binExpr.eval(currentTemporary);
+			currentTemporary = exprReturn1.nextUnusedTemp;
+			BinaryExpression.EvalReturn exprReturn2 = $indexExpr2.binExpr.eval(currentTemporary);
+			currentTemporary = exprReturn2.nextUnusedTemp;
+			
+			irOutput.add(exprReturn1.irGen);
+			irOutput.add(exprReturn2.irGen);
+			
+			passThrough = exprReturn1;
+			passThroughTemporary = "t" + String.valueOf((exprReturn1.nextUnusedTemp - 1));
+			
+			// Create an anchor to loop start
+			passThroughLabel = IRGenerator.generateCondLabel($indexExpr1.binExpr);
+			irOutput.add(IRGenerator.emitLabel(passThroughLabel));
+			
+			// Generate expr to jump to end if not equal
+			irOutput.add(IRMap.brneq(passThroughTemporary, "t" + String.valueOf((exprReturn2.nextUnusedTemp - 1)), exprReturn1.condLabel));
+			
+		} stat_seq {
+			// Generate expr to increment expression by 1 at end
+			BinaryExpression.EvalReturn incrementExpr = new BinaryExpression(
+				new BinaryExpression(passThroughTemporary), 
+				new BinaryExpression("1"), Binop.PLUS).eval(currentTemporary);
+			currentTemporary = incrementExpr.nextUnusedTemp;
+			irOutput.add(incrementExpr.irGen);
+			// And reassign it back to original temp at end
+			irOutput.add(IRMap.assign("t" + String.valueOf(((BinaryExpression.EvalReturn) passThrough).nextUnusedTemp - 1), "t" + String.valueOf((incrementExpr.nextUnusedTemp - 1))));
+		} )
 	;
 
 assign_stat

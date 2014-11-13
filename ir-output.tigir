@@ -49,16 +49,25 @@ callr, t31, func3, int_type_var
 callr, t32, func3, int_type_var2
 callr, t33, func4, fixedpt_type_var
 callr, t34, func4, fixedpt_type_var2
-callr, t35, func3, 3
-callr, t36, func4, 4.1
-goto, 20178-expr-eval, , 
-assign, t37, 1, 
-assign, t38, 2, 
-brneq, t37, t38, 20178-expr-eval
-20178-expr-eval: 
-assign, t39, 9000, 
-assign, int_type_var, t39, 
-goto, 24720-expr-eval, , 
-assign, t40, 1, 
+86997-loop: 
+assign, t35, 1, 
+assign, t36, 2, 
+brneq, t35, t36, 86997-expr-eval
+callr, t37, func3, int_type_var
+callr, t38, func4, fixedpt_type_var
+goto, 86997-expr-eval, , 
+goto, 86997-loop, , 
+86997-expr-eval: 
+assign, t39, 1, 
 assign, t40, 9000, 
-24720-expr-eval: 
+91554-loop: 
+brneq, t39, t40, 91554-expr-eval
+assign, t41, 9000, 
+assign, int_type_var, t41, 
+goto, 91554-expr-eval, , 
+assign, t42, t39, 
+assign, t43, 1, 
+add, t42, t43, t44
+assign, t39, t44, 
+goto, 91554-loop, , 
+91554-expr-eval: 
