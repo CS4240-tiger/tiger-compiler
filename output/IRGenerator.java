@@ -278,38 +278,6 @@ public class IRGenerator {
 	}
 	
 	/**
-	 * Checks a value to see if it is an integer.
-	 * 
-	 * @param value The String value to check.
-	 * @return true if the value is a valid integer; false otherwise.
-	 */
-	private static boolean isInteger(String value) {
-		try {
-			Integer.parseInt(value);
-		} catch (NumberFormatException e) {
-			return false;
-		}
-		
-		return true;
-	}
-	
-	/**
-	 * Checks a value to see if it is a double.
-	 * 
-	 * @param value The String value to check.
-	 * @return true if the value is a valid double; false otherwise.
-	 */
-	private static boolean isDouble(String value) {
-		try {
-			Double.parseDouble(value);
-		} catch (NumberFormatException e) {
-			return false;
-		}
-		
-		return true;
-	}
-	
-	/**
 	 * Emits an input IRMap String and appends a newline character to the end.
 	 * 
 	 * @param input An input IRMap String.
