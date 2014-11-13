@@ -20,7 +20,7 @@
 \maketitle
 
 \begin{abstract}
-Instructions on how to run the code / compile and such will go here.
+Run code in the Antlr environment, should output IR to root directory and print symbol table to console.
 \end{abstract}
 
 \section{Symbol Table}
@@ -101,61 +101,45 @@ Code Break. \\ \\ \\ \\ Continued On Next Page.  \\ \\ \\ \\ \\
 The problem of casting the correct types is solved by this code block, wherein we can see that if the types of var1 and var2 match, then we perform a symbol table lookup in order to get the appropriate typing, in order to assign the appropriate type. The new type is essentially the typecast version of the original. 
 
 \section{Intermediate/IR Code Generation}
-The bulk of our IR Code generation takes place inside output\textbackslash IRGenerator.java and output\textbackslash IRMap.java. Essentially, the IRMap provides an API in order to generate IR code based upon certain function calls. An addition statement, for example, would relate to the code: 
-\begin{verbatim}
-public static String add(String a, String b, String target) {
-   String base = "add, $a, $b, $target";
-    
-   base = base.replace("$a", a);
-   base = base.replace("$b", b);
-   base = base.replace("$target", target);
-
-   return base;
-}
-\end{verbatim}
-
-This code takes any addition statement given params "a," "b," and "target" and translates it into a string of desired format. E.g., $z=x+y$, when converted, would become "add, x, y, z".
-
-As for how we interpret other types of functions, control logic, assignments, etc., we must direct our attention to the IRGenerator code. While the specifics can be found in the file's comments, we can see what was done in general in control logic statements by looking at the following piece of code:
+We had a few ways of generating our intermediate code before settling on one that actually worked well. While originally, we had seperate output files that would handle the conversion into IR code, we determined that way was a bit too complicated and would involve too much for our tastes. So, we decided to integrate the code generation mostly in our tigerTreeWalker.g. As an example of how we did this, we can look at the following code:
 
 \begin{verbatim}
-public static String while_stat(String expr1, String expr2, 
-                                Binop compare, List<String> statSeq) {
-   String result = "";
-   // Generate a unique label to loop to if statement is still true
-   String startDo = String.valueOf(expr2.hashCode())
-                    .substring((expr2.length() / 4), (expr2.length() / 4) + 5)
-                    + "-while-do";
-    
-   // Generate a unique label to go to if statement is false
-   String endDo = String.valueOf(expr2.hashCode())
-                    .substring((expr2.length() / 2), (expr2.length() / 2) + 5)
-                    + "-while-enddo";
-    
-   // Insert start label at beginning of loop.
-   result += emitLabel(startDo);
-   switch (compare) {
-      case EQUAL:
-         result += IRMap.breq(expr1, expr2, endDo);
-         break;
-       .
-       .
-      //CODE EMITTED FOR THE SAKE OF BREVITY
-       .
-       .
-
+while_stat returns [String breakLabel]
+   @after {
+      // Emit goto label to go back to top for checking
+      irOutput.add(IRMap.gotoLabel(passThroughLabel));
+      // Emit end label
+      irOutput.add(IRGenerator.emitLabel(
+                  ((BinaryExpression.EvalReturn) passThrough).condLabel));
+      // Now check for break statements
+      for (int line = 0; line < irOutput.size(); line++) {
+         if (irOutput.get(line).contains("BREAK_LABEL_" + loopNestNum)) {
+            irOutput.set(line, irOutput.get(line).replace("BREAK_LABEL_" + loopNestNum, 
+                  ((BinaryExpression.EvalReturn) passThrough).condLabel));
+                  loopNestNum--;
+                  break;
+         }
+      }
    }
-   for (String stat : statSeq) {
-      result += emit(stat);
-   }
-   // Insert end label at end of statSeq.
-   result += emitLabel(endDo);
-   return result;
-}
+   :   ^(WHILE_KEY expr {
+         // Create an anchor to loop start
+         passThroughLabel = IRGenerator.generateCondLabel($expr.binExpr);
+         irOutput.add(IRGenerator.emitLabel(passThroughLabel));
+         BinaryExpression.EvalReturn exprReturn = $expr.binExpr.eval(currentTemporary);
+         currentTemporary = exprReturn.nextUnusedTemp;  
+         irOutput.add(exprReturn.irGen);
+         passThrough = exprReturn;
+         } stat_seq)
+   ;
 \end{verbatim}
 
-Given the input string expressions and the binary operator comparing them, along with statSeq (the block of code to be executed if the statement is determined to be true), this code block takes and formats the code in the appropriate IR fashion, complete with unique label for the control block to goto based on the binary evaluation of true/false. 
+The way we do this is first, we assign values at the top, as such:\\
+for $ i := 1$ to $ 9000$\\
+$t(n) = 1$\\
+$t(n+1) = 9000$\\
 
-In the end, these methods are used in conjunction in order to write to file a completed IR code output in .tigIR (haha) format. 
+Then, we emite the loop label, followed by a conditional check that jumps to the end if false. After the body is interpreted, we emit an expression which increments the loop variable, followed by a goto top label. Finally, we have an end-label that we jump to when the label is finished.
+
+In the end, this method is used for the other rules, which are used in conjunction in order to write to file a completed IR code output in .tigIR (haha) format. 
 
 \end{document}
