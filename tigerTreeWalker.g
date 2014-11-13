@@ -187,6 +187,9 @@ else_tail
 
 while_stat returns [String breakLabel]
 	@after {
+		// Emit end label
+		irOutput.add(IRGenerator.emitLabel(((BinaryExpression.EvalReturn) passThrough).condLabel));
+		
 		// Now check for break statements
 		for (int line = 0; line < irOutput.size(); line++) {
 			if (irOutput.get(line).contains("BREAK_LABEL_" + loopNestNum)) {
@@ -202,7 +205,6 @@ while_stat returns [String breakLabel]
 		BinaryExpression.EvalReturn exprReturn = $expr.binExpr.eval(currentTemporary);
 		currentTemporary = exprReturn.nextUnusedTemp;
 		irOutput.add(exprReturn.irGen);
-		irOutput.add(IRGenerator.emitLabel(exprReturn.condLabel));
 		passThrough = exprReturn;
 	}
 	;

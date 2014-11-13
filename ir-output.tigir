@@ -51,14 +51,14 @@ callr, t33, func4, fixedpt_type_var
 callr, t34, func4, fixedpt_type_var2
 callr, t35, func3, 3
 callr, t36, func4, 4.1
-goto, 10574-expr-eval, , 
+goto, 20178-expr-eval, , 
 assign, t37, 1, 
 assign, t38, 2, 
-brneq, t37, t38, 10574-expr-eval
-10574-expr-eval: 
+brneq, t37, t38, 20178-expr-eval
+20178-expr-eval: 
 assign, t39, 9000, 
 assign, int_type_var, t39, 
-goto, 89279-expr-eval, , 
+goto, 24720-expr-eval, , 
 assign, t40, 1, 
 assign, t40, 9000, 
-89279-expr-eval: 
+24720-expr-eval: 
