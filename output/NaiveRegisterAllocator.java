@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -32,30 +33,49 @@ public class NaiveRegisterAllocator {
 		this.registers = registers;
 	}
 	
+	/**
+	 * Appends a list of temporary variables in memory, 
+	 * as well as the MIPS .data section header.
+	 */
 	private void storeAllTemporaries() {
 		List<Integer> tempIndexes;
+		List<String> foundTemps = new ArrayList<String>();
+		String temp;
+		
+		// Append .data section to our MIPS header
 		mipsPreface.add(".data");
 		
+		// Search through IR and add all temp references to foundTemps list
 		for (String line : input) {
 			tempIndexes = findTempInLine(line);
 			if (!tempIndexes.isEmpty()) {
 				for (int index : findTempInLine(line)) {
-					
+					temp = line.split("\\s+")[index];
+					if (!foundTemps.contains(temp)) {
+						foundTemps.add(temp);
+					}
 				}
-				mipsPreface.add("");
 			}
 		}
+		
+		// TODO: Assign values in header
 	}
 	
+	/**
+	 * Splits an IR line into an array of words.
+	 * Returns the indexes where temporaries are referenced.
+	 * 
+	 * @param input An input IR line.
+	 * @return The indexes where temporary variables are references in the IR line.
+	 */
 	private List<Integer> findTempInLine(String input) {
 		String[] lineSplit = input.split("\\s+");
 		List<Integer> indexes = new ArrayList<Integer>();
 		for (int i = 0; i < lineSplit.length; i++) {
 			if (lineSplit[i].matches("[t][0-9]+")) {
-				
+				indexes.add(i);
 			}
 		}
-		
 		
 		return indexes;
 	}
