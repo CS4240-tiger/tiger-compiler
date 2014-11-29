@@ -57,7 +57,12 @@ public class NaiveRegisterAllocator {
 							/* Add to header */
 							mipsMemAssign(temp, line);
 						} else {
-							/* TODO: Generate load-stores */
+							int lineIndex = input.indexOf(line);
+							String targetRegister = ""; // Get most appropriate register
+							/* Load before use */
+							input.add(lineIndex, genMipsLoad(temp, targetRegister));
+							/* Store after use */
+							input.add(lineIndex, genMipsStore(temp, targetRegister));
 						}
 					}
 				}
@@ -99,5 +104,29 @@ public class NaiveRegisterAllocator {
 		
 		String[] assignComponents = line.replace(" ",  "").replace("assign", "").split(",");
 		mipsPreface.add(assignComponents[0] + ": .word " + assignComponents[1]);
+	}
+	
+	/**
+	 * Generates a MIPS load instruction given a source label and target register.
+	 * 
+	 * @param label The source label to load from.
+	 * @param register The target register to load to.
+	 * @return The String MIPS load instruction.
+	 */
+	private String genMipsLoad(String label, String register) {
+		// TODO: implement
+		return "";
+	}
+	
+	/**
+	 * Generates a MIPS store instruction given a source register and target label.
+	 * 
+	 * @param label The target label to store to.
+	 * @param register The source register to store from.
+	 * @return The String MIPS load instruction.
+	 */
+	private String genMipsStore(String label, String register) {
+		// TODO: implement
+		return "";
 	}
 }
