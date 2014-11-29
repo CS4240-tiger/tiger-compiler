@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -17,10 +19,12 @@ public class NaiveRegisterAllocator {
 	 */
 	private List<String> mipsPreface;
 	/**
-	 * An array of register numbers to allocate.
+	 * A map of register numbers to allocate.
+	 * The mappings are in the following format:
+	 * 
+	 * String registerName -> Boolean isUsed
 	 */
-	private int[] registers;
-	
+	private Map<String, Boolean> registerMap;
 	/**
 	 * Constructs a new NaiveRegisterAllocator with input IR List and number of
 	 * available registers to allocate.
@@ -28,9 +32,12 @@ public class NaiveRegisterAllocator {
 	 * @param input Input IR lines, as Strings.
 	 * @param numRegisters An array of register numbers to allocate.
 	 */
-	public NaiveRegisterAllocator(List<String> input, int[] registers) {
+	public NaiveRegisterAllocator(List<String> input, String[] registers) {
 		this.input = input;
-		this.registers = registers;
+		registerMap = new HashMap<String, Boolean>();
+		for (String register : registers) {
+			registerMap.put(register, false);
+		}
 	}
 	
 	/**
@@ -57,15 +64,18 @@ public class NaiveRegisterAllocator {
 							/* Add to header */
 							mipsMemAssign(temp, line);
 						} else {
-							int lineIndex = input.indexOf(line);
-							String targetRegister = ""; // Get most appropriate register
-							/* Load before use */
-							input.add(lineIndex, genMipsLoad(temp, targetRegister)[0]);
-							input.add(lineIndex, genMipsLoad(temp, targetRegister)[1]);
-							/* Store after use */
-							input.add(lineIndex, genMipsStore(temp, targetRegister)[0]);
-							input.add(lineIndex, genMipsStore(temp, targetRegister)[1]);
+							/* Assign default value */
+							mipsMemAssign(temp, "assign " + temp + ", 0, ");
 						}
+					} else {
+						int lineIndex = input.indexOf(line);
+						String targetRegister = useBestRegister(); // Get most appropriate register
+						/* Load before use */
+						input.add(lineIndex, genMipsLoad(temp, targetRegister)[0]);
+						input.add(lineIndex, genMipsLoad(temp, targetRegister)[1]);
+						/* Store after use */
+						input.add(lineIndex, genMipsStore(temp, targetRegister)[0]);
+						input.add(lineIndex, genMipsStore(temp, targetRegister)[1]);
 					}
 				}
 			}
@@ -140,5 +150,26 @@ public class NaiveRegisterAllocator {
 		result[1] = "sw " + register + ", 0($at)";
 		
 		return result;
+	}
+	
+	/**
+	 * Returns the best register used to store a type of value 
+	 * (int vs. fixedpt) and marks that register as used in the 
+	 * register map.
+	 * 
+	 * @return A free register to store to.
+	 */
+	private String useBestRegister() {
+		// TODO: implement
+		return "";
+	}
+	
+	/**
+	 * Marks all registers in the register map as unused.
+	 */
+	private void unuseAllRegisters() {
+		for (String key : registerMap.keySet()) {
+			registerMap.put(key, false);
+		}
 	}
 }
