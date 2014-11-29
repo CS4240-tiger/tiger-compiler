@@ -25,6 +25,7 @@ public class NaiveRegisterAllocator {
 	 * String registerName -> Boolean isUsed
 	 */
 	private Map<String, Boolean> registerMap;
+	
 	/**
 	 * Constructs a new NaiveRegisterAllocator with input IR List and number of
 	 * available registers to allocate.
@@ -38,6 +39,27 @@ public class NaiveRegisterAllocator {
 		for (String register : registers) {
 			registerMap.put(register, false);
 		}
+	}
+	
+	/**
+	 * Constructs a new NaiveRegisterAllocator with input IR List.
+	 * Available registers will be allocated based on standard MIPS registers:<br /><br />
+	 * 
+	 * <b>$t0-$t9</b>: Temporaries (int)<br />
+	 * <b>$s0-$s7</b>: Saved temporaries (int)<br />
+	 * <b>$f0-$f31</b>: FPU temporaries (fixedpt)
+	 * 
+	 * @param input Input IR lines, as Strings.
+	 */
+	public NaiveRegisterAllocator(List<String> input) {
+		this(input, new String[]{"$t0", "$t1", "$t2", "$t3", "$t4", 
+				"$t5", "$t6", "$t7", "$t8", "$t9", "$s0", "$s1", 
+				"$s2", "$s3", "$s4", "$s5", "$s6", "$s7", "$f0", 
+				"$f1", "$f2", "$f3", "$f4", "$f5", "$f6", "$f7", 
+				"$f8", "$f9", "$f10", "$f11", "$f12", "$f13", "$f14", 
+				"$f15", "$f16", "$f17", "$f18", "$f19", "$f20", "$f21", 
+				"$f22", "$f23", "$f24", "$f25", "$f26", "$f27", "$f28", 
+				"$f29", "$f30", "$f31"});
 	}
 	
 	/**
@@ -70,16 +92,22 @@ public class NaiveRegisterAllocator {
 					} else {
 						int lineIndex = input.indexOf(line);
 						String targetRegister = useBestRegister(); // Get most appropriate register
-						/* Load before use */
+						// Load before use
 						input.add(lineIndex, genMipsLoad(temp, targetRegister)[0]);
 						input.add(lineIndex, genMipsLoad(temp, targetRegister)[1]);
-						/* Store after use */
+						// Store after use
 						input.add(lineIndex, genMipsStore(temp, targetRegister)[0]);
 						input.add(lineIndex, genMipsStore(temp, targetRegister)[1]);
 					}
 				}
+				
 			}
+			
+			// All registers are now free!
+			unuseAllRegisters();
 		}
+		
+		
 	}
 	
 	/**
