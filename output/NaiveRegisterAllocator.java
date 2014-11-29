@@ -60,9 +60,11 @@ public class NaiveRegisterAllocator {
 							int lineIndex = input.indexOf(line);
 							String targetRegister = ""; // Get most appropriate register
 							/* Load before use */
-							input.add(lineIndex, genMipsLoad(temp, targetRegister));
+							input.add(lineIndex, genMipsLoad(temp, targetRegister)[0]);
+							input.add(lineIndex, genMipsLoad(temp, targetRegister)[1]);
 							/* Store after use */
-							input.add(lineIndex, genMipsStore(temp, targetRegister));
+							input.add(lineIndex, genMipsStore(temp, targetRegister)[0]);
+							input.add(lineIndex, genMipsStore(temp, targetRegister)[1]);
 						}
 					}
 				}
@@ -113,9 +115,14 @@ public class NaiveRegisterAllocator {
 	 * @param register The target register to load to.
 	 * @return The String MIPS load instruction.
 	 */
-	private String genMipsLoad(String label, String register) {
-		// TODO: implement
-		return "";
+	private String[] genMipsLoad(String label, String register) {
+		// We'll use the assembler register $at for loading the address
+		String[] result = new String[2];
+		
+		result[0] = "la $at, " + label;
+		result[1] = "lw " + register + ", 0($at)";
+		
+		return result;
 	}
 	
 	/**
@@ -125,8 +132,13 @@ public class NaiveRegisterAllocator {
 	 * @param register The source register to store from.
 	 * @return The String MIPS load instruction.
 	 */
-	private String genMipsStore(String label, String register) {
-		// TODO: implement
-		return "";
+	private String[] genMipsStore(String label, String register) {
+		// We'll use the assembler register $at for loading the address
+		String[] result = new String[2];
+		
+		result[0] = "la $at, " + label;
+		result[1] = "sw " + register + ", 0($at)";
+		
+		return result;
 	}
 }
