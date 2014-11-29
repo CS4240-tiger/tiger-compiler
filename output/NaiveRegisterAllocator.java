@@ -49,16 +49,20 @@ public class NaiveRegisterAllocator {
 		for (String line : input) {
 			tempIndexes = findTempInLine(line);
 			if (!tempIndexes.isEmpty()) {
-				for (int index : findTempInLine(line)) {
+				for (int index : tempIndexes) {
 					temp = line.split("\\s+")[index];
 					if (!foundTemps.contains(temp)) {
 						foundTemps.add(temp);
+						if (line.toLowerCase().contains("assign")) {
+							/* Add to header */
+							mipsMemAssign(temp, line);
+						} else {
+							/* TODO: Generate load-stores */
+						}
 					}
 				}
 			}
 		}
-		
-		// TODO: Assign values in header
 	}
 	
 	/**
@@ -78,5 +82,16 @@ public class NaiveRegisterAllocator {
 		}
 		
 		return indexes;
+	}
+	
+	/**
+	 * Generates an assignment label for a variable in memory 
+	 * and places it in the MIPS header.
+	 * 
+	 * @param label A label (without colon).
+	 * @param line A full assignment statement in input IR.
+	 */
+	private void mipsMemAssign(String label, String line) {
+		
 	}
 }
