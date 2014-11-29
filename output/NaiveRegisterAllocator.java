@@ -92,6 +92,12 @@ public class NaiveRegisterAllocator {
 	 * @param line A full assignment statement in input IR.
 	 */
 	private void mipsMemAssign(String label, String line) {
+		// assign $a, $b, => [$a, $b, ]
+		// assignComponents[0] = target
+		// assignComponents[1] = value
+		// MIPS: label: .word value
 		
+		String[] assignComponents = line.replace(" ",  "").replace("assign", "").split(",");
+		mipsPreface.add(assignComponents[0] + ": .word " + assignComponents[1]);
 	}
 }
