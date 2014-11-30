@@ -15,6 +15,10 @@ public class NaiveRegisterAllocator {
 	 */
 	private List<String> input;
 	/**
+	 * Output mixed IR-MIPS lines, as Strings.
+	 */
+	protected List<String> output;
+	/**
 	 * Generated opening sections to a MIPS program.
 	 */
 	private List<String> mipsPreface;
@@ -39,6 +43,9 @@ public class NaiveRegisterAllocator {
 		for (String register : registers) {
 			registerMap.put(register, false);
 		}
+		
+		// Now, perform load-stores on temporary variables as required
+		storeAllTemporaries();
 	}
 	
 	/**
@@ -70,12 +77,13 @@ public class NaiveRegisterAllocator {
 		List<Integer> tempIndexes;
 		List<String> foundTemps = new ArrayList<String>();
 		String temp;
+		output = input;
 		
 		// Append .data section to our MIPS header
 		mipsPreface.add(".data");
 		
 		// Search through IR and add all temp references to foundTemps list
-		for (String line : input) {
+		for (String line : output) {
 			tempIndexes = findTempInLine(line);
 			if (!tempIndexes.isEmpty()) {
 				for (int index : tempIndexes) {
@@ -90,14 +98,14 @@ public class NaiveRegisterAllocator {
 							mipsMemAssign(temp, "assign " + temp + ", 0, ");
 						}
 					} else {
-						int lineIndex = input.indexOf(line);
+						int lineIndex = output.indexOf(line);
 						String targetRegister = useBestRegister(temp); // Get most appropriate register
 						// Load before use
-						input.add(lineIndex, genMipsLoad(temp, targetRegister)[0]);
-						input.add(lineIndex, genMipsLoad(temp, targetRegister)[1]);
+						output.add(lineIndex, genMipsLoad(temp, targetRegister)[0]);
+						output.add(lineIndex, genMipsLoad(temp, targetRegister)[1]);
 						// Store after use
-						input.add(lineIndex, genMipsStore(temp, targetRegister)[0]);
-						input.add(lineIndex, genMipsStore(temp, targetRegister)[1]);
+						output.add(lineIndex, genMipsStore(temp, targetRegister)[0]);
+						output.add(lineIndex, genMipsStore(temp, targetRegister)[1]);
 					}
 				}
 				
@@ -106,8 +114,6 @@ public class NaiveRegisterAllocator {
 			// All registers are now free!
 			unuseAllRegisters();
 		}
-		
-		
 	}
 	
 	/**
