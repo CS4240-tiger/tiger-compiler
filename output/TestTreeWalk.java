@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -39,7 +40,7 @@ public class TestTreeWalk {
     }
 	
 	private static List<String> readFileToList(String path) throws FileNotFoundException {
-		List<String> output = new ArrayList<String>();
+		List<String> output = new LinkedList<String>();
 		Scanner scan = new Scanner(new File(path));
 
 		while (scan.hasNext()){

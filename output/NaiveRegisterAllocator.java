@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -13,7 +14,7 @@ public class NaiveRegisterAllocator {
 	/**
 	 * Input IR lines, as Strings.
 	 */
-	private List<String> input;
+	private List<String> inputIR;
 	/**
 	 * Output mixed IR-MIPS lines, as Strings.
 	 */
@@ -37,12 +38,17 @@ public class NaiveRegisterAllocator {
 	 * @param input Input IR lines, as Strings.
 	 * @param numRegisters An array of register numbers to allocate.
 	 */
-	private NaiveRegisterAllocator(List<String> input, String[] registers) {
-		this.input = input;
+	private NaiveRegisterAllocator(List<String> inputIR, String[] registers) {
+		this.inputIR = inputIR;
 		registerMap = new HashMap<String, Boolean>();
+		mipsPreface = new ArrayList<String>();
+		output = new ArrayList<String>();
 		for (String register : registers) {
 			registerMap.put(register, false);
 		}
+		
+		// Copy input to output for modification
+		inputOutputDeepCopy();
 		
 		// Now, perform load-stores on temporary variables as required
 		storeAllTemporaries();
@@ -58,8 +64,8 @@ public class NaiveRegisterAllocator {
 	 * 
 	 * @param input Input IR lines, as Strings.
 	 */
-	public NaiveRegisterAllocator(List<String> input) {
-		this(input, new String[]{"$t0", "$t1", "$t2", "$t3", "$t4", 
+	public NaiveRegisterAllocator(List<String> inputIR) {
+		this(inputIR, new String[]{"$t0", "$t1", "$t2", "$t3", "$t4", 
 				"$t5", "$t6", "$t7", "$t8", "$t9", "$s0", "$s1", 
 				"$s2", "$s3", "$s4", "$s5", "$s6", "$s7", "$f0", 
 				"$f1", "$f2", "$f3", "$f4", "$f5", "$f6", "$f7", 
@@ -76,14 +82,15 @@ public class NaiveRegisterAllocator {
 	private void storeAllTemporaries() {
 		List<Integer> tempIndexes;
 		List<String> foundTemps = new ArrayList<String>();
-		String temp;
-		output = input;
+		String temp, line;
 		
 		// Append .data section to our MIPS header
 		mipsPreface.add(".data");
 		
 		// Search through IR and add all temp references to foundTemps list
-		for (String line : output) {
+		for (int i = 0; i < output.size(); i++) {
+			line = output.get(i);
+			
 			tempIndexes = findTempInLine(line);
 			if (!tempIndexes.isEmpty()) {
 				for (int index : tempIndexes) {
@@ -253,6 +260,16 @@ public class NaiveRegisterAllocator {
 	private void unuseAllRegisters() {
 		for (String key : registerMap.keySet()) {
 			registerMap.put(key, false);
+		}
+	}
+	
+	/**
+	 * Deep-copies inputIR to output for modification.
+	 */
+	private void inputOutputDeepCopy() {
+		Iterator<String> i = inputIR.iterator();
+		while (i.hasNext()) {
+			output.add(i.next());
 		}
 	}
 }
