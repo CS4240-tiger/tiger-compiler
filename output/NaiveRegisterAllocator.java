@@ -33,7 +33,7 @@ public class NaiveRegisterAllocator {
 	 * @param input Input IR lines, as Strings.
 	 * @param numRegisters An array of register numbers to allocate.
 	 */
-	public NaiveRegisterAllocator(List<String> input, String[] registers) {
+	private NaiveRegisterAllocator(List<String> input, String[] registers) {
 		this.input = input;
 		registerMap = new HashMap<String, Boolean>();
 		for (String register : registers) {
@@ -91,7 +91,7 @@ public class NaiveRegisterAllocator {
 						}
 					} else {
 						int lineIndex = input.indexOf(line);
-						String targetRegister = useBestRegister(); // Get most appropriate register
+						String targetRegister = useBestRegister(temp); // Get most appropriate register
 						// Load before use
 						input.add(lineIndex, genMipsLoad(temp, targetRegister)[0]);
 						input.add(lineIndex, genMipsLoad(temp, targetRegister)[1]);
@@ -185,11 +185,60 @@ public class NaiveRegisterAllocator {
 	 * (int vs. fixedpt) and marks that register as used in the 
 	 * register map.
 	 * 
+	 * @param label The label in memory to load from.
 	 * @return A free register to store to.
 	 */
-	private String useBestRegister() {
-		// TODO: implement
-		return "";
+	private String useBestRegister(String label) {
+		boolean isInt = true;
+		
+		// Iterate through .data
+		for (String temp : mipsPreface) {
+			if (temp.contains(label)) {
+				if (temp.split("\\s+")[2].contains(".")) {
+					// This is a fixedpt
+					isInt = false;
+				}
+				
+				break;
+			}
+		}
+		
+		// Now that we know the type of value, assign register
+		if (isInt) {
+			// Check t-registers
+			for (int i = 0; i < 10; i++) {
+				if (!registerMap.get("$t" + i)) {
+					// Mark as used
+					registerMap.put("$t" + i, true);
+					
+					return ("$t" + i);
+				}
+			}
+			
+			// If somehow we don't have a register yet, check s-registers
+			for (int i = 0; i < 8; i++) {
+				if (!registerMap.get("$s" + i)) {
+					// Mark as used
+					registerMap.put("$s" + i, true);
+					
+					return ("$s" + i);
+				}
+			}
+			
+		} else {
+			// Check f-registers for fixedpt
+			for (int i = 0; i < 32; i++) {
+				if (!registerMap.get("$f" + i)) {
+					// Mark as used
+					registerMap.put("$f" + i, true);
+					
+					return ("$f" + i);
+				}
+			}
+		}
+		
+		// This should not happen
+		return null;
 	}
 	
 	/**
