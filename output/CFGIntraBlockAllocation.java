@@ -46,16 +46,17 @@ public class CFGIntraBlockAllocation {
 					CodeBlock newCodeBlock = new CodeBlock(code[count], code[i-1], Arrays.copyOfRange(code,count, i), id);
 					allCodeBlocks.add(id, newCodeBlock);
 					graph.put(newCodeBlock, new LinkedList<CodeBlock>());
-					System.out.println("id:"+String.valueOf(id)+"|S: "+code[count]+"|E: "+code[i-1]);
+					//System.out.println("id:"+String.valueOf(id)+"|S: "+code[count]+"|E: "+code[i-1]);
 					count = i;
 					id++;
 				}
 			} else if (code[i].contains("br") || code[i].contains("goto") || code[i].contains("call") || code[i].contains("callr")) {
+				//check to get the right blocks
 				if (i >= count) {
 					CodeBlock newCodeBlock = new CodeBlock(code[count], code[i], Arrays.copyOfRange(code,count, i+1), id);
 					allCodeBlocks.add(id, newCodeBlock);
 					graph.put(newCodeBlock, new LinkedList<CodeBlock>());
-					System.out.println("id:"+String.valueOf(id)+"|S: "+code[count]+"|E: "+code[i]);
+					//System.out.println("id:"+String.valueOf(id)+"|S: "+code[count]+"|E: "+code[i]);
 					count = i+1;
 					id++;
 				}
@@ -65,33 +66,58 @@ public class CFGIntraBlockAllocation {
 		CodeBlock newCodeBlock = new CodeBlock(code[count], code[code.length - 1], Arrays.copyOfRange(code,count, code.length), id);
 		allCodeBlocks.add(id, newCodeBlock);
 		graph.put(newCodeBlock, new LinkedList<CodeBlock>());
-		System.out.println("id:"+String.valueOf(id)+"|S: "+code[count]+"|E: "+code[code.length - 1]);
+		//System.out.println("id:"+String.valueOf(id)+"|S: "+code[count]+"|E: "+code[code.length - 1]);
 		//System.out.println(allCodeBlocks.size());
 	}
 	
 	public void buildCFG() {
 		//for if the node should point to the next block
-		boolean nextblock;
+		boolean funcCall = false;
+		boolean nextblock = false;
+		boolean hasLabel;
 		for (int i = 0; i < allCodeBlocks.size() - 1; i++) {
-			nextblock = true;
+			hasLabel = true;
+			funcCall = false;
 			CodeBlock block1 = allCodeBlocks.get(i);
+			String first = block1.getLeader();
+			//all blocks before the main label should not point to the next code block
+			if (first.contains("main")) {
+				nextblock = true;
+			}
 			String last = block1.getLast();
 			String[] breakUp = last.split(",");
 			String label = "";
 			if (breakUp[0].contains("br")) {
-				label = breakUp[3];
+				//System.out.println(Arrays.toString(breakUp));
+				label = breakUp[3].trim();
 			} else if (breakUp[0].contains("goto")) {
-				label = breakUp[1];
+				//System.out.println(Arrays.toString(breakUp));
+				label = breakUp[1].trim();
 				nextblock = false;
 			} else if (breakUp[0].contains("callr")) {
-				label = breakUp[2];
+				//System.out.println(Arrays.toString(breakUp));
+				label = breakUp[2].trim();
+				nextblock = false;
+				funcCall = true;
+				//System.out.println(label);
 			} else if (breakUp[0].contains("call")) {
-				label = breakUp[1];
+				//System.out.println(Arrays.toString(breakUp));
+				label = breakUp[1].trim();
+				nextblock = false;
+				funcCall = true;
+			} else {
+				//shouldn't even check for edges because it doesn't have any labels
+				hasLabel = false;
 			}
-			for (int j = 0; j < allCodeBlocks.size(); j++) {
-				CodeBlock block2 = allCodeBlocks.get(j);
-				if (block2.getLeader().contains(label)) {
-					graph.get(block1).add(block2);
+			if (hasLabel) { 
+				for (int j = 0; j < allCodeBlocks.size(); j++) {
+					CodeBlock block2 = allCodeBlocks.get(j);
+					if (funcCall && block2.getLeader().contains(label)) {
+						graph.get(block2).add(allCodeBlocks.get(block1.getId() + 1));
+					}
+					if (block2.getLeader().contains(label)) {
+						graph.get(block1).add(block2);
+					}
 				}
 			}
 			if (nextblock) {
@@ -104,7 +130,7 @@ public class CFGIntraBlockAllocation {
 	 * Appends a list of temporary variables in memory, 
 	 * as well as the MIPS .data section header.
 	 */
-	private void storeAllTemporaries() {
+	public void storeAllTemporaries() {
 		List<Integer> tempIndexes;
 		List<String> foundTemps = new ArrayList<String>();
 		String temp, line;
@@ -117,18 +143,21 @@ public class CFGIntraBlockAllocation {
 			if (!tempIndexes.isEmpty()) {
 				for (int index : tempIndexes) {
 					temp = line.split("\\s+")[index];
+					System.out.println(temp);
 					if (!foundTemps.contains(temp)) {
-						if (line.toLowerCase().contains("assign")) {
+						foundTemps.add(temp);
+						//if (line.toLowerCase().contains("assign")) {
 							/* Add to header */
-							mipsMemAssign(temp, line);
-						} else {
+							//mipsMemAssign(temp, line);
+						//} else {
 							/* Assign default value */
-							mipsMemAssign(temp, "assign " + temp + ", 0, ");
-						}
+							//mipsMemAssign(temp, "assign " + temp + ", 0, ");
+						//}
 					} 
 				}
 			}
 		}
+		//System.out.println(Arrays.toString(foundTemps.toArray()));
 	}
 	
 	private void mipsMemAssign(String label, String line) {
@@ -136,9 +165,11 @@ public class CFGIntraBlockAllocation {
 		// assignComponents[0] = target
 		// assignComponents[1] = value
 		// MIPS: label: .word value
-		
+		System.out.println(line);
 		String[] assignComponents = line.replace(" ",  "").replace("assign", "").split(",");
-		mipsPreface.put(assignComponents[0],assignComponents[1]);
+		//System.out.println("target: "+assignComponents[0]+"|"+"value: "+assignComponents[1]);
+		//System.out.println(Arrays.toString(assignComponents));
+		//mipsPreface.put(assignComponents[0],assignComponents[1]);
 	}
 	
 	
@@ -150,7 +181,6 @@ public class CFGIntraBlockAllocation {
 				indexes.add(i);
 			}
 		}
-		
 		return indexes;
 	}
 	
