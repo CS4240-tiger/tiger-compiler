@@ -341,6 +341,7 @@ return_stat
 		BinaryExpression.EvalReturn exprReturn = $expr.binExpr.eval(currentTemporary);
 		currentTemporary = exprReturn.nextUnusedTemp;
 		irOutput.add(exprReturn.irGen);
+		irOutput.add(IRMap.returnVal("t" + (currentTemporary - 1)));
 	}
 	;
 
@@ -578,7 +579,7 @@ value_array_index returns [String tempVarIndex]
 		BinaryExpression.EvalReturn exprReturn = $index_expr.binExpr.eval(currentTemporary);
 		currentTemporary = exprReturn.nextUnusedTemp;
 		irOutput.add(exprReturn.irGen);
-		$tempVarIndex = $LBRACK.text + String.valueOf((currentTemporary - 1)) + $RBRACK.text;
+		$tempVarIndex = $LBRACK.text + "t" + String.valueOf((currentTemporary - 1)) + $RBRACK.text;
 	}
 	;
 
