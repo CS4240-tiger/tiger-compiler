@@ -41,25 +41,31 @@ public class CFGIntraBlockAllocation {
 		int id = 0;
 		for (int i = 1; i < code.length - 1; i++) {
 			if (code[i].contains(":")) {
-				CodeBlock newCodeBlock = new CodeBlock(code[count], code[i-1], Arrays.copyOfRange(code,count, i), id);
-				allCodeBlocks.add(id, newCodeBlock);
-				graph.put(newCodeBlock, new LinkedList<CodeBlock>());
-				System.out.println("id:"+String.valueOf(id)+"|S: "+code[count]+"|E: "+code[i-1]);
-				count = i;
-				id++;
+				//check to get right blocks
+				if (i-1 >= count) {
+					CodeBlock newCodeBlock = new CodeBlock(code[count], code[i-1], Arrays.copyOfRange(code,count, i), id);
+					allCodeBlocks.add(id, newCodeBlock);
+					graph.put(newCodeBlock, new LinkedList<CodeBlock>());
+					System.out.println("id:"+String.valueOf(id)+"|S: "+code[count]+"|E: "+code[i-1]);
+					count = i;
+					id++;
+				}
 			} else if (code[i].contains("br") || code[i].contains("goto") || code[i].contains("call") || code[i].contains("callr")) {
-				CodeBlock newCodeBlock = new CodeBlock(code[count], code[i], Arrays.copyOfRange(code,count, i+1), id);
-				allCodeBlocks.add(id, newCodeBlock);
-				graph.put(newCodeBlock, new LinkedList<CodeBlock>());
-				System.out.println("id:"+String.valueOf(id)+"|S: "+code[count]+"|E: "+code[i]);
-				count = i+1;
-				id++;
+				if (i >= count) {
+					CodeBlock newCodeBlock = new CodeBlock(code[count], code[i], Arrays.copyOfRange(code,count, i+1), id);
+					allCodeBlocks.add(id, newCodeBlock);
+					graph.put(newCodeBlock, new LinkedList<CodeBlock>());
+					System.out.println("id:"+String.valueOf(id)+"|S: "+code[count]+"|E: "+code[i]);
+					count = i+1;
+					id++;
+				}
 			} 
 		}
 		//for the very last block
 		CodeBlock newCodeBlock = new CodeBlock(code[count], code[code.length - 1], Arrays.copyOfRange(code,count, code.length), id);
 		allCodeBlocks.add(id, newCodeBlock);
 		graph.put(newCodeBlock, new LinkedList<CodeBlock>());
+		System.out.println("id:"+String.valueOf(id)+"|S: "+code[count]+"|E: "+code[code.length - 1]);
 		//System.out.println(allCodeBlocks.size());
 	}
 	
