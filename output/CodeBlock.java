@@ -96,6 +96,7 @@ public class CodeBlock {
 		this.numIntVars = 0;
 		this.numFixedPtVars= 0;
 		this.assignedVars = new ArrayList<String>();
+		this.usedVars = new ArrayList<String>();
 	}
 	
 	public void allocateRegs(List<CodeBlock> allCodeBlocks, Map<String,String> typeMap) {
