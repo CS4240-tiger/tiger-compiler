@@ -104,6 +104,15 @@ public class CodeBlock {
 			String codeLine = code.get(i);
 			searchLine(codeLine, allCodeBlocks, typeMap);
 		}
+		if (numIntVars < allIntRegs.length) {
+			for (int i = 0; i < numIntVars; i++) {
+				//intRegs.put(key, value)
+			}
+			System.out.println("all int regs can be allocated");
+		}
+		if (numFixedPtVars < allFixedPtRegs.length) {
+			System.out.println("all fixedpt regs can be allocated");
+		}
 		System.out.println("Int Vars: " +numIntVars);
 		System.out.println("Fixedpt Vars: "+numFixedPtVars);
 		System.out.println("Return type: "+this.returnType);
