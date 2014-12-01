@@ -22,6 +22,11 @@ public class CFGIntraBlockAllocation {
 	 */
 	private List<CodeBlock> allCodeBlocks;
 	
+	/**
+	 * Generated opening sections to a MIPS program.
+	 */
+	private Map<String,String> mipsPreface;
+	
 	public CFGIntraBlockAllocation(String input) {
 		code = input.split("\n");
 		graph = new HashMap<CodeBlock, List<CodeBlock>>(10);
@@ -84,7 +89,61 @@ public class CFGIntraBlockAllocation {
 				graph.get(block1).add(allCodeBlocks.get(block1.getId() + 1));
 			}
 		}
-	}	
+	}
+	
+	/**
+	 * Appends a list of temporary variables in memory, 
+	 * as well as the MIPS .data section header.
+	 */
+	private void storeAllTemporaries() {
+		List<Integer> tempIndexes;
+		List<String> foundTemps = new ArrayList<String>();
+		String temp, line;
+		
+		// Search through IR and add all temp references to foundTemps list
+		for (int i = 0; i < code.length; i++) {
+			line = code[i];
+			
+			tempIndexes = findTempInLine(line);
+			if (!tempIndexes.isEmpty()) {
+				for (int index : tempIndexes) {
+					temp = line.split("\\s+")[index];
+					if (!foundTemps.contains(temp)) {
+						if (line.toLowerCase().contains("assign")) {
+							/* Add to header */
+							mipsMemAssign(temp, line);
+						} else {
+							/* Assign default value */
+							mipsMemAssign(temp, "assign " + temp + ", 0, ");
+						}
+					} 
+				}
+			}
+		}
+	}
+	
+	private void mipsMemAssign(String label, String line) {
+		// assign $a, $b, => [$a, $b, ]
+		// assignComponents[0] = target
+		// assignComponents[1] = value
+		// MIPS: label: .word value
+		
+		String[] assignComponents = line.replace(" ",  "").replace("assign", "").split(",");
+		mipsPreface.put(assignComponents[0],assignComponents[1]);
+	}
+	
+	
+	private List<Integer> findTempInLine(String input) {
+		String[] lineSplit = input.split("\\s+");
+		List<Integer> indexes = new ArrayList<Integer>();
+		for (int i = 0; i < lineSplit.length; i++) {
+			if (lineSplit[i].matches("[t][0-9]+")) {
+				indexes.add(i);
+			}
+		}
+		
+		return indexes;
+	}
 	
 
 }
