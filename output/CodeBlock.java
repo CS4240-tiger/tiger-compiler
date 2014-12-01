@@ -102,7 +102,9 @@ public class CodeBlock {
 			String codeLine = code.get(i);
 			searchLine(codeLine, allCodeBlocks);
 		}
-		
+		System.out.println("Int Vars: " +numIntVars);
+		System.out.println("Fixedpt Vars: "+numFixedPtVars);
+		System.out.println("Return type: "+this.returnType);
 	}
 	
 	private void searchLine(String codeLine, List<CodeBlock> allCodeBlocks) {
@@ -118,7 +120,7 @@ public class CodeBlock {
 				typeMap.put(asignee, "int");
 				numIntVars++;
 			} else {
-				String type = findType(asignee);
+				String type = findType(asigner);
 				if (type.equals("int") ) {
 					numIntVars++;
 				} else if (type.equals("fixedpt")) {

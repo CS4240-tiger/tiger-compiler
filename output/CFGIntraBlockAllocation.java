@@ -33,6 +33,10 @@ public class CFGIntraBlockAllocation {
 		allCodeBlocks = new ArrayList<CodeBlock>(10);
 	}
 	
+	public void allocateAllBlocks() {
+		allCodeBlocks.get(3).allocateRegs(allCodeBlocks);
+	}
+	
 	/**
 	 * gets all the blocks from the code
 	 */
