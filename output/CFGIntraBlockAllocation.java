@@ -44,12 +44,14 @@ public class CFGIntraBlockAllocation {
 				CodeBlock newCodeBlock = new CodeBlock(code[count], code[i-1], Arrays.copyOfRange(code,count, i), id);
 				allCodeBlocks.add(id, newCodeBlock);
 				graph.put(newCodeBlock, new LinkedList<CodeBlock>());
+				System.out.println("id:"+String.valueOf(id)+"|S: "+code[count]+"|E: "+code[i-1]);
 				count = i;
 				id++;
 			} else if (code[i].contains("br") || code[i].contains("goto") || code[i].contains("call") || code[i].contains("callr")) {
 				CodeBlock newCodeBlock = new CodeBlock(code[count], code[i], Arrays.copyOfRange(code,count, i+1), id);
 				allCodeBlocks.add(id, newCodeBlock);
 				graph.put(newCodeBlock, new LinkedList<CodeBlock>());
+				System.out.println("id:"+String.valueOf(id)+"|S: "+code[count]+"|E: "+code[i]);
 				count = i+1;
 				id++;
 			} 
@@ -58,6 +60,7 @@ public class CFGIntraBlockAllocation {
 		CodeBlock newCodeBlock = new CodeBlock(code[count], code[code.length - 1], Arrays.copyOfRange(code,count, code.length), id);
 		allCodeBlocks.add(id, newCodeBlock);
 		graph.put(newCodeBlock, new LinkedList<CodeBlock>());
+		//System.out.println(allCodeBlocks.size());
 	}
 	
 	public void buildCFG() {

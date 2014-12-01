@@ -2,7 +2,7 @@ func1:
 assign, a, 0, 
 assign, t0, a, 
 assign, p, 0, 
-assign, t1, p, 
+assign, t1, p,
 func2: 
 assign, a, 0, 
 assign, t2, a, 
