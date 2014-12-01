@@ -31,10 +31,6 @@ public class CodeBlock {
 	 */
 	private String returnType;
 	
-	/**
-	 * Map for all the variables in this block and their type
-	 */
-	private Map<String,String> typeMap;
 	
 	/**
 	 * Map for all the integer registers
@@ -79,6 +75,12 @@ public class CodeBlock {
 	private List<String> assignedVars;
 	
 	/**
+	 * a list of variables that were used in the block but didn't have any assign statements
+	 * used for load statements at the beginning of the block
+	 */
+	private List<String> usedVars;
+	
+	/**
 	 * @param leader the first line of code of this block
 	 * @param last the last line of code of this block
 	 * @param code the entire code of this block
@@ -89,7 +91,6 @@ public class CodeBlock {
 		this.last = last;
 		this.code = new ArrayList<String>(Arrays.asList(code));
 		this.id = id;
-		this.typeMap = new HashMap<String,String>();
 		this.intRegs = new HashMap<String,String>();
 		this.fixeptRegs = new HashMap<String,String>();
 		this.numIntVars = 0;
@@ -97,17 +98,17 @@ public class CodeBlock {
 		this.assignedVars = new ArrayList<String>();
 	}
 	
-	public void allocateRegs(List<CodeBlock> allCodeBlocks) {
+	public void allocateRegs(List<CodeBlock> allCodeBlocks, Map<String,String> typeMap) {
 		for (int i = 0; i < code.size(); i++) {
 			String codeLine = code.get(i);
-			searchLine(codeLine, allCodeBlocks);
+			searchLine(codeLine, allCodeBlocks, typeMap);
 		}
 		System.out.println("Int Vars: " +numIntVars);
 		System.out.println("Fixedpt Vars: "+numFixedPtVars);
 		System.out.println("Return type: "+this.returnType);
 	}
 	
-	private void searchLine(String codeLine, List<CodeBlock> allCodeBlocks) {
+	private void searchLine(String codeLine, List<CodeBlock> allCodeBlocks, Map<String,String> typeMap) {
 		String[] breakUp = codeLine.split(",");
 		if (codeLine.contains("assign")) {
 			String asignee = breakUp[1].trim();
@@ -120,21 +121,22 @@ public class CodeBlock {
 				typeMap.put(asignee, "int");
 				numIntVars++;
 			} else {
-				String type = findType(asigner);
+				String type = findType(asigner, typeMap);
 				if (type.equals("int") ) {
 					numIntVars++;
 				} else if (type.equals("fixedpt")) {
 					numFixedPtVars++;
 				}
 				typeMap.put(asignee, type);
+				addToUsed(asigner, typeMap);
 			}
-			assignedVars.add(asignee);
+			addToAssigned(asignee);
 		} else if (codeLine.contains("add") || codeLine.contains("sub") || codeLine.contains("mult") || 
 				codeLine.contains("div") || codeLine.contains("and") || codeLine.contains("or")) {
 			String operator1 = breakUp[1].trim();
-			String type1 = findType(operator1);
+			String type1 = findType(operator1, typeMap);
 			String operator2 = breakUp[2].trim();
-			String type2 = findType(operator2);
+			String type2 = findType(operator2, typeMap);
 			String asigneeType;
 			if (type1.equals("fixedpt") || type2.equals("fixedpt")) {
 				asigneeType = "fixedpt";
@@ -144,7 +146,9 @@ public class CodeBlock {
 				numIntVars++;
 			}
 			typeMap.put(breakUp[3].trim(),asigneeType);
-			assignedVars.add(breakUp[3].trim());
+			addToUsed(operator1,typeMap);
+			addToUsed(operator2, typeMap);
+			addToAssigned(breakUp[3].trim());
 		} else if (codeLine.contains("callr")) {
 			String returnVar = breakUp[1].trim();
 			String funcName = breakUp[2].trim();
@@ -162,27 +166,64 @@ public class CodeBlock {
 				numFixedPtVars++;
 			}
 			typeMap.put(returnVar,funcReturnType);
-			assignedVars.add(returnVar);
+			addFuncParams(breakUp, 3, typeMap);
+			addToAssigned(returnVar);
 		} else if (codeLine.contains("return") && this.returnType == null) {
-			String returnVarType = findType(breakUp[1].trim());
+			String returnVarType = findType(breakUp[1].trim(), typeMap);
 			this.returnType = returnVarType; 
+		} else if (breakUp[0].contains("br")) {
+			String oneVar = breakUp[1].trim();
+			String twoVar = breakUp[2].trim();
+			addToUsed(oneVar,typeMap);
+			addToUsed(twoVar,typeMap);
 		}
 	}
 	
+	private void addFuncParams(String[] breakUp, int start, Map<String,String> typeMap) {
+		for (int i = start; i < breakUp.length; i++) {
+			if (!breakUp[i].trim().equals("")) {
+				addToUsed(breakUp[i].trim(),typeMap);
+			}
+		}
+	}
+	
+	/**
+	 * This function decides whether or not the variable should be loaded at the beginning of the block
+	 * @param operator the variable used in math operations
+	 */
+	private void addToUsed(String operator, Map<String,String> typeMap) {
+		//If used without being assigned first
+		if (!assignedVars.contains(operator)) {
+			String type = findType(operator,typeMap); 
+			if (type.equals("int")) {
+				numIntVars++;
+			} else if (type.equals("fixedpt")) {
+				numFixedPtVars++;
+			}
+			usedVars.add(operator);
+		}
+	}
+	
+	private void addToAssigned(String variable) {
+		//If it already wasn't assigned at some point
+		if (!assignedVars.contains(variable)) {
+			assignedVars.add("variable");
+		}
+	}
 	/**
 	 * Recursive function that goes to the depth of hell and searches through typeMap to find the type of the asignee
 	 * 
 	 * @param asignee the original variable
 	 * @return either "int" or "fixedpt"
 	 */
-	private String findType(String asignee) {
+	private String findType(String asignee, Map<String,String> typeMap) {
 		String type = typeMap.get(asignee);
 		if (type.equals("int")) {
 			return "int";
 		} else if (type.equals("fixedpt")) {
 			return "fixedpt";
 		} else {
-			return findType(type);
+			return findType(type, typeMap);
 		}
 	}
 	

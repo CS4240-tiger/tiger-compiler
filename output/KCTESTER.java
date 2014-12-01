@@ -16,10 +16,14 @@ public class KCTESTER {
 		}
 		//System.out.println(content);
 		CFGIntraBlockAllocation cfg = new CFGIntraBlockAllocation(content);
-		cfg.findBlocks();
+		//cfg.findBlocks();
 		//cfg.storeAllTemporaries();
-		cfg.buildCFG();
+		//cfg.buildCFG();
 		//cfg.allocateAllBlocks();
+		System.out.println("start");
+		String space =" ";
+		System.out.println(space.trim().equals(""));
+		System.out.println("end");
 
 	}
 

@@ -27,15 +27,22 @@ public class CFGIntraBlockAllocation {
 	 */
 	private Map<String,String> mipsPreface;
 	
+	/**
+	 * Map for all the variables in this block and their type
+	 */
+	private Map<String,String> typeMap;
+	
 	public CFGIntraBlockAllocation(String input) {
 		code = input.split("\n");
 		graph = new HashMap<CodeBlock, List<CodeBlock>>(10);
 		allCodeBlocks = new ArrayList<CodeBlock>(10);
+		this.typeMap = new HashMap<String,String>();
 	}
 	
 	public void allocateAllBlocks() {
-		allCodeBlocks.get(3).allocateRegs(allCodeBlocks);
+		allCodeBlocks.get(3).allocateRegs(allCodeBlocks, typeMap);
 	}
+	
 	
 	/**
 	 * gets all the blocks from the code
