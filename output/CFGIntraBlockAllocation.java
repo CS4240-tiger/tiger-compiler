@@ -54,7 +54,7 @@ public class CFGIntraBlockAllocation {
 					count = i;
 					id++;
 				}
-			} else if (code[i].contains("br") || code[i].contains("goto") || code[i].contains("call") || code[i].contains("callr")) {
+			} else if (code[i].contains("br") || code[i].contains("goto") || code[i].contains("call") || code[i].contains("callr") || code[i].contains("return")) {
 				//check to get the right blocks
 				if (i >= count) {
 					CodeBlock newCodeBlock = new CodeBlock(code[count], code[i], Arrays.copyOfRange(code,count, i+1), id);
@@ -71,7 +71,7 @@ public class CFGIntraBlockAllocation {
 		allCodeBlocks.add(id, newCodeBlock);
 		graph.put(newCodeBlock, new LinkedList<CodeBlock>());
 		//System.out.println("id:"+String.valueOf(id)+"|S: "+code[count]+"|E: "+code[code.length - 1]);
-		//System.out.println(allCodeBlocks.size());
+		System.out.println(allCodeBlocks.size());
 	}
 	
 	public void buildCFG() {
@@ -117,7 +117,13 @@ public class CFGIntraBlockAllocation {
 				for (int j = 0; j < allCodeBlocks.size(); j++) {
 					CodeBlock block2 = allCodeBlocks.get(j);
 					if (funcCall && block2.getLeader().contains(label)) {
-						graph.get(block2).add(allCodeBlocks.get(block1.getId() + 1));
+						for (int k = j; k < allCodeBlocks.size(); k++) {
+							CodeBlock block3 = allCodeBlocks.get(k);
+							if (block3.getLast().contains("return")) {
+								graph.get(block3).add(allCodeBlocks.get(block1.getId() + 1));
+								break;
+							}
+						}
 					}
 					if (block2.getLeader().contains(label)) {
 						graph.get(block1).add(block2);
@@ -128,6 +134,7 @@ public class CFGIntraBlockAllocation {
 				graph.get(block1).add(allCodeBlocks.get(block1.getId() + 1));
 			}
 		}
+		System.out.println(graph.get(allCodeBlocks.get(0)).size());
 	}
 	
 	/**
