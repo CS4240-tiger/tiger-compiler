@@ -74,6 +74,11 @@ public class CodeBlock {
 	private int numFixedPtVars;
 	
 	/**
+	 * list of variables that were assigned in this block for store statements later
+	 */
+	private List<String> assignedVars;
+	
+	/**
 	 * @param leader the first line of code of this block
 	 * @param last the last line of code of this block
 	 * @param code the entire code of this block
@@ -89,6 +94,94 @@ public class CodeBlock {
 		this.fixeptRegs = new HashMap<String,String>();
 		this.numIntVars = 0;
 		this.numFixedPtVars= 0;
+		this.assignedVars = new ArrayList<String>();
+	}
+	
+	public void allocateRegs(List<CodeBlock> allCodeBlocks) {
+		for (int i = 0; i < code.size(); i++) {
+			String codeLine = code.get(i);
+			searchLine(codeLine, allCodeBlocks);
+		}
+		
+	}
+	
+	private void searchLine(String codeLine, List<CodeBlock> allCodeBlocks) {
+		String[] breakUp = codeLine.split(",");
+		if (codeLine.contains("assign")) {
+			String asignee = breakUp[1].trim();
+			String asigner = breakUp[2].trim();
+			String asignerNums = asigner.replaceAll("[^\\d.]", "");
+			if (asigner.length()==asignerNums.length() && asignerNums.indexOf(".") != -1) {
+				typeMap.put(asignee, "fixedpt");
+				numFixedPtVars++;
+			} else if (asigner.length()==asignerNums.length() && asignerNums.indexOf(".") == -1) {
+				typeMap.put(asignee, "int");
+				numIntVars++;
+			} else {
+				String type = findType(asignee);
+				if (type.equals("int") ) {
+					numIntVars++;
+				} else if (type.equals("fixedpt")) {
+					numFixedPtVars++;
+				}
+				typeMap.put(asignee, type);
+			}
+			assignedVars.add(asignee);
+		} else if (codeLine.contains("add") || codeLine.contains("sub") || codeLine.contains("mult") || 
+				codeLine.contains("div") || codeLine.contains("and") || codeLine.contains("or")) {
+			String operator1 = breakUp[1].trim();
+			String type1 = findType(operator1);
+			String operator2 = breakUp[2].trim();
+			String type2 = findType(operator2);
+			String asigneeType;
+			if (type1.equals("fixedpt") || type2.equals("fixedpt")) {
+				asigneeType = "fixedpt";
+				numFixedPtVars++;
+			} else {
+				asigneeType = "int";
+				numIntVars++;
+			}
+			typeMap.put(breakUp[3].trim(),asigneeType);
+			assignedVars.add(breakUp[3].trim());
+		} else if (codeLine.contains("callr")) {
+			String returnVar = breakUp[1].trim();
+			String funcName = breakUp[2].trim();
+			String funcReturnType = "";
+			for (int i = 0; i < allCodeBlocks.size(); i++) {
+				CodeBlock block = allCodeBlocks.get(i);
+				if (block.getLeader().contains(funcName)) {
+					funcReturnType = block.returnType;
+					break;
+				}
+			}
+			if (funcReturnType.equals("int")) {
+				numIntVars++;
+			} else if (funcReturnType.equals("fixedpt")) {
+				numFixedPtVars++;
+			}
+			typeMap.put(returnVar,funcReturnType);
+			assignedVars.add(returnVar);
+		} else if (codeLine.contains("return") && this.returnType == null) {
+			String returnVarType = findType(breakUp[1].trim());
+			this.returnType = returnVarType; 
+		}
+	}
+	
+	/**
+	 * Recursive function that goes to the depth of hell and searches through typeMap to find the type of the asignee
+	 * 
+	 * @param asignee the original variable
+	 * @return either "int" or "fixedpt"
+	 */
+	private String findType(String asignee) {
+		String type = typeMap.get(asignee);
+		if (type.equals("int")) {
+			return "int";
+		} else if (type.equals("fixedpt")) {
+			return "fixedpt";
+		} else {
+			return findType(type);
+		}
 	}
 	
 	public boolean equals(CodeBlock block2) {
