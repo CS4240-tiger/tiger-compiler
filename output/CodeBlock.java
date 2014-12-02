@@ -131,7 +131,7 @@ public class CodeBlock {
 					intRegs.remove(minVar);
 					intRegs.put(each, reg);
 					// finds new min in intRegs
-					minVar = findNewMin(intRegs, intRegCount);
+					minVar = findNewMin(intRegs, intRegCount, new String[1]);
 					min = intRegCount.get(minVar);
 				} else {
 					intRegs.put(each, allIntRegs[index]);
@@ -164,7 +164,7 @@ public class CodeBlock {
 					fixedptRegs.remove(minVar);
 					fixedptRegs.put(each, reg);
 					// finds new min in intRegs
-					minVar = findNewMin(fixedptRegs, fixedptRegCount);
+					minVar = findNewMin(fixedptRegs, fixedptRegCount, new String[1]);
 					min = fixedptRegCount.get(minVar);
 				} else {
 					fixedptRegs.put(each, allFixedPtRegs[index]);
@@ -172,6 +172,7 @@ public class CodeBlock {
 				index++;
 			}
 		}
+		replaceVars();
 		//System.out.println("Int Vars: " +intRegCount.size());
 		for (String each: intRegCount.keySet()) {
 			System.out.println(each +":"+intRegCount.get(each));
@@ -180,12 +181,28 @@ public class CodeBlock {
 		System.out.println("Return type: "+this.returnType);
 	}
 	
-	private String findNewMin(Map<String,String> regs, Map<String,Integer> regCount){
+	private void replaceVars() {
+		for (int i = 0; i < code.size(); i++) {
+			String line = code.get(i);
+			String[] stuff = line.replace(" ", "").split(",");
+			for (int j = 1; j < stuff.length; j++) {
+				String var = stuff[j].trim();
+				if (intRegs.containsKey(var) && intRegCount.containsKey(var)) {
+					line.replace(var, intRegs.get(var));
+				} else if (intRegCount.containsKey(var) && !intRegs.containsKey(var)) {
+					
+				}
+			}
+		}
+	}
+	
+	private String findNewMin(Map<String,String> regs, Map<String,Integer> regCount, String[] notInclude){
+		List<String> toList = Arrays.asList(notInclude);
 		int min = Integer.MAX_VALUE;
 		String minVar = "";
 		for (String each: regs.keySet()) {
 			int varCount = regCount.get(each);
-			if (min > varCount) {
+			if (min > varCount && !toList.contains(each)) {
 				min = varCount;
 				minVar = each;
 			}
