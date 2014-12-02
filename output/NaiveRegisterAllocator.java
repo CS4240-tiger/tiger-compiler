@@ -104,16 +104,20 @@ public class NaiveRegisterAllocator {
 							mipsMemAssign(temp, "assign, " + temp + ", 0, ");
 						}
 					} else {
-						int lineIndex = output.indexOf(line);
+						int lineIndex = output.indexOf(line.replaceAll("$", ""));
 						String targetRegister = useBestRegister(temp); // Get most appropriate register
 						// Load before use
 						output.add(lineIndex, genMipsLoad(temp, targetRegister)[0]);
 						output.add(lineIndex + 1, genMipsLoad(temp, targetRegister)[1]);
 						// Replace use with register
 						output.set(lineIndex + 2, output.get(lineIndex + 2).replace(temp, targetRegister));
+						line = output.get(lineIndex + 2);
 						// Store after use
 						output.add(lineIndex + 3, genMipsStore(temp, targetRegister)[0]);
 						output.add(lineIndex + 4, genMipsStore(temp, targetRegister)[1]);
+						
+						// Advance index to ignore IR lines
+						i += 5;
 					}
 				}
 				
