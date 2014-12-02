@@ -3,6 +3,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 
 public class CodeBlock {
@@ -40,7 +41,17 @@ public class CodeBlock {
 	/**
 	 * Map for all the fixedpt registers
 	 */
-	private Map<String,String> fixeptRegs;
+	private Map<String,String> fixedptRegs;
+	
+	/**
+	 * Keeps track of all the times the integer registers have been used. This is used for the heuristic
+	 */
+	private Map<String,Integer> intRegCount;
+	
+	/**
+	 * Keeps track of all the times the fixedpt registers have been used. This is used for the heuristic
+	 */
+	private Map<String,Integer> fixedptRegCount;
 	
 	/**
 	 * All the available integer registers
@@ -59,15 +70,6 @@ public class CodeBlock {
 		"$f22", "$f23", "$f24", "$f25", "$f26", "$f27", "$f28", 
 		"$f29", "$f30", "$f31"};
 	
-	/**
-	 * The number of total integer variables
-	 */
-	private int numIntVars;
-	
-	/**
-	 * The number of total fixedpt variables
-	 */
-	private int numFixedPtVars;
 	
 	/**
 	 * list of variables that were assigned in this block for store statements later
@@ -92,11 +94,11 @@ public class CodeBlock {
 		this.code = new ArrayList<String>(Arrays.asList(code));
 		this.id = id;
 		this.intRegs = new HashMap<String,String>();
-		this.fixeptRegs = new HashMap<String,String>();
-		this.numIntVars = 0;
-		this.numFixedPtVars= 0;
+		this.fixedptRegs = new HashMap<String,String>();
 		this.assignedVars = new ArrayList<String>();
 		this.usedVars = new ArrayList<String>();
+		this.intRegCount = new HashMap<String,Integer>();
+		this.fixedptRegCount = new HashMap<String,Integer>();
 	}
 	
 	public void allocateRegs(List<CodeBlock> allCodeBlocks, Map<String,String> typeMap) {
@@ -104,18 +106,91 @@ public class CodeBlock {
 			String codeLine = code.get(i);
 			searchLine(codeLine, allCodeBlocks, typeMap);
 		}
-		if (numIntVars < allIntRegs.length) {
-			for (int i = 0; i < numIntVars; i++) {
-				//intRegs.put(key, value)
+		if (intRegCount.size() <= allIntRegs.length) {
+			Set<String> register = typeMap.keySet();
+			int index = 0;
+			for (String reg: register) {
+				if (typeMap.get(reg).equals("int")) {
+					intRegs.put(reg, allIntRegs[index]);
+					index++;
+				}
 			}
 			System.out.println("all int regs can be allocated");
+		} else {
+			int min = Integer.MAX_VALUE;
+			String minVar = ""; 
+			int index = 0;
+			for (String each: intRegCount.keySet()) {
+				int thisCount = intRegCount.get(each);
+				if (min > thisCount) {
+					min = thisCount;
+					minVar = each;
+				}
+				if (index > allIntRegs.length && thisCount > min) {
+					String reg = intRegs.get(minVar);
+					intRegs.remove(minVar);
+					intRegs.put(each, reg);
+					// finds new min in intRegs
+					minVar = findNewMin(intRegs, intRegCount);
+					min = intRegCount.get(minVar);
+				} else {
+					intRegs.put(each, allIntRegs[index]);
+				}
+				index++;
+			}
 		}
-		if (numFixedPtVars < allFixedPtRegs.length) {
+		if (fixedptRegCount.size() <= allFixedPtRegs.length) {
+			Set<String> register = typeMap.keySet();
+			int index = 0;
+			for (String reg: register) {
+				if (typeMap.get(reg).equals("fixedpt")) {
+					fixedptRegs.put(reg, allFixedPtRegs[index]);
+					index++;
+				}
+			}
 			System.out.println("all fixedpt regs can be allocated");
+		} else {
+			int min = Integer.MAX_VALUE;
+			String minVar = ""; 
+			int index = 0;
+			for (String each: fixedptRegCount.keySet()) {
+				int thisCount = fixedptRegCount.get(each);
+				if (min > thisCount) {
+					min = thisCount;
+					minVar = each;
+				}
+				if (index > allFixedPtRegs.length && thisCount > min) {
+					String reg = fixedptRegs.get(minVar);
+					fixedptRegs.remove(minVar);
+					fixedptRegs.put(each, reg);
+					// finds new min in intRegs
+					minVar = findNewMin(fixedptRegs, fixedptRegCount);
+					min = fixedptRegCount.get(minVar);
+				} else {
+					fixedptRegs.put(each, allFixedPtRegs[index]);
+				}
+				index++;
+			}
 		}
-		System.out.println("Int Vars: " +numIntVars);
-		System.out.println("Fixedpt Vars: "+numFixedPtVars);
+		//System.out.println("Int Vars: " +intRegCount.size());
+		for (String each: intRegCount.keySet()) {
+			System.out.println(each +":"+intRegCount.get(each));
+		}
+		System.out.println("Fixedpt Vars: "+fixedptRegCount.size());
 		System.out.println("Return type: "+this.returnType);
+	}
+	
+	private String findNewMin(Map<String,String> regs, Map<String,Integer> regCount){
+		int min = Integer.MAX_VALUE;
+		String minVar = "";
+		for (String each: regs.keySet()) {
+			int varCount = regCount.get(each);
+			if (min > varCount) {
+				min = varCount;
+				minVar = each;
+			}
+		}
+		return minVar;
 	}
 	
 	private void searchLine(String codeLine, List<CodeBlock> allCodeBlocks, Map<String,String> typeMap) {
@@ -124,23 +199,19 @@ public class CodeBlock {
 			String asignee = breakUp[1].trim();
 			String asigner = breakUp[2].trim();
 			String asignerNums = asigner.replaceAll("[^\\d.]", "");
+			String type;
 			if (asigner.length()==asignerNums.length() && asignerNums.indexOf(".") != -1) {
 				typeMap.put(asignee, "fixedpt");
-				numFixedPtVars++;
+				type = "fixedpt";
 			} else if (asigner.length()==asignerNums.length() && asignerNums.indexOf(".") == -1) {
 				typeMap.put(asignee, "int");
-				numIntVars++;
+				type = "int";
 			} else {
-				String type = findType(asigner, typeMap);
-				if (type.equals("int") ) {
-					numIntVars++;
-				} else if (type.equals("fixedpt")) {
-					numFixedPtVars++;
-				}
+				type = findType(asigner, typeMap);
 				typeMap.put(asignee, type);
-				addToUsed(asigner, typeMap);
+				addToUsed(asigner, type);
 			}
-			addToAssigned(asignee);
+			addToAssigned(asignee,type);
 		} else if (codeLine.contains("add") || codeLine.contains("sub") || codeLine.contains("mult") || 
 				codeLine.contains("div") || codeLine.contains("and") || codeLine.contains("or")) {
 			String operator1 = breakUp[1].trim();
@@ -150,15 +221,13 @@ public class CodeBlock {
 			String asigneeType;
 			if (type1.equals("fixedpt") || type2.equals("fixedpt")) {
 				asigneeType = "fixedpt";
-				numFixedPtVars++;
 			} else {
 				asigneeType = "int";
-				numIntVars++;
 			}
 			typeMap.put(breakUp[3].trim(),asigneeType);
-			addToUsed(operator1,typeMap);
-			addToUsed(operator2, typeMap);
-			addToAssigned(breakUp[3].trim());
+			addToUsed(operator1, findType(operator1,typeMap));
+			addToUsed(operator2, findType(operator1,typeMap));
+			addToAssigned(breakUp[3].trim(), asigneeType);
 		} else if (codeLine.contains("callr")) {
 			String returnVar = breakUp[1].trim();
 			String funcName = breakUp[2].trim();
@@ -170,29 +239,27 @@ public class CodeBlock {
 					break;
 				}
 			}
-			if (funcReturnType.equals("int")) {
-				numIntVars++;
-			} else if (funcReturnType.equals("fixedpt")) {
-				numFixedPtVars++;
-			}
 			typeMap.put(returnVar,funcReturnType);
 			addFuncParams(breakUp, 3, typeMap);
-			addToAssigned(returnVar);
+			addToAssigned(returnVar, funcReturnType);
 		} else if (codeLine.contains("return") && this.returnType == null) {
-			String returnVarType = findType(breakUp[1].trim(), typeMap);
+			String varName = breakUp[1].trim();
+			String returnVarType = findType(varName, typeMap);
+			addToUsed(varName,returnVarType);
 			this.returnType = returnVarType; 
 		} else if (breakUp[0].contains("br")) {
 			String oneVar = breakUp[1].trim();
 			String twoVar = breakUp[2].trim();
-			addToUsed(oneVar,typeMap);
-			addToUsed(twoVar,typeMap);
+			addToUsed(oneVar,findType(oneVar, typeMap));
+			addToUsed(twoVar,findType(twoVar, typeMap));
 		}
 	}
 	
 	private void addFuncParams(String[] breakUp, int start, Map<String,String> typeMap) {
 		for (int i = start; i < breakUp.length; i++) {
 			if (!breakUp[i].trim().equals("")) {
-				addToUsed(breakUp[i].trim(),typeMap);
+				String var = breakUp[i].trim();
+				addToUsed(var,findType(var,typeMap));
 			}
 		}
 	}
@@ -201,23 +268,43 @@ public class CodeBlock {
 	 * This function decides whether or not the variable should be loaded at the beginning of the block
 	 * @param operator the variable used in math operations
 	 */
-	private void addToUsed(String operator, Map<String,String> typeMap) {
+	private void addToUsed(String operator, String type) {
 		//If used without being assigned first
 		if (!assignedVars.contains(operator)) {
-			String type = findType(operator,typeMap); 
-			if (type.equals("int")) {
-				numIntVars++;
-			} else if (type.equals("fixedpt")) {
-				numFixedPtVars++;
-			}
 			usedVars.add(operator);
+		}
+		if (type.equals("int")) {
+			if (!intRegCount.containsKey(operator)) {
+				intRegCount.put(operator, 2);
+			} else {
+				intRegCount.put(operator, intRegCount.get(operator)+2);
+			}
+		} else if (type.equals("fixedpt")) {
+			if (!fixedptRegCount.containsKey(operator)) {
+				fixedptRegCount.put(operator, 2);
+			} else {
+				fixedptRegCount.put(operator, fixedptRegCount.get(operator)+2);
+			}
 		}
 	}
 	
-	private void addToAssigned(String variable) {
+	private void addToAssigned(String variable,String type) {
 		//If it already wasn't assigned at some point
 		if (!assignedVars.contains(variable)) {
 			assignedVars.add("variable");
+		}
+		if (type.equals("fixedpt")) {
+			if (!fixedptRegCount.containsKey(variable)) {
+				fixedptRegCount.put(variable, 1);
+			} else {
+				fixedptRegCount.put(variable, fixedptRegCount.get(variable)+1);
+			}
+		} else if (type.equals("int")) {
+			if (!intRegCount.containsKey(variable)) {
+				intRegCount.put(variable, 1);
+			} else {
+				intRegCount.put(variable, intRegCount.get(variable)+1);
+			}
 		}
 	}
 	/**
