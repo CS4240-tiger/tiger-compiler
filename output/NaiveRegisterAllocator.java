@@ -3,7 +3,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 /**
  * A NaiveRegistorAllocator is a class which takes in IR-generated code as 
@@ -153,10 +152,12 @@ public class NaiveRegisterAllocator {
 		// assign $a, $b, => [$a, $b, ]
 		// assignComponents[0] = target
 		// assignComponents[1] = value
-		// MIPS: label: .word value
+		// MIPS (if int): label: .word value
+		// MIPS (if fixedpt): label: .float value
 		
 		String[] assignComponents = line.replace(" ",  "").replace("assign", "").split(",");
-		mipsPreface.add(assignComponents[0] + ": .word " + assignComponents[1]);
+		mipsPreface.add(assignComponents[0] + (assignComponents[1].contains(".") 
+				? ": .float " : ": .word ") + assignComponents[1]);
 	}
 	
 	/**
@@ -207,7 +208,7 @@ public class NaiveRegisterAllocator {
 		// Iterate through .data
 		for (String temp : mipsPreface) {
 			if (temp.contains(label)) {
-				if (temp.split("\\s+")[2].contains(".")) {
+				if (temp.split("\\s+")[1].contains(".float")) {
 					// This is a fixedpt
 					isInt = false;
 				}
