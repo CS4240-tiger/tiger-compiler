@@ -89,11 +89,11 @@ public class NaiveRegisterAllocator {
 		// Search through IR and add all temp references to foundTemps list
 		for (int i = 0; i < output.size(); i++) {
 			line = output.get(i);
-			
 			tempIndexes = findTempInLine(line);
-			if (!tempIndexes.isEmpty()) {
+			// Assume every line containing the register delimiter is already MIPS
+			if (!line.contains("$") && !tempIndexes.isEmpty()) {
 				for (int index : tempIndexes) {
-					temp = line.split("\\s+")[index];
+					temp = line.replaceAll(",", "").split("\\s+")[index];
 					if (!foundTemps.contains(temp)) {
 						foundTemps.add(temp);
 						if (line.toLowerCase().contains("assign")) {
@@ -101,17 +101,19 @@ public class NaiveRegisterAllocator {
 							mipsMemAssign(temp, line);
 						} else {
 							/* Assign default value */
-							mipsMemAssign(temp, "assign " + temp + ", 0, ");
+							mipsMemAssign(temp, "assign, " + temp + ", 0, ");
 						}
 					} else {
 						int lineIndex = output.indexOf(line);
 						String targetRegister = useBestRegister(temp); // Get most appropriate register
 						// Load before use
 						output.add(lineIndex, genMipsLoad(temp, targetRegister)[0]);
-						output.add(lineIndex, genMipsLoad(temp, targetRegister)[1]);
+						output.add(lineIndex + 1, genMipsLoad(temp, targetRegister)[1]);
+						// Replace use with register
+						output.set(lineIndex + 2, output.get(lineIndex + 2).replace(temp, targetRegister));
 						// Store after use
-						output.add(lineIndex, genMipsStore(temp, targetRegister)[0]);
-						output.add(lineIndex, genMipsStore(temp, targetRegister)[1]);
+						output.add(lineIndex + 3, genMipsStore(temp, targetRegister)[0]);
+						output.add(lineIndex + 4, genMipsStore(temp, targetRegister)[1]);
 					}
 				}
 				
@@ -130,7 +132,7 @@ public class NaiveRegisterAllocator {
 	 * @return The indexes where temporary variables are references in the IR line.
 	 */
 	private List<Integer> findTempInLine(String input) {
-		String[] lineSplit = input.split("\\s+");
+		String[] lineSplit = input.replaceAll(",", "").split("\\s+");
 		List<Integer> indexes = new ArrayList<Integer>();
 		for (int i = 0; i < lineSplit.length; i++) {
 			if (lineSplit[i].matches("[t][0-9]+")) {
@@ -150,14 +152,14 @@ public class NaiveRegisterAllocator {
 	 */
 	private void mipsMemAssign(String label, String line) {
 		// assign $a, $b, => [$a, $b, ]
-		// assignComponents[0] = target
-		// assignComponents[1] = value
+		// assignComponents[1] = target
+		// assignComponents[2] = value
 		// MIPS (if int): label: .word value
 		// MIPS (if fixedpt): label: .float value
 		
 		String[] assignComponents = line.replace(" ",  "").replace("assign", "").split(",");
-		mipsPreface.add(assignComponents[0] + (assignComponents[1].contains(".") 
-				? ": .float " : ": .word ") + assignComponents[1]);
+		mipsPreface.add(assignComponents[1] + (assignComponents[2].contains(".") 
+				? ": .float " : ": .word ") + assignComponents[2]);
 	}
 	
 	/**

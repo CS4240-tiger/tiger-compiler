@@ -43,8 +43,8 @@ public class TestTreeWalk {
 		List<String> output = new LinkedList<String>();
 		Scanner scan = new Scanner(new File(path));
 
-		while (scan.hasNext()){
-			output.add(scan.next());
+		while (scan.hasNextLine()){
+			output.add(scan.nextLine());
 		}
 		
 		scan.close();
