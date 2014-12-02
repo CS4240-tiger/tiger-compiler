@@ -91,12 +91,7 @@ public class NaiveRegisterAllocator {
 			line = output.get(i);
 			tempIndexes = findTempInLine(line);
 			
-			// Test - these should be the same
-			boolean test = line.indexOf("\\$") != -1;
-			boolean test2 = line.contains("\\$");
-			
-			// Assume every line containing the register delimiter is already MIPS
-			if (!line.contains("$") && !tempIndexes.isEmpty()) {
+			if (!tempIndexes.isEmpty()) {
 				for (int index : tempIndexes) {
 					temp = line.replaceAll(",", "").split("\\s+")[index];
 					if (!foundTemps.contains(temp)) {
@@ -169,9 +164,48 @@ public class NaiveRegisterAllocator {
 		// MIPS (if int): label: .word value
 		// MIPS (if fixedpt): label: .float value
 		
-		String[] assignComponents = line.replace(" ",  "").replace("assign", "").split(",");
+		String[] assignComponents = line.replace(" ",  "")
+				.replace("assign", "").split(",");
+		
+		if (!assignComponents[2].matches("[0-9]+(.[0-9]+)?")) {
+			if (assignComponents[2].matches("[t][0-9]+")) {
+				// Temporary value, look it up
+				assignComponents[2] = getValueFromLabel(assignComponents[2]);
+			} else {
+				assignComponents[2] = reverseVarLookup(assignComponents[2], line);
+			}
+		}
+		
 		mipsPreface.add(assignComponents[1] + (assignComponents[2].contains(".") 
 				? ": .float " : ": .word ") + assignComponents[2]);
+	}
+	
+	/**
+	 * Looks up from the current line in the IR for a variable declaration, 
+	 * given the variable to look for.
+	 * 
+	 * Returns the value of that variable.
+	 * 
+	 * @param var The variable to search for.
+	 * @param line The input line to look up from.
+	 * @return The variable's value.
+	 */
+	private String reverseVarLookup(String var, String line) {
+		int lineIndex = output.indexOf(line);
+		
+		while (!output.get(lineIndex).contains("assign, " + var)) {
+			lineIndex--;
+		}
+		
+		String[] assignComponents = output.get(lineIndex)
+				.replace(" ",  "").replace("assign", "").split(",");
+		
+		if (!assignComponents[2].matches("[0-9]+(.[0-9]+)?")) {
+			// Recurse for that value
+			return reverseVarLookup(assignComponents[2], output.get(lineIndex));
+		}
+		
+		return assignComponents[2];
 	}
 	
 	/**
@@ -286,6 +320,22 @@ public class NaiveRegisterAllocator {
 		while (i.hasNext()) {
 			output.add(i.next());
 		}
+	}
+	
+	/**
+	 * Returns the value of a previously stored temporary.
+	 * 
+	 * @param label The name of the temporary to search for.
+	 * @return The value of the temporary in memory.
+	 */
+	private String getValueFromLabel(String label) {
+		for (String temp : mipsPreface) {
+			if (temp.contains(label)) {
+				return temp.split("\\s+")[2];
+			}
+		}
+		
+		return null;
 	}
 	
 	/**
