@@ -90,6 +90,11 @@ public class NaiveRegisterAllocator {
 		for (int i = 0; i < output.size(); i++) {
 			line = output.get(i);
 			tempIndexes = findTempInLine(line);
+			
+			// Test - these should be the same
+			boolean test = line.indexOf("\\$") != -1;
+			boolean test2 = line.contains("\\$");
+			
 			// Assume every line containing the register delimiter is already MIPS
 			if (!line.contains("$") && !tempIndexes.isEmpty()) {
 				for (int index : tempIndexes) {
@@ -103,22 +108,22 @@ public class NaiveRegisterAllocator {
 							/* Assign default value */
 							mipsMemAssign(temp, "assign, " + temp + ", 0, ");
 						}
-					} else {
-						int lineIndex = output.indexOf(line.replaceAll("$", ""));
-						String targetRegister = useBestRegister(temp); // Get most appropriate register
-						// Load before use
-						output.add(lineIndex, genMipsLoad(temp, targetRegister)[0]);
-						output.add(lineIndex + 1, genMipsLoad(temp, targetRegister)[1]);
-						// Replace use with register
-						output.set(lineIndex + 2, output.get(lineIndex + 2).replace(temp, targetRegister));
-						line = output.get(lineIndex + 2);
-						// Store after use
-						output.add(lineIndex + 3, genMipsStore(temp, targetRegister)[0]);
-						output.add(lineIndex + 4, genMipsStore(temp, targetRegister)[1]);
-						
-						// Advance index to ignore IR lines
-						i += 5;
 					}
+						
+					int lineIndex = output.indexOf(line.replaceAll("$", ""));
+					String targetRegister = useBestRegister(temp); // Get most appropriate register
+					// Load before use
+					output.add(lineIndex, genMipsLoad(temp, targetRegister)[0]);
+					output.add(lineIndex + 1, genMipsLoad(temp, targetRegister)[1]);
+					// Replace use with register
+					output.set(lineIndex + 2, output.get(lineIndex + 2).replace(temp, targetRegister));
+					line = output.get(lineIndex + 2);
+					// Store after use
+					output.add(lineIndex + 3, genMipsStore(temp, targetRegister)[0]);
+					output.add(lineIndex + 4, genMipsStore(temp, targetRegister)[1]);
+					
+					// Advance index to ignore IR lines
+					i += 4;	
 				}
 				
 			}
@@ -126,6 +131,9 @@ public class NaiveRegisterAllocator {
 			// All registers are now free!
 			unuseAllRegisters();
 		}
+		
+		// End .data section
+		mipsPreface.add(".text");
 	}
 	
 	/**
@@ -278,5 +286,17 @@ public class NaiveRegisterAllocator {
 		while (i.hasNext()) {
 			output.add(i.next());
 		}
+	}
+	
+	/**
+	 * Returns the mixed output appended to the .data preface.
+	 * 
+	 * @return Mixed MIPS-IR output.
+	 */
+	public List<String> getMixedOutput() {
+		List<String> mixedOutput = mipsPreface;
+		mixedOutput.addAll(output);
+		
+		return mixedOutput;
 	}
 }

@@ -31,7 +31,7 @@ public class TestTreeWalk {
             
             treeWalker.tiger_program(); // Walk tree and output IR
             NaiveRegisterAllocator regAlloc = new NaiveRegisterAllocator(readFileToList(OUTPUT_IR_PATH));
-            for (String output : regAlloc.output) {
+            for (String output : regAlloc.getMixedOutput()) {
             	System.out.println(output);
             }
         } catch (RecognitionException e) {
