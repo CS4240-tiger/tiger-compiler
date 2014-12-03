@@ -40,7 +40,10 @@ public class CFGIntraBlockAllocation {
 	}
 	
 	public void allocateAllBlocks() {
-		allCodeBlocks.get(3).allocateRegs(allCodeBlocks, typeMap);
+		for (CodeBlock block: allCodeBlocks) {
+			block.allocateRegs(allCodeBlocks, typeMap);
+			block.printMIPS();
+		}
 	}
 	
 	
@@ -78,7 +81,7 @@ public class CFGIntraBlockAllocation {
 		allCodeBlocks.add(id, newCodeBlock);
 		graph.put(newCodeBlock, new LinkedList<CodeBlock>());
 		//System.out.println("id:"+String.valueOf(id)+"|S: "+code[count]+"|E: "+code[code.length - 1]);
-		System.out.println(allCodeBlocks.size());
+		//System.out.println(allCodeBlocks.size());
 	}
 	
 	public void buildCFG() {

@@ -107,7 +107,8 @@ public class CodeBlock {
 			searchLine(codeLine, allCodeBlocks, typeMap);
 		}
 		if (intRegCount.size() <= allIntRegs.length) {
-			Set<String> register = typeMap.keySet();
+			//System.out.println(intRegCount.size());
+			Set<String> register = intRegCount.keySet();
 			int index = 0;
 			for (String reg: register) {
 				if (typeMap.get(reg).equals("int")) {
@@ -115,7 +116,7 @@ public class CodeBlock {
 					index++;
 				}
 			}
-			System.out.println("all int regs can be allocated");
+			//System.out.println("all int regs can be allocated");
 		} else {
 			int min = Integer.MAX_VALUE;
 			String minVar = ""; 
@@ -140,7 +141,7 @@ public class CodeBlock {
 			}
 		}
 		if (fixedptRegCount.size() <= allFixedPtRegs.length) {
-			Set<String> register = typeMap.keySet();
+			Set<String> register = fixedptRegCount.keySet();
 			int index = 0;
 			for (String reg: register) {
 				if (typeMap.get(reg).equals("fixedpt")) {
@@ -148,7 +149,7 @@ public class CodeBlock {
 					index++;
 				}
 			}
-			System.out.println("all fixedpt regs can be allocated");
+			//System.out.println("all fixedpt regs can be allocated");
 		} else {
 			int min = Integer.MAX_VALUE;
 			String minVar = ""; 
@@ -163,7 +164,7 @@ public class CodeBlock {
 					String reg = fixedptRegs.get(minVar);
 					fixedptRegs.remove(minVar);
 					fixedptRegs.put(each, reg);
-					// finds new min in intRegs
+					// finds new min in fixedptRegs
 					minVar = findNewMin(fixedptRegs, fixedptRegCount, new String[1]);
 					min = fixedptRegCount.get(minVar);
 				} else {
@@ -173,27 +174,91 @@ public class CodeBlock {
 			}
 		}
 		replaceVars();
-		//System.out.println("Int Vars: " +intRegCount.size());
+		/**System.out.println("Int Vars: " +intRegCount.size());
 		for (String each: intRegCount.keySet()) {
 			System.out.println(each +":"+intRegCount.get(each));
 		}
 		System.out.println("Fixedpt Vars: "+fixedptRegCount.size());
-		System.out.println("Return type: "+this.returnType);
+		System.out.println("Return type: "+this.returnType);**/
+	}
+	
+	public void printMIPS() {
+		for (String each: code) {
+			System.out.println(each);
+		}
 	}
 	
 	private void replaceVars() {
-		for (int i = 0; i < code.size(); i++) {
+		List<String> replaceCode = new ArrayList<String>();
+		boolean hasLabel = false;
+		if (code.get(0).contains(":")) {
+			replaceCode.add(code.get(0));
+			hasLabel = true;
+		}
+		for (String each: intRegs.keySet()) {
+			genMipsLoad(each,intRegs.get(each),replaceCode);
+		}
+		for (String each:fixedptRegs.keySet()) {
+			genMipsLoad(each,fixedptRegs.get(each), replaceCode);
+		}
+		int startIndex;
+		if (!hasLabel) {
+			startIndex = 0;
+		} else {
+			startIndex = 1;
+		}
+		for (int i = startIndex; i < code.size(); i++) {
 			String line = code.get(i);
-			String[] stuff = line.replace(" ", "").split(",");
-			for (int j = 1; j < stuff.length; j++) {
-				String var = stuff[j].trim();
-				if (intRegs.containsKey(var) && intRegCount.containsKey(var)) {
-					line.replace(var, intRegs.get(var));
-				} else if (intRegCount.containsKey(var) && !intRegs.containsKey(var)) {
-					
-				}
+			String newCode = handleLine(line);
+			replaceCode.add(newCode);
+		}
+		for (String each: intRegs.keySet()) {
+			genMipsStore(each,intRegs.get(each),replaceCode);
+		}
+		for (String each:fixedptRegs.keySet()) {
+			genMipsStore(each,fixedptRegs.get(each), replaceCode);
+		}
+		this.code = replaceCode;
+	}
+	
+	private String handleLine(String line) {
+		String[] stuff = line.replace(" ", "").split(",");
+		String newLine = stuff[0]+", ";
+		for (int j = 1; j < stuff.length; j++) {
+			String var = stuff[j].trim();
+			if (!intRegs.containsKey(var) && intRegCount.containsKey(var)) {
+				String min = findNewMin(intRegs,intRegCount,stuff);
+				String register = intRegs.get(min);
+				genMipsStore(min,register,code);
+				intRegs.remove(min);
+				intRegs.put(var, register);
+				newLine = newLine + register + ", ";
+				//newLine = newLine + 
+				//line.replace(var, register);
+				//System.out.println("replaced");
+			} else if (!fixedptRegs.containsKey(var) && fixedptRegCount.containsKey(var)) {
+				String min = findNewMin(fixedptRegs,fixedptRegCount,stuff);
+				String register = fixedptRegs.get(min);
+				genMipsStore(min,register,code);
+				fixedptRegs.remove(min);
+				fixedptRegs.put(var, register);
+				line.replace(var,register);
+				newLine = newLine + register + ", ";
+				//System.out.println("replaced");
+			} else if (intRegs.containsKey(var) && intRegCount.containsKey(var)) {
+				//line.replace(var,intRegs.get(var));
+				newLine = newLine + intRegs.get(var)+", ";
+				//System.out.println(var +" replaced with " + intRegs.get(var));
+			} else if (fixedptRegs.containsKey(var) && fixedptRegCount.containsKey(var)) {
+				//line.replace(var,fixedptRegs.get(var));
+				newLine = newLine + fixedptRegs.get(var)+", ";
+				//System.out.println("replaced");
+			} else {
+				newLine = newLine + var + ", ";
 			}
 		}
+		//System.out.println(newLine);
+		return newLine;	
 	}
 	
 	private String findNewMin(Map<String,String> regs, Map<String,Integer> regCount, String[] notInclude){
@@ -246,6 +311,7 @@ public class CodeBlock {
 			addToUsed(operator2, findType(operator1,typeMap));
 			addToAssigned(breakUp[3].trim(), asigneeType);
 		} else if (codeLine.contains("callr")) {
+			//System.out.println(codeLine);
 			String returnVar = breakUp[1].trim();
 			String funcName = breakUp[2].trim();
 			String funcReturnType = "";
@@ -290,13 +356,13 @@ public class CodeBlock {
 		if (!assignedVars.contains(operator)) {
 			usedVars.add(operator);
 		}
-		if (type.equals("int")) {
+		if (type != null && type.equals("int")) {
 			if (!intRegCount.containsKey(operator)) {
 				intRegCount.put(operator, 2);
 			} else {
 				intRegCount.put(operator, intRegCount.get(operator)+2);
 			}
-		} else if (type.equals("fixedpt")) {
+		} else if (type != null && type.equals("fixedpt")) {
 			if (!fixedptRegCount.containsKey(operator)) {
 				fixedptRegCount.put(operator, 2);
 			} else {
@@ -310,13 +376,13 @@ public class CodeBlock {
 		if (!assignedVars.contains(variable)) {
 			assignedVars.add("variable");
 		}
-		if (type.equals("fixedpt")) {
+		if (type != null && type.equals("fixedpt")) {
 			if (!fixedptRegCount.containsKey(variable)) {
 				fixedptRegCount.put(variable, 1);
 			} else {
 				fixedptRegCount.put(variable, fixedptRegCount.get(variable)+1);
 			}
-		} else if (type.equals("int")) {
+		} else if (type != null && type.equals("int")) {
 			if (!intRegCount.containsKey(variable)) {
 				intRegCount.put(variable, 1);
 			} else {
@@ -332,13 +398,17 @@ public class CodeBlock {
 	 */
 	private String findType(String asignee, Map<String,String> typeMap) {
 		String type = typeMap.get(asignee);
-		if (type.equals("int")) {
-			return "int";
-		} else if (type.equals("fixedpt")) {
-			return "fixedpt";
-		} else {
-			return findType(type, typeMap);
+		if (type != null) {
+			if (type.equals("int")) {
+				return "int";
+			} else if (type.equals("fixedpt")) {
+				return "fixedpt";
+			} else {
+				return findType(type, typeMap);
+			}
 		}
+		//shouldn't happen
+		return null;
 	}
 	
 	public boolean equals(CodeBlock block2) {
@@ -364,14 +434,10 @@ public class CodeBlock {
 	 * @param register The target register to load to.
 	 * @return The String MIPS load instruction.
 	 */
-	private String[] genMipsLoad(String label, String register) {
-		// We'll use the assembler register $at for loading the address
-		String[] result = new String[2];
+	private void genMipsLoad(String label, String register, List<String> code) {
+		code.add("la $at, " + label);
+		code.add("lw " + register + ", 0($at)");
 		
-		result[0] = "la $at, " + label;
-		result[1] = "lw " + register + ", 0($at)";
-		
-		return result;
 	}
 	
 	/**
@@ -381,13 +447,9 @@ public class CodeBlock {
 	 * @param register The source register to store from.
 	 * @return The String MIPS load instruction.
 	 */
-	private String[] genMipsStore(String label, String register) {
-		// We'll use the assembler register $at for loading the address
-		String[] result = new String[2];
+	private void genMipsStore(String label, String register, List<String> code) {
 		
-		result[0] = "la $at, " + label;
-		result[1] = "sw " + register + ", 0($at)";
-		
-		return result;
+		code.add("la $at, " + label);
+		code.add("sw " + register + ", 0($at)");
 	}
 }
