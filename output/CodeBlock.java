@@ -21,6 +21,7 @@ public class CodeBlock {
 	 * All the code in the block separated by lines
 	 */
 	private List<String> code;
+	private List<String> replaceCode;
 	
 	/**
 	 * the id for this code block
@@ -118,6 +119,7 @@ public class CodeBlock {
 			}
 			//System.out.println("all int regs can be allocated");
 		} else {
+			System.out.println("all int regs cannot be allocated");
 			int min = Integer.MAX_VALUE;
 			String minVar = ""; 
 			int index = 0;
@@ -151,6 +153,7 @@ public class CodeBlock {
 			}
 			//System.out.println("all fixedpt regs can be allocated");
 		} else {
+			System.out.println("all fixedpt regs canot be allocated");
 			int min = Integer.MAX_VALUE;
 			String minVar = ""; 
 			int index = 0;
@@ -189,7 +192,7 @@ public class CodeBlock {
 	}
 	
 	private void replaceVars() {
-		List<String> replaceCode = new ArrayList<String>();
+		replaceCode = new ArrayList<String>();
 		boolean hasLabel = false;
 		if (code.get(0).contains(":")) {
 			replaceCode.add(code.get(0));
@@ -209,8 +212,7 @@ public class CodeBlock {
 		}
 		for (int i = startIndex; i < code.size(); i++) {
 			String line = code.get(i);
-			String newCode = handleLine(line);
-			replaceCode.add(newCode);
+			handleLine(line);
 		}
 		for (String each: intRegs.keySet()) {
 			genMipsStore(each,intRegs.get(each),replaceCode);
@@ -221,7 +223,7 @@ public class CodeBlock {
 		this.code = replaceCode;
 	}
 	
-	private String handleLine(String line) {
+	private void handleLine(String line) {
 		String[] stuff = line.replace(" ", "").split(",");
 		String newLine = stuff[0]+", ";
 		for (int j = 1; j < stuff.length; j++) {
@@ -229,7 +231,7 @@ public class CodeBlock {
 			if (!intRegs.containsKey(var) && intRegCount.containsKey(var)) {
 				String min = findNewMin(intRegs,intRegCount,stuff);
 				String register = intRegs.get(min);
-				genMipsStore(min,register,code);
+				genMipsStore(min,register,replaceCode);
 				intRegs.remove(min);
 				intRegs.put(var, register);
 				newLine = newLine + register + ", ";
@@ -239,10 +241,10 @@ public class CodeBlock {
 			} else if (!fixedptRegs.containsKey(var) && fixedptRegCount.containsKey(var)) {
 				String min = findNewMin(fixedptRegs,fixedptRegCount,stuff);
 				String register = fixedptRegs.get(min);
-				genMipsStore(min,register,code);
+				genMipsStore(min,register,replaceCode);
 				fixedptRegs.remove(min);
 				fixedptRegs.put(var, register);
-				line.replace(var,register);
+				//line.replace(var,register);
 				newLine = newLine + register + ", ";
 				//System.out.println("replaced");
 			} else if (intRegs.containsKey(var) && intRegCount.containsKey(var)) {
@@ -258,7 +260,7 @@ public class CodeBlock {
 			}
 		}
 		//System.out.println(newLine);
-		return newLine;	
+		replaceCode.add(newLine);	
 	}
 	
 	private String findNewMin(Map<String,String> regs, Map<String,Integer> regCount, String[] notInclude){
