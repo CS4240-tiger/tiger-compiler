@@ -58,12 +58,30 @@ public class MIPSInstructionSelector {
 		
 		for (int index = 0; index < text.size(); index++) {
 			line = text.get(index);
-			components = splitToComponents(line);
-			// TODO: If it's a normal assignment statement, filter it out
+			
+			// If it's a normal assignment statement, filter it out
 			// (These should be already dealt with in previous phase)
+			while (isAssignDirect(line)) {
+				text.remove(index);
+				line = text.get(index);
+			}
+			
+			components = splitToComponents(line);
 			translatedLine = IR_MIPS_OP_MAPPINGS.get(components[0]);
 			
 		}
+	}
+	
+	/**
+	 * Returns whether or not the given line of IR is of the form:<br />
+	 * 
+	 * <i>assign</i> <b>var</b>, <b>value</b>
+	 * 
+	 * @param line The given line of IR.
+	 * @return true if the line is a direct IR assignment, false otherwise.
+	 */
+	private boolean isAssignDirect(String line) {
+		return splitToComponents(line.replaceAll(" ", "")).length != 4;
 	}
 	
 	/**
