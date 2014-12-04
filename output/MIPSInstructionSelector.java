@@ -88,12 +88,18 @@ public class MIPSInstructionSelector {
 					
 					components[3] = temp;
 				}
-				
-				translatedLine = insertParams(
-					IR_MIPS_OP_MAPPINGS.get(components[0]), 
-					components[1], 
-					components[2], 
-					components[3]);
+
+				if (components[0].contains("return")) {
+					translatedLine = insertParams(
+							IR_MIPS_OP_MAPPINGS.get(components[0]), 
+							components[1], "", "");
+				} else {
+					translatedLine = insertParams(
+						IR_MIPS_OP_MAPPINGS.get(components[0]), 
+						components[1], 
+						components[2], 
+						components[3]);
+				}
 			}
 			
 			// Finally, push the completed MIPS line back to .data
