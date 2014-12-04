@@ -107,12 +107,31 @@ public class MIPSInstructionSelector {
 					// We have to push arguments to the stack
 				} else if (components[0].contains("assign")) {
 					// We have to generate loop labels
+					translatedLine = translatedLine
+						.replace("<ASSIGN-LOOP-LABEL-START>", 
+							"assign-loop-label-" 
+							+ getUniqueLabel(translatedLine) + "-end")
+						.replace("<ASSIGN-LOOP-LABEL-END>", 
+								"assign-loop-label-"
+							+ getUniqueLabel(translatedLine) + "-end");
+						
 				}
 			}
 			
 			// Finally, push the completed MIPS line back to .data
 			text.set(index, translatedLine);
 		}
+	}
+	
+	/**
+	 * Generates a unique label based on a given String's hashcode.
+	 * 
+	 * @param line A given String.
+	 * @return A unique label (based on hashcode).
+	 */
+	private String getUniqueLabel(String line) {
+		return String.valueOf(line.hashCode()).substring(
+				(line.length() / 2), ((line.length() / 2) + 5));
 	}
 	
 	/**
