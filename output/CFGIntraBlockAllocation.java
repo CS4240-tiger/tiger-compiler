@@ -57,24 +57,29 @@ public class CFGIntraBlockAllocation {
 		//gets the actual leader, in this case, the block with main:
 		for (CodeBlock each: allCodeBlocks) {
 			if (each.getLeader().contains("main:")) {
-				leader.add(each);
+				leader.push(each);
 				break;
 			}
 		}
 		while (!leader.isEmpty()) {
+			//System.out.println(leader.isEmpty());
 			CodeBlock currLeader = leader.pop();
 			LinkedList<CodeBlock> currEBB = new LinkedList<CodeBlock>();
 			currEBB.push(currLeader);
-			EBBs.push(currEBB);
+			//EBBs.push(currEBB);
 			LinkedList<CodeBlock> newcurrEBB = new LinkedList<CodeBlock>();
+			//System.out.println(currEBB.isEmpty());
 			while (!currEBB.isEmpty()) {
 				CodeBlock currBlock = currEBB.pop();
+				//System.out.println(graph.get(currBlock).size());
 				newcurrEBB.push(currBlock);
 				for (CodeBlock block2: graph.get(currBlock)) {
+					//System.out.println(numPredecessor(block2));
 					if (numPredecessor(block2) > 1) {
+						//System.out.println("added" + block2.getId());
 						leader.push(block2);
 					} else {
-						currEBB.add(block2);
+						currEBB.push(block2);
 					}
 				}
 			}
@@ -84,10 +89,10 @@ public class CFGIntraBlockAllocation {
 		ArrayList<CodeBlock> newAllEBBs= new ArrayList<CodeBlock>();
 		int id=0;
 		for (LinkedList<CodeBlock> EBB: EBBs) {
-			ArrayList<String> newCode = new ArrayList<String>(0);
+			ArrayList<String> newCode = new ArrayList<String>();
 			while (!EBB.isEmpty()) {
 				CodeBlock block = EBB.pop();
-				System.out.println(block.getCode());
+				//System.out.println(block.getCode());
 				newCode.addAll(block.getCode());
 				//newCode.add
 			}
@@ -98,7 +103,7 @@ public class CFGIntraBlockAllocation {
 			newAllEBBs.add(newBlock);
 			id++;
 		}
-		System.out.println(newAllEBBs.size());
+		//System.out.println(newAllEBBs.size());
 		allEBBs = newAllEBBs;
 	}
 	
@@ -209,7 +214,7 @@ public class CFGIntraBlockAllocation {
 				graph.get(block1).add(allCodeBlocks.get(block1.getId() + 1));
 			}
 		}
-		System.out.println(graph.get(allCodeBlocks.get(0)).size());
+		//System.out.println(graph.get(allCodeBlocks.get(0)).size());
 	}
 	
 	/**
