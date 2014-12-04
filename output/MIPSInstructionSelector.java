@@ -53,7 +53,7 @@ public class MIPSInstructionSelector {
 	 * Translates the IR in .text to MIPS.
 	 */
 	private void translateAll() {
-		String line, translatedLine;
+		String line, translatedLine, temp;
 		String[] components;
 		
 		for (int index = 0; index < text.size(); index++) {
@@ -67,8 +67,27 @@ public class MIPSInstructionSelector {
 			}
 			
 			components = splitToComponents(line);
-			translatedLine = IR_MIPS_OP_MAPPINGS.get(components[0]);
+			if (components.length > 4) {
+				// If the IR line has more than 3 parameters 
+				// (e.g. callr), combine them all to components[3]
+				temp = components[3];
+				for (int compIndex = 4; 
+						compIndex < components.length; compIndex++) {
+					temp += ", " + components[compIndex];
+					components[compIndex] = "<STRIPPED-BY-TRANSLATION>";
+				}
+				
+				components[3] = temp;
+			}
 			
+			translatedLine = insertParams(
+				IR_MIPS_OP_MAPPINGS.get(components[0]), 
+				components[1], 
+				components[2], 
+				components[3]);
+			
+			// Finally, push the completed MIPS line back to .data
+			text.set(index, translatedLine);
 		}
 	}
 	
@@ -82,6 +101,27 @@ public class MIPSInstructionSelector {
 	 */
 	private boolean isAssignDirect(String line) {
 		return splitToComponents(line.replaceAll(" ", "")).length != 4;
+	}
+	
+	/**
+	 * Replaces param designators in a mapped IR-MIPS line with the 
+	 * given input parameters.<br /><br />
+	 * 
+	 * <b>NOTE</b>: If an instruction does not have four parameters, 
+	 * you can safely pass an empty string for the remaining parameters.
+	 * 
+	 * @param mipsLine The direct-mapped IR-MIPS line.
+	 * @param param1 The first parameter to insert. 
+	 * @param param2 The second parameter to insert.
+	 * @param param3 The third parameter to insert.
+	 * @return The completed MIPS line.
+	 */
+	private String insertParams(String mipsLine, String param1, String param2, 
+			String param3) {
+		return mipsLine.replace("<PARAM1>", param1)
+				.replace("<PARAM2>", param2)
+				.replace("<PARAM3>", param3);
+		
 	}
 	
 	/**
