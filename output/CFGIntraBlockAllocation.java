@@ -58,11 +58,16 @@ public class CFGIntraBlockAllocation {
 		for (CodeBlock each: allCodeBlocks) {
 			if (each.getLeader().contains("main:")) {
 				leader.push(each);
+				//System.out.println(each.getId());
+				//System.out.println("edges to:");
+				/**for (int i = 0; i < graph.get(each).size(); i++) {
+					System.out.println(graph.get(each).get(i).getId());
+				}**/
 				break;
 			}
 		}
+		ArrayList<CodeBlock> allLeaders = new ArrayList<CodeBlock>();
 		while (!leader.isEmpty()) {
-			//System.out.println(leader.isEmpty());
 			CodeBlock currLeader = leader.pop();
 			LinkedList<CodeBlock> currEBB = new LinkedList<CodeBlock>();
 			currEBB.push(currLeader);
@@ -73,12 +78,15 @@ public class CFGIntraBlockAllocation {
 				CodeBlock currBlock = currEBB.pop();
 				//System.out.println(graph.get(currBlock).size());
 				newcurrEBB.push(currBlock);
-				for (CodeBlock block2: graph.get(currBlock)) {
+				List<CodeBlock> neighbors = graph.get(currBlock);
+				for (CodeBlock block2: neighbors) {
 					//System.out.println(numPredecessor(block2));
-					if (numPredecessor(block2) > 1) {
+					if (numPredecessor(block2) > 1 && !allLeaders.contains(block2)) {
+						allLeaders.add(block2);
 						//System.out.println("added" + block2.getId());
 						leader.push(block2);
-					} else {
+					} else if (numPredecessor(block2) == 1){
+						//System.out.println("added" + block2.getId());
 						currEBB.push(block2);
 					}
 				}
@@ -172,20 +180,20 @@ public class CFGIntraBlockAllocation {
 			String[] breakUp = last.split(",");
 			String label = "";
 			if (breakUp[0].contains("br")) {
-				//System.out.println(Arrays.toString(breakUp));
+				//System.out.println(breakUp[0]);
 				label = breakUp[3].trim();
 			} else if (breakUp[0].contains("goto")) {
-				//System.out.println(Arrays.toString(breakUp));
+				//System.out.println(breakUp[0]);
 				label = breakUp[1].trim();
 				nextblock = false;
 			} else if (breakUp[0].contains("callr")) {
-				//System.out.println(Arrays.toString(breakUp));
+				//System.out.println(breakUp[0]);
 				label = breakUp[2].trim();
 				nextblock = false;
 				funcCall = true;
 				//System.out.println(label);
 			} else if (breakUp[0].contains("call")) {
-				//System.out.println(Arrays.toString(breakUp));
+				//System.out.println(breakUp[0]);
 				label = breakUp[1].trim();
 				nextblock = false;
 				funcCall = true;
@@ -205,7 +213,8 @@ public class CFGIntraBlockAllocation {
 							}
 						}
 					}
-					if (block2.getLeader().contains(label)) {
+					if (block2.getLeader().trim().equals(label+":") && !block1.equals(block2)) {
+						//System.out.println(block2.getLeader()+" and "+label);
 						graph.get(block1).add(block2);
 					}
 				}
@@ -214,7 +223,9 @@ public class CFGIntraBlockAllocation {
 				graph.get(block1).add(allCodeBlocks.get(block1.getId() + 1));
 			}
 		}
-		//System.out.println(graph.get(allCodeBlocks.get(0)).size());
+		/**for (CodeBlock block:graph.get(allCodeBlocks.get(0))){
+			System.out.println(block.getLeader());
+		}**/
 	}
 	
 	/**
