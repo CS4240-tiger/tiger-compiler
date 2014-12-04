@@ -63,26 +63,43 @@ public class MIPSInstructionSelector {
 		IR_MIPS_OP_MAPPINGS = new HashMap<String, String>();
 		
 		// Map IR instruction -> MIPS instructions here
-		IR_MIPS_OP_MAPPINGS.put("assign", ""); // TODO: Do we even need to add this?
-		// TODO: "assign" is overloaded in IR!
-		IR_MIPS_OP_MAPPINGS.put("add", "add");
-		IR_MIPS_OP_MAPPINGS.put("sub", "sub");
-		IR_MIPS_OP_MAPPINGS.put("mult", "mult");
-		IR_MIPS_OP_MAPPINGS.put("div", ""); // TODO: Translate
-		IR_MIPS_OP_MAPPINGS.put("and", ""); // TODO: Translate
-		IR_MIPS_OP_MAPPINGS.put("or", ""); // TODO: Translate
-		IR_MIPS_OP_MAPPINGS.put("goto", ""); // TODO: Translate
-		IR_MIPS_OP_MAPPINGS.put("breq", ""); // TODO: Translate
-		IR_MIPS_OP_MAPPINGS.put("brneq", ""); // TODO: Translate
-		IR_MIPS_OP_MAPPINGS.put("brlt", ""); // TODO: Translate
-		IR_MIPS_OP_MAPPINGS.put("brgt", ""); // TODO: Translate
-		IR_MIPS_OP_MAPPINGS.put("brgeq", ""); // TODO: Translate
-		IR_MIPS_OP_MAPPINGS.put("brleq", ""); // TODO: Translate
-		IR_MIPS_OP_MAPPINGS.put("return", ""); // TODO: Translate
-		IR_MIPS_OP_MAPPINGS.put("call", ""); // TODO: Translate
-		IR_MIPS_OP_MAPPINGS.put("callr", ""); // TODO: Translate
-		IR_MIPS_OP_MAPPINGS.put("array_store", ""); // TODO: Translate
-		IR_MIPS_OP_MAPPINGS.put("array_load", ""); // TODO: Translate
+		
+		// IR_MIPS_OP_MAPPINGS.put("assign", "$label: $value");
+		// It's assumed that variables are already assigned in previous 
+		// phases, so we're going to assume that assign is referring to 
+		// array static value population only
+		
+		// But we need to handle placing unique labels later on for looping
+		IR_MIPS_OP_MAPPINGS.put("assign", "add $t9, $zero, $zero\n"
+				+ "addi $t8, $zero, $array_size"
+				+ "$assignLoopLabelBeg:\n" 
+				+ "sw $value, $label($t9)\n"
+				+ "addi $t9, $t9, 1\n"
+				+ "bne $t8, $t9, $assignLoopLabelEnd");
+		IR_MIPS_OP_MAPPINGS.put("add", "add $dest, $param1, $param2");
+		IR_MIPS_OP_MAPPINGS.put("sub", "sub $dest, $param1, $param2");
+		// mult: Assume max 32-bit, so don't access HI
+		IR_MIPS_OP_MAPPINGS.put("mult", "mult $param1, $param2\n"
+				+ "mflo $dest"); 
+		// div: Assume integer division, so don't access HI
+		IR_MIPS_OP_MAPPINGS.put("div", "div $param1, $param2\n"
+				+ "mflo $dest");
+		IR_MIPS_OP_MAPPINGS.put("and", "and $dest, $param1, $param2");
+		IR_MIPS_OP_MAPPINGS.put("or", "or $dest, $param1, $param2");
+		IR_MIPS_OP_MAPPINGS.put("goto", "jr $addr");
+		IR_MIPS_OP_MAPPINGS.put("breq", "beq $param1, $param2, $addr");
+		IR_MIPS_OP_MAPPINGS.put("brneq", "bne $param1, $param2, $addr");
+		IR_MIPS_OP_MAPPINGS.put("brlt", "blt $param1, $param2, $addr");
+		IR_MIPS_OP_MAPPINGS.put("brgt", "bgt $param1, $param2, $addr");
+		IR_MIPS_OP_MAPPINGS.put("brgeq", "bge $param1, $param2, $addr");
+		IR_MIPS_OP_MAPPINGS.put("brleq", "ble $param1, $param2, $addr");
+		IR_MIPS_OP_MAPPINGS.put("return", "jr $ra");
+		IR_MIPS_OP_MAPPINGS.put("call", "jr $addr");
+		IR_MIPS_OP_MAPPINGS.put("callr", "jr $addr");
+		IR_MIPS_OP_MAPPINGS.put("array_store", "add $at, $param1, $zero\n"
+				+ "lw $dest, $addr($at)"); // value -> $reg, then lw
+		IR_MIPS_OP_MAPPINGS.put("array_load", "add $at, $param1, $zero\n"
+				+ "sw $dest, $addr($at)"); // value -> $reg, then sw
 		
 		// TODO: Now, map standard library functions to MIPS (call, callr)
 	}
