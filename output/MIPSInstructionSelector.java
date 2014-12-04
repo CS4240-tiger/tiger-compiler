@@ -56,7 +56,8 @@ public class MIPSInstructionSelector {
 		String line, translatedLine, temp;
 		String[] components;
 		
-		for (int index = 0; index < text.size(); index++) {
+		// (Skip the header declaration)
+		for (int index = 1; index < text.size(); index++) {
 			line = text.get(index);
 			
 			// If it's a normal assignment statement, filter it out
@@ -67,24 +68,29 @@ public class MIPSInstructionSelector {
 			}
 			
 			components = splitToComponents(line);
-			if (components.length > 4) {
-				// If the IR line has more than 3 parameters 
-				// (e.g. callr), combine them all to components[3]
-				temp = components[3];
-				for (int compIndex = 4; 
-						compIndex < components.length; compIndex++) {
-					temp += ", " + components[compIndex];
-					components[compIndex] = "<STRIPPED-BY-TRANSLATION>";
+			if (components.length == 1) {
+				// Must be a label or header, pass it through
+				translatedLine = line;
+			} else {
+				if (components.length > 4) {
+					// If the IR line has more than 3 parameters 
+					// (e.g. callr), combine them all to components[3]
+					temp = components[3];
+					for (int compIndex = 4; 
+							compIndex < components.length; compIndex++) {
+						temp += ", " + components[compIndex];
+						components[compIndex] = "<STRIPPED-BY-TRANSLATION>";
+					}
+					
+					components[3] = temp;
 				}
 				
-				components[3] = temp;
+				translatedLine = insertParams(
+					IR_MIPS_OP_MAPPINGS.get(components[0]), 
+					components[1], 
+					components[2], 
+					components[3]);
 			}
-			
-			translatedLine = insertParams(
-				IR_MIPS_OP_MAPPINGS.get(components[0]), 
-				components[1], 
-				components[2], 
-				components[3]);
 			
 			// Finally, push the completed MIPS line back to .data
 			text.set(index, translatedLine);
@@ -100,7 +106,8 @@ public class MIPSInstructionSelector {
 	 * @return true if the line is a direct IR assignment, false otherwise.
 	 */
 	private boolean isAssignDirect(String line) {
-		return splitToComponents(line.replaceAll(" ", "")).length != 4;
+		return line.contains("assign") && 
+				splitToComponents(line.replaceAll(" ", "")).length < 4;
 	}
 	
 	/**
