@@ -53,6 +53,8 @@ public class MIPSInstructionSelector {
 	 * Translates the IR in .text to MIPS.
 	 */
 	private void translateAll() {
+		final String pushSP = "addi $sp, $sp, -1\n";
+		final String pushVar = "sw <VAL>, 0($sp)\n"
 		String line, translatedLine, temp;
 		String[] components;
 		
@@ -102,9 +104,14 @@ public class MIPSInstructionSelector {
 						components[3]);
 				}
 				
+				
 				if (components[0].contains("call") 
 						|| components[0].contains("callr")) {
-					// We have to push arguments to the stack
+					for (int argIndex = 3; 
+							argIndex < components.length; argIndex++) {
+						translatedLine += pushSP + 
+								pushVar.replace("<VAR>", components[argIndex]);
+					}
 				} else if (components[0].contains("assign")) {
 					// We have to generate loop labels
 					translatedLine = translatedLine
@@ -193,9 +200,8 @@ public class MIPSInstructionSelector {
 	 */
 	private static final void initializeMipsMappings() {
 		final String FUNC_CALL_CALL_CONV = "add $fp, $sp, $zero\n"
-				+ "addi $sp, $sp, <NUM-ARGS>\n"
 				+ "<FUNC_CALL_STACK_POPULATION>\n"
-				+ "addi $sp, $sp, 1\n"
+				+ "addi $sp, $sp, -1\n"
 				+ "sw $ra, 0($sp)\n";
 		final String FUNC_CALL_RETURN_CONV = "";
 		IR_MIPS_OP_MAPPINGS = new HashMap<String, String>();
