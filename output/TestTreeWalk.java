@@ -25,15 +25,27 @@ public class TestTreeWalk {
 
         tigerParser g = new tigerParser(tokens);
         try {
+        	
+        	// Phase 1: Lex/parse/AST population
         	tigerParser.tiger_program_return postParse = g.tiger_program();
             CommonTree parseTree = postParse.getTree();
             SymbolTable symbolTable = postParse.symTable;
+            // Phase 2: Treewalk/symbol table/semantic checks/IR generation
             CommonTreeNodeStream treeNodes = new CommonTreeNodeStream(parseTree);
             tigerTreeWalker treeWalker = new tigerTreeWalker(treeNodes, symbolTable);
             treeWalker.tiger_program(); // Walk tree and output IR
-            
-            NaiveRegisterAllocator regAlloc = new NaiveRegisterAllocator(readFileToList(OUTPUT_IR_PATH));
+            // Phase 3: Register allocation
+            NaiveRegisterAllocator regAlloc = new NaiveRegisterAllocator(
+            		readFileToList(OUTPUT_IR_PATH));
             for (String output : regAlloc.getMixedOutput()) {
+            	System.out.println(output);
+            }
+            
+            // Phase 4: MIPS translation
+            MIPSInstructionSelector translator = new MIPSInstructionSelector(
+            		regAlloc.getData(), regAlloc.getOutput());
+            System.out.println("FINAL TRANSLATED MIPS PROGRAM:");
+            for (String output : translator.getOutput()) {
             	System.out.println(output);
             }
         } catch (RecognitionException e) {

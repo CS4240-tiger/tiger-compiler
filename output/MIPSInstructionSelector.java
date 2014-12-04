@@ -221,5 +221,4 @@ public class MIPSInstructionSelector {
 		
 		// TODO: Now, map standard library functions to MIPS (call, callr)
 	}
-
 }
