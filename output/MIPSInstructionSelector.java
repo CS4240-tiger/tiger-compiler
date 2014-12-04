@@ -165,7 +165,6 @@ public class MIPSInstructionSelector {
 		return mipsLine.replace("<PARAM1>", param1)
 				.replace("<PARAM2>", param2)
 				.replace("<PARAM3>", param3);
-		
 	}
 	
 	/**
@@ -193,9 +192,12 @@ public class MIPSInstructionSelector {
 	 * of IR to MIPS instructions.
 	 */
 	private static final void initializeMipsMappings() {
-		final String FUNC_CALL_CALL_CONV = "addi $sp, $sp, <NUM-ARGS>\n"
+		final String FUNC_CALL_CALL_CONV = "add $fp, $sp, $zero\n"
+				+ "addi $sp, $sp, <NUM-ARGS>\n"
 				+ "<FUNC_CALL_STACK_POPULATION>\n"
-				+ "add $fp, $sp, $zero\n";
+				+ "addi $sp, $sp, 1\n"
+				+ "sw $ra, 0($sp)\n";
+		final String FUNC_CALL_RETURN_CONV = "";
 		IR_MIPS_OP_MAPPINGS = new HashMap<String, String>();
 		
 		// Map IR instruction -> MIPS instructions here
@@ -254,7 +256,7 @@ public class MIPSInstructionSelector {
 		IR_MIPS_OP_MAPPINGS.put("brgeq", "bge <PARAM1>, <PARAM2>, <PARAM3>");
 		// ble $param1, $param2, $addr
 		IR_MIPS_OP_MAPPINGS.put("brleq", "ble <PARAM1>, <PARAM2>, <PARAM3>");
-		IR_MIPS_OP_MAPPINGS.put("return", "jr $ra");
+		IR_MIPS_OP_MAPPINGS.put("return", FUNC_CALL_RETURN_CONV + "jr $ra");
 		IR_MIPS_OP_MAPPINGS.put("call", FUNC_CALL_CALL_CONV + "jr <PARAM1>");
 		IR_MIPS_OP_MAPPINGS.put("callr", FUNC_CALL_CALL_CONV + "jr <PARAM1>\n"
 				+ "sw $v0, <PARAM2>($zero)");
