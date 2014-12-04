@@ -33,6 +33,37 @@ public class MIPSInstructionSelector {
 		initializeMipsMappings();
 		text.add(".text");
 		text.addAll(modIR);
+		translateAll();
+	}
+	
+	/**
+	 * Returns the full translated MIPS program.
+	 * 
+	 * @return The full translated MIPS program, as a String list.
+	 */
+	public List<String> getOutput() {
+		List<String> output = new ArrayList<String>();
+		output.addAll(data);
+		output.addAll(text);
+		
+		return output;
+	}
+	
+	/**
+	 * Translates the IR in .text to MIPS.
+	 */
+	private void translateAll() {
+		String line, translatedLine;
+		String[] components;
+		
+		for (int index = 0; index < text.size(); index++) {
+			line = text.get(index);
+			components = splitToComponents(line);
+			// TODO: If it's a normal assignment statement, filter it out
+			// (These should be already dealt with in previous phase)
+			translatedLine = IR_MIPS_OP_MAPPINGS.get(components[0]);
+			
+		}
 	}
 	
 	/**
@@ -70,28 +101,53 @@ public class MIPSInstructionSelector {
 		// array static value population only
 		
 		// But we need to handle placing unique labels later on for looping
+		
+		// add $t9, $zero, $zero
+		// addi $t8, $zero, $array_size
+		// $assignLoopLabelBeg:
+		// sw $value, $label($t9)
+		// addi $t9, $t9, 1
+		// bne $t8, $t9, $assignLoopLabelEnd
 		IR_MIPS_OP_MAPPINGS.put("assign", "add $t9, $zero, $zero\n"
-				+ "addi $t8, $zero, $array_size"
-				+ "$assignLoopLabelBeg:\n" 
-				+ "sw $value, $label($t9)\n"
+				+ "addi $t8, $zero, <PARAM2>"
+				+ "<ASSIGN-LOOP-LABEL-START>:\n" 
+				+ "sw <PARAM3>, <PARAM1>($t9)\n"
 				+ "addi $t9, $t9, 1\n"
-				+ "bne $t8, $t9, $assignLoopLabelEnd");
-		IR_MIPS_OP_MAPPINGS.put("add", "add $dest, $param1, $param2");
-		IR_MIPS_OP_MAPPINGS.put("sub", "sub $dest, $param1, $param2");
+				+ "bne $t8, $t9, <ASSIGN-LOOP-LABEL-END>\n"
+				+ "<ASSIGN-LOOP-LABEL-END>:");
+		// add $dest, $param1, $param2
+		IR_MIPS_OP_MAPPINGS.put("add", "add <PARAM3>, <PARAM1>, <PARAM2>");
+		// sub $dest, $param1, $param2
+		IR_MIPS_OP_MAPPINGS.put("sub", "sub <PARAM3>, <PARAM1>, <PARAM2>");
 		// mult: Assume max 32-bit, so don't access HI
-		IR_MIPS_OP_MAPPINGS.put("mult", "mult $param1, $param2\n"
-				+ "mflo $dest"); 
+		
+		// mult $param1, $param2
+		// mflo $dest
+		IR_MIPS_OP_MAPPINGS.put("mult", "mult <PARAM1>, <PARAM2>\n"
+				+ "mflo <PARAM3>"); 
 		// div: Assume integer division, so don't access HI
-		IR_MIPS_OP_MAPPINGS.put("div", "div $param1, $param2\n"
-				+ "mflo $dest");
-		IR_MIPS_OP_MAPPINGS.put("and", "and $dest, $param1, $param2");
-		IR_MIPS_OP_MAPPINGS.put("or", "or $dest, $param1, $param2");
-		IR_MIPS_OP_MAPPINGS.put("goto", "jr $addr");
-		IR_MIPS_OP_MAPPINGS.put("breq", "beq $param1, $param2, $addr");
-		IR_MIPS_OP_MAPPINGS.put("brneq", "bne $param1, $param2, $addr");
-		IR_MIPS_OP_MAPPINGS.put("brlt", "blt $param1, $param2, $addr");
-		IR_MIPS_OP_MAPPINGS.put("brgt", "bgt $param1, $param2, $addr");
-		IR_MIPS_OP_MAPPINGS.put("brgeq", "bge $param1, $param2, $addr");
+		
+		// div $param1, $param2
+		// mflo $dest
+		IR_MIPS_OP_MAPPINGS.put("div", "div <PARAM2>, <PARAM3>\n"
+				+ "mflo <PARAM1>");
+		// and $dest, $param1, $param2
+		IR_MIPS_OP_MAPPINGS.put("and", "and <PARAM3>, <PARAM1>, <PARAM2>");
+		// or $dest, $param1, $param2
+		IR_MIPS_OP_MAPPINGS.put("or", "or <PARAM3>, <PARAM1>, <PARAM2>");
+		// jr $addr
+		IR_MIPS_OP_MAPPINGS.put("goto", "jr <PARAM1>");
+		// beq $param1, $param2, $addr
+		IR_MIPS_OP_MAPPINGS.put("breq", "beq <PARAM1>, <PARAM2>, <PARAM3>");
+		// bne $param1, $param2, $addr
+		IR_MIPS_OP_MAPPINGS.put("brneq", "bne <PARAM1>, <PARAM2>, <PARAM3>");
+		// blt $param1, $param2, $addr
+		IR_MIPS_OP_MAPPINGS.put("brlt", "blt <PARAM1>, <PARAM2>, <PARAM3>");
+		// bgt $param1, $param2, $addr
+		IR_MIPS_OP_MAPPINGS.put("brgt", "bgt <PARAM1>, <PARAM2>, <PARAM3>");
+		// bge $param1, $param2, $addr
+		IR_MIPS_OP_MAPPINGS.put("brgeq", "bge <PARAM1>, <PARAM2>, <PARAM3>");
+		// ble $param1, $param2, $addr
 		IR_MIPS_OP_MAPPINGS.put("brleq", "ble $param1, $param2, $addr");
 		IR_MIPS_OP_MAPPINGS.put("return", "jr $ra");
 		IR_MIPS_OP_MAPPINGS.put("call", "jr $addr");
