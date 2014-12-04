@@ -32,6 +32,11 @@ public class CFGIntraBlockAllocation {
 	 */
 	private Map<String,String> typeMap;
 	
+	/**
+	 * List of all EBBs. I'm just going to combine all of them into one codeBlock
+	 */
+	private ArrayList<CodeBlock> allEBBs;
+	
 	public CFGIntraBlockAllocation(String input) {
 		code = input.split("\n");
 		graph = new HashMap<CodeBlock, List<CodeBlock>>(10);
@@ -46,6 +51,61 @@ public class CFGIntraBlockAllocation {
 		}
 	}
 	
+	public void findEBBs() {
+		LinkedList<CodeBlock> leader = new LinkedList<CodeBlock>();
+		LinkedList<LinkedList<CodeBlock>> EBBs = new LinkedList<LinkedList<CodeBlock>>(); 
+		//gets the actual leader, in this case, the block with main:
+		for (CodeBlock each: allCodeBlocks) {
+			if (each.getLeader().contains("main:")) {
+				leader.add(each);
+				break;
+			}
+		}
+		while (!leader.isEmpty()) {
+			CodeBlock currLeader = leader.pop();
+			LinkedList<CodeBlock> currEBB = new LinkedList<CodeBlock>();
+			currEBB.push(currLeader);
+			EBBs.push(currEBB);
+			LinkedList<CodeBlock> newcurrEBB = new LinkedList<CodeBlock>();
+			while (!currEBB.isEmpty()) {
+				CodeBlock currBlock = currEBB.pop();
+				newcurrEBB.push(currBlock);
+				for (CodeBlock block2: graph.get(currBlock)) {
+					if (numPredecessor(block2) > 1) {
+						leader.push(block2);
+					} else {
+						currEBB.add(block2);
+					}
+				}
+			}
+			EBBs.push(newcurrEBB);
+		}
+		ArrayList<CodeBlock> newAllEBBs= new ArrayList<CodeBlock>();
+		int id=0;
+		for (LinkedList<CodeBlock> EBB: EBBs) {
+			ArrayList<String> newCode = new ArrayList<String>();
+			while (!EBB.isEmpty()) {
+				CodeBlock block = EBB.pop();
+				newCode.addAll(block.getCode());
+			}
+			String leader2 = newCode.get(0);
+			String last = newCode.get(newCode.size()-1);
+			CodeBlock newBlock = new CodeBlock(leader2,last,newCode.toArray(new String[newCode.size()]), id);
+			newAllEBBs.add(newBlock);
+			id++;
+		}
+		allEBBs = newAllEBBs;
+	}
+	
+	private int numPredecessor(CodeBlock block) {
+		int numPred = 0;
+		for (CodeBlock each: graph.keySet()) {
+			if (graph.get(each).contains(block)) {
+				numPred++;
+			}
+		}
+		return numPred;
+	}
 	
 	/**
 	 * gets all the blocks from the code
