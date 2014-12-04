@@ -89,7 +89,8 @@ public class MIPSInstructionSelector {
 					components[3] = temp;
 				}
 
-				if (components[0].contains("return")) {
+				if (components[0].contains("return") 
+						|| components[0].contains("goto")) {
 					translatedLine = insertParams(
 							IR_MIPS_OP_MAPPINGS.get(components[0]), 
 							components[1], "", "");
@@ -99,6 +100,13 @@ public class MIPSInstructionSelector {
 						components[1], 
 						components[2], 
 						components[3]);
+				}
+				
+				if (components[0].contains("call") 
+						|| components[0].contains("callr")) {
+					// We have to push arguments to the stack
+				} else if (components[0].contains("assign")) {
+					// We have to generate loop labels
 				}
 			}
 			
@@ -168,7 +176,7 @@ public class MIPSInstructionSelector {
 	private static final void initializeMipsMappings() {
 		final String FUNC_CALL_CALL_CONV = "addi $sp, $sp, <NUM-ARGS>\n"
 				+ "<FUNC_CALL_STACK_POPULATION>\n"
-				+ "add $fp, $sp, $zero";
+				+ "add $fp, $sp, $zero\n";
 		IR_MIPS_OP_MAPPINGS = new HashMap<String, String>();
 		
 		// Map IR instruction -> MIPS instructions here
