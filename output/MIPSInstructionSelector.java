@@ -54,7 +54,7 @@ public class MIPSInstructionSelector {
 	 */
 	private void translateAll() {
 		final String pushSP = "addi $sp, $sp, -1\n";
-		final String pushVar = "sw <VAL>, 0($sp)\n"
+		final String pushVar = "sw <VAL>, 0($sp)\n";
 		String line, translatedLine, temp;
 		String[] components;
 		
@@ -107,11 +107,19 @@ public class MIPSInstructionSelector {
 				
 				if (components[0].contains("call") 
 						|| components[0].contains("callr")) {
+					temp = "";
 					for (int argIndex = 3; 
 							argIndex < components.length; argIndex++) {
-						translatedLine += pushSP + 
-								pushVar.replace("<VAR>", components[argIndex]);
+							 temp += pushSP + pushVar.replace(
+									 "<VAL>", components[argIndex]);
+						if (components[0].contains("callr")) {
+							translatedLine = translatedLine
+								.replace("<DEST>", components[1]);
+						}
 					}
+					
+					translatedLine = translatedLine
+						.replace("<FUNC_CALL_STACK_POPULATION>", temp);
 				} else if (components[0].contains("assign")) {
 					// We have to generate loop labels
 					translatedLine = translatedLine
@@ -122,7 +130,7 @@ public class MIPSInstructionSelector {
 								"assign-loop-label-"
 							+ getUniqueLabel(translatedLine) + "-end");
 						
-				}
+				} 
 			}
 			
 			// Finally, push the completed MIPS line back to .data
@@ -199,11 +207,18 @@ public class MIPSInstructionSelector {
 	 * of IR to MIPS instructions.
 	 */
 	private static final void initializeMipsMappings() {
-		final String FUNC_CALL_CALL_CONV = "add $fp, $sp, $zero\n"
-				+ "<FUNC_CALL_STACK_POPULATION>\n"
+		final String FUNC_CALL_CALL_CONV = "add $at, $fp, $zero\n"
+				+ "add $fp, $sp, $zero\n"
+				+ "<FUNC_CALL_STACK_POPULATION>"
 				+ "addi $sp, $sp, -1\n"
-				+ "sw $ra, 0($sp)\n";
-		final String FUNC_CALL_RETURN_CONV = "";
+				+ "sw $ra, 0($sp)\n" // Store return address
+				+ "addi $sp, $sp, -1\n"
+				+ "sw $at, 0($sp)\n"; // Store FP
+		final String FUNC_CALL_RETURN_CONV = "addi $sp, $sp, 1\n"
+				+ "lw $fp, 0($sp)\n"
+				+ "addi $sp, $sp, 1\n"
+				+ "lw $ra, 0($sp)\n"
+				+ "add $sp, $fp, $zero\n";
 		IR_MIPS_OP_MAPPINGS = new HashMap<String, String>();
 		
 		// Map IR instruction -> MIPS instructions here
@@ -264,8 +279,9 @@ public class MIPSInstructionSelector {
 		IR_MIPS_OP_MAPPINGS.put("brleq", "ble <PARAM1>, <PARAM2>, <PARAM3>");
 		IR_MIPS_OP_MAPPINGS.put("return", FUNC_CALL_RETURN_CONV + "jr $ra");
 		IR_MIPS_OP_MAPPINGS.put("call", FUNC_CALL_CALL_CONV + "jr <PARAM1>");
-		IR_MIPS_OP_MAPPINGS.put("callr", FUNC_CALL_CALL_CONV + "jr <PARAM1>\n"
-				+ "sw $v0, <PARAM2>($zero)");
+		IR_MIPS_OP_MAPPINGS.put("callr", FUNC_CALL_CALL_CONV + "jr <PARAM1>\n" 
+				+ "sw $v0, <PARAM2>($zero)\n"
+				+ "add <DEST>, $v0, $zero");
 		IR_MIPS_OP_MAPPINGS.put("array_store", "addi $at, $zero, <PARAM2>\n"
 				+ "lw <PARAM3>, <PARAM1>($at)"); // value -> $reg, then lw
 		IR_MIPS_OP_MAPPINGS.put("array_load", "addi $at, $zero, <PARAM2>\n"
