@@ -19,7 +19,8 @@ public class KCTESTER {
 		cfg.findBlocks();
 		//cfg.storeAllTemporaries();
 		//cfg.buildCFG();
-		cfg.allocateAllBlocks();
+		//cfg.allocateAllBlocks();
+		cfg.findEBBs();
 		
 
 	}

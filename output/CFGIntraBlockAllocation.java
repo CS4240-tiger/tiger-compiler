@@ -80,20 +80,25 @@ public class CFGIntraBlockAllocation {
 			}
 			EBBs.push(newcurrEBB);
 		}
+		//System.out.println(EBBs.size());
 		ArrayList<CodeBlock> newAllEBBs= new ArrayList<CodeBlock>();
 		int id=0;
 		for (LinkedList<CodeBlock> EBB: EBBs) {
-			ArrayList<String> newCode = new ArrayList<String>();
+			ArrayList<String> newCode = new ArrayList<String>(0);
 			while (!EBB.isEmpty()) {
 				CodeBlock block = EBB.pop();
+				System.out.println(block.getCode());
 				newCode.addAll(block.getCode());
+				//newCode.add
 			}
+			//System.out.println(newCode.size());
 			String leader2 = newCode.get(0);
 			String last = newCode.get(newCode.size()-1);
 			CodeBlock newBlock = new CodeBlock(leader2,last,newCode.toArray(new String[newCode.size()]), id);
 			newAllEBBs.add(newBlock);
 			id++;
 		}
+		System.out.println(newAllEBBs.size());
 		allEBBs = newAllEBBs;
 	}
 	

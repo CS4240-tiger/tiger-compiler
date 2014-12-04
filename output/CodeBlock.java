@@ -415,8 +415,8 @@ public class CodeBlock {
 		return null;
 	}
 	
-	public List<String> getCode() {
-		return code;
+	public ArrayList<String> getCode() {
+		return (ArrayList<String>)code;
 	}
 	
 	public boolean equals(CodeBlock block2) {
