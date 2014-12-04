@@ -68,8 +68,12 @@ public class MIPSInstructionSelector {
 			}
 			
 			components = splitToComponents(line);
-			if (components.length == 1) {
-				// Must be a label or header, pass it through
+			if (components.length == 1 
+					|| components[0].contains("la")
+					|| components[0].contains("lw")
+					|| components[0].contains("sw")) {
+				// Must be a label, header, or already MIPS
+				// ...so pass it through
 				translatedLine = line;
 			} else {
 				if (components.length > 4) {
