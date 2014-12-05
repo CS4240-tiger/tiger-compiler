@@ -1,7 +1,4 @@
 bin
-output/tigerLexer.java
-output/tigerParser.java
-output/tigerTreeWalker.java
 output/__Test*
-output/tiger.tokens
-output/tigerTreeWalker.tokens
+output/Scope.class
+output/*.class
