@@ -32,6 +32,11 @@ public class CFGIntraBlockAllocation {
 	 */
 	private Map<String,String> typeMap;
 	
+	/**
+	 * List of all EBBs. I'm just going to combine all of them into one codeBlock
+	 */
+	private ArrayList<CodeBlock> allEBBs;
+	
 	public CFGIntraBlockAllocation(String input) {
 		code = input.split("\n");
 		graph = new HashMap<CodeBlock, List<CodeBlock>>(10);
@@ -46,6 +51,79 @@ public class CFGIntraBlockAllocation {
 		}
 	}
 	
+	public void findEBBs() {
+		LinkedList<CodeBlock> leader = new LinkedList<CodeBlock>();
+		LinkedList<LinkedList<CodeBlock>> EBBs = new LinkedList<LinkedList<CodeBlock>>(); 
+		//gets the actual leader, in this case, the block with main:
+		for (CodeBlock each: allCodeBlocks) {
+			if (each.getLeader().contains("main:")) {
+				leader.push(each);
+				//System.out.println(each.getId());
+				//System.out.println("edges to:");
+				/**for (int i = 0; i < graph.get(each).size(); i++) {
+					System.out.println(graph.get(each).get(i).getId());
+				}**/
+				break;
+			}
+		}
+		ArrayList<CodeBlock> allLeaders = new ArrayList<CodeBlock>();
+		while (!leader.isEmpty()) {
+			CodeBlock currLeader = leader.pop();
+			LinkedList<CodeBlock> currEBB = new LinkedList<CodeBlock>();
+			currEBB.push(currLeader);
+			//EBBs.push(currEBB);
+			LinkedList<CodeBlock> newcurrEBB = new LinkedList<CodeBlock>();
+			//System.out.println(currEBB.isEmpty());
+			while (!currEBB.isEmpty()) {
+				CodeBlock currBlock = currEBB.pop();
+				//System.out.println(graph.get(currBlock).size());
+				newcurrEBB.push(currBlock);
+				List<CodeBlock> neighbors = graph.get(currBlock);
+				for (CodeBlock block2: neighbors) {
+					//System.out.println(numPredecessor(block2));
+					if (numPredecessor(block2) > 1 && !allLeaders.contains(block2)) {
+						allLeaders.add(block2);
+						//System.out.println("added" + block2.getId());
+						leader.push(block2);
+					} else if (numPredecessor(block2) == 1){
+						//System.out.println("added" + block2.getId());
+						currEBB.push(block2);
+					}
+				}
+			}
+			EBBs.push(newcurrEBB);
+		}
+		//System.out.println(EBBs.size());
+		ArrayList<CodeBlock> newAllEBBs= new ArrayList<CodeBlock>();
+		int id=0;
+		for (LinkedList<CodeBlock> EBB: EBBs) {
+			ArrayList<String> newCode = new ArrayList<String>();
+			while (!EBB.isEmpty()) {
+				CodeBlock block = EBB.pop();
+				//System.out.println(block.getCode());
+				newCode.addAll(block.getCode());
+				//newCode.add
+			}
+			//System.out.println(newCode.size());
+			String leader2 = newCode.get(0);
+			String last = newCode.get(newCode.size()-1);
+			CodeBlock newBlock = new CodeBlock(leader2,last,newCode.toArray(new String[newCode.size()]), id);
+			newAllEBBs.add(newBlock);
+			id++;
+		}
+		//System.out.println(newAllEBBs.size());
+		allEBBs = newAllEBBs;
+	}
+	
+	private int numPredecessor(CodeBlock block) {
+		int numPred = 0;
+		for (CodeBlock each: graph.keySet()) {
+			if (graph.get(each).contains(block)) {
+				numPred++;
+			}
+		}
+		return numPred;
+	}
 	
 	/**
 	 * gets all the blocks from the code
@@ -102,20 +180,20 @@ public class CFGIntraBlockAllocation {
 			String[] breakUp = last.split(",");
 			String label = "";
 			if (breakUp[0].contains("br")) {
-				//System.out.println(Arrays.toString(breakUp));
+				//System.out.println(breakUp[0]);
 				label = breakUp[3].trim();
 			} else if (breakUp[0].contains("goto")) {
-				//System.out.println(Arrays.toString(breakUp));
+				//System.out.println(breakUp[0]);
 				label = breakUp[1].trim();
 				nextblock = false;
 			} else if (breakUp[0].contains("callr")) {
-				//System.out.println(Arrays.toString(breakUp));
+				//System.out.println(breakUp[0]);
 				label = breakUp[2].trim();
 				nextblock = false;
 				funcCall = true;
 				//System.out.println(label);
 			} else if (breakUp[0].contains("call")) {
-				//System.out.println(Arrays.toString(breakUp));
+				//System.out.println(breakUp[0]);
 				label = breakUp[1].trim();
 				nextblock = false;
 				funcCall = true;
@@ -135,7 +213,8 @@ public class CFGIntraBlockAllocation {
 							}
 						}
 					}
-					if (block2.getLeader().contains(label)) {
+					if (block2.getLeader().trim().equals(label+":") && !block1.equals(block2)) {
+						//System.out.println(block2.getLeader()+" and "+label);
 						graph.get(block1).add(block2);
 					}
 				}
@@ -144,7 +223,9 @@ public class CFGIntraBlockAllocation {
 				graph.get(block1).add(allCodeBlocks.get(block1.getId() + 1));
 			}
 		}
-		System.out.println(graph.get(allCodeBlocks.get(0)).size());
+		/**for (CodeBlock block:graph.get(allCodeBlocks.get(0))){
+			System.out.println(block.getLeader());
+		}**/
 	}
 	
 	/**

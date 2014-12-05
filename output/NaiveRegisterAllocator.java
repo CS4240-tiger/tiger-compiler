@@ -349,4 +349,22 @@ public class NaiveRegisterAllocator {
 		
 		return mixedOutput;
 	}
+	
+	/**
+	 * Returns the MIPS .data preface only.
+	 * 
+	 * @return MIPS .data preface.
+	 */
+	public List<String> getData() {
+		return mipsPreface;
+	}
+	
+	/**
+	 * Returns the mixed MIPS-IR output, without the .data preface.
+	 * 
+	 * @return Mixed MIPS-IR output, without .data.
+	 */
+	public List<String> getOutput() {
+		return output;
+	}
 }

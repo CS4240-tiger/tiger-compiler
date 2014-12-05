@@ -232,6 +232,7 @@ public class CodeBlock {
 				String min = findNewMin(intRegs,intRegCount,stuff);
 				String register = intRegs.get(min);
 				genMipsStore(min,register,replaceCode);
+				genMipsLoad(var,register,replaceCode);
 				intRegs.remove(min);
 				intRegs.put(var, register);
 				newLine = newLine + register + ", ";
@@ -242,6 +243,7 @@ public class CodeBlock {
 				String min = findNewMin(fixedptRegs,fixedptRegCount,stuff);
 				String register = fixedptRegs.get(min);
 				genMipsStore(min,register,replaceCode);
+				genMipsLoad(var,register,replaceCode);
 				fixedptRegs.remove(min);
 				fixedptRegs.put(var, register);
 				//line.replace(var,register);
@@ -411,6 +413,10 @@ public class CodeBlock {
 		}
 		//shouldn't happen
 		return null;
+	}
+	
+	public ArrayList<String> getCode() {
+		return (ArrayList<String>)code;
 	}
 	
 	public boolean equals(CodeBlock block2) {
