@@ -9,10 +9,13 @@ t7: .word 0
 t6: .word 0
 t9: .float 0.0
 t8: .float 0.0
-t59: .word 5
 t52: .word 5
-t522: .word 5
-t53: .word 5
+t53: .float 5.0
+t54: .word 5
+t55: .float 5.0
+t542: .word 5
+t552: .float 5.0
+t58: .word 5
 t10: .word 0
 t11: .word 0
 t13: .word 5
@@ -171,25 +174,37 @@ jr $ra
 la $v1, t8
 s.s $f0, 0($v1)
 main:
-la $v1, t59
-lw $t0, 0($v1)
-la $v1, t59
-sw $t0, 0($v1)
 la $v1, t52
 lw $t0, 0($v1)
 la $v1, t52
 sw $t0, 0($v1)
-la $v1, t522
+la $v1, t53
+l.s $f0, 0($v1)
+la $v1, t53
+s.s $f0, 0($v1)
+la $v1, t54
 lw $t0, 0($v1)
-la $v1, t522
+la $v1, t54
 sw $t0, 0($v1)
-la $v1, t53
+la $v1, t55
+l.s $f0, 0($v1)
+la $v1, t55
+s.s $f0, 0($v1)
+la $v1, t542
 lw $t0, 0($v1)
-la $v1, t53
+la $v1, t542
+sw $t0, 0($v1)
+la $v1, t552
+l.s $f0, 0($v1)
+la $v1, t552
+s.s $f0, 0($v1)
+la $v1, t58
+lw $t0, 0($v1)
+la $v1, t58
 sw $t0, 0($v1)
 la $v1, t10
 lw $t0, 0($v1)
-la $v1, t53
+la $v1, t58
 lw $t1, 0($v1)
 add $v1, $fp, $zero
 add $fp, $sp, $zero
@@ -202,13 +217,13 @@ sw $v1, 0($sp)
 jr $t0
 sw $v0, func1($zero)
 add $t0, $v0, $zero
-la $v1, t53
+la $v1, t58
 sw $t1, 0($v1)
 la $v1, t10
 sw $t0, 0($v1)
 la $v1, t11
 lw $t0, 0($v1)
-la $v1, t59
+la $v1, t52
 lw $t1, 0($v1)
 add $v1, $fp, $zero
 add $fp, $sp, $zero
@@ -221,7 +236,7 @@ sw $v1, 0($sp)
 jr $t0
 sw $v0, func1($zero)
 add $t0, $v0, $zero
-la $v1, t59
+la $v1, t52
 sw $t1, 0($v1)
 la $v1, t11
 sw $t0, 0($v1)
@@ -231,9 +246,9 @@ la $v1, t13
 sw $t0, 0($v1)
 la $v1, t14
 lw $t0, 0($v1)
-la $v1, t59
+la $v1, t52
 lw $t1, 0($v1)
-la $v1, t59
+la $v1, t52
 sw $t1, 0($v1)
 la $v1, t14
 sw $t0, 0($v1)
@@ -317,10 +332,12 @@ la $v1, t18
 sw $t0, 0($v1)
 la $v1, t20
 lw $t0, 0($v1)
+la $v1, t53
+l.s $f0, 0($v1)
 add $v1, $fp, $zero
 add $fp, $sp, $zero
 addi $sp, $sp, -1
-sw fixedt53t_var, 0($sp)
+s.s $f0, 0($sp)
 addi $sp, $sp, -1
 sw $ra, 0($sp)
 addi $sp, $sp, -1
@@ -328,11 +345,13 @@ sw $v1, 0($sp)
 jr $t0
 sw $v0, func2($zero)
 add $t0, $v0, $zero
+la $v1, t53
+s.s $f0, 0($v1)
 la $v1, t20
 sw $t0, 0($v1)
 la $v1, t21
 lw $t0, 0($v1)
-la $v1, t59
+la $v1, t52
 lw $t1, 0($v1)
 add $v1, $fp, $zero
 add $fp, $sp, $zero
@@ -345,7 +364,7 @@ sw $v1, 0($sp)
 jr $t0
 sw $v0, func2($zero)
 add $t0, $v0, $zero
-la $v1, t59
+la $v1, t52
 sw $t1, 0($v1)
 la $v1, t21
 sw $t0, 0($v1)
@@ -355,6 +374,10 @@ la $v1, t23
 s.s $f0, 0($v1)
 la $v1, t24
 l.s $f0, 0($v1)
+la $v1, t53
+l.s $f1, 0($v1)
+la $v1, t53
+s.s $f1, 0($v1)
 la $v1, t24
 s.s $f0, 0($v1)
 la $v1, t23
@@ -395,6 +418,10 @@ la $v1, t27
 sw $t0, 0($v1)
 la $v1, t28
 l.s $f0, 0($v1)
+la $v1, t53
+l.s $f1, 0($v1)
+la $v1, t53
+s.s $f1, 0($v1)
 la $v1, t28
 s.s $f0, 0($v1)
 la $v1, t27
@@ -435,9 +462,9 @@ la $v1, t31
 s.s $f0, 0($v1)
 la $v1, t32
 lw $t0, 0($v1)
-la $v1, t59
+la $v1, t52
 lw $t1, 0($v1)
-la $v1, t59
+la $v1, t52
 sw $t1, 0($v1)
 la $v1, t32
 sw $t0, 0($v1)
@@ -479,9 +506,9 @@ la $v1, t35
 sw $t0, 0($v1)
 la $v1, t36
 lw $t0, 0($v1)
-la $v1, t59
+la $v1, t52
 lw $t1, 0($v1)
-la $v1, t59
+la $v1, t52
 sw $t1, 0($v1)
 la $v1, t36
 sw $t0, 0($v1)
@@ -519,7 +546,7 @@ la $v1, t34
 sw $t0, 0($v1)
 la $v1, t38
 lw $t0, 0($v1)
-la $v1, t52
+la $v1, t54
 lw $t1, 0($v1)
 add $v1, $fp, $zero
 add $fp, $sp, $zero
@@ -532,13 +559,13 @@ sw $v1, 0($sp)
 jr $t0
 sw $v0, func3($zero)
 add $t0, $v0, $zero
-la $v1, t52
+la $v1, t54
 sw $t1, 0($v1)
 la $v1, t38
 sw $t0, 0($v1)
 la $v1, t39
 lw $t0, 0($v1)
-la $v1, t522
+la $v1, t542
 lw $t1, 0($v1)
 add $v1, $fp, $zero
 add $fp, $sp, $zero
@@ -551,16 +578,18 @@ sw $v1, 0($sp)
 jr $t0
 sw $v0, func3($zero)
 add $t0, $v0, $zero
-la $v1, t522
+la $v1, t542
 sw $t1, 0($v1)
 la $v1, t39
 sw $t0, 0($v1)
 la $v1, t40
 lw $t0, 0($v1)
+la $v1, t55
+l.s $f0, 0($v1)
 add $v1, $fp, $zero
 add $fp, $sp, $zero
 addi $sp, $sp, -1
-sw fixedt53t_tyt53e_var, 0($sp)
+s.s $f0, 0($sp)
 addi $sp, $sp, -1
 sw $ra, 0($sp)
 addi $sp, $sp, -1
@@ -568,14 +597,18 @@ sw $v1, 0($sp)
 jr $t0
 sw $v0, func4($zero)
 add $t0, $v0, $zero
+la $v1, t55
+s.s $f0, 0($v1)
 la $v1, t40
 sw $t0, 0($v1)
 la $v1, t41
 lw $t0, 0($v1)
+la $v1, t552
+l.s $f0, 0($v1)
 add $v1, $fp, $zero
 add $fp, $sp, $zero
 addi $sp, $sp, -1
-sw fixedt53t_tyt53e_var2, 0($sp)
+s.s $f0, 0($sp)
 addi $sp, $sp, -1
 sw $ra, 0($sp)
 addi $sp, $sp, -1
@@ -583,9 +616,11 @@ sw $v1, 0($sp)
 jr $t0
 sw $v0, func4($zero)
 add $t0, $v0, $zero
+la $v1, t552
+s.s $f0, 0($v1)
 la $v1, t41
 sw $t0, 0($v1)
-31455-loot53:
+14714-loot58:
 la $v1, t42
 lw $t0, 0($v1)
 la $v1, t42
@@ -598,14 +633,14 @@ la $v1, t42
 lw $t0, 0($v1)
 la $v1, t43
 lw $t1, 0($v1)
-bne $t0, $t1, 31455-ext53r-eval
+bne $t0, $t1, 14714-ext58r-eval
 la $v1, t43
 sw $t1, 0($v1)
 la $v1, t42
 sw $t0, 0($v1)
 la $v1, t44
 lw $t0, 0($v1)
-la $v1, t52
+la $v1, t54
 lw $t1, 0($v1)
 add $v1, $fp, $zero
 add $fp, $sp, $zero
@@ -618,16 +653,18 @@ sw $v1, 0($sp)
 jr $t0
 sw $v0, func3($zero)
 add $t0, $v0, $zero
-la $v1, t52
+la $v1, t54
 sw $t1, 0($v1)
 la $v1, t44
 sw $t0, 0($v1)
 la $v1, t45
 lw $t0, 0($v1)
+la $v1, t55
+l.s $f0, 0($v1)
 add $v1, $fp, $zero
 add $fp, $sp, $zero
 addi $sp, $sp, -1
-sw fixedt53t_tyt53e_var, 0($sp)
+s.s $f0, 0($sp)
 addi $sp, $sp, -1
 sw $ra, 0($sp)
 addi $sp, $sp, -1
@@ -635,11 +672,13 @@ sw $v1, 0($sp)
 jr $t0
 sw $v0, func4($zero)
 add $t0, $v0, $zero
+la $v1, t55
+s.s $f0, 0($v1)
 la $v1, t45
 sw $t0, 0($v1)
-jr 31455-ext53r-eval
-jr 31455-loot53
-31455-ext53r-eval:
+jr 14714-ext58r-eval
+jr 14714-loot58
+14714-ext58r-eval:
 la $v1, t46
 lw $t0, 0($v1)
 la $v1, t46
@@ -648,12 +687,12 @@ la $v1, t47
 lw $t0, 0($v1)
 la $v1, t47
 sw $t0, 0($v1)
-14714-loot53:
+05133-loot58:
 la $v1, t46
 lw $t0, 0($v1)
 la $v1, t47
 lw $t1, 0($v1)
-bne $t0, $t1, 14714-ext53r-eval
+bne $t0, $t1, 05133-ext58r-eval
 la $v1, t47
 sw $t1, 0($v1)
 la $v1, t46
@@ -662,15 +701,15 @@ la $v1, t48
 lw $t0, 0($v1)
 la $v1, t48
 sw $t0, 0($v1)
-la $v1, t52
+la $v1, t54
 lw $t0, 0($v1)
 la $v1, t48
 lw $t1, 0($v1)
 la $v1, t48
 sw $t1, 0($v1)
-la $v1, t52
+la $v1, t54
 sw $t0, 0($v1)
-jr 14714-ext53r-eval
+jr 05133-ext58r-eval
 la $v1, t49
 lw $t0, 0($v1)
 la $v1, t46
@@ -704,5 +743,5 @@ la $v1, t51
 sw $t1, 0($v1)
 la $v1, t46
 sw $t0, 0($v1)
-jr 14714-loot53
-14714-ext53r-eval:
+jr 05133-loot58
+05133-ext58r-eval:

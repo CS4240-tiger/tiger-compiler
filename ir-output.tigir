@@ -18,64 +18,64 @@ assign, t9, 0.0,
 assign, t8, t9, 
 return, t8, ,
 main:
-assign, t59, 5,
-assign, fixedt53t_var, 5.0,
 assign, t52, 5,
-assign, fixedt53t_tyt53e_var, 5.0,
-assign, t522, 5,
-assign, fixedt53t_tyt53e_var2, 5.0,
-assign, t53, 5,
-callr, t10, func1, t53
-callr, t11, func1, t59
+assign, t53, 5.0,
+assign, t54, 5,
+assign, t55, 5.0,
+assign, t542, 5,
+assign, t552, 5.0,
+assign, t58, 5,
+callr, t10, func1, t58
+callr, t11, func1, t52
 assign, t13, 5, 
-assign, t14, t59, 
+assign, t14, t52, 
 add, t13, t14, t15
 callr, t12, func1, t15
 assign, t17, 5.0,
 callr, t16, func2, t17
 assign, t19, 5,
 callr, t18, func2, t19
-callr, t20, func2, fixedt53t_var
-callr, t21, func2, t59
+callr, t20, func2, t53
+callr, t21, func2, t52
 assign, t23, 5.0, 
-assign, t24, fixedt53t_var, 
+assign, t24, t53, 
 add, t23, t24, t25
 callr, t22, func2, t25
 assign, t27, 5, 
-assign, t28, fixedt53t_var, 
+assign, t28, t53, 
 add, t27, t28, t29
 callr, t26, func2, t29
 assign, t31, 5.0, 
-assign, t32, t59, 
+assign, t32, t52, 
 add, t31, t32, t33
 callr, t30, func2, t33
 assign, t35, 5, 
-assign, t36, t59, 
+assign, t36, t52, 
 add, t35, t36, t37
 callr, t34, func2, t37
-callr, t38, func3, t52
-callr, t39, func3, t522
-callr, t40, func4, fixedt53t_tyt53e_var
-callr, t41, func4, fixedt53t_tyt53e_var2
-31455-loot53:
+callr, t38, func3, t54
+callr, t39, func3, t542
+callr, t40, func4, t55
+callr, t41, func4, t552
+14714-loot58:
 assign, t42, 1, 
 assign, t43, 2, 
-brneq, t42, t43, 31455-ext53r-eval
-callr, t44, func3, t52
-callr, t45, func4, fixedt53t_tyt53e_var
-goto, 31455-ext53r-eval, ,
-goto, 31455-loot53, ,
-31455-ext53r-eval:
+brneq, t42, t43, 14714-ext58r-eval
+callr, t44, func3, t54
+callr, t45, func4, t55
+goto, 14714-ext58r-eval, ,
+goto, 14714-loot58, ,
+14714-ext58r-eval:
 assign, t46, 1, 
 assign, t47, 9000, 
-14714-loot53:
-brneq, t46, t47, 14714-ext53r-eval
+05133-loot58:
+brneq, t46, t47, 05133-ext58r-eval
 assign, t48, 9000, 
-assign, t52, t48,
-goto, 14714-ext53r-eval, ,
+assign, t54, t48,
+goto, 05133-ext58r-eval, ,
 assign, t49, t46, 
 assign, t50, 1, 
 add, t49, t50, t51
 assign, t46, t51,
-goto, 14714-loot53, ,
-14714-ext53r-eval:
+goto, 05133-loot58, ,
+05133-ext58r-eval:

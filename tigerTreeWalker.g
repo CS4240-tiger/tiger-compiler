@@ -22,7 +22,8 @@ tokens {
 @header {
 	import java.util.Map;
 	import java.util.HashMap;
-	import java.util.Stack;
+	import java.util.Queue;
+	import java.util.LinkedList;
 }
 
 @members {
@@ -30,7 +31,7 @@ tokens {
 	private static final String OUTPUT_IR_FILENAME = "ir-output.tigir";
 	private List<String> irOutput = new ArrayList<String>();
 	private List<String> IR_RESERVED_WORDS = new ArrayList<String>();
-	private Stack<String> localVars = new Stack<String>();
+	private Queue<String> localVars = new LinkedList<String>();
 	private int currentTemporary = 0;
   	private SymbolTable symTable;
   	private int loopNestNum = 0;
@@ -127,7 +128,7 @@ block
  	:	^(AST_BLOCK {currentIRindex = irOutput.size() - 1; } declaration_statement stat_seq)
  	{
  	 while (!localVars.isEmpty()) {
- 	   String var = localVars.pop();
+ 	   String var = localVars.remove();
  	    if (!var.matches("[t][0-9]+")) {
       // Assign it a temporary, then replace all instances of that value in scope with temporary
       for (int lineIndex = currentIRindex; lineIndex < irOutput.size(); lineIndex++) {
@@ -138,8 +139,8 @@ block
             tempIRcomponents[compIndex] = tempIRcomponents[compIndex].replace(var, emitCurrentTemporary());
           } 
         
+        }
         irOutput.set(lineIndex, glue(tempIRcomponents, " "));
-       }
       }
      }
      
@@ -184,7 +185,7 @@ var_declaration
 	:	^(ASSIGN ^(COLON id_list type_id) (unsigned_tail))
 	{	
 		for (String id : $id_list.idList) {
-			localVars.push(id);
+			localVars.add(id);
 			irOutput.add(IRGenerator.declaration_statement(id, $unsigned_tail.stringVal));
 		}
 		
@@ -192,7 +193,7 @@ var_declaration
 	|	^(COLON id_list type_id)
 	{
 		for (String id : $id_list.idList) {
-			localVars.push(id);
+			localVars.add(id);
 			irOutput.add(IRGenerator.declaration_statement(id, "0"));
 		}
 	}
@@ -330,7 +331,7 @@ assign_stat
 	:	^(ASSIGN value assign_tail)
 	{
 		irOutput.add(IRGenerator.assign_stat($value.strVal, $assign_tail.temp));
-		localVars.push($value.strVal);
+		localVars.add($value.strVal);
 	}
 	;
 
