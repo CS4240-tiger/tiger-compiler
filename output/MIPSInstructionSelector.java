@@ -104,6 +104,13 @@ public class MIPSInstructionSelector {
 						components[1], 
 						components[2], 
 						components[3]);
+					if(components[0].equals("add") && 
+							(components[2].contains("$f") || components[3].contains("$f"))){
+						translatedLine = insertParams(
+							IR_MIPS_OP_MAPPINGS.get("add.s"), 
+							components[1], components[2], 
+							components[3]); //TODO here
+					}
 				}
 				
 				
@@ -291,7 +298,8 @@ public class MIPSInstructionSelector {
 				+ "lw <PARAM3>, <PARAM1>($v1)"); // value -> $reg, then lw
 		IR_MIPS_OP_MAPPINGS.put("array_load", "addi $v1, $zero, <PARAM2>\n"
 				+ "sw <PARAM3>, <PARAM1>($v1)"); // value -> $reg, then sw
-		
+		//Floating point add
+		IR_MIPS_OP_MAPPINGS.put("add.s", "add.s <PARAM1>, <PARAM2>, <PARAM3>");
 		// TODO: Now, map standard library functions to MIPS (call, callr)
 	}
 }

@@ -14,7 +14,7 @@ import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.CommonTreeNodeStream;
 
 public class TestTreeWalk {
-	public static final String LOCAL_TEST_PATH = "C:\\Users\\Jinhai Steakhouse\\OneDrive\\College\\CS 4240\\tiger-compiler\\TestCases\\testcase4kc.tig";
+	public static final String LOCAL_TEST_PATH = "C:\\Users\\dcbenas\\Documents\\NewComp\\tiger-compiler2\\TestCases\\testcase4kc.tig";
 	public static final String MOBILE_TEST_PATH = "E:\\Utilities\\PortableApps\\PortableApps\\GitPortable\\App\\Git\\tiger-compiler\\TestCases\\testcase4kc.tig";
 	public static final String OUTPUT_IR_FILENAME = "ir-output.tigir";
 	public static final String OUTPUT_IR_PATH = TestTreeWalk.class.getProtectionDomain().getCodeSource().getLocation()

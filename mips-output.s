@@ -386,7 +386,7 @@ la $v1, t24
 l.s $f1, 0($v1)
 la $v1, t25
 lw $t0, 0($v1)
-add $t0, $f0, $f1
+add.s $f0, $f1, $t0
 la $v1, t25
 sw $t0, 0($v1)
 la $v1, t24
@@ -430,7 +430,7 @@ la $v1, t28
 l.s $f0, 0($v1)
 la $v1, t29
 lw $t1, 0($v1)
-add $t1, $t0, $f0
+add.s $t0, $f0, $t1
 la $v1, t29
 sw $t1, 0($v1)
 la $v1, t28
@@ -620,7 +620,7 @@ la $v1, t552
 s.s $f0, 0($v1)
 la $v1, t41
 sw $t0, 0($v1)
-14714-loot58:
+21597-loot58:
 la $v1, t42
 lw $t0, 0($v1)
 la $v1, t42
@@ -633,7 +633,7 @@ la $v1, t42
 lw $t0, 0($v1)
 la $v1, t43
 lw $t1, 0($v1)
-bne $t0, $t1, 14714-ext58r-eval
+bne $t0, $t1, 21597-ext58r-eval
 la $v1, t43
 sw $t1, 0($v1)
 la $v1, t42
@@ -676,9 +676,9 @@ la $v1, t55
 s.s $f0, 0($v1)
 la $v1, t45
 sw $t0, 0($v1)
-jr 14714-ext58r-eval
-jr 14714-loot58
-14714-ext58r-eval:
+jr 21597-ext58r-eval
+jr 21597-loot58
+21597-ext58r-eval:
 la $v1, t46
 lw $t0, 0($v1)
 la $v1, t46
@@ -687,12 +687,12 @@ la $v1, t47
 lw $t0, 0($v1)
 la $v1, t47
 sw $t0, 0($v1)
-05133-loot58:
+57191-loot58:
 la $v1, t46
 lw $t0, 0($v1)
 la $v1, t47
 lw $t1, 0($v1)
-bne $t0, $t1, 05133-ext58r-eval
+bne $t0, $t1, 57191-ext58r-eval
 la $v1, t47
 sw $t1, 0($v1)
 la $v1, t46
@@ -709,7 +709,7 @@ la $v1, t48
 sw $t1, 0($v1)
 la $v1, t54
 sw $t0, 0($v1)
-jr 05133-ext58r-eval
+jr 57191-ext58r-eval
 la $v1, t49
 lw $t0, 0($v1)
 la $v1, t46
@@ -743,5 +743,5 @@ la $v1, t51
 sw $t1, 0($v1)
 la $v1, t46
 sw $t0, 0($v1)
-jr 05133-loot58
-05133-ext58r-eval:
+jr 57191-loot58
+57191-ext58r-eval:
