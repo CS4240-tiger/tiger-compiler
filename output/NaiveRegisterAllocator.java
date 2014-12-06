@@ -344,7 +344,8 @@ public class NaiveRegisterAllocator {
 	 * @return Mixed MIPS-IR output.
 	 */
 	public List<String> getMixedOutput() {
-		List<String> mixedOutput = mipsPreface;
+		List<String> mixedOutput = new ArrayList<String>();
+		mixedOutput.addAll(mipsPreface);
 		mixedOutput.addAll(output);
 		
 		return mixedOutput;
