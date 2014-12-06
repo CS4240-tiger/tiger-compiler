@@ -17,6 +17,10 @@ public class MIPSInstructionSelector {
 	 */
 	private List<String> text;
 	/**
+	 * Hacky hack solution to assigning fp registers.
+	 */
+	private int currentFloatReg = 31;
+	/**
 	 * Static mappings between IR and MIPS code.
 	 */
 	private static Map<String, String> IR_MIPS_OP_MAPPINGS;
@@ -99,18 +103,48 @@ public class MIPSInstructionSelector {
 							IR_MIPS_OP_MAPPINGS.get(components[0]), 
 							components[1], "", "");
 				} else {
-					translatedLine = insertParams(
-						IR_MIPS_OP_MAPPINGS.get(components[0]), 
-						components[1], 
-						components[2], 
-						components[3]);
 					if(components[0].equals("add") && 
 							(components[2].contains("$f") || components[3].contains("$f"))){
-						translatedLine = insertParams(
+						String dest = components[1];
+						String firstArg = components[2];
+						String secondArg = components[3];
+						//TODO: Why does it fail on add $t1, $f0, $t0???
+						//Case1: add.s $tx, arg1, arg2
+						if (!dest.contains("$f")){
+							dest = "$f" + currentFloatReg;
+							translatedLine = insertParams(IR_MIPS_OP_MAPPINGS.get("add.s"), dest, firstArg, secondArg);
+							currentFloatReg--;
+						}
+						//Case2: add.s $fx, $ty, arg2
+						//mtc1 $t0, $f0
+						//cvt.s.w $f0, $f0
+						if(!firstArg.contains("$f")){
+							firstArg = "$f"+currentFloatReg;
+							translatedLine = "mtc1 " + components[2] +", " + firstArg + "\n" +
+									"cvt.s.w" + firstArg + ", " + firstArg + "\n" +
+									insertParams(IR_MIPS_OP_MAPPINGS.get("add.s"), dest, firstArg, secondArg);
+							currentFloatReg--;
+						}
+						//Case3: add.s $fx, $fy, $tz
+						if(!secondArg.contains("$f")){
+							secondArg = "$f" + currentFloatReg;
+							translatedLine = "mtc1 " + components[3] +", " + secondArg + "\n" +
+									"cvt.s.w" + secondArg + ", " + secondArg + "\n" +
+									insertParams(IR_MIPS_OP_MAPPINGS.get("add.s"), dest, firstArg, secondArg);
+							currentFloatReg--;
+						}
+						
+						else translatedLine = insertParams(
 							IR_MIPS_OP_MAPPINGS.get("add.s"), 
-							components[1], components[2], 
-							components[3]); //TODO here
+							components[1], 
+							components[2], 
+							components[3]);
 					}
+					else translatedLine = insertParams(
+							IR_MIPS_OP_MAPPINGS.get(components[0]), 
+							components[1], 
+							components[2], 
+							components[3]);
 				}
 				
 				
