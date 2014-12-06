@@ -22,26 +22,62 @@ tokens {
 @header {
 	import java.util.Map;
 	import java.util.HashMap;
+	import java.util.Stack;
 }
 
 @members {
 	// IR stuff
 	private static final String OUTPUT_IR_FILENAME = "ir-output.tigir";
 	private List<String> irOutput = new ArrayList<String>();
+	private List<String> IR_RESERVED_WORDS = new ArrayList<String>();
+	private Stack<String> localVars = new Stack<String>();
 	private int currentTemporary = 0;
   	private SymbolTable symTable;
   	private int loopNestNum = 0;
   	private Object passThrough;
   	private String passThroughLabel, passThroughTemporary;
+  	private int currentIRindex = 0;
   	
 	public tigerTreeWalker(TreeNodeStream input, SymbolTable symTable) {
 		this(input);
 		this.symTable = symTable;
+		IR_RESERVED_WORDS.add("add");
+		IR_RESERVED_WORDS.add("and");
+		IR_RESERVED_WORDS.add("array_store");
+		IR_RESERVED_WORDS.add("assign");
+		IR_RESERVED_WORDS.add("breq");
+		IR_RESERVED_WORDS.add("brgeq");
+		IR_RESERVED_WORDS.add("brgt");
+		IR_RESERVED_WORDS.add("brleq");
+		IR_RESERVED_WORDS.add("brlt");
+		IR_RESERVED_WORDS.add("brneq");
+		IR_RESERVED_WORDS.add("call");
+		IR_RESERVED_WORDS.add("callr");
+		IR_RESERVED_WORDS.add("div");
+		IR_RESERVED_WORDS.add("goto");
+		IR_RESERVED_WORDS.add("mult");
+		IR_RESERVED_WORDS.add("or");
+		IR_RESERVED_WORDS.add("return");
+		IR_RESERVED_WORDS.add("sub");
 	}
   
   	private String emitCurrentTemporary() {
   		return "t" + currentTemporary;
   	}
+  	
+  	/* Thanks StackOverflow */
+  	private String glue(String[] s, String glue) {
+	  int k = s.length;
+	  if (k == 0) {
+	    return null;
+	  }
+	  StringBuilder out = new StringBuilder();
+	  out.append(s[0]);
+	  for (int x = 1; x < k; ++x) {
+	    out.append(glue).append(s[x]);
+	  }
+	  return out.toString();
+	}
 }
 
 tiger_program
@@ -88,7 +124,28 @@ block_list
 	;
 
 block 	
- 	:	^(AST_BLOCK declaration_statement stat_seq)
+ 	:	^(AST_BLOCK {currentIRindex = irOutput.size() - 1; } declaration_statement stat_seq)
+ 	{
+ 	 while (!localVars.isEmpty()) {
+ 	   String var = localVars.pop();
+ 	    if (!var.matches("[t][0-9]+")) {
+      // Assign it a temporary, then replace all instances of that value in scope with temporary
+      for (int lineIndex = currentIRindex; lineIndex < irOutput.size(); lineIndex++) {
+        // Split into components
+        String[] tempIRcomponents = irOutput.get(lineIndex).split(" ");
+        for (int compIndex = 0; compIndex < tempIRcomponents.length; compIndex++) {
+          if (!IR_RESERVED_WORDS.contains(tempIRcomponents[compIndex].replace(",", ""))) {
+            tempIRcomponents[compIndex] = tempIRcomponents[compIndex].replace(var, emitCurrentTemporary());
+          } 
+        
+        irOutput.set(lineIndex, glue(tempIRcomponents, " "));
+       }
+      }
+     }
+     
+     currentTemporary++;
+    }
+   }
 	;
 
 declaration_statement 
@@ -127,6 +184,7 @@ var_declaration
 	:	^(ASSIGN ^(COLON id_list type_id) (unsigned_tail))
 	{	
 		for (String id : $id_list.idList) {
+			localVars.push(id);
 			irOutput.add(IRGenerator.declaration_statement(id, $unsigned_tail.stringVal));
 		}
 		
@@ -134,6 +192,7 @@ var_declaration
 	|	^(COLON id_list type_id)
 	{
 		for (String id : $id_list.idList) {
+			localVars.push(id);
 			irOutput.add(IRGenerator.declaration_statement(id, "0"));
 		}
 	}
@@ -271,6 +330,7 @@ assign_stat
 	:	^(ASSIGN value assign_tail)
 	{
 		irOutput.add(IRGenerator.assign_stat($value.strVal, $assign_tail.temp));
+		localVars.push($value.strVal);
 	}
 	;
 

@@ -1,78 +1,79 @@
-func1: 
-assign, a, 0, 
-assign, t0, a, 
-return, t0, , 
-assign, p, 0, 
-assign, t1, p, 
-return, t1, , 
-func2: 
-assign, a, 0, 
-assign, t2, a, 
-return, t2, , 
-func3: 
-assign, a, 0, 
-assign, t3, a, 
-return, t3, , 
-func4: 
-assign, a, 0.0, 
-assign, t4, a, 
-return, t4, , 
-main: 
-assign, int_var, 5, 
-assign, fixedpt_var, 5.0, 
-assign, int_type_var, 5, 
-assign, fixedpt_type_var, 5.0, 
-assign, int_type_var2, 5, 
-assign, fixedpt_type_var2, 5.0, 
-callr, t5, func1, p
-callr, t6, func1, int_var
-assign, t8, 5, 
-assign, t9, int_var, 
-add, t8, t9, t10
-callr, t7, func1, t10
-callr, t11, func2, 5.0
-callr, t12, func2, 5
-callr, t13, func2, fixedpt_var
-callr, t14, func2, int_var
-assign, t16, 5.0, 
-assign, t17, fixedpt_var, 
-add, t16, t17, t18
-callr, t15, func2, t18
-assign, t20, 5, 
-assign, t21, fixedpt_var, 
-add, t20, t21, t22
-callr, t19, func2, t22
-assign, t24, 5.0, 
-assign, t25, int_var, 
-add, t24, t25, t26
-callr, t23, func2, t26
-assign, t28, 5, 
-assign, t29, int_var, 
-add, t28, t29, t30
-callr, t27, func2, t30
-callr, t31, func3, int_type_var
-callr, t32, func3, int_type_var2
-callr, t33, func4, fixedpt_type_var
-callr, t34, func4, fixedpt_type_var2
-88422-loop: 
-assign, t35, 1, 
-assign, t36, 2, 
-brneq, t35, t36, 88422-expr-eval
-callr, t37, func3, int_type_var
-callr, t38, func4, fixedpt_type_var
-goto, 88422-expr-eval, , 
-goto, 88422-loop, , 
-88422-expr-eval: 
-assign, t39, 1, 
-assign, t40, 9000, 
-84365-loop: 
-brneq, t39, t40, 84365-expr-eval
-assign, t41, 9000, 
-assign, int_type_var, t41, 
-goto, 84365-expr-eval, , 
-assign, t42, t39, 
-assign, t43, 1, 
-add, t42, t43, t44
-assign, t39, t44, 
-goto, 84365-loop, , 
-84365-expr-eval: 
+func1:
+assign, t1, 0,
+assign, t0, t1, 
+return, t0, ,
+assign, t3, 0,
+assign, t2, t3, 
+return, t2, ,
+func2:
+assign, t5, 0,
+assign, t4, t5, 
+return, t4, ,
+func3:
+assign, t7, 0,
+assign, t6, t7, 
+return, t6, ,
+func4:
+assign, t9, 0.0,
+assign, t8, t9, 
+return, t8, ,
+main:
+assign, t57, 5,
+assign, fixedt51t_var, 5.0,
+assign, t50, 5,
+assign, fixedt51t_tyt51e_var, 5.0,
+assign, t502, 5,
+assign, fixedt51t_tyt51e_var2, 5.0,
+assign, t51, 5,
+callr, t10, func1, t51
+callr, t11, func1, t57
+assign, t13, 5, 
+assign, t14, t57, 
+add, t13, t14, t15
+callr, t12, func1, t15
+callr, t16, func2, 5.0
+callr, t17, func2, 5
+callr, t18, func2, fixedt51t_var
+callr, t19, func2, t57
+assign, t21, 5.0, 
+assign, t22, fixedt51t_var, 
+add, t21, t22, t23
+callr, t20, func2, t23
+assign, t25, 5, 
+assign, t26, fixedt51t_var, 
+add, t25, t26, t27
+callr, t24, func2, t27
+assign, t29, 5.0, 
+assign, t30, t57, 
+add, t29, t30, t31
+callr, t28, func2, t31
+assign, t33, 5, 
+assign, t34, t57, 
+add, t33, t34, t35
+callr, t32, func2, t35
+callr, t36, func3, t50
+callr, t37, func3, t502
+callr, t38, func4, fixedt51t_tyt51e_var
+callr, t39, func4, fixedt51t_tyt51e_var2
+91472-loot51:
+assign, t40, 1, 
+assign, t41, 2, 
+brneq, t40, t41, 91472-ext51r-eval
+callr, t42, func3, t50
+callr, t43, func4, fixedt51t_tyt51e_var
+goto, 91472-ext51r-eval, ,
+goto, 91472-loot51, ,
+91472-ext51r-eval:
+assign, t44, 1, 
+assign, t45, 9000, 
+20017-loot51:
+brneq, t44, t45, 20017-ext51r-eval
+assign, t46, 9000, 
+assign, t50, t46,
+goto, 20017-ext51r-eval, ,
+assign, t47, t44, 
+assign, t48, 1, 
+add, t47, t48, t49
+assign, t44, t49,
+goto, 20017-loot51, ,
+20017-ext51r-eval:

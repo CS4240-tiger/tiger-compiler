@@ -45,7 +45,8 @@ begin
 	var int_type_var : Int_Type := 5;
 	var fixedpt_type_var : Fixedpt_Type := 5.0;
 	var int_type_var2 : Int_Type := 5;
-	var fixedpt_type_var2 : Fixedpt_Type := 5.0;	
+	var fixedpt_type_var2 : Fixedpt_Type := 5.0;
+	var p : int := 5;
 	t(d);
 	/*
 	BELOW SHOULD PASS (WHICH IT DOES FOR NOW)*/
