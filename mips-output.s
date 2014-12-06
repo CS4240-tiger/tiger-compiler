@@ -106,11 +106,11 @@ la $v1, t3
 sw $t0, 0($v1)
 func4: 
 la $v1, t4
-lw $f0, 0($v1)
+l.s $f0, 0($v1)
 la $v1, t4
-sw $f0, 0($v1)
+s.s $f0, 0($v1)
 la $v1, t4
-lw $f0, 0($v1)
+l.s $f0, 0($v1)
 addi $sp, $sp, 1
 lw $fp, 0($sp)
 addi $sp, $sp, 1
@@ -118,7 +118,7 @@ lw $ra, 0($sp)
 add $sp, $fp, $zero
 jr $ra
 la $v1, t4
-sw $f0, 0($v1)
+s.s $f0, 0($v1)
 main: 
 la $v1, t5
 lw $t0, 0($v1)
@@ -251,26 +251,26 @@ add $t0, $v0, $zero
 la $v1, t14
 sw $t0, 0($v1)
 la $v1, t16
-lw $f0, 0($v1)
+l.s $f0, 0($v1)
 la $v1, t16
-sw $f0, 0($v1)
+s.s $f0, 0($v1)
 la $v1, t17
-lw $f0, 0($v1)
+l.s $f0, 0($v1)
 la $v1, t17
-sw $f0, 0($v1)
+s.s $f0, 0($v1)
 la $v1, t16
-lw $f0, 0($v1)
+l.s $f0, 0($v1)
 la $v1, t17
-lw $f1, 0($v1)
+l.s $f1, 0($v1)
 la $v1, t18
 lw $t0, 0($v1)
 add $t0, $f0, $f1
 la $v1, t18
 sw $t0, 0($v1)
 la $v1, t17
-sw $f1, 0($v1)
+s.s $f1, 0($v1)
 la $v1, t16
-sw $f0, 0($v1)
+s.s $f0, 0($v1)
 la $v1, t15
 lw $t0, 0($v1)
 la $v1, t18
@@ -295,20 +295,20 @@ lw $t0, 0($v1)
 la $v1, t20
 sw $t0, 0($v1)
 la $v1, t21
-lw $f0, 0($v1)
+l.s $f0, 0($v1)
 la $v1, t21
-sw $f0, 0($v1)
+s.s $f0, 0($v1)
 la $v1, t20
 lw $t0, 0($v1)
 la $v1, t21
-lw $f0, 0($v1)
+l.s $f0, 0($v1)
 la $v1, t22
 lw $t1, 0($v1)
 add $t1, $t0, $f0
 la $v1, t22
 sw $t1, 0($v1)
 la $v1, t21
-sw $f0, 0($v1)
+s.s $f0, 0($v1)
 la $v1, t20
 sw $t0, 0($v1)
 la $v1, t19
@@ -331,15 +331,15 @@ sw $t1, 0($v1)
 la $v1, t19
 sw $t0, 0($v1)
 la $v1, t24
-lw $f0, 0($v1)
+l.s $f0, 0($v1)
 la $v1, t24
-sw $f0, 0($v1)
+s.s $f0, 0($v1)
 la $v1, t25
 lw $t0, 0($v1)
 la $v1, t25
 sw $t0, 0($v1)
 la $v1, t24
-lw $f0, 0($v1)
+l.s $f0, 0($v1)
 la $v1, t25
 lw $t0, 0($v1)
 la $v1, t26
@@ -350,7 +350,7 @@ sw $t1, 0($v1)
 la $v1, t25
 sw $t0, 0($v1)
 la $v1, t24
-sw $f0, 0($v1)
+s.s $f0, 0($v1)
 la $v1, t23
 lw $t0, 0($v1)
 la $v1, t26
