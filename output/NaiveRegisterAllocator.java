@@ -217,7 +217,11 @@ public class NaiveRegisterAllocator {
 		String[] result = new String[2];
 		
 		result[0] = "la $v1, " + label;
-		result[1] = "lw " + register + ", 0($v1)";
+		if (mipsPreface.get(getIndexOfTemporary(label)).contains(".float")) {
+			result[1] = "l.s " + register + ", 0($v1)";
+		} else {
+			result[1] = "lw " + register + ", 0($v1)";
+		}
 		
 		return result;
 	}
@@ -234,7 +238,13 @@ public class NaiveRegisterAllocator {
 		String[] result = new String[2];
 		
 		result[0] = "la $v1, " + label;
-		result[1] = "sw " + register + ", 0($v1)";
+		if (register.contains("f")) {
+			// It's a float, store floating point instead
+			result[1] = "s.s " + register + ", 0($v1)";
+		} else {
+			result[1] = "sw " + register + ", 0($v1)";
+		}
+		
 		
 		return result;
 	}
@@ -364,5 +374,20 @@ public class NaiveRegisterAllocator {
 	 */
 	public List<String> getOutput() {
 		return output;
+	}
+	
+	/**
+	 * Returns the index of the given temporary in mipsPreface.
+	 * @param temporary A given temporary label to search for.
+	 * @return The index of the temporary in mipsPreface.
+	 */
+	private int getIndexOfTemporary(String temporary) {
+		for (int i = 0; i < mipsPreface.size(); i++) {
+			if (mipsPreface.get(i).contains(temporary)) {
+				return i;
+			}
+		}
+		
+		return -1;
 	}
 }
