@@ -1,6 +1,14 @@
 RUNNING LIST OF BUGS:
+
+Note, the output is currently the .data section followed by the IR followed by the actual valid MIPS code.
+
 On moment of truth.s which is compiled from testcases4kc.tiger
 lw $f0 -> l.s
 sw $f0 -> s.s
 sw p -> sw $fp //this could be $sp too
-sw int_var -> ?? //possibly $fp or $sp?
+sw int_var -> sw $fp?? //possibly $fp or $sp?
+sw int_type_var-> sw $fp ??
+sw float_type_var-> sw $fp ?? //these three always seemed to be in a place where storing fp would be appropriate.
+sw 5.0 -> sw 5, 0($sp)??
+
+Its recommended that you just recompile and take a look at the MIPS output for yourself...

@@ -140,7 +140,7 @@ lw $t0, 0($v1)
 add $v1, $fp, $zero
 add $fp, $sp, $zero
 addi $sp, $sp, -1
-sw int_var, 0($sp)
+sw $fp, 0($sp)
 addi $sp, $sp, -1
 sw $ra, 0($sp)
 addi $sp, $sp, -1
@@ -195,7 +195,7 @@ lw $t0, 0($v1)
 add $v1, $fp, $zero
 add $fp, $sp, $zero
 addi $sp, $sp, -1
-sw 5.0, 0($sp)
+sw 5, 0($sp)
 addi $sp, $sp, -1
 sw $ra, 0($sp)
 addi $sp, $sp, -1
@@ -240,7 +240,7 @@ lw $t0, 0($v1)
 add $v1, $fp, $zero
 add $fp, $sp, $zero
 addi $sp, $sp, -1
-sw int_var, 0($sp)
+sw $fp, 0($sp)
 addi $sp, $sp, -1
 sw $ra, 0($sp)
 addi $sp, $sp, -1
@@ -415,7 +415,7 @@ lw $t0, 0($v1)
 add $v1, $fp, $zero
 add $fp, $sp, $zero
 addi $sp, $sp, -1
-sw int_type_var, 0($sp)
+sw $fp, 0($sp)
 addi $sp, $sp, -1
 sw $ra, 0($sp)
 addi $sp, $sp, -1
@@ -430,7 +430,7 @@ lw $t0, 0($v1)
 add $v1, $fp, $zero
 add $fp, $sp, $zero
 addi $sp, $sp, -1
-sw int_type_var2, 0($sp)
+sw $fp, 0($sp)
 addi $sp, $sp, -1
 sw $ra, 0($sp)
 addi $sp, $sp, -1
@@ -493,7 +493,7 @@ lw $t0, 0($v1)
 add $v1, $fp, $zero
 add $fp, $sp, $zero
 addi $sp, $sp, -1
-sw int_type_var, 0($sp)
+sw $fp, 0($sp)
 addi $sp, $sp, -1
 sw $ra, 0($sp)
 addi $sp, $sp, -1
@@ -508,7 +508,7 @@ lw $t0, 0($v1)
 add $v1, $fp, $zero
 add $fp, $sp, $zero
 addi $sp, $sp, -1
-sw fixedpt_type_var, 0($sp)
+sw $fp, 0($sp)
 addi $sp, $sp, -1
 sw $ra, 0($sp)
 addi $sp, $sp, -1
