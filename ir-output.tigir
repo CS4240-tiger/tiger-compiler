@@ -18,62 +18,64 @@ assign, t9, 0.0,
 assign, t8, t9, 
 return, t8, ,
 main:
-assign, t57, 5,
-assign, fixedt51t_var, 5.0,
-assign, t50, 5,
-assign, fixedt51t_tyt51e_var, 5.0,
-assign, t502, 5,
-assign, fixedt51t_tyt51e_var2, 5.0,
-assign, t51, 5,
-callr, t10, func1, t51
-callr, t11, func1, t57
+assign, t59, 5,
+assign, fixedt53t_var, 5.0,
+assign, t52, 5,
+assign, fixedt53t_tyt53e_var, 5.0,
+assign, t522, 5,
+assign, fixedt53t_tyt53e_var2, 5.0,
+assign, t53, 5,
+callr, t10, func1, t53
+callr, t11, func1, t59
 assign, t13, 5, 
-assign, t14, t57, 
+assign, t14, t59, 
 add, t13, t14, t15
 callr, t12, func1, t15
-callr, t16, func2, 5.0
-callr, t17, func2, 5
-callr, t18, func2, fixedt51t_var
-callr, t19, func2, t57
-assign, t21, 5.0, 
-assign, t22, fixedt51t_var, 
-add, t21, t22, t23
-callr, t20, func2, t23
-assign, t25, 5, 
-assign, t26, fixedt51t_var, 
-add, t25, t26, t27
-callr, t24, func2, t27
-assign, t29, 5.0, 
-assign, t30, t57, 
-add, t29, t30, t31
-callr, t28, func2, t31
-assign, t33, 5, 
-assign, t34, t57, 
-add, t33, t34, t35
-callr, t32, func2, t35
-callr, t36, func3, t50
-callr, t37, func3, t502
-callr, t38, func4, fixedt51t_tyt51e_var
-callr, t39, func4, fixedt51t_tyt51e_var2
-91472-loot51:
-assign, t40, 1, 
-assign, t41, 2, 
-brneq, t40, t41, 91472-ext51r-eval
-callr, t42, func3, t50
-callr, t43, func4, fixedt51t_tyt51e_var
-goto, 91472-ext51r-eval, ,
-goto, 91472-loot51, ,
-91472-ext51r-eval:
-assign, t44, 1, 
-assign, t45, 9000, 
-20017-loot51:
-brneq, t44, t45, 20017-ext51r-eval
-assign, t46, 9000, 
-assign, t50, t46,
-goto, 20017-ext51r-eval, ,
-assign, t47, t44, 
-assign, t48, 1, 
-add, t47, t48, t49
-assign, t44, t49,
-goto, 20017-loot51, ,
-20017-ext51r-eval:
+assign, t17, 5.0,
+callr, t16, func2, t17
+assign, t19, 5,
+callr, t18, func2, t19
+callr, t20, func2, fixedt53t_var
+callr, t21, func2, t59
+assign, t23, 5.0, 
+assign, t24, fixedt53t_var, 
+add, t23, t24, t25
+callr, t22, func2, t25
+assign, t27, 5, 
+assign, t28, fixedt53t_var, 
+add, t27, t28, t29
+callr, t26, func2, t29
+assign, t31, 5.0, 
+assign, t32, t59, 
+add, t31, t32, t33
+callr, t30, func2, t33
+assign, t35, 5, 
+assign, t36, t59, 
+add, t35, t36, t37
+callr, t34, func2, t37
+callr, t38, func3, t52
+callr, t39, func3, t522
+callr, t40, func4, fixedt53t_tyt53e_var
+callr, t41, func4, fixedt53t_tyt53e_var2
+34663-loot53:
+assign, t42, 1, 
+assign, t43, 2, 
+brneq, t42, t43, 34663-ext53r-eval
+callr, t44, func3, t52
+callr, t45, func4, fixedt53t_tyt53e_var
+goto, 34663-ext53r-eval, ,
+goto, 34663-loot53, ,
+34663-ext53r-eval:
+assign, t46, 1, 
+assign, t47, 9000, 
+24415-loot53:
+brneq, t46, t47, 24415-ext53r-eval
+assign, t48, 9000, 
+assign, t52, t48,
+goto, 24415-ext53r-eval, ,
+assign, t49, t46, 
+assign, t50, 1, 
+add, t49, t50, t51
+assign, t46, t51,
+goto, 24415-loot53, ,
+24415-ext53r-eval:

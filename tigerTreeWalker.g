@@ -372,7 +372,15 @@ func_call returns [String tempTarget]
 				if ($func_param_list.paramList.get(i).isTerminal()) {
 					// If it's a variable or value, just add it
 					// Hopefully this is the case most of the time
-					paramList[i] = $func_param_list.paramList.get(i).value;
+					
+					if ($func_param_list.paramList.get(i).value.matches("[0-9]+(.[0-9]+)?")) {
+						// If value, assign it to temporary
+						irOutput.add(IRGenerator.assign_stat(emitCurrentTemporary(), $func_param_list.paramList.get(i).value));
+						paramList[i] = emitCurrentTemporary();
+						currentTemporary++;
+					} else {
+						paramList[i] = $func_param_list.paramList.get(i).value;
+					}
 				} else {
 					// Otherwise, we need to evaluate it and return the temporary
 					BinaryExpression.EvalReturn returnPkg = $func_param_list.paramList.get(i).eval(currentTemporary);
