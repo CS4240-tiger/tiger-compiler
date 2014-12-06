@@ -207,13 +207,13 @@ public class MIPSInstructionSelector {
 	 * of IR to MIPS instructions.
 	 */
 	private static final void initializeMipsMappings() {
-		final String FUNC_CALL_CALL_CONV = "add $at, $fp, $zero\n"
+		final String FUNC_CALL_CALL_CONV = "add $v1, $fp, $zero\n"
 				+ "add $fp, $sp, $zero\n"
 				+ "<FUNC_CALL_STACK_POPULATION>"
 				+ "addi $sp, $sp, -1\n"
 				+ "sw $ra, 0($sp)\n" // Store return address
 				+ "addi $sp, $sp, -1\n"
-				+ "sw $at, 0($sp)\n"; // Store FP
+				+ "sw $v1, 0($sp)\n"; // Store FP
 		final String FUNC_CALL_RETURN_CONV = "addi $sp, $sp, 1\n"
 				+ "lw $fp, 0($sp)\n"
 				+ "addi $sp, $sp, 1\n"
@@ -282,10 +282,10 @@ public class MIPSInstructionSelector {
 		IR_MIPS_OP_MAPPINGS.put("callr", FUNC_CALL_CALL_CONV + "jr <PARAM1>\n" 
 				+ "sw $v0, <PARAM2>($zero)\n"
 				+ "add <DEST>, $v0, $zero");
-		IR_MIPS_OP_MAPPINGS.put("array_store", "addi $at, $zero, <PARAM2>\n"
-				+ "lw <PARAM3>, <PARAM1>($at)"); // value -> $reg, then lw
-		IR_MIPS_OP_MAPPINGS.put("array_load", "addi $at, $zero, <PARAM2>\n"
-				+ "sw <PARAM3>, <PARAM1>($at)"); // value -> $reg, then sw
+		IR_MIPS_OP_MAPPINGS.put("array_store", "addi $v1, $zero, <PARAM2>\n"
+				+ "lw <PARAM3>, <PARAM1>($v1)"); // value -> $reg, then lw
+		IR_MIPS_OP_MAPPINGS.put("array_load", "addi $v1, $zero, <PARAM2>\n"
+				+ "sw <PARAM3>, <PARAM1>($v1)"); // value -> $reg, then sw
 		
 		// TODO: Now, map standard library functions to MIPS (call, callr)
 	}

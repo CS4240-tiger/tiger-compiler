@@ -45,7 +45,6 @@ t42: .word 1
 t43: .word 1
 t44: .word 0
 .text
-.text
 func1: 
 la $at, t0
 lw $t0, 0($at)
@@ -471,7 +470,7 @@ sw $v0, func4($zero)
 add $t0, $v0, $zero
 la $at, t34
 sw $t0, 0($at)
-98739-loop: 
+88422-loop: 
 la $at, t35
 lw $t0, 0($at)
 la $at, t35
@@ -484,7 +483,7 @@ la $at, t35
 lw $t0, 0($at)
 la $at, t36
 lw $t1, 0($at)
-bne $t0, $t1, 98739-expr-eval
+bne $t0, $t1, 88422-expr-eval
 la $at, t36
 sw $t1, 0($at)
 la $at, t35
@@ -519,9 +518,9 @@ sw $v0, func4($zero)
 add $t0, $v0, $zero
 la $at, t38
 sw $t0, 0($at)
-jr 98739-expr-eval
-jr 98739-loop
-98739-expr-eval: 
+jr 88422-expr-eval
+jr 88422-loop
+88422-expr-eval: 
 la $at, t39
 lw $t0, 0($at)
 la $at, t39
@@ -530,12 +529,12 @@ la $at, t40
 lw $t0, 0($at)
 la $at, t40
 sw $t0, 0($at)
-93857-loop: 
+84365-loop: 
 la $at, t39
 lw $t0, 0($at)
 la $at, t40
 lw $t1, 0($at)
-bne $t0, $t1, 93857-expr-eval
+bne $t0, $t1, 84365-expr-eval
 la $at, t40
 sw $t1, 0($at)
 la $at, t39
@@ -548,7 +547,7 @@ la $at, t41
 lw $t0, 0($at)
 la $at, t41
 sw $t0, 0($at)
-jr 93857-expr-eval
+jr 84365-expr-eval
 la $at, t42
 lw $t0, 0($at)
 la $at, t39
@@ -582,5 +581,5 @@ la $at, t44
 sw $t1, 0($at)
 la $at, t39
 sw $t0, 0($at)
-jr 93857-loop
-93857-expr-eval: 
+jr 84365-loop
+84365-expr-eval: 

@@ -216,8 +216,8 @@ public class NaiveRegisterAllocator {
 		// We'll use the assembler register $at for loading the address
 		String[] result = new String[2];
 		
-		result[0] = "la $at, " + label;
-		result[1] = "lw " + register + ", 0($at)";
+		result[0] = "la $v1, " + label;
+		result[1] = "lw " + register + ", 0($v1)";
 		
 		return result;
 	}
@@ -230,11 +230,11 @@ public class NaiveRegisterAllocator {
 	 * @return The String MIPS load instruction.
 	 */
 	private String[] genMipsStore(String label, String register) {
-		// We'll use the assembler register $at for loading the address
+		// We'll use the assembler register $v1 for loading the address
 		String[] result = new String[2];
 		
-		result[0] = "la $at, " + label;
-		result[1] = "sw " + register + ", 0($at)";
+		result[0] = "la $v1, " + label;
+		result[1] = "sw " + register + ", 0($v1)";
 		
 		return result;
 	}
