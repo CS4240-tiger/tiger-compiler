@@ -114,6 +114,9 @@ public class MIPSInstructionSelector {
 							argIndex < components.length; argIndex++) {
 							 temp += pushSP + pushVar.replace(
 									 "<VAL>", components[argIndex]);
+							 if (components[argIndex].contains("$f")) {
+								 temp = temp.replace("sw", "s.s");
+							 }
 						if (components[0].contains("callr")) {
 							translatedLine = translatedLine
 								.replace("<DEST>", components[1]);

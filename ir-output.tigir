@@ -57,25 +57,25 @@ callr, t38, func3, t52
 callr, t39, func3, t522
 callr, t40, func4, fixedt53t_tyt53e_var
 callr, t41, func4, fixedt53t_tyt53e_var2
-34663-loot53:
+31455-loot53:
 assign, t42, 1, 
 assign, t43, 2, 
-brneq, t42, t43, 34663-ext53r-eval
+brneq, t42, t43, 31455-ext53r-eval
 callr, t44, func3, t52
 callr, t45, func4, fixedt53t_tyt53e_var
-goto, 34663-ext53r-eval, ,
-goto, 34663-loot53, ,
-34663-ext53r-eval:
+goto, 31455-ext53r-eval, ,
+goto, 31455-loot53, ,
+31455-ext53r-eval:
 assign, t46, 1, 
 assign, t47, 9000, 
-24415-loot53:
-brneq, t46, t47, 24415-ext53r-eval
+14714-loot53:
+brneq, t46, t47, 14714-ext53r-eval
 assign, t48, 9000, 
 assign, t52, t48,
-goto, 24415-ext53r-eval, ,
+goto, 14714-ext53r-eval, ,
 assign, t49, t46, 
 assign, t50, 1, 
 add, t49, t50, t51
 assign, t46, t51,
-goto, 24415-loot53, ,
-24415-ext53r-eval:
+goto, 14714-loot53, ,
+14714-ext53r-eval:

@@ -280,7 +280,7 @@ l.s $f0, 0($v1)
 add $v1, $fp, $zero
 add $fp, $sp, $zero
 addi $sp, $sp, -1
-sw $f0, 0($sp)
+s.s $f0, 0($sp)
 addi $sp, $sp, -1
 sw $ra, 0($sp)
 addi $sp, $sp, -1
@@ -585,7 +585,7 @@ sw $v0, func4($zero)
 add $t0, $v0, $zero
 la $v1, t41
 sw $t0, 0($v1)
-34663-loot53:
+31455-loot53:
 la $v1, t42
 lw $t0, 0($v1)
 la $v1, t42
@@ -598,7 +598,7 @@ la $v1, t42
 lw $t0, 0($v1)
 la $v1, t43
 lw $t1, 0($v1)
-bne $t0, $t1, 34663-ext53r-eval
+bne $t0, $t1, 31455-ext53r-eval
 la $v1, t43
 sw $t1, 0($v1)
 la $v1, t42
@@ -637,9 +637,9 @@ sw $v0, func4($zero)
 add $t0, $v0, $zero
 la $v1, t45
 sw $t0, 0($v1)
-jr 34663-ext53r-eval
-jr 34663-loot53
-34663-ext53r-eval:
+jr 31455-ext53r-eval
+jr 31455-loot53
+31455-ext53r-eval:
 la $v1, t46
 lw $t0, 0($v1)
 la $v1, t46
@@ -648,12 +648,12 @@ la $v1, t47
 lw $t0, 0($v1)
 la $v1, t47
 sw $t0, 0($v1)
-24415-loot53:
+14714-loot53:
 la $v1, t46
 lw $t0, 0($v1)
 la $v1, t47
 lw $t1, 0($v1)
-bne $t0, $t1, 24415-ext53r-eval
+bne $t0, $t1, 14714-ext53r-eval
 la $v1, t47
 sw $t1, 0($v1)
 la $v1, t46
@@ -670,7 +670,7 @@ la $v1, t48
 sw $t1, 0($v1)
 la $v1, t52
 sw $t0, 0($v1)
-jr 24415-ext53r-eval
+jr 14714-ext53r-eval
 la $v1, t49
 lw $t0, 0($v1)
 la $v1, t46
@@ -704,5 +704,5 @@ la $v1, t51
 sw $t1, 0($v1)
 la $v1, t46
 sw $t0, 0($v1)
-jr 24415-loot53
-24415-ext53r-eval:
+jr 14714-loot53
+14714-ext53r-eval:
