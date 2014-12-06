@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,9 +19,10 @@ public class TestTreeWalk {
 	public static final String OUTPUT_IR_FILENAME = "ir-output.tigir";
 	public static final String OUTPUT_IR_PATH = TestTreeWalk.class.getProtectionDomain().getCodeSource().getLocation()
 			.getPath().replace("%20", " ").replace("bin/", OUTPUT_IR_FILENAME);
-
+	public static final String OUTPUT_MIPS_FILENAME = "mips-output.s";
+	
 	public static void main(String args[]) throws Exception {
-        tigerLexer lex = new tigerLexer(new ANTLRFileStream(MOBILE_TEST_PATH, "UTF8"));
+        tigerLexer lex = new tigerLexer(new ANTLRFileStream(LOCAL_TEST_PATH, "UTF8"));
 		
         CommonTokenStream tokens = new CommonTokenStream(lex);
 
@@ -48,6 +51,8 @@ public class TestTreeWalk {
             for (String output : translator.getOutput()) {
             	System.out.println(output);
             }
+            
+            outputMIPS(translator.getOutput());
         } catch (RecognitionException e) {
             e.printStackTrace();
         }
@@ -63,5 +68,15 @@ public class TestTreeWalk {
 		
 		scan.close();
 		return output;
+	}
+	
+	private static void outputMIPS(List<String> mipsList) throws IOException {
+		FileWriter fw = new FileWriter(OUTPUT_MIPS_FILENAME); 
+		for (String mipsLine : mipsList) {
+			fw.write(mipsLine + "\n");
+		}
+		
+		System.out.println("Output written to " + OUTPUT_MIPS_FILENAME + "!");
+		fw.close();
 	}
 }
