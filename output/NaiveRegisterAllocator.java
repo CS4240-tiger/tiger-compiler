@@ -126,9 +126,6 @@ public class NaiveRegisterAllocator {
 			// All registers are now free!
 			unuseAllRegisters();
 		}
-		
-		// End .data section
-		mipsPreface.add(".text");
 	}
 	
 	/**
