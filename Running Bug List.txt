@@ -1,0 +1,6 @@
+RUNNING LIST OF BUGS:
+On moment of truth.s which is compiled from testcases4kc.tiger
+lw $f0 -> l.s
+sw $f0 -> s.s
+sw p -> sw $fp //this could be $sp too
+sw int_var -> ?? //possibly $fp or $sp?
