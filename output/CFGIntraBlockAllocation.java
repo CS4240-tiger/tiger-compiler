@@ -51,21 +51,60 @@ public class CFGIntraBlockAllocation {
 		}
 	}
 	
+	public void allocateAllEBBs() {
+		for (CodeBlock EBB: allEBBs) {
+			EBB.allocateRegs(allEBBs, typeMap);
+			EBB.printMIPS();
+		}
+	}
+	
+	public void printEBBs() {
+		/**for (CodeBlock block: allCodeBlocks) {
+			if (numPredecessor(block) > 1) {
+				System.out.println(block.getLeader());
+			}
+		}
+		System.out.println("-----------");**/
+		for (CodeBlock each: allEBBs) {
+			System.out.println("HERE");
+			for (String line: each.getCode()) {
+				System.out.println(line);
+			}
+		}
+	}
+	
+	public void printGraph() {
+		for (CodeBlock each: graph.keySet()) {
+			System.out.println("LEADER: "+each.getLeader());
+			System.out.println("NEIGHBORS:");
+			for (CodeBlock neighbor: graph.get(each)) {
+				System.out.println(neighbor.getLeader());
+			}
+		}
+	}
+	
+	public void printBlocks() {
+		for(CodeBlock each:allCodeBlocks) {
+			System.out.println(each.getLeader());
+		}
+	}
+	
 	public void findEBBs() {
 		LinkedList<CodeBlock> leader = new LinkedList<CodeBlock>();
 		LinkedList<LinkedList<CodeBlock>> EBBs = new LinkedList<LinkedList<CodeBlock>>(); 
 		//gets the actual leader, in this case, the block with main:
-		for (CodeBlock each: allCodeBlocks) {
+		/**for (CodeBlock each: allCodeBlocks) {
 			if (each.getLeader().contains("main:")) {
 				leader.push(each);
 				//System.out.println(each.getId());
 				//System.out.println("edges to:");
-				/**for (int i = 0; i < graph.get(each).size(); i++) {
+				for (int i = 0; i < graph.get(each).size(); i++) {
 					System.out.println(graph.get(each).get(i).getId());
-				}**/
+				}
 				break;
 			}
-		}
+		}**/
+		leader.push(allCodeBlocks.get(0));
 		ArrayList<CodeBlock> allLeaders = new ArrayList<CodeBlock>();
 		while (!leader.isEmpty()) {
 			CodeBlock currLeader = leader.pop();
@@ -77,21 +116,27 @@ public class CFGIntraBlockAllocation {
 			while (!currEBB.isEmpty()) {
 				CodeBlock currBlock = currEBB.pop();
 				//System.out.println(graph.get(currBlock).size());
-				newcurrEBB.push(currBlock);
+				newcurrEBB.add(currBlock);
 				List<CodeBlock> neighbors = graph.get(currBlock);
 				for (CodeBlock block2: neighbors) {
 					//System.out.println(numPredecessor(block2));
 					if (numPredecessor(block2) > 1 && !allLeaders.contains(block2)) {
 						allLeaders.add(block2);
-						//System.out.println("added" + block2.getId());
-						leader.push(block2);
+						//System.out.println(block2.getLeader());
+						leader.add(block2);
 					} else if (numPredecessor(block2) == 1){
 						//System.out.println("added" + block2.getId());
 						currEBB.push(block2);
 					}
 				}
 			}
-			EBBs.push(newcurrEBB);
+			//System.out.println(newcurrEBB.peek().getLeader());
+			EBBs.add(newcurrEBB);
+			LinkedList<CodeBlock> lastEBB = EBBs.get(EBBs.size()-1);
+			CodeBlock lastCodeBlock = lastEBB.get(lastEBB.size()-1);
+			if (leader.isEmpty() && !lastCodeBlock.equals(allCodeBlocks.get(allCodeBlocks.size()-1))) {
+				leader.add(allCodeBlocks.get(lastCodeBlock.getId()+1));
+			}
 		}
 		//System.out.println(EBBs.size());
 		ArrayList<CodeBlock> newAllEBBs= new ArrayList<CodeBlock>();
@@ -142,7 +187,7 @@ public class CFGIntraBlockAllocation {
 					count = i;
 					id++;
 				}
-			} else if (code[i].contains("br") || code[i].contains("goto") || code[i].contains("call") || code[i].contains("callr") || code[i].contains("return")) {
+			} else if (code[i].contains("br") || code[i].contains("goto") || code[i].contains("return")) {
 				//check to get the right blocks
 				if (i >= count) {
 					CodeBlock newCodeBlock = new CodeBlock(code[count], code[i], Arrays.copyOfRange(code,count, i+1), id);
@@ -164,17 +209,20 @@ public class CFGIntraBlockAllocation {
 	
 	public void buildCFG() {
 		//for if the node should point to the next block
-		boolean funcCall = false;
-		boolean nextblock = false;
+		//boolean funcCall = false;
+		boolean nextblock;
+		boolean reachedMain = false;
 		boolean hasLabel;
 		for (int i = 0; i < allCodeBlocks.size() - 1; i++) {
+			nextblock = true;
 			hasLabel = true;
-			funcCall = false;
+			//funcCall = false;
 			CodeBlock block1 = allCodeBlocks.get(i);
 			String first = block1.getLeader();
 			//all blocks before the main label should not point to the next code block
 			if (first.contains("main")) {
 				nextblock = true;
+				reachedMain = true;
 			}
 			String last = block1.getLast();
 			String[] breakUp = last.split(",");
@@ -182,11 +230,16 @@ public class CFGIntraBlockAllocation {
 			if (breakUp[0].contains("br")) {
 				//System.out.println(breakUp[0]);
 				label = breakUp[3].trim();
+				nextblock = true;
 			} else if (breakUp[0].contains("goto")) {
 				//System.out.println(breakUp[0]);
 				label = breakUp[1].trim();
 				nextblock = false;
-			} else if (breakUp[0].contains("callr")) {
+			} else if (breakUp[0].contains("return")) {
+				hasLabel = false;
+				nextblock = false;
+			}
+			/**else if (breakUp[0].contains("callr")) {
 				//System.out.println(breakUp[0]);
 				label = breakUp[2].trim();
 				nextblock = false;
@@ -197,14 +250,14 @@ public class CFGIntraBlockAllocation {
 				label = breakUp[1].trim();
 				nextblock = false;
 				funcCall = true;
-			} else {
+			}**/ else {
 				//shouldn't even check for edges because it doesn't have any labels
 				hasLabel = false;
 			}
 			if (hasLabel) { 
 				for (int j = 0; j < allCodeBlocks.size(); j++) {
 					CodeBlock block2 = allCodeBlocks.get(j);
-					if (funcCall && block2.getLeader().contains(label)) {
+					/**if (funcCall && block2.getLeader().contains(label)) {
 						for (int k = j; k < allCodeBlocks.size(); k++) {
 							CodeBlock block3 = allCodeBlocks.get(k);
 							if (block3.getLast().contains("return")) {
@@ -212,17 +265,18 @@ public class CFGIntraBlockAllocation {
 								break;
 							}
 						}
-					}
+					}**/
 					if (block2.getLeader().trim().equals(label+":") && !block1.equals(block2)) {
 						//System.out.println(block2.getLeader()+" and "+label);
 						graph.get(block1).add(block2);
 					}
 				}
 			}
-			if (nextblock) {
+			if (nextblock && reachedMain) {
 				graph.get(block1).add(allCodeBlocks.get(block1.getId() + 1));
 			}
 		}
+		//System.out.println(graph.get(allCodeBlocks.get(0)).size());
 		/**for (CodeBlock block:graph.get(allCodeBlocks.get(0))){
 			System.out.println(block.getLeader());
 		}**/

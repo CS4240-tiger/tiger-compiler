@@ -119,7 +119,7 @@ public class CodeBlock {
 			}
 			//System.out.println("all int regs can be allocated");
 		} else {
-			System.out.println("all int regs cannot be allocated");
+			//System.out.println("all int regs cannot be allocated");
 			int min = Integer.MAX_VALUE;
 			String minVar = ""; 
 			int index = 0;
@@ -129,14 +129,14 @@ public class CodeBlock {
 					min = thisCount;
 					minVar = each;
 				}
-				if (index > allIntRegs.length && thisCount > min) {
+				if (index >= allIntRegs.length && thisCount > min) {
 					String reg = intRegs.get(minVar);
 					intRegs.remove(minVar);
 					intRegs.put(each, reg);
 					// finds new min in intRegs
 					minVar = findNewMin(intRegs, intRegCount, new String[1]);
 					min = intRegCount.get(minVar);
-				} else {
+				} else if (index <= allIntRegs.length) {
 					intRegs.put(each, allIntRegs[index]);
 				}
 				index++;
@@ -153,7 +153,7 @@ public class CodeBlock {
 			}
 			//System.out.println("all fixedpt regs can be allocated");
 		} else {
-			System.out.println("all fixedpt regs canot be allocated");
+			//System.out.println("all fixedpt regs canot be allocated");
 			int min = Integer.MAX_VALUE;
 			String minVar = ""; 
 			int index = 0;
@@ -170,7 +170,7 @@ public class CodeBlock {
 					// finds new min in fixedptRegs
 					minVar = findNewMin(fixedptRegs, fixedptRegCount, new String[1]);
 					min = fixedptRegCount.get(minVar);
-				} else {
+				} else if (index < allFixedPtRegs.length){
 					fixedptRegs.put(each, allFixedPtRegs[index]);
 				}
 				index++;
