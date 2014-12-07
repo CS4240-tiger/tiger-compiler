@@ -220,8 +220,10 @@ public class CodeBlock {
 		for (String each:fixedptRegs.keySet()) {
 			genMipsStore(each,fixedptRegs.get(each), replaceCode);
 		}
-		String line = code.get(code.size() -1);
-		handleLine(line);
+		if (code.size() != 1) {
+			String line = code.get(code.size() -1);
+			handleLine(line);
+		}
 		this.code = replaceCode;
 	}
 	

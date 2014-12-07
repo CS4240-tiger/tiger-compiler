@@ -57,25 +57,25 @@ callr, t38, func3, t54
 callr, t39, func3, t56
 callr, t40, func4, t55
 callr, t41, func4, t57
-loop_05133:
+loop_68263:
 assign, t42, 1, 
 assign, t43, 2, 
-brneq, t42, t43, expr_eval_05133
+brneq, t42, t43, expr_eval_68263
 callr, t44, func3, t54
 callr, t45, func4, t55
-goto, expr_eval_05133, ,
-goto, loop_05133, ,
-expr_eval_05133:
+goto, expr_eval_68263, ,
+goto, loop_68263, ,
+expr_eval_68263:
 assign, t46, 1, 
 assign, t47, 9000, 
-loop_41154:
-brneq, t46, t47, expr_eval_41154
+loop_17216:
+brneq, t46, t47, expr_eval_17216
 assign, t48, 9000, 
 assign, t54, t48,
-goto, expr_eval_41154, ,
+goto, expr_eval_17216, ,
 assign, t49, t46, 
 assign, t50, 1, 
 add, t49, t50, t51
 assign, t46, t51,
-goto, loop_41154, ,
-expr_eval_41154:
+goto, loop_17216, ,
+expr_eval_17216:

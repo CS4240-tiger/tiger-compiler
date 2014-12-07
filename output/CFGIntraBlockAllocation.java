@@ -44,6 +44,22 @@ public class CFGIntraBlockAllocation {
 		this.typeMap = new HashMap<String,String>();
 	}
 	
+	public List<String> getEBBOutput() {
+		ArrayList<String> output = new ArrayList<String>();
+		for(CodeBlock each: allEBBs) {
+			output.addAll(each.getCode());
+		}
+		return output;
+	}
+	
+	public List<String> getIntraBlockOutput() {
+		ArrayList<String> output = new ArrayList<String>();
+		for(CodeBlock each: allCodeBlocks) {
+			output.addAll(each.getCode());
+		}
+		return output;
+	}
+	
 	public void allocateAllBlocks() {
 		for (CodeBlock block: allCodeBlocks) {
 			block.allocateRegs(allCodeBlocks, typeMap);
