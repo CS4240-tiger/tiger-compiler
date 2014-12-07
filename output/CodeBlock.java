@@ -210,7 +210,7 @@ public class CodeBlock {
 		} else {
 			startIndex = 1;
 		}
-		for (int i = startIndex; i < code.size(); i++) {
+		for (int i = startIndex; i < code.size() - 1; i++) {
 			String line = code.get(i);
 			handleLine(line);
 		}
@@ -220,6 +220,8 @@ public class CodeBlock {
 		for (String each:fixedptRegs.keySet()) {
 			genMipsStore(each,fixedptRegs.get(each), replaceCode);
 		}
+		String line = code.get(code.size() -1);
+		handleLine(line);
 		this.code = replaceCode;
 	}
 	
