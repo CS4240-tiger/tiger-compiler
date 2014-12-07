@@ -13,8 +13,8 @@ t52: .word 5
 t53: .float 5.0
 t54: .word 5
 t55: .float 5.0
-t542: .word 5
-t552: .float 5.0
+t56: .word 5
+t57: .float 5.0
 t58: .word 5
 t10: .word 0
 t11: .word 0
@@ -190,13 +190,13 @@ la $v1, t55
 l.s $f0, 0($v1)
 la $v1, t55
 s.s $f0, 0($v1)
-la $v1, t542
+la $v1, t56
 lw $t0, 0($v1)
-la $v1, t542
+la $v1, t56
 sw $t0, 0($v1)
-la $v1, t552
+la $v1, t57
 l.s $f0, 0($v1)
-la $v1, t552
+la $v1, t57
 s.s $f0, 0($v1)
 la $v1, t58
 lw $t0, 0($v1)
@@ -571,7 +571,7 @@ la $v1, t38
 sw $t0, 0($v1)
 la $v1, t39
 lw $t0, 0($v1)
-la $v1, t542
+la $v1, t56
 lw $t1, 0($v1)
 add $v1, $fp, $zero
 add $fp, $sp, $zero
@@ -584,7 +584,7 @@ sw $v1, 0($sp)
 jr $t0
 sw $v0, func3($zero)
 add $t0, $v0, $zero
-la $v1, t542
+la $v1, t56
 sw $t1, 0($v1)
 la $v1, t39
 sw $t0, 0($v1)
@@ -609,7 +609,7 @@ la $v1, t40
 sw $t0, 0($v1)
 la $v1, t41
 lw $t0, 0($v1)
-la $v1, t552
+la $v1, t57
 l.s $f0, 0($v1)
 add $v1, $fp, $zero
 add $fp, $sp, $zero
@@ -622,11 +622,11 @@ sw $v1, 0($sp)
 jr $t0
 sw $v0, func4($zero)
 add $t0, $v0, $zero
-la $v1, t552
+la $v1, t57
 s.s $f0, 0($v1)
 la $v1, t41
 sw $t0, 0($v1)
-21597-loot58:
+loop_05133:
 la $v1, t42
 lw $t0, 0($v1)
 la $v1, t42
@@ -639,7 +639,7 @@ la $v1, t42
 lw $t0, 0($v1)
 la $v1, t43
 lw $t1, 0($v1)
-bne $t0, $t1, 21597-ext58r-eval
+bne $t0, $t1, expr_eval_05133
 la $v1, t43
 sw $t1, 0($v1)
 la $v1, t42
@@ -682,9 +682,9 @@ la $v1, t55
 s.s $f0, 0($v1)
 la $v1, t45
 sw $t0, 0($v1)
-jr 21597-ext58r-eval
-jr 21597-loot58
-21597-ext58r-eval:
+jr expr_eval_05133
+jr loop_05133
+expr_eval_05133:
 la $v1, t46
 lw $t0, 0($v1)
 la $v1, t46
@@ -693,12 +693,12 @@ la $v1, t47
 lw $t0, 0($v1)
 la $v1, t47
 sw $t0, 0($v1)
-57191-loot58:
+loop_41154:
 la $v1, t46
 lw $t0, 0($v1)
 la $v1, t47
 lw $t1, 0($v1)
-bne $t0, $t1, 57191-ext58r-eval
+bne $t0, $t1, expr_eval_41154
 la $v1, t47
 sw $t1, 0($v1)
 la $v1, t46
@@ -715,7 +715,7 @@ la $v1, t48
 sw $t1, 0($v1)
 la $v1, t54
 sw $t0, 0($v1)
-jr 57191-ext58r-eval
+jr expr_eval_41154
 la $v1, t49
 lw $t0, 0($v1)
 la $v1, t46
@@ -749,5 +749,5 @@ la $v1, t51
 sw $t1, 0($v1)
 la $v1, t46
 sw $t0, 0($v1)
-jr 57191-loot58
-57191-ext58r-eval:
+jr loop_41154
+expr_eval_41154:

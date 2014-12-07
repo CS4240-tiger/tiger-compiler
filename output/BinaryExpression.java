@@ -190,10 +190,9 @@ public class BinaryExpression {
 	 * @return A unique conditional label.
 	 */
 	private String generateCondLabel() {
-		return String.valueOf(this.hashCode()).substring(
+		return "expr_eval_" + String.valueOf(this.hashCode()).substring(
 				String.valueOf(this.hashCode()).length() / 2, 
-				String.valueOf(this.hashCode()).length()) 
-				+ "-expr-eval";
+				String.valueOf(this.hashCode()).length());
 	}
 	
 	/**

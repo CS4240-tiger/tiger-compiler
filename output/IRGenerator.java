@@ -137,9 +137,8 @@ public class IRGenerator {
 	 * @return A unique loop label.
 	 */
 	public static String generateCondLabel(Object obj) {
-		return String.valueOf(obj.hashCode()).substring(
+		return "loop_" + String.valueOf(obj.hashCode()).substring(
 				String.valueOf(obj.hashCode()).length() / 2, 
-				String.valueOf(obj.hashCode()).length()) 
-				+ "-loop";
+				String.valueOf(obj.hashCode()).length());
 	}
 }

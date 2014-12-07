@@ -135,7 +135,8 @@ block
         // Split into components
         String[] tempIRcomponents = irOutput.get(lineIndex).split(" ");
         for (int compIndex = 0; compIndex < tempIRcomponents.length; compIndex++) {
-          if (!IR_RESERVED_WORDS.contains(tempIRcomponents[compIndex].replace(",", ""))) {
+          if (!IR_RESERVED_WORDS.contains(tempIRcomponents[compIndex].replace(",", "")) 
+           && tempIRcomponents[compIndex].replace(" ", "").replace(",", "").equals(var)) {
             tempIRcomponents[compIndex] = tempIRcomponents[compIndex].replace(var, emitCurrentTemporary());
           } 
         

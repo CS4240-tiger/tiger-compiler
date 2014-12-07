@@ -171,10 +171,10 @@ public class MIPSInstructionSelector {
 					// We have to generate loop labels
 					translatedLine = translatedLine
 						.replace("<ASSIGN-LOOP-LABEL-START>", 
-							"assign-loop-label-" 
+							"assign_loop_label_" 
 							+ getUniqueLabel(translatedLine) + "-end")
 						.replace("<ASSIGN-LOOP-LABEL-END>", 
-								"assign-loop-label-"
+								"assign_loop_label_"
 							+ getUniqueLabel(translatedLine) + "-end");
 						
 				} 
