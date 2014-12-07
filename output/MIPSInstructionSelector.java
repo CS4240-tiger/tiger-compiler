@@ -121,7 +121,7 @@ public class MIPSInstructionSelector {
 						if(!firstArg.contains("$f")){
 							firstArg = "$f"+currentFloatReg;
 							translatedLine = "mtc1 " + components[2] +", " + firstArg + "\n" +
-									"cvt.s.w" + firstArg + ", " + firstArg + "\n" +
+									"cvt.s.w " + firstArg + ", " + firstArg + "\n" +
 									insertParams(IR_MIPS_OP_MAPPINGS.get("add.s"), dest, firstArg, secondArg);
 							currentFloatReg--;
 						}
@@ -129,7 +129,7 @@ public class MIPSInstructionSelector {
 						if(!secondArg.contains("$f")){
 							secondArg = "$f" + currentFloatReg;
 							translatedLine = "mtc1 " + components[3] +", " + secondArg + "\n" +
-									"cvt.s.w" + secondArg + ", " + secondArg + "\n" +
+									"cvt.s.w " + secondArg + ", " + secondArg + "\n" +
 									insertParams(IR_MIPS_OP_MAPPINGS.get("add.s"), dest, firstArg, secondArg);
 							currentFloatReg--;
 						}
