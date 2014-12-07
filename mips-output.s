@@ -387,7 +387,7 @@ l.s $f1, 0($v1)
 la $v1, t25
 lw $t0, 0($v1)
 mtc1 $t0, $f31
-cvt.s.w$f31, $f31
+cvt.s.w $f31, $f31
 add.s $f0, $f1, $f31
 la $v1, t25
 sw $t0, 0($v1)
@@ -433,7 +433,7 @@ l.s $f0, 0($v1)
 la $v1, t29
 lw $t1, 0($v1)
 mtc1 $t1, $f29
-cvt.s.w$f29, $f29
+cvt.s.w $f29, $f29
 add.s $f30, $f0, $f29
 la $v1, t29
 sw $t1, 0($v1)
@@ -478,7 +478,9 @@ la $v1, t32
 lw $t0, 0($v1)
 la $v1, t33
 lw $t1, 0($v1)
-add $t1, $f0, $t0
+mtc1 $t1, $f27
+cvt.s.w $f27, $f27
+add.s $f0, $f28, $f27
 la $v1, t33
 sw $t1, 0($v1)
 la $v1, t32

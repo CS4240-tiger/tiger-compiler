@@ -104,12 +104,13 @@ public class MIPSInstructionSelector {
 							components[1], "", "");
 				} else {
 					if(components[0].equals("add") && 
-							(components[2].contains("$f") || components[3].contains("$f"))){
+							(components[1].contains("$f") || components[2].contains("$f") || components[3].contains("$f"))){
 						String dest = components[1];
 						String firstArg = components[2];
 						String secondArg = components[3];
-						//TODO: Why does it fail on add $t1, $f0, $t0???
+						//TODO: WEIRD mismatch of components and inserting their params. Insure things are going in the right areas...
 						//Case1: add.s $tx, arg1, arg2
+						System.out.println("dest:" + dest + "firstarg" + firstArg + "secondarg" + secondArg); 
 						if (!dest.contains("$f")){
 							dest = "$f" + currentFloatReg;
 							translatedLine = insertParams(IR_MIPS_OP_MAPPINGS.get("add.s"), dest, firstArg, secondArg);
