@@ -176,7 +176,7 @@ public class CodeBlock {
 				index++;
 			}
 		}
-		replaceVars();
+		replaceVars(typeMap);
 		/**System.out.println("Int Vars: " +intRegCount.size());
 		for (String each: intRegCount.keySet()) {
 			System.out.println(each +":"+intRegCount.get(each));
@@ -191,7 +191,7 @@ public class CodeBlock {
 		}
 	}
 	
-	private void replaceVars() {
+	private void replaceVars(Map<String,String> typeMap) {
 		replaceCode = new ArrayList<String>();
 		boolean hasLabel = false;
 		if (code.get(0).contains(":")) {
@@ -199,10 +199,10 @@ public class CodeBlock {
 			hasLabel = true;
 		}
 		for (String each: intRegs.keySet()) {
-			genMipsLoad(each,intRegs.get(each),replaceCode);
+			genMipsLoad(each,intRegs.get(each),replaceCode,typeMap);
 		}
 		for (String each:fixedptRegs.keySet()) {
-			genMipsLoad(each,fixedptRegs.get(each), replaceCode);
+			genMipsLoad(each,fixedptRegs.get(each), replaceCode,typeMap);
 		}
 		int startIndex;
 		if (!hasLabel) {
@@ -212,22 +212,22 @@ public class CodeBlock {
 		}
 		for (int i = startIndex; i < code.size() - 1; i++) {
 			String line = code.get(i);
-			handleLine(line);
+			handleLine(line, typeMap);
 		}
 		for (String each: intRegs.keySet()) {
-			genMipsStore(each,intRegs.get(each),replaceCode);
+			genMipsStore(each,intRegs.get(each),replaceCode, typeMap);
 		}
 		for (String each:fixedptRegs.keySet()) {
-			genMipsStore(each,fixedptRegs.get(each), replaceCode);
+			genMipsStore(each,fixedptRegs.get(each), replaceCode,typeMap);
 		}
 		if (code.size() != 1) {
 			String line = code.get(code.size() -1);
-			handleLine(line);
+			handleLine(line, typeMap);
 		}
 		this.code = replaceCode;
 	}
 	
-	private void handleLine(String line) {
+	private void handleLine(String line, Map<String,String> typeMap) {
 		String[] stuff = line.replace(" ", "").split(",");
 		String newLine = stuff[0]+", ";
 		for (int j = 1; j < stuff.length; j++) {
@@ -235,8 +235,8 @@ public class CodeBlock {
 			if (!intRegs.containsKey(var) && intRegCount.containsKey(var)) {
 				String min = findNewMin(intRegs,intRegCount,stuff);
 				String register = intRegs.get(min);
-				genMipsStore(min,register,replaceCode);
-				genMipsLoad(var,register,replaceCode);
+				genMipsStore(min,register,replaceCode, typeMap);
+				genMipsLoad(var,register,replaceCode, typeMap);
 				intRegs.remove(min);
 				intRegs.put(var, register);
 				newLine = newLine + register + ", ";
@@ -246,8 +246,8 @@ public class CodeBlock {
 			} else if (!fixedptRegs.containsKey(var) && fixedptRegCount.containsKey(var)) {
 				String min = findNewMin(fixedptRegs,fixedptRegCount,stuff);
 				String register = fixedptRegs.get(min);
-				genMipsStore(min,register,replaceCode);
-				genMipsLoad(var,register,replaceCode);
+				genMipsStore(min,register,replaceCode, typeMap);
+				genMipsLoad(var,register,replaceCode, typeMap);
 				fixedptRegs.remove(min);
 				fixedptRegs.put(var, register);
 				//line.replace(var,register);
@@ -446,9 +446,13 @@ public class CodeBlock {
 	 * @param register The target register to load to.
 	 * @return The String MIPS load instruction.
 	 */
-	private void genMipsLoad(String label, String register, List<String> code) {
-		code.add("la $at, " + label);
-		code.add("lw " + register + ", 0($at)");
+	private void genMipsLoad(String label, String register, List<String> code, Map<String,String> typeMap) {
+		code.add("la $v1, " + label);
+		if (findType(label, typeMap).equals("int")) {
+			code.add("lw " + register + ", 0($v1)");
+		} else if (findType(label, typeMap).equals("int")) {
+			code.add("l.s " + register + ", 0($v1)");
+		}
 		
 	}
 	
@@ -459,9 +463,13 @@ public class CodeBlock {
 	 * @param register The source register to store from.
 	 * @return The String MIPS load instruction.
 	 */
-	private void genMipsStore(String label, String register, List<String> code) {
+	private void genMipsStore(String label, String register, List<String> code, Map<String,String> typeMap) {
 		
-		code.add("la $at, " + label);
-		code.add("sw " + register + ", 0($at)");
+		code.add("la $v1, " + label);
+		if (findType(label, typeMap).equals("int")) {
+			code.add("sw " + register + ", 0($v1)");
+		} else if (findType(label, typeMap).equals("int")) {
+			code.add("s.s " + register + ", 0($v1)");
+		}
 	}
 }
