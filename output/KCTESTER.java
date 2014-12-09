@@ -29,7 +29,25 @@ public class KCTESTER {
 		}
 		//System.out.println(content);
 		CFGIntraBlockAllocation cfg = new CFGIntraBlockAllocation(content);
-		cfg.findBlocks();
+		MIPSInstructionSelector translator;
+		boolean ib = false;
+		if (ib) {
+			cfg.findBlocks();
+			cfg.buildCFG();
+			cfg.allocateAllBlocks();
+			translator = new MIPSInstructionSelector(
+	        		regAlloc.getData(), cfg.getIntraBlockOutput());
+		} else { //EBB
+			cfg.findBlocks();
+			cfg.buildCFG();
+			cfg.findEBBs();
+			cfg.allocateAllEBBs();
+			translator = new MIPSInstructionSelector(
+	        		regAlloc.getData(), cfg.getEBBOutput());
+		}
+		
+		/* cfg.findBlocks();
+		 
 		//cfg.printBlocks();
 		//cfg.storeAllTemporaries();
 		cfg.buildCFG();
@@ -39,7 +57,7 @@ public class KCTESTER {
 		cfg.allocateAllEBBs();
 		//cfg.printEBBs();
 		MIPSInstructionSelector translator = new MIPSInstructionSelector(
-        		regAlloc.getData(), cfg.getEBBOutput());
+        		regAlloc.getData(), cfg.getEBBOutput()); */
 		System.out.println("FINAL TRANSLATED MIPS PROGRAM:");
         for (String output : translator.getOutput()) {
         	System.out.println(output);

@@ -1,42 +1,101 @@
 main:
-assign, t24, 0,
-assign, t25, 6,
-assign, t0, 1, 
-assign, t26, t0,
-assign, t1, 5, 
-assign, t27, t1,
-assign, t2, 0, 
-assign, t3, 5, 
-loop_53269:
-brneq, t2, t3, expr_eval_53269
-assign, t4, t27, 
-assign, t5, t25, 
-mult, t4, t5, t6
-assign, t26, t6,
+assign, t22, 0,
+assign, t23, 1,
+assign, t0, x15, 
+assign, t22, t0,
+assign, t1, x16, 
+assign, t25, t1,
+assign, t2, x17, 
+assign, t26, t2,
+assign, t3, x18, 
+assign, t27, t3,
+assign, t4, 1, 
+assign, t28, t4,
+assign, t5, 1, 
+assign, t29, t5,
+assign, t6, 1, 
+assign, t30, t6,
+assign, t7, t28, 
+assign, t8, t29, 
+add, t7, t8, t9
 assign, t7, t27, 
-assign, t8, t24, 
-sub, t7, t8, t9
-assign, t25, t9,
-assign, t10, t26, 
-assign, t11, t25, 
-add, t10, t11, t12
-assign, t27, t12,
-assign, t13, t24, 
-assign, t14, 3, 
-brlt, t13, t14, expr_eval_25349
-expr_eval_25349:
-assign, t15, t26, 
-assign, t16, 1, 
-add, t15, t16, t17
-assign, t26, t17,
-assign, t18, t2, 
-assign, t19, 1, 
-add, t18, t19, t20
-assign, t2, t20,
-goto, loop_53269, ,
-expr_eval_53269:
-assign, t21, t26, 
-assign, t22, t24, 
-div, t21, t22, t23
-breq, t21, t22, expr_eval_53983
-assign, t24, t23,
+assign, t8, 9, 
+add, t7, t8, t9
+assign, t31, t9,
+assign, t10, t30, 
+assign, t32, t10,
+assign, t11, x13, 
+assign, t12, x14, 
+add, t11, t12, t13
+assign, t11, x12, 
+assign, t12, 13, 
+add, t11, t12, t13
+assign, t11, t23, 
+assign, t12, 13, 
+add, t11, t12, t13
+assign, t11, t31, 
+assign, t12, 13, 
+add, t11, t12, t13
+assign, t33, t13,
+loop_44919:
+assign, t14, t32, 
+assign, t15, 9, 
+brneq, t14, t15, expr_eval_44919
+assign, t14, t25, 
+assign, t15, 15, 
+brneq, t14, t15, expr_eval_44919
+assign, t14, t22, 
+assign, t15, 15, 
+brneq, t14, t15, expr_eval_44919
+assign, t16, t29, 
+assign, t17, t33, 
+add, t16, t17, t18
+assign, t16, t28, 
+assign, t17, 18, 
+add, t16, t17, t18
+assign, t16, t27, 
+assign, t17, 18, 
+add, t16, t17, t18
+assign, t16, t22, 
+assign, t17, 18, 
+add, t16, t17, t18
+assign, t22, t18,
+goto, loop_44919, ,
+expr_eval_44919:
+assign, t19, x19, 
+assign, t20, 1000, 
+add, t19, t20, t21
+assign, t19, x18, 
+assign, t20, 21, 
+add, t19, t20, t21
+assign, t19, x17, 
+assign, t20, 21, 
+add, t19, t20, t21
+assign, t19, x16, 
+assign, t20, 21, 
+add, t19, t20, t21
+assign, t19, x15, 
+assign, t20, 21, 
+add, t19, t20, t21
+assign, t19, x14, 
+assign, t20, 21, 
+add, t19, t20, t21
+assign, t19, x13, 
+assign, t20, 21, 
+add, t19, t20, t21
+assign, t19, x12, 
+assign, t20, 21, 
+add, t19, t20, t21
+assign, t19, t23, 
+assign, t20, 21, 
+add, t19, t20, t21
+assign, t19, t31, 
+assign, t20, 21, 
+add, t19, t20, t21
+assign, t19, t30, 
+assign, t20, 21, 
+add, t19, t20, t21
+assign, t19, t26, 
+assign, t20, 21, 
+add, t19, t20, t21
+expr_eval_37097:

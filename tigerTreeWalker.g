@@ -99,7 +99,13 @@ funct_declaration_list
 funct_declaration
 	:	^(ID {
 			irOutput.add(IRGenerator.funct_declaration($ID.text));
-		} param_list block_list)
+		} param_list {
+			for (String param : $param_list.paramStringList) {
+				irOutput.add(IRGenerator.declaration_statement(param, "0"));
+				localVars.add(param);
+			}
+		
+		} block_list)
 	
 		
 	|	^(MAIN_KEY {
@@ -112,12 +118,18 @@ ret_type
 	|	type_id
 	;
 
-param_list  
-	:	^(AST_PARAM_LIST (param+)?)
+param_list returns [List<String> paramStringList]
+	@init {
+		$paramStringList = new ArrayList<String>();
+	}
+	:	^(AST_PARAM_LIST ((param {$paramStringList.add($param.paramString);})+)?)
 	;
 
-param 	
+param returns [String paramString]
 	:	^(COLON ID type_id)
+	{
+		$paramString = $ID.text;
+	}
 	;
 
 block_list  
