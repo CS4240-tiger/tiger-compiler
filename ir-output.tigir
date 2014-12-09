@@ -1,81 +1,42 @@
-func1:
-assign, t1, 0,
-assign, t0, t1, 
-return, t0, ,
-assign, t3, 0,
-assign, t2, t3, 
-return, t2, ,
-func2:
-assign, t5, 0,
-assign, t4, t5, 
-return, t4, ,
-func3:
-assign, t7, 0,
-assign, t6, t7, 
-return, t6, ,
-func4:
-assign, t9, 0.0,
-assign, t8, t9, 
-return, t8, ,
 main:
-assign, t52, 5,
-assign, t53, 5.0,
-assign, t54, 5,
-assign, t55, 5.0,
-assign, t56, 5,
-assign, t57, 5.0,
-assign, t58, 5,
-callr, t10, func1, t58
-callr, t11, func1, t52
-assign, t13, 5, 
-assign, t14, t52, 
-add, t13, t14, t15
-callr, t12, func1, t15
-assign, t17, 5.0,
-callr, t16, func2, t17
-assign, t19, 5,
-callr, t18, func2, t19
-callr, t20, func2, t53
-callr, t21, func2, t52
-assign, t23, 5.0, 
-assign, t24, t53, 
-add, t23, t24, t25
-callr, t22, func2, t25
-assign, t27, 5, 
-assign, t28, t53, 
-add, t27, t28, t29
-callr, t26, func2, t29
-assign, t31, 5.0, 
-assign, t32, t52, 
-add, t31, t32, t33
-callr, t30, func2, t33
-assign, t35, 5, 
-assign, t36, t52, 
-add, t35, t36, t37
-callr, t34, func2, t37
-callr, t38, func3, t54
-callr, t39, func3, t56
-callr, t40, func4, t55
-callr, t41, func4, t57
-loop_68263:
-assign, t42, 1, 
-assign, t43, 2, 
-brneq, t42, t43, expr_eval_68263
-callr, t44, func3, t54
-callr, t45, func4, t55
-goto, expr_eval_68263, ,
-goto, loop_68263, ,
-expr_eval_68263:
-assign, t46, 1, 
-assign, t47, 9000, 
-loop_17216:
-brneq, t46, t47, expr_eval_17216
-assign, t48, 9000, 
-assign, t54, t48,
-goto, expr_eval_17216, ,
-assign, t49, t46, 
-assign, t50, 1, 
-add, t49, t50, t51
-assign, t46, t51,
-goto, loop_17216, ,
-expr_eval_17216:
+assign, t24, 0,
+assign, t25, 6,
+assign, t0, 1, 
+assign, t26, t0,
+assign, t1, 5, 
+assign, t27, t1,
+assign, t2, 0, 
+assign, t3, 5, 
+loop_53269:
+brneq, t2, t3, expr_eval_53269
+assign, t4, t27, 
+assign, t5, t25, 
+mult, t4, t5, t6
+assign, t26, t6,
+assign, t7, t27, 
+assign, t8, t24, 
+sub, t7, t8, t9
+assign, t25, t9,
+assign, t10, t26, 
+assign, t11, t25, 
+add, t10, t11, t12
+assign, t27, t12,
+assign, t13, t24, 
+assign, t14, 3, 
+brlt, t13, t14, expr_eval_25349
+expr_eval_25349:
+assign, t15, t26, 
+assign, t16, 1, 
+add, t15, t16, t17
+assign, t26, t17,
+assign, t18, t2, 
+assign, t19, 1, 
+add, t18, t19, t20
+assign, t2, t20,
+goto, loop_53269, ,
+expr_eval_53269:
+assign, t21, t26, 
+assign, t22, t24, 
+div, t21, t22, t23
+breq, t21, t22, expr_eval_53983
+assign, t24, t23,

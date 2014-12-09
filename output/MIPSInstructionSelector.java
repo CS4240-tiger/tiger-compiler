@@ -70,6 +70,10 @@ public class MIPSInstructionSelector {
 			// (These should be already dealt with in previous phase)
 			while (isAssignDirect(line)) {
 				text.remove(index);
+				if (index >= text.size()) {
+					return;
+				}
+				
 				line = text.get(index);
 			}
 			

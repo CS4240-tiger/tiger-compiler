@@ -21,7 +21,7 @@ public class KCTESTER {
 		String content="hi";
 		NaiveRegisterAllocator regAlloc = null;
 		try {
-		content = new Scanner(new File("/Users/cevanish12/git/tiger-compiler/ir-output.tigir")).useDelimiter("\\Z").next();
+		content = new Scanner(new File("C:\\Users\\Jinhai Steakhouse\\Desktop\\Temp\\phase3_tiger-compiler\\ir-output.tigir")).useDelimiter("\\Z").next();
 		regAlloc = new NaiveRegisterAllocator(
         		readFileToList(OUTPUT_IR_PATH));
 		} catch (FileNotFoundException e) {
@@ -34,12 +34,12 @@ public class KCTESTER {
 		//cfg.storeAllTemporaries();
 		cfg.buildCFG();
 		//cfg.printGraph();
-		cfg.allocateAllBlocks();
+		//cfg.allocateAllBlocks();
 		cfg.findEBBs();
-		//cfg.allocateAllEBBs();
+		cfg.allocateAllEBBs();
 		//cfg.printEBBs();
 		MIPSInstructionSelector translator = new MIPSInstructionSelector(
-        		regAlloc.getData(), cfg.getIntraBlockOutput());
+        		regAlloc.getData(), cfg.getEBBOutput());
 		System.out.println("FINAL TRANSLATED MIPS PROGRAM:");
         for (String output : translator.getOutput()) {
         	System.out.println(output);

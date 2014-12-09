@@ -136,7 +136,7 @@ public class CodeBlock {
 					// finds new min in intRegs
 					minVar = findNewMin(intRegs, intRegCount, new String[1]);
 					min = intRegCount.get(minVar);
-				} else if (index <= allIntRegs.length) {
+				} else if (index < allIntRegs.length) {
 					intRegs.put(each, allIntRegs[index]);
 				}
 				index++;

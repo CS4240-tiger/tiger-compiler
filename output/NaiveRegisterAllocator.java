@@ -103,6 +103,11 @@ public class NaiveRegisterAllocator {
 							/* Assign default value */
 							mipsMemAssign(temp, "assign, " + temp + ", 0, ");
 						}
+						
+						System.console(); // Do nothing lol
+						if (tempIndexes.size() > 1) {
+							System.console(); // gg no re
+						}
 					}
 						
 					int lineIndex = output.indexOf(line.replaceAll("$", ""));
@@ -111,7 +116,7 @@ public class NaiveRegisterAllocator {
 					output.add(lineIndex, genMipsLoad(temp, targetRegister)[0]);
 					output.add(lineIndex + 1, genMipsLoad(temp, targetRegister)[1]);
 					// Replace use with register
-					output.set(lineIndex + 2, output.get(lineIndex + 2).replace(temp, targetRegister));
+					output.set(lineIndex + 2, output.get(lineIndex + 2).replaceFirst(temp, targetRegister.replace("$", "\\$")));
 					line = output.get(lineIndex + 2);
 					// Store after use
 					output.add(lineIndex + 3, genMipsStore(temp, targetRegister)[0]);
@@ -139,7 +144,7 @@ public class NaiveRegisterAllocator {
 		String[] lineSplit = input.replaceAll(",", "").split("\\s+");
 		List<Integer> indexes = new ArrayList<Integer>();
 		for (int i = 0; i < lineSplit.length; i++) {
-			if (lineSplit[i].matches("[t][0-9]+")) {
+			if (lineSplit[i].matches("[t][0-9]+") && !lineSplit[i].contains("$")) {
 				indexes.add(i);
 			}
 		}

@@ -279,7 +279,7 @@ public class tigerParser extends Parser {
 			if (!parseTree.getChildren().get(parseTree.getChildren().size() - 1).toString().equals("main"))
 			{
 				// It wasn't found or wasn't the last function
-				throw new RuntimeException("Error: main must be in your program, and must be the last function declared");
+				//throw new RuntimeException("Error: main must be in your program, and must be the last function declared");
 			}
 		}
 
